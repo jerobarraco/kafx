@@ -1,0 +1,2162 @@
+Content-Type: multipart/related; start=<op.mhtml.1312503405403.d7e8a86e59635d0d@192.168.1.99>; boundary=----------ysjv8NZ8908MODnCMnZC68
+Content-Location: http://wiki.python.org/moin/Audio
+Subject: =?utf-8?Q?Audio=20-=20PythonInfo=20Wiki?=
+MIME-Version: 1.0
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline; filename=Audio.htm
+Content-Type: text/html; charset=utf-8; name=Audio.htm
+Content-ID: <op.mhtml.1312503405403.d7e8a86e59635d0d@192.168.1.99>
+Content-Location: http://wiki.python.org/moin/Audio
+Content-Transfer-Encoding: Quoted-Printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/=
+html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html;charset=3Dutf-8">=
+
+<meta name=3D"robots" content=3D"index,nofollow">
+
+<title>Audio - PythonInfo Wiki</title>
+<script type=3D"text/javascript" src=3D"/moin/moin_static193/common/js/c=
+ommon.js"></script>
+
+<script type=3D"text/javascript">
+<!--
+var search_hint =3D "B=C3=BAsqueda";
+//-->
+</script>
+
+<script type=3D"text/javascript">
+<!-- // GUI edit link and i18n
+var gui_editor_link_href =3D "/moin/Audio?action=3Dedit&editor=3Dgui";
+var gui_editor_link_text =3D "Edici=C3=B3n (GUI)";
+//-->
+</script>
+
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"al=
+l" href=3D"/moin/moin_static193/europython/css/common.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"sc=
+reen" href=3D"/moin/moin_static193/europython/css/screen.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"pr=
+int" href=3D"/moin/moin_static193/europython/css/print.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"pr=
+ojection" href=3D"/moin/moin_static193/europython/css/projection.css">
+
+<!-- css only for MS IE6/IE7 browsers -->
+<!--[if lt IE 8]>
+   <link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D=
+"all" href=3D"/moin/moin_static193/europython/css/msie.css">
+<![endif]-->
+
+
+
+<link rel=3D"alternate" type=3D"application/wiki" title=3D"Editar" href=3D=
+"/moin/Audio?action=3Dedit">
+
+<link rel=3D"Start" href=3D"/moin/FrontPage">
+<link rel=3D"Alternate" title=3D"Formato Wiki" href=3D"/moin/Audio?actio=
+n=3Draw">
+<link rel=3D"Alternate" media=3D"print" title=3D"Vista de impresi=C3=B3n=
+" href=3D"/moin/Audio?action=3Dprint">
+<link rel=3D"Search" href=3D"/moin/FindPage">
+<link rel=3D"Index" href=3D"/moin/TitleIndex">
+<link rel=3D"Glossary" href=3D"/moin/WordIndex">
+<link rel=3D"Help" href=3D"/moin/HelpOnFormatting">
+</head>
+
+<body  lang=3D"es" dir=3D"ltr">
+
+<div id=3D"header">
+
+<form id=3D"searchform" method=3D"get" action=3D"/moin/Audio">
+<div>
+<input type=3D"hidden" name=3D"action" value=3D"fullsearch">
+<input type=3D"hidden" name=3D"context" value=3D"180">
+<label for=3D"searchinput">Buscar:</label>
+<input id=3D"searchinput" type=3D"text" name=3D"value" value=3D"" size=3D=
+"20"
+    onfocus=3D"searchFocus(this)" onblur=3D"searchBlur(this)"
+    onkeyup=3D"searchChange(this)" onchange=3D"searchChange(this)" alt=3D=
+"Search">
+<input id=3D"titlesearch" name=3D"titlesearch" type=3D"submit"
+    value=3D"T=C3=ADtulos" alt=3D"Search Titles">
+<input id=3D"fullsearch" name=3D"fullsearch" type=3D"submit"
+    value=3D"Texto" alt=3D"Search Full Text">
+</div>
+</form>
+<script type=3D"text/javascript">
+<!--// Initialize search form
+var f =3D document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display =3D 'none';
+var e =3D document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<div id=3D"logo"><a href=3D"/moin/FrontPage"><img src=3D"http://www.pyth=
+on.org/images/python-logo.gif" alt=3D"Python" ></a></div>
+<div id=3D"locationline">
+
+
+<ul id=3D"pagelocation">
+<li><a class=3D"backlink" href=3D"/moin/Audio?action=3Dfullsearch&amp;co=
+ntext=3D180&amp;value=3Dlinkto%3A%22Audio%22" rel=3D"nofollow" title=3D"=
+Efectuar una b=C3=BAsqueda por p=C3=A1ginas que tienen este t=C3=ADtulo =
+en contenidos">Audio</a></li>
+</ul>
+
+</div>
+
+<ul id=3D"pagetrail">
+<li><a href=3D"/moin/Audio">Audio</a></li>
+</ul>
+</div>
+
+<div id=3D"sidebar">
+<div id=3D"star">
+
+</div>
+<div class=3D"sidepanel">
+
+<ul id=3D"navibar">
+<li class=3D"wikilink"><a href=3D"/moin/FrontPage">FrontPage</a></li><li=
+ class=3D"wikilink"><a href=3D"/moin/RecentChanges">RecentChanges</a></l=
+i><li class=3D"wikilink"><a href=3D"/moin/FindPage">FindPage</a></li><li=
+ class=3D"wikilink"><a href=3D"/moin/HelpContents">HelpContents</a></li>=
+<li class=3D"current"><a href=3D"/moin/Audio">Audio</a></li>
+</ul>
+
+</div>
+<div class=3D"sidepanel">
+<h1>P=C3=A1gina</h1>
+<ul class=3D"editbar"><li><a href=3D"/moin/Audio?action=3Dedit&amp;edito=
+r=3Dtext" name=3D"texteditlink" rel=3D"nofollow">Edici=C3=B3n (Texto)</a=
+></li><li class=3D"toggleCommentsButton" style=3D"display:none;"><a href=
+=3D"#" class=3D"nbcomment" onClick=3D"toggleComments();return false;">Co=
+mentarios</a></li><li><a class=3D"nbinfo" href=3D"/moin/Audio?action=3Di=
+nfo" rel=3D"nofollow">Informaci=C3=B3n</a></li><li><a class=3D"nbattachm=
+ents" href=3D"/moin/Audio?action=3DAttachFile" rel=3D"nofollow">Adjuntos=
+</a></li><li>
+<form class=3D"actionsmenu" method=3D"GET" action=3D"/moin/Audio">
+<div>
+    <label>M=C3=A1s Acciones</label>
+    <select name=3D"action"
+        onchange=3D"if ((this.selectedIndex !=3D 0) &&
+                      (this.options[this.selectedIndex].disabled =3D=3D =
+false)) {
+                this.form.submit();
+            }
+            this.selectedIndex =3D 0;">
+        <option value=3D"raw">Texto sin formato</option>
+<option value=3D"print">Vista de impresi=C3=B3n</option>
+<option value=3D"refresh">Eliminar cach=C3=A9</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"SpellCheck">Revisar ortograf=C3=ADa</option>
+<option value=3D"LikePages">P=C3=A1ginas similares</option>
+<option value=3D"LocalSiteMap">Mapa del sitio</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"RenamePage" disabled class=3D"disabled">Renombrar P=C3=A1=
+gina</option>
+<option value=3D"DeletePage" disabled class=3D"disabled">Eliminar p=C3=A1=
+gina</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"show" disabled class=3D"disabled">Eliminar Spam</option=
+>
+<option value=3D"show" disabled class=3D"disabled">Revertir a esta revis=
+i=C3=B3n</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"Load">Subir</option>
+<option value=3D"SlideShow">SlideShow</option>
+    </select>
+    <input type=3D"submit" value=3D"Hacer">
+    =
+
+</div>
+<script type=3D"text/javascript">
+<!--// Init menu
+actionsMenuInit('M=C3=A1s Acciones');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+<div class=3D"sidepanel">
+<h1>Usuario</h1>
+<ul id=3D"username"><li><a href=3D"/moin/Audio?action=3Dlogin" id=3D"log=
+in" rel=3D"nofollow">Ingresar</a></li></ul>
+</div>
+</div>
+
+<div id=3D"page" lang=3D"en" dir=3D"ltr">
+<div dir=3D"ltr" id=3D"content" lang=3D"en"><span class=3D"anchor" id=3D=
+"top"></span>
+<span class=3D"anchor" id=3D"line-1"></span><p class=3D"line867">
+<h1 id=3D"Audio_in_Python">Audio in Python</h1>
+<span class=3D"anchor" id=3D"line-2"></span><span class=3D"anchor" id=3D=
+"line-3"></span><p class=3D"line874">This page tries to provide a starti=
+ng point for those who want to work with audio in combination with Pytho=
+n.  <span class=3D"anchor" id=3D"line-4"></span><span class=3D"anchor" i=
+d=3D"line-5"></span><p class=3D"line862">If you are creating a game, mos=
+t of what you are looking for may already be included in the many <a hre=
+f=3D"/moin/PythonGameLibraries">PythonGameLibraries</a> that are availab=
+le. <span class=3D"anchor" id=3D"line-6"></span><span class=3D"anchor" i=
+d=3D"line-7"></span><p class=3D"line862">If you are looking for podcasts=
+ related to Python, go to the <a href=3D"/moin/PythonAudioMaterial">Pyth=
+onAudioMaterial</a> page.  <span class=3D"anchor" id=3D"line-8"></span><=
+span class=3D"anchor" id=3D"line-9"></span><span class=3D"anchor" id=3D"=
+line-10"></span><p class=3D"line867">
+<h2 id=3D"Built_in_modules">Built in modules</h2>
+<span class=3D"anchor" id=3D"line-11"></span><span class=3D"anchor" id=3D=
+"line-12"></span><p class=3D"line862">The <a class=3D"http" href=3D"http=
+://docs.python.org/lib/mmedia.html">Multimedia Services</a> allow for so=
+me basic audio functionality in Python. It consists of the following mod=
+ules: <span class=3D"anchor" id=3D"line-13"></span><span class=3D"anchor=
+" id=3D"line-14"></span><div><table><tbody><tr>  <td><p class=3D"line862=
+"> <a class=3D"http" href=3D"http://docs.python.org/lib/module-audioop.h=
+tml">audioop</a> </td>
+  <td><p class=3D"line862"> Manipulate raw audio data. </td>
+</tr>
+<tr>  <td><span class=3D"anchor" id=3D"line-15"></span><p class=3D"line8=
+62"> <a class=3D"http" href=3D"http://docs.python.org/lib/module-aifc.ht=
+ml">aifc</a> </td>
+  <td><p class=3D"line862">   Read and write audio files in AIFF or AIFC=
+ format. </td>
+</tr>
+<tr>  <td><span class=3D"anchor" id=3D"line-16"></span><p class=3D"line8=
+62"> <a class=3D"http" href=3D"http://docs.python.org/lib/module-sunau.h=
+tml">sunau</a> </td>
+  <td><p class=3D"line862">   Provide an interface to the Sun AU sound f=
+ormat. </td>
+</tr>
+<tr>  <td><span class=3D"anchor" id=3D"line-17"></span><p class=3D"line8=
+62"> <a class=3D"http" href=3D"http://docs.python.org/lib/module-wave.ht=
+ml">wave</a> </td>
+  <td><p class=3D"line862">   Provide an interface to the WAV sound form=
+at. </td>
+</tr>
+<tr>  <td><span class=3D"anchor" id=3D"line-18"></span><p class=3D"line8=
+62"> <a class=3D"http" href=3D"http://docs.python.org/lib/module-chunk.h=
+tml">chunk</a> </td>
+  <td><p class=3D"line862">   Module to read IFF (e.g. AIFF) chunks. </t=
+d>
+</tr>
+<tr>  <td><span class=3D"anchor" id=3D"line-19"></span><p class=3D"line8=
+62"> <a class=3D"http" href=3D"http://docs.python.org/lib/module-sndhdr.=
+html">sndhdr</a> </td>
+  <td><p class=3D"line862">   Determine type of a sound file. </td>
+</tr>
+<tr>  <td><span class=3D"anchor" id=3D"line-20"></span><p class=3D"line8=
+62"> <a class=3D"http" href=3D"http://docs.python.org/lib/module-ossaudi=
+odev.html">ossaudiodev</a> </td>
+  <td><p class=3D"line862">   Access to OSS-compatible audio devices (ma=
+inly important for Linux / FreeBSD) </td>
+</tr>
+<tr>  <td><span class=3D"anchor" id=3D"line-21"></span><p class=3D"line8=
+62"> <a class=3D"http" href=3D"http://docs.python.org/library/winsound.h=
+tml">winsound</a> </td>
+  <td><p class=3D"line862"> Access to the basic sound-playing machinery =
+provided by Windows platforms. </td>
+</tr>
+</tbody></table></div><span class=3D"anchor" id=3D"line-22"></span><span=
+ class=3D"anchor" id=3D"line-23"></span><p class=3D"line867">
+<h2 id=3D"Beyond_the_default_modules">Beyond the default modules</h2>
+<span class=3D"anchor" id=3D"line-24"></span><p class=3D"line874">Altern=
+atively, you might want to learn about audio programming in Python.  The=
+re is a veritable forest of stuff out there, but here are some good star=
+ting points. <span class=3D"anchor" id=3D"line-25"></span><span class=3D=
+"anchor" id=3D"line-26"></span><p class=3D"line862">For a complete overv=
+iew have a look at <a href=3D"/moin/PythonInMusic">PythonInMusic</a>. <s=
+pan class=3D"anchor" id=3D"line-27"></span><span class=3D"anchor" id=3D"=
+line-28"></span><p class=3D"line867">
+<h3 id=3D"Platform_independent">Platform independent</h3>
+<span class=3D"anchor" id=3D"line-29"></span><span class=3D"anchor" id=3D=
+"line-30"></span><p class=3D"line867"><a class=3D"http" href=3D"http://n=
+sound.sourceforge.net">Nsound</a> <span class=3D"anchor" id=3D"line-31">=
+</span><ul><li style=3D"list-style-type:none">A framework for audio synt=
+hesis. <span class=3D"anchor" id=3D"line-32"></span><span class=3D"ancho=
+r" id=3D"line-33"></span></li></ul><p class=3D"line867"><a class=3D"http=
+" href=3D"http://pyaudiere.org">PyAudiere</a> <span class=3D"anchor" id=3D=
+"line-34"></span><ul><li style=3D"list-style-type:none">A high-level aud=
+io interface for Python. <span class=3D"anchor" id=3D"line-35"></span><s=
+pan class=3D"anchor" id=3D"line-36"></span></li></ul><p class=3D"line867=
+"><a class=3D"http" href=3D"http://people.csail.mit.edu/hubert/pyaudio/"=
+>pyAudio</a> <span class=3D"anchor" id=3D"line-37"></span><ul><li style=3D=
+"list-style-type:none"><p class=3D"line862">pyAudio provides Python bind=
+ings for <a class=3D"nonexistent" href=3D"/moin/PortAudio">PortAudio</a>=
+, the cross-platform audio I/O library. Only for audio input and output,=
+ other operations can be done using e.g. Python's built in wave module. =
+<span class=3D"anchor" id=3D"line-38"></span><span class=3D"anchor" id=3D=
+"line-39"></span></li></ul><p class=3D"line867"><a class=3D"http" href=3D=
+"http://www.speech.kth.se/snack/">Snack</a>  <span class=3D"anchor" id=3D=
+"line-40"></span><ul><li style=3D"list-style-type:none">Snack has comman=
+ds for basic sound handling, such as playback, recording, file and socke=
+t I/O. Snack also provides primitives for sound visualization, e.g. wave=
+forms and spectrograms. <span class=3D"anchor" id=3D"line-41"></span><sp=
+an class=3D"anchor" id=3D"line-42"></span></li></ul><p class=3D"line867"=
+><a class=3D"http" href=3D"http://sourceforge.net/projects/audiotools/">=
+Python Audio Tools</a> <span class=3D"anchor" id=3D"line-43"></span><ul>=
+<li style=3D"list-style-type:none">Python programs for CD-ripping and co=
+nversion between audio file formats. <span class=3D"anchor" id=3D"line-4=
+4"></span><span class=3D"anchor" id=3D"line-45"></span></li></ul><p clas=
+s=3D"line867">
+<h3 id=3D"Platform_dependent">Platform dependent</h3>
+<span class=3D"anchor" id=3D"line-46"></span><p class=3D"line867"><a cla=
+ss=3D"http" href=3D"http://gstreamer.freedesktop.org/modules/gst-python.=
+html">http://gstreamer.freedesktop.org/modules/gst-python.html</a> <span=
+ class=3D"anchor" id=3D"line-47"></span><span class=3D"anchor" id=3D"lin=
+e-48"></span><span class=3D"anchor" id=3D"line-49"></span><p class=3D"li=
+ne867">
+<h3 id=3D"Modules_relying_on_closed_source">Modules relying on closed so=
+urce</h3>
+<span class=3D"anchor" id=3D"line-50"></span><span class=3D"anchor" id=3D=
+"line-51"></span><p class=3D"line867"><a class=3D"http" href=3D"http://p=
+ysonic.sourceforge.net/">pysonic</a> <span class=3D"anchor" id=3D"line-5=
+2"></span><ul><li style=3D"list-style-type:none"><p class=3D"line862">A =
+wrapper around the <a class=3D"http" href=3D"http://www.fmod.org">FMOD</=
+a>-library offering plenty of options including 3D sound and effects. FM=
+OD is a popular closed, but free for own use, that is used in many comme=
+rcial game titles. <span class=3D"anchor" id=3D"line-53"></span></li></u=
+l><p class=3D"line867"><hr /><p class=3D"line874"> <span class=3D"anchor=
+" id=3D"line-54"></span><a href=3D"/moin/CategoryDocumentation">Category=
+Documentation</a> <span class=3D"anchor" id=3D"line-55"></span><span cla=
+ss=3D"anchor" id=3D"bottom"></span></div><p id=3D"pageinfo" class=3D"inf=
+o" lang=3D"es" dir=3D"ltr">Audio  (=C3=BAltima edici=C3=B3n 2011-07-04 0=
+2:32:29 efectuada por <span title=3D"eryksun @ adsl-74-179-112-186.gnv.b=
+ellsouth.net[74.179.112.186]"><a class=3D"nonexistent" href=3D"/moin/ery=
+ksun" title=3D"eryksun @ adsl-74-179-112-186.gnv.bellsouth.net[74.179.11=
+2.186]">eryksun</a></span>)</p>
+
+<div id=3D"pagebottom"></div>
+</div>
+
+
+<div id=3D"footer">
+<ul id=3D"credits">
+<li><a href=3D"http://moinmo.in/" title=3D"This site uses the MoinMoin W=
+iki software.">MoinMoin Powered</a></li><li><a href=3D"http://moinmo.in/=
+Python" title=3D"MoinMoin is written in Python.">Python Powered</a></li>=
+<li><a href=3D"http://moinmo.in/GPL" title=3D"MoinMoin is GPL licensed."=
+>GPL licensed</a></li><li><a href=3D"http://validator.w3.org/check?uri=3D=
+referer" title=3D"Click here to validate this page.">Valid HTML 4.01</a>=
+</li>
+</ul>
+
+
+</div>
+</body>
+</html>
+
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline; filename=common.js
+Content-Type: application/x-javascript; charset=utf-8; name=common.js
+Content-Location: http://wiki.python.org/moin/moin_static193/common/js/common.js
+Content-Transfer-Encoding: Base64
+
+Ly8KLy8gTW9pbk1vaW4gY29tbW9ubHkgdXNlZCBKYXZhU2NyaXB0IGZ1bmN0aW9u
+cwovLwoKLy8gV2Uga2VlcCBoZXJlIHRoZSBzdGF0ZSBvZiB0aGUgc2VhcmNoIGJv
+eApzZWFyY2hJc0Rpc2FibGVkID0gZmFsc2U7CgpmdW5jdGlvbiBzZWFyY2hDaGFu
+Z2UoZSkgewogICAgLy8gVXBkYXRlIHNlYXJjaCBidXR0b25zIHN0YXR1cyBhY2Nv
+cmRpbmcgdG8gc2VhcmNoIGJveCBjb250ZW50LgogICAgLy8gSWdub3JlIGVtcHR5
+IG9yIHdoaXRlc3BhY2Ugc2VhcmNoIHRlcm0uCiAgICB2YXIgdmFsdWUgPSBlLnZh
+bHVlLnJlcGxhY2UoL1xzKy8sICcnKTsKICAgIGlmICh2YWx1ZSA9PSAnJyB8fCBz
+ZWFyY2hJc0Rpc2FibGVkKSB7IAogICAgICAgIHNlYXJjaFNldERpc2FibGVkKHRy
+dWUpOwogICAgfSBlbHNlIHsKICAgICAgICBzZWFyY2hTZXREaXNhYmxlZChmYWxz
+ZSk7CiAgICB9Cn0KCmZ1bmN0aW9uIHNlYXJjaFNldERpc2FibGVkKGZsYWcpIHsK
+ICAgIC8vIEVuYWJsZSBvciBkaXNhYmxlIHNlYXJjaAogICAgZG9jdW1lbnQuZ2V0
+RWxlbWVudEJ5SWQoJ2Z1bGxzZWFyY2gnKS5kaXNhYmxlZCA9IGZsYWc7CiAgICBk
+b2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGl0bGVzZWFyY2gnKS5kaXNhYmxlZCA9
+IGZsYWc7Cn0KCmZ1bmN0aW9uIHNlYXJjaEZvY3VzKGUpIHsKICAgIC8vIFVwZGF0
+ZSBzZWFyY2ggaW5wdXQgY29udGVudCBvbiBmb2N1cwogICAgaWYgKGUudmFsdWUg
+PT0gc2VhcmNoX2hpbnQpIHsKICAgICAgICBlLnZhbHVlID0gJyc7CiAgICAgICAg
+ZS5jbGFzc05hbWUgPSAnJzsKICAgICAgICBzZWFyY2hJc0Rpc2FibGVkID0gZmFs
+c2U7CiAgICB9Cn0KCmZ1bmN0aW9uIHNlYXJjaEJsdXIoZSkgewogICAgLy8gVXBk
+YXRlIHNlYXJjaCBpbnB1dCBjb250ZW50IG9uIGJsdXIKICAgIGlmIChlLnZhbHVl
+ID09ICcnKSB7CiAgICAgICAgZS52YWx1ZSA9IHNlYXJjaF9oaW50OwogICAgICAg
+IGUuY2xhc3NOYW1lID0gJ2Rpc2FibGVkJzsKICAgICAgICBzZWFyY2hJc0Rpc2Fi
+bGVkID0gdHJ1ZTsKICAgIH0KfQoKZnVuY3Rpb24gYWN0aW9uc01lbnVJbml0KHRp
+dGxlKSB7CiAgICAvLyBJbml0aWFsaXplIGFjdGlvbiBtZW51CiAgICBmb3IgKGkg
+PSAwOyBpIDwgZG9jdW1lbnQuZm9ybXMubGVuZ3RoOyBpKyspIHsKICAgICAgICB2
+YXIgZm9ybSA9IGRvY3VtZW50LmZvcm1zW2ldOwogICAgICAgIGlmIChmb3JtLmNs
+YXNzTmFtZSA9PSAnYWN0aW9uc21lbnUnKSB7CiAgICAgICAgICAgIC8vIENoZWNr
+IGlmIHRoaXMgZm9ybSBuZWVkcyB1cGRhdGUKICAgICAgICAgICAgdmFyIGRpdiA9
+IGZvcm0uZ2V0RWxlbWVudHNCeVRhZ05hbWUoJ2RpdicpWzBdOwogICAgICAgICAg
+ICB2YXIgbGFiZWwgPSBkaXYuZ2V0RWxlbWVudHNCeVRhZ05hbWUoJ2xhYmVsJylb
+MF07CiAgICAgICAgICAgIGlmIChsYWJlbCkgewogICAgICAgICAgICAgICAgLy8g
+VGhpcyBpcyB0aGUgZmlyc3QgdGltZTogcmVtb3ZlIGxhYmVsIGFuZCBkbyBidXRv
+bi4KICAgICAgICAgICAgICAgIGRpdi5yZW1vdmVDaGlsZChsYWJlbCk7CiAgICAg
+ICAgICAgICAgICB2YXIgZG9idXR0b24gPSBkaXYuZ2V0RWxlbWVudHNCeVRhZ05h
+bWUoJ2lucHV0JylbMF07CiAgICAgICAgICAgICAgICBkaXYucmVtb3ZlQ2hpbGQo
+ZG9idXR0b24pOwogICAgICAgICAgICAgICAgLy8gYW5kIGFkZCBtZW51IHRpdGxl
+CiAgICAgICAgICAgICAgICB2YXIgc2VsZWN0ID0gZGl2LmdldEVsZW1lbnRzQnlU
+YWdOYW1lKCdzZWxlY3QnKVswXTsKICAgICAgICAgICAgICAgIHZhciBpdGVtID0g
+ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnb3B0aW9uJyk7CiAgICAgICAgICAgICAg
+ICBpdGVtLmFwcGVuZENoaWxkKGRvY3VtZW50LmNyZWF0ZVRleHROb2RlKHRpdGxl
+KSk7CiAgICAgICAgICAgICAgICBpdGVtLnZhbHVlID0gJ3Nob3cnOwogICAgICAg
+ICAgICAgICAgc2VsZWN0Lmluc2VydEJlZm9yZShpdGVtLCBzZWxlY3Qub3B0aW9u
+c1swXSk7CiAgICAgICAgICAgICAgICBzZWxlY3Quc2VsZWN0ZWRJbmRleCA9IDA7
+CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9Cn0KCi8vIHVzZSB0aGlzIGlu
+c3RlYWQgb2YgYXNzaWduaW5nIHRvIHdpbmRvdy5vbmxvYWQgZGlyZWN0bHk6CmZ1
+bmN0aW9uIGFkZExvYWRFdmVudChmdW5jKSB7CiAgICAvLyBhbGVydCgiYWRkTG9h
+ZEV2ZW50ICIgKyBmdW5jKQogICAgdmFyIG9sZG9ubG9hZCA9IHdpbmRvdy5vbmxv
+YWQ7CiAgICBpZiAodHlwZW9mIHdpbmRvdy5vbmxvYWQgIT0gJ2Z1bmN0aW9uJykg
+ewogICAgICAgIHdpbmRvdy5vbmxvYWQgPSBmdW5jOwogICAgfSBlbHNlIHsKICAg
+ICAgICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICAgICAgICAgIG9s
+ZG9ubG9hZCgpOwogICAgICAgICAgICBmdW5jKCk7CiAgICAgICAgfQogICAgfQp9
+CgovLyBjb3B5IGZyb20gZmNrZWRpdG9yIGJyb3dzZXIgY2hlY2sgY29kZSAoZmNr
+ZWRpdG9yLmpzOjI5OCwgZnVuY3Rpb24gOiBGQ0tlZGl0b3JfSXNDb21wYXRpYmxl
+QnJvd3NlcikKZnVuY3Rpb24gY2FuX3VzZV9ndWlfZWRpdG9yKCkgewogICAgdmFy
+IHNBZ2VudCA9IG5hdmlnYXRvci51c2VyQWdlbnQudG9Mb3dlckNhc2UoKSA7Cgog
+ICAgLy8gSW50ZXJuZXQgRXhwbG9yZXIgNS41KwogICAgaWYgKCAvKkBjY19vbiFA
+Ki9mYWxzZSAmJiBzQWdlbnQuaW5kZXhPZigibWFjIikgPT0gLTEgKQogICAgewog
+ICAgICAgIHZhciBzQnJvd3NlclZlcnNpb24gPSBuYXZpZ2F0b3IuYXBwVmVyc2lv
+bi5tYXRjaCgvTVNJRSAoLlwuLikvKVsxXSA7CiAgICAgICAgcmV0dXJuICggc0Jy
+b3dzZXJWZXJzaW9uID49IDUuNSApIDsKICAgIH0KCiAgICAvLyBHZWNrbyAoT3Bl
+cmEgOSB0cmllcyB0byBiZWhhdmUgbGlrZSBHZWNrbyBhdCB0aGlzIHBvaW50KS4K
+ICAgIGlmICggbmF2aWdhdG9yLnByb2R1Y3QgPT0gIkdlY2tvIiAmJiBuYXZpZ2F0
+b3IucHJvZHVjdFN1YiA+PSAyMDAzMDIxMCAmJiAhKCB0eXBlb2Yob3BlcmEpID09
+ICdvYmplY3QnICYmIG9wZXJhLnBvc3RFcnJvciApICkKICAgICAgICByZXR1cm4g
+dHJ1ZSA7CgogICAgLy8gT3BlcmEgOS41MCsKICAgIGlmICggd2luZG93Lm9wZXJh
+ICYmIHdpbmRvdy5vcGVyYS52ZXJzaW9uICYmIHBhcnNlRmxvYXQoIHdpbmRvdy5v
+cGVyYS52ZXJzaW9uKCkgKSA+PSA5LjUgKQogICAgICAgIHJldHVybiB0cnVlIDsK
+Ci8qCiAgLy8gZGlzYWJsZSBzYWZhcmkgOiB1bnRpbCBmY2sgZGV2dGVhbSBmaXgg
+aHR0cDovL2Rldi5mY2tlZGl0b3IubmV0L3RpY2tldC8yMzMzCiAgCiAgICAvLyBB
+ZG9iZSBBSVIKICAgIC8vIENoZWNrZWQgYmVmb3JlIFNhZmFyaSBiZWNhdXNlIEFJ
+UiBoYXZlIHRoZSBXZWJLaXQgcmljaCB0ZXh0IGVkaXRvcgogICAgLy8gZmVhdHVy
+ZXMgZnJvbSBTYWZhcmkgMy4wLjQsIGJ1dCB0aGUgdmVyc2lvbiByZXBvcnRlZCBp
+cyA0MjAuCiAgICBpZiAoIHNBZ2VudC5pbmRleE9mKCAnIGFkb2JlYWlyLycgKSAh
+PSAtMSApCiAgICAgICAgcmV0dXJuICggc0FnZW50Lm1hdGNoKCAvIGFkb2JlYWly
+XC8oXGQrKS8gKVsxXSA+PSAxICkgOyAvLyBCdWlsZCBtdXN0IGJlIGF0IGxlYXN0
+IHYxCgogICAgLy8gU2FmYXJpIDMrCiAgICBpZiAoIHNBZ2VudC5pbmRleE9mKCAn
+IGFwcGxld2Via2l0LycgKSAhPSAtMSApCiAgICAgICAgcmV0dXJuICggc0FnZW50
+Lm1hdGNoKCAvIGFwcGxld2Via2l0XC8oXGQrKS8gKVsxXSA+PSA1MjIgKSA7ICAg
+IC8vIEJ1aWxkIG11c3QgYmUgYXQgbGVhc3QgNTIyICh2MykKKi8KICAgIHJldHVy
+biBmYWxzZSA7Cgp9CgoKZnVuY3Rpb24gdXBkYXRlX2VkaXRfbGlua3MoKSB7CiAg
+ICAvLyBVcGRhdGUgZWRpdGxpbmsgYWNjb3JkaW5nIGlmIGlmIHRoZSBicm93c2Vy
+IGlzIGNvbXBhdGlibGUKICAgIGlmIChjYW5fdXNlX2d1aV9lZGl0b3IoKSA9PSBm
+YWxzZSl7CiAgICAgICAgLy9hbGVydCgidXBkYXRlX2VkaXRfbGlua3M6IGNhbid0
+IHVzZSBndWkgZWRpdG9yIik7CiAgICAgICAgcmV0dXJuOwogICAgfQogICAgdmFy
+IGVkaXRsaW5rcyA9IGRvY3VtZW50LmdldEVsZW1lbnRzQnlOYW1lKCJlZGl0bGlu
+ayIpOwogICAgZm9yIChpID0gMDsgaSA8IGVkaXRsaW5rcy5sZW5ndGg7IGkrKykg
+ewogICAgICAgIHZhciBsaW5rID0gZWRpdGxpbmtzW2ldOwogICAgICAgIGhyZWYg
+PSBsaW5rLmhyZWYucmVwbGFjZSgnZWRpdG9yPXRleHRvbmx5JywnZWRpdG9yPWd1
+aXBvc3NpYmxlJyk7CiAgICAgICAgbGluay5ocmVmID0gaHJlZjsKICAgICAgICAv
+L2FsZXJ0KCJ1cGRhdGVfZWRpdF9saW5rczogbW9kaWZpZWQgdG8gZ3VpcG9zc2li
+bGUiKTsKICAgIH0KfQoKCmZ1bmN0aW9uIGFkZF9ndWlfZWRpdG9yX2xpbmtzKCkg
+ewogICAgLy8gQWRkIGd1aSBlZGl0b3IgbGluayBhZnRlciB0aGUgdGV4dCBlZGl0
+b3IgbGluawogICAgCiAgICAvLyBJZiB0aGUgdmFyaWFibGUgaXMgbm90IHNldCBv
+ciBicm93c2VyIGlzIG5vdCBjb21wYXRpYmxlLCBleGl0CiAgICB0cnkge2d1aV9l
+ZGl0b3JfbGlua19ocmVmfQogICAgY2F0Y2ggKGUpIHsKICAgICAgICAvL2FsZXJ0
+KCJhZGRfZ3VpX2VkaXRvcl9saW5rczogZ3VpX2VkaXRvcl9saW5rX2hyZWYgbm90
+IGhlcmUiKTsKICAgICAgICByZXR1cm4KICAgIH0KICAgIGlmIChjYW5fdXNlX2d1
+aV9lZGl0b3IoKSA9PSBmYWxzZSl7CiAgICAgICAgLy9hbGVydCgiYWRkX2d1aV9l
+ZGl0b3JfbGlua3M6IGNhbid0IHVzZSBndWlfZWRpdG9yIik7CiAgICAgICAgcmV0
+dXJuOwogICAgfQogICAgdmFyIGFsbCA9IGRvY3VtZW50LmdldEVsZW1lbnRzQnlO
+YW1lKCd0ZXh0ZWRpdGxpbmsnKTsKICAgIGZvciAoaSA9IDA7IGkgPCBhbGwubGVu
+Z3RoOyBpKyspIHsKICAgICAgICB2YXIgdGV4dEVkaXRvckxpbmsgPSBhbGxbaV07
+CiAgICAgICAgLy8gQ3JlYXRlIGEgbGlzdCBpdGVtIHdpdGggYSBsaW5rCiAgICAg
+ICAgdmFyIGd1aUVkaXRvckxpbmsgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdh
+Jyk7CiAgICAgICAgZ3VpRWRpdG9yTGluay5ocmVmID0gZ3VpX2VkaXRvcl9saW5r
+X2hyZWY7CiAgICAgICAgdmFyIHRleHQgPSBkb2N1bWVudC5jcmVhdGVUZXh0Tm9k
+ZShndWlfZWRpdG9yX2xpbmtfdGV4dCk7CiAgICAgICAgZ3VpRWRpdG9yTGluay5h
+cHBlbmRDaGlsZCh0ZXh0KTsKICAgICAgICB2YXIgbGlzdEl0ZW0gPSBkb2N1bWVu
+dC5jcmVhdGVFbGVtZW50KCdsaScpCiAgICAgICAgbGlzdEl0ZW0uYXBwZW5kQ2hp
+bGQoZ3VpRWRpdG9yTGluayk7CiAgICAgICAgLy8gSW5zZXJ0IGluIHRoZSBlZGl0
+YmFyCiAgICAgICAgdmFyIGVkaXRiYXIgPSB0ZXh0RWRpdG9yTGluay5wYXJlbnRO
+b2RlLnBhcmVudE5vZGUKICAgICAgICB2YXIgbmV4dExpc3RJdGVtID0gdGV4dEVk
+aXRvckxpbmsucGFyZW50Tm9kZS5uZXh0U2libGluZzsKICAgICAgICBlZGl0YmFy
+Lmluc2VydEJlZm9yZShsaXN0SXRlbSwgbmV4dExpc3RJdGVtKTsKICAgICAgICAv
+L2FsZXJ0KCJhZGRfZ3VpX2VkaXRvcl9saW5rczogYWRkZWQgZ3VpIGVkaXRvciBs
+aW5rIik7CiAgICB9Cn0KIAoKZnVuY3Rpb24gc2hvd19zd2l0Y2gyZ3VpKCkgewog
+ICAgLy8gU2hvdyBzd2l0Y2ggdG8gZ3VpIGVkaXRvciBsaW5rIGlmIHRoZSBicm93
+c2VyIGlzIGNvbXBhdGlibGUKICAgIGlmIChjYW5fdXNlX2d1aV9lZGl0b3IoKSA9
+PSBmYWxzZSkgcmV0dXJuOwogICAgCiAgICB2YXIgc3dpdGNoMmd1aSA9IGRvY3Vt
+ZW50LmdldEVsZW1lbnRCeUlkKCdzd2l0Y2gyZ3VpJykKICAgIGlmIChzd2l0Y2gy
+Z3VpKSB7CiAgICAgICAgc3dpdGNoMmd1aS5zdHlsZS5kaXNwbGF5ID0gJ2lubGlu
+ZSc7CiAgICB9Cn0KCi8vIGZvciBsb25nIGRvY3VtZW50cyB3aXRoIG1hbnkgY29t
+bWVudHMgdGhpcyBpcyBleHBlbnNpdmUgdG8gY2FsY3VsYXRlLAovLyB0aHVzIHdl
+IGtlZXAgaXQgaGVyZToKY29tbWVudHMgPSBudWxsOwoKZnVuY3Rpb24gdG9nZ2xl
+Q29tbWVudHMoKSB7CiAgICAvLyBUb2dnbGUgdmlzaWJpbGl0eSBvZiBldmVyeSB0
+YWcgd2l0aCBjbGFzcyAiY29tbWVudCIKICAgIGZvciAoaSA9IDA7IGkgPCBjb21t
+ZW50cy5sZW5ndGg7IGkrKyl7CiAgICAgICAgZWwgPSBjb21tZW50c1tpXTsKICAg
+ICAgICBpZiAoIGVsLnN0eWxlLmRpc3BsYXkgIT0gJ25vbmUnICkgewogICAgICAg
+ICAgICBlbC5zdHlsZS5kaXNwbGF5ID0gJ25vbmUnOwogICAgICAgIH0gZWxzZSB7
+CiAgICAgICAgICAgIGVsLnN0eWxlLmRpc3BsYXkgPSAnJzsKICAgICAgICB9CiAg
+ICB9Cn0KCmZ1bmN0aW9uIHNob3dfdG9nZ2xlQ29tbWVudHMoKSB7CiAgICAvLyBT
+aG93IGVkaXQgYmFyIGl0ZW0gZm9yIHRvZ2dsaW5nIGlubGluZSBjb21tZW50cyBv
+bi9vZmYgb25seSBpZiBpbmxpbmUgY29tbWVudHMgZXhpc3Qgb24gdGhlIHBhZ2UK
+ICAgIGNvbW1lbnRzID0gZ2V0RWxlbWVudHNCeUNsYXNzTmFtZSgnY29tbWVudCcs
+IG51bGwsIGRvY3VtZW50KTsKICAgIGlmIChjb21tZW50cy5sZW5ndGggPiAwKSB7
+CiAgICAgICAgdmFyIGJ1dHRvbnMgPSBnZXRFbGVtZW50c0J5Q2xhc3NOYW1lKCd0
+b2dnbGVDb21tZW50c0J1dHRvbicsIG51bGwsIGRvY3VtZW50KTsKICAgICAgICBm
+b3IgKGkgPSAwOyBpIDwgYnV0dG9ucy5sZW5ndGg7IGkrKyl7CiAgICAgICAgICAg
+IGVsID0gYnV0dG9uc1tpXTsKICAgICAgICAgICAgZWwuc3R5bGUuZGlzcGxheSA9
+ICcnOwogICAgICAgIH0KICAgIH0KfQoKCmZ1bmN0aW9uIGxvYWQoKSB7CiAgICAv
+LyBEbyBub3QgbmFtZSB0aGlzICJvbmxvYWQiLCBpdCBkb2VzIG5vdCB3b3JrIHdp
+dGggSUUgOi0pCiAgICAvLyBUT0RPOiBjcmVhdGUgc2VwYXJhdGUgb25sb2FkIGZv
+ciBlYWNoIHR5cGUgb2YgdmlldyBhbmQgc2V0IHRoZQogICAgLy8gY29ycmVjdCBm
+dW5jdGlvbiBuYW1lIGluIHRoZSBodG1sLiAKICAgIC8vIGUuZyA8Ym9keSBvbmxv
+ZD0nZWRpdG9yX29ubG9hZCgpJz4KCiAgICAvLyBsb2dpbiBmb2N1cwogICAgaWYg
+KGRvY3VtZW50LmZvcm1zWydsb2dpbmZvcm0nXSkgewogICAgICAgIGRvY3VtZW50
+LmZvcm1zWydsb2dpbmZvcm0nXS5lbGVtZW50c1snbmFtZSddLmZvY3VzKCk7CiAg
+ICB9CiAgICAKICAgIC8vIFBhZ2UgdmlldyBzdHVmZgogICAgdXBkYXRlX2VkaXRf
+bGlua3MoKTsKICAgIGFkZF9ndWlfZWRpdG9yX2xpbmtzKCk7CiAgICAKICAgIC8v
+IEVkaXRvciBzdHVmZgogICAgc2hvd19zd2l0Y2gyZ3VpKCk7CgogICAgLy8gRW5h
+YmxlIG1lbnUgaXRlbSAiVG9nZ2xlQ29tbWVudHMiIGlmIGlubGluZSBjb21tZW50
+cyBleGlzdAogICAgc2hvd190b2dnbGVDb21tZW50cygpOwogCiAgICAvLyBkYXRh
+IGJyb3dzZXIgd2lkZ2V0CiAgICBkYndfaGlkZV9idXR0b25zKCk7Cn0KCgpmdW5j
+dGlvbiBiZWZvcmVfdW5sb2FkKGV2dCkgewogICAgLy8gVE9ETzogQmV0dGVyIHRv
+IHNldCB0aGlzIGluIHRoZSBlZGl0b3IgaHRtbCwgYXMgaXQgZG9lcyBub3QgbWFr
+ZQogICAgLy8gc2Vuc2UgZWxzZWh3ZXJlLgogICAgLy8gY29uZmlybWxlYXZpbmcg
+aXMgYXZhaWxhYmxlIHdoZW4gZWRpdGluZwogICAgdHJ5IHtyZXR1cm4gY29uZmly
+bWxlYXZpbmcoKTt9CiAgICBjYXRjaCAoZSkge30KfQoKLy8gSW5pdGlhbGl6ZSBh
+ZnRlciBsb2FkaW5nIHRoZSBwYWdlCmFkZExvYWRFdmVudChsb2FkKQoKLy8gQ2F0
+Y2ggYmVmb3JlIHVubG9hZGluZyB0aGUgcGFnZQp3aW5kb3cub25iZWZvcmV1bmxv
+YWQgPSBiZWZvcmVfdW5sb2FkCgpmdW5jdGlvbiBkYndfdXBkYXRlX3NlYXJjaChk
+YndfaWQpCnsKICAgIHZhciB0YWJsZSA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlk
+KGRid19pZCsndGFibGUnKTsKICAgIHZhciBjZWxsOwogICAgdmFyIHNob3duOwog
+ICAgdmFyIGkKICAgIHZhciBjb2xzID0gdGFibGUucm93c1swXS5jZWxscy5sZW5n
+dGg7CiAgICB2YXIgZmlsdGVyID0gbmV3IEFycmF5KCk7CiAgICB2YXIgZG9maWx0
+ZXIgPSBuZXcgQXJyYXkoKTsKICAgIHZhciBmb3JtID0gZG9jdW1lbnQuZm9ybXNb
+ZGJ3X2lkKydmb3JtJ107CgogICAgZm9yIChpID0gMDsgaSA8IGNvbHM7IGkrKykg
+ewogICAgICAgIGRvZmlsdGVyW2ldID0gZmFsc2U7CiAgICAgICAgaWYgKGZvcm1b
+ZGJ3X2lkKydmaWx0ZXInK2ldKSB7CiAgICAgICAgICAgIGRvZmlsdGVyW2ldID0g
+dHJ1ZTsKICAgICAgICAgICAgZmlsdGVyW2ldID0gZm9ybVtkYndfaWQrJ2ZpbHRl
+cicraV0udmFsdWU7CiAgICAgICAgICAgIGlmIChmaWx0ZXJbaV0gPT0gJ1thbGxd
+JykKICAgICAgICAgICAgICAgIGRvZmlsdGVyW2ldID0gZmFsc2U7CiAgICAgICAg
+ICAgIGlmIChmaWx0ZXJbaV0gPT0gJ1tlbXB0eV0nKQogICAgICAgICAgICAgICAg
+ZmlsdGVyW2ldID0gJyc7CiAgICAgICAgfQogICAgfQoKICAgIGZvciAoaSA9IDE7
+IGkgPCB0YWJsZS5yb3dzLmxlbmd0aDsgaSsrKSB7CiAgICAgICAgdmFyIHNob3cg
+PSB0cnVlOwogICAgICAgIGZvciAoY29sID0gMDsgY29sIDwgY29sczsgY29sKysp
+IHsKICAgICAgICAgICAgaWYgKCFkb2ZpbHRlcltjb2xdKQogICAgICAgICAgICAg
+ICAgY29udGludWU7CgogICAgICAgICAgICBjZWxsID0gdGFibGUucm93c1tpXS5j
+ZWxsc1tjb2xdOwoKICAgICAgICAgICAgaWYgKGZpbHRlcltjb2xdID09ICdbbm90
+ZW1wdHldJykgewogICAgICAgICAgICAgICAgaWYgKGNlbGwuYWJiciA9PSAnJykg
+ewogICAgICAgICAgICAgICAgICAgIHNob3cgPSBmYWxzZTsKICAgICAgICAgICAg
+ICAgICAgICBicmVhazsKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfSBl
+bHNlIGlmIChmaWx0ZXJbY29sXSAhPSBjZWxsLmFiYnIpIHsKICAgICAgICAgICAg
+ICAgIHNob3cgPSBmYWxzZTsKICAgICAgICAgICAgICAgIGJyZWFrOwogICAgICAg
+ICAgICB9CiAgICAgICAgfQogICAgICAgIGlmIChzaG93KQogICAgICAgICAgICB0
+YWJsZS5yb3dzW2ldLnN0eWxlLmRpc3BsYXkgPSAnJzsKICAgICAgICBlbHNlCiAg
+ICAgICAgICAgIHRhYmxlLnJvd3NbaV0uc3R5bGUuZGlzcGxheSA9ICdub25lJzsK
+ICAgIH0KfQoKZnVuY3Rpb24gZGJ3X2hpZGVfYnV0dG9ucygpIHsKICAgIHZhciBm
+b3JtOwogICAgdmFyIGVsZW07CiAgICB2YXIgbmFtZTsKCiAgICBmb3IgKHZhciBm
+aWR4ID0gMDsgZmlkeCA8IGRvY3VtZW50LmZvcm1zLmxlbmd0aDsgZmlkeCsrKSB7
+CiAgICAgICAgZm9ybSA9IGRvY3VtZW50LmZvcm1zW2ZpZHhdOwogICAgICAgIGZv
+ciAodmFyIGVpZHggPSAwOyBlaWR4IDwgZm9ybS5lbGVtZW50cy5sZW5ndGg7IGVp
+ZHgrKykgewogICAgICAgICAgICBlbGVtID0gZm9ybS5lbGVtZW50c1tlaWR4XTsK
+ICAgICAgICAgICAgbmFtZSA9IGVsZW0ubmFtZTsKICAgICAgICAgICAgaWYgKG5h
+bWUpIHsKICAgICAgICAgICAgICAgIGlmIChuYW1lLmluZGV4T2YoJ2Ridy4nKSA+
+PSAwICYmIG5hbWUuc3Vic3RyKC03KSA9PSAnLnN1Ym1pdCcpCiAgICAgICAgICAg
+ICAgICAgICAgZWxlbS5zdHlsZS5kaXNwbGF5ID0gJ25vbmUnOwogICAgICAgICAg
+ICB9CiAgICAgICAgfQogICAgfQp9CgovKiAgZ2V0RWxlbWVudHNCeUNsYXNzTmFt
+ZQogICAgRGV2ZWxvcGVkIGJ5IFJvYmVydCBOeW1hbiwgaHR0cDovL3d3dy5yb2Jl
+cnRueW1hbi5jb20KICAgIENvZGUvbGljZW5zaW5nOiBodHRwOi8vY29kZS5nb29n
+bGUuY29tL3AvZ2V0ZWxlbWVudHNieWNsYXNzbmFtZS8gKE1JVCBsaWNlbnNlKQog
+ICAgVmVyc2lvbjogMS4wLjEKKi8gIAp2YXIgZ2V0RWxlbWVudHNCeUNsYXNzTmFt
+ZSA9IGZ1bmN0aW9uIChjbGFzc05hbWUsIHRhZywgZWxtKXsKICAgIGlmIChkb2N1
+bWVudC5nZXRFbGVtZW50c0J5Q2xhc3NOYW1lKSB7CiAgICAgICAgZ2V0RWxlbWVu
+dHNCeUNsYXNzTmFtZSA9IGZ1bmN0aW9uIChjbGFzc05hbWUsIHRhZywgZWxtKSB7
+CiAgICAgICAgICAgIGVsbSA9IGVsbSB8fCBkb2N1bWVudDsKICAgICAgICAgICAg
+dmFyIGVsZW1lbnRzID0gZWxtLmdldEVsZW1lbnRzQnlDbGFzc05hbWUoY2xhc3NO
+YW1lKSwKICAgICAgICAgICAgICAgIG5vZGVOYW1lID0gKHRhZyk/IG5ldyBSZWdF
+eHAoIlxcYiIgKyB0YWcgKyAiXFxiIiwgImkiKSA6IG51bGwsCiAgICAgICAgICAg
+ICAgICByZXR1cm5FbGVtZW50cyA9IFtdLAogICAgICAgICAgICAgICAgY3VycmVu
+dDsKICAgICAgICAgICAgZm9yKHZhciBpPTAsIGlsPWVsZW1lbnRzLmxlbmd0aDsg
+aTxpbDsgaSs9MSl7CiAgICAgICAgICAgICAgICBjdXJyZW50ID0gZWxlbWVudHNb
+aV07CiAgICAgICAgICAgICAgICBpZighbm9kZU5hbWUgfHwgbm9kZU5hbWUudGVz
+dChjdXJyZW50Lm5vZGVOYW1lKSkgewogICAgICAgICAgICAgICAgICAgIHJldHVy
+bkVsZW1lbnRzLnB1c2goY3VycmVudCk7CiAgICAgICAgICAgICAgICB9CiAgICAg
+ICAgICAgIH0KICAgICAgICAgICAgcmV0dXJuIHJldHVybkVsZW1lbnRzOwogICAg
+ICAgIH07CiAgICB9CiAgICBlbHNlIGlmIChkb2N1bWVudC5ldmFsdWF0ZSkgewog
+ICAgICAgIGdldEVsZW1lbnRzQnlDbGFzc05hbWUgPSBmdW5jdGlvbiAoY2xhc3NO
+YW1lLCB0YWcsIGVsbSkgewogICAgICAgICAgICB0YWcgPSB0YWcgfHwgIioiOwog
+ICAgICAgICAgICBlbG0gPSBlbG0gfHwgZG9jdW1lbnQ7CiAgICAgICAgICAgIHZh
+ciBjbGFzc2VzID0gY2xhc3NOYW1lLnNwbGl0KCIgIiksCiAgICAgICAgICAgICAg
+ICBjbGFzc2VzVG9DaGVjayA9ICIiLAogICAgICAgICAgICAgICAgeGh0bWxOYW1l
+c3BhY2UgPSAiaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIsCiAgICAgICAg
+ICAgICAgICBuYW1lc3BhY2VSZXNvbHZlciA9IChkb2N1bWVudC5kb2N1bWVudEVs
+ZW1lbnQubmFtZXNwYWNlVVJJID09PSB4aHRtbE5hbWVzcGFjZSk/IHhodG1sTmFt
+ZXNwYWNlIDogbnVsbCwKICAgICAgICAgICAgICAgIHJldHVybkVsZW1lbnRzID0g
+W10sCiAgICAgICAgICAgICAgICBlbGVtZW50cywKICAgICAgICAgICAgICAgIG5v
+ZGU7CiAgICAgICAgICAgIGZvcih2YXIgaj0wLCBqbD1jbGFzc2VzLmxlbmd0aDsg
+ajxqbDsgais9MSl7CiAgICAgICAgICAgICAgICBjbGFzc2VzVG9DaGVjayArPSAi
+W2NvbnRhaW5zKGNvbmNhdCgnICcsIEBjbGFzcywgJyAnKSwgJyAiICsgY2xhc3Nl
+c1tqXSArICIgJyldIjsKICAgICAgICAgICAgfQogICAgICAgICAgICB0cnkgewog
+ICAgICAgICAgICAgICAgZWxlbWVudHMgPSBkb2N1bWVudC5ldmFsdWF0ZSgiLi8v
+IiArIHRhZyArIGNsYXNzZXNUb0NoZWNrLCBlbG0sIG5hbWVzcGFjZVJlc29sdmVy
+LCAwLCBudWxsKTsKICAgICAgICAgICAgfQogICAgICAgICAgICBjYXRjaCAoZSkg
+ewogICAgICAgICAgICAgICAgZWxlbWVudHMgPSBkb2N1bWVudC5ldmFsdWF0ZSgi
+Li8vIiArIHRhZyArIGNsYXNzZXNUb0NoZWNrLCBlbG0sIG51bGwsIDAsIG51bGwp
+OwogICAgICAgICAgICB9CiAgICAgICAgICAgIHdoaWxlICgobm9kZSA9IGVsZW1l
+bnRzLml0ZXJhdGVOZXh0KCkpKSB7CiAgICAgICAgICAgICAgICByZXR1cm5FbGVt
+ZW50cy5wdXNoKG5vZGUpOwogICAgICAgICAgICB9CiAgICAgICAgICAgIHJldHVy
+biByZXR1cm5FbGVtZW50czsKICAgICAgICB9OwogICAgfQogICAgZWxzZSB7CiAg
+ICAgICAgZ2V0RWxlbWVudHNCeUNsYXNzTmFtZSA9IGZ1bmN0aW9uIChjbGFzc05h
+bWUsIHRhZywgZWxtKSB7CiAgICAgICAgICAgIHRhZyA9IHRhZyB8fCAiKiI7CiAg
+ICAgICAgICAgIGVsbSA9IGVsbSB8fCBkb2N1bWVudDsKICAgICAgICAgICAgdmFy
+IGNsYXNzZXMgPSBjbGFzc05hbWUuc3BsaXQoIiAiKSwKICAgICAgICAgICAgICAg
+IGNsYXNzZXNUb0NoZWNrID0gW10sCiAgICAgICAgICAgICAgICBlbGVtZW50cyA9
+ICh0YWcgPT09ICIqIiAmJiBlbG0uYWxsKT8gZWxtLmFsbCA6IGVsbS5nZXRFbGVt
+ZW50c0J5VGFnTmFtZSh0YWcpLAogICAgICAgICAgICAgICAgY3VycmVudCwKICAg
+ICAgICAgICAgICAgIHJldHVybkVsZW1lbnRzID0gW10sCiAgICAgICAgICAgICAg
+ICBtYXRjaDsKICAgICAgICAgICAgZm9yKHZhciBrPTAsIGtsPWNsYXNzZXMubGVu
+Z3RoOyBrPGtsOyBrKz0xKXsKICAgICAgICAgICAgICAgIGNsYXNzZXNUb0NoZWNr
+LnB1c2gobmV3IFJlZ0V4cCgiKF58XFxzKSIgKyBjbGFzc2VzW2tdICsgIihcXHN8
+JCkiKSk7CiAgICAgICAgICAgIH0KICAgICAgICAgICAgZm9yKHZhciBsPTAsIGxs
+PWVsZW1lbnRzLmxlbmd0aDsgbDxsbDsgbCs9MSl7CiAgICAgICAgICAgICAgICBj
+dXJyZW50ID0gZWxlbWVudHNbbF07CiAgICAgICAgICAgICAgICBtYXRjaCA9IGZh
+bHNlOwogICAgICAgICAgICAgICAgZm9yKHZhciBtPTAsIG1sPWNsYXNzZXNUb0No
+ZWNrLmxlbmd0aDsgbTxtbDsgbSs9MSl7CiAgICAgICAgICAgICAgICAgICAgbWF0
+Y2ggPSBjbGFzc2VzVG9DaGVja1ttXS50ZXN0KGN1cnJlbnQuY2xhc3NOYW1lKTsK
+ICAgICAgICAgICAgICAgICAgICBpZiAoIW1hdGNoKSB7CiAgICAgICAgICAgICAg
+ICAgICAgICAgIGJyZWFrOwogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAg
+ICAgICAgIH0KICAgICAgICAgICAgICAgIGlmIChtYXRjaCkgewogICAgICAgICAg
+ICAgICAgICAgIHJldHVybkVsZW1lbnRzLnB1c2goY3VycmVudCk7CiAgICAgICAg
+ICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICAgICAgcmV0dXJuIHJldHVy
+bkVsZW1lbnRzOwogICAgICAgIH07CiAgICB9CiAgICByZXR1cm4gZ2V0RWxlbWVu
+dHNCeUNsYXNzTmFtZShjbGFzc05hbWUsIHRhZywgZWxtKTsKfTsKCgovLyA9PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT0KLy8gVGhlIGZvbGxvd2luZyBmdW5jdGlv
+bnMgYXJlIHBhcnQgb2Ygc2Nyb2xsIGVkaXQgdGV4dGFyZWEgb24gZG91YmxlLWNs
+aWNrCi8vCi8vIFRoaXMgY29kZSBpcyBwdWJsaWMgZG9tYWluIChvciBwcmltYXJp
+bHkgcHVibGljIGRvbWFpbikuCi8vIERvIHdoYXRldmVyIHlvdSB3YW50IHdpdGgg
+aXQuICBJbiBwYXJ0aWN1bGFyLCB5b3UgbWF5IHJlbGVhc2UgaXQgdW5kZXIKLy8g
+R1BMIDIuMCBvciBpbmNvcnBvcmF0ZSBpdCBpbnRvIHByb2plY3RzIHRoYXQgdXNl
+IEdQTCAyLjAuCi8vIC0tIFJhZG9taXIgRG9waWVyYWxza2kgYW5kIFJvZ2VyIEQu
+IEhhYXNlCgovLyBEZWJ1Z2dpbmcgaGVscGVycwovLyAgc2F2ZSBkZWJ1Z2dpbmcg
+c3RhdGUgaW4gY29va2llIC0gcHJlc2VuY2Ugb2YgYSBjb29raWUgbWVhbnMgZGVi
+dWdnaW5nIG1vZGUgaXMgb24KY29va2llUGF0aCA9ICcvJzsKZnVuY3Rpb24gYXV0
+b1Njcm9sbFNldENvb2tpZSAoKXsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICdhdXRv
+c2Nyb2xsZGVidWc9b247IHBhdGg9JyArIGNvb2tpZVBhdGggKyAnOyAnOwp9CmZ1
+bmN0aW9uIGF1dG9TY3JvbGxEZWxldGVDb29raWUgKCl7CiAgICB2YXIgY29va2ll
+X2RhdGUgPSBuZXcgRGF0ZSAoICk7ICAvLyBjdXJyZW50IGRhdGUgJiB0aW1lCiAg
+ICBjb29raWVfZGF0ZS5zZXRUaW1lICggY29va2llX2RhdGUuZ2V0VGltZSgpIC0g
+MSApOwogICAgZG9jdW1lbnQuY29va2llID0gJ2F1dG9zY3JvbGxkZWJ1Zz07IGV4
+cGlyZXM9JyArIGNvb2tpZV9kYXRlLnRvR01UU3RyaW5nKCkgKyAnOyBwYXRoPScg
+KyBjb29raWVQYXRoICsgJzsgJzsKfQpmdW5jdGlvbiBhdXRvU2Nyb2xsR2V0Q29v
+a2llICgpewogICAgdmFyIHJlc3VsdHMgPSBkb2N1bWVudC5jb29raWUubWF0Y2gg
+KCAnKF58OykgPycgKyAiYXV0b3Njcm9sbGRlYnVnIiArICc9KFteO10qKSg7fCQp
+JyApOwogICAgaWYgKCByZXN1bHRzICkgewogICAgICAgIHJldHVybiAoIHVuZXNj
+YXBlICggcmVzdWx0c1syXSApICk7CiAgICB9IGVsc2UgewogICAgICAgIHJldHVy
+biBudWxsOwogICAgfQp9Ci8vIHR1cm4gb24gZGVidWdnaW5nIG1vZGUgYnkgcHJl
+dmlld2luZywgc2F2aW5nIG9yIHJlYWRpbmcgYSBwYWdlIHdpdGggImF1dG8gc2Ny
+b2xsIGRlYnVnIG9uIiB3aXRoaW4gYW4gaDEgaGVhZGVyCi8vID0gTXkgUGFnZSBh
+dXRvIHNjcm9sbCBkZWJ1ZyBvbiA9Ci8vIG9uY2Ugc2V0IG9uLGRlYnVnIG1vZGUg
+c2F5cyBvbiBmb3IgY3VycmVudCBzZXNzaW9uIG9yIHVudGlsIHR1cm5lZCBvZmYg
+d2l0aAovLyA9IE15IFBhZ2UgYXV0byBzY3JvbGwgZGVidWcgb2ZmID0KYXV0b1Nj
+cm9sbERlYnVnT24gPSAwOwovLyB0aGlzIGZ1bmN0aW9uIGV4ZWN1dGVkIG9uIHBh
+Z2UgbG9hZApmdW5jdGlvbiB0dXJuRGVidWdPbk9yT2ZmICgpIHsKICAgIC8vIHNl
+dCBnbG9iYWwgdmFyaWFibGUgZm9yIHVzZSBieSBjb29raWUgZnVuY3Rpb25zCiAg
+ICBjb29raWVQYXRoID0gZG9jdW1lbnQuZ2V0RWxlbWVudHNCeU5hbWUoJ2VkaXRf
+b25fZG91YmxlY2xpY2snKVswXS5jb250ZW50OwogICAgdmFyIGhPbmVzID0gZG9j
+dW1lbnQuZ2V0RWxlbWVudHNCeVRhZ05hbWUoJ0gxJyk7CiAgICBmb3IgKHZhciBp
+ID0gMDsgaSA8IGhPbmVzLmxlbmd0aDsgKytpKSB7CiAgICAgICAgdmFyIGhlYWRl
+ciA9IGhPbmVzW2ldLnRleHRDb250ZW50IHx8IGhPbmVzW2ldLmlubmVyVGV4dDsK
+ICAgICAgICBpZiAoaGVhZGVyLm1hdGNoICgnYXV0byBzY3JvbGwgZGVidWcgb24n
+KSkgewogICAgICAgICAgICBhdXRvU2Nyb2xsU2V0Q29va2llICgpOwogICAgICAg
+IH0KICAgICAgICBpZiAoaGVhZGVyLm1hdGNoICgnYXV0byBzY3JvbGwgZGVidWcg
+b2ZmJykpIHsKICAgICAgICAgICAgYXV0b1Njcm9sbERlbGV0ZUNvb2tpZSAoKTsK
+ICAgICAgICB9CiAgICB9CiAgICBpZiAoYXV0b1Njcm9sbEdldENvb2tpZSAoKSkg
+ewogICAgICAgIGF1dG9TY3JvbGxEZWJ1Z09uID0gMTsKICAgIH0gZWxzZSB7CiAg
+ICAgICAgYXV0b1Njcm9sbERlYnVnT24gPSAwOwogICAgfQp9CgovLyBmdW5jdGlv
+bnMgdXNlZCBmb3IgdGVzdGluZyAtIG1vdXNlb3ZlciB0b29sdGlwIHdpdGggdGFn
+TmFtZSBhbmQgc2Nyb2xsIGxpbmUgbnVtYmVyCmZ1bmN0aW9uIGRvTW91c2VPdmVy
+KGUpIHsKICAgIHZhciB0YXJnID0gZ2V0Tm9kZShlKTsKICAgIHRhcmcudGl0bGUg
+PSAndGFnTmFtZT0nK3RhcmcudGFnTmFtZSsnICBsaW5lPScrdGFyZy5zY3JvbGxM
+aW5lOwp9CmZ1bmN0aW9uIGRvTW91c2VPdXQoZSkgewogICAgdmFyIHRhcmcgPSBn
+ZXROb2RlKGUpOwogICAgdGFyZy5yZW1vdmVBdHRyaWJ1dGUoJ3RpdGxlJyk7Cn0K
+Ly8gYWRkIGxlYWRpbmcgemVyb3MgdG8gaG91cnMsIG1pbnV0ZXMsIHNlY29uZHMs
+IG1pbGxpc2Vjb25kcwpmdW5jdGlvbiBsZWFkaW5nWmVyb3MgKG5icixjb3VudCkg
+eyAKICAgIHZhciBzdHJOYnIgPSBuYnIgKyAnJzsKICAgIHdoaWxlIChzdHJOYnIu
+bGVuZ3RoIDwgY291bnQpIHsKICAgICAgICBzdHJOYnIgPSAiMCIgKyBzdHJOYnI7
+IAogICAgfQogICAgcmV0dXJuIHN0ck5icjsKfQovLyBmb3JtYXQgaG91cnMsIG1p
+bnV0ZXMsIHNlY29uZHMsIGFuZCBtcwpmdW5jdGlvbiBmb3JtYXRUaW1lICh0KSB7
+CiAgICB2YXIgc0hvdXJzID0gbGVhZGluZ1plcm9zICh0LmdldEhvdXJzKCksIDIp
+OwogICAgdmFyIHNNaW51dGVzID0gbGVhZGluZ1plcm9zICh0LmdldE1pbnV0ZXMg
+KCksIDIpOwogICAgdmFyIHNTZWNvbmRzID0gbGVhZGluZ1plcm9zICh0LmdldFNl
+Y29uZHMgKCksIDIpOwogICAgdmFyIHNNaWxsaXNlY29uZHMgPSBsZWFkaW5nWmVy
+b3MgKHQuZ2V0TWlsbGlzZWNvbmRzICgpLCAzKTsKICAgIHJldHVybiBzSG91cnMg
+KyAnOicgKyBzTWludXRlcyArICc6JyArIHNTZWNvbmRzICsgJzonICsgc01pbGxp
+c2Vjb25kczsKfQoKLy8gdGhpcyB2YXJpYWJsZSBpcyBhdmFpbGFibGUgYXMgZWFz
+eSB3YXkgdG8gZGlzcGxheSB0cmFjZSBpbmZvCmF1dG9EZWJ1Z1RyYWNlID0gJyc7
+CmZ1bmN0aW9uIHNob3dTdGFydFN0b3BUaW1lcyAoc3RhcnRUaW1lKSB7CiAgICAv
+LyBkaXNwbGF5IGEgbWVzc2FnZSB3aXRoIHN0YXJ0IGFuZCBlbmQgdGltZXMgYXQg
+dG9wIG9mIHBhZ2UKICAgIHZhciBlbmRUaW1lID0gbmV3IERhdGUoKTsKICAgIHZh
+ciB0U3RhcnQgPSdhdXRvIHNjcm9sbCBkZWJ1ZyBvbiAtLSBJbml0aWFsaXphdGlv
+biBzdGFydCBIOk06Uzptcz0nICsgZm9ybWF0VGltZSAoc3RhcnRUaW1lKTsKICAg
+IHZhciB0RW5kID0gJyAgZW5kIEg6TTpTOm1zPScgKyBmb3JtYXRUaW1lIChlbmRU
+aW1lKTsKICAgIHZhciB0aW1pbmdNc2cgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50
+ICgnUCcpOwogICAgdGltaW5nTXNnLmlubmVySFRNTCA9IHRTdGFydCArIHRFbmQ7
+CiAgICB0aW1pbmdNc2cuc3R5bGUuIGNvbG9yID0gInJlZCI7CiAgICB2YXIgY29u
+dGVudERpdjsKICAgIGlmIChkb2N1bWVudC5nZXRFbGVtZW50QnlJZCAoJ3ByZXZp
+ZXcnKSkgewogICAgICAgIGNvbnRlbnREaXYgPSBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCAoJ3ByZXZpZXcnKTsKICAgIH0gZWxzZSB7CiAgICAgICAgY29udGVudERp
+diA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkICgnY29udGVudCcpOwogICAgfQog
+ICAgY29udGVudERpdi5pbnNlcnRCZWZvcmUgKHRpbWluZ01zZywgY29udGVudERp
+di5maXJzdENoaWxkKTsKICAgIC8vIGRpc3BsYXkgdHJhY2UgaW5mbyBpcyB0aGVy
+ZSBpcyBhbnkKICAgIGlmIChhdXRvRGVidWdUcmFjZSkgewogICAgICAgIGFsZXJ0
+KGF1dG9EZWJ1Z1RyYWNlKTsKICAgIH0KfQovLyBlbmQgb2YgZGVidWdnaW5nIGhl
+bHBlcnMKCi8vIHRoaXMgc2Nyb2xscyB0aGUgdGV4dGFyZWEgYWZ0ZXIgYSBkb3Vi
+bGVjbGljayAtIGp1bXBMaW5lIGlzIHNjcm9sbC10byBsaW5lCmZ1bmN0aW9uIHNj
+cm9sbFRleHRhcmVhKGp1bXBMaW5lKSB7CiAgICB2YXIgdHh0Qm94ID0gZG9jdW1l
+bnQuZ2V0RWxlbWVudEJ5SWQoJ2VkaXRvci10ZXh0YXJlYScpOwogICAgc2Nyb2xs
+KDAsMCk7IAogICAgaWYgKHR4dEJveCkgewogICAgICAgIC8vIENhbGN1bGF0ZSB0
+aGUgY3Vyc29yIHBvc2l0aW9uIC0gSUUgc3VwcG9ydHMgaW5uZXJUZXh0LCBub3Qg
+dGV4dENvbnRlbnQKICAgICAgICB2YXIgdGV4dExpbmVzID0gdHh0Qm94LnRleHRD
+b250ZW50IHx8IHR4dEJveC5pbm5lclRleHQ7CiAgICAgICAgdGV4dExpbmVzID0g
+dGV4dExpbmVzLm1hdGNoKC8oLipcbikvZyk7CiAgICAgICAgdmFyIHNjcm9sbGVk
+VGV4dCA9ICcnOwogICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgdGV4dExpbmVz
+Lmxlbmd0aCAmJiBpIDwganVtcExpbmU7ICsraSkgewogICAgICAgICAgICBzY3Jv
+bGxlZFRleHQgKz0gdGV4dExpbmVzW2ldOwogICAgICAgIH0KICAgICAgICB0eHRC
+b3guZm9jdXMoKTsKICAgICAgICBpZiAodHh0Qm94LnNldFNlbGVjdGlvblJhbmdl
+KSB7CiAgICAgICAgICAgIC8vIFN0YW5kYXJkLWNvbXBsaWFudCBicm93c2Vycwog
+ICAgICAgICAgICAvLyBNb3ZlIHRoZSBjdXJzb3IKICAgICAgICAgICAgdHh0Qm94
+LnNldFNlbGVjdGlvblJhbmdlKHNjcm9sbGVkVGV4dC5sZW5ndGgsIHNjcm9sbGVk
+VGV4dC5sZW5ndGgpOwogICAgICAgICAgICAvLyBDYWxjdWxhdGUgaG93IGZhciB0
+byBzY3JvbGwsIGJ5IHB1dHRpbmcgdGhlIHRleHQgdGhhdCBpcyB0byBiZQogICAg
+ICAgICAgICAvLyBhYm92ZSB0aGUgZm9sZCBpbiBhIERJViwgYW5kIGNoZWNraW5n
+IHRoZSBESVYncyBoZWlnaHQuCiAgICAgICAgICAgIHZhciBzY3JvbGxQcmUgPSBk
+b2N1bWVudC5jcmVhdGVFbGVtZW50KCdwcmUnKTsKICAgICAgICAgICAgdHh0Qm94
+LnBhcmVudE5vZGUuYXBwZW5kQ2hpbGQoc2Nyb2xsUHJlKTsKICAgICAgICAgICAg
+dmFyIHN0eWxlID0gd2luZG93LmdldENvbXB1dGVkU3R5bGUodHh0Qm94LCAnJyk7
+CiAgICAgICAgICAgIHNjcm9sbFByZS5zdHlsZS5saW5lSGVpZ2h0ID0gc3R5bGUu
+bGluZUhlaWdodDsKICAgICAgICAgICAgc2Nyb2xsUHJlLnN0eWxlLmZvbnRGYW1p
+bHkgPSBzdHlsZS5mb250RmFtaWx5OwogICAgICAgICAgICBzY3JvbGxQcmUuc3R5
+bGUuZm9udFNpemUgPSBzdHlsZS5mb250U2l6ZTsKICAgICAgICAgICAgc2Nyb2xs
+UHJlLnN0eWxlLnBhZGRpbmcgPSAwOwogICAgICAgICAgICBzY3JvbGxQcmUuc3R5
+bGUubGV0dGVyU3BhY2luZyA9IHN0eWxlLmxldHRlclNwYWNpbmc7CiAgICAgICAg
+ICAgIC8vIERpZmZlcmVudCBicm93c2VycyBjYWxsIHRoaXMgdmFsdWUgZGlmZmVy
+ZW50bHk6CiAgICAgICAgICAgIHRyeSB7IHNjcm9sbFByZS5zdHlsZS53aGl0ZVNw
+YWNlID0gIi1tb3otcHJlLXdyYXAiOyB9IGNhdGNoKGUpIHt9CiAgICAgICAgICAg
+IHRyeSB7IHNjcm9sbFByZS5zdHlsZS53aGl0ZVNwYWNlID0gIi1vLXByZS13cmFw
+IjsgfSBjYXRjaChlKSB7fQogICAgICAgICAgICB0cnkgeyBzY3JvbGxQcmUuc3R5
+bGUud2hpdGVTcGFjZSA9ICItcHJlLXdyYXAiOyB9IGNhdGNoKGUpIHt9CiAgICAg
+ICAgICAgIHRyeSB7IHNjcm9sbFByZS5zdHlsZS53aGl0ZVNwYWNlID0gInByZS13
+cmFwIjsgfSBjYXRjaChlKSB7fQogICAgICAgICAgICBzY3JvbGxQcmUudGV4dENv
+bnRlbnQgPSBzY3JvbGxlZFRleHQ7CiAgICAgICAgICAgIHR4dEJveC5zY3JvbGxU
+b3AgPSBzY3JvbGxQcmUuc2Nyb2xsSGVpZ2h0LTEwMDsKICAgICAgICAgICAgc2Ny
+b2xsUHJlLnBhcmVudE5vZGUucmVtb3ZlQ2hpbGQoc2Nyb2xsUHJlKTsKICAgICAg
+ICB9IGVsc2UgaWYgKHR4dEJveC5jcmVhdGVUZXh0UmFuZ2UpIHsKICAgICAgICAg
+ICAgLy8gTWljcm9zb2Z0IEludGVybmV0IEV4cGxvcmVyCiAgICAgICAgICAgIC8v
+IFdlIGRvbid0IG5lZWQgdG8gc2Nyb2xsLCBpdCB3aWxsIGRvIGl0IGF1dG9tYXRp
+Y2FsbHksIGp1c3QgbW92ZQogICAgICAgICAgICAvLyB0aGUgY3Vyc29yLgogICAg
+ICAgICAgICB2YXIgcmFuZ2UgPSB0eHRCb3guY3JlYXRlVGV4dFJhbmdlKCk7CiAg
+ICAgICAgICAgIHJhbmdlLmNvbGxhcHNlKHRydWUpOwogICAgICAgICAgICByYW5n
+ZS5tb3ZlRW5kKCdjaGFyYWN0ZXInLCBzY3JvbGxlZFRleHQubGVuZ3RoKTsKICAg
+ICAgICAgICAgcmFuZ2UubW92ZVN0YXJ0KCdjaGFyYWN0ZXInLCBzY3JvbGxlZFRl
+eHQubGVuZ3RoKTsKICAgICAgICAgICAgcmFuZ2Uuc2VsZWN0KCk7CiAgICAgICAg
+ICAgIHR4dEJveC5fX2NvbHVtbiA9IDE7CiAgICAgICAgfQogICAgfSAKfQoKLy8g
+c3RvcCBldmVudCBidWJibGluZwpmdW5jdGlvbiBzdG9wQnViYmxpbmcoZSkgewog
+ICAgaWYgKGUuc3RvcFByb3BhZ2F0aW9uKSB7CiAgICAgICAgZS5zdG9wUHJvcGFn
+YXRpb24oKTsgCiAgICB9CiAgICBlLmNhbmNlbEJ1YmJsZSA9IHRydWU7Cn0KCi8v
+IHN0b3AgYnViYmxpbmcgYW5kIHJldHVybiBldmVudCBub2RlIApmdW5jdGlvbiBn
+ZXROb2RlKGUpIHsKICAgIC8vIHdpbmRvdy5ldmVudCBhbmQgZS5zcmNFbGVtZW50
+IGFyZSBJRQogICAgdmFyIGUgPSBlIHx8IHdpbmRvdy5ldmVudDsKICAgIHZhciB0
+YXJnID0gZS50YXJnZXQgfHwgZS5zcmNFbGVtZW50OwogICAgaWYgKHRhcmcubm9k
+ZVR5cGUgPT0gMykgewogICAgICAgIC8vIHdvcmthcm91bmQgc2FmYXJpCiAgICAg
+ICAgdGFyZyA9IHRhcmcucGFyZW50Tm9kZTsKICAgIH0KICAgIHN0b3BCdWJibGlu
+ZyhlKTsKICAgIHJldHVybiB0YXJnOwp9CgovLyBhZGQgYWN0aW9uPWVkaXQgYW5k
+IHNjcm9sbExpbmUgdG8gZG9jdW1lbnQubG9jYXRpb24KZnVuY3Rpb24gZG9BY3Rp
+b25FZGl0KGUpIHsKICAgIHZhciB0YXJnID0gZ2V0Tm9kZShlKTsKICAgIC8vIE1v
+aW5Nb2luIGNvdW50cyBzdGFydGluZyB3aXRoIDEsIHNjcm9sbFRleHRhcmVhIHN0
+YXJ0cyB3aXRoIDAKICAgIGRvY3VtZW50LmxvY2F0aW9uLnNlYXJjaCA9ICc/YWN0
+aW9uPWVkaXQmbGluZT0nKyh0YXJnLnNjcm9sbExpbmUtMSk7Cn0KCi8vIHNjcm9s
+bCB0ZXh0YXJlYSBvbiB0aGlzIHBhZ2UKZnVuY3Rpb24gZG9UZXh0YXJlYVNjcm9s
+bChlKSB7CiAgICB2YXIgdGFyZyA9IGdldE5vZGUoZSk7CiAgICBzY3JvbGxUZXh0
+YXJlYSh0YXJnLnNjcm9sbExpbmUtMSk7Cn0KCi8vIFRoaXMgaXMgdGhlIGZ1bmN0
+aW9uIHRoYXQgcmVnaXN0ZXJzIGRvdWJsZSBjbGlja3MuCi8vIGlzUHJldmlldyBp
+cyB0cnVlIGlmIHRoZSBjdXJyZW50IHBhZ2UgaXMgYW4gZWRpdCBkcmFmdCBwcmV2
+aWV3CmZ1bmN0aW9uIHNldENhbGxiYWNrKG5vZGUsIGxpbmUsIGlzUHJldmlldykg
+ewogICAgaWYgKG5vZGUuc2Nyb2xsTGluZSkgewogICAgICAgIC8vIHRoaXMgbm9k
+ZSBhbHJlYWR5IHByb2Nlc3NlZAogICAgICAgIHJldHVybjsKICAgIH0gZWxzZSB7
+CiAgICAgICAgbm9kZS5zY3JvbGxMaW5lID0gbGluZTsKICAgICAgICBpZih3aW5k
+b3cuYWRkRXZlbnRMaXN0ZW5lcil7IAogICAgICAgICAgICBpZiAoaXNQcmV2aWV3
+KSB7CiAgICAgICAgICAgICAgICBub2RlLmFkZEV2ZW50TGlzdGVuZXIoJ2RibGNs
+aWNrJyxkb1RleHRhcmVhU2Nyb2xsLGZhbHNlKTsKICAgICAgICAgICAgfSBlbHNl
+IHsKICAgICAgICAgICAgICAgIG5vZGUuYWRkRXZlbnRMaXN0ZW5lcignZGJsY2xp
+Y2snLGRvQWN0aW9uRWRpdCxmYWxzZSk7CiAgICAgICAgICAgIH0KICAgICAgICAg
+ICAgaWYgKGF1dG9TY3JvbGxEZWJ1Z09uKSB7CiAgICAgICAgICAgICAgICBub2Rl
+LmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNlb3ZlcicsIGRvTW91c2VPdmVyLGZhbHNl
+KTsgCiAgICAgICAgICAgICAgICBub2RlLmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNl
+b3V0Jyxkb01vdXNlT3V0LGZhbHNlKTsgCiAgICAgICAgICAgIH0KICAgICAgICB9
+IGVsc2UgewogICAgICAgICAgICAvLyBJRQogICAgICAgICAgICBpZiAoaXNQcmV2
+aWV3KSB7CiAgICAgICAgICAgICAgICBub2RlLmF0dGFjaEV2ZW50KCdvbmRibGNs
+aWNrJyxkb1RleHRhcmVhU2Nyb2xsKTsKICAgICAgICAgICAgfSBlbHNlIHsKICAg
+ICAgICAgICAgICAgIG5vZGUuYXR0YWNoRXZlbnQoJ29uZGJsY2xpY2snLGRvQWN0
+aW9uRWRpdCk7CiAgICAgICAgICAgIH0KICAgICAgICAgICAgaWYgKGF1dG9TY3Jv
+bGxEZWJ1Z09uKSB7CiAgICAgICAgICAgICAgICBub2RlLmF0dGFjaEV2ZW50KCdv
+bm1vdXNlb3ZlcicsIGRvTW91c2VPdmVyLGZhbHNlKTsgCiAgICAgICAgICAgICAg
+ICBub2RlLmF0dGFjaEV2ZW50KCdvbm1vdXNlb3V0Jyxkb01vdXNlT3V0LGZhbHNl
+KTsKICAgICAgICAgICAgfQogICAgICAgIH0KICAgIH0KfQoKLy8gd2FsayBwYXJ0
+IG9mIERPTSBhbmQgYWRkIGRvdWJsZWNsaWNrIGZ1bmN0aW9uIHRvIGFsbCBub2Rl
+cyB3aXRoIHRhZ05hbWVzCmZ1bmN0aW9uIHdhbGtEb20gKHNvbWVOb2RlLCBsaW5l
+TmJyLCBpc1ByZXZpZXcsIG5leHRJZCwgdG9wSWQpIHsKCiAgICAvL34gLy8gaGFu
+ZGxlIHNwZWNpYWwgY2FzZXMgb2YgcGFyYWdyYXBoIG9uIGxpbmUgYWZ0ZXIgPDxU
+T0M+PiBhbmQgLS0tLSAoaG9yaXpvbnRhbCBydWxlKQogICAgLy9+IC8vICAgQnV0
+IHRoaXMgZWZmZWN0cyBwYXJhZ3JhcGhzIG9uIG11bHRpcGxlIGxpbmVzOiBkb3Vi
+bGVjbGljayBnb2VzIHRvIHBhcmFncmFwaCBib3R0b20gcmF0aGVyIHRoYW4gdG9w
+LgogICAgLy9+IC8vICAgU2VlbXMgYmVzdCB0byBsaXZlIHdpdGggVE9DIGFuZCBI
+UiBwcm9ibGVtIGFuZCB3YWl0IGZvciBNb2luMi4KICAgIC8vfiB2YXIgbmV4dDEs
+IG5leHQyLCBuZXh0MzsKICAgIC8vfiB2YXIgbmV4dE5iciA9ICdsaW5lLScgKyAo
+bGluZU5ici0wKzEpOwogICAgLy9+IGlmIChzb21lTm9kZS5wYXJlbnROb2RlLnRh
+Z05hbWUgPT0gJ1AnICYmIHNvbWVOb2RlLnBhcmVudE5vZGUuc2Nyb2xsTGluZSkg
+ewogICAgICAgIC8vfiBuZXh0MSA9IHNvbWVOb2RlLm5leHRTaWJsaW5nOwogICAg
+ICAgIC8vfiBpZiAobmV4dDEgJiYgbmV4dDEudGFnTmFtZSAhPSAnU1BBTicpIHsK
+ICAgICAgICAgICAgLy9+IG5leHQyID0gbmV4dDEubmV4dFNpYmxpbmc7CiAgICAg
+ICAgLy9+IH0KICAgICAgICAvL34gaWYgKG5leHQyICYmIG5leHQyLmlkID09IG5l
+eHROYnIpIHsKICAgICAgICAgICAgLy9+IGFsZXJ0KCdDb3JyZWN0aW5nIHNjcm9s
+bExpbmU9JytsaW5lTmJyKTsKICAgICAgICAgICAgLy9+IHNvbWVOb2RlLnBhcmVu
+dE5vZGUuc2Nyb2xsTGluZSA9IGxpbmVOYnI7CiAgICAgICAgICAgIC8vfiByZXR1
+cm47CiAgICAgICAgLy9+IH0KICAgIC8vfiB9CgogICAgdmFyIGRvQ2hpbGQgPSB0
+cnVlOwogICAgd2hpbGUgKCEoc29tZU5vZGUuaWQgPT0gbmV4dElkKSAmJiAhKHNv
+bWVOb2RlLmlkID09IHRvcElkKSkgewogICAgICAgIC8vIGFkZCBjaGlsZHJlbiwg
+YWRkIHNpYmxpbmdzLCBhZGQgcGFyZW50CiAgICAgICAgaWYgKGRvQ2hpbGQgJiYg
+c29tZU5vZGUuZmlyc3RDaGlsZCkgewogICAgICAgICAgICBzb21lTm9kZSA9IHNv
+bWVOb2RlLmZpcnN0Q2hpbGQ7CiAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAg
+ZG9DaGlsZCA9IHRydWU7CiAgICAgICAgICAgIGlmIChzb21lTm9kZS5uZXh0U2li
+bGluZykgewogICAgICAgICAgICAgICAgc29tZU5vZGUgPSBzb21lTm9kZS5uZXh0
+U2libGluZzsKICAgICAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgICAgIGlm
+IChzb21lTm9kZS5wYXJlbnROb2RlLm5leHRTaWJsaW5nKSB7CiAgICAgICAgICAg
+ICAgICBzb21lTm9kZSA9IHNvbWVOb2RlLnBhcmVudE5vZGUubmV4dFNpYmxpbmc7
+CiAgICAgICAgICAgICAgICB9IGVsc2UgewogICAgICAgICAgICAgICAgICAgIGRv
+Q2hpbGQgPSBmYWxzZTsKICAgICAgICAgICAgICAgICAgICBzb21lTm9kZSA9IHNv
+bWVOb2RlLnBhcmVudE5vZGUucGFyZW50Tm9kZTsKICAgICAgICAgICAgICAgIH0K
+ICAgICAgICAgICAgfQogICAgICAgIH0KICAgICAgICBpZiAoZG9DaGlsZCAmJiBz
+b21lTm9kZS50YWdOYW1lICYmICEoc29tZU5vZGUuaWQgPT0gbmV4dElkKSAmJiAh
+KHNvbWVOb2RlLmlkID09IHRvcElkKSkgewogICAgICAgICAgICBzZXRDYWxsYmFj
+ayhzb21lTm9kZSwgbGluZU5iciwgaXNQcmV2aWV3KTsKICAgICAgICB9CiAgICB9
+Cn0KCi8vIHJ1biBkdXJpbmcgcGFnZSBsb2FkIHdoZW4gdXNlciBtYXkgZWRpdCBj
+dXJyZW50IHBhZ2UgT1IgaXMgdmlld2luZyBkcmFmdCBwcmV2aWV3CmZ1bmN0aW9u
+IHNldFNwYW5UYWdzKGlzUHJldmlldykgewogICAgLy8gZmluZCBhbGwgdGhlIFNQ
+QU4gdGFncyB3aXRoIGFuIElEIGJlZ2lubmluZyB3aXRoICJsaW5lLSIKICAgIHZh
+ciBzcGFuVGFncyA9IGRvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCdzcGFu
+Jyk7CiAgICB2YXIgbWFya3MgPSBbXTsKICAgIGZvciAodmFyIGkgPSAwOyBpIDwg
+c3BhblRhZ3MubGVuZ3RoOyArK2kpIHsKICAgICAgICBpZiAoc3BhblRhZ3NbaV0u
+aWQgJiYgc3BhblRhZ3NbaV0uaWQuc3Vic3RyaW5nKDAsIDUpID09ICdsaW5lLScp
+IHsKICAgICAgICAgICAgbWFya3MucHVzaChzcGFuVGFnc1tpXSk7CiAgICAgICAg
+fQogICAgfQogICAgdmFyIHRvcCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdj
+b250ZW50Jyk7CiAgICB2YXIgYm90dG9tID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5
+SWQoJ2JvdHRvbScpOwogICAgLy8gYWRkIGV4cGVjdGVkIHN0b3BwaW5nIHBvaW50
+IHRvIGVuZCBvZiBhcnJheSBmb3IgY29udmVuaWVuY2UKICAgIGlmIChib3R0b20p
+IHsKICAgICAgICBtYXJrcy5wdXNoKGJvdHRvbSk7IAogICAgfSBlbHNlIHsKICAg
+ICAgICBpZiAoYXV0b1Njcm9sbERlYnVnT24pIHsKICAgICAgICAgICAgYWxlcnQo
+ImF1dG8gc2Nyb2xsIGRlYnVnIDE6IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdi
+b3R0b20nKSBmYWlsZWQiKTsKICAgICAgICB9CiAgICB9CiAgICB2YXIgc2tpcFRv
+ID0gLTE7IAogICAgLy8gbG9vcCB0aHJvdWdoIHNwYW4gdGFncyBhbmQgYXBwbHkg
+ZG91YmxlLWNsaWNrIGV2ZW50cyB0byBhcHByb3ByaWF0ZSBub2RlKHMpIAogICAg
+Zm9yIChpID0gMDsgaSA8IG1hcmtzLmxlbmd0aC0xOyArK2kpIHsKICAgICAgICB2
+YXIgbWFyayA9IG1hcmtzW2ldOwogICAgICAgIC8vIHNraXAgc3BhbiB0YWdzIGdl
+bmVyYXRlZCBieSBlbWJlZGRlZCBwYXJzZXJzCiAgICAgICAgaWYgKGkgPiBza2lw
+VG8pIHsKICAgICAgICAgICAgLy8gc3BsaXQgdGhlIElEIGludG8gcGFydHM6IGxv
+b2tzIGxpbmUgImxpbmUtMjIiIG9yICJsaW5lLTIyLTEiCiAgICAgICAgICAgIHZh
+ciBsaW5lUGFydHMgPSBtYXJrLmlkLnNwbGl0KCctJyk7CiAgICAgICAgICAgIHZh
+ciBsaW5lID0gbGluZVBhcnRzWzFdOwogICAgICAgICAgICBpZiAobGluZVBhcnRz
+Lmxlbmd0aCA9PSAzKSB7CiAgICAgICAgICAgICAgICAvLyBoYXZlIGZvdW5kIG91
+dHB1dCBmcm9tIGVtYmVkZGVkIHBhcnNlcgogICAgICAgICAgICAgICAgLy8gZmlu
+ZCBuZXh0IHNwYW4gaWQgdGhhdCBsb29rcyBsaWtlICJsaW5lLW4iIGFuZCB0aGUg
+ImxpbmUtbi1uIiBqdXN0IGJlZm9yZSBpdAogICAgICAgICAgICAgICAgdmFyIGog
+PSBpIC0gMDsKICAgICAgICAgICAgICAgIHdoaWxlIChsaW5lUGFydHMubGVuZ3Ro
+ID09IDMpIHsKICAgICAgICAgICAgICAgICAgICBqKys7CiAgICAgICAgICAgICAg
+ICAgICAgbGluZVBhcnRzID0gbWFya3Nbal0uaWQuc3BsaXQoJy0nKTsKICAgICAg
+ICAgICAgICAgIH0KICAgICAgICAgICAgICAgIC8vIGRldGVybWluZSBob3cgbWFu
+eSBsaW5lcywgc3RhcnRpbmcgbGluZSBudW1iZXIsIGFuZCBhZGQgZG91YmxlLWNs
+aWNrIGV2ZW50cwogICAgICAgICAgICAgICAgdmFyIG5iclBhcnNlZExpbmVzID0g
+aiAtIGk7CiAgICAgICAgICAgICAgICB2YXIgcGFyc2VkTGluZU5iciA9IGxpbmVQ
+YXJ0c1sxXSAtIG5iclBhcnNlZExpbmVzIC0gMTsKICAgICAgICAgICAgICAgIGZv
+ciAodmFyIGsgPSAwOyBrIDwgbmJyUGFyc2VkTGluZXM7ICsraykgeyAKICAgICAg
+ICAgICAgICAgICAgICBpZiAobWFya3NbaStrXSAmJiBtYXJrc1tpK2srMV0gJiYg
+bWFya3NbaStrKzFdLmlkKSB7CiAgICAgICAgICAgICAgICAgICAgICAgIHdhbGtE
+b20gKG1hcmtzW2kra10sIHBhcnNlZExpbmVOYnIraywgaXNQcmV2aWV3LCBtYXJr
+c1tpK2srMV0uaWQsIHRvcC5pZCk7CiAgICAgICAgICAgICAgICAgICAgfSBlbHNl
+IHsKICAgICAgICAgICAgICAgICAgICAgICAgaWYgKGF1dG9TY3JvbGxEZWJ1Z09u
+KSB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICBhbGVydCgnYXV0byBzY3Jv
+bGwgZGVidWcgMjogc2tpcHBpbmcgd2Fsa0RvbSwgaT0nICsgaSArICcgaz0nICsg
+ayArICcgbWFya3NbaV0uaWQ9JyArIG1hcmtzW2ldLmlkKTsKICAgICAgICAgICAg
+ICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAg
+ICAgIH0KICAgICAgICAgICAgICAgIC8vIGRvbmUgd2l0aCBlbWJlZGRlZCBwYXJz
+ZXIgbGluZXMsIHRlbGwgbWFpbiBsb29wIHRvIHNraXAgdGhlc2UKICAgICAgICAg
+ICAgICAgIHNraXBUbyA9IGogLSAxOyAKICAgICAgICAgICAgfSBlbHNlIHsKICAg
+ICAgICAgICAgICAgIC8vIHdhbGsgcGFydCBvZiBET00gYW5kIGFwcGx5IGRvdWJs
+ZWNsaWNrIGZ1bmN0aW9uIHRvIGV2ZXJ5IG5vZGUgd2l0aCBhIHRhZ25hbWUKICAg
+ICAgICAgICAgICAgIGlmIChtYXJrc1tpKzFdICYmIG1hcmtzW2krMV0uaWQpIHsK
+ICAgICAgICAgICAgICAgICAgICB3YWxrRG9tIChtYXJrLCBsaW5lLCBpc1ByZXZp
+ZXcsIG1hcmtzW2krMV0uaWQsIHRvcC5pZCk7CiAgICAgICAgICAgICAgICB9IGVs
+c2UgewogICAgICAgICAgICAgICAgICAgIGlmIChhdXRvU2Nyb2xsRGVidWdPbikg
+ewogICAgICAgICAgICAgICAgICAgICAgICBhbGVydCgnYXV0byBzY3JvbGwgZGVi
+dWcgMzogc2tpcHBpbmcgd2Fsa0RvbSwgaT0nICsgaSArICcgbWFya3NbaV0uaWQ9
+JyArIG1hcmtzW2ldLmlkKTsKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAg
+ICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9CiAgICBpZiAo
+YXV0b1Njcm9sbERlYnVnT24pICB7CiAgICAgICAgZm9yIChpID0gMDsgaSA8IG1h
+cmtzLmxlbmd0aC0xOyArK2kpIHsKICAgICAgICAgICAgbWFya3NbaV0uaW5uZXJI
+VE1MID0gJyAnICsgbWFya3NbaV0uaWQgKyAnICc7CiAgICAgICAgICAgIG1hcmtz
+W2ldLnN0eWxlLiBjb2xvciA9ICJyZWQiOwogICAgICAgIH0KICAgIH0KfQoKLy8g
+dGVzdCB0byBzZWUgaWYgdGhpcyB1c2VyIGhhcyBzZWxlY3RlZCBvciBkZWZhdWx0
+ZWQgdG8gZWRpdF9vbl9kb3VibGVjbGljayBBTkQKLy8gd2hldGhlciB3ZSBhcmUg
+dmlld2luZyBhIHBhZ2UsIGVkaXRpbmcgYSBwYWdlLCBvciBwcmV2aWV3aW5nIGFu
+IGVkaXQgZHJhZnQgCmZ1bmN0aW9uIHNjcm9sbFRleHRhcmVhSW5pdCgpIHsKICAg
+IC8vIGxvb2sgZm9yIG1ldGEgdGFnIC0tIGlzIGVkaXRfb25fZG91YmxlY2xpY2sg
+cHJlc2VudD8KICAgIGlmICghZG9jdW1lbnQuZ2V0RWxlbWVudHNCeU5hbWUoJ2Vk
+aXRfb25fZG91YmxlY2xpY2snKS5sZW5ndGgpIHsKICAgICAgICByZXR1cm47CiAg
+ICB9CiAgICB0dXJuRGVidWdPbk9yT2ZmICgpOwogICAgLy8gYXJlIHdlIHZpZXdp
+bmcgYSBwYWdlIC0gYm90aCBndWkgYW5kIHRleHQgZWRpdG9ycyB3aWxsIGhhdmUg
+YnV0dG9uIG5hbWVkIGJ1dHRvbl9zYXZlCiAgICBpZiAoIWRvY3VtZW50LmdldEVs
+ZW1lbnRzQnlOYW1lKCdidXR0b25fc2F2ZScpLmxlbmd0aCkgewogICAgICAgIHNl
+dFNwYW5UYWdzKDApOwogICAgICAgIHJldHVybjsKICAgIH0KICAgIC8vIHdlIGFy
+ZSBpbiBlZGl0b3IgLS0gaXMgdGhlcmUgYSBsaW5lIG51bWJlciBzcGVjaWZpZWQg
+aW4gVVJMPwogICAgdmFyIGxpbmVNYXRjaCA9IGRvY3VtZW50LmxvY2F0aW9uLnNl
+YXJjaC5tYXRjaCgvbGluZT0oXGQqKS8pOwogICAgaWYgKGxpbmVNYXRjaCkgewog
+ICAgICAgIHNjcm9sbFRleHRhcmVhKGxpbmVNYXRjaFsxXSk7CiAgICAgICAgcmV0
+dXJuOwogICAgfSAKICAgIGlmIChkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncHJl
+dmlldycpKSB7CiAgICAgICAgLy8gaXMgYW4gZWRpdG9yIHByZXZpZXcKICAgICAg
+ICBzZXRTcGFuVGFncygxKTsKICAgIH0KfQoKLy8gTm93IHRvIHJlc29sdmUgdGhl
+IHByb2JsZW0gb2YgaG93IHRvIGJlc3QgZXhlY3V0ZSBzY3JvbGxUZXh0YXJlYUlu
+aXQKLy8gLS0gV2Ugd2FudCB0byBydW4gYXMgc29vbiBhcyBET00gaXMgbG9hZGVk
+LCBwZXJoYXBzIG1hbnkgc2Vjb25kcyBiZWZvcmUgbGFzdCBiaWcgaW1hZ2UgaXMg
+bG9hZGVkCi8vIC0tIElmIHdlIHdhaXQgZm9yIGJvZHkub25sb2FkLCB0aGUgdXNl
+ciBtYXkgc2VlIGFuZCBkb3VibGVjbGljayBvbiB0ZXh0IGJlZm9yZSB3ZSBhcmUg
+cmVhZHkgCi8vIC0tIElmIGV2ZXJ5IGJyb3dzZXIgc3VwcG9ydGVkIERPTUNvbnRl
+bnRMb2FkZWQsIHdlIGNvdWxkIGRvOgovLyAgICAgICAgIGRvY3VtZW50LmFkZEV2
+ZW50TGlzdGVuZXIoIkRPTUNvbnRlbnRMb2FkZWQiLCBzY3JvbGxUZXh0YXJlYUlu
+aXQsIGZhbHNlKTsKLy8gLS0gSWYgd2UgaGFkIGpRdWVyeSwgd2UgY291bGQgZG86
+Ci8vICAgICAgICAgalF1ZXJ5KHNjcm9sbFRleHRhcmVhSW5pdCk7Ci8vIC0tIEFu
+b3RoZXIgcG9zc2liaWxpdHkgaXMgdG8gYWRkIGEgYml0IG9mIHNjcmlwdCBuZWFy
+IHRoZSBlbmQgb2YgdGhlIG15cGFnZS5IVE1MLCBob3BpbmcgdGhlIERPTSBpcyBy
+ZWFkeQovLyAgICAgICAgICc8c2NyaXB0IHR5cGU9InRleHQvamF2YXNjcmlwdCIg
+bGFuZ3VhZ2U9ImphdmFzY3JpcHQiPnNjcm9sbFRleHRhcmVhSW5pdCgpPC9zY3Jp
+cHQ+JwovLyAtLSBPdXIgY2hvaWNlIGlzIHRvIHNwZWVkIHVwIG1vc3QgY3VycmVu
+dCBicm93c2VycyBhbmQgZG8gc2xvdyBidXQgc3VyZSBmb3IgdGhlIHJlc3Q6Cgov
+LyBydW4gc2Nyb2xsVGV4dGFyZWFJbml0IG9uZSB0aW1lOyAgdGhpcyBmdW5jdGlv
+biB3aWxsIGJlIGNhbGxlZCB0d2ljZSBmb3IgYWxtb3N0IGFsbCBicm93c2VycywK
+c2Nyb2xsVGV4dGFyZWFJbml0Q29tcGxldGUgPSAwOwpmdW5jdGlvbiBydW5TY3Jv
+bGxUZXh0YXJlYUluaXRPbmNlKCkgewogICAgLy8gdW5jb21tZW50IG5leHQgbGlu
+ZSB0byB0ZXN0IC0gbW9zdCBicm93c2VycyB3aWxsIGRpc3BsYXkgdGhpcyBhbGVy
+dCB0d2ljZSAKICAgIC8vfiBhbGVydCgnc2Nyb2xsVGV4dGFyZWFJbml0Q29tcGxl
+dGU9JyArIHNjcm9sbFRleHRhcmVhSW5pdENvbXBsZXRlKTsKICAgIGlmIChzY3Jv
+bGxUZXh0YXJlYUluaXRDb21wbGV0ZSkgewogICAgICAgIHJldHVybjsKICAgIH0K
+ICAgIHNjcm9sbFRleHRhcmVhSW5pdENvbXBsZXRlID0gMTsKICAgIHZhciBzdGFy
+dFRpbWUgPSBuZXcgRGF0ZSgpOwogICAgc2Nyb2xsVGV4dGFyZWFJbml0KCk7CiAg
+ICBpZiAoYXV0b1Njcm9sbERlYnVnT24gJiYgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5
+SWQoJ2NvbnRlbnQnKSkgewogICAgICAgIHNob3dTdGFydFN0b3BUaW1lcyhzdGFy
+dFRpbWUpOwogICAgfQp9CgovLyBzcGVlZCB1cCBtb3N0IGJyb3dzZXJzIC0tIHJ1
+biBteSBmdW5jdGlvbiBBcyBTb29uIEFzIFBvc3NpYmxlCmZ1bmN0aW9uIHJ1bkFT
+QVAoZnVuYykgewogICAgaWYgKGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIpIHsg
+CiAgICAgICAgLy8gRmlyZWZveCAzLjYsIENocm9tZSA0LjAuMjQ5Ljg5LCBTYWZh
+cmkgZm9yIFdpbmRvd3MgNC4wNCwgT3BlcmEgMTAuNWJldGEsIGFuZCBtYXliZSBv
+bGRlciB2ZXJzaW9ucwogICAgICAgIC8vIHNjaGVkdWxlIGZ1bmMgdG8gYmUgcnVu
+IHdoZW4gRE9NIGNvbXBsZXRlCiAgICAgICAgZG9jdW1lbnQuYWRkRXZlbnRMaXN0
+ZW5lcigiRE9NQ29udGVudExvYWRlZCIsIGZ1bmMsIGZhbHNlKTsKICAgIH0gZWxz
+ZSB7CiAgICAgICAgLy8gdHJpY2sgZGlzY292ZXJlZCBieSBEaWVnbyBQZXJpbmkg
+dG8gdGVzdCBmb3IgSUUgRE9NIGNvbXBsZXRlCiAgICAgICAgaWYgKGRvY3VtZW50
+LmRvY3VtZW50RWxlbWVudC5kb1Njcm9sbCAmJiB3aW5kb3cgPT0gd2luZG93LnRv
+cCkgewogICAgICAgICAgICB0cnkgewogICAgICAgICAgICAgICAgZG9jdW1lbnQu
+ZG9jdW1lbnRFbGVtZW50LmRvU2Nyb2xsKCJsZWZ0Iik7CiAgICAgICAgICAgICAg
+ICAvLyBET00gaXMgY29tcGxldGU7IHJ1biBmdW5jIG5vdwogICAgICAgICAgICAg
+ICAgZnVuYygpOwogICAgICAgICAgICB9IGNhdGNoKGUpIHsKICAgICAgICAgICAg
+ICAgIC8vIHdhaXQgYW5kIHRyeSBhZ2FpbgogICAgICAgICAgICAgICAgc2V0VGlt
+ZW91dChhcmd1bWVudHMuY2FsbGVlLCAxKTsKICAgICAgICAgICAgfQogICAgICAg
+IH0KICAgIH0KfQpydW5BU0FQKHJ1blNjcm9sbFRleHRhcmVhSW5pdE9uY2UpOwov
+LyBlbnN1cmUgaW5pdCB3aWxsIGJlIHJ1biBieSBvYnNvbGV0ZSBicm93c2Vycwph
+ZGRMb2FkRXZlbnQocnVuU2Nyb2xsVGV4dGFyZWFJbml0T25jZSk7Cgo=
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/moin-www.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+g
+vaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH1QQaBywH5hnejwAAADV0
+RVh0Q29tbWVudAAoYykgMjAwNCBKYWt1YiBTdGVpbmVyCgpDcmVhdGVkIHdpdGgg
+VGhlIEdJTVCQ2YtvAAAC7ElEQVQ4y62TXWhbZRyHn/ec95xjkzRpm+ajjW3W0KIs
+uHWyyMSrKagwFG+UKd1FZTgQb4ShoLdSEMX7XYgVR0HE6Y1MhjezMLWzlo12K67r
+XD+znCwfTXKSc5Kc1wvZxO3W5/r/ey7+/H6CBzj+3uwp4C1dyv0KLOX7DaVY0HTt
+7NzM1BcP3ov7wfe/nDR17ceJsWTiyIE0Y6koAcuiXG+ytmmzuLLJjY3CZSHEybmZ
+qav/Ebz27ue5YLjnt1eOHhQHJ+KU603snQ1kKA49/eDYpBJRFla2OT+/chchnr0n
+kQDRaOin55/JiicyA5SKeQZHs0QGh3BabfKb60jfQ+s2eS6Xoeur6IVL188ATwNo
+b3741UfJeH/4aG4cQ/PpyBBoAkNKTEMSsCSJaC9D8RixviC57KOkhweOvPHB2WkA
+LRwJnDycHaVSLnLHDRAf3odS4CtAaAjfY7fU4PuLy1yYXyRiKfaPDwO8CiBrTjuW
+TvazcKNAZiKOr/79bL1S4qnJLEIIlFJs796h1WwyFIsAHAbQWl5HsywTLRSnUm9h
+1zwct0vN8fDqNkL8oxNCkIhFubp6E8uQAAMAUtc1v9poacHWDiFpUWgMUjRMOl2f
+VqnDZLuN63r0hoI4jsO+VIxC0wMoAUhD0/K3torDh8aTZEaGuL25zfzaHh4mTS/I
+p99ewRJd3n75ALVajaVrN6E3DfA7gKa63XNLq1t4vgQgPZLi2KEYu4USd6sNqq7g
+dtnHtm2q1SqP9KdYXc8DfAOgL/187vx47qXTQtfNSNCgx9T5ZXGZ5byi1nDZa7js
+OS65EZ3CnsdW2efa2s6vczNT79wvUqVQPHHxsv+d78OTjyX44UqVsmfidbq4XgfL
+EGxUFH8V2lz6Y60shDj10BaOTX/8+mhmZDYc6TMfzyRJDoaxLAOn1WbXrvDnrTxb
+O8XrQpfHH9rCPfoGxswXTpye1a3Ai+iyD4RQyu+oTntdCe2zrz+ZPsP/zd9wbDf3
+MdodlQAAAABJRU5ErkJggg==
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline
+Content-Type: image/gif
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/bullet.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhCQAJAIAAAP///wsnSiH5BAUUAAAALAAAAAAJAAkAAAINhI+ZYbytnINg
+VqqyKgA7
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline; filename=common.css
+Content-Type: text/css; name=common.css
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/css/common.css
+Content-Transfer-Encoding: 8bit
+
+/*  common.css - MoinMoin Default Styles
+
+Copyright (c) 2001, 2002, 2003 by Juergen Hermann
+*/
+
+/* content styles */
+
+html {
+	background-color: white;
+	color: black;
+	font-family: sans-serif;
+	font-size: 1em;
+}
+
+body {
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Links */
+
+
+a:link {color: #00E;}
+a:visited {color: #551A8B;}
+a {color: #00E;}
+
+#content a {
+    text-decoration: none;
+    border-bottom: 1px dashed #ddd;
+}
+a:hover, a:visited:hover {
+    color: #000;
+}
+
+a.nonexistent:visited, a.nonexistent, 
+a.badinterwiki:visited, a.badinterwiki {color: gray;}
+
+a.www:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
+a.http:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
+a.https:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
+a.file:before {content: url(../img/moin-ftp.png); margin: 0 0.2em;}
+a.ftp:before {content: url(../img/moin-ftp.png); margin: 0 0.2em;}
+a.nntp:before {content: url(../img/moin-news.png); margin: 0 0.2em;}
+a.news:before {content: url(../img/moin-news.png); margin: 0 0.2em;}
+a.telnet:before, a.ssh:before {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
+a.irc:before, a.ircs:before  {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
+a.mailto:before {content: url(../img/moin-email.png); margin: 0 0.2em;}
+a.attachment:before {content: url(../img/moin-attach.png); margin: 0 0.2em;}
+a.badinterwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
+a.interwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
+
+li p {
+	margin: .25em 0;
+}
+
+li.gap {
+    margin-top: 0.5em;
+}
+
+dt {
+    margin-top: 0.5em;
+    font-weight: bold;
+}
+
+dd {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+dd p {
+    margin: 0.25em 0;
+}
+   
+a, img, img.drawing {
+	border: 0;
+}
+
+pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+	white-space: pre;
+	/* begin css 3 or browser specific rules - do not remove!
+	see: http://forums.techguy.org/archive/index.php/t-249849.html */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    /* end css 3 or browser specific rules */
+}
+
+pre.comment {
+    background-color: #CCCCCC;
+    color: red;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+pre.comment:before {
+    content: url(../img/attention.png);
+}
+
+
+/* .comment css definition must be top of .red/.green/.blue or it won't work */
+.comment { color: #555555; background-color: #DDDDFF; }
+
+.red { background-color: #FFCCCC; border: 1px solid #daa; padding: 0 1em;  }
+.green { background-color: #CCFFCC; border: 1px solid #ada; padding: 0 1em;  }
+.blue { background-color: #CCCCFF; border: 1px solid #aad; padding: 0 1em;  }
+.yellow { background-color: #FFF29F; border: 1px solid #dd7; padding: 0 1em; }
+.orange { background-color: #FFD59B; border: 1px solid #dc7; padding: 0 1em;  }
+
+.solid { border: 2px solid #000000; padding: 2px; }
+.dashed { border: 2px dashed #000000; padding: 2px; }
+.dotted { border: 2px dotted #000000; padding: 2px; }
+
+.left { text-align: left; }
+.center { text-align: center; }
+.right { text-align: right; }
+.justify { text-align: justify; }
+
+table
+{
+	margin: 0.5em 0 0 0.5em;
+	border-collapse: collapse;
+}
+
+th, td
+{
+	padding: 0.25em 0.5em 0.25em 0.5em;
+	border: 1pt solid #ADB9CC;
+}
+
+td p {
+	margin: 0;
+	padding: 0;
+}
+/* TableOfContents macro */
+div.table-of-contents {
+    border: 1px solid #b7becc;
+    color: black;
+    background-color: #f7f6f0;
+    font-size: 80%;
+    text-align: left;
+    margin: 0.5em 0 0.5em 1em;
+    padding: 0.5em 0.75em 1em 0.5em;
+    max-width: 50%;
+    display: inline-table;
+    -moz-border-radius: 9px 0 9px 0; 
+    overflow: hidden;
+}
+div.table-of-contents ol {
+    margin: 0;
+    padding: 0 0 0 2em;
+}
+div.table-of-contents ul {
+    margin: 0;
+    list-style:none;
+}
+div.table-of-contents li {
+    margin:0;
+    padding: 0;
+}
+p.table-of-contents-heading {
+    font-weight:bold;
+    padding:0;
+    margin: 0 0 0.5em 0;
+    letter-spacing: 0.075em;
+    color: #fff;
+    background: #376a94;
+    border-bottom: 3px solid #ffbc29;
+    padding: 0.25em 0.25em 0.25em 1em;
+    margin: -0.5em -0.75em 1em -0.5em;
+    -moz-border-radius: 7px 0 0px 0; 
+}
+
+/* Navigation macro */
+table.navigation {
+    background: #fff;
+    margin: 0;
+}
+
+.footnotes div {
+	width: 5em;
+	border-top: 1pt solid gray;
+}
+
+.footnotes ol {
+	padding: 0 2em;
+	margin: 0 0 1em;
+}
+
+.footnotes li {
+}
+
+.info {
+    float: right;
+    font-size: 0.7em;
+    color: gray;
+}
+
+#pageinfo {
+    margin-top: 2em;
+}
+
+.seperator {
+    color: gray;
+}
+
+#pagebottom {clear: both;}
+
+/* standard rule ---- */
+hr {
+    height: 1pt;
+    background-color: #9C9C9C;
+    border: 0;
+}
+
+/* custom rules ----- to ---------- */
+.hr1 {height: 2pt;}
+.hr2 {height: 3pt;}
+.hr3 {height: 4pt;}
+.hr4 {height: 5pt;}
+.hr5 {height: 6pt;}
+.hr6 {height: 7pt;}
+
+/* Replacement for deprecated html 3 <u> element and html 4 <strike> */
+.u {text-decoration: underline;}
+.strike {text-decoration: line-through;}
+
+/* eye catchers */
+.warning 
+{
+	color: red;
+}
+
+.error 
+{
+	color: red;
+}
+
+strong.highlight 
+{
+	background-color: #CCE0FF;
+	padding: 1pt;
+}
+
+
+/* Recent changes */
+
+.rcrss {
+	float: right;
+	margin: 0 7px 0 14px;
+        height: 0;
+        position: relative;
+        top: 9px;
+}
+*[div="rtl"] .rcrss {
+    float: left;
+}
+.recentchanges[dir="rtl"] .rcrss {
+	float: left;
+}
+
+.recentchanges table {
+    clear: right;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.recentchanges td {
+    vertical-align: top;
+    border: none;
+    background: #fff;
+}
+
+
+.recentchanges .rcdaybreak td {
+    background: #eee;
+    border: none;
+    border: 1px solid #ddd;
+}
+
+.rcdaybreak td a {
+	font-size: 0.88em;
+}
+
+.rcicon1, .rcicon2 {
+	text-align: center;
+}
+
+.rcpagelink {
+	width: 33%;
+}
+
+.rctime {
+	font-size: 0.88em;
+	white-space: nowrap;
+}
+
+.rceditor {
+	white-space: nowrap;
+	font-size: 0.88em;
+}
+
+.rccomment {
+	width: 50%;
+	color: gray;
+	font-size: 0.88em;
+}
+
+
+/* User Preferences */
+
+.userpref table, .userpref td {
+	border: none;
+}
+
+/* CSS for new code_area markup used by Colorizer and ParserBase */
+
+div.codearea { /* the div makes the border */
+	margin: 0.5em 0;
+	padding: 0;
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	color: black;
+}
+
+div.codearea pre { /* the pre has no border and is inside the div */
+	margin: 0;
+	padding: 10pt;
+	border: none;
+}
+
+a.codenumbers { /* format of the line numbering link */
+	margin: 0 10pt;
+	font-size: 0.85em;
+	color: gray;
+}
+
+/* format of certain syntax spans */
+div.codearea pre span.LineNumber {color: gray;}
+div.codearea pre span.ID         {color: #000000;}
+div.codearea pre span.Operator   {color: #0000C0;}
+div.codearea pre span.Char       {color: #004080;}
+div.codearea pre span.Comment    {color: #008000;}
+div.codearea pre span.Number     {color: #0080C0;}
+div.codearea pre span.String     {color: #004080;}
+div.codearea pre span.SPChar     {color: #0000C0;}
+div.codearea pre span.ResWord    {color: #A00000;}
+div.codearea pre span.ConsWord   {color: #008080; font-weight: bold;}
+div.codearea pre span.Error      {color: #FF8080; border: solid 1.5pt #FF0000;}
+div.codearea pre span.ResWord2   {color: #0080ff; font-weight: bold;}
+div.codearea pre span.Special    {color: #0000ff;}
+div.codearea pre span.Preprc     {color: #803999;}
+
+/* for diff parser */
+table.diff .diff-added span,
+div.codearea pre span.DiffAdded   {background: #b4ddff; font-weight: bold}
+table.diff .diff-removed span,
+div.codearea pre span.DiffRemoved {background: #ffeca1; font-weight: bold;}
+table.diff .diff-changed span,
+div.codearea pre span.DiffChanged {background: #bcde9e; font-weight: bold}
+table.diff .diff-header,
+div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
+
+/* Search results */
+.advancedsearch {
+    border: 1pt solid #ADB9CC;
+}
+
+.advancedsearch td {
+    vertical-align: top;
+    background-color: #E7E7E7;    
+    border: 0px;
+}
+
+.advancedsearch td.searchfor {
+    font-weight: bold;
+}
+
+.advancedsearch input {
+    border: 1px solid #ADB9CC;
+    background-color: #fff;
+}
+
+.advancedsearch input[disabled] {
+    background-color: #eee;
+}
+
+.advancedsearch td.submit {
+    border-top: 1px solid #ADB9CC;
+    background-color: #fff;
+    text-align: right;
+}
+
+.advancedsearch optioni, 
+.advancedsearch select {
+    border: 1px solid #ADB9CC;
+    background-color: #fff;
+}
+
+
+.searchresults dt {
+    margin-top: 1em;
+    font-weight: normal;
+}
+
+.searchresults dd, .searchresults p {
+    font-size: 0.85em;
+}
+
+.searchresults .searchhitinfobar {
+    color: #008000;
+    margin-left: 15px;
+    margin-top: 0;
+}
+
+p.searchstats {
+    font-size: 0.8em;
+    text-align: right;
+    width: 100%;
+    background-color: #E6EAF0;
+    border-top: 1px solid #9088DC;
+    padding: 2px;
+}
+
+p.searchhint {
+    background-color: #E6EAF0;
+    border: 1px solid #9088DC;
+    padding: 2px;
+}
+
+.searchpages {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.searchpages tr, .searchpages td {
+    border: 0;
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+    vertical-align: middle;
+    color: #b93a58;
+    font-weight: bold;
+    font-size: 1.05em;
+}
+
+.searchpages td a, .searchpages td a:link {
+    text-decoration: underline;
+}
+
+/* MonthCalendar css */
+
+/* days without and with pages linked to them */
+a.cal-emptyday {
+    color: #777777;
+    text-align: center;
+}
+a.cal-usedday {
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+}
+/* general stuff: workdays, weekend, today */
+td.cal-workday {
+    background-color: #DDDDFF;
+    text-align: center;
+}
+td.cal-weekend {
+    background-color: #FFDDDD;
+    text-align: center;
+}
+td.cal-today {
+    background-color: #CCFFCC;
+    border-style: solid;
+    border-width: 2pt;
+    text-align: center;
+}
+/* invalid places on the monthly calendar sheet */
+td.cal-invalidday {
+    background-color: #CCCCCC;
+}
+/* links to prev/next month/year */
+a.cal-link {
+    color: #000000;
+    text-decoration: none;
+}
+th.cal-header {
+    background-color: #DDBBFF;
+    text-align: center;
+}
+
+/* for MonthCalendar mouseover info boxes */
+TABLE.tip {
+    color: black;
+    background-color: #FF8888;
+    font-size: small;
+    font-weight: normal;
+    border-style: solid;
+    border-width: 1px;
+}
+
+TH.tip {
+    background-color: #FF4444;
+    font-weight: bold;
+    text-align: center;
+}
+
+TD.tip {
+    text-align: left;
+}
+*[dir="rtl"] TD.tip {
+    text-align: right;
+}
+
+/* end MonthCalendar stuff */
+
+#message .hint {font-style: italic;}
+#message .info {
+    float: none;
+    font-size: 1em;
+    color: black;
+}
+#message .info:before {content: url('../img/icon-info.png'); margin: 0 0.2em;}
+#message .warning:before {content: url('../img/alert.png'); margin: 0 0.2em;}
+#message .error:before {content: url('../img/icon-error.png'); margin: 0 0.2em;}
+
+
+/* admonition start */
+#content div.caution, 
+#content div.important, 
+#content div.note, 
+#content div.tip, 
+#content div.warning {
+    border: 1pt solid #E5E5E5;
+    background-color: #F9F9FF;
+    color: black;
+    
+    margin: 10pt 30pt 10pt 30pt;
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
+    min-height: 64px; /*64=48+8+8 but doesn't work with IE*/
+    padding-left: 64px;
+}
+ 
+#content div.caution p, 
+#content div.important p, 
+#content div.note p, 
+#content div.tip p, 
+#content div.warning p {
+    margin-top: 8px; /*to align text with bg graphic*/
+}
+
+#content div.tip { background-image: url("../img/admon-tip.png"); }
+#content div.note { background-image: url("../img/admon-note.png"); }
+#content div.important { background-image: url("../img/admon-important.png"); }
+#content div.caution { background-image: url("../img/admon-caution.png"); }
+#content div.warning { background-image: url("../img/admon-warning.png"); }
+
+/* admonition end */
+
+h1, h2, h3, h4, h5 {
+    font-family: serif;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+}
+h1 {
+    color: #234764;
+    font-size: 150%;
+}
+h2 {
+    color: #366d9c;
+    font-size: 125%;
+}
+
+ul li {
+    list-style: url(../img/bullet.gif);
+}
+ol li {
+    list-style: decimal;
+}
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/button-on-bg.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAIwAAAARCAIAAACAWtP0AAAAA3NCSVQICAjb4U/g
+AAAACXBIWXMAAAsSAAALEgHS3X78AAAAIHRFWHRTb2Z0d2FyZQBNYWNyb21lZGlh
+IEZpcmV3b3JrcyBNWLuRKiQAAAAWdEVYdENyZWF0aW9uIFRpbWUAMTIvMDYvMDRn
+7m0SAAAAW0lEQVR4nO3V0QkAQQgD0bhs/4XahNeBv3sD8yoIhGjNTPRvN0l3v46h
+zU1SVa9jaHOTnHNex9DGJQFYEoAlAfiTAFwSgCUBeO4AXBKAJQF47gBcEoAlAVgS
+wAdacQY2hOtlkAAAAABJRU5ErkJggg==
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/header-bg2.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAAYAAABSCAIAAAD4sTL+AAAAA3NCSVQICAjb4U/g
+AAAACXBIWXMAAAsSAAALEgHS3X78AAAAIHRFWHRTb2Z0d2FyZQBNYWNyb21lZGlh
+IEZpcmV3b3JrcyBNWLuRKiQAAAAWdEVYdENyZWF0aW9uIFRpbWUAMTIvMDUvMDR1
+W8L8AAAATElEQVR4nGN8+fIlAypgYsAAWIRYGDGFGBjRBYkzi1gbaWw8phCtPURT
+G7EYj03V0LGROOPJtpHGxg8hDw1WG6lpPP1tHAAPkVtiAgC3dwPAjN8N6wAAAABJ
+RU5ErkJggg==
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/nav-off-bg.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAPoAAAARCAYAAAD0b7F8AAAABHNCSVQICAgIfAhk
+iAAAAAlwSFlzAAAK8AAACvABQqw0mAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRp
+YSBGaXJld29ya3MgTVi7kSokAAAAFnRFWHRDcmVhdGlvbiBUaW1lADEyLzA2LzA0
+Z+5tEgAAAIpJREFUeJzt2jEOwyAQRcF15NtyHo4KLalSBCmRXVjWmpnud9s80bCN
+MUYAj7b33u++AbjY6+4DgOsJHRYgdFiA0CGhWuvfPRM6JFRK+Yp73jOhQ1JnYhc6
+JHY0dqFDYrXWKKX83B9Ch6SORh4hdEjpTOQREVtrzV93eDgvOixA6LAAocMChA4L
+eANRljJd8nyitAAAAABJRU5ErkJggg==
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/nav-on-bg.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAPoAAAARCAYAAAD0b7F8AAAABHNCSVQICAgIfAhk
+iAAAAAlwSFlzAAAK8AAACvABQqw0mAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRp
+YSBGaXJld29ya3MgTVi7kSokAAAAFnRFWHRDcmVhdGlvbiBUaW1lADEyLzA2LzA0
+Z+5tEgAAALtJREFUeJzt2TsOQFAQheEZsVSCsByCsEKN0CivSiKSKUXG/b/udNOc
+zH1oCCEIgF9Ll2X5egYAL0tV9esZALwsTZLk6xkAvIyNDkSAogMOzfMsWZaZ+UnX
+deXVHXBomibJ89zMd7ptG0UHnBrHUYqiMPNF932n6IBjwzBIWZZmFuGODrjW971U
+VWXmC99rgFNd10ld12a+Y6MDDrVtK03TmPlJj+Pgjg78HEd3IAIc3YEIUHQgAhQd
+iMAJsnlAcYTBdPsAAAAASUVORK5CYII=
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline; filename=screen.css
+Content-Type: text/css; name=screen.css
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/css/screen.css
+Content-Transfer-Encoding: 8bit
+
+html {
+    height: 100%;
+    font-size: 103%;
+    font-family: Arial,Verdana,Geneva,"Bitstream Vera Sans",Helvetica,sans-serif;
+}
+body {
+    position: relative;
+    min-height: 100%;
+    line-height: 1.4;
+}
+form#searchform {
+    float: right;
+    margin: 16px 4% 0 0;
+}
+form#searchform input#searchinput {
+    border: 1px solid #c4cccc;
+    font-size: 88%;
+    vertical-align: middle;
+}
+form#searchform input#fullsearch,
+form#searchform input#titlesearch {
+    border-top: 1px solid #c4cccc;
+    border-left: 1px solid #c4cccc;
+    border-bottom: 1px solid #6f7777;
+    border-right: 1px solid #6f7777;
+    background: #f8f7f7 url(../img/button-on-bg.png) no-repeat;
+    font-weight: bold;
+    color: #223344;
+    font-size: 90%;
+    text-transform: lowercase;
+    vertical-align: middle;
+}
+div#header {
+    background: #f7f7f7 url(../img/header-bg2.png) repeat-x;
+    border-bottom: 1px solid #999;
+    height: 84px;
+    padding: 1px 0;
+    position: relative;
+}
+div#logo {
+    float: left;
+    margin: 10px 0 0 3%;
+    height: 71px;
+    width: 211px;
+    text-align: center;
+}
+div#logo a {
+    outline: none;
+}
+div#sidebar {
+    float: left;
+    width: 13.2em;
+    padding: 0 0.4em 0 1.4em; 
+    margin: 19px 0 0 3%;
+    color: #4b5a6a;
+    font-size: 75%;
+}
+div#sidebar h1 {
+    font-weight: bold;
+    font-size: 103%;
+    color: #4b5a6a;
+    font-family: sans-serif;
+    margin: 0.5em;
+}
+div#sidebar div.sidepanel:first-child h1 {
+    display: none;
+}
+div#sidebar ul#navibar {
+    padding: 0;
+    margin: 0;
+}
+div#sidebar ul#navibar li {
+    margin: 0;
+    padding: 0;
+    border: none;
+    list-style: none;
+    display: block;
+    font-variant: small-caps;
+}
+div#sidebar ul#navibar li a {
+    display: block;
+    border: 1px solid #dadada;
+    margin: 4px 0 0 0;
+    background: #f4f4f4 url(../img/nav-off-bg.png) 100% 0 no-repeat;
+    color: #4b5a6a;
+    font-family: Verdana,Geneva,"Bitstream Vera Sans",Helvetica,sans-serif;
+    padding: 2px 4px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+div#sidebar ul#navibar li.current a {
+    background: #f4f4f4 url(../img/nav-on-bg.png) 100% 0 no-repeat;
+    border-left: 3px solid #ffdb4c;
+    color: #000;
+}
+div#sidebar ul {
+    margin: 0;
+    padding: 0;
+}
+div#sidebar ul li {
+    list-style: url(../img/bullet.gif);
+    margin: 2px 0 2px 2em;
+    padding: 0;
+}
+div#sidebar ul li a {
+    color: #3c4b7b;
+    text-decoration: none;
+}
+div#sidebar ul li a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+div#sidebar select {
+    width: 100%;
+    font-size: 12px;
+}
+div#content {
+    margin: 0 1.5em 0 3%;
+    padding: 12px 0 0 16.5em;
+    font-size: 86%;
+    line-height: 1.5;
+}
+div#footer {
+    clear: both;
+    margin: 1em 1.5em 0 242px;
+    border-top: 1px solid #ddd;
+    padding: 0.5em 0;
+}
+ul#credits {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
+ul#credits a {
+    color: #666;
+    text-decoration: none;
+}
+ul#credits a:hover {
+    text-decoration: underline;
+}
+ul#credits li {
+    display: inline;
+    list-style: none;
+    margin: 1em;
+}
+#locationline {
+    font-size: 86%;
+    position: absolute;
+    bottom: 4px;
+    left: 3%;
+    margin-left: 16.5em;
+    background: url(../img/bullet.gif) no-repeat 0 50%;
+    padding: 0 0 0 12px;
+}
+ul#pagetrail,
+#locationline ul {
+    margin: 0;
+    padding: 0;
+}
+ul#pagetrail li,
+#locationline ul li {
+    margin: 0 1em 0 0;
+    padding: 0;
+    display: inline;
+    list-style: none;
+    font-size: 110%;
+}
+ul#pagetrail li a,
+#locationline ul li a {
+    color: #3A4969;
+    text-decoration: none;
+}
+ul#pagetrail li a:hover,
+#locationline ul li a:hover {
+    text-decoration: underline;
+}
+#locationline ul li a.backlink {
+    font-weight: bold;
+}
+ul#pagetrail {
+    position: absolute;
+    bottom: -1.5em;
+    left: 3%;
+    margin-left: 16.5em;
+    font-size: 86%;
+}
+ul#pagetrail li {
+    font-size: 90%;
+    padding: 0 0 0 12px;
+    margin: 0;
+    background: url(../img/bullet.gif) 1px 50% no-repeat;
+}
+#message {
+    position: absolute;
+    top: 0.5em;
+    left: 242px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0.5em;
+    z-index: 10000;
+    font-size: 12px;
+    margin: 0 0.75em 0 0;
+}
+#message table {
+    max-width: 100%;
+    border: none;
+}
+#message table td {
+    border: none;
+}
+#message p {
+    margin: 0;
+}
+
+#message input {
+    width: 100%;
+}
+#message .buttons input {
+    width: auto;
+}
+#editor {
+    padding: 6em 0 0 0;
+    margin: 0.5em;
+} 
+#editor textarea {
+    display: block;
+    font-size: 100%;
+    width: 100%;
+}
+#editor-comment {
+    display: block;
+    width: 100%;
+}
+div#textcha {
+    padding: 0.25em 1em;
+    background: #fff29f;
+    border: 1px solid #eee18e;
+    margin: 0.25em 0;
+    color: #630;
+}
+
+#pageinfo {
+    margin: 2em 2em 0.25em 0;
+}
+
+#star a {
+    display: block;
+    overflow: hidden;
+    width: 16px;
+    height: 16px;
+    text-indent: 16px;
+    background: url('../img/star_off.png') no-repeat 50% 50%;
+    position: absolute;
+    top: 64px;
+    left: 3%;
+    margin-left: 17.5em;
+    margin-top: -0.2em;
+}
+#star a.unsubscribe {
+    background-image: url('../img/star_on.png');
+}
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline; filename=print.css
+Content-Type: text/css; name=print.css
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/css/print.css
+Content-Transfer-Encoding: 8bit
+
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline; filename=python-logo.gif
+Content-Type: image/gif; name=python-logo.gif
+Content-Location: http://www.python.org/images/python-logo.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlh0wBHAPcAAP/////78vf3///35fb19fPy8u/v7//tyPHs2uvq6urq6vXo
+xv/tYObm5vHlw//krP/rXvXmpvXjmP/mWf/gl9zh5/bfoP/jVN7e3vfekvjhbt3d
+3friYv/gUtfe483f7vbYl/XZjfXagv/We//Wg//bTNbW1vfUe//YSf/TdvjVaPfS
+hPnWW/vVT//VRP/PasbU4P/QQP/NV/fNdMLR3vvOR/jNV//MO8zMzPjHYvvIQPzF
+Of/FMsXFxfnCRLDH2fnAScLCwvvAN/q+QP2+Lv+8Kb29vf+4Lf+1Mf+1IZu/3Zu9
+2qG6z5260bW1taysrJCvyYKv1KioqIKt0aOjo3+oyqGgoICmxn6lxoCjwH2hv3+e
+uJmZmXKgxZGRkXCWtZCPj2SVvWSRtVqRv2SOsoaGhlKNvX5+fkmIu0SJwFCFsEmF
+tkOFuziFw0ODtjiCvkl/rFB8oUN/snV1dTh/ukJ9rjh8tUN5pzd5r2xsbDd2q0Jz
+pTxynjdzpWZmZjZtnDdqlP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACH5BAUUAIEALAAAAADTAEcAAAj/AAMJHEiwoMGDCBMqXMiw
+ocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2b
+OHPq3Mmzp8+fQIMKjYiDSx4cQ2fSwBJmjRs5UOWoEaPFQ1KEZfz4QXrVZRM2b8La
+GYunrJ6zesh0LZh161qWTcLSmTuWLNo+ePe8FdiW616UaN6k+SBgCtmyZfEq/hLU
+L8G+N6VIlhxIioFACqTEBKsEAAACdhDfVdyHj88GVub4OQgZp2aBUoJsCPL6Zdgo
+nj+ExjMa75/fPnFoXW2wdeSBUjIbqO0y7JspS9wgTqz4N/CewrWy1uq4Zu3vMeke
+/0ZM2vp1ntmJs+WeEzzs8HVFn61u/k/w4dvdukbOP6cY+tYBshEORjzxBA4NKGQC
+BkThVxx7EzWAg4FGmPAQgQYi2BMNY4DlXHzTlRcgIIAYwAADE6SoQURGnDHci1wk
+WJATqnVHkIOBPPHii08M1JcBGFjholZ5WCGjQRhwsaMfcxiRUANODLljjDpV4dyH
+41Hn24gkGgABBBNcICYLDvWgmlZzlFGGlGccyReEB+Go45J+9PimHz0oSWebBvWQ
+x3Bq/qkVlTMKmiYXZQjqB583NdHGo2/MRZd8eoj4G4ldpijmBSWUIAJDRhD5BIMD
+4SBoGevpF6d2BKWXH5FWIP+FwZx+oEqQCYIaOZARgnJBUANtleFYA3r64etNaUAq
+aV2h9daHeZh2uSmnndbAUFs9HJRetj7CaRCOArn6oFa6EuTEcBYK1MCZThiEq1bt
+hgvuY/PK9EMbV74BInkA/hGttNR26oILDixkXKpn0Kvqt6yWWm8gbTl5kKB25ogm
+QnPmIaO4fT4MUxeQijVeb/X9G8cCHXQg8MAxhGCwt+YORyrEMN/YsLw3d7swQWCQ
+OxC7CDUwnMQcM6weTWbIJZ5d8/X7LyA0qNBpCQO7EEMMNry8s8NaSUzz1gPNW7TO
+Ngo0p60mDFe2QEOCgfPRBXn8koci78bvlpf+uwUCU1f/HcMNN+ig9dqBDFfxwXHn
+PPada58tUA9yB6JnwoEsHnbOMklKx75aPssliXHQgEALK/8N+A07DJ7QcMd+TbjY
+DyM+kOMWY04QrW+vbjtMWNqdWBYwGCD88MQbsIAKKCTP8uk8NK86QoCSrTvclstu
+tla24p6Q9pYLFHlLy+57RwUScHDi+SdqGjDVVjPfPA/Pr1qr9NArHnvN188fCOS7
+509594Xrn0vcsLks4aECGkDf+VI0gZSpjH3tA9z7eCCE+BntcPjznv1sZ73a2So9
+6TpIz/QHwO+xZAycw0MWIqDA9KXIgSuzmukmWAQfWLBVw4mX66ZXkOplkHYB9IPX
+/wwyJDuVUIAtucLIzlIB8ylQfQHzmwRpWIQZ3HAg59JKCCPGQxxy8IfY01nrCiI0
+LeaufnCTCQzigxY9FGACTwyTmPoWwRtMkAdFyCMCriiQM1HuTmNMHPXuBzYP7opI
+bppdGM8oP5zUYTp4wEsB4rgpOprOju/LYx6HcC2tVCxmWuGWQKiAroPwD25p00oC
+xtW4RQISSYLyyxHTKBMomOUuk1ygHKfGvktSMY9JAEEn0eQEUiWAVl4oSAIElYcn
+rDIQCTBCWzB3pk8yDmOuDAQGevXMyhXRi7TUYDhjIobe5JKBMISgLzOpySQAoSFt
+OROaXnSGbg7kXXTakbuGM/+HWNHPIEAUiAnOlAc1SYkKPZSbCV3CBDjc4aF3CMSX
+XpgygdXgojrIqEaFwNGOWhGe3MGBF3bUzIQkaUlecEICHmaCkXrynwUJqECOqSit
+eMFGswwKFPumAo/0pQBAxYFQCUeQBAwVA0AFauSEOrOMmGCo9vzLQqZlSfe9r4IU
+6WBFFirVl8yxqlNsXh6xOhGtTmSl+utqTipautPZUQYUGIEmK2JWiWQnkGqtCR3r
++L4BeCYFSSACXTNIET0NMa81aYHyZBhWHgTAMyRIAlklUleIhMoPeYgqYmeSASli
+MpMvOMADjpCEFQy2kBE5aSg3mxMWrJOdSYhtEnJgkcrSJsQET+CClOZAVNbCxAI1
++CwegRlbJAjTInrqrUKKxSRn+pYnCzgBEIRABE0OYQYFcyoVQiiRHpSBCk7g7nPH
+S97ymve86E2vetfLXoYQIKnwja9829ve98oXqMUT3n2TSt/yEsC+Sc2vgPN73/6y
+FsD4LV4CFszgBieAwPE1cF7/C18FM7gBGM5wAxpcvPlKuKsILkB+HUxiCMP3wxMO
+8YBXrF8PozjFFN6vjJP63/++2L81zrGOd3zjHvv4x0AOspCHTOQiG/nISE6ykpfc
+44AAADs=
+
+------------ysjv8NZ8908MODnCMnZC68
+Content-Disposition: inline; filename=projection.htm
+Content-Type: text/html; charset=utf-8; name=projection.htm
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/css/projection.css
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="robots" content="index,nofollow">
+
+<title>moin_static193/europython/css/projection.css - PythonInfo Wiki</title>
+<script type="text/javascript" src="/moin/moin_static193/common/js/common.js"></script>
+
+<script type="text/javascript">
+<!--
+var search_hint = "Búsqueda";
+//-->
+</script>
+
+<script type="text/javascript">
+<!-- // GUI edit link and i18n
+var gui_editor_link_href = "/moin/moin_static193/europython/css/projection.css?action=edit&editor=gui";
+var gui_editor_link_text = "Edición (GUI)";
+//-->
+</script>
+
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="/moin/moin_static193/europython/css/common.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="screen" href="/moin/moin_static193/europython/css/screen.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="print" href="/moin/moin_static193/europython/css/print.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="projection" href="/moin/moin_static193/europython/css/projection.css">
+
+<!-- css only for MS IE6/IE7 browsers -->
+<!--[if lt IE 8]>
+   <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="/moin/moin_static193/europython/css/msie.css">
+<![endif]-->
+
+
+
+<link rel="alternate" type="application/wiki" title="Editar" href="/moin/moin_static193/europython/css/projection.css?action=edit">
+
+<link rel="Start" href="/moin/FrontPage">
+<link rel="Alternate" title="Formato Wiki" href="/moin/moin_static193/europython/css/projection.css?action=raw">
+<link rel="Alternate" media="print" title="Vista de impresión" href="/moin/moin_static193/europython/css/projection.css?action=print">
+<link rel="Search" href="/moin/FindPage">
+<link rel="Index" href="/moin/TitleIndex">
+<link rel="Glossary" href="/moin/WordIndex">
+<link rel="Help" href="/moin/HelpOnFormatting">
+</head>
+
+<body  lang="es" dir="ltr">
+
+<div id="header">
+
+<form id="searchform" method="get" action="/moin/moin_static193/europython/css/projection.css">
+<div>
+<input type="hidden" name="action" value="fullsearch">
+<input type="hidden" name="context" value="180">
+<label for="searchinput">Buscar:</label>
+<input id="searchinput" type="text" name="value" value="" size="20"
+    onfocus="searchFocus(this)" onblur="searchBlur(this)"
+    onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search">
+<input id="titlesearch" name="titlesearch" type="submit"
+    value="Títulos" alt="Search Titles">
+<input id="fullsearch" name="fullsearch" type="submit"
+    value="Texto" alt="Search Full Text">
+</div>
+</form>
+<script type="text/javascript">
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<div id="logo"><a href="/moin/FrontPage"><img src="http://www.python.org/images/python-logo.gif" alt="Python" ></a></div>
+<div id="locationline">
+
+
+<ul id="pagelocation">
+<li><a class="nonexistent" href="/moin/moin_static193">moin_static193</a></li><li><a class="nonexistent" href="/moin/moin_static193/europython">europython</a></li><li><a class="nonexistent" href="/moin/moin_static193/europython/css">css</a></li><li><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css?action=fullsearch&amp;context=180&amp;value=linkto%3A%22moin_static193%2Feuropython%2Fcss%2Fprojection.css%22" rel="nofollow" title="Efectuar una búsqueda por páginas que tienen este título en contenidos">projection.css</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="sidebar">
+<div id="star">
+
+</div>
+<div class="sidepanel">
+
+<ul id="navibar">
+<li class="wikilink"><a href="/moin/FrontPage">FrontPage</a></li><li class="wikilink"><a href="/moin/RecentChanges">RecentChanges</a></li><li class="wikilink"><a href="/moin/FindPage">FindPage</a></li><li class="wikilink"><a href="/moin/HelpContents">HelpContents</a></li><li class="current"><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css">projection.css</a></li>
+</ul>
+
+</div>
+<div class="sidepanel">
+<h1>Página</h1>
+<ul class="editbar"><li><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css?action=edit&amp;editor=text" name="texteditlink" rel="nofollow">Edición (Texto)</a></li><li class="toggleCommentsButton" style="display:none;"><a href="#" class="nbcomment" onClick="toggleComments();return false;">Comentarios</a></li><li><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css?action=info" rel="nofollow">Información</a></li><li><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css?action=AttachFile" rel="nofollow">Adjuntos</a></li><li>
+<form class="actionsmenu" method="GET" action="/moin/moin_static193/europython/css/projection.css">
+<div>
+    <label>Más Acciones</label>
+    <select name="action"
+        onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="raw">Texto sin formato</option>
+<option value="print">Vista de impresión</option>
+<option value="refresh">Eliminar caché</option>
+<option value="show" disabled class="disabled">------------------------</option>
+<option value="SpellCheck">Revisar ortografía</option>
+<option value="LikePages">Páginas similares</option>
+<option value="LocalSiteMap">Mapa del sitio</option>
+<option value="show" disabled class="disabled">------------------------</option>
+<option value="RenamePage" disabled class="disabled">Renombrar Página</option>
+<option value="DeletePage" disabled class="disabled">Eliminar página</option>
+<option value="show" disabled class="disabled">------------------------</option>
+<option value="show" disabled class="disabled">------------------------</option>
+<option value="show" disabled class="disabled">Eliminar Spam</option>
+<option value="show" disabled class="disabled">Revertir a esta revisión</option>
+<option value="show" disabled class="disabled">------------------------</option>
+<option value="Load">Subir</option>
+<option value="SlideShow">SlideShow</option>
+    </select>
+    <input type="submit" value="Hacer">
+    
+</div>
+<script type="text/javascript">
+<!--// Init menu
+actionsMenuInit('Más Acciones');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+<div class="sidepanel">
+<h1>Usuario</h1>
+<ul id="username"><li><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css?action=login" id="login" rel="nofollow">Ingresar</a></li></ul>
+</div>
+</div>
+
+<div id="page" lang="en" dir="ltr">
+<div dir="ltr" id="content" lang="en"><span class="anchor" id="top"></span>
+<span class="anchor" id="line-1"></span><span class="anchor" id="line-2"></span><span class="anchor" id="line-3"></span><span class="anchor" id="line-4"></span><span class="anchor" id="line-5"></span><span class="anchor" id="line-6"></span><p class="line867"><strong>This page does not exist yet. You can create a new empty page, or use one of the page templates. Before creating the page, please check if a similar page already exists.</strong> <span class="anchor" id="line-7"></span><span class="anchor" id="line-8"></span><p class="line867"><a class="action" href="/moin/moin_static193/europython/css/projection.css?action=edit">Create new empty page</a> <span class="anchor" id="line-9"></span><span class="anchor" id="line-10"></span><span class="anchor" id="bottom"></span></div>
+<div id="pagebottom"></div>
+</div>
+
+
+<div id="footer">
+<ul id="credits">
+<li><a href="http://moinmo.in/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a></li><li><a href="http://moinmo.in/Python" title="MoinMoin is written in Python.">Python Powered</a></li><li><a href="http://moinmo.in/GPL" title="MoinMoin is GPL licensed.">GPL licensed</a></li><li><a href="http://validator.w3.org/check?uri=referer" title="Click here to validate this page.">Valid HTML 4.01</a></li>
+</ul>
+
+
+</div>
+</body>
+</html>
+
+
+------------ysjv8NZ8908MODnCMnZC68--

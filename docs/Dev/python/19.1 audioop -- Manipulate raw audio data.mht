@@ -1,0 +1,903 @@
+Content-Type: multipart/related; start=<op.mhtml.1310176151948.5b9c8c056f542bb7@201.213.113.239>; boundary=----------MBQO802M5x1WcurpFnU9EW
+Content-Location: http://docs.python.org/release/2.5.2/lib/module-audioop.html
+Subject: =?utf-8?Q?19.1=20audioop=20--=20Manipulate=20raw=20audio=20data?=
+MIME-Version: 1.0
+
+------------MBQO802M5x1WcurpFnU9EW
+Content-Disposition: inline; filename=module-audioop.html
+Content-Type: text/html; charset=utf-8; name=module-audioop.html
+Content-ID: <op.mhtml.1310176151948.5b9c8c056f542bb7@201.213.113.239>
+Content-Location: http://docs.python.org/release/2.5.2/lib/module-audioop.html
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel="STYLESHEET" href="lib.css" type='text/css' />
+<link rel="SHORTCUT ICON" href="../icons/pyfav.png" type="image/png" />
+<link rel='start' href='../index.html' title='Python documentation Index' />
+<link rel="first" href="lib.html" title='Python library Reference' />
+<link rel='contents' href='contents.html' title="Contents" />
+<link rel='index' href='genindex.html' title='Index' />
+<link rel='last' href='about.html' title='About this document...' />
+<link rel='help' href='about.html' title='About this document...' />
+<link rel="next" href="module-imageop.html" />
+<link rel="prev" href="mmedia.html" />
+<link rel="parent" href="mmedia.html" />
+<link rel="next" href="module-imageop.html" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name='aesop' content='information' />
+<title>19.1 audioop -- Manipulate raw audio data</title>
+</head>
+<body>
+<div class="navigation">
+<div id='top-navigation-panel' xml:id='top-navigation-panel'>
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="19. multimedia Services"
+  href="mmedia.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></a></td>
+<td class='online-navigation'><a rel="parent" title="19. multimedia Services"
+  href="mmedia.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up one Level' width='32' /></a></td>
+<td class='online-navigation'><a rel="next" title="19.2 imageop  "
+  href="module-imageop.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></a></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></a></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></a></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="mmedia.html">19. Multimedia Services</a>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="mmedia.html">19. Multimedia Services</a>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-imageop.html">19.2 imageop  </a>
+</div>
+<hr /></div>
+</div>
+<!--End of Navigation Panel-->
+
+<h1><a name="SECTION0021100000000000000000">
+19.1 <tt class="module">audioop</tt> --
+         Manipulate raw audio data</a>
+</h1>
+
+<p>
+<a name="module-audioop"></a>
+
+<p>
+The <tt class="module">audioop</tt> module contains some useful operations on sound
+fragments.  It operates on sound fragments consisting of signed
+integer samples 8, 16 or 32 bits wide, stored in Python strings.  This
+is the same format as used by the <tt class="module"><a href="module-al.html">al</a></tt> and <tt class="module"><a href="module-sunaudiodev.html">sunaudiodev</a></tt>
+modules.  All scalar items are integers, unless specified otherwise.
+
+<p>
+This module provides support for a-LAW, u-LAW and Intel/DVI ADPCM encodings.
+<a id='l2h-4517' xml:id='l2h-4517'></a>
+
+<p>
+A few of the more complicated operations only take 16-bit samples,
+otherwise the sample size (in bytes) is always a parameter of the
+operation.
+
+<p>
+The module defines the following variables and functions:
+
+<p>
+<dl><dt><b><span class="typelabel">exception</span>&nbsp;<tt id='l2h-4491' xml:id='l2h-4491' class="exception">error</tt></b></dt>
+<dd>
+This exception is raised on all errors, such as unknown number of bytes
+per sample, etc.
+</dd></dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4492' xml:id='l2h-4492' class="function">add</tt></b>(</nobr></td>
+  <td><var>fragment1, fragment2, width</var>)</td></tr></table></dt>
+<dd>
+Return a fragment which is the addition of the two samples passed as
+parameters.  <var>width</var> is the sample width in bytes, either
+<code>1</code>, <code>2</code> or <code>4</code>.  Both fragments should have the same
+length.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4493' xml:id='l2h-4493' class="function">adpcm2lin</tt></b>(</nobr></td>
+  <td><var>adpcmfragment, width, state</var>)</td></tr></table></dt>
+<dd>
+Decode an Intel/DVI ADPCM coded fragment to a linear fragment.  See
+the description of <tt class="function">lin2adpcm()</tt> for details on ADPCM coding.
+Return a tuple <code>(<var>sample</var>, <var>newstate</var>)</code> where the sample
+has the width specified in <var>width</var>.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4494' xml:id='l2h-4494' class="function">alaw2lin</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Convert sound fragments in a-LAW encoding to linearly encoded sound
+fragments.  a-LAW encoding always uses 8 bits samples, so <var>width</var>
+refers only to the sample width of the output fragment here.
+
+<span class="versionnote">New in version 2.5.</span>
+
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4495' xml:id='l2h-4495' class="function">avg</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Return the average over all samples in the fragment.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4496' xml:id='l2h-4496' class="function">avgpp</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Return the average peak-peak value over all samples in the fragment.
+No filtering is done, so the usefulness of this routine is
+questionable.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4497' xml:id='l2h-4497' class="function">bias</tt></b>(</nobr></td>
+  <td><var>fragment, width, bias</var>)</td></tr></table></dt>
+<dd>
+Return a fragment that is the original fragment with a bias added to
+each sample.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4498' xml:id='l2h-4498' class="function">cross</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Return the number of zero crossings in the fragment passed as an
+argument.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4499' xml:id='l2h-4499' class="function">findfactor</tt></b>(</nobr></td>
+  <td><var>fragment, reference</var>)</td></tr></table></dt>
+<dd>
+Return a factor <var>F</var> such that
+<code>rms(add(<var>fragment</var>, mul(<var>reference</var>, -<var>F</var>)))</code> is
+minimal, i.e., return the factor with which you should multiply
+<var>reference</var> to make it match as well as possible to
+<var>fragment</var>.  The fragments should both contain 2-byte samples.
+
+<p>
+The time taken by this routine is proportional to
+<code>len(<var>fragment</var>)</code>.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4500' xml:id='l2h-4500' class="function">findfit</tt></b>(</nobr></td>
+  <td><var>fragment, reference</var>)</td></tr></table></dt>
+<dd>
+Try to match <var>reference</var> as well as possible to a portion of
+<var>fragment</var> (which should be the longer fragment).  This is
+(conceptually) done by taking slices out of <var>fragment</var>, using
+<tt class="function">findfactor()</tt> to compute the best match, and minimizing the
+result.  The fragments should both contain 2-byte samples.  Return a
+tuple <code>(<var>offset</var>, <var>factor</var>)</code> where <var>offset</var> is the
+(integer) offset into <var>fragment</var> where the optimal match started
+and <var>factor</var> is the (floating-point) factor as per
+<tt class="function">findfactor()</tt>.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4501' xml:id='l2h-4501' class="function">findmax</tt></b>(</nobr></td>
+  <td><var>fragment, length</var>)</td></tr></table></dt>
+<dd>
+Search <var>fragment</var> for a slice of length <var>length</var> samples (not
+bytes!) with maximum energy, i.e., return <var>i</var> for which
+<code>rms(fragment[i*2:(i+length)*2])</code> is maximal.  The fragments
+should both contain 2-byte samples.
+
+<p>
+The routine takes time proportional to <code>len(<var>fragment</var>)</code>.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4502' xml:id='l2h-4502' class="function">getsample</tt></b>(</nobr></td>
+  <td><var>fragment, width, index</var>)</td></tr></table></dt>
+<dd>
+Return the value of sample <var>index</var> from the fragment.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4503' xml:id='l2h-4503' class="function">lin2adpcm</tt></b>(</nobr></td>
+  <td><var>fragment, width, state</var>)</td></tr></table></dt>
+<dd>
+Convert samples to 4 bit Intel/DVI ADPCM encoding.  ADPCM coding is an
+adaptive coding scheme, whereby each 4 bit number is the difference
+between one sample and the next, divided by a (varying) step.  The
+Intel/DVI ADPCM algorithm has been selected for use by the IMA, so it
+may well become a standard.
+
+<p>
+<var>state</var> is a tuple containing the state of the coder.  The coder
+returns a tuple <code>(<var>adpcmfrag</var>, <var>newstate</var>)</code>, and the
+<var>newstate</var> should be passed to the next call of
+<tt class="function">lin2adpcm()</tt>.  In the initial call, <code>None</code> can be
+passed as the state.  <var>adpcmfrag</var> is the ADPCM coded fragment
+packed 2 4-bit values per byte.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4504' xml:id='l2h-4504' class="function">lin2alaw</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Convert samples in the audio fragment to a-LAW encoding and return
+this as a Python string.  a-LAW is an audio encoding format whereby
+you get a dynamic range of about 13 bits using only 8 bit samples.  It
+is used by the Sun audio hardware, among others.
+
+<span class="versionnote">New in version 2.5.</span>
+
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4505' xml:id='l2h-4505' class="function">lin2lin</tt></b>(</nobr></td>
+  <td><var>fragment, width, newwidth</var>)</td></tr></table></dt>
+<dd>
+Convert samples between 1-, 2- and 4-byte formats.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4506' xml:id='l2h-4506' class="function">lin2ulaw</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Convert samples in the audio fragment to u-LAW encoding and return
+this as a Python string.  u-LAW is an audio encoding format whereby
+you get a dynamic range of about 14 bits using only 8 bit samples.  It
+is used by the Sun audio hardware, among others.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4507' xml:id='l2h-4507' class="function">minmax</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Return a tuple consisting of the minimum and maximum values of all
+samples in the sound fragment.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4508' xml:id='l2h-4508' class="function">max</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Return the maximum of the <em>absolute value</em> of all samples in a
+fragment.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4509' xml:id='l2h-4509' class="function">maxpp</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Return the maximum peak-peak value in the sound fragment.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4510' xml:id='l2h-4510' class="function">mul</tt></b>(</nobr></td>
+  <td><var>fragment, width, factor</var>)</td></tr></table></dt>
+<dd>
+Return a fragment that has all samples in the original fragment
+multiplied by the floating-point value <var>factor</var>.  Overflow is
+silently ignored.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4511' xml:id='l2h-4511' class="function">ratecv</tt></b>(</nobr></td>
+  <td><var>fragment, width, nchannels, inrate, outrate,
+                         state</var><big>[</big><var>, weightA</var><big>[</big><var>, weightB</var><big>]</big><var></var><big>]</big><var></var>)</td></tr></table></dt>
+<dd>
+Convert the frame rate of the input fragment.
+
+<p>
+<var>state</var> is a tuple containing the state of the converter.  The
+converter returns a tuple <code>(<var>newfragment</var>, <var>newstate</var>)</code>,
+and <var>newstate</var> should be passed to the next call of
+<tt class="function">ratecv()</tt>.  The initial call should pass <code>None</code>
+as the state.
+
+<p>
+The <var>weightA</var> and <var>weightB</var> arguments are parameters for a
+simple digital filter and default to <code>1</code> and <code>0</code> respectively.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4512' xml:id='l2h-4512' class="function">reverse</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Reverse the samples in a fragment and returns the modified fragment.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4513' xml:id='l2h-4513' class="function">rms</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Return the root-mean-square of the fragment, i.e.
+<br><p></p>
+<div align="CENTER" class="mathdisplay">
+<!-- MATH
+ \begin{displaymath}
+\catcode`_=8
+\sqrt{\frac{\sum{{S_{i}}^{2}}}{n}}
+\end{displaymath}
+ -->
+
+<IMG
+ WIDTH="60" HEIGHT="55" BORDER="0"
+ SRC="img3.png"
+ ALT="\begin{displaymath}
+\catcode\lq _=8
+\sqrt{\frac{\sum{{S_{i}}^{2}}}{n}}
+\end{displaymath}">
+</div>
+<br clear="ALL">
+<p></p>
+This is a measure of the power in an audio signal.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4514' xml:id='l2h-4514' class="function">tomono</tt></b>(</nobr></td>
+  <td><var>fragment, width, lfactor, rfactor</var>)</td></tr></table></dt>
+<dd> 
+Convert a stereo fragment to a mono fragment.  The left channel is
+multiplied by <var>lfactor</var> and the right channel by <var>rfactor</var>
+before adding the two channels to give a mono signal.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4515' xml:id='l2h-4515' class="function">tostereo</tt></b>(</nobr></td>
+  <td><var>fragment, width, lfactor, rfactor</var>)</td></tr></table></dt>
+<dd>
+Generate a stereo fragment from a mono fragment.  Each pair of samples
+in the stereo fragment are computed from the mono sample, whereby left
+channel samples are multiplied by <var>lfactor</var> and right channel
+samples by <var>rfactor</var>.
+</dl>
+
+<p>
+<dl><dt><table cellpadding="0" cellspacing="0"><tr valign="baseline">
+  <td><nobr><b><tt id='l2h-4516' xml:id='l2h-4516' class="function">ulaw2lin</tt></b>(</nobr></td>
+  <td><var>fragment, width</var>)</td></tr></table></dt>
+<dd>
+Convert sound fragments in u-LAW encoding to linearly encoded sound
+fragments.  u-LAW encoding always uses 8 bits samples, so <var>width</var>
+refers only to the sample width of the output fragment here.
+</dl>
+
+<p>
+Note that operations such as <tt class="function">mul()</tt> or <tt class="function">max()</tt> make
+no distinction between mono and stereo fragments, i.e. all samples
+are treated equal.  If this is a problem the stereo fragment should be
+split into two mono fragments first and recombined later.  Here is an
+example of how to do that:
+
+<p>
+<div class="verbatim"><pre>
+def mul_stereo(sample, width, lfactor, rfactor):
+    lsample = audioop.tomono(sample, width, 1, 0)
+    rsample = audioop.tomono(sample, width, 0, 1)
+    lsample = audioop.mul(sample, width, lfactor)
+    rsample = audioop.mul(sample, width, rfactor)
+    lsample = audioop.tostereo(lsample, width, 1, 0)
+    rsample = audioop.tostereo(rsample, width, 0, 1)
+    return audioop.add(lsample, rsample, width)
+</pre></div>
+
+<p>
+If you use the ADPCM coder to build network packets and you want your
+protocol to be stateless (i.e. to be able to tolerate packet loss)
+you should not only transmit the data but also the state.  Note that
+you should send the <var>initial</var> state (the one you passed to
+<tt class="function">lin2adpcm()</tt>) along to the decoder, not the final state (as
+returned by the coder).  If you want to use <tt class="function">struct.struct()</tt>
+to store the state in binary you can code the first element (the
+predicted value) in 16 bits and the second (the delta index) in 8.
+
+<p>
+The ADPCM coders have never been tried against other ADPCM coders,
+only against themselves.  It could well be that I misinterpreted the
+standards in which case they will not be interoperable with the
+respective standards.
+
+<p>
+The <tt class="function">find*()</tt> routines might look a bit funny at first sight.
+They are primarily meant to do echo cancellation.  A reasonably
+fast way to do this is to pick the most energetic piece of the output
+sample, locate that in the input sample and subtract the whole output
+sample from the input sample:
+
+<p>
+<div class="verbatim"><pre>
+def echocancel(outputdata, inputdata):
+    pos = audioop.findmax(outputdata, 800)    # one tenth second
+    out_test = outputdata[pos*2:]
+    in_test = inputdata[pos*2:]
+    ipos, factor = audioop.findfit(in_test, out_test)
+    # Optional (for better cancellation):
+    # factor = audioop.findfactor(in_test[ipos*2:ipos*2+len(out_test)], 
+    #              out_test)
+    prefill = '\0'*(pos+ipos)*2
+    postfill = '\0'*(len(inputdata)-len(prefill)-len(outputdata))
+    outputdata = prefill + audioop.mul(outputdata,2,-factor) + postfill
+    return audioop.add(inputdata, outputdata, 2)
+</pre></div>
+
+<div class="navigation">
+<div class='online-navigation'>
+<p></p><hr />
+<table align="center" width="100%" cellpadding="0" cellspacing="2">
+<tr>
+<td class='online-navigation'><a rel="prev" title="19. multimedia Services"
+  href="mmedia.html"><img src='../icons/previous.png'
+  border='0' height='32'  alt='Previous Page' width='32' /></a></td>
+<td class='online-navigation'><a rel="parent" title="19. multimedia Services"
+  href="mmedia.html"><img src='../icons/up.png'
+  border='0' height='32'  alt='Up one Level' width='32' /></a></td>
+<td class='online-navigation'><a rel="next" title="19.2 imageop  "
+  href="module-imageop.html"><img src='../icons/next.png'
+  border='0' height='32'  alt='Next Page' width='32' /></a></td>
+<td align="center" width="100%">Python Library Reference</td>
+<td class='online-navigation'><a rel="contents" title="Table of Contents"
+  href="contents.html"><img src='../icons/contents.png'
+  border='0' height='32'  alt='Contents' width='32' /></a></td>
+<td class='online-navigation'><a href="modindex.html" title="Module Index"><img src='../icons/modules.png'
+  border='0' height='32'  alt='Module Index' width='32' /></a></td>
+<td class='online-navigation'><a rel="index" title="Index"
+  href="genindex.html"><img src='../icons/index.png'
+  border='0' height='32'  alt='Index' width='32' /></a></td>
+</tr></table>
+<div class='online-navigation'>
+<b class="navlabel">Previous:</b>
+<a class="sectref" rel="prev" href="mmedia.html">19. Multimedia Services</a>
+<b class="navlabel">Up:</b>
+<a class="sectref" rel="parent" href="mmedia.html">19. Multimedia Services</a>
+<b class="navlabel">Next:</b>
+<a class="sectref" rel="next" href="module-imageop.html">19.2 imageop  </a>
+</div>
+</div>
+<hr />
+<span class="release-info">Release 2.5.2, documentation updated on 21st February, 2008.</span>
+</div>
+<!--End of Navigation Panel-->
+<address>
+See <i><a href="about.html">About this document...</a></i> for information on suggesting changes.
+</address>
+</body>
+</html>
+
+------------MBQO802M5x1WcurpFnU9EW
+Content-Disposition: inline; filename=lib.css
+Content-Type: text/css; charset=utf-8; name=lib.css
+Content-Location: http://docs.python.org/release/2.5.2/lib/lib.css
+Content-Transfer-Encoding: 8bit
+
+/*
+ * The first part of this is the standard CSS generated by LaTeX2HTML,
+ * with the "empty" declarations removed.
+ */
+
+/* Century Schoolbook font is very similar to Computer Modern Math: cmmi */
+.math                   { font-family: "Century Schoolbook", serif; }
+.math i                 { font-family: "Century Schoolbook", serif;
+                          font-weight: bold }
+.boldmath               { font-family: "Century Schoolbook", serif;
+                          font-weight: bold }
+
+/*
+ * Implement both fixed-size and relative sizes.
+ *
+ * I think these can be safely removed, as it doesn't appear that
+ * LaTeX2HTML ever generates these, even though these are carried
+ * over from the LaTeX2HTML stylesheet.
+ */
+small.xtiny             { font-size : xx-small; }
+small.tiny              { font-size : x-small; }
+small.scriptsize        { font-size : smaller; }
+small.footnotesize      { font-size : small; }
+big.xlarge              { font-size : large; }
+big.xxlarge             { font-size : x-large; }
+big.huge                { font-size : larger; }
+big.xhuge               { font-size : xx-large; }
+
+/*
+ * Document-specific styles come next;
+ * these are added for the Python documentation.
+ *
+ * Note that the size specifications for the H* elements are because
+ * Netscape on Solaris otherwise doesn't get it right; they all end up
+ * the normal text size.
+ */
+
+body                    { color: #000000;
+                          background-color: #ffffff; }
+
+a:link:active           { color: #ff0000; }
+a:link:hover            { background-color: #bbeeff; }
+a:visited:hover         { background-color: #bbeeff; }
+a:visited               { color: #551a8b; }
+a:link                  { color: #0000bb; }
+
+h1, h2, h3, h4, h5, h6  { font-family: avantgarde, sans-serif;
+                          font-weight: bold; }
+h1                      { font-size: 180%; }
+h2                      { font-size: 150%; }
+h3, h4                  { font-size: 120%; }
+
+/* These are section titles used in navigation links, so make sure we
+ * match the section header font here, even it not the weight.
+ */
+.sectref                { font-family: avantgarde, sans-serif; }
+/* And the label before the titles in navigation: */
+.navlabel               { font-size: 85%; }
+
+
+/* LaTeX2HTML insists on inserting <br> elements into headers which
+ * are marked with \label.  This little bit of CSS magic ensures that
+ * these elements don't cause spurious whitespace to be added.
+ */
+h1>br, h2>br, h3>br,
+h4>br, h5>br, h6>br     { display: none; }
+
+code, tt                { font-family: "lucida typewriter", lucidatypewriter,
+                                       monospace; }
+var                     { font-family: times, serif;
+                          font-style: italic;
+                          font-weight: normal; }
+
+.Unix                   { font-variant: small-caps; }
+
+.typelabel              { font-family: lucida, sans-serif; }
+
+.navigation td          { background-color: #99ccff;
+                          font-weight: bold;
+                          font-family: avantgarde, sans-serif;
+                          font-size: 110%; }
+
+div.warning             { background-color: #fffaf0;
+                          border: thin solid black;
+                          padding: 1em;
+                          margin-left: 2em;
+                          margin-right: 2em; }
+
+div.warning .label      { font-family: sans-serif;
+                          font-size: 110%;
+                          margin-right: 0.5em; }
+
+div.note                { background-color: #fffaf0;
+                          border: thin solid black;
+                          padding: 1em;
+                          margin-left: 2em;
+                          margin-right: 2em; }
+
+div.note .label         { margin-right: 0.5em;
+                          font-family: sans-serif; }
+
+address                 { font-size: 80%; }
+.release-info           { font-style: italic;
+                          font-size: 80%; }
+
+.titlegraphic           { vertical-align: top; }
+
+.verbatim pre           { color: #00008b;
+                          font-family: "lucida typewriter", lucidatypewriter,
+                                       monospace;
+                          font-size: 90%; }
+.verbatim               { margin-left: 2em; }
+.verbatim .footer       { padding: 0.05in;
+                          font-size: 85%;
+                          background-color: #99ccff;
+                          margin-right: 0.5in; }
+
+.grammar                { background-color: #99ccff;
+                          margin-right: 0.5in;
+                          padding: 0.05in; }
+.grammar-footer         { padding: 0.05in;
+                          font-size: 85%; }
+.grammartoken           { font-family: "lucida typewriter", lucidatypewriter,
+                                       monospace; }
+
+.productions                  { background-color: #bbeeff; }
+.productions a:active         { color: #ff0000; }
+.productions a:link:hover     { background-color: #99ccff; }
+.productions a:visited:hover  { background-color: #99ccff; }
+.productions a:visited        { color: #551a8b; }
+.productions a:link           { color: #0000bb; }
+.productions table            { vertical-align: baseline;
+                                empty-cells: show; }
+.productions > table td,
+.productions > table th       { padding: 2px; }
+.productions > table td:first-child,
+.productions > table td:last-child {
+                                font-family: "lucida typewriter",
+                                             lucidatypewriter,
+                                             monospace;
+                                }
+/* same as the second selector above, but expressed differently for Opera */
+.productions > table td:first-child + td + td {
+                                font-family: "lucida typewriter",
+                                             lucidatypewriter,
+                                             monospace;
+                                vertical-align: baseline;
+                                }
+.productions > table td:first-child + td {
+                                padding-left: 1em;
+                                padding-right: 1em;
+                                }
+.productions > table tr       { vertical-align: baseline; }
+
+.email                  { font-family: avantgarde, sans-serif; }
+.mailheader             { font-family: avantgarde, sans-serif; }
+.mimetype               { font-family: avantgarde, sans-serif; }
+.newsgroup              { font-family: avantgarde, sans-serif; }
+.url                    { font-family: avantgarde, sans-serif; }
+.file                   { font-family: avantgarde, sans-serif; }
+.guilabel               { font-family: avantgarde, sans-serif; }
+
+.realtable              { border-collapse: collapse;
+                          border-color: black;
+                          border-style: solid;
+                          border-width: 0px 0px 2px 0px;
+                          empty-cells: show;
+                          margin-left: auto;
+                          margin-right: auto;
+                          padding-left: 0.4em;
+                          padding-right: 0.4em;
+                          }
+.realtable tbody        { vertical-align: baseline; }
+.realtable tfoot        { display: table-footer-group; }
+.realtable thead        { background-color: #99ccff;
+                          border-width: 0px 0px 2px 1px;
+                          display: table-header-group;
+                          font-family: avantgarde, sans-serif;
+                          font-weight: bold;
+                          vertical-align: baseline;
+                          }
+.realtable thead :first-child {
+                          border-width: 0px 0px 2px 0px;
+                          }
+.realtable thead th     { border-width: 0px 0px 2px 1px }
+.realtable td,
+.realtable th           { border-color: black;
+                          border-style: solid;
+                          border-width: 0px 0px 1px 1px;
+                          padding-left: 0.4em;
+                          padding-right: 0.4em;
+                          }
+.realtable td:first-child,
+.realtable th:first-child {
+                          border-left-width: 0px;
+                          vertical-align: baseline;
+                          }
+.center                 { text-align: center; }
+.left                   { text-align: left; }
+.right                  { text-align: right; }
+
+.refcount-info          { font-style: italic; }
+.refcount-info .value   { font-weight: bold;
+                          color: #006600; }
+
+/*
+ * Some decoration for the "See also:" blocks, in part inspired by some of
+ * the styling on Lars Marius Garshol's XSA pages.
+ * (The blue in the navigation bars is #99CCFF.)
+ */
+.seealso                { background-color: #fffaf0;
+                          border: thin solid black;
+                          padding: 0pt 1em 4pt 1em; }
+
+.seealso > .heading     { font-size: 110%;
+                          font-weight: bold; }
+
+/*
+ * Class 'availability' is used for module availability statements at
+ * the top of modules.
+ */
+.availability .platform { font-weight: bold; }
+
+
+/*
+ * Additional styles for the distutils package.
+ */
+.du-command             { font-family: monospace; }
+.du-option              { font-family: avantgarde, sans-serif; }
+.du-filevar             { font-family: avantgarde, sans-serif;
+                          font-style: italic; }
+.du-xxx:before          { content: "** ";
+                          font-weight: bold; }
+.du-xxx:after           { content: " **";
+                          font-weight: bold; }
+
+
+/*
+ * Some specialization for printed output.
+ */
+@media print {
+  .online-navigation    { display: none; }
+  }
+
+------------MBQO802M5x1WcurpFnU9EW
+Content-Disposition: inline; filename=pyfav.png
+Content-Type: image/png; name=pyfav.png
+Content-Location: http://docs.python.org/release/2.5.2/icons/pyfav.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAA4AAAAPBAMAAAAmOuNHAAAAFVBMVEXAwMAA/wD/
+AAAAAAD//wCAgAAAAP+0+poaAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJ
+cEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfUCwsJLSz4iU8KAAAAVElEQVQI1yWM
+0Q2AMAhESZgATRfQBUquuIch7L+KXOXncZB7IgrZEzU3nye56FqRPGcWP1H1km52
+kjgco6kXPAWit4/UbsBqkh0RP7fARxtYsDbIB4XuD9olK0PJAAAAAElFTkSuQmCC
+
+------------MBQO802M5x1WcurpFnU9EW
+Content-Disposition: inline; filename=previous.png
+Content-Type: image/png; name=previous.png
+Content-Location: http://docs.python.org/release/2.5.2/icons/previous.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAYFBMVEX///+ZzP+P
+wvWGuex8r+JzptlpnM9fksVWibxMf7JDdqk6baAwY5YmWYwdUIMTRnkKPXAAM2YA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACNPzCtAAAA
+AWJLR0QSe7xsAAAAAJNJREFUeNrVkkEWwyAIRBVpSY1avP9lm4Av2Th22852/sMZ
+JMQvCr8GSDU9ELD3U8pgAhXzG4MnUjO/EsjAav6OQor7G2qxeTxBNafxb4A83lTv
+A+CF30sMpAu/v44JsgKeZ4a8ANha+I41wd8cNRohICYdkeE9sL+Y8cGMKgKBUWWy
+7eseqhMEASp2jxkCSH8BfAA/kBNxvPufEwAAAEx6VFh0U29mdHdhcmUAAHjac9BQ
+1vTMTUxP9U1Mz0zOVjDRM9IzUrC01Dcw1TcwVEguyiwuqXTIrSwuyUzWSy3WSykt
+yM8r0UvOzwUA9EsSgPTdxF4AAAAzelRYdFNpZ25hdHVyZQAAeNoztUg1TzRMNDc0
+NzRLSUo1MzG1SEozTDNNMjQxT0tONAYAkBUI9Py5OZQAAAAXelRYdFBhZ2UAAHja
+MzaqMDbSNtA2AAAKmgH5R3fDFQAAAABJRU5ErkJggg==
+
+------------MBQO802M5x1WcurpFnU9EW
+Content-Disposition: inline; filename=up.png
+Content-Type: image/png; name=up.png
+Content-Location: http://docs.python.org/release/2.5.2/icons/up.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAYFBMVEX///+ZzP+P
+wvWGuex8r+JzptlpnM9fksVWibxMf7JDdqk6baAwY5YmWYwdUIMTRnkKPXAAM2YA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACNPzCtAAAA
+AWJLR0QSe7xsAAAAANVJREFUeNp9ktsWhSAIRJMyK2/x/z97FFmFJ3QeahU7YCYX
+8xF0T8unHMIUgIR4TYDtxiI3BHaq470NAIesG1TA46OkABBQyH+ANWGn4w9o60vt
+HeBa/ayX7KWVBkB75Wy9RdOmXQKw/MlBbQyIuBpQW6fi/eICbWQFUKaGmk1ELtTI
+5JKRfdNs7pklwPNWEaKPAgD2TLvycYA+B/PsWkyMD0wQCaoABbROgNeEDmwt6DGw
+dwdBATQTHfAEPQJyBWAC0D83Y8BqJiRwvMdo0OEsshNA1w+EeBN4oq4LMwAAAEx6
+VFh0U29mdHdhcmUAAHjac9BQ1vTMTUxP9U1Mz0zOVjDRM9IzUrC01Dcw1TcwVEgu
+yiwuqXTIrSwuyUzWSy3WSyktyM8r0UvOzwUA9EsSgPTdxF4AAAAzelRYdFNpZ25h
+dHVyZQAAeNozMDRMszBKTDRNNEtJNEg1NrU0TLZMNDQ0SDQwtTQyMQIAjXYIQ7db
+zYMAAAAXelRYdFBhZ2UAAHjaMzaqMDbSNtA2AAAKmgH5R3fDFQAAAABJRU5ErkJg
+gg==
+
+------------MBQO802M5x1WcurpFnU9EW
+Content-Disposition: inline; filename=next.png
+Content-Type: image/png; name=next.png
+Content-Location: http://docs.python.org/release/2.5.2/icons/next.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAYFBMVEX///+ZzP+P
+wvWGuex8r+JzptlpnM9fksVWibxMf7JDdqk6baAwY5YmWYwdUIMKPXAAM2YAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABdnj3GAAAA
+AWJLR0QR4rU9ugAAAJNJREFUeNrNk8ESwjAIRGNAqYkJ+f+vlYJ2HM2246175U1m
+H6XpcpB0RkCah/ELdaxRgkDuTvQMO5A68cAl2YFRsIUEIVizBMF4D21TMSBaT2Mq
+BoydVAN4DxjX9K48j9gLdzxWBhY5JDoBTQqvlsGiWF8CYNUS8wV97uisN3Qwdas/
+Bb6O5Qeg4vdYPubn/HH+Bp4eaBKTQSxafgAAAEx6VFh0U29mdHdhcmUAAHjac9BQ
+1vTMTUxP9U1Mz0zOVjDRM9IzUrC01Dcw1TcwVEguyiwuqXTIrSwuyUzWSy3WSykt
+yM8r0UvOzwUA9EsSgPTdxF4AAAAzelRYdFNpZ25hdHVyZQAAeNozMjMxs7RMNDcz
+NzRLMTE0MjZOTDMxtzA1TDIxMEhMMwQAfG4H0Mm+yMQAAAAXelRYdFBhZ2UAAHja
+MzaqMDbSNtA2AAAKmgH5R3fDFQAAAABJRU5ErkJggg==
+
+------------MBQO802M5x1WcurpFnU9EW
+Content-Disposition: inline; filename=contents.png
+Content-Type: image/png; name=contents.png
+Content-Location: http://docs.python.org/release/2.5.2/icons/contents.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAYFBMVEX///+ZzP+P
+wvWGuex8r+JzptlpnM9fksVWibxMf7JDdqk6baAwY5YmWYwdUIMTRnkKPXAAM2YA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACNPzCtAAAA
+AWJLR0QSe7xsAAAAAR1JREFUeNrNkt2SwyAIhYuCCsYf3v9lFzFJuzftTWdnM5l4
+Rj4OYHzAh+fxjwD8AGR5D2TN7wBsqpVPJz5oR0JhrmEDpINWEzgMK5pWnIaBve8S
+qNWX6Yt2L7qM5twAe1KYMzigd0qMG2i6IlWLby6gaXydwk0t4AZJDzPor1MkZa/a
+fKfayEXlFRBviB0zo3brC+gTUrAs36wzLjd3COiA5WBay2o8T/SBhvUT7Zw2sHPz
+ZJLqjUKag6XcR32NRPT8B5f+mxsV6gHUCmABya2hNLklL6AkhB4OpAENmOwDpyTx
++2AbKJAKKd3AlrHDCRDbS0fdQMuXrPkXwP12OGVsCxAM0EGImJ+AywAOxNahdJuE
+41lCTom9fuGgfgD+yQ6qbNhfPQAAAEx6VFh0U29mdHdhcmUAAHjac9BQ1vTMTUxP
+9U1Mz0zOVjDRM9IzUrC01Dcw1TcwVEguyiwuqXTIrSwuyUzWSy3WSyktyM8r0UvO
+zwUA9EsSgPTdxF4AAAAzelRYdFNpZ25hdHVyZQAAeNqzNE1JMjWyTEwxt0wzMTc0
+NDM3Sk4zNrE0SUk1tEhKNAQAjUUIn3CzpOcAAAAXelRYdFBhZ2UAAHjaMzaqMDbS
+NtA2AAAKmgH5R3fDFQAAAABJRU5ErkJggg==
+
+------------MBQO802M5x1WcurpFnU9EW
+Content-Disposition: inline; filename=modules.png
+Content-Type: image/png; name=modules.png
+Content-Location: http://docs.python.org/release/2.5.2/icons/modules.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAYFBMVEX///+ZzP+P
+wvWGuex8r+JzptlpnM9fksVWibxMf7JDdqk6baAwY5YmWYwdUIMTRnkKPXAAM2YA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACNPzCtAAAA
+AWJLR0QSe7xsAAAAAOpJREFUeNrt0sFyxCAIBuAFRcQIkfd/2WKS3aabTHvZY3P4
+D843wvzmAX98j3/wDkikRfYFAVjl5gb2BryYF2ht9XQF4oU5kloG9ZsbzIln1gIw
+7ArQTbassUlMu4DiK265T7uC5vxKe65wBuvAmY5zjl5B8v7K4hX5HfB2N3vdV5h1
+/QR9q2ZP8TX//hb04dfMApJh6QmaFuCcOce+qsx9BzTSoFpzB0VNQiQUnUcThgdY
+1ahjHCmUegbpAKJCChuIv+YAQzMvT5BvwCw7ZuwA4qjgBEs+ART6BmhGoNYgmaXY
+Kg9lU/xAUV8OyQyqnbnLwwAAAEx6VFh0U29mdHdhcmUAAHjac9BQ1vTMTUxP9U1M
+z0zOVjDRM9IzUrC01Dcw1TcwVEguyiwuqXTIrSwuyUzWSy3WSyktyM8r0UvOzwUA
+9EsSgPTdxF4AAAAzelRYdFNpZ25hdHVyZQAAeNpLsjA1SzNLMTI0SDEyNjZLSkwz
+TTU0MjC2NEm0MDe1MAAAi+gILmnqIAwAAAAXelRYdFBhZ2UAAHjaMzaqMDbSNtA2
+AAAKmgH5R3fDFQAAAABJRU5ErkJggg==
+
+------------MBQO802M5x1WcurpFnU9EW
+Content-Disposition: inline; filename=index.png
+Content-Type: image/png; name=index.png
+Content-Location: http://docs.python.org/release/2.5.2/icons/index.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAYFBMVEX///+ZzP+P
+wvWGuex8r+JzptlpnM9fksVWibxMf7JDdqk6baAwY5YmWYwdUIMTRnkKPXAAM2YA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACNPzCtAAAA
+AWJLR0QSe7xsAAAAAKVJREFUeNq10tEOwyAIBdCiRQUHlv//2dLszTmaLKuvnuD1
+hg1uzvZ/UNoNMMMY8Cs9GjIX6hhPUEsxODTOgMYxICsxkDnCBJJJ/M1iFAM2TDUC
+HqGFPXTT/aaHOcITK/cN7BU6MLAUqCKZMk0ACSwLSPJLT6qtLgA58K2+AI/0CUQv
+gETKgAIL0I838Al95AVAc9D3C4zWFgCGP8NAKqVnncDvRZ2RSAi+8+SQvAAAAEx6
+VFh0U29mdHdhcmUAAHjac9BQ1vTMTUxP9U1Mz0zOVjDRM9IzUrC01Dcw1TcwVEgu
+yiwuqXTIrSwuyUzWSy3WSyktyM8r0UvOzwUA9EsSgPTdxF4AAAAzelRYdFNpZ25h
+dHVyZQAAeNozNU4zTzJONU01NzA1TDQ1MTJOtkgzS0wzTDFKSbRMNQAAjyEI7p5Y
+y+cAAAAXelRYdFBhZ2UAAHjaMzaqMDbSNtA2AAAKmgH5R3fDFQAAAABJRU5ErkJg
+gg==
+
+------------MBQO802M5x1WcurpFnU9EW
+Content-Disposition: inline; filename=img3.png
+Content-Type: image/png; name=img3.png
+Content-Location: http://docs.python.org/release/2.5.2/lib/img3.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAADwAAAA3BAMAAAHVEgQUAAAAMFBMVEWzs7OoqKic
+nJyQkJCEhIR4eHhsbGxgYGBUVFRISEg8PDwwMDAkJCQYGBgMDAwAAADqWcueAAAA
+AXRSTlMAQObYZgAAAgFJREFUOI21VL9Lw0AU/hrTtElqE8HBSSuIrgUFdZEMCg6C
+HQUH+w8ogg7iIMGhCC4ZHTuI4FYH8UdA+h/o6ib+AxZ0q1DvV9LctU118IPce+/e
+u3ff3XsXIIEsG32UqRhBL0wtR4UuzH0eLkGPNZLgJTZoaF3oTp/MPdB6p96K8Nn+
+BjKMom8DMyx72WARrSjU71lMed1RxfrN7vkh/iDW3tnooUnGjOuhJMjbLM1+k7lN
+vmKrhgq4yw7DxyhFEVWZqqvQb3Ax7gr7lYuCU+HKwhC2f0dJsRVCifNzVAcl0otc
+LgI14CIAK5QByyXdViRtMUtti5fOibYh11+gckrYpJXGKAun2110x6OGqJNHM5BL
+hukyK8B5GDa6oXWJU45EJGErnB2l90aVbsibXO6KRtbnuMxGrSWO4WmiYDETgZZi
+q/7/QKc/hDdbSV085M1MpLsP+8yt38ZqAKsdhuFT563rLk9G2ogP7LHXvkw+I8Ax
+EVpMN0+uOPMaWZslzBPvR1sinnsXVvb5O3pCHGts3BA7JRqQo85SlLkx6eIaB8nG
+p8EGW5ETM4WoPz0yRz7thpLd/pTPDusl9Q8z/QUsYUDJyPw9cDp4NU6g9LuMKU+v
+prhtXyq2UVs9kuyWKVE9w4q0/EsudgtX0mN6kH4ceR+XXnJix09hRspTSnWn4Qda
+SnrZ/SfZUgAAAABJRU5ErkJggg==
+
+------------MBQO802M5x1WcurpFnU9EW--

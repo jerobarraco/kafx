@@ -1,0 +1,270 @@
+Content-Type: multipart/related; start=<op.mhtml.1219973365150.7ca5c5763254faa3@192.168.1.99>; boundary=----------yxcv5tYQT8SiEo2qQpDByr
+Content-Location: http://davidf.sjsoft.com/mirrors/mcmillan-inc/embed.html
+Subject: =?utf-8?Q?Embedding=20Python?=
+MIME-Version: 1.0
+
+------------yxcv5tYQT8SiEo2qQpDByr
+Content-Disposition: inline; filename=embed.html
+Content-Type: text/html; charset=UTF-8; name=embed.html
+Content-Id: <op.mhtml.1219973365150.7ca5c5763254faa3@192.168.1.99>
+Content-Location: http://davidf.sjsoft.com/mirrors/mcmillan-inc/embed.html
+Content-Transfer-Encoding: 8bit
+
+<HTML>
+<HEAD>
+
+
+<TITLE>
+Embedding Python
+</TITLE>
+
+</HEAD>
+
+<BODY>
+<FONT FACE="Helvetica"><TABLE CELLPADDING=5 CELLSPACING=5>
+  <TR ALIGN="center">
+      <TD COLSPAN=2><IMG SRC="me_inc.gif" HEIGHT=36 WIDTH=480><HR></TD>
+    </TR>
+  <TR>
+      <TD VALIGN="top" NOWRAP BGCOLOR="#D8D0F0"><H4>Sitemap</H4><SMALL><A HREF="index.html">McMillan Enterprises, Inc.</A><BR><A HREF="python_index.html">Python Pages</A><BR>&nbsp;&nbsp;<A HREF="sock1.html">Sockets HOWTO</A><BR>&nbsp;&nbsp;<A HREF="install1.html">Distributing Python Programs</A><BR>&nbsp;&nbsp;<A HREF="scxx.html">A Python C++ API</A><BR>&nbsp;&nbsp;Embedding Python<BR>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="embed2.html">Scripting Your App with Python</A><BR>&nbsp;&nbsp;<A HREF="stackless.html">Stackless Python</A><BR>&nbsp;&nbsp;<A HREF="mksqlintro.html">MkSQL</A><BR>&nbsp;&nbsp;<A HREF="importhooks.html">Import Hooks</A><BR><A HREF="javasamples.html">Java Samples</A><BR><A HREF="sponsor.html">Sponsoring ME Inc.</A><BR><A HREF="about.html">About ME Inc.</A><BR><BR></SMALL></TD>
+        <TD ROWSPAN=2><P><center><h1>Embedding</h1>
+      <h2>or Why You're Not Likely to Get Much Help</h2></center></P>
+      <P>At least once per week, comp.lang.python gets a post saying "Hi, I'm new to Python and trying to embed it into this really cool app I wrote, and I need some help".</P>
+      <P>Why is it always a newbie? Is embedding Python so easy that experienced Pythoneers don't have any questions? No. While it's not all that difficult, there are always questions.
+      The real answer is that experienced Pythoneers don't embed. Well, that's not quite true; some do, but it's rare.</P>
+      <P>And why is it rare? Is embedding so difficult that only a newbie is dumb enough to try it?</P>
+      <P>Not at all. Embedding is as easy (or as hard) as you want to make it. The answer is simply that most experienced Pythoneers would have written the whole app in Python to begin with. </P>
+      <P>That's not to say that Python does everything out of the box. Or that it doesn't sometimes need a speed boost. But those problems are more naturally addressed by extending, which <i>is</i> a very popular activity of experienced Pythoneers.</P>
+      <P>Extending starts with a well defined problem - how do you expose some C/C++ API to Python? The rules for  exposing C to Python are fairly simple, well documented, and without going any further than the source distribution, there are tons of examples (including a code skeleton).</P>
+      <P>On the other hand, there are very few rules for embedding. Embedding is as simple or as complex as you want it to be. Unfortunately, many seem to make it much more complex than it needs to be.</P>
+      <P>First, there <i>are</i> a couple embedding samples in the source distribution. One of them is Python. Another is called <code>frozenmain.c</code>, which is the code that will be used as "main" when you use <b>freeze</b> to turn a Python script into an executable.</P>
+      <P>These examples use what's called the Very High Level Layer of the API to Python. These are the <code>PyRun_*</code> functions. These functions run arbitrary pieces of Python code <I>purely for their side effects</I>. You can do basically the same thing in pure Python, using <code>exec</code> and <code>execfile</code>, (and you'd be well advised to try that first, before getting distracted by trying the same thing in C).</P>
+      <P>For some embedding apps, that's good enough. Many, though, want to get results back out of Python. While sometimes you can get that out of the Very High Level Layer, most of the time it will be a mess. In this case, it's best to go deeper.</P>
+      <P><h2>Getting Results</h2></P>
+      <P>The first thing to realize, is that anything you can do in Python, you can do in C. The next thing to realize is that (almost) anything you can do in C, you can do in Python. And, in fact, the best way to do it in C is the same way you would do it in Python. <i>So write it in Python first.</i></P>
+      <P>OK, example time. Your embedding app will let the user specify a Python module that has a function named <code>doit</code>, which takes a string and will return a number, which your embeddding app needs.</P>
+      <P>Writing in Python, we have something like this:
+      <pre>
+      modname = "test"
+      mod = __import__(modname)
+      rslt = mod.doit("this is a test")
+      </pre></P>
+      <P>Now, in C:
+      <pre>
+      01 #include "Python.h"
+      02 int main(int argc, char* argv[])
+      03 {
+      04   long answer;
+      05   PyObject *modname, *mod, *mdict, *func, *stringarg, *args, *rslt;
+      06   Py_Initialize();
+      07   modname = PyString_FromString("test");
+      08   mod = PyImport_Import(modname);
+      09   if (mod) {
+      10     mdict = PyModule_GetDict(mod);
+      11     func = PyDict_GetItemString(mdict, "doit"); /* borrowed reference */
+      12     if (func) {
+      13       if (PyCallable_Check(func)) {
+      14         stringarg = PyString_FromString("this is a test");
+      15         args = PyTuple_New(1);
+      16         PyTuple_SetItem(args, 0, stringarg);
+      17         rslt = PyObject_CallObject(func, args);
+      18         if (rslt) {
+      19           answer = PyInt_AsLong(rslt);
+      20           Py_XDECREF(rslt);
+      21         }
+      22         Py_XDECREF(stringarg);
+      23         Py_XDECREF(args);
+      24       }
+      25     }
+      26     Py_XDECREF(mod);
+      27   }
+      28   Py_XDECREF(modname);
+      29   Py_Finalize();
+      30   return 0;
+      31 }
+      </pre></P>
+      <P>Now, I ask you, why would a sane person do that?</P>
+      <P>OK, it can be simplified. The line:
+      <pre>rslt = PyObject_CallFunction(func, "(s)", "this is a test");</pre> 
+      can replace lines 14 through 17, and eliminate lines 22 and 23. The Python / C API has a host of such special purpose shortcuts, and keeping track of them is a daunting task.</P>
+      <P>The major point, though, is that all you are doing is writing Python in C, with about a 8 to 1 increase in line count, a lot of research to do, and only a minor increase in speed (something like 15%) that comes of avoiding Python's interpreter.</P>
+      <P>NEXT: <A HREF="embed2.html">Scripting Your App With Python</A>
+      </P>
+      </TD>
+    </TR>
+  <TR>
+      <TD VALIGN="bottom" BGCOLOR="#D8D0F0"><SMALL>copyright 1999-2002<BR>McMillan Enterprises, Inc.<BR></SMALL></TD>
+    </TR>
+  </TABLE></FONT>
+</BODY>
+
+<!-- FILE ARCHIVED ON 20030621134722 AND RETRIEVED FROM THE -->
+<!-- INTERNET ARCHIVE ON 20040701044634. -->
+</HTML>
+
+------------yxcv5tYQT8SiEo2qQpDByr
+Content-Disposition: inline; filename=me_inc.gif
+Content-Type: image/gif; name=me_inc.gif
+Content-Location: http://davidf.sjsoft.com/mirrors/mcmillan-inc/me_inc.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlh4AEkAPcAAA8NJxANOAoERB4ZPwoAWhAAYxUPUSAbVQwEaxAEcwgAexAA
+exgKaRsNdSUaZyUadS4rRkBASzUxXkhDWi8pcTw2b0ZFZ0hBdFVUX1RSbVZQeV1a
+eGVlaGVjdW9sdnd3ewwAhBAAjBAAlBAAnBgKhhgFlCcahiUUlBAApRgApRAArRgA
+rRAAtRgIpSEIrSEUpDMpjDMmoUU7jkU4pFROjF9bilRJpGJannBtiH9/hHh1knNu
+o4SEkIyMjImGloqIphgAtRAAvRgAvRAAxhgAxhgAzhgA1hsI0ycUuzEhuSUUzjIb
+yTwutTstvzkl0kQvyhgA3hgA5yEA3iUM3iEA5xgA8yMG6yYI9CkQ6zMb4jMX+Dkh
+90As4UYu8T8j/0Yt/05At08/y15QvF9SzE464VQ/8mVT3mVS80ox/1Ix/1I5/1Y9
+/1pC/15G/2dO/3BX/HZsvHdr0IiDuYiCxHVo3nVn7IF03ox/5XNe/3te/3tr+4Rr
+/4Rz+4R794xz/5B7/5SUlJSUnJycnJSUpZycpaWlpZSUrZyUrZmWsqWcrZeQwJyc
+taWctaWcvaWcxqWlra2lraWlta2ltaWlva2lva2tra2tta2tva2txrWtxrW1tbW1
+vbW1xr21xr29vb29xpiQzpSM2pyU2qeh05SK85x7/6ae5KKY9ZyE/6WE/5+O/6WU
+/6Wc/62U/62g/7Wc/7Kt27e10L2608a91rWv5r665LWx87m187Wl/7Wt/72l/72t
+/721+8ax/86t/861/8bGxsbGzs7OzsbG1s7O1tbW1sbG3s7G3s7O3tbO3tbW3sbG
+587O59bO59bW597W572998a988bG88a9/869/9a9/87I987O/9bG/97G/9bO79bO
+99bW897W79bO/9rS/97W997W/97e3t7e597e797e997e/+fO/+fW/+fe7+fe9+fe
+/+fn5+fn7+fn9+fn/+/W/+/e/+/n9+/n/+/v7+/v9+/v//fe//fn//fv//f39/f3
+///n///v///3/////ywAAAAA4AEkAAAI/gD/CRxIsKDBgwgTKlzIsKHDhxAjSpxI
+saLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fP
+n0CDCh1KtKjRo0iTKl3KtKnTp1CjSp1KtarVq1hVFuNwAEkeav/yAeNhY0aYM3/C
++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
+qTnMYg4mIAAAOw==
+
+------------yxcv5tYQT8SiEo2qQpDByr--

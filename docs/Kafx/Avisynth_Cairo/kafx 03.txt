@@ -1,0 +1,160 @@
+Bueno por varias razones empezaré en inglés y despues lo traduzco.
+
+Ok, let's start doing effects!!
+
+----What is and Creating an effect
+For each different effect you want, you'll need a class. This class must descend from the class
+FxFuncs from the extra module.
+remember the file we've done before? myfx.py? well, we've already imported the module "extra" in there...
+so, we'll write our new class in the same file, anyplace after that.. i always put the effects after the imports
+and before the FX class
+something like this:
+
+[code]
+from libs import extra
+
+class Karaoke(extra.FxFuncs):
+	pass
+
+class FX(extra.FX):
+	def __init__(self):
+		extra.FX.__init__(self)
+[/code]
+
+Let me remind you the organization:
+You have a file myfx.py wich hold everything you work on. First you import whatever you need, and then you define
+classes that descend from extra.FxFuncs. Each of this classes will hold the information (the algorithm in fact) for
+each effect you draw on the screen.
+For "effect" i refer to the group of effects for when the line apperars, each sillab is sang, and dissapears. 
+You can think of it as an "style".
+
+Then you have your class FX in wich you hold the information for the project, ANNNNNNNNND you have a list with
+all the effects you have. remember the "self.funcs"? well, in there well put each of this classes we will be creating
+now.
+
+Now, for each of these classes we will have several events. For each event we will receive the dialog for that event
+and we can do whatever we want with it.
+
+
+---Events are easier!
+This are the events:
+I'll list them in the order they are being called. (This means that a an event that gets called last will obviously 
+paint on top of any other event (No layer support sorry (i have my reasons))
+[code]
+#firs of all gets called FX.OnDialogoInicia
+class Karaoke(extra.FxFuncs):
+	def OnDialogoSale(self, diag):
+		#OnDialogExit
+		#Gets called when the dialog dissapear, the duration of this event is FX.outms
+		
+	def OnDialogoEntra(self, diag):
+		#OnDialogEntry
+		#This is when the dialog enters, the duration of this event is FX.
+		
+	def OnDialogo(self, diag):
+		#OnDialogue
+		#This is while the dialogue is on the screen, the duration is the same from the Ass.
+		
+	#This is everything for the dialogs, as you can notice, dialogs have lower "priority" compared with sillabs..
+	#You can also animate the dialog sillab by sillab using chaining (Encadenar) wich i'll teach later.
+	#Note i've just changed the order of two of them in the svn , i hope you don't notice the change.
+	#This is the version that is on the svn
+	
+	def OnSilabaMuerta(self, sil):
+		#OnSillabDead
+		#you can call the second parameter the way you like.. i always put diag for sils and diags
+		#This is for every sillab _in the current dialog_ (that means in the dialog that is being showed) 
+		#that HAVE ALREADY BEEN SANG, and are now inactive.
+		
+	def OnSilabaMuertaOut(self, sil):
+		#OnSillabDeadOut
+		#Like OnDialogoSale but for sillabs, this is for the sillab _just after_ it have been sang.
+		#The duration of the animation is FX.soutms
+		
+	def OnSilabaDorm(self, sil): 
+		#OnSillabSleep
+		#This is for every sillab _in the current dialog_ (that means in the dialog that is being showed) 
+		#that have not been sang YET. that is, that are AFTER the current sillab
+		
+	def OnSilabaDormIn(self, sil):
+		#OnSillabSleepIn
+		#This is like OnDialogoEntra, but for sillab, this is before the sillab gets active (sing).
+		#the duration of the animation is FX.sinms
+		
+	def OnSilaba(self, sil):
+		#OnSillab
+		#And this is the active sillab, the one just being sang.
+		
+	#And those are all the events for an effect.. 
+	#And now gets called FX.OnCuadroFin
+[/code]
+
+Notes:
+There will be (almost) always two parameters for the events, the first is self, wich is the instance that is being 
+called (python stuff), the other (diag), you can call it whatever you want, and is the dialogue (sillab) 
+that is affected.
+
+For some events like OnSilabaMuerta you will have more than 1 sillab affected by the same in a frame.
+This means, this function will get called several time, one for each sillab (not one time with all the sillabs).
+And that is posible (and will happen) that sometimes you'll have some sillabs getting called for, ie, 
+OnSilabaDorm and the same sillab can be called for OnDialogo, so be careful with what you choose.
+
+Also, you don't need to use all those events (it wont make sense either). And you don't need to write the function
+(def) for the events you wont use.
+Ie you could write and empy effect, one that won't paint ANYTHING, just like this.
+
+[code]
+class Karaoke(extra.FxFuncs):
+	pass
+[/code]
+
+---Lines and Effects, how to pair them?
+Assing your effect to a line in ASS.
+so, let's assume you've wrote, like, 3 effects
+[code]
+class Karaoke(extra.FxFuncs):
+	...
+
+class Translation(extra.FxFuncs):
+	...
+	
+class Romanji(extra.FxFuncs):
+	...
+	
+[/code]
+
+you must tell kafx wich ones you'll use.
+For that, you have to put them in the FX class, in the funcs variable. 
+Simply make a list of the effects you'll use. like this:
+[code]
+class FX(extra.FX):
+	def __init__(self):
+		extra.FX.__init__(self)
+		...
+		self.funcs = (Karaoke(), Translation(), Romanji())
+[/code]
+Notes:
+when you put a effect you must put "()" to create an instance (python stuff), if you write
+self.funcs = (Karaoke, Translation, Romanji)
+you'll (hopefully) get an error.
+
+And if you need to put only ONE effect you must write
+self.funcs = (Karaoke,)
+with a comma at the end. once again, python stuff, that way python knows you're trying to create a list.
+
+the last step is to assign wich line will have wich effect. 
+Now remember the line "self.funcs = (..." and number (mentally) each effect from zero, that will be:
+0 = Karaoke
+1 = Translation
+2 = Romanji
+
+(sounds hard but is not)
+
+and now simply open the .ass in whatever you use to edit it and for each line you need a effect (yeah each line)
+put the previous number of the effect in field named "Effect".
+Something like this: 
+[URL=http://img25.imageshack.us/i/asfp.gif/][IMG=http://img25.imageshack.us/img25/6659/asfp.th.gif][/IMG][/URL]
+
+That's all.
+Soon i'll teach you what's inside the diag or sil that you get on each event. 
+That will be all you need to make some nice effects.

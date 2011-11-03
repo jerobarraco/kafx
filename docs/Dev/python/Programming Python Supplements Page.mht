@@ -1,0 +1,585 @@
+Content-Type: multipart/related; start=<op.mhtml.1219973243721.763083480565969f@192.168.1.99>; boundary=----------srToNcysLeXlpbCPXZhwnY
+Content-Location: http://www.rmi.net/~lutz/errata-supplements.html
+Subject: =?utf-8?Q?"Programming=20Python"=20Supplements=20Page?=
+MIME-Version: 1.0
+
+------------srToNcysLeXlpbCPXZhwnY
+Content-Disposition: inline; filename=errata-supplements.html
+Content-Type: text/html; name=errata-supplements.html
+Content-Id: <op.mhtml.1219973243721.763083480565969f@192.168.1.99>
+Content-Location: http://www.rmi.net/~lutz/errata-supplements.html
+Content-Transfer-Encoding: 8bit
+
+<HTML>
+
+<HEAD>
+<TITLE>"Programming Python" Supplements Page</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+<H1><I>Programming Python</I> supplements</H1>
+
+
+<P>This page contains additional descriptions and examples which
+don't appear in the first edition of the book.  Some are clarifications
+to existing material, and others reflect answers to common questions
+from readers.
+
+<P><B>Related pages</B>:
+
+<UL>
+
+<LI>
+<A HREF="errata-book-fixes.html">
+Book corrections and clarifications</A>
+
+<LI>
+<A HREF="errata-python-changes.html">
+Changes in Python since the book's release</A>
+
+<LI>
+<A HREF="progdiff.html">
+Program Patches for later Python releases</A>
+
+</UL>
+
+<HR> 
+ 
+
+
+ 
+<H2><A NAME="G3">General updates and additions</A></H2>
+<P>Last updated: Aug 9, 1998</P>
+
+<P>This section lists updates that should eventually make their 
+way into the book.  Some of these are a result of recent changes 
+in Python, and some are a result of me being my own worst critic.
+</P>
+
+<UL>
+<LI><A HREF="#G31">Chapter 15: registered code can be objects or strings</A>
+<LI><A HREF="#G32">Chapter 11: more on implicit widget object trees</A>
+<LI><A HREF="#G33">Chapter 15: retrieving Python error info in C</A>
+<LI><A HREF="#G34">Chapter 14/15: string conversions don't copy bytes</A>
+<LI><A HREF="#G35">Chapter 2/12: close shelves manually under bsddb</A>
+<LI><A HREF="newex.html">Chapter 14/15: more integration examples (off page)</A>
+<LI><A HREF="#G36">Chapter 15: more on precompiling code strings</A>
+<LI><A HREF="#G37">Appendix A: CGI scripts versus Tkinter GUIs</A>
+<LI><A HREF="#G2">Proposed updates for the second edition [future]</A>
+</UL>
+
+<P><B>Also see</B> the new supplemental
+<A HREF="newex.html">integration examples page</A> for additional 
+supplements not listed below (the 6th item in the list above).
+</P> 
+
+
+
+
+<HR>
+<H4><A NAME="G31">Chapter 15 supplement: registered code can be objects or strings</A></H4>
+
+<P>Chapter 15 tries to stick to general concepts, but in retrospect, the
+section on "object registration" may have been a bit misleading.  It
+seems to imply that registration is tied to callable objects.  It's not:
+the registered code can actually take the form of objects, code strings,
+or files. In fact, "registration" is really just a technique for telling
+C which code to run, by letting Python call through a C extension module.
+ 
+<P>In general, Python embedded code can take a variety of <U><B>forms</B></U>:
+</P>
+ 
+<PRE>- Code strings:      expressions, statements
+- Callable objects:  functions, classes, methods
+- Code files:        modules, scripts, etc.
+</PRE>
+ 
+<P>And embedded code may be <U><B>located</B></U> via:
+</P>
+ 
+<PRE>- Modules:       fetching code by importing modules (on PYTHONPATH)
+- Files:         fetching code from simple text files
+- Registration:  letting Python pass code to a C extension module
+- HTML tags:     extracting code from web pages
+- Databases:     fetching code from a database table
+- Processes:     receiving code over sockets
+- Construction:  code may also be constructed at runtime
+- And so on:     system registries, etc.
+</PRE>
+ 
+<P>These categories aren't completely orthogonal.  In common practice,
+code forms suggest location techniques:
+</P>
+ 
+<PRE>- Code string sources:      files, modules, registration, databases, HTML
+- Callable object sources:  modules, registration
+- Code file sources:        modules, files
+</PRE>
+ 
+<P>And like code sources, <U><B>communication</B></U> techniques depend on 
+the code form as well:
+</P>
+ 
+<PRE>- Arguments (input, output), return values (output)
+     Objects
+- Global variables: copy-in-copy-out (input, output)
+     Strings, Objects
+- Expression results (output)
+     Strings
+- Exported C extension module functions (input, output)
+     Strings, Objects
+- And others (files, sockets, stdin/out streams, etc.)
+</PRE>
+ 
+<P>The <I>registration</I> technique usually suffers from the fact that it implies
+an extra coding step and an application structure, and does not readily
+support dynamic code reloading (there's no associated module).  However,
+it's sometimes better when finer granularity is needed (e.g., Tkinter lets
+users associate Python objects with a large number of widget objets).
+The reloading problem may be solved by also registering a module name
+along with the Python code to be run, and (for objects) applying the
+indirection techniques discussed in chapter 11 (a raw Python object held
+by C won't be directly updated if its module is reloaded).
+ 
+<P>Again, chapter 15 was intended as a general look at API tools, which you
+can apply according to your application's structure.  Nobody's complained
+about the issues above, but to avoid confusion, the categories above
+should probably be more clearly defined at the start of chapter 15.
+</P>
+
+
+
+<HR>
+<H4><A NAME="G32">Chapter 11 supplement: more on implicit widget object trees</A></H4>
+ 
+<P>Chapter 11 correctly states that we don't need to keep a reference to
+a widget object if we won't be using it after creation.  For example,
+the new button object:
+</P>
+ 
+<PRE>Button(parent, ...options...)
+</PRE>
+ 
+<P>doesn't need to be saved away in an instance member, if we won't access
+the button in the future.  The chapter also suggests that this is because
+Tkinter implicitly builds a widget tree internally, based on the parent
+widgets we pass to constructors.  But this is a subtle point, and I'm not
+sure it was made as clear as it could have been.
+ 
+<P>More specifically, when we make a call such as:
+</P>
+ 
+<PRE>Button(parent,...)
+</PRE>
+ 
+<P>Tkinter internally cross-links the new widget with its parent: the new
+child refers to the parent object in its 'master' member, and the parent
+refers to the child in its 'children' member (a table).  Because of these
+internal references, the new widget won't "go away" after you create it:
+it's part of an instance object tree built up by Tkinter.  And because of
+that, you can also do things like:
+</P>
+ 
+<PRE>Button(parent,...).pack()    # returns None!
+</PRE>
+ 
+<P>to save a line--the instance is both inserted into the object tree by
+Tkinter and returned to you.  But note that the "pack" method returns
+'None': don't assign the result of a pack call to a variable.  Again,
+if you really need to process the button yourself, use this form instead:
+</P>
+ 
+<PRE>widget = Button(parent,...)
+widget.pack()
+...use widget...
+</PRE>
+ 
+<P>Either form is fine, but be sure to pick the one that makes sense for
+the way you'll be processing the widget.
+</P>
+
+
+
+
+<HR>
+<H4><A NAME="G33">Chapter 15 supplement: retrieving Python error info in C</A></H4>
+ 
+<P>
+Chapter 15 states that <B>PyErr_Fetch</B> can be used to fetch the latest
+exception type and data, and gives its signature, but doesn't show how to
+actually use it.  Here's a function which illustrates typical usage.
+ 
+<P>
+When an API call returns an error indicator (NULL, or integer status
+code), Python has already set exception information.  To retrieve it,
+call the PyerrorHandler function below, and get the info as C strings
+from the 2 'save*' vars.  Notes:
+</P>
+ 
+<UL>
+<LI>If you just want to display a Python stack trace for the exception
+raised, call <B>PyErr_Print()</B> (e.g., see the order validations examples
+towards the end of chapter 15).  The trace includes the error type/data.
+ 
+<LI>The extended API functions (e.g., Run_Function) return -1 or NULL
+on the first error detected, and do not overwrite the exception
+info Python has set.
+ 
+<LI>Caveat: you may want to tweak the function below to avoid using
+global C vars for output.
+</UL>
+ 
+ 
+<PRE>
+<U><B>file: pyerrors.c</B></U>
+ 
+#include &lt;Python.h&gt;
+#include &lt;stdio.h&gt;
+char save_error_type[1024], save_error_info[1024];
+ 
+PyerrorHandler(char *msgFromC)
+{
+   /* process Python-related errors */
+   /* call after Python API raises an exception */
+ 
+   PyObject *errobj, *errdata, *errtraceback, *pystring;
+   printf("%s\n", msgFromC);
+ 
+   /* get latest python exception info */
+   PyErr_Fetch(&errobj, &errdata, &errtraceback);
+ 
+   pystring = NULL;
+   if (errobj != NULL &&
+      (pystring = PyObject_Str(errobj)) != NULL &&     /* str(object) */
+      (PyString_Check(pystring))
+      )
+       strcpy(save_error_type, PyString_AsString(pystring));
+   else
+       strcpy(save_error_type, "&lt;unknown exception type&gt;");
+   Py_XDECREF(pystring);
+ 
+   pystring = NULL;
+   if (errdata != NULL &&
+      (pystring = PyObject_Str(errdata)) != NULL &&
+      (PyString_Check(pystring))
+      )
+       strcpy(save_error_info, PyString_AsString(pystring));
+   else
+       strcpy(save_error_info, "&lt;unknown exception data&gt;");
+   Py_XDECREF(pystring);
+ 
+   printf("%s\n%s\n", save_error_type, save_error_info);
+   Py_XDECREF(errobj);
+   Py_XDECREF(errdata);         /* caller owns all 3 */
+   Py_XDECREF(errtraceback);    /* already NULL'd out */
+}
+</PRE>
+
+ 
+ 
+
+<HR>
+<H4><A NAME="G34">Chapter 14/15: string conversions don't copy bytes</A></H4>
+
+<P>
+Chapter 14 discusses Python-to-C conversions (via the API functions 
+"PyArg_Parse", and PyArg_ParseTuple"), and chapter 15 makes use of
+such conversions to extract embedded code results.  
+The discussion and usage aren't in error, but neither chapter underscores
+a subtle point as strongly as they should: When converting from a Python
+<B>string</B> object to a C <B>char*</B> with the <B>"s"</B> conversion format
+code, Python assigns the C "char*" the address of a char array embedded
+in the string object.  It doesn't copy out the char array's contents itself.
+
+<P>
+Why should you care?  Because the C "char*" winds up pointing into a 
+Python <I>object</I>, which will be reclaimed (garbage collected) when no
+longer referenced.  If the Python string object is reclaimed while your
+"char*" is pointing into it, your "char*" might wind up referencing
+garbage if the Python object's space is reallocated from the heap.
+
+<P>
+This is a subtle point, and usually isn't an issue as long as you use
+the "char*" immediately after the conversion, and before calling another 
+Python API function (or mallocing from the heap yourself, in C).  In 
+fact, this is why you get a char* from "s" conversions instead of a 
+char array--since the most common practice is to use the char* right
+away after converting, the extra string copy isn't usually warranted.
+
+<P>
+But if you need to retain the "char*", or want to avoid problems altogether,
+you can take one these approaches with the <B>built-in API</B>:
+
+<UL>
+<LI><I>Other references:</I> 
+Make sure the Python string object is referenced elsewhere: For instance,
+strings assigned to attributes in modules usually won't go away as long as 
+the module doesn't.  Temporaries and expressions are the main concerns,
+and more so in embedding results than extension inputs.<BR><BR>
+
+<LI><I>Use it immediately:</I> 
+Use the "char*" immediately after the conversion, and before any more API
+calls or other heap operations.  You generally only run into trouble if the 
+string object's space is free'd and re-malloc'd while you're pointing at it.
+For instance, this is why the example on page 617 gets away with decref'ing
+early (arguably dangerous, but it works on every platform tested).<BR><BR>
+
+<LI><I>Copy it out:</I> 
+Hold onto the string itself, by copying the string to a C char array after the 
+conversion.<BR><BR>
+
+<LI><I>Keep the object:</I>
+Hold onto the original Python string object.  Make sure the Python string 
+object's reference count doesn't fall to zero while you need to use the
+"char*" (i.e., don't decrement it until you're done with the "char*", or
+increment it if you don't already own it in C). <BR><BR> 
+</UL>
+
+<P>
+When using "s" output conversion codes with the <B>extended API</B> in 
+chapter 15 (e.g., Run_Function), you don't have control over the original
+string objects, (Convert_Result decref's it automatically), so the last 
+solution above (holding the object) won't work.  But these will:
+
+<UL>
+<LI><I>Other references:</I>
+You can often ignore the issue completely if you're sure there are other 
+references to the Python string.  For instance, Get_Global and Get_Member
+are usually okay, since the fetched object is owned by another object; 
+Run_Function, Run_Method, and Run_Codestr are only an issue for "s" output
+codes, and then only when the embedded code returns a <I>new</I> string (e.g.,
+when the output value is an expression which creates a new string object).<BR><BR>
+
+<LI><I>Use it immediately:</I> 
+If you can't be sure the string is referenced elsewhere, use the "char*"
+output immediately after the API call which sets it (i.e., before any new 
+API calls, or other heap mallocs).<BR><BR>
+
+<LI><I>Copy it out:</I> 
+And if you can't use the "s" output immediately, just copy the string
+referenced by the "char*" output to a char array manually.<BR><BR>
+</UL>
+
+<P>
+In principle, the extended API could copy out the string to a malloc'd
+buffer automatically, but that implies a speed hit (malloc + copy), and
+means clients would need to free the result (or provide a big enough
+buffer--very eror prone).  To mimimize risks, the next release of the API
+will probably hold onto the prior string object, and free it on the next
+conversion call, rather than immediately (it will save at most 1 string 
+object):
+</P>
+
+<PRE>
+Convert_Result(...)
+{
+    static last_string = NULL;
+    if (last_string != NULL) {
+        Py_DECREF(last_string);
+        last_string = NULL;
+    }
+    ...
+    if (strcmp(resFormat, "O") != 0) {
+        if (strcmp(resFormat, "s") == 0)
+            last_string = presult;
+        else
+            Py_DECREF(presult);
+    }
+    return 0;
+}
+
+</PRE>
+
+<P>
+Keep in mind that this is only an issue in rare cases (using the "s"
+code to convert a temporary string output/result), and nothing happens
+to the heap between the conversion and the return to your C call.
+So long as you use the char* immediately, this isn't a problem on any
+platform I've tested this on, and nobody has reported an error with the
+API in a year, so it's not classified as a bug (though the "s" behavior 
+clearly should have been better documented in general).
+
+<P>
+But to be on the safe side (and much more user-friendly!), the above
+patch will appear in the second edition, along with other changes 
+(e.g., separate chapters on the built-in and extended embedding APIs;
+the extended API was originally developed as a compact way to teach 
+embedding, but it's actually being used in production contexts now).
+</P>
+
+
+
+<HR>
+<H4><A NAME="G35">Chapter 2/12: close shelves manually under bsddb</A></H4>
+
+<P>When using shelves (or simple dbm-style files) with the bsddb interface 
+(a.k.a., dbhash), you need to manually close your shelves when you finish 
+writing them (with a shelve.close() call).  
+
+<P>Apparently, the deallocation procedure in the bsddb interface doesn't
+close the file automatically (all other dbm and file objects do), and/or 
+you need some special creation mode flags (I've heard both explanations).
+The upshot is that you can't rely on auto-close at garbage collection
+time.  Without the manual close() call, your files may be corrupted.
+
+<P>The dbm, gdbm, and dumbdbm interfaces close automatically, and the shelve
+examples in the book assume this works.  But if your code might end up 
+using the current (1.4) bsd file interface, it's better to manually 
+close your shelves, just to be on the safe side.  
+
+<P>But what does bsddb have to do with shelves (he asks, rhetorically ;-)? 
+Recall that a shelve is a dbm-like file plus pickling; bsddb will be used
+for your dbm-like file if it's the only keyed-file interface you have 
+installed (see the "anydbm.py" library module for more details; shelve 
+imports anydbm to get whatever keyed-file interface is available).
+</P>
+
+
+
+
+<HR>
+<H4><A NAME="G36">Chapter 15: more on precompiling code strings</A></H4>
+
+<P>
+There's a (all too brief, and unindexed) sidebar on page 623 which 
+discusses how to precompile Python code strings from C, and how to 
+run the resulting code object.  People seem to ask about this often,
+so here are a few more details.
+
+<P>
+At least as of Python 1.4, you say something like this:
+</P>
+
+<PRE>
+<I>1) Compile a string to a byte code object</I>
+
+   PyCodeObject* code =  
+   Py_CompileString(char *string,      /* code to compile */
+                    char *filename,    /* for error messages */ 
+                    int parsemode);    /* eval|file_input */
+
+<I>2) Run the byte-code object</I>
+
+   PyObject* result =  
+   PyEval_EvalCode(PyCodeObject *code, 
+                   PyObject *globalnamesdict, 
+                   PyObject *localnamesdict);
+</PRE>
+
+<P>
+where the last 2 arguments to PyEval_EvalCode are dictionaries
+that serve as the namespaces for the code you're running (just
+as in PyRun_String).  
+
+<P><I>Hint</I>: When in doubt, also try using the newsgroup 'search'
+utility at python.org 
+(<A HREF="http://www.python.org/locator">http://www.python.org/locator</A>) 
+and search on Py_CompileString or PyEval_EvalCode; I'm sure I've answered 
+this one before.
+</P>
+ 
+
+
+
+<HR>
+<H4><A NAME="G37">Appendix A: CGI scripts versus Tkinter GUIs</A></H4> 
+
+<P>A Python CGI script shows up in Appendix A.  In a later edition
+there may or may not be more on CGI scripting; either way, I think
+a bit of context about the tradeoffs between CGI scripts and HTML
+versus traditional GUI APIs like Tkinter may be in order, especially
+for beginners.  
+
+<P>Despite
+some of the wild comments that seem to pop up in magazines these days, 
+CGI scripts are not a replacement for traditional GUI APIs, except
+for fairly simple user interactions, and even then only in certain 
+environments.  Here's why:
+
+<UL>
+
+<LI>CGI scripts...
+<UL>
+<LI>Work across a network, on any browser
+<LI>Only require Python to be installed on the server, 
+not the client
+</UL>
+  
+<LI>But Tk GUIs are...
+<UL>
+<LI>Faster: in-process calls and callbacks, versus messages over a network 
+and text parsing
+<LI>Simpler: there's no HTML to format and print
+<LI>General: they're not just for networks and browsers
+<LI>More powerful: once you go past forms, CGI scripts break 
+down, which is why Sun developed client-side Java applets
+</UL>
+
+</UL>
+
+<P>Beyond such distinctions, things become less straightforward.
+For instance, both CGI scripts and Tkinter programs can be used to 
+implement platform-independent GUIs.  
+
+<P>But if pressed, I'd say that CGI 
+scripts and HTML are a less direct way to implement GUIs, and there's
+a limit to how much they can do (consider implementing an image-processing
+system in HTML).  Because of that, traditional GUI APIs won't go away any 
+time soon; even in Web applications, they are useful for implementing 
+non-trivial GUIs with client-side applets. As usual, the choice between 
+the two depends on your requirements:
+
+<UL>
+<LI>If you need to implement portable GUIs more complex than forms, and/or
+don't need to make them work in a Web browser, Tkinter is a great
+choice (there really are still a lot of us working on systems that have
+user-interface requirements, but nothing to do with the Web and browsers).
+
+<LI>If you need to implement portable form-style GUIs that do
+run in browsers, CGI scripts may be your best bet.  Unless you want 
+to use JPython's AWT interface to create client-side applets, or a 
+Netscape interface, or... Options are generally a Good Thing.
+</UL>
+</P>
+ 
+
+
+
+<HR>
+<H4><A NAME="G2">Proposed updates for the second edition [future]</A></H4> 
+
+<P>
+Note: there are no plans for a second edition yet (and I don't imagine 
+there will be any until 1999).  There will be other printings until then, 
+but they'll just fix minor typos, and not include any new material.  The 
+items listed below are a sampling of things I'd like to include in a 
+second edition when it finally happens.  Comments are always welcome.
+</P>
+
+<UL>
+<LI>Document all the items in the 
+<A HREF="errata-python-changes.html">recent Python changes page</A>
+<LI>Platform-specific usage, install, and extension tips (Macs, Windows)
+<LI>Cross-reference of OO design patterns used (composition, factory, proxy,...)
+<LI>Mention a Windows95/NT Python+Tk <A HREF="http://www.pythonware.com">binary executable release</A>
+<LI>More Windows95 Python+Tk <A HREF=http://www.netaxs.com/~mryan/python/install_win95.html>install hints</A>
+<LI>Beef-up the index (a common request)
+<LI>Get rid of the mini-reference and tutorial appendices (
+<A HREF="about-lp.html">Learning Python</A> and the 
+<A HREF="about-ppr.html">Python Pocket Reference</A> do the jobs now)
+</UL>
+
+ 
+
+
+<HR>
+<P>
+<I>Back to the <A HREF="errata.html">errata page</A></I><BR>
+<I>Back to my <A HREF="index.html">homepage</A></I><BR>
+</P>
+
+</BODY>
+</HTML>
+
+
+------------srToNcysLeXlpbCPXZhwnY--

@@ -1,0 +1,180 @@
+asdf, tutorial 4
+
+Now i'll teach you what you can do :D
+This is the basic stuff. the thing that's on the diag object.
+
+Now, remember the last tutorial? i've explained the events, if you can recall, each event will give you an object.
+usually called "diag"
+What's this object?
+Well, is the object that represents the dialog or the sillab that is being activated for this event.
+It has ... well.. a lot of stuff.
+i could enumerate all the properties and events but, the best way to teach you is by doing stuff.
+(for reasons larger than my previous posts).
+
+So, let me tell you how to use it. now, let's emulate how a normal ass would look.
+[code]
+from libs import extra
+
+class Karaoke(extra.FxFuncs):
+	def OnDialogo(self, diag):
+		diag.Pintar() #Paint
+
+class FX(extra.FX):
+	def __init__(self):
+		extra.FX.__init__(self)
+		self.funcs = (Karaoke(),)
+[/code]
+
+that's all, we define the FX class, inside we have an instance of the Karaoke class, and the karaoke class
+defines the OnDialogo function and inside we call diag.Pintar().
+
+[b]diag.Pintar[/b]
+This is almost the main function you'll use.
+Paints the text with the size, scale, position, font, color, border, shadow and align specified in the ass.
+In the svn i've expanded this function to do one hell of new functions!
+Note: color include ALWAYS the alpha channel, so everytime i speak of color i'm implicitly talking about opacity.
+
+This will require a little thinking on your side, but you can notice you could achieve the same result by 
+defining this:
+
+[code]
+class Karaoke(extra.FxFuncs):
+	def OnSilabaDorm(self, diag):
+		diag.Pintar() #Paint
+	def OnSilaba(self, diag):
+		diag.Pintar()
+	def OnSilabaMuerta(self, diag):
+		diag.Pintar()
+[/code]
+Why doing this? well, because you'll draw inactive sillabs, active sillabs and .... post-active inactive sillabs
+separatedly..
+this will give you control on your effects.
+
+
+Now, let's try something common, lets make a dialog that appears with a fade-in and dissapears with a fade-out.
+[code]
+class Fader(extra.FxFuncs):
+	def OnDialogoEntra(self, diag):
+		#When the dialog enters
+		
+		diag.Desvanecer(0, 1)
+		#Desvanecer = Fade 
+		#We fade from 1 to 0 (read note about ranges) from opaque to fully transparent
+		
+		diag.Pintar()
+		#And we paint it
+		
+	def OnDialogo(self, diag):
+		#When the dialog is active
+		
+		diag.Pintar()
+		#We paint it
+		
+	def OnDialogoSale(self, diag):
+		#When the dialog is exiting (what a word)
+		
+		diag.Desvanecer(1, 0)
+		#Fade from fully opaque (1) to fully transparent (0)
+		
+		diag.Pintar()
+		#And paint
+[/code]
+
+As you see, the animation is divided in 3 steps, when the dialog enter, when is active and when it dissapears.
+Lets analize OnDialogoEntra:
+diag.Desvanecer tells the diag to fade, from one value to the other. This affects the alpha only.
+The values we give Desvanecer are "from" and "to" you could put whatever you want.
+for example, if you would like to fade in from 0 to half the opacity (this is when you have a style with 50% opacity)
+you could write
+[code]diag.Desvanecer(0, 0.5)[/code]
+And for the dissapearing we put from 1 to 0. the inverse. easy aint it? kafx handles the frames, the time, the fps,
+the interpolation, and the alpha for you. 
+(Note i'd like to implement stuff like FadeTo(1) and FadeFrom(0) but is not big difference (neither hard to do))
+
+
+Now, the other common effect would be, moving the dialog :D
+[code]
+class MoveOut(extra.FxFuncs):
+	def OnDialogoEntra(self, d):
+		#OnDialog enters
+		
+		d.Desvanecer(0, 1)
+		#Fade from transparent to opaque
+		
+		d.MoverDe(50, 0)
+		#MoveFrom
+		#Move from x=50 y=0 to the normal position
+		
+		d.Pintar()
+		
+	def OnDialogo(self, d): 
+		d.Pintar()
+		#You know this, when is active, we paint it
+		
+	def OnDialogoSale(self, d):
+		#On exit
+		d.Desvanecer(1, 0)
+		#Fade from opaque to transparent
+		
+		d.MoverA(-50, 0)
+		#MoveTO
+		#Move (from normal position) TO x= -50  y=0
+		
+		d.Pintar()
+[/code]
+
+I've used this effect a lot, you can see something _similar_ on the badapple video, the lines for the translation
+http://www.youtube.com/watch?v=85ht84I720Q
+
+So, there i used two new functions MoverDe (from) and MoverA (to), both needs 2 numbers.
+The first is x the second y, (x=horizontal, y=vertical). Those are the pixels it will move, FROM or TO the position
+in the ass.
+Theres also another one, that is Mover (Move) that requieres 2 arrays of 2 numbers, it moves from the first to the
+second touple.
+
+[code]d.Mover( (10,10), (20,20))[/code]
+Not very efficient nor usefull actually.
+
+Well, the last function is [b]Girar[/b], it requires two numbers, from and to. 
+the number must be on radians.. so... you can do something like this
+[code]
+class MoveOut(extra.FxFuncs):
+	def OnDialogo(self, d): 
+		d.Girar(0, 3.1415)
+		d.Pintar()
+[/code]
+
+pi = 180º
+
+And that's all for today, i ran out of time. 
+Try this out, because for the next things i couldn't make any function so most of the things are done manually.
+
+
+
+
+Important note about ranges:
+ Almost every value inside the program is a number between 1 and 0, (with decimals of course (that is 0.0 to 1.0). 
+ 1 is the max, 0 is the minimum. 
+ This is a technique i've learned from OpenGL and is very handy when you need to 
+ convert stuff.
+ Also it gives you the posibility to handle ranges of infinite .... granularity. 
+ That is, between 1 and 0 there's infinite numbers. But you know wich one is the max, and wich is the minimum.
+ Also, when you want to choose for example a number between X and 0 depending on a number ranging from 0 to 1, 
+ You only need to multiply X by the other number. This is a great insight i've gained trough studying functions
+ and mathematics... hopefully you won't need to understand it, but if you can, it'll b awesome.
+ 
+ Cairo and opengl (kafx2) use that ranging (also, python has unlimited decimal positions!).
+ So, for example, in a "normal" program, you tell how much red a color has because the red channel is a number 
+ between 0 and 254. You ONLY have 255 shades of red (blue or green or alpha also). Depending on what you do, it can
+ be .... not enough. But if you say, red is between 0 and 1, you have infinte red!! 
+ (in fact infinite shades of red, but it sound funnier that way)
+ 
+ 
+Note about new files on svn:
+i changed the scripts on the svn, now you would be able to READ and use the fxs in the folders
+fx/Usados (used) y fx/Tutoriales (tutorials (hey spanish isn't THAT hard))
+
+you can use them directly by modifying your avs file like this (in EXAMPLE)
+[code]
+KAFX('fxs.Tutoriales.basico', 'mybigbad.ass')
+[/code]

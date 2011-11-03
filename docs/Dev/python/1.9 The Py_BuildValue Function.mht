@@ -1,0 +1,428 @@
+Content-Type: multipart/related; start=<op.mhtml.1219973601379.62f719675577d9a9@192.168.1.99>; boundary=----------DM73PuLTFMPVz5Cs8c8gmf
+Content-Location: http://www.python.org/doc/1.5.2p2/ext/buildValue.html
+Subject: =?utf-8?Q?1.9=20The=20Py=5FBuildValue()=20Function?=
+MIME-Version: 1.0
+
+------------DM73PuLTFMPVz5Cs8c8gmf
+Content-Disposition: inline; filename=buildValue.html
+Content-Type: text/html; charset=iso-8859-1; name=buildValue.html
+Content-Id: <op.mhtml.1219973601379.62f719675577d9a9@192.168.1.99>
+Content-Location: http://www.python.org/doc/1.5.2p2/ext/buildValue.html
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>1.9 The Py_BuildValue() Function </title>
+<META NAME="description" CONTENT="1.9 The Py_BuildValue() Function ">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="ext.css">
+<LINK REL="next" href="refcounts.html">
+<LINK REL="previous" href="parseTupleAndKeywords.html">
+<LINK REL="up" href="intro.html">
+<LINK REL="next" href="refcounts.html">
+</head>
+<body bgcolor="#ffffff">
+<div class='navigation'>
+<table align='center' width='100%' cellpadding='0' cellspacing='2'>
+<tr>
+<td><A href="refcounts.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A></td>
+<td><A href="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A></td>
+<td><A href="parseTupleAndKeywords.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A></td>
+<td align='center' bgcolor='#99CCFF' width='100%'>
+ <b class=title>Extending and Embedding the Python Interpreter</b></td>
+<td><A href="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A></td>
+<td><img width=32 height=32 align=bottom border=0 alt=""
+ src="../icons/blank.gif"></td>
+<td><img width=32 height=32 align=bottom border=0 alt=""
+ src="../icons/blank.gif"></td>
+</tr></table><b class='navlabel'>Next:</b> <span class='sectref'><A href="refcounts.html">1.10 Reference Counts</A></span>
+<b class='navlabel'>Up:</b> <span class='sectref'><A href="intro.html">1. Extending Python with</A></span>
+<b class='navlabel'>Previous:</b> <span class='sectref'><A href="parseTupleAndKeywords.html">1.8 Keyword Parsing with</A></span>
+<br><hr></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION003900000000000000000"></A>
+<BR>
+1.9 The <tt class="cfunction">Py_BuildValue()</tt> Function
+         
+</H1>
+
+<P>
+This function is the counterpart to <tt class="cfunction">PyArg_ParseTuple()</tt>.  It is
+declared as follows:
+
+<P>
+<dl><dd><pre class="verbatim">
+PyObject *Py_BuildValue(char *format, ...);
+</pre></dl>
+
+<P>
+It recognizes a set of format units similar to the ones recognized by
+<tt class="cfunction">PyArg_ParseTuple()</tt>, but the arguments (which are input to the
+function, not output) must not be pointers, just values.  It returns a
+new Python object, suitable for returning from a C function called
+from Python.
+
+<P>
+One difference with <tt class="cfunction">PyArg_ParseTuple()</tt>: while the latter
+requires its first argument to be a tuple (since Python argument lists
+are always represented as tuples internally),
+<tt class="cfunction">Py_BuildValue()</tt> does not always build a tuple.  It builds
+a tuple only if its format string contains two or more format units.
+If the format string is empty, it returns <code>None</code>; if it contains
+exactly one format unit, it returns whatever object is described by
+that format unit.  To force it to return a tuple of size 0 or one,
+parenthesize the format string.
+
+<P>
+In the following description, the quoted form is the format unit; the
+entry in (round) parentheses is the Python object type that the format
+unit will return; and the entry in [square] brackets is the type of
+the C value(s) to be passed.
+
+<P>
+The characters space, tab, colon and comma are ignored in format
+strings (but not within format units such as "<tt class="samp">s#</tt>").  This can be
+used to make long format strings a tad more readable.
+
+<P>
+<DL>
+<DD><P>
+<DT><STRONG>"<tt class="samp">s</tt>" (string) [char *]</STRONG>
+<DD>Convert a null-terminated C string to a Python object.  If the C
+string pointer is <tt class="constant">NULL</tt>, <code>None</code> is returned.
+
+<P>
+<DT><STRONG>"<tt class="samp">s#</tt>" (string) [char *, int]</STRONG>
+<DD>Convert a C string and its length to a Python object.  If the C string
+pointer is <tt class="constant">NULL</tt>, the length is ignored and <code>None</code> is
+returned.
+
+<P>
+<DT><STRONG>"<tt class="samp">z</tt>" (string or <code>None</code>) [char *]</STRONG>
+<DD>Same as "<tt class="samp">s</tt>".
+
+<P>
+<DT><STRONG>"<tt class="samp">z#</tt>" (string or <code>None</code>) [char *, int]</STRONG>
+<DD>Same as "<tt class="samp">s#</tt>".
+
+<P>
+<DT><STRONG>"<tt class="samp">i</tt>" (integer) [int]</STRONG>
+<DD>Convert a plain C <tt class="ctype">int</tt> to a Python integer object.
+
+<P>
+<DT><STRONG>"<tt class="samp">b</tt>" (integer) [char]</STRONG>
+<DD>Same as "<tt class="samp">i</tt>".
+
+<P>
+<DT><STRONG>"<tt class="samp">h</tt>" (integer) [short int]</STRONG>
+<DD>Same as "<tt class="samp">i</tt>".
+
+<P>
+<DT><STRONG>"<tt class="samp">l</tt>" (integer) [long int]</STRONG>
+<DD>Convert a C <tt class="ctype">long int</tt> to a Python integer object.
+
+<P>
+<DT><STRONG>"<tt class="samp">c</tt>" (string of length 1) [char]</STRONG>
+<DD>Convert a C <tt class="ctype">int</tt> representing a character to a Python string of
+length 1.
+
+<P>
+<DT><STRONG>"<tt class="samp">d</tt>" (float) [double]</STRONG>
+<DD>Convert a C <tt class="ctype">double</tt> to a Python floating point number.
+
+<P>
+<DT><STRONG>"<tt class="samp">f</tt>" (float) [float]</STRONG>
+<DD>Same as "<tt class="samp">d</tt>".
+
+<P>
+<DT><STRONG>"<tt class="samp">O</tt>" (object) [PyObject *]</STRONG>
+<DD>Pass a Python object untouched (except for its reference count, which
+is incremented by one).  If the object passed in is a <tt class="constant">NULL</tt>
+pointer, it is assumed that this was caused because the call producing
+the argument found an error and set an exception.  Therefore,
+<tt class="cfunction">Py_BuildValue()</tt> will return <tt class="constant">NULL</tt> but won't raise an
+exception.  If no exception has been raised yet,
+<tt class="cdata">PyExc_SystemError</tt> is set.
+
+<P>
+<DT><STRONG>"<tt class="samp">S</tt>" (object) [PyObject *]</STRONG>
+<DD>Same as "<tt class="samp">O</tt>".
+
+<P>
+<DT><STRONG>"<tt class="samp">N</tt>" (object) [PyObject *]</STRONG>
+<DD>Same as "<tt class="samp">O</tt>", except it doesn't increment the reference count on
+the object.  Useful when the object is created by a call to an object
+constructor in the argument list.
+
+<P>
+<DT><STRONG>"<tt class="samp">O&amp;</tt>" (object) [<var>converter</var>, <var>anything</var>]</STRONG>
+<DD>Convert <var>anything</var> to a Python object through a <var>converter</var>
+function.  The function is called with <var>anything</var> (which should be
+compatible with <tt class="ctype">void *</tt>) as its argument and should return a
+``new'' Python object, or <tt class="constant">NULL</tt> if an error occurred.
+
+<P>
+<DT><STRONG>"<tt class="samp">(<var>items</var>)</tt>" (tuple) [<var>matching-items</var>]</STRONG>
+<DD>Convert a sequence of C values to a Python tuple with the same number
+of items.
+
+<P>
+<DT><STRONG>"<tt class="samp">[<var>items</var>]</tt>" (list) [<var>matching-items</var>]</STRONG>
+<DD>Convert a sequence of C values to a Python list with the same number
+of items.
+
+<P>
+<DT><STRONG>"<tt class="samp">{<var>items</var>}</tt>" (dictionary) [<var>matching-items</var>]</STRONG>
+<DD>Convert a sequence of C values to a Python dictionary.  Each pair of
+consecutive C values adds one item to the dictionary, serving as key
+and value, respectively.
+
+<P>
+</DL>
+
+<P>
+If there is an error in the format string, the
+<tt class="cdata">PyExc_SystemError</tt> exception is raised and <tt class="constant">NULL</tt> returned.
+
+<P>
+Examples (to the left the call, to the right the resulting Python value):
+
+<P>
+<dl><dd><pre class="verbatim">
+    Py_BuildValue("")                        None
+    Py_BuildValue("i", 123)                  123
+    Py_BuildValue("iii", 123, 456, 789)      (123, 456, 789)
+    Py_BuildValue("s", "hello")              'hello'
+    Py_BuildValue("ss", "hello", "world")    ('hello', 'world')
+    Py_BuildValue("s#", "hello", 4)          'hell'
+    Py_BuildValue("()")                      ()
+    Py_BuildValue("(i)", 123)                (123,)
+    Py_BuildValue("(ii)", 123, 456)          (123, 456)
+    Py_BuildValue("(i,i)", 123, 456)         (123, 456)
+    Py_BuildValue("[i,i]", 123, 456)         [123, 456]
+    Py_BuildValue("{s:i,s:i}",
+                  "abc", 123, "def", 456)    {'abc': 123, 'def': 456}
+    Py_BuildValue("((ii)(ii)) (ii)",
+                  1, 2, 3, 4, 5, 6)          (((1, 2), (3, 4)), (5, 6))
+</pre></dl>
+
+<P>
+<p>
+<div class='navigation'><hr><table align='center' width='100%' cellpadding='0' cellspacing='2'>
+<tr>
+<td><A href="refcounts.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A></td>
+<td><A href="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A></td>
+<td><A href="parseTupleAndKeywords.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A></td>
+<td align='center' bgcolor='#99CCFF' width='100%'>
+ <b class=title>Extending and Embedding the Python Interpreter</b></td>
+<td><A href="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A></td>
+<td><img width=32 height=32 align=bottom border=0 alt=""
+ src="../icons/blank.gif"></td>
+<td><img width=32 height=32 align=bottom border=0 alt=""
+ src="../icons/blank.gif"></td>
+</tr></table><b class='navlabel'>Next:</b> <span class='sectref'><A href="refcounts.html">1.10 Reference Counts</A></span>
+<b class='navlabel'>Up:</b> <span class='sectref'><A href="intro.html">1. Extending Python with</A></span>
+<b class='navlabel'>Previous:</b> <span class='sectref'><A href="parseTupleAndKeywords.html">1.8 Keyword Parsing with</A></span>
+</div>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>Send comments on this document to <a href="mailto:python-docs@python.org">python-docs@python.org</a>.
+</ADDRESS>
+</BODY>
+</HTML>
+
+------------DM73PuLTFMPVz5Cs8c8gmf
+Content-Disposition: inline; filename=ext.css
+Content-Type: text/css; charset=iso-8859-1; name=ext.css
+Content-Location: http://www.python.org/doc/1.5.2p2/ext/ext.css
+Content-Transfer-Encoding: 8bit
+
+/*
+ * The first part of this is the standard CSS generated by LaTeX2HTML,
+ * with the "empty" declarations removed.
+ */
+
+/* Century Schoolbook font is very similar to Computer Modern Math: cmmi */
+.MATH    { font-family: "Century Schoolbook", serif; }
+.MATH I  { font-family: "Century Schoolbook", serif; font-weight: bold }
+.BOLDMATH { font-family: "Century Schoolbook", serif; font-weight: bold }
+
+/* implement both fixed-size and relative sizes */
+SMALL.XTINY		{ font-size : xx-small }
+SMALL.TINY		{ font-size : x-small  }
+SMALL.SCRIPTSIZE	{ font-size : smaller  }
+SMALL.FOOTNOTESIZE	{ font-size : small    }
+BIG.XLARGE		{ font-size : large    }
+BIG.XXLARGE		{ font-size : x-large  }
+BIG.HUGE		{ font-size : larger   }
+BIG.XHUGE		{ font-size : xx-large }
+
+/*
+ * Document-specific styles come next;
+ * these are added for the Python documentation.
+ *
+ * Note that the size specifications for the H* elements are because
+ * Netscape on Solaris otherwise doesn't get it right; they all end up
+ * the normal text size.
+ */
+
+h1, h2, h3, h4, h5, h6	{ font-family: avantgarde, sans-serif;
+			  font-weight: bold }
+h1			{ font-size: 180% }
+h2			{ font-size: 150% }
+h3, h4			{ font-size: 120% }
+code, tt		{ font-family: monospace }
+var			{ font: italic normal serif }
+
+.navigation .title	{ font-family: avantgarde, sans-serif;
+			  font-size: 110% }
+
+.verbatim		{ color: darkblue }
+
+.email			{ font-family: avantgarde, sans-serif }
+.mimetype		{ font-family: avantgarde, sans-serif }
+.newsgroup		{ font-family: avantgarde, sans-serif }
+.url			{ font-family: avantgarde, sans-serif }
+.file			{ font-family: avantgarde, sans-serif }
+
+.refcount-info          { font-style: italic }
+.refcount-info .value   { font-weight: bold;
+                          color: #006600 }
+
+/*
+ * Some decoration for the "See also:" blocks, in part inspired by some of
+ * the styling on Lars Marius Garshol's XSA pages.
+ * (The blue in the navigation bars is #99CCFF.)
+ */
+.seealso		{ background-color: floralwhite;
+                          border: thin solid black;
+                          padding: 4pt }
+
+.seealso .heading	{ font-size: 110% }
+
+/*
+ * Class 'availability' is used for module availability statements at
+ * the top of modules.  Otherwise, rely on context for platform specifiers
+ * (generated by \platform and \platformof).
+ */
+.availability .platform { font-weight: bold }
+
+------------DM73PuLTFMPVz5Cs8c8gmf
+Content-Disposition: inline; filename=next.gif
+Content-Type: image/gif; name=next.gif
+Content-Location: http://www.python.org/doc/1.5.2p2/icons/next.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhIAAgAMT/AP///5nM/4/C9Ya57Hyv4nOm2Wmcz1+SxVaJvEx/skN2qTpt
+oDBjliZZjB1Qgwo9cAAzZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACwAAAAAIAAgAAAFgmAgjmRpnmiqrmzrvnAsl0dj38RsLlDf
+PwMdSeDw9RwC4WjwMEIYyhHBCVFERQfq4RpQUHPXhhNIKlLPaCNylG6nF6Kpe+4s
+BLL0/DaQyM8fYDoCYmpBQgNmPg1JQgRNRnBKB48+CFF9Rg8GUTyZgTNETmuHCjc2
+Coxcqqusra6vJSEAOw==
+
+------------DM73PuLTFMPVz5Cs8c8gmf
+Content-Disposition: inline; filename=up.gif
+Content-Type: image/gif; name=up.gif
+Content-Location: http://www.python.org/doc/1.5.2p2/icons/up.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhIAAgAMT/AP///5nM/4/C9Ya57Hyv4nOm2Wmcz1+SxVaJvEx/skN2qTpt
+oDBjliZZjB1QgxNGeQo9cAAzZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACwAAAAAIAAgAAAFwWAgjmQ5CmaqqgLDrPAqOFGkxPhIQHV9
+5DEDrxeBEICqA5EIQSFJi+XS8RS1pNLFc0DDShHAnddrwB2GvQTxEWUeZUvIoUBs
+BLq924reMwYQRAkBAmgRPytqNQ5OCkSHYjUFMG0MTgENRJIiSjUxmFokSyVqDzGG
+JQNEVCULdjJlJXw1LyUCsE+JNYJVKgxEt7wleBEDwSmixiUEdcklBkSgzSK5EbvS
+l5nXIg9EltJM2gGyEa7XgHnhBQnrCZrhxiEAOw==
+
+------------DM73PuLTFMPVz5Cs8c8gmf
+Content-Disposition: inline; filename=previous.gif
+Content-Type: image/gif; name=previous.gif
+Content-Location: http://www.python.org/doc/1.5.2p2/icons/previous.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhIAAgAMT/AP///5nM/4/C9Ya57Hyv4nOm2Wmcz1+SxVaJvEx/skN2qTpt
+oDBjliZZjB1QgxNGeQo9cAAzZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACwAAAAAIAAgAAAFgWAgjmRpnmiqrmzrvnAsB0dj38VMLlHf
+QwSdSMDw9RxB4cBhjDQEwgAB0lxEaVQj4opoQg5XnhEYFTCb6HT6ISKc1XA1IyDI
+xu/NhOiA7/sMIwp+fUkiRWMDV3RvR1BXA3Y9c4oEaAqKNGhgioJjhVENXo5lDDc2
+l5ipqqusra4rIQA7
+
+------------DM73PuLTFMPVz5Cs8c8gmf
+Content-Disposition: inline; filename=contents.gif
+Content-Type: image/gif; name=contents.gif
+Content-Location: http://www.python.org/doc/1.5.2p2/icons/contents.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhIAAgAMT/AP///5nM/4/C9Ya57Hyv4nOm2Wmcz1+SxVaJvEx/skN2qTpt
+oDBjliZZjB1QgxNGeQo9cAAzZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACwAAAAAIAAgAAAF/2AgjmRpnmiqrmzrvnDsEjJ7KLV6REd+
+Eo1IZJEo3RKMgkmASCQWAhKhEHkUaCLCoxhARAykglXkcJQIQylkQYqYRTulCAIp
+Jb4jAT06EmbTIwMDJUF8AQsRCCQDfgFBgypugUKGAQYRDAFobymXXAE7DSWIPV44
+KgoRcgF3nwGMoqwRricOdQZRXq4LEJA7pyICWCKwBGCvgKAQw3oPfANQi0KuBxAJ
+BQrRJAYQWwqKJgSQJQWrJ+U+6errLgILmQUNigSKCgcNDQQKDQr0Afb49H1CYICG
+AwEMpjxwxEpJLDEMr2EzFEufJQRU4jVkGCCjqGsDOHEsUIRkAQYLPjs6bHDgZMqN
+C3qIeFjyWgIHKkfezDkg1j8CUcwoKOckJ80EKqP47GkGgQN4CXpuxDc0qkoCDtiw
+29oiBAA7
+
+------------DM73PuLTFMPVz5Cs8c8gmf
+Content-Disposition: inline; filename=blank.gif
+Content-Type: image/gif; name=blank.gif
+Content-Location: http://www.python.org/doc/1.5.2p2/icons/blank.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODdhIAAgAIcAAAAAAAEBAQICAgMDAwQEBAUFBQYGBgcHBwgICAkJCQAAADMA
+AGYAAJkAAMwAAP8AAAAzADMzAGYzAJkzAMwzAP8zAABmADNmAGZmAJlmAMxmAP9m
+AACZADOZAGaZAJmZAMyZAP+ZAADMADPMAGbMAJnMAMzMAP/MAAD/ADP/AGb/AJn/
+AMz/AP//AAAAMzMAM2YAM5kAM8wAM/8AMwAzMzMzM2YzM5kzM8wzM/8zMwBmMzNm
+M2ZmM5lmM8xmM/9mMwCZMzOZM2aZM5mZM8yZM/+ZMwDMMzPMM2bMM5nMM8zMM//M
+MwD/MzP/M2b/M5n/M8z/M///MwAAZjMAZmYAZpkAZswAZv8AZgAzZjMzZmYzZpkz
+ZswzZv8zZgBmZjNmZmZmZplmZsxmZv9mZgCZZjOZZmaZZpmZZsyZZv+ZZgDMZjPM
+ZmbMZpnMZszMZv/MZgD/ZjP/Zmb/Zpn/Zsz/Zv//ZgAAmTMAmWYAmZkAmcwAmf8A
+mQAzmTMzmWYzmZkzmcwzmf8zmQBmmTNmmWZmmZlmmcxmmf9mmQCZmTOZmWaZmZmZ
+mcyZmf+ZmQDMmTPMmWbMmZnMmczMmf/MmQD/mTP/mWb/mZn/mcz/mf//mQAAzDMA
+zGYAzJkAzMwAzP8AzAAzzDMzzGYzzJkzzMwzzP8zzABmzDNmzGZmzJlmzMxmzP9m
+zACZzDOZzGaZzJmZzMyZzP+ZzADMzDPMzGbMzJnMzMzMzP/MzAD/zDP/zGb/zJn/
+zMz/zP//zAAA/zMA/2YA/5kA/8wA//8A/wAz/zMz/2Yz/5kz/8wz//8z/wBm/zNm
+/2Zm/5lm/8xm//9m/wCZ/zOZ/2aZ/5mZ/8yZ//+Z/wDM/zPM/2bM/5nM/8zM///M
+/wD//zP//2b//5n//8z//////+Li4uPj4+Tk5OXl5ebm5ufn5+jo6Onp6erq6uvr
+6+zs7O3t7e7u7u/v7/Dw8PHx8fLy8vPz8/T09PX19fb29vf39/j4+Pn5+fr6+vv7
++/z8/P39/f7+/v///ywAAAAAIAAgAEAI/wCzZcuWLVu2bNmyZcuWLVu2bNmyZcuW
+LVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2
+bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmy
+ZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuW
+LVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2
+bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZf/Lli1btmzZ
+smXLli1btmzZsmXLli1btmzZsmXLli1bNoDZsmXLli1btmzZsmXLli1btmzZsmXL
+li1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1b
+tmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZ
+smXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXL
+li1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1b
+tmzZsmXLli3/W7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs
+2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YNYLZs2bJly5YtW7Zs2bJly5YtW7Zs2bJl
+y5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5Yt
+W7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs
+2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJl
+y5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs/9myZcuWLVu2bNmyZcuWLVu2bNmyZcuW
+LVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2
+bNmyZcuWLVu2bNmyZcuWLVu2bNmyZQOYLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmy
+ZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuW
+LVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2
+bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZYvLli1btmzZ
+smXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXL
+li1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1b
+tmzZsmXLli1btmzZsmXLli1btmzZAGbLli1btmzZsmXLli0gADs=
+
+------------DM73PuLTFMPVz5Cs8c8gmf--

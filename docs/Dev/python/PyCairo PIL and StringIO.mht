@@ -1,0 +1,781 @@
+Content-Type: multipart/related; start=<op.mhtml.1220067112304.ea0800655575980a@192.168.1.99>; boundary=----------VrP3tTgODLJYoFiHu6OiOR
+Content-Location: http://coding.derkeiler.com/Archive/Python/comp.lang.python/2008-01/msg00212.html
+Subject: =?utf-8?Q?Re:=20Re:=20PyCairo,=20PIL=20and=20StringIO?=
+MIME-Version: 1.0
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename=msg00212.html
+Content-Type: text/html; name=msg00212.html
+Content-Id: <op.mhtml.1220067112304.ea0800655575980a@192.168.1.99>
+Content-Location: http://coding.derkeiler.com/Archive/Python/comp.lang.python/2008-01/msg00212.html
+Content-Transfer-Encoding: Quoted-Printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Re: Re: PyCairo, PIL and StringIO</title>
+
+<link rel=3D"stylesheet" href=3D"/styles/dk.css" type=3D"text/css" media=
+=3D"all">
+<link rel=3D"alternate" href=3D"http://coding.derkeiler.com/pdf/Archive/=
+Python/comp.lang.python/2008-01/msg00212.pdf" type=3D"application/pdf" m=
+edia=3D"print" title=3D"PDF version">
+<link rel=3D"alternate" type=3D"application/rss+xml" href=3D"http://codi=
+ng.derkeiler.com/Archive/Python/comp.lang.python/rss.xml">
+
+</head>
+<body>
+<div id=3D"content">
+<!-- google_ad_section_start -->
+
+
+<h1>Re: Re: PyCairo, PIL and StringIO</h1>
+<hr>
+<ul>
+<li><em>From</em>: Jair Trejo &lt;<a href=3D"mailto:jairtrejo@DOMAIN.HID=
+DEN">jairtrejo@xxxxxxxxxxxx</a>&gt;</li>
+<li><em>Date</em>: Wed, 2 Jan 2008 13:19:57 -0600 (CST)</li>
+</ul>
+<hr>
+<br>
+<blockquote style=3D"border-left: #5555EE solid 0.2em; margin: 0em; padd=
+ing-left: 0.85em"><blockquote style=3D"border-left: #5555EE solid 0.2em;=
+ margin: 0em; padding-left: 0.85em">De: Fredrik Lundh &lt;fredrik@xxxxxx=
+xxxxxxxx&gt;<br>
+</blockquote>A: python-list@xxxxxxxxxx<br>
+Fecha: Wed, 02 Jan 2008 15:39:11 +0100<br>
+Asunto: Re: PyCairo, PIL and StringIO<br>
+<br>
+Jair Trejo wrote:<br>
+<br>
+<blockquote style=3D"border-left: #5555EE solid 0.2em; margin: 0em; padd=
+ing-left: 0.85em">I'm doing some image processing in PIL, and I want<br>=
+
+</blockquote>to<br>
+<blockquote style=3D"border-left: #5555EE solid 0.2em; margin: 0em; padd=
+ing-left: 0.85em">display the results in a GTK window using PyCairo,<br>=
+
+</blockquote>so<br>
+<blockquote style=3D"border-left: #5555EE solid 0.2em; margin: 0em; padd=
+ing-left: 0.85em">I create a Cairo image surface from the PIL Image<br>
+</blockquote>like<br>
+<blockquote style=3D"border-left: #5555EE solid 0.2em; margin: 0em; padd=
+ing-left: 0.85em">this:<br>
+data<br>
+        mfile =3D StringIO.StringIO()<br>
+        final.save(mfile, format=3D&quot;PNG&quot;)<br>
+        ima =3D<br>
+cairo.ImageSurface.create_from_png(mfile)<br>
+        mfile.close()<br>
+        return ima<br>
+<br>
+Where final is a PIL image. The problem is, I get<br>
+</blockquote>a<br>
+<blockquote style=3D"border-left: #5555EE solid 0.2em; margin: 0em; padd=
+ing-left: 0.85em">IOError: error while reading from Input Stream.<br>
+<br>
+&#xBF;Any idea of why is this happening?<br>
+</blockquote><br>
+&quot;save&quot; leaves the file pointer at an undefined<br>
+position (usually at the <br>
+end), so my guess is that you have to rewind the<br>
+file before you pass it<br>
+to the next function:<br>
+<br>
+     final.save(mfile, format=3D&quot;PNG&quot;)<br>
+     mfile.seek(0) # rewind<br>
+<br>
+also note that compressing and decompressing will<br>
+introduce unnecessary <br>
+overhead; chances are that you might get a lot<br>
+better performance if you <br>
+just shuffle the raw pixels.  I haven't used PyCairo<br>
+myself, but from a <br>
+quick look at the ImageSurface documentation,<br>
+something like this should <br>
+work (untested):<br>
+<br>
+    if final.mode !=3D &quot;RGB&quot;:<br>
+        final =3D final.convert(&quot;RGB&quot;)<br>
+    w, h =3D final.size<br>
+    data =3D final.tostring() # get packed RGB buffer<br>
+    ima =3D cairo.ImageSurface.create(data,<br>
+FORMAT_RGB24, w, h, w*3)<br>
+<br>
+(tweak as necessary)<br>
+<br>
+&lt;/F&gt;<br>
+</blockquote><br>
+Thank, you, it worked!<br>
+I tried rewinding the file, and it worked OK. But you<br>
+were right about performance issues, so I tweaked your<br>
+code and left it as:<br>
+<br>
+from array import array<br>
+<br>
+....<br>
+<br>
+        w,h =3D final.size<br>
+        data=3Darray('c')<br>
+        data.fromstring(final.tostring())<br>
+        ima=3Dcairo.ImageSurface.create_for_data(data,<br>
+cairo.FORMAT_ARGB32,w,h,w*4)<br>
+        return ima<br>
+<br>
+Which is around 10 times faster. The problem is, it<br>
+swaps the R and B bands. I could probably write my own<br>
+Image.tostring(), but i found it more convenient to<br>
+swap the channels before processing, and it worked<br>
+just fine.<br>
+<br>
+<br>
+      __________________________________________________________________=
+__________________<br>
+&#xA1;Capacidad ilimitada de almacenamiento en tu correo!<br>
+No te preocupes m&#xE1;s por el espacio de tu cuenta con Correo Yahoo!: =
+                     <br>
+<a  rel=3D"nofollow" href=3D"http://correo.yahoo.com.mx/">http://correo.=
+yahoo.com.mx/</a><br>
+.<br>
+<br>
+
+<hr>
+<ul>
+<li>Prev by Date:
+<strong><a href=3D"msg00211.html">Re: Python-list Digest, Vol 52, Issue =
+19</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href=3D"msg00213.html">Re: os.tmpfile()</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href=3D"msg00103.html">Re: PyCairo, PIL and StringIO</a></str=
+ong>
+</li>
+<li>Next by thread:
+<strong><a href=3D"msg00091.html">parse text files in a directory?</a></=
+strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href=3D"maillist.html#00212"><strong>Date</strong></a></li>
+<li><a href=3D"threads.html#00212"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<hr><table width=3D"100%" border=3D"0" cellspacing=3D"10"><tr><td><h2>Re=
+levant Pages</h2><ul><!-- ffM -->
+<li><a href=3D"http://coding.derkeiler.com/Archive/Python/comp.lang.pyth=
+on/2008-01/msg00211.html">Re: Python&#45;list Digest, Vol 52, Issue 19</=
+a><br><b>...</b> return <b>ima</b> <b>...</b> Where final is a <b>PIL im=
+age.</b> <b>...</b> so my guess is that you have to <b>rewind</b> the <b=
+>...</b> I haven't used <b>PyCairo</b> <b>...</b> <br>(comp.lang.python)=
+</li><li><a href=3D"http://coding.derkeiler.com/Archive/Python/comp.lang=
+.python/2008-01/msg00086.html">PyCairo, PIL and StringIO</a><br><b>...</=
+b> display the results in a GTK window using <b>PyCairo,</b> <b>...</b> =
+I create a <b>Cairo image surface</b> from the <b>PIL Image</b> like <b>=
+...</b> return <b>ima</b> <b>...</b> <br>(comp.lang.python)</li><li><a h=
+ref=3D"http://coding.derkeiler.com/Archive/Python/comp.lang.python/2008-=
+01/msg00103.html">Re: PyCairo, PIL and StringIO</a><br><b>...</b> return=
+ <b>ima</b> <b>...</b> Where final is a <b>PIL image.</b> <b>...</b> so =
+my guess is that you have to <b>rewind</b> the file before you pass it <=
+b>...</b> I haven't used <b>PyCairo</b> myself, but from a quick look at=
+ the ImageSurface documentation, something like this should work: <b>...=
+</b> <br>(comp.lang.python)</li></ul></td><td>
+<!--- start of derkeiler.com_(300x250 Right1)_247RealMediaAdTag --->
+<script LANGUAGE=3D"JavaScript1.1" SRC=3D"http://208.71.124.75/RealMedia=
+/ads/adstream_jx.ads/derkeiler.com/@Right1"></script>
+<script LANGUAGE=3D"JavaScript">
+<!--
+if (parseFloat(navigator.appVersion) =3D=3D 0){ document.write("<IFRAME =
+WIDTH=3D300 HEIGHT=3D250 MARGINWIDTH=3D0 MARGINHEIGHT=3D0 HSPACE=3D0 VSP=
+ACE=3D0 FRAMEBORDER=3D0 SCROLLING=3Dno BORDERCOLOR=3D'#000000' SRC=3D'ht=
+tp://208.71.124.75/RealMedia/ads/adstream_sx.ads/derkeiler.com/@Right1'>=
+</IFRAME>");}
+//-->
+</script>
+<noscript><A HREF=3D"http://208.71.124.75/RealMedia/ads/click_nx.ads/der=
+keiler.com/@Right1?x"><IMG SRC=3D"http://208.71.124.75/RealMedia/ads/ads=
+tream_nx.ads/derkeiler.com/@Right1"></a></noscript> =
+
+<!--- end of derkeiler.com_(300x250 Right1)_247RealMediaAdTag ---><div i=
+d=3D'beacon_62' style=3D'position: absolute; left: 0px; top: 0px; visibi=
+lity: hidden;'><img src=3D'/ads/adlog.php?bannerid=3D62&amp;campaignid=3D=
+37&amp;zoneid=3D36&amp;source=3D&amp;block=3D0&amp;capping=3D0&amp;sessi=
+on_capping=3D0&amp;cb=3D46c79f1b76' width=3D'0' height=3D'0' alt=3D'' st=
+yle=3D'width: 0px; height: 0px;'></div></td></tr></table><hr>
+<!-- google_ad_section_end -->
+<div id=3D"footer">
+	We are proud to have <a href=3D"http://www.9na.de/" target=3D"_blank">W=
+eb Hosting and Rack Housing</a> from 9 Net Avenue Deutschland.
+        <br>
+	(10)
+	=
+
+</div>
+</div>
+<p id=3D"logo"><a href=3D"/" title=3D"Home"><img src=3D"/images/logo.png=
+" width=3D"46" height=3D"313" alt=3D"derkeiler.com" title=3D"Home"></a><=
+/p>
+<div id=3D"menu1">
+        <ul>
+                <li><a href=3D"http://www.derkeiler.com/">Security</a></=
+li>
+                <li><a href=3D"http://unix.derkeiler.com/">UNIX</a></li>=
+
+                <li><a href=3D"http://linux.derkeiler.com/">Linux</a></l=
+i>
+                <li id=3D"selected1"><a href=3D"http://coding.derkeiler.=
+com/">Coding</a></li>
+		<li><a href=3D"http://newsgroups.derkeiler.com/">Usenet</a></li>
+        </ul>
+</div>
+<div id=3D"menu2">
+        <ul>
+		<li id=3D"selected2"><a href=3D"http://coding.derkeiler.com/Archive/">=
+Archive</a></li><li><a href=3D"http://www.derkeiler.com/about/">About</a=
+></li><li><a href=3D"http://coding.derkeiler.com/privacy/">Privacy</a></=
+li><li><a href=3D"http://coding.derkeiler.com/search/">Search</a></li><l=
+i><a href=3D"http://www.derkeiler.com/about/imprint">Imprint</a></li>
+        </ul>
+</div>
+<div id=3D"nav">
+        <img src=3D"/images/arrow.gif" width=3D"15" height=3D"7" alt=3D"=
+Path:">
+        <a href=3D"http://coding.derkeiler.com/">coding.derkeiler.com</a=
+> &nbsp;&gt;&nbsp;<a href=3D"http://coding.derkeiler.com/Archive/">Archi=
+ve</a> &nbsp;&gt;&nbsp;<a href=3D"http://coding.derkeiler.com/Archive/Py=
+thon/">Python</a> &nbsp;&gt;&nbsp;<a href=3D"http://coding.derkeiler.com=
+/Archive/Python/comp.lang.python/">comp.lang.python</a> &nbsp;&gt;&nbsp;=
+<a href=3D"http://coding.derkeiler.com/Archive/Python/comp.lang.python/2=
+008-01/">2008-01</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=3D"http://coding.der=
+keiler.com/pdf/Archive/Python/comp.lang.python/2008-01/msg00212.pdf"><im=
+g src=3D"/images/pdf.jpg" height=3D"15" width=3D"16" alt=3D"Print as PDF=
+" style=3D"position:relative; bottom:-2px;"></a>&nbsp;&nbsp;<a href=3D"h=
+ttp://coding.derkeiler.com/Archive/Python/comp.lang.python/rss.xml"><img=
+ src=3D"/images/xml.gif" height=3D"13" width=3D"35" alt=3D"RSS Feed" sty=
+le=3D"position:relative; bottom:-2px;"></a>
+</div>
+
+<div id=3D"topbanner">
+<!--- start of derkeiler.com_(728x90 Top)_247RealMediaAdTag --->
+<script LANGUAGE=3D"JavaScript1.1" SRC=3D"http://208.71.124.75/RealMedia=
+/ads/adstream_jx.ads/derkeiler.com/@Top"></script>
+<script LANGUAGE=3D"JavaScript"> =
+
+<!--
+if (parseFloat(navigator.appVersion) =3D=3D 0){ document.write("<IFRAME =
+WIDTH=3D728 HEIGHT=3D90 MARGINWIDTH=3D0 MARGINHEIGHT=3D0 HSPACE=3D0 VSPA=
+CE=3D0 FRAMEBORDER=3D0 SCROLLING=3Dno BORDERCOLOR=3D'#000000' SRC=3D'htt=
+p://208.71.124.75/RealMedia/ads/adstream_sx.ads/derkeiler.com/@Top'></IF=
+RAME>");}
+//--> =
+
+</script>
+<noscript><A HREF=3D"http://208.71.124.75/RealMedia/ads/click_nx.ads/der=
+keiler.com/@Top?x"><IMG SRC=3D"http://208.71.124.75/RealMedia/ads/adstre=
+am_nx.ads/derkeiler.com/@Top"></a></noscript>
+<!--- end of derkeiler.com_(728x90 Top)_247RealMediaAdTag --->
+</div><div id=3D'beacon_61' style=3D'position: absolute; left: 0px; top:=
+ 0px; visibility: hidden;'><img src=3D'/ads/adlog.php?bannerid=3D61&amp;=
+campaignid=3D36&amp;zoneid=3D4&amp;source=3D&amp;block=3D0&amp;capping=3D=
+0&amp;session_capping=3D0&amp;cb=3D9a258e7266' width=3D'0' height=3D'0' =
+alt=3D'' style=3D'width: 0px; height: 0px;'></div>
+
+<div id=3D"skyscraper">
+<!--- start of derkeiler.com_(120x600/160x600 Right3)_247RealMediaAdTag =
+--->
+<script LANGUAGE=3D"JavaScript1.1" SRC=3D"http://208.71.124.75/RealMedia=
+/ads/adstream_jx.ads/derkeiler.com/@Right3"></script>
+<script LANGUAGE=3D"JavaScript"> =
+
+<!--
+if (parseFloat(navigator.appVersion) =3D=3D 0){ document.write("<IFRAME =
+WIDTH=3D160 HEIGHT=3D600 MARGINWIDTH=3D0 MARGINHEIGHT=3D0 HSPACE=3D0 VSP=
+ACE=3D0 FRAMEBORDER=3D0 SCROLLING=3Dno BORDERCOLOR=3D'#000000' SRC=3D'ht=
+tp://208.71.124.75/RealMedia/ads/adstream_sx.ads/derkeiler.com/@Right3'>=
+</IFRAME>");} =
+
+//--> =
+
+</script>
+<noscript><A HREF=3D"http://208.71.124.75/RealMedia/ads/click_nx.ads/der=
+keiler.com/@Right3?x"><IMG SRC=3D"http://208.71.124.75/RealMedia/ads/ads=
+tream_nx.ads/derkeiler.com/@Right3"></a></noscript>
+<!--- end of derkeiler.com_(120x600/160x600 Right3)_247RealMediaAdTag --=
+-><div id=3D'beacon_63' style=3D'position: absolute; left: 0px; top: 0px=
+; visibility: hidden;'><img src=3D'/ads/adlog.php?bannerid=3D63&amp;camp=
+aignid=3D38&amp;zoneid=3D28&amp;source=3D&amp;block=3D0&amp;capping=3D0&=
+amp;session_capping=3D0&amp;cb=3D839acd2e40' width=3D'0' height=3D'0' al=
+t=3D'' style=3D'width: 0px; height: 0px;'></div>
+</div>
+
+<!-- Start Quantcast tag -->
+<script type=3D"text/javascript" src=3D"http://edge.quantserve.com/quant=
+.js"></script>
+<script type=3D"text/javascript">_qacct=3D"p-abMz3F92T4IJ2";quantserve()=
+;</script>
+<noscript>
+<a href=3D"http://www.quantcast.com/p-abMz3F92T4IJ2" target=3D"_blank"><=
+img src=3D"http://pixel.quantserve.com/pixel/p-abMz3F92T4IJ2.gif" style=3D=
+"display: none;" border=3D"0" height=3D"1" width=3D"1" alt=3D"Quantcast"=
+/></a>
+</noscript>
+<!-- End Quantcast tag -->
+</body>
+</html>
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename=body_back.gif
+Content-Type: image/gif; name=body_back.gif
+Content-Location: http://coding.derkeiler.com/images/body_back.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhJgCNAIQBAAAAAP////7+/v39/fz8/Pv7+/r6+vn5+fj4+Pf39/b29vX1
+9fT09PPz8/Ly8vHx8fDw8O/v7+7u7u3t7ezs7Ovr6+rq6unp6ejo6Ofn5+bm5uXl
+5f///////////////yH5BAEKAB8ALAAAAAAmAI0AAAX+4CaOZGmeaKqubOu+cCzP
+dG3feK7vfO//wKBwSCwaj8ikcslsOp/QqHRKrVqv2Kx2y+16v2CVZkwum8/otHrN
+brvf6ox8Tq/b7/i8fs/v+/MYgYKDhIWGh4iJiouMjYgXkJGSk5SVlpeYmZgWnJ2e
+n6ChoqOkpaQVqKmqq6ytrq+wsbKztK8Ut7i5uru8vb6/wL8Tw8TFxsfIycrLzMsS
+z9DR0tPU1dbX2NcR29zd3t/g4eLj5OMQ5+jp6uvs7e7v8O8P8/T19vf4+fr7/PsO
+/wADChxIsOC/BggTKlzIsKHDhxAjQmRAsaLFixgzatzIsSPHBSBDihxJsqTJkyjA
+U6JUwLKly5cwY8qcSbMmzQQ4c+rcybOnz59AgwJFQLSo0aNIkypdyrQp0wNQo0qd
+SrWq1atYs2rdyvWqga9gw4odS7as2bNozxZYy7at27dw48qdS3cugbt48+rdy7ev
+37+AAwse7HeA4cOIEytezLix48eQI0tuLKCy5cuYM2vezLmz58+gQ3MOQLq06dOo
+U6tezbq169ewY8ueTbu27du4c+vezbu379/AgwsfTry48ePIkytfzry58+fQb4cA
+ADs=
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename=dk.css
+Content-Type: text/css; name=dk.css
+Content-Location: http://coding.derkeiler.com/styles/dk.css
+Content-Transfer-Encoding: Quoted-Printable
+
+body{font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:11p=
+x;margin:0;padding:0;background:#fff url("/images/body_back.gif") repeat=
+-x}table{font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size=
+:11px;margin:0;padding:0}#logo{position:absolute;top:0;left:0;margin:0;c=
+olor:white;z-index:2}#logo[id]{position:fixed}a:link{color:#036;backgrou=
+nd-color:transparent}a:visited{color:#616366;background-color:transparen=
+t}a:hover{color:#00b}a:active{color:#f1edcf}a:focus{color:#036}a:link im=
+g,a:visited img,a:hover img,a:active img{border:none}h1{font-size:20px}h=
+2{font-size:18px}#menu1{width:100%;min-width:700px;font-weight:bold;back=
+ground-color:#036;position:absolute;top:0px;left:0px;height:35px}#menu1 =
+ul{list-style:none; margin-bottom:0px;padding:0px;font-size:12px;positio=
+n:absolute;bottom:0px;width:80%;margin-left:44px;display:inline}#menu1 l=
+i{float:left;list-style:none;margin-bottom:3px;padding-bottom:3px;paddin=
+g-left:3px;padding-right:3px;padding-top:6px;display:inline}#menu1 a{pad=
+ding:5px 20px;border-top:1px solid #FFFDF2;border-left:1px solid #FFFDF2=
+;border-right:1px solid #FFFDF2;background-color:#039;text-decoration:no=
+ne}#menu1 a:link,#menu1 a:visited{color:#ccc}#menu1 a:hover{background-c=
+olor:#06C;color:#fff}#selected1 a,#selected1 a:link,#selected1 a:visited=
+,#selected1 a:hover{background-color:#06C;color:#fff}#menu2{width:100%;m=
+in-width:700px;font-weight:bold;background-color:#06C;position:absolute;=
+top:34px;left:0px;height:20px;z-index:1}#menu2 ul{margin-left:45px;list-=
+style:none;margin-bottom:0px;padding:0px;font-size:10px;position:absolut=
+e;bottom:0px;width:80%;display:inline}#menu2 li{float:left;list-style:no=
+ne;margin-bottom:1px;padding:2px;display:inline}#menu2 a{padding:0px 6px=
+;text-decoration:none}#menu2 a:link,#menu2 a:visited{color:#fff}#menu2 a=
+:hover{color:#fff;text-decoration:underline}#selected2 a,#selected2 a:li=
+nk,#selected2 a:visited,#selected2 a:hover{text-decoration:underline}#to=
+pbanner{position:absolute;top:70px;left:72px;height:90px;width:728px;mar=
+gin:0px;padding:0px}#nav{position:absolute;top:170px;left:72px;border-wi=
+dth:1px;border-color:#808080;border-style:solid;margin:0px;padding:3px;f=
+ont-size:10px;font-weight:bold}#nav a:link,#nav a:visited{text-decoratio=
+n:none;color:#036}#nav a:hover{text-decoration:underline;color:#036}#con=
+tent{position:absolute;top:200px;margin-left:72px;width:728px}#content h=
+1{text-align:center}#skyscraper{position:absolute;top:70px;left:836px;wi=
+dth:160px;margin-right:10px;height:600px;text-align:center}#footer{margi=
+n-top:20px;margin-bottom:5px;background-color:#036;border-width:1px;bord=
+er-color:#06C;border-style:inset;color:#fff;text-align:center;clear:both=
+;padding:5px}#footer hr{width:80%;border-style:dotted;border-color:#ccc}=
+#footer a,#footer a:link,#footer a:visited,#footer a:hover{text-decorati=
+on:none;color:#fff}
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename="@Right1.js"
+Content-Type: application/x-javascript; name="@Right1.js"
+Content-Location: http://208.71.124.75/RealMedia/ads/adstream_jx.ads/derkeiler.com/@Right1
+Content-Transfer-Encoding: Base64
+
+ZG9jdW1lbnQud3JpdGUgKCc8c2NyaXB0IGxhbmd1YWdlPScpOwpkb2N1bWVudC53
+cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCdKYXZhU2NyaXB0Jyk7CmRvY3Vt
+ZW50LndyaXRlICgiJyIpOwpkb2N1bWVudC53cml0ZSAoJyB0eXBlPScpOwpkb2N1
+bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCd0ZXh0L2phdmFzY3Jp
+cHQnKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnPlxu
+Jyk7CmRvY3VtZW50LndyaXRlICgnPCEtLVxuJyk7CmRvY3VtZW50LndyaXRlICgn
+ICAgLyogZGVya2VpbGVyIHJlY3RhbmdsZSBzbG90ICgzMDB4MjUwKSAqL1xuJyk7
+CmRvY3VtZW50LndyaXRlICgnICAgdmFyIGF3cnpfcm5kID0gTWF0aC5mbG9vcihN
+YXRoLnJhbmRvbSgpKjk5OTk5OTk5OTk5KTtcbicpOwpkb2N1bWVudC53cml0ZSAo
+JyAgIHZhciBhd3J6X3Byb3RvY29sID0gbG9jYXRpb24ucHJvdG9jb2wuaW5kZXhP
+ZignKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnaHR0
+cHMnKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnKT4t
+MT8nKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnaHR0
+cHM6Jyk7CmRvY3VtZW50LndyaXRlICgiJyIpOwpkb2N1bWVudC53cml0ZSAoJzon
+KTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnaHR0cDon
+KTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnO1xuJyk7
+CmRvY3VtZW50LndyaXRlICgnICAgaWYgKCFkb2N1bWVudC5waHBBZHNfdXNlZCkg
+ZG9jdW1lbnQucGhwQWRzX3VzZWQgPSAnKTsKZG9jdW1lbnQud3JpdGUgKCInIik7
+CmRvY3VtZW50LndyaXRlICgnLCcpOwpkb2N1bWVudC53cml0ZSAoIiciKTsKZG9j
+dW1lbnQud3JpdGUgKCc7XG4nKTsKZG9jdW1lbnQud3JpdGUgKCcgICBkb2N1bWVu
+dC53cml0ZSAoIjwiICsgInNjcmlwdCBsYW5ndWFnZT0nKTsKZG9jdW1lbnQud3Jp
+dGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnSmF2YVNjcmlwdCcpOwpkb2N1bWVu
+dC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCcgdHlwZT0nKTsKZG9jdW1l
+bnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgndGV4dC9qYXZhc2NyaXB0
+Jyk7CmRvY3VtZW50LndyaXRlICgiJyIpOwpkb2N1bWVudC53cml0ZSAoJyBzcmM9
+Jyk7CmRvY3VtZW50LndyaXRlICgiJyIpOwpkb2N1bWVudC53cml0ZSAoJyIpO1xu
+Jyk7CmRvY3VtZW50LndyaXRlICgnICAgZG9jdW1lbnQud3JpdGUgKGF3cnpfcHJv
+dG9jb2wrIi8vd3d3LmRlcmtlaWxlci5jb20vYWRzL2FkanMucGhwP249YWI0M2Ey
+NDUiKTtcbicpOwpkb2N1bWVudC53cml0ZSAoJyAgIGRvY3VtZW50LndyaXRlICgi
+JnpvbmVpZD00NiIpO1xuJyk7CmRvY3VtZW50LndyaXRlICgnICAgZG9jdW1lbnQu
+d3JpdGUgKCImZXhjbHVkZT0iICsgZG9jdW1lbnQucGhwQWRzX3VzZWQpO1xuJyk7
+CmRvY3VtZW50LndyaXRlICgnICAgZG9jdW1lbnQud3JpdGUgKCImbG9jPSIgKyBl
+c2NhcGUod2luZG93LmxvY2F0aW9uKSk7XG4nKTsKZG9jdW1lbnQud3JpdGUgKCcg
+ICBpZiAoZG9jdW1lbnQucmVmZXJyZXIpXG4nKTsKZG9jdW1lbnQud3JpdGUgKCcg
+ICAgICBkb2N1bWVudC53cml0ZSAoIiZyZWZlcmVyPSIgKyBlc2NhcGUoZG9jdW1l
+bnQucmVmZXJyZXIpKTtcbicpOwpkb2N1bWVudC53cml0ZSAoJyAgIGRvY3VtZW50
+LndyaXRlICgnKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRl
+ICgnJnI9Jyk7CmRvY3VtZW50LndyaXRlICgiJyIpOwpkb2N1bWVudC53cml0ZSAo
+JyArIGF3cnpfcm5kKTtcbicpOwpkb2N1bWVudC53cml0ZSAoJyAgIGRvY3VtZW50
+LndyaXRlICgiJmN0MD0iICsgZXNjYXBlKGRvY3VtZW50LnBocEFkc19jdDApKTtc
+bicpOwpkb2N1bWVudC53cml0ZSAoJyAgIGRvY3VtZW50LndyaXRlICgiJyk7CmRv
+Y3VtZW50LndyaXRlICgiJyIpOwpkb2N1bWVudC53cml0ZSAoJz48IiArICIvc2Ny
+aXB0PiIpO1xuJyk7CmRvY3VtZW50LndyaXRlICgnLy8tLT5cbicpOwpkb2N1bWVu
+dC53cml0ZSAoJzwvc2NyaXB0PicpOwo=
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename=adlog.gif
+Content-Type: image/gif; name=adlog.gif
+Content-Location: http://coding.derkeiler.com/ads/adlog.php?bannerid=62&campaignid=37&zoneid=36&source=&block=0&capping=0&session_capping=0&cb=46c79f1b76
+Content-Transfer-Encoding: Base64
+
+R0lGODlhAQABAIAAAP///wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename=logo.png
+Content-Type: image/png; name=logo.png
+Content-Location: http://coding.derkeiler.com/images/logo.png
+Content-Transfer-Encoding: Base64
+
+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
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename=arrow.gif
+Content-Type: image/gif; name=arrow.gif
+Content-Location: http://coding.derkeiler.com/images/arrow.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhDwAHAKECAP9mAP7+/v///////ywAAAAADwAHAAACGIRvIcooJ6J8R5mp
+3oxg80ph3wV5iCNlBQA7
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename=pdf.jpg
+Content-Type: image/jpeg; name=pdf.jpg
+Content-Location: http://coding.derkeiler.com/images/pdf.jpg
+Content-Transfer-Encoding: Base64
+
+/9j/4AAQSkZJRgABAQIAJQAlAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoH
+BwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQME
+BAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU
+FBQUFBQUFBQUFBQUFBT/wAARCAAPABADASIAAhEBAxEB/8QAFgABAQEAAAAAAAAA
+AAAAAAAABwMI/8QAIBAAAgICAgMBAQAAAAAAAAAAAQIDBAYRBQcAEiExUv/EABUB
+AQEAAAAAAAAAAAAAAAAAAAQF/8QAIBEAAgEBCQAAAAAAAAAAAAAAAQIDAAQFERIT
+QVFx8P/aAAwDAQACEQMRAD8AR8y6P7Wu85DQymjYzC+Es2K9lsolAjiMsYVVV3UK
+NBvgB/R/Pk+qOm8uwqrkHYHITXsVn4kLyXC1qd9LAmjVZDLBMXDMY2AiBBI39Pmm
++/c5qdf5Jxd2/YNCC5QlqR3jGZFgcyIfYqoLHQ+ga0da2PCLIO2MQt4ZynAcDl62
+pLtaStXoScbOAzuvqEV2Ueuyf1jrbE/B88GllRGzYk9mrk16zzpplFAO4UA+5r//
+2Q==
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename=xml.gif
+Content-Type: image/gif; name=xml.gif
+Content-Location: http://coding.derkeiler.com/images/xml.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhIwANAJEAAP/////MAP9mAAAAACH5BAAAAAAALAAAAAAjAA0AAAJKjI+p
+y+IPo5zR0IulFQC4/kUeN0JBdZLfCK4uaqZkO9cqKm9vCLb0g3DoOjRPj1UC6jY+
+FqSpkQmYyNCjSQTCMtyLrgtWMsbkRQEAOw==
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename="@Top.js"
+Content-Type: application/x-javascript; name="@Top.js"
+Content-Location: http://208.71.124.75/RealMedia/ads/adstream_jx.ads/derkeiler.com/@Top
+Content-Transfer-Encoding: Base64
+
+ZG9jdW1lbnQud3JpdGUgKCc8c2NyaXB0IGxhbmd1YWdlPScpOwpkb2N1bWVudC53
+cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCdKYXZhU2NyaXB0Jyk7CmRvY3Vt
+ZW50LndyaXRlICgiJyIpOwpkb2N1bWVudC53cml0ZSAoJyB0eXBlPScpOwpkb2N1
+bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCd0ZXh0L2phdmFzY3Jp
+cHQnKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnPlxu
+Jyk7CmRvY3VtZW50LndyaXRlICgnPCEtLVxuJyk7CmRvY3VtZW50LndyaXRlICgn
+ICAgLyogZGVya2VpbGVyIGxlYXRoZXJib2FyZCBzbG90ICg3Mjh4OTApICovXG4n
+KTsKZG9jdW1lbnQud3JpdGUgKCcgICB2YXIgYXdyel9ybmQgPSBNYXRoLmZsb29y
+KE1hdGgucmFuZG9tKCkqOTk5OTk5OTk5OTkpO1xuJyk7CmRvY3VtZW50LndyaXRl
+ICgnICAgdmFyIGF3cnpfcHJvdG9jb2wgPSBsb2NhdGlvbi5wcm90b2NvbC5pbmRl
+eE9mKCcpOwpkb2N1bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCdo
+dHRwcycpOwpkb2N1bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCcp
+Pi0xPycpOwpkb2N1bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCdo
+dHRwczonKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgn
+OicpOwpkb2N1bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCdodHRw
+OicpOwpkb2N1bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCc7XG4n
+KTsKZG9jdW1lbnQud3JpdGUgKCcgICBpZiAoIWRvY3VtZW50LnBocEFkc191c2Vk
+KSBkb2N1bWVudC5waHBBZHNfdXNlZCA9ICcpOwpkb2N1bWVudC53cml0ZSAoIici
+KTsKZG9jdW1lbnQud3JpdGUgKCcsJyk7CmRvY3VtZW50LndyaXRlICgiJyIpOwpk
+b2N1bWVudC53cml0ZSAoJztcbicpOwpkb2N1bWVudC53cml0ZSAoJyAgIGRvY3Vt
+ZW50LndyaXRlICgiPCIgKyAic2NyaXB0IGxhbmd1YWdlPScpOwpkb2N1bWVudC53
+cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCdKYXZhU2NyaXB0Jyk7CmRvY3Vt
+ZW50LndyaXRlICgiJyIpOwpkb2N1bWVudC53cml0ZSAoJyB0eXBlPScpOwpkb2N1
+bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCd0ZXh0L2phdmFzY3Jp
+cHQnKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnIHNy
+Yz0nKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnIik7
+XG4nKTsKZG9jdW1lbnQud3JpdGUgKCcgICBkb2N1bWVudC53cml0ZSAoYXdyel9w
+cm90b2NvbCsiLy93d3cuZGVya2VpbGVyLmNvbS9hZHMvYWRqcy5waHA/bj1hNTY1
+ZmYxOSIpO1xuJyk7CmRvY3VtZW50LndyaXRlICgnICAgZG9jdW1lbnQud3JpdGUg
+KCImem9uZWlkPTQ0Iik7XG4nKTsKZG9jdW1lbnQud3JpdGUgKCcgICBkb2N1bWVu
+dC53cml0ZSAoIiZleGNsdWRlPSIgKyBkb2N1bWVudC5waHBBZHNfdXNlZCk7XG4n
+KTsKZG9jdW1lbnQud3JpdGUgKCcgICBkb2N1bWVudC53cml0ZSAoIiZsb2M9IiAr
+IGVzY2FwZSh3aW5kb3cubG9jYXRpb24pKTtcbicpOwpkb2N1bWVudC53cml0ZSAo
+JyAgIGlmIChkb2N1bWVudC5yZWZlcnJlcilcbicpOwpkb2N1bWVudC53cml0ZSAo
+JyAgICAgIGRvY3VtZW50LndyaXRlICgiJnJlZmVyZXI9IiArIGVzY2FwZShkb2N1
+bWVudC5yZWZlcnJlcikpO1xuJyk7CmRvY3VtZW50LndyaXRlICgnICAgZG9jdW1l
+bnQud3JpdGUgKCcpOwpkb2N1bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3Jp
+dGUgKCcmcj0nKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRl
+ICgnICsgYXdyel9ybmQpO1xuJyk7CmRvY3VtZW50LndyaXRlICgnICAgZG9jdW1l
+bnQud3JpdGUgKCImY3QwPSIgKyBlc2NhcGUoZG9jdW1lbnQucGhwQWRzX2N0MCkp
+O1xuJyk7CmRvY3VtZW50LndyaXRlICgnICAgZG9jdW1lbnQud3JpdGUgKCInKTsK
+ZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnPjwiICsgIi9z
+Y3JpcHQ+Iik7XG4nKTsKZG9jdW1lbnQud3JpdGUgKCcvLy0tPlxuJyk7CmRvY3Vt
+ZW50LndyaXRlICgnPC9zY3JpcHQ+Jyk7Cg==
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename=adlog.gif
+Content-Type: image/gif; name=adlog.gif
+Content-Location: http://coding.derkeiler.com/ads/adlog.php?bannerid=61&campaignid=36&zoneid=4&source=&block=0&capping=0&session_capping=0&cb=9a258e7266
+Content-Transfer-Encoding: Base64
+
+R0lGODlhAQABAIAAAP///wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename="@Right3.js"
+Content-Type: application/x-javascript; name="@Right3.js"
+Content-Location: http://208.71.124.75/RealMedia/ads/adstream_jx.ads/derkeiler.com/@Right3
+Content-Transfer-Encoding: Base64
+
+ZG9jdW1lbnQud3JpdGUgKCc8c2NyaXB0IGxhbmd1YWdlPScpOwpkb2N1bWVudC53
+cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCdKYXZhU2NyaXB0Jyk7CmRvY3Vt
+ZW50LndyaXRlICgiJyIpOwpkb2N1bWVudC53cml0ZSAoJyB0eXBlPScpOwpkb2N1
+bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCd0ZXh0L2phdmFzY3Jp
+cHQnKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50LndyaXRlICgnPlxu
+Jyk7CmRvY3VtZW50LndyaXRlICgnPCEtLVxuJyk7CmRvY3VtZW50LndyaXRlICgn
+ICAgLyogZGVya2VpbGVyICh3aWRlLSkgc2t5c2NyYXBlciBzbG90ICgxNjB4NjAw
+IG9yIDEyMHg2MDApICovXG4nKTsKZG9jdW1lbnQud3JpdGUgKCcgICB2YXIgYXdy
+el9ybmQgPSBNYXRoLmZsb29yKE1hdGgucmFuZG9tKCkqOTk5OTk5OTk5OTkpO1xu
+Jyk7CmRvY3VtZW50LndyaXRlICgnICAgdmFyIGF3cnpfcHJvdG9jb2wgPSBsb2Nh
+dGlvbi5wcm90b2NvbC5pbmRleE9mKCcpOwpkb2N1bWVudC53cml0ZSAoIiciKTsK
+ZG9jdW1lbnQud3JpdGUgKCdodHRwcycpOwpkb2N1bWVudC53cml0ZSAoIiciKTsK
+ZG9jdW1lbnQud3JpdGUgKCcpPi0xPycpOwpkb2N1bWVudC53cml0ZSAoIiciKTsK
+ZG9jdW1lbnQud3JpdGUgKCdodHRwczonKTsKZG9jdW1lbnQud3JpdGUgKCInIik7
+CmRvY3VtZW50LndyaXRlICgnOicpOwpkb2N1bWVudC53cml0ZSAoIiciKTsKZG9j
+dW1lbnQud3JpdGUgKCdodHRwOicpOwpkb2N1bWVudC53cml0ZSAoIiciKTsKZG9j
+dW1lbnQud3JpdGUgKCc7XG4nKTsKZG9jdW1lbnQud3JpdGUgKCcgICBpZiAoIWRv
+Y3VtZW50LnBocEFkc191c2VkKSBkb2N1bWVudC5waHBBZHNfdXNlZCA9ICcpOwpk
+b2N1bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCcsJyk7CmRvY3Vt
+ZW50LndyaXRlICgiJyIpOwpkb2N1bWVudC53cml0ZSAoJztcbicpOwpkb2N1bWVu
+dC53cml0ZSAoJyAgIGRvY3VtZW50LndyaXRlICgiPCIgKyAic2NyaXB0IGxhbmd1
+YWdlPScpOwpkb2N1bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3JpdGUgKCdK
+YXZhU2NyaXB0Jyk7CmRvY3VtZW50LndyaXRlICgiJyIpOwpkb2N1bWVudC53cml0
+ZSAoJyB0eXBlPScpOwpkb2N1bWVudC53cml0ZSAoIiciKTsKZG9jdW1lbnQud3Jp
+dGUgKCd0ZXh0L2phdmFzY3JpcHQnKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRv
+Y3VtZW50LndyaXRlICgnIHNyYz0nKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRv
+Y3VtZW50LndyaXRlICgnIik7XG4nKTsKZG9jdW1lbnQud3JpdGUgKCcgICBkb2N1
+bWVudC53cml0ZSAoYXdyel9wcm90b2NvbCsiLy93d3cuZGVya2VpbGVyLmNvbS9h
+ZHMvYWRqcy5waHA/bj1hNjMzNTZkMCIpO1xuJyk7CmRvY3VtZW50LndyaXRlICgn
+ICAgZG9jdW1lbnQud3JpdGUgKCImem9uZWlkPTQ1Iik7XG4nKTsKZG9jdW1lbnQu
+d3JpdGUgKCcgICBkb2N1bWVudC53cml0ZSAoIiZleGNsdWRlPSIgKyBkb2N1bWVu
+dC5waHBBZHNfdXNlZCk7XG4nKTsKZG9jdW1lbnQud3JpdGUgKCcgICBkb2N1bWVu
+dC53cml0ZSAoIiZsb2M9IiArIGVzY2FwZSh3aW5kb3cubG9jYXRpb24pKTtcbicp
+Owpkb2N1bWVudC53cml0ZSAoJyAgIGlmIChkb2N1bWVudC5yZWZlcnJlcilcbicp
+Owpkb2N1bWVudC53cml0ZSAoJyAgICAgIGRvY3VtZW50LndyaXRlICgiJnJlZmVy
+ZXI9IiArIGVzY2FwZShkb2N1bWVudC5yZWZlcnJlcikpO1xuJyk7CmRvY3VtZW50
+LndyaXRlICgnICAgZG9jdW1lbnQud3JpdGUgKCcpOwpkb2N1bWVudC53cml0ZSAo
+IiciKTsKZG9jdW1lbnQud3JpdGUgKCcmcj0nKTsKZG9jdW1lbnQud3JpdGUgKCIn
+Iik7CmRvY3VtZW50LndyaXRlICgnICsgYXdyel9ybmQpO1xuJyk7CmRvY3VtZW50
+LndyaXRlICgnICAgZG9jdW1lbnQud3JpdGUgKCImY3QwPSIgKyBlc2NhcGUoZG9j
+dW1lbnQucGhwQWRzX2N0MCkpO1xuJyk7CmRvY3VtZW50LndyaXRlICgnICAgZG9j
+dW1lbnQud3JpdGUgKCInKTsKZG9jdW1lbnQud3JpdGUgKCInIik7CmRvY3VtZW50
+LndyaXRlICgnPjwiICsgIi9zY3JpcHQ+Iik7XG4nKTsKZG9jdW1lbnQud3JpdGUg
+KCcvLy0tPlxuJyk7CmRvY3VtZW50LndyaXRlICgnPC9zY3JpcHQ+Jyk7Cg==
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename=adlog.gif
+Content-Type: image/gif; name=adlog.gif
+Content-Location: http://coding.derkeiler.com/ads/adlog.php?bannerid=63&campaignid=38&zoneid=28&source=&block=0&capping=0&session_capping=0&cb=839acd2e40
+Content-Transfer-Encoding: Base64
+
+R0lGODlhAQABAIAAAP///wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==
+
+------------VrP3tTgODLJYoFiHu6OiOR
+Content-Disposition: inline; filename=quant.js
+Content-Type: application/x-javascript; name=quant.js
+Content-Location: http://edge.quantserve.com/quant.js
+Content-Transfer-Encoding: Base64
+
+ZnVuY3Rpb24gX3FjZHN0KCl7aWYoX3FjdHpvZmYoMCkhPV9xY3R6b2ZmKDYpKXJl
+dHVybiAxO3JldHVybiAwO30KZnVuY3Rpb24gX3FjdHpvZmYobSl7CnZhciBkMT1u
+ZXcgRGF0ZSgyMDAwLG0sMSwwLDAsMCwwKTsKdmFyIHQ9ZDEudG9HTVRTdHJpbmco
+KTsKdmFyIGQzPW5ldyBEYXRlKHQuc3Vic3RyaW5nKDAsdC5sYXN0SW5kZXhPZigi
+ICIpLTEpKTsKcmV0dXJuIGQxLWQzOwp9CmZ1bmN0aW9uIF9xY2V1YyhzKXsKaWYo
+dHlwZW9mKGVuY29kZVVSSUNvbXBvbmVudCk9PSdmdW5jdGlvbicpe3JldHVybiBl
+bmNvZGVVUklDb21wb25lbnQocyk7fQplbHNle3JldHVybiBlc2NhcGUocyk7fQp9
+CmZ1bmN0aW9uIF9xY3JuZCgpe3JldHVybiBNYXRoLnJvdW5kKE1hdGgucmFuZG9t
+KCkqMjE0NzQ4MzY0Nyk7fQpmdW5jdGlvbiBfcXZvaWQoKXtyZXR1cm47fQpmdW5j
+dGlvbiBfcWNnYyhuKXsKIHZhciB2PScnOwogdmFyIGM9ZG9jdW1lbnQuY29va2ll
+O2lmKCFjKXJldHVybiB2OwogdmFyIGk9Yy5pbmRleE9mKG4rIj0iKTsKIHZhciBs
+ZW49aStuLmxlbmd0aCsxOwogaWYoaT4tMSl7CiAgdmFyIGVuZD1jLmluZGV4T2Yo
+IjsiLCBsZW4pOwogIGlmKGVuZDwwKWVuZD1jLmxlbmd0aDsKICB2PWMuc3Vic3Ry
+aW5nKGxlbixlbmQpOwogfQogcmV0dXJuIHY7Cn0KZnVuY3Rpb24gX3FjZG9tYWlu
+KCl7CiB2YXIgZD1kb2N1bWVudC5kb21haW47CiBpZihkLnN1YnN0cmluZygwLDQp
+PT0id3d3LiIpZD1kLnN1YnN0cmluZyg0LGQubGVuZ3RoKTsKIHZhciBhPWQuc3Bs
+aXQoIi4iKTt2YXIgbGVuPWEubGVuZ3RoOwogaWYobGVuPDMpcmV0dXJuIGQ7CiB2
+YXIgZT1hW2xlbi0xXTsKIGlmKGUubGVuZ3RoPDMpcmV0dXJuIGQ7CiBkPWFbbGVu
+LTJdKyIuIithW2xlbi0xXTsKIHJldHVybiBkOwp9CmZ1bmN0aW9uIF9xY3NjKGRj
+KXsKIHZhciBzPSIiLHU9ZG9jdW1lbnQ7dmFyIGQ9X3FjZG9tYWluKCk7dmFyIGE9
+X3FjZ2MoIl9fcWNhIik7CiBpZihhLmxlbmd0aD4wKXtzKz0iO2ZwYW49MDtmcGE9
+IithO30KIGVsc2V7CiAgdS5jb29raWU9Il9fcWNhPSIrZGMrIjsgZXhwaXJlcz1T
+dW4sIDE4IEphbiAyMDM4IDAwOjAwOjAwIEdNVDsgcGF0aD0vOyBkb21haW49Iitk
+OwogIGE9X3FjZ2MoIl9fcWNhIik7CiAgaWYoYS5sZW5ndGg+MCl7cys9IjtmcGFu
+PTE7ZnBhPSIrZGM7fQogIGVsc2V7cys9IjtmcGFuPXU7ZnBhPSI7fQogfQogdmFy
+IGI9X3FjZ2MoIl9fcWNiIik7CiBpZihiLmxlbmd0aD4wKXtzKz0iO2ZwYm49MDtm
+cGI9IitiO30KIGVsc2V7Yj1fcWNybmQoKTsKICB1LmNvb2tpZT0iX19xY2I9Iiti
+KyI7IHBhdGg9LzsgZG9tYWluPSIrZDsKICBiPV9xY2djKCJfX3FjYiIpOwogIGlm
+KGIubGVuZ3RoPjApe3MrPSI7ZnBibj0xO2ZwYj0iK2I7fQogIGVsc2V7cys9Ijtm
+cGJuPXU7ZnBiPSI7fQogfQogcmV0dXJuIHM7Cn0KZnVuY3Rpb24gcXVhbnRzZXJ2
+ZSgpewogdmFyIHI9X3Fjcm5kKCk7CiB2YXIgc3I9JycscW89JycscW09JycsdXJs
+PScnLHJlZj0nJyxqZT0ndScsbnM9JzEnLG1lZGlhPSd3ZWJwYWdlJyxldmVudD0n
+bG9hZCc7CiBpZih0eXBlb2YgX3FvcHRpb25zICE9InVuZGVmaW5lZCIgJiYgX3Fv
+cHRpb25zIT1udWxsKXsKICBmb3IodmFyIGsgaW4gX3FvcHRpb25zKXsKICAgaWYo
+dHlwZW9mKF9xb3B0aW9uc1trXSkhPSdzdHJpbmcnKXtjb250aW51ZTt9CiAgIGlm
+KGs9PSdxYWNjdCcpe19xYWNjdD1fcW9wdGlvbnNba107fQogICBlbHNle3FvKz0n
+OycraysnPScrX3FjZXVjKF9xb3B0aW9uc1trXSk7fQogICBpZihrPT0nbWVkaWEn
+KXttZWRpYT1fcW9wdGlvbnNba107fQogICBpZihrPT0nZXZlbnQnKXtldmVudD1f
+cW9wdGlvbnNba107fQogIH0KICBfcW9wdGlvbnM9bnVsbDsKIH0KIGlmKCh0eXBl
+b2YgX3FhY2N0ID09InVuZGVmaW5lZCIpfHwoX3FhY2N0Lmxlbmd0aD09MCkpcmV0
+dXJuOwogaWYobWVkaWE9PSd3ZWJwYWdlJyAmJiBldmVudD09J2xvYWQnKXsKICBp
+ZigodHlwZW9mIF9xcGl4ZWxzZW50ICE9InVuZGVmaW5lZCIpJiYoX3FwaXhlbHNl
+bnQ9PV9xYWNjdCkpcmV0dXJuOwogIF9xcGl4ZWxzZW50PV9xYWNjdDt9CiB2YXIg
+Y2U9KG5hdmlnYXRvci5jb29raWVFbmFibGVkKT8iMSI6IjAiOwogaWYodHlwZW9m
+IG5hdmlnYXRvci5qYXZhRW5hYmxlZCAhPSd1bmRlZmluZWQnKWplPShuYXZpZ2F0
+b3IuamF2YUVuYWJsZWQoKSk/IjEiOiIwIjsKIGlmKHR5cGVvZiBfcW1ldGEgIT0i
+dW5kZWZpbmVkIiAmJiBfcW1ldGEhPW51bGwpe3FtPSc7bT0nK19xY2V1YyhfcW1l
+dGEpO19xbWV0YT1udWxsO30KIGlmKHNlbGYuc2NyZWVuKXtzcj1zY3JlZW4ud2lk
+dGgrIngiK3NjcmVlbi5oZWlnaHQrIngiK3NjcmVlbi5jb2xvckRlcHRoO30KIHZh
+ciBkPW5ldyBEYXRlKCk7CiB2YXIgZHN0PV9xY2RzdCgpOwoKCgogdmFyIGRjPSIx
+MTc5NDQ5ODM5LTYxMjI2OTQwLTQ2MDM2MzcwIjsKIHZhciBxcz0iaHR0cDovL3Bp
+eGVsLnF1YW50c2VydmUuY29tIjsKIHZhciBmcD1fcWNzYyhkYyk7CiBpZih3aW5k
+b3cubG9jYXRpb24gJiYgd2luZG93LmxvY2F0aW9uLmhyZWYpdXJsPV9xY2V1Yyh3
+aW5kb3cubG9jYXRpb24uaHJlZik7CiBpZih3aW5kb3cuZG9jdW1lbnQgJiYgd2lu
+ZG93LmRvY3VtZW50LnJlZmVycmVyKXJlZj1fcWNldWMod2luZG93LmRvY3VtZW50
+LnJlZmVycmVyKTsKIGlmKHNlbGY9PXRvcClucz0nMCc7CiB2YXIgaW1nPW5ldyBJ
+bWFnZSgxLDEpOwogaW1nLmFsdD0iIjsKIGltZy5zcmM9cXMrJy9waXhlbCcrJzty
+PScrcitmcCsnO25zPScrbnMrJzt1cmw9Jyt1cmwrJztyZWY9JytyZWYrJztjZT0n
+K2NlKyc7amU9JytqZSsnO3NyPScrc3IrJztkYz0nK2RjKyc7ZHN0PScrZHN0Kyc7
+ZXQ9JytkLmdldFRpbWUoKSsnO3R6bz0nK2QuZ2V0VGltZXpvbmVPZmZzZXQoKSsn
+O2E9JytfcWFjY3QrcW8rcW07CiBpbWcub25sb2FkPWZ1bmN0aW9uKCkge19xdm9p
+ZCgpO30KfQpxdWFudHNlcnZlKCk7Cg==
+
+------------VrP3tTgODLJYoFiHu6OiOR--

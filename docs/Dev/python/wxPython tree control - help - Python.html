@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" dir="ltr" lang="en-US"> <head> <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <meta http-equiv="X-UA-Compatible" content="IE=7" /> <meta name="generator" content="vBulletin 3.6.1" />  <meta name="keywords" content="Python, programming forum, computer forum, programming help, computer help, tech support, technical support, web development, website promotion, internet marketing, seo" /> <meta name="description" content="wxPython tree control - help - Python Community and Forum - Our Python forum is the place for Q&amp;A-style discussions related to this interpreted OOP language." />    <link rel="stylesheet" type="text/css" href="/forums/clientscript/vbulletin_css/style-4908a840-00006.css" id="vbulletin_css" /> <style type="text/css">    ul#unanswered { display: none; }     </style> <!--[if lt IE 7]> <style type="text/css"> div.box, div.userinfo, div.authorcomment { position: static; } div.tlc, div.blc, div.trc, div.brc { display: none; } </style> <![endif]-->   <script type="text/javascript" src="/forums/clientscript/jquery.js"></script> <script type="text/javascript" src="/forums/clientscript/jquery.dimensions.min.js"></script>  <script type="text/javascript" src="/forums/clientscript/jquery.tooltip.min.js"></script> <script type="text/javascript" src="/forums/clientscript/thickbox-compressed.js"></script> <link rel="stylesheet" href="/forums/clientscript/thickbox.css" type="text/css" />      <script type="text/javascript" src="/forums/clientscript/jquery.accordion.min.js"></script> <script type="text/javascript" src="/forums/clientscript/jquery.hoverIntent.minified.js"></script>   <script type="text/javascript"> <!--
+var SESSIONURL = "";
+var IMGDIR_MISC = "/forums/myimages/misc";
+var vb_disable_ajax = parseInt("0", 10);
+// --> </script> <script type="text/javascript" src="/scripts/minify.php?filename=global"></script> <script type="text/javascript" src="/scripts/minify.php?filename=menu"></script>  <link rel="alternate" title="DaniWeb IT Discussion Community - Forums" href="/forums/external.php" type="application/rss+xml" /> <link rel="alternate" title="DaniWeb IT Discussion Community - Blogs" href="/blogs/rss.php" type="application/rss+xml" />  <link rel="alternate" type="application/rss+xml" title="DaniWeb IT Discussion Community Forums - Python" href="/forums/rss114.xml" />     <link rel="top" href="/" title="DaniWeb IT Discussion Community" /> <link rel="search" href="/forums/search.php" title="Search" /> <link rel="help" href="/forums/faq.php" title="FAQ" /> <title>wxPython tree control - help - Python</title> <script type="text/javascript" src="/scripts/minify.php?filename=post_loader"></script> </head> <body onload=""> <div align="center" id="mainbg"> <div class="thinborder"> <div class="top"></div><div class="thincontainer"> <!-- google_ad_section_start(weight=ignore) -->  <div align="right"> <div id="login"><div>  <form action="/forums/login.php?do=login" method="post" onsubmit="md5hash(vb_login_password,vb_login_md5password,vb_login_md5password_utf)"> <script type="text/javascript" src="/forums/clientscript/vbulletin_md5.js?v=360"></script> <table cellpadding="0" cellspacing="0" align="center"> <tr> <td>User Name</td> <td><input type="text" class="button" name="vb_login_username" id="navbar_username" accesskey="u" style="width:80px" /></td> <td>Password</td> <td><input type="password" class="button" name="vb_login_password" accesskey="p" style="width:100px" /></td> <td><label for="cb_cookieuser_navbar"><input type="checkbox" name="cookieuser" value="1" id="cb_cookieuser_navbar" accesskey="c" checked="checked" />Remember Me?</label></td> <td><input type="image" src="/forums/myimages/misc/dani/login.gif" value="Log in" title="Enter your username and password in the boxes provided to login, or click the 'register' button to create a profile for yourself." accesskey="s" /></td> <td><a href="/forums/register.php"><img src="/forums/myimages/misc/dani/register.gif" border="0" alt="Register" width="93" height="24" /></a></td> </tr> </table> <input type="hidden" name="s" value="" /> <input type="hidden" name="do" value="login" /> <input type="hidden" name="forceredirect" value="1" /> <input type="hidden" name="vb_login_md5password" /> <input type="hidden" name="vb_login_md5password_utf" /> </form>  </div></div> </div> <a name="top"></a>   <div class="mspaced" style="height:90px"> <div style="margin-top:25px; float:left"> <a href="/"><img src="/forums/myimages/style/logo.gif" border="0" alt="DaniWeb IT Discussion Community" width="155" height="32" /></a> </div> <div id="leaderboard"><iframe id="ileaderboard" width="728" height="90" allowtransparency="true" border="0" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" hspace="0" vspace="0" noresize="true" src="http://aj.daniweb.com/servlet/ajrotator/103152/114/vh?z=daniweb&amp;ct=103149&amp;dim=103151&amp;kw=member0,group1,114,2,-1,threads&amp;random=755535527&amp;pos=1&amp;ns=softwaredevelopment"></iframe></div> <div style="clear:both"></div> </div>     <div class="spaced"> <table class="navmenu" border="0" width="887" cellpadding="0" cellspacing="0"> <tr> <td width="64"><div class="category"><a href="/category2.html"><img src="/forums/myimages/style/navigation/off/home.gif" width="64" height="28" class="ro" alt="Home" border="0" /></a></div></td> <td width="62"><div class="category"><a href="/forums/forum2.html"><img src="/forums/myimages/style/navigation/softwaredevelopment/forums.gif" width="62" height="28"  alt="Forums" border="0" /></a></div></td>  <td width="80"><div class="category"><a href="/tutorials/category2.html"><img src="/forums/myimages/style/navigation/off/tutorials.gif" width="80" height="28" class="ro" alt="Tutorials" border="0" /></a></div></td>   <td width="113"><div class="category"><a href="/code/forum2.html"><img src="/forums/myimages/style/navigation/off/code.gif" width="113" height="28" class="ro" alt="Code Snippets"  border="0"/></a></div></td>  <td width="60"><div class="category"><a href="/blogs/forum2.html"><img src="/forums/myimages/style/navigation/off/blogs.gif" width="60" height="28" class="ro" alt="Blogs" border="0" /></a></div></td> <td width="112"><div class="category"><a href="/directory/forum2.html"><img src="/forums/myimages/style/navigation/off/directory.gif" width="112" height="28" class="ro" alt="Link Directory" border="0" /></a></div></td>  <td width="100%"></td> <td width="13"><img src="/forums/myimages/style/navigation/rcorner.gif" width="13" height="28" alt="" border="0" /></td> </tr> </table> <table border="0" width="887" cellpadding="0" cellspacing="0"> <tr> <td width="64"><div class="category"><a href="/" title="Home"><img src="/forums/myimages/style/navigation/all.gif" width="64" height="28" alt="All" border="0" /></a></div></td> <td width="96"><div class="category" id="menu1"><a href="/category1.html" title="Tech Talk"><img src="/forums/myimages/style/navigation/techtalk.gif" width="96" height="28" alt="Tech Talk" border="0" /></a></div></td> <td width="176"><div class="category" id="menu2"><a href="/category2.html" title="Software Development"><img src="/forums/myimages/style/navigation/softwaredevelopment_on.gif" width="176" height="28" alt="Software Development" border="0" /></a></div></td> <td width="152"><div class="category" id="menu31"><a href="/category31.html" title="Web Development"><img src="/forums/myimages/style/navigation/webdevelopment.gif" width="152" height="28" alt="Web Development" border="0" /></a></div></td> <td width="143"><div class="category" id="menu25"><a href="/category25.html" title="Site Management"><img src="/forums/myimages/style/navigation/sitemanagement.gif" width="143" height="28" alt="Site Management"  border="0"/></a></div></td> <td width="133"><div class="category" id="menu152"><a href="/category152.html" title="IT Water Cooler"><img src="/forums/myimages/style/navigation/itwatercooler.gif" width="133" height="28" alt="IT Water Cooler" border="0" /></a></div></td> <td width="123"><div class="category" id="menu3"><a href="/category3.html" title="Coffee House"><img src="/forums/myimages/style/navigation/coffeehouse.gif" width="123" height="28" alt="Coffee House" border="0" /></a></div></td> </tr> </table> </div>  <!-- google_ad_section_end -->   <div> <div class="page" style="text-align:left"> <div style="padding:0px">  <div id="content"> 
+<div id="breadcrumb"><div><div>
+<h1>
+	
+		<a href="/" accesskey="1">DaniWeb Home</a>
+		
+			&gt; <a href="/forums/" accesskey="2">Forums</a>
+		
+		 &gt; <a href="forum2.html">Software Development</a>   &gt; <a href="forum114.html">Python</a>  
+		<!-- &gt; wxPython tree control -... -->
+	
+</h1>
+</div></div></div>
+
+
+<div id="navtitle"><div><div>
+<h1>
+	
+	 wxPython tree control - help  
+	
+</h1>
+</div></div></div>
+
+
+
+<!-- google_ad_section_start(weight=ignore) -->
+<!-- box --> <div class="box">
+	<div class="tlc"><div class="tli">&bull;</div></div>
+	<div class="blc"><div class="bli">&bull;</div></div>
+	<div class="trc"><div class="tri">&bull;</div></div>
+	<div class="brc"><div class="bri">&bull;</div></div>
+	<a style="float:right; margin-top:8px" href="#top" onclick="return toggle_effect('guestinfo')"><img id="collapseimg_guestinfo" src="/forums/myimages/buttons/collapse_tcat.gif" alt="" border="0" width="24" height="24" /></a>
+	<div class="h2">What is DaniWeb IT Discussion Community?</div>
+	<div style="clear:right"></div>
+	
+		<div id="ad_welcomerectangle"><script type="text/javascript"><!--
+google_ad_client = "pub-8426641637123945";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "text_image";
+//2007-07-30: Welcome Nag
+google_ad_channel = "2728197858+4798191823+3668950816";
+google_color_border = "EEEEEE";
+google_color_bg = "EEEEEE";
+google_color_link = "0033CC";
+google_color_text = "444444";
+google_color_url = "008000";
+//--> </script> <script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </script></div>
+	
+	<div id="ad_spacer"></div>
+	<div id="collapseobj_guestinfo" style="">
+	<div class="spaced">
+	
+		
+		You're currently browsing the <strong>Python</strong> section within the <strong>Software Development</strong> category of DaniWeb,
+		
+	 a massive community of <strong>346,348</strong> software developers, web developers, Internet marketers, and tech gurus who are all enthusiastic about making contacts, networking, and learning from each other. In fact, there are <strong>3,220</strong> IT professionals currently interacting right now! <a href="/forums/register.php">Registration is free</a>, only takes a minute and lets you enjoy all of the interactive features of the site.
+	</div>
+	<div class="h1"><a href="/forums/register.php">Join our community!</a></div>
+	</div>
+	<div style="clear:right"></div>
+</div> <!-- / box -->
+<!-- google_ad_section_end -->
+
+
+
+
+
+
+<div id="textsponsor">
+	
+		
+		<div class="spaced">
+			Please support our <strong>Python</strong> advertiser:
+			<script type="text/javascript"><!--
+google_ad_client = "pub-8426641637123945";
+//Navbar - Software Development
+google_ad_slot = "1806113312";
+google_ad_output = "textlink";
+google_ad_format = "ref_text";
+google_cpa_choice = ""; // on file
+//--></script> <script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </script>
+		</div>
+		
+	
+	
+</div>
+   <a name="poststop" id="poststop"></a> <div id="subforumheading">  <div style="float:left">  <span id="threadtools"> <a href="/forums/thread62161.html?nojs=1#goto_threadtools">Thread Tools</a> <script type="text/javascript"> vbmenu_register("threadtools"); </script> </span>   <span id="displaymodes"> &nbsp;<a href="/forums/thread62161.html?nojs=1#goto_displaymodes">Display Modes</a> <script type="text/javascript"> vbmenu_register("displaymodes"); </script> </span>  </div> <div style="clear:both"></div> </div>     <div class="spaced"> <div style="float:right"> Views: <strong>2611</strong> | Replies: <strong>1</strong>  </div> <div class="ad_linkunit" style="padding-top:5px"><script type="text/javascript"><!--
+google_ad_client = "pub-8426641637123945";
+google_ad_width = 468;
+google_ad_height = 15;
+google_ad_format = "468x15_0ads_al";
+//2007-04-07: Link Unit - Threads
+google_ad_channel = "2728197858+4798191823+9773045337";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "0033CC";
+google_color_text = "444444";
+google_color_url = "008000";
+//--> </script> <script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js"> </script></div> <div style="clear:right"></div> </div> <div id="searchwords" class="big spaced"> These search terms have been highlighted: <!-- google_ad_section_start --> <strong class="smallfont highlight">python wx treecontrol</strong> <!-- google_ad_section_end -->  <span style="font-weight:normal">  (<a href="#" onclick="clearHilite(); return false;">Clear</a>) <script type="text/javascript">
+clearHilite = function() {
+$('strong.highlight').removeClass('highlight');
+$('div#searchwords').hide();
+};
+</script>  </span>  </div>    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom:20px"> <tr valign="bottom">  <td class="smallfont"><a href="newreply.php?do=newreply&amp;noquote=1&amp;p=278249"><img src="/forums/myimages/buttons/reply.gif" alt="Reply" border="0" /></a></td>   </tr> </table>    <div style="margin-bottom:20px">    </div> <script language="javascript" src="/scripts/adsense_postbit.php?channel=2728197858+4798191823+2972547138&amp;number=2"></script> <script language="javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>   <div id="posts"><!-- post #278249 -->    <div id="edit278249" style="padding:0px 0px 5px 0px"> 	  <a name="post278249"></a>    <div class="userinfo" id="post278249"> <div class="tlc"><div class="tli">&bull;</div></div> <div class="trc"><div class="tri">&bull;</div></div> <div style="float:right" class="smallfont"> <div>Join Date: Nov 2006</div>   <div>Posts: 5</div>   <div>Reputation: <span id="repdisplay_278249_127072"><img class="inlineimg" src="/forums/myimages/reputation/reputation_pos.gif" alt="7even is an unknown quantity at this point" border="0" />&nbsp;</span></div> <div>Rep Power: <span id="reppower_278249_127072">0</span></div>  <div>Solved Threads: 0 </div> <div>    </div> </div>  <div class="smallfont" style="float:right; margin-right:10px"> <div class="spaced">          </div> </div>   <div id="postmenu_278249" style="float:left; position:relative; display:inline"> <div>  <a class="bigusername" href="member127072.html">7even</a> <img class="inlineimg" src="/forums/myimages/statusicon/user_offline.gif" alt="7even is offline" border="0" /> <span class="smallfont">Offline</span>   <script type="text/javascript"> vbmenu_register("postmenu_278249", true); </script>  </div> <div class="smallfont">Newbie Poster</div>  </div> <div style="clear:both"></div> </div> <div class="quote"> <div class="rule">   <h2>  <strong>wxPython tree control - help</strong> </h2>   <div style="float:right"> &nbsp; #<a href="post278249-1.html" id="postcount278249" name="1"><strong>1</strong></a> &nbsp;  </div> <div> <span>  Nov 20th, 2006  </span>       </div> </div> <div id="td_post_278249">     <div id="post_message_278249">   <div class="rule"> <div class="ad_txt"> <!-- google_ad_section_start --> I have the following sample code:<br />
+<br />
+ <div class="codeblock"> <div class="spaced"> <div class="light" style="float:right"> <a href="/forums/misc-explaincode.html?TB_iframe=true&amp;height=400&amp;width=680" class="thickbox" title="Help with Code Tags" target="_blank">Help with Code Tags</a> </div> <div>(<a href="#" onclick="toggle('code414850225'); return false;">Toggle Plain Text</a>)</div> </div> <div class="ad_notxt" style="width:560px"> <div id="code414850225_1"><pre class="code">]import <strong class="highlight">wx</strong>
+
+class TestFrame(<strong class="highlight">wx</strong>.Frame):
+
+    def __init__(self):
+
+        <strong class="highlight">wx</strong>.Frame.__init__(self, None, title=&quot;tree example&quot;, size=(600,30))
+
+        
+
+        self.tree = <strong class="highlight">wx</strong>.TreeCtrl(self)
+
+       
+
+        root = self.tree.AddRoot(&quot;Example&quot;)
+
+        
+
+        items = [
+
+               &quot;test1&quot;,
+
+               &quot;test2&quot;,
+
+               &quot;test3&quot;,]
+
+      
+
+        self.AddTreeNodes(root, items)
+
+      
+
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_ITEM_EXPANDED, self.OnItemExpanded, self.tree)
+
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_ITEM_COLLAPSED, self.OnItemCollapsed, self.tree)
+
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_SEL_CHANGED, self.OnSelChanged, self.tree)
+
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_ITEM_ACTIVATED, self.OnActivated, self.tree)
+
+     
+
+        self.tree.Expand(root)
+
+        
+
+      
+
+    def AddTreeNodes(self, parentItem, items):
+
+        
+
+       
+
+        for item in items:
+
+            if type(item) == str:
+
+                self.tree.AppendItem(parentItem, item)
+
+            else:
+
+                newItem = self.tree.AppendItem(parentItem, item[0])
+
+                self.AddTreeNodes(newItem, item[0])
+
+                
+
+    def GetItemText(self, item):
+
+        if item:
+
+            return self.tree.GetItemText(item)
+
+        else:
+
+            return &quot;&quot;
+
+        
+
+    def OnItemExpanded(self, evt):
+
+        print &quot;OnItemExpanded: &quot;, self.GetItemText(evt.GetItem())
+
+        
+
+    def OnItemCollapsed(self, evt):
+
+        print &quot;OnItemCollapsed:&quot;, self.GetItemText(evt.GetItem())
+
+    def OnSelChanged(self, evt):
+
+        print &quot;OnSelChanged:   &quot;, self.GetItemText(evt.GetItem())
+
+    def OnActivated(self, evt):
+
+        print &quot;OnActivated:    &quot;, self.GetItemText(evt.GetItem())
+
+app = <strong class="highlight">wx</strong>.PySimpleApp(None)
+
+frame = TestFrame()
+
+frame.Show()
+
+app.MainLoop()</pre></div> <div id="code414850225_2" style="display:none"><textarea class="code" readonly="true" wrap="off" style="height:258px">]import <strong class="highlight">wx</strong>
+
+class TestFrame(<strong class="highlight">wx</strong>.Frame):
+
+    def __init__(self):
+
+        <strong class="highlight">wx</strong>.Frame.__init__(self, None, title=&quot;tree example&quot;, size=(600,30))
+
+        
+
+        self.tree = <strong class="highlight">wx</strong>.TreeCtrl(self)
+
+       
+
+        root = self.tree.AddRoot(&quot;Example&quot;)
+
+        
+
+        items = [
+
+               &quot;test1&quot;,
+
+               &quot;test2&quot;,
+
+               &quot;test3&quot;,]
+
+      
+
+        self.AddTreeNodes(root, items)
+
+      
+
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_ITEM_EXPANDED, self.OnItemExpanded, self.tree)
+
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_ITEM_COLLAPSED, self.OnItemCollapsed, self.tree)
+
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_SEL_CHANGED, self.OnSelChanged, self.tree)
+
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_ITEM_ACTIVATED, self.OnActivated, self.tree)
+
+     
+
+        self.tree.Expand(root)
+
+        
+
+      
+
+    def AddTreeNodes(self, parentItem, items):
+
+        
+
+       
+
+        for item in items:
+
+            if type(item) == str:
+
+                self.tree.AppendItem(parentItem, item)
+
+            else:
+
+                newItem = self.tree.AppendItem(parentItem, item[0])
+
+                self.AddTreeNodes(newItem, item[0])
+
+                
+
+    def GetItemText(self, item):
+
+        if item:
+
+            return self.tree.GetItemText(item)
+
+        else:
+
+            return &quot;&quot;
+
+        
+
+    def OnItemExpanded(self, evt):
+
+        print &quot;OnItemExpanded: &quot;, self.GetItemText(evt.GetItem())
+
+        
+
+    def OnItemCollapsed(self, evt):
+
+        print &quot;OnItemCollapsed:&quot;, self.GetItemText(evt.GetItem())
+
+    def OnSelChanged(self, evt):
+
+        print &quot;OnSelChanged:   &quot;, self.GetItemText(evt.GetItem())
+
+    def OnActivated(self, evt):
+
+        print &quot;OnActivated:    &quot;, self.GetItemText(evt.GetItem())
+
+app = <strong class="highlight">wx</strong>.PySimpleApp(None)
+
+frame = TestFrame()
+
+frame.Show()
+
+app.MainLoop()</textarea></div> </div> </div> 
+<br />
+I want to display some checkboxes when i select test1, test2 or test3 from tree control. The problem is that i don't know how to display a checkbox for example only when I select test1. When I don't select test1 i want the checkboxes to be hidden. What I trying to do is displaying certain options only when i click the proper node. Can someone help me ? <br />
+Thank you. <!-- google_ad_section_end --> </div> </div> </div>    <div class="spaced smallfont"> <em> Last edited by 7even : Nov 20th, 2006 at <span class="time">6:59 am</span>.  </em> </div>        <div style="float:right">   <script type="text/javascript">
+addthis_pub             = 'cscgal'; 
+addthis_logo            = 'http://www.daniweb.com/forums/myimages/style/logo.gif';
+addthis_logo_background = 'FFFFFF';
+addthis_logo_color      = '444444';
+addthis_brand           = 'DaniWeb';
+addthis_options         = 'favorites, email, google, live, digg, slashdot, more';
+</script> <a href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="http://s9.addthis.com/button1-share.gif" width="125" height="16" border="0" alt="" /></a> <script type="text/javascript" src="http://s7.addthis.com/js/152/addthis_widget.js"></script>   </div>  <div>     <a href="newreply.php?do=newreply&amp;p=278249"><img src="/forums/myimages/buttons/quote.gif" alt="Reply With Quote" border="0" /></a>          &nbsp; </div> </div> </div>  <div class="bottomquote"></div>  <!-- post 278249 popup menu --> <div class="vbmenu_popup" id="postmenu_278249_menu" style="display:none;"> <table cellpadding="4" cellspacing="1" border="0"> <tr> <td class="thead">7even</td> </tr>  <tr><td class="vbmenu_option"><a href="member127072.html">View Public Profile</a></td></tr>   <tr><td class="vbmenu_option"><a href="private.php?do=newpm&amp;u=127072">Send a private message to 7even</a></td></tr>     <tr><td class="vbmenu_option"><a href="finduser127072.html">Find all posts by 7even</a></td></tr>   </table> </div> <!-- / post 278249 popup menu -->   </div>   <!-- / post #278249 --><!-- post #278354 -->    <div id="edit278354" style="padding:0px 0px 5px 0px"> 	  <a name="post278354"></a>    <div class="userinfo" id="post278354"> <div class="tlc"><div class="tli">&bull;</div></div> <div class="trc"><div class="tri">&bull;</div></div> <div style="float:right" class="smallfont"> <div>Join Date: Oct 2004</div> <div>Location: Mojave Desert</div>  <div>Posts: 2,247</div>   <div>Reputation: <span id="repdisplay_278354_19440"><img class="inlineimg" src="/forums/myimages/reputation/reputation_pos.gif" alt="vegaseat is on a distinguished road" border="0" />&nbsp;</span></div> <div>Rep Power: <span id="reppower_278354_19440">8</span></div>  <div>Solved Threads: 163 </div> <div>    </div> </div>  <div class="smallfont" style="float:right; margin-right:10px"> <div class="spaced">  <div><a href="/forums/showgroups.php"><img src="/forums/dani-images/ranks/moderator.gif" alt="Moderator" border="0" width="125" height="20" /></a></div>          </div> </div>   <div style="float:left; margin-right:20px"><a href="member19440.html"><img src="customavatars/avatar19440_9.gif" width="80" height="80" alt="vegaseat's Avatar" border="0" /></a></div>  <div id="postmenu_278354" style="float:left; position:relative; display:inline"> <div>  <a class="bigusername" href="member19440.html"><span style="color:#003366; font-weight:bold">vegaseat</span></a> <img class="inlineimg" src="/forums/myimages/statusicon/user_offline.gif" alt="vegaseat is offline" border="0" /> <span class="smallfont">Offline</span>   <script type="text/javascript"> vbmenu_register("postmenu_278354", true); </script>  </div> <div class="smallfont">Kickbutt Moderator</div> <div class="smallfont"><img src="dani-images/ranks/member.gif" alt="" border="" /><img src="dani-images/ranks/member.gif" alt="" border="" /></div> </div> <div style="clear:both"></div> </div> <div class="quote"> <div class="rule">   <h2>  <strong>Re: wxPython tree control - help</strong> </h2>   <div style="float:right"> &nbsp; #<a href="post278354-2.html" id="postcount278354" name="2"><strong>2</strong></a> &nbsp;  </div> <div> <span>  Nov 20th, 2006  </span>       </div> </div> <div id="td_post_278354">     <div id="post_message_278354">   <div class="rule"> <div class="ad_txt"> <!-- google_ad_section_start --> Are you talking about something like this ...<br />
+<div class="codeblock"> <div class="spaced"> <div class="light" style="float:right"> <a href="/forums/misc-explaincode.html?TB_iframe=true&amp;height=400&amp;width=680" class="thickbox" title="Help with Code Tags" target="_blank">Help with Code Tags</a> </div> <div> <strong><strong class="highlight">python</strong> Syntax</strong> (<a href="#" onclick="toggle('code1956142374'); return false;">Toggle Plain Text</a>) </div> </div> <div class="ad_notxt" style="width:560px"> <div id="code1956142374_1"><pre class="code"><ol><li class="li1"><div class="de1"><span class="co1"># example of <strong class="highlight">wx</strong>.TreeCtrl()</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1"><span class="kw1">import</span> <strong class="highlight">wx</strong></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2"><span class="kw1">class</span> TestFrame<span class="br0">&#40;</span><strong class="highlight">wx</strong>.<span class="me1">Frame</span><span class="br0">&#41;</span>:</div></li><li class="li1"><div class="de1">    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:</div></li><li class="li1"><div class="de1">        <strong class="highlight">wx</strong>.<span class="me1">Frame</span>.<span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span>, <span class="kw2">None</span>, title=<span class="st0">&quot;tree example&quot;</span>, size=<span class="br0">&#40;</span><span class="nu0">300</span>,<span class="nu0">130</span><span class="br0">&#41;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">        <span class="kw2">self</span>.<span class="me1">cb1</span> = <strong class="highlight">wx</strong>.<span class="me1">CheckBox</span><span class="br0">&#40;</span><span class="kw2">self</span>, <span class="nu0">-1</span>, <span class="st0">&quot;test1&quot;</span>, pos=<span class="br0">&#40;</span><span class="nu0">280</span>,<span class="nu0">10</span><span class="br0">&#41;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">        <span class="kw2">self</span>.<span class="me1">cb1</span>.<span class="me1">Hide</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">        <span class="kw2">self</span>.<span class="me1">tree</span> = <strong class="highlight">wx</strong>.<span class="me1">TreeCtrl</span><span class="br0">&#40;</span><span class="kw2">self</span>, size=<span class="br0">&#40;</span><span class="nu0">280</span>,<span class="nu0">100</span><span class="br0">&#41;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">        root = <span class="kw2">self</span>.<span class="me1">tree</span>.<span class="me1">AddRoot</span><span class="br0">&#40;</span><span class="st0">&quot;Example&quot;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">        items = <span class="br0">&#91;</span><span class="st0">&quot;test1&quot;</span>,</div></li><li class="li1"><div class="de1">               <span class="st0">&quot;test2&quot;</span>,</div></li><li class="li2"><div class="de2">               <span class="st0">&quot;test3&quot;</span>,<span class="br0">&#93;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">        <span class="kw2">self</span>.<span class="me1">AddTreeNodes</span><span class="br0">&#40;</span>root, items<span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">        <span class="kw2">self</span>.<span class="me1">Bind</span><span class="br0">&#40;</span><strong class="highlight">wx</strong>.<span class="me1">EVT_TREE_ITEM_EXPANDED</span>, <span class="kw2">self</span>.<span class="me1">OnItemExpanded</span>, <span class="kw2">self</span>.<span class="me1">tree</span><span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">        <span class="kw2">self</span>.<span class="me1">Bind</span><span class="br0">&#40;</span><strong class="highlight">wx</strong>.<span class="me1">EVT_TREE_ITEM_COLLAPSED</span>, <span class="kw2">self</span>.<span class="me1">OnItemCollapsed</span>, <span class="kw2">self</span>.<span class="me1">tree</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">        <span class="kw2">self</span>.<span class="me1">Bind</span><span class="br0">&#40;</span><strong class="highlight">wx</strong>.<span class="me1">EVT_TREE_SEL_CHANGED</span>, <span class="kw2">self</span>.<span class="me1">OnSelChanged</span>, <span class="kw2">self</span>.<span class="me1">tree</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">        <span class="kw2">self</span>.<span class="me1">Bind</span><span class="br0">&#40;</span><strong class="highlight">wx</strong>.<span class="me1">EVT_TREE_ITEM_ACTIVATED</span>, <span class="kw2">self</span>.<span class="me1">OnActivated</span>, <span class="kw2">self</span>.<span class="me1">tree</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">        <span class="kw2">self</span>.<span class="me1">tree</span>.<span class="me1">Expand</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li class="li1"><div class="de1">    <span class="kw1">def</span> AddTreeNodes<span class="br0">&#40;</span><span class="kw2">self</span>, parentItem, items<span class="br0">&#41;</span>:</div></li><li class="li1"><div class="de1">        <span class="kw1">for</span> item <span class="kw1">in</span> items:</div></li><li class="li1"><div class="de1">            <span class="kw1">if</span> <span class="kw2">type</span><span class="br0">&#40;</span>item<span class="br0">&#41;</span> == <span class="kw2">str</span>:</div></li><li class="li1"><div class="de1">                <span class="kw2">self</span>.<span class="me1">tree</span>.<span class="me1">AppendItem</span><span class="br0">&#40;</span>parentItem, item<span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">            <span class="kw1">else</span>:</div></li><li class="li1"><div class="de1">                newItem = <span class="kw2">self</span>.<span class="me1">tree</span>.<span class="me1">AppendItem</span><span class="br0">&#40;</span>parentItem, item<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">                <span class="kw2">self</span>.<span class="me1">AddTreeNodes</span><span class="br0">&#40;</span>newItem, item<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">    <span class="kw1">def</span> GetItemText<span class="br0">&#40;</span><span class="kw2">self</span>, item<span class="br0">&#41;</span>:</div></li><li class="li2"><div class="de2">        <span class="kw1">if</span> item:</div></li><li class="li1"><div class="de1">            <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">tree</span>.<span class="me1">GetItemText</span><span class="br0">&#40;</span>item<span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">        <span class="kw1">else</span>:</div></li><li class="li1"><div class="de1">            <span class="kw1">return</span> <span class="st0">&quot;&quot;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">    <span class="kw1">def</span> OnItemExpanded<span class="br0">&#40;</span><span class="kw2">self</span>, evt<span class="br0">&#41;</span>:</div></li><li class="li1"><div class="de1">        <span class="kw1">print</span> <span class="st0">&quot;OnItemExpanded: &quot;</span>, <span class="kw2">self</span>.<span class="me1">GetItemText</span><span class="br0">&#40;</span>evt.<span class="me1">GetItem</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">    <span class="kw1">def</span> OnItemCollapsed<span class="br0">&#40;</span><span class="kw2">self</span>, evt<span class="br0">&#41;</span>:</div></li><li class="li1"><div class="de1">        <span class="kw1">print</span> <span class="st0">&quot;OnItemCollapsed:&quot;</span>, <span class="kw2">self</span>.<span class="me1">GetItemText</span><span class="br0">&#40;</span>evt.<span class="me1">GetItem</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li class="li1"><div class="de1">    <span class="kw1">def</span> OnSelChanged<span class="br0">&#40;</span><span class="kw2">self</span>, evt<span class="br0">&#41;</span>:</div></li><li class="li1"><div class="de1">        <span class="kw1">print</span> <span class="st0">&quot;OnSelChanged:   &quot;</span>, <span class="kw2">self</span>.<span class="me1">GetItemText</span><span class="br0">&#40;</span>evt.<span class="me1">GetItem</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">GetItemText</span><span class="br0">&#40;</span>evt.<span class="me1">GetItem</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> == <span class="st0">&quot;test1&quot;</span>:</div></li><li class="li1"><div class="de1">            <span class="kw2">self</span>.<span class="me1">cb1</span>.<span class="me1">SetValue</span><span class="br0">&#40;</span><span class="kw2">True</span><span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">            <span class="kw2">self</span>.<span class="me1">cb1</span>.<span class="me1">Show</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">        <span class="kw1">else</span>:</div></li><li class="li1"><div class="de1">            <span class="kw2">self</span>.<span class="me1">cb1</span>.<span class="me1">Hide</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">    <span class="kw1">def</span> OnActivated<span class="br0">&#40;</span><span class="kw2">self</span>, evt<span class="br0">&#41;</span>:</div></li><li class="li2"><div class="de2">        <span class="kw1">print</span> <span class="st0">&quot;OnActivated:    &quot;</span>, <span class="kw2">self</span>.<span class="me1">GetItemText</span><span class="br0">&#40;</span>evt.<span class="me1">GetItem</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">app = <strong class="highlight">wx</strong>.<span class="me1">PySimpleApp</span><span class="br0">&#40;</span><span class="kw2">None</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">frame = TestFrame<span class="br0">&#40;</span><span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">frame.<span class="me1">Show</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></li><li class="li1"><div class="de1">app.<span class="me1">MainLoop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></li></ol></pre></div> <div id="code1956142374_2" style="display:none"><textarea class="code" readonly="true" wrap="off" style="height:258px"># example of <strong class="highlight">wx</strong>.TreeCtrl()
+
+import <strong class="highlight">wx</strong>
+
+class TestFrame(<strong class="highlight">wx</strong>.Frame):
+    def __init__(self):
+        <strong class="highlight">wx</strong>.Frame.__init__(self, None, title=&quot;tree example&quot;, size=(300,130))
+        self.cb1 = <strong class="highlight">wx</strong>.CheckBox(self, -1, &quot;test1&quot;, pos=(280,10))
+        self.cb1.Hide()
+        self.tree = <strong class="highlight">wx</strong>.TreeCtrl(self, size=(280,100))
+        root = self.tree.AddRoot(&quot;Example&quot;)
+        
+        items = [&quot;test1&quot;,
+               &quot;test2&quot;,
+               &quot;test3&quot;,]
+      
+        self.AddTreeNodes(root, items)
+      
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_ITEM_EXPANDED, self.OnItemExpanded, self.tree)
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_ITEM_COLLAPSED, self.OnItemCollapsed, self.tree)
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_SEL_CHANGED, self.OnSelChanged, self.tree)
+        self.Bind(<strong class="highlight">wx</strong>.EVT_TREE_ITEM_ACTIVATED, self.OnActivated, self.tree)
+     
+        self.tree.Expand(root)
+      
+    def AddTreeNodes(self, parentItem, items):
+        for item in items:
+            if type(item) == str:
+                self.tree.AppendItem(parentItem, item)
+            else:
+                newItem = self.tree.AppendItem(parentItem, item[0])
+                self.AddTreeNodes(newItem, item[0])
+                
+    def GetItemText(self, item):
+        if item:
+            return self.tree.GetItemText(item)
+        else:
+            return &quot;&quot;
+        
+    def OnItemExpanded(self, evt):
+        print &quot;OnItemExpanded: &quot;, self.GetItemText(evt.GetItem())
+        
+    def OnItemCollapsed(self, evt):
+        print &quot;OnItemCollapsed:&quot;, self.GetItemText(evt.GetItem())
+
+    def OnSelChanged(self, evt):
+        print &quot;OnSelChanged:   &quot;, self.GetItemText(evt.GetItem())
+        if self.GetItemText(evt.GetItem()) == &quot;test1&quot;:
+            self.cb1.SetValue(True)
+            self.cb1.Show()
+        else:
+            self.cb1.Hide()
+            
+    def OnActivated(self, evt):
+        print &quot;OnActivated:    &quot;, self.GetItemText(evt.GetItem())
+
+
+app = <strong class="highlight">wx</strong>.PySimpleApp(None)
+frame = TestFrame()
+frame.Show()
+app.MainLoop()</textarea></div> </div> </div> <!-- google_ad_section_end --> </div> </div> </div>      <div class="spaced smallfont"> May 'the Google' be with you! </div>      <div>     <a href="newreply.php?do=newreply&amp;p=278354"><img src="/forums/myimages/buttons/quote.gif" alt="Reply With Quote" border="0" /></a>          &nbsp; </div> </div> </div>  <div class="bottomquote"></div>  <!-- post 278354 popup menu --> <div class="vbmenu_popup" id="postmenu_278354_menu" style="display:none;"> <table cellpadding="4" cellspacing="1" border="0"> <tr> <td class="thead">vegaseat</td> </tr>  <tr><td class="vbmenu_option"><a href="member19440.html">View Public Profile</a></td></tr>   <tr><td class="vbmenu_option"><a href="private.php?do=newpm&amp;u=19440">Send a private message to vegaseat</a></td></tr>     <tr><td class="vbmenu_option"><a href="finduser19440.html">Find all posts by vegaseat</a></td></tr>   </table> </div> <!-- / post 278354 popup menu -->   </div>   <!-- / post #278354 --><div id="lastpost"></div></div>     <table cellpadding="0" cellspacing="0" border="0" width="100%"> <tr valign="top">  <td class="smallfont"><a href="newreply.php?do=newreply&amp;noquote=1&amp;p=278354"><img src="/forums/myimages/buttons/reply.gif" alt="Reply" border="0" /></a></td> 	   </tr> </table>    <br />    <div style="width:346px; float:left">   <div class="box">
+	<div class="tlc"><div class="tli">&bull;</div></div>
+	<div class="blc"><div class="bli">&bull;</div></div>
+	<div class="trc"><div class="tri">&bull;</div></div>
+	<div class="brc"><div class="bri">&bull;</div></div>  <p>Only community members can participate in forum threads. You must <a href="register.php">register</a> or log in to contribute.</p> <div class="big"><a href="register.php">Register</a></div>  </div>   </div>  <div id="rectangle" class="ad_rectangle" style="float:right"><iframe width="336" height="280" allowtransparency="true" border="0" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" hspace="0" vspace="0" noresize="true" src="http://aj.daniweb.com/servlet/ajrotator/103163/114/vh?z=daniweb&amp;ct=103149&amp;dim=103156,103157&amp;kw=member0,group1,114,2,-1,threads&amp;random=755535527&amp;pos=4&amp;ns=softwaredevelopment"></iframe></div> <div style="clear:both; height:20px;"></div>    <div class="box">
+	<div class="tlc"><div class="tli">&bull;</div></div>
+	<div class="blc"><div class="bli">&bull;</div></div>
+	<div class="trc"><div class="tri">&bull;</div></div>
+	<div class="brc"><div class="bri">&bull;</div></div> <div class="h2">Currently Active Users Viewing This Thread: 1 <span class="normal">(0 members and 1 guests)</span></div> <p class="userlist">&nbsp;</p> </div>     <div class="yellowcontainer"><div class="box">
+	<div class="tlc"><div class="tli">&bull;</div></div>
+	<div class="blc"><div class="bli">&bull;</div></div>
+	<div class="trc"><div class="tri">&bull;</div></div>
+	<div class="brc"><div class="bri">&bull;</div></div> <div class="box">
+	<div class="tlc"><div class="tli">&bull;</div></div>
+	<div class="blc"><div class="bli">&bull;</div></div>
+	<div class="trc"><div class="tri">&bull;</div></div>
+	<div class="brc"><div class="bri">&bull;</div></div><div class="h1"> DaniWeb <span class="normal">Python</span> Marketplace </div></div> <iframe width="627" height="250" allowtransparency="true" border="0" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" hspace="0" vspace="0" noresize="true" src="/mediakit/industrybrains.php?f=114&amp;t=62161"></iframe> </div></div>    <br /> <div class="vbmenu_popup" id="threadtools_menu" style="display:none"> <form action="postings.php?t=62161&amp;pollid=" method="post" name="threadadminform"> <table cellpadding="4" cellspacing="1" border="0"> <tr> <td class="thead">Thread Tools<a name="goto_threadtools"></a></td> </tr> <tr> <td class="vbmenu_option"><img class="inlineimg" src="/forums/myimages/buttons/printer.gif" alt="Show Printable Version" /> <a href="printthread62161.html" accesskey="3">Show Printable Version</a></td> </tr> <tr> <td class="vbmenu_option"><img class="inlineimg" src="/forums/myimages/buttons/sendtofriend.gif" alt="Email this Page" /> <a href="sendthread62161.html">Email this Page</a></td> </tr>    </table> </form> </div>     <div class="vbmenu_popup" id="displaymodes_menu" style="display:none"> <table cellpadding="4" cellspacing="1" border="0"> <tr> <td class="thead">Display Modes<a name="goto_displaymodes"></a></td> </tr> <tr>  <td class="vbmenu_option" title="nohilite"><img class="inlineimg" src="/forums/myimages/buttons/mode_linear.gif" alt="Linear Mode" /> <strong>Linear Mode</strong></td>  </tr> <tr>  <td class="vbmenu_option"><img class="inlineimg" src="/forums/myimages/buttons/mode_hybrid.gif" alt="Hybrid Mode" /> <a href="showthread.php?mode=hybrid&amp;t=62161&amp;highlight=python+wx+treecontrol">Switch to Hybrid Mode</a></td>  </tr> <tr>  <td class="vbmenu_option"><img class="inlineimg" src="/forums/myimages/buttons/mode_threaded.gif" alt="Threaded Mode" /> <a href="showthread.php?p=278249&amp;mode=threaded&amp;highlight=python+wx+treecontrol#post278249">Switch to Threaded Mode</a></td>  </tr> </table> </div>        <br />  <div class="columnmargin" style="float:right; width:300px"> <div class="box">
+	<div class="tlc"><div class="tli">&bull;</div></div>
+	<div class="blc"><div class="bli">&bull;</div></div>
+	<div class="trc"><div class="tri">&bull;</div></div>
+	<div class="brc"><div class="bri">&bull;</div></div> <!-- google_ad_section_start --> <div class="tagcloud"><a style="font-size:25px; color:#111111;" href="/blogs/tag-development.html">development</a> <a style="font-size:25px; color:#111111;" href="/blogs/tag-programming.html">programming</a> <a style="font-size:25px; color:#111111;" href="/blogs/tag-python.html">python</a> <a style="font-size:25px; color:#111111;" href="/blogs/tag-software.html">software</a></div> <!-- google_ad_section_end --> </div> </div>  <strong>Similar Threads<a name="similarthreads"></a></strong> <ul class="bulleted"> <li> <a href="thread82042.html" title="Hello There,
+ 
+Im trying to create tree control view with check box in the nods.
+but i dont know how to add the check box to the nods
+ 
+here is the code:
+ 
+
+How can i add the check boxes to the nods  X,Y,T">tree control view with check box</a> <em>(C#)</em> </li><li> <a href="thread78471.html" title="I have a problem with tree control and i don't know how to solve it, maybe someone can help me. What i'm trying to do is display widgets in a staticbox plus a help text when i select different items in a tree.
+For example when i select item1 in a a tree control i want to display two checkboxes in...">Problem with wx.TreeCtrl</a> <em>(Python)</em> </li><li> <a href="thread51085.html" title="Hi,
+I am in the need of tree control which i am going to use in aspx or asp page, that can loaded by SQL database at the first time. After that I need functionally of Expand All&quot;, &quot;Collapse All&quot;, &quot;Submit&quot;, &quot;Clear&quot;, &quot;Cancel&quot;. it would be great help for me if some one provide the source code for...">Tree View</a> <em>(ASP)</em> </li><li> <a href="thread31068.html" title="I have finally decided on  a book to purchase (Programming in the key of C#), but until it arrives, I'll still have to seek answers here.
+
+I'm wondering about implementing a tree control. Am I correct in assuming that the tree control can be used to allow switching between panel controls? Any ideas...">Using a Tree Control</a> <em>(C#)</em> </li><li> <a href="thread19932.html" title="How can I use the Checkboxes of a Tree Control in Visual C++ 6, I add it in properties but I don't know how to program de detection of the click over the checkbox. The idea is that the user can make multiple selections, in order to store every item checked in an array.
+
+
+Thanks
+
+
+Yonoid">How can I use the Checkboxes into a Tree Control</a> <em>(C++)</em> </li> </ul> <br />  <strong>Other Threads in the Python Forum</strong> <ul class="bulleted">  <li>Previous Thread: <a href="thread61730.html">Sound with Tkinter</a></li>   <li>Next Thread: <a href="thread61732.html">Loading a Tkinter Listbox</a></li>  </ul>  <div style="clear:right"></div> <br /> <div style="clear:both"></div> </div>  <!-- google_ad_section_start(weight=ignore) --> <div id="sidebar"> <form action="/search/index.php" method="post"> <div class="heading"> <div style="font-size:16px">Search</div> </div> <div class="search_body"> <div style="margin-bottom:5px"> <input type="text" class="search" name="query" value="python wx treecontrol" size="20" /> </div> <div style="height:30px"> <select class="bginput" name="what" style="width:145px">   <option value="thread">in this thread</option>  <option value="forum">in this forum</option>      <option value="-1">--------------------</option>  <option value="entiresite" selected="selected">across entire site</option> <option value="forums-threads">in forums (as threads)</option> <option value="forums-posts">in forums (as posts)</option> <option value="code">in code snippets</option> <option value="blogs">in blogs</option> <option value="links">in link directory</option> </select> </div> <input type="hidden" name="forumid" value="114" /> <input type="hidden" name="threadid" value="62161" /> <input type="hidden" name="userid" value="" /> <input type="hidden" name="language" value="" /> <input type="image" src="/forums/myimages/misc/style/search.gif" alt="Search" /> <div class="smallfont"><a href="/forums/search.php?forumid=114&amp;query=python+wx+treecontrol">Advanced Forum Search</a></div> </div> </form>  <div style="margin-bottom:5px"> <a href="/chat/"><img src="/forums/myimages/misc/dani/irc.gif" alt="IRC Chat Network" border="0" width="170" height="32" /></a> </div> <div style="margin-bottom:5px"> <a href="/subscribe.php"><img src="/forums/myimages/misc/dani/rssfeeds.gif" alt="RSS Feeds" border="0" width="170" height="32" /></a> </div> <div class="heading">Forum Highlights</div> <div class="body"> <ul id="highlights">  <li><a href="/forums/forum114.html">Python Forum</a></li>      <li><span class="dowhen">Today's Posts</span> <ul id="getdaily"> <li style="font-weight:normal"><a href="/forums/getdaily114.html">Python</a></li><li style="font-weight:normal"><a href="/forums/getdaily2.html">Software Development</a></li>  <li><a href="/forums/getdaily.html">All Forums</a></li> </ul> </li> <li><span class="dowhen">Unanswered Threads</span> <ul id="unanswered"> <li style="font-weight:normal"><a href="/forums/unanswered114.html">Python</a></li><li style="font-weight:normal"><a href="/forums/unanswered2.html">Software Development</a></li>  <li><a href="/forums/unanswered.html">All Forums</a></li> </ul> </li> </ul> </div>   <div class="heading">Related Features</div> <div class="body">  <ul>  <li><a href="/forums/solved114.html">Solved Python Threads</a></li>  <li><a href="/tutorials/forum85.html">Python Tutorials</a></li> <li><a href="/code/python.html">python Code Snippets</a></li><li><a href="/code/spyce.html">spyce Code Snippets</a></li> <li style="font-weight:normal"><a href="/directory/forum114.html">Python Directory Links</a></li><li style="font-weight:normal"><a href="/directory/forum2.html">Software Development Directory Links</a></li> <li><a href="/blogs/forum2.html">Software Development Blog</a></li> </ul> </div>   <div class="headingoff">DANIWEB FEATURE INDEX</div> <div class="bodyoff"> <ul> <li><a href="/forums/">Forums</a></li> <li><a href="/tutorials/">Tutorials</a></li> <li><a href="/code/">Code Snippets</a></li> <li><a href="/blogs/">Blogs</a></li> <li><a href="/directory/">Link Directory</a></li> <li><a href="/whitepapers/">Whitepapers</a></li> </ul> </div> <div class="headingoff">Advertisement</div> <div class="bodyoff" align="center"> <div id="skyscraper"><iframe id="iskyscraper" width="160" height="600" allowtransparency="true" border="0" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" hspace="0" vspace="0" noresize="true" src="http://aj.daniweb.com/servlet/ajrotator/103278/114/vh?z=daniweb&amp;ct=103149&amp;dim=103279&amp;kw=member0,group1,114,2,-1,threads&amp;random=755535527&amp;pos=2&amp;ns=softwaredevelopment"></iframe></div> </div>  <div class="headingoff">Statistics</div> <div class="bodyoff"> <div> <strong>Members:</strong> <a href="/forums/memberlist.php?do=search">346,348</a> </div> <div> <strong>Users Online Now:</strong> <a href="/forums/online.php">3,220</a> </div> <div><strong>Active IRC Users:</strong> 14</div> <div><strong>Forum Threads:</strong> 116,210</div> <div><strong>Forum Posts:</strong> 608,950</div> <div><strong>Code Snippets:</strong> 822</div> <div><strong>Blogs:</strong> 136</div> <div><strong>Blog Entries:</strong> 1,759</div> <div><strong>Directory Links:</strong> 521</div> </div> </div> <!-- google_ad_section_end -->  <div class="spaced" style="clear:both"></div> </div> </div> </div> </div> <div class="bottom"></div>  <div class="top"></div> <div class="thincontainer" style="text-align:center"><iframe id="ileaderboard2" style="width:728px; height:90px; z-index:0;" width="728" height="90" allowtransparency="true" border="0" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" hspace="0" vspace="0" noresize="true" src="http://ad.doubleclick.net/adi/ns.daniweb/softwaredevelopment;kw=member0,group1,114,2,-1,threads;sz=728x90;tile=1;ord=755535527"></iframe></div> <div class="bottom"></div>  <!-- google_ad_section_start(weight=ignore) --> <form action="index.php" method="get"> <div class="top"></div> <div class="thincontainer"> <div class="h1" style="float:right"><a href="/advertising/">Advertising Opportunities on DaniWeb</a></div> <div style="line-height:30px"> <a href="/contactus.php">Contact Us</a> - <a href="/newsletter/">Newsletter Archive</a> -   <a href="/forums/archive/">Sitemap</a> - <a href="/forums/faq.php?faq=privacy_policy">Privacy Statement</a> </div> </div> <div class="bottom"></div> <div class="spaced">All times are GMT -4. The time now is <span class="time">2:07 am</span>.</div> <div>  <div class="smallfont">  Forum system based on vBulletin Copyright &copy;2000 - 2008, Jelsoft Enterprises Ltd.  </div> <div class="smallfont">    &copy;2003 - 2008 DaniWeb&reg; LLC </div> </div> </form> <!-- google_ad_section_end --> </div></div>  <script type="text/javascript" src="/scripts/style.php?script=showthread&amp;forumid=2"></script>   <script type="text/javascript" src="/scripts/menu.php?f=114"></script>    <script type="text/javascript"> <!--
+// Main vBulletin Javascript Initialization
+vBulletin_init();
+//--> </script>   <script type="text/javascript" src="http://daniweb.us.intellitxt.com/intellitxt/front.asp?ipid=3052"></script>   <script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script> <script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-98289-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script> </body> </html> 

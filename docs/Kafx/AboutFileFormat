@@ -1,0 +1,91 @@
+Ok, for file format, i've choosen XML.
+(and i hope not to regret)
+Why? well, i could write a binary file, in fact, i'm the kind of person that likes more the use 
+of a binary file that is strict in format, and can only be loaded from a single version of a 
+program. 
+but i decided to use xml, so a user can read and edit the file, and fix any problem 
+with the project file.
+Besides the good point in xml is that it is flexible as you can put in it almost anything in any 
+way, (of course it depends on how good is your parser). And allows nesting of properties, so is 
+very good to define object from Python where the "type" doesnt care much.
+
+well, xml, has something i really don't apreciate much, as it is an "interpreted" file, that 
+means, you have to analyze the content of it to know what is in there. (as oposite to a fixed 
+format file (where u know exaclty what is in it)) And that makes it kinda slow and you have 
+many ways to do it so:
+
+How will i use xml?
+
+xml allow having tags, that have properties and some text. The text part is really annoying in 
+the application, because you could define an object like this:
+
+<object>
+	<name>
+		 Lousy Object
+	</name>
+</object>
+
+But then you will have to a) clean all the mess of characters before and after the text, and you 
+can have the following.
+
+<object>
+	<name>
+		 Lousy Object
+		<type> Text</type>
+		<font> Narrow</font>
+	</name>
+	this is an object
+</object>
+
+And then, name stop being implemented as a variable, and now it is an object wich have some 
+"default" content ("Lousy Object") and some content too, that can be also a property or an 
+object itself. 
+And now, the "object" itself has some text, wich has to be stored in some place.
+Is really nice for the eye this way, you can watch all the properties and understand the nesting 
+of it. but you can't actually see where a object starts and when it ends. Because in this type
+of implementation, everything should be implemented as an object. (is not a problem, if you 
+think that everything in python is an object).
+Is remarkable , that , for the sake of the reader (wich is why i use xml) the "text" of the 
+object "object" is something like "\nthis is an object\n" so , more cleanup needed. 
+
+
+The other way to implement it is using only the tags and the properties on them. so you could 
+have something like this.
+
+<object name="Lousy object">
+	<text font="narrow" text="This is my text" colour="FF00FF"/>
+</object>
+
+wich is more dificult to imagine by simple reading, but is clearer. as i need to do things like this:
+
+<project>
+	<object>
+		<text font="OpenWidgets" text="lalalala" color="F00FC7C8">
+			<effect plugin="Bright">
+				<effect_setting name="Bright" value="10"/>
+				<effect_setting name="Contrast" value="15"/>
+			</effect>
+			<effect plugin="Blur">
+				<effect_setting name="Amount" value ="3"/>
+			</effect>
+			<mask>
+				<rect x1="10" x2="20" y1="10" y2="20"/>
+			<mask>
+		</text>
+	</object>
+</project>
+
+where each tag represents an object, wich properties are listed in as an attribute.
+Also, it has the benefit that the specific implementation of Sax that i'm using, calls a method for each 
+tag opened, and passes as parameter the attributes, so is more easy to create the object because you don't
+have to store to wich objet the property belongs.
+
+
+(sorry for my very bad english. also, i use to mix a lot of things together so i hope someone understand this)
+
+16-06-2008:
+I could program it using only Tags & Default values. By ignoring the default values of any tag having childs.... But using it in the code will be not only unnatural, it will be a mess, and it will ocupy more space.. also in the xml, as for values i only use a tag. (though that won't matter much because i pretend to compress it with bzip)
+It'll be pretty bothering for the programmer.
+
+15-12-2008: 
+i've found out that microsoft uses xml the same way i do ¬¬'

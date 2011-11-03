@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US">
+<!-- git web interface version 1.5.2.1, (C) 2005-2006, Kay Sievers <kay.sievers@vrfy.org>, Christian Gierke -->
+<!-- git core binaries version 1.5.2.1 -->
+<head>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8"/>
+<meta name="generator" content="gitweb/1.5.2.1 git/1.5.2.1"/>
+<meta name="robots" content="index, nofollow"/>
+<title>taschenorakel.de Git - playground/blob - blur-effect/blur-effect.c</title>
+<link rel="stylesheet" type="text/css" href="taschenorakel.de%20Git%20-%20playground_blob%20-%20blur-effect_blur-effect.c_files/layout.css"/>
+<link rel="alternate" title="playground log RSS feed" href="http://taschenorakel.de/gitweb/?p=playground;a=rss" type="application/rss+xml"/>
+<link rel="alternate" title="playground log Atom feed" href="http://taschenorakel.de/gitweb/?p=playground;a=atom" type="application/atom+xml"/>
+<link rel="shortcut icon" href="http://taschenorakel.de/media/gitweb/favicon.png" type="image/png"/>
+</head>
+<body>
+<div class="page_header">
+<a title="git homepage" href="http://git.or.cz/"><img width="72" height="27" src="taschenorakel.de%20Git%20-%20playground_blob%20-%20blur-effect_blur-effect.c_files/logo.png" alt="git" class="logo"/></a><a href="http://taschenorakel.de/gitweb/">projects</a> / <a href="http://taschenorakel.de/gitweb/?p=playground;a=summary">playground</a> / blob
+</div>
+<form method="get" action="/gitweb/" enctype="application/x-www-form-urlencoded">
+<div class="search">
+<input type="hidden" name="p" value="playground"/>
+<input type="hidden" name="a" value="search"/>
+<input type="hidden" name="h" value="16e6306839851ae1680026ca612876429d3cb57f"/>
+<select name="st">
+<option selected="selected" value="commit">commit</option>
+<option value="grep">grep</option>
+<option value="author">author</option>
+<option value="committer">committer</option>
+<option value="pickaxe">pickaxe</option>
+</select><sup><a href="http://taschenorakel.de/gitweb/?p=playground;a=search_help">?</a></sup> search:
+<input type="text" name="s"/>
+</div>
+</form>
+<div class="page_nav">
+<br/><br/></div>
+<div class="title">16e6306839851ae1680026ca612876429d3cb57f</div>
+<div class="page_path"><a title="tree root" href="http://taschenorakel.de/gitweb/?p=playground;a=tree">[playground]</a> / <a title="blur-effect" href="http://taschenorakel.de/gitweb/?p=playground;a=tree;f=blur-effect">blur-effect</a> / <a title="blur-effect/blur-effect.c" href="http://taschenorakel.de/gitweb/?p=playground;a=blob_plain;f=blur-effect/blur-effect.c">blur-effect.c</a><br/></div>
+<div class="page_body">
+<div class="pre"><a id="l1" href="#l1" class="linenr">   1</a> /* Pixman based blur effect</div>
+<div class="pre"><a id="l2" href="#l2" class="linenr">   2</a>  * Copyright (C) 2008  Mathias Hasselmann</div>
+<div class="pre"><a id="l3" href="#l3" class="linenr">   3</a>  *</div>
+<div class="pre"><a id="l4" href="#l4" class="linenr">   4</a>  * This program is free software; you can redistribute it and/or</div>
+<div class="pre"><a id="l5" href="#l5" class="linenr">   5</a>  * modify it under the terms of the GNU Lesser General Public</div>
+<div class="pre"><a id="l6" href="#l6" class="linenr">   6</a>  * License as published by the Free Software Foundation; either</div>
+<div class="pre"><a id="l7" href="#l7" class="linenr">   7</a>  * version 2.1 of the License, or (at your option) any later version.</div>
+<div class="pre"><a id="l8" href="#l8" class="linenr">   8</a>  *</div>
+<div class="pre"><a id="l9" href="#l9" class="linenr">   9</a>  * This program is distributed in the hope that it will be useful,</div>
+<div class="pre"><a id="l10" href="#l10" class="linenr">  10</a>  * but WITHOUT ANY WARRANTY; without even the implied warranty of</div>
+<div class="pre"><a id="l11" href="#l11" class="linenr">  11</a>  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</div>
+<div class="pre"><a id="l12" href="#l12" class="linenr">  12</a>  * Lesser General Public License for more details.</div>
+<div class="pre"><a id="l13" href="#l13" class="linenr">  13</a>  *</div>
+<div class="pre"><a id="l14" href="#l14" class="linenr">  14</a>  * You should have received a copy of the GNU Lesser General Public</div>
+<div class="pre"><a id="l15" href="#l15" class="linenr">  15</a>  * License along with this program; if not, write to the Free Software</div>
+<div class="pre"><a id="l16" href="#l16" class="linenr">  16</a>  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA</div>
+<div class="pre"><a id="l17" href="#l17" class="linenr">  17</a>  */</div>
+<div class="pre"><a id="l18" href="#l18" class="linenr">  18</a> #include &lt;gtk/gtk.h&gt;</div>
+<div class="pre"><a id="l19" href="#l19" class="linenr">  19</a> #include &lt;math.h&gt;</div>
+<div class="pre"><a id="l20" href="#l20" class="linenr">  20</a> #include &lt;pixman.h&gt;</div>
+<div class="pre"><a id="l21" href="#l21" class="linenr">  21</a> </div>
+<div class="pre"><a id="l22" href="#l22" class="linenr">  22</a> #define GNOME_MARGIN_DEFAULT 6</div>
+<div class="pre"><a id="l23" href="#l23" class="linenr">  23</a> #define GNOME_MARGIN_DOUBLE  12</div>
+<div class="pre"><a id="l24" href="#l24" class="linenr">  24</a> </div>
+<div class="pre"><a id="l25" href="#l25" class="linenr">  25</a> static GdkPixbuf *avatar1 = NULL;</div>
+<div class="pre"><a id="l26" href="#l26" class="linenr">  26</a> static GdkPixbuf *avatar2 = NULL;</div>
+<div class="pre"><a id="l27" href="#l27" class="linenr">  27</a> static GtkWidget *canvas  = NULL;</div>
+<div class="pre"><a id="l28" href="#l28" class="linenr">  28</a> </div>
+<div class="pre"><a id="l29" href="#l29" class="linenr">  29</a> static int        radius  = 3;</div>
+<div class="pre"><a id="l30" href="#l30" class="linenr">  30</a> static double     offset  = 2.0;</div>
+<div class="pre"><a id="l31" href="#l31" class="linenr">  31</a> static double     sigma   = 3.0;</div>
+<div class="pre"><a id="l32" href="#l32" class="linenr">  32</a> static double     alpha   = 0.8;</div>
+<div class="pre"><a id="l33" href="#l33" class="linenr">  33</a> static double     red     = 0.0;</div>
+<div class="pre"><a id="l34" href="#l34" class="linenr">  34</a> static double     green   = 0.0;</div>
+<div class="pre"><a id="l35" href="#l35" class="linenr">  35</a> static double     blue    = 0.0;</div>
+<div class="pre"><a id="l36" href="#l36" class="linenr">  36</a> </div>
+<div class="pre"><a id="l37" href="#l37" class="linenr">  37</a> static void</div>
+<div class="pre"><a id="l38" href="#l38" class="linenr">  38</a> rounded_rectangle (cairo_t *cr,</div>
+<div class="pre"><a id="l39" href="#l39" class="linenr">  39</a>                    double   x,</div>
+<div class="pre"><a id="l40" href="#l40" class="linenr">  40</a>                    double   y,</div>
+<div class="pre"><a id="l41" href="#l41" class="linenr">  41</a>                    double   w,</div>
+<div class="pre"><a id="l42" href="#l42" class="linenr">  42</a>                    double   h,</div>
+<div class="pre"><a id="l43" href="#l43" class="linenr">  43</a>                    double   r)</div>
+<div class="pre"><a id="l44" href="#l44" class="linenr">  44</a> {</div>
+<div class="pre"><a id="l45" href="#l45" class="linenr">  45</a>     /*   A----BQ</div>
+<div class="pre"><a id="l46" href="#l46" class="linenr">  46</a>      *  H      C</div>
+<div class="pre"><a id="l47" href="#l47" class="linenr">  47</a>      *  |      |</div>
+<div class="pre"><a id="l48" href="#l48" class="linenr">  48</a>      *  G      D</div>
+<div class="pre"><a id="l49" href="#l49" class="linenr">  49</a>      *   F----E</div>
+<div class="pre"><a id="l50" href="#l50" class="linenr">  50</a>      */</div>
+<div class="pre"><a id="l51" href="#l51" class="linenr">  51</a> </div>
+<div class="pre"><a id="l52" href="#l52" class="linenr">  52</a>     cairo_move_to  (cr, x + r,     y);          /* Move to A */</div>
+<div class="pre"><a id="l53" href="#l53" class="linenr">  53</a>     cairo_line_to  (cr, x + w - r, y);          /* Straight line to B */</div>
+<div class="pre"><a id="l54" href="#l54" class="linenr">  54</a>     cairo_curve_to (cr, x + w,     y,           /* Curve to C, */</div>
+<div class="pre"><a id="l55" href="#l55" class="linenr">  55</a>                         x + w,     y,           /* control points are both at Q */</div>
+<div class="pre"><a id="l56" href="#l56" class="linenr">  56</a>                         x + w,     y + r);</div>
+<div class="pre"><a id="l57" href="#l57" class="linenr">  57</a>     cairo_line_to  (cr, x + w,     y + h - r);  /* Move to D */</div>
+<div class="pre"><a id="l58" href="#l58" class="linenr">  58</a>     cairo_curve_to (cr, x + w,     y + h,       /* Curve to E */</div>
+<div class="pre"><a id="l59" href="#l59" class="linenr">  59</a>                         x + w,     y + h,</div>
+<div class="pre"><a id="l60" href="#l60" class="linenr">  60</a>                         x + w - r, y + h);</div>
+<div class="pre"><a id="l61" href="#l61" class="linenr">  61</a>     cairo_line_to  (cr, x + r,     y + h);      /* Line to F */</div>
+<div class="pre"><a id="l62" href="#l62" class="linenr">  62</a>     cairo_curve_to (cr, x,         y + h,       /* Curve to G */</div>
+<div class="pre"><a id="l63" href="#l63" class="linenr">  63</a>                         x,         y + h,</div>
+<div class="pre"><a id="l64" href="#l64" class="linenr">  64</a>                         x,         y + h - r);</div>
+<div class="pre"><a id="l65" href="#l65" class="linenr">  65</a>     cairo_line_to  (cr, x,         y + r);      /* Line to H */</div>
+<div class="pre"><a id="l66" href="#l66" class="linenr">  66</a>     cairo_curve_to (cr, x,         y,</div>
+<div class="pre"><a id="l67" href="#l67" class="linenr">  67</a>                         x,         y,</div>
+<div class="pre"><a id="l68" href="#l68" class="linenr">  68</a>                         x + r,     y);          /* Curve to A */</div>
+<div class="pre"><a id="l69" href="#l69" class="linenr">  69</a> }</div>
+<div class="pre"><a id="l70" href="#l70" class="linenr">  70</a> </div>
+<div class="pre"><a id="l71" href="#l71" class="linenr">  71</a> static void</div>
+<div class="pre"><a id="l72" href="#l72" class="linenr">  72</a> draw_background (cairo_t   *cr,</div>
+<div class="pre"><a id="l73" href="#l73" class="linenr">  73</a>                  double     x,</div>
+<div class="pre"><a id="l74" href="#l74" class="linenr">  74</a>                  double     y,</div>
+<div class="pre"><a id="l75" href="#l75" class="linenr">  75</a>                  double     w,</div>
+<div class="pre"><a id="l76" href="#l76" class="linenr">  76</a>                  double     h)</div>
+<div class="pre"><a id="l77" href="#l77" class="linenr">  77</a> {</div>
+<div class="pre"><a id="l78" href="#l78" class="linenr">  78</a>         cairo_pattern_t *gradient;</div>
+<div class="pre"><a id="l79" href="#l79" class="linenr">  79</a> </div>
+<div class="pre"><a id="l80" href="#l80" class="linenr">  80</a>         rounded_rectangle (cr, x + 0.5, y + 0.5, w - 1, h - 1, 20);</div>
+<div class="pre"><a id="l81" href="#l81" class="linenr">  81</a> </div>
+<div class="pre"><a id="l82" href="#l82" class="linenr">  82</a>         gradient = cairo_pattern_create_linear (0, y, 0, y + h);</div>
+<div class="pre"><a id="l83" href="#l83" class="linenr">  83</a>         cairo_pattern_add_color_stop_rgb (gradient, 0.0, 0.6, 0.6, 0.6);</div>
+<div class="pre"><a id="l84" href="#l84" class="linenr">  84</a>         cairo_pattern_add_color_stop_rgb (gradient, 0.4, 0.5, 0.5, 0.5);</div>
+<div class="pre"><a id="l85" href="#l85" class="linenr">  85</a>         cairo_pattern_add_color_stop_rgb (gradient, 1.0, 0.2, 0.2, 0.2);</div>
+<div class="pre"><a id="l86" href="#l86" class="linenr">  86</a>         cairo_set_source (cr, gradient);</div>
+<div class="pre"><a id="l87" href="#l87" class="linenr">  87</a>         cairo_pattern_destroy (gradient);</div>
+<div class="pre"><a id="l88" href="#l88" class="linenr">  88</a> </div>
+<div class="pre"><a id="l89" href="#l89" class="linenr">  89</a>         cairo_fill_preserve (cr);</div>
+<div class="pre"><a id="l90" href="#l90" class="linenr">  90</a> </div>
+<div class="pre"><a id="l91" href="#l91" class="linenr">  91</a>         cairo_set_source_rgb (cr, 0, 0, 0);</div>
+<div class="pre"><a id="l92" href="#l92" class="linenr">  92</a>         cairo_set_line_width (cr, 1);</div>
+<div class="pre"><a id="l93" href="#l93" class="linenr">  93</a>         cairo_stroke (cr);</div>
+<div class="pre"><a id="l94" href="#l94" class="linenr">  94</a> }</div>
+<div class="pre"><a id="l95" href="#l95" class="linenr">  95</a> </div>
+<div class="pre"><a id="l96" href="#l96" class="linenr">  96</a> static void</div>
+<div class="pre"><a id="l97" href="#l97" class="linenr">  97</a> draw_pixbuf_with_mask (cairo_t   *cr,</div>
+<div class="pre"><a id="l98" href="#l98" class="linenr">  98</a>                        double     x,</div>
+<div class="pre"><a id="l99" href="#l99" class="linenr">  99</a>                        double     y,</div>
+<div class="pre"><a id="l100" href="#l100" class="linenr"> 100</a>                        double     w,</div>
+<div class="pre"><a id="l101" href="#l101" class="linenr"> 101</a>                        double     h,</div>
+<div class="pre"><a id="l102" href="#l102" class="linenr"> 102</a>                        GdkPixbuf *pixbuf)</div>
+<div class="pre"><a id="l103" href="#l103" class="linenr"> 103</a> {</div>
+<div class="pre"><a id="l104" href="#l104" class="linenr"> 104</a>         cairo_pattern_t *mask;</div>
+<div class="pre"><a id="l105" href="#l105" class="linenr"> 105</a>         double dx, dy;</div>
+<div class="pre"><a id="l106" href="#l106" class="linenr"> 106</a> </div>
+<div class="pre"><a id="l107" href="#l107" class="linenr"> 107</a>         dx = gdk_pixbuf_get_width (pixbuf);</div>
+<div class="pre"><a id="l108" href="#l108" class="linenr"> 108</a>         dy = gdk_pixbuf_get_height (pixbuf);</div>
+<div class="pre"><a id="l109" href="#l109" class="linenr"> 109</a> </div>
+<div class="pre"><a id="l110" href="#l110" class="linenr"> 110</a>         x += rint ((w - dx) / 2);</div>
+<div class="pre"><a id="l111" href="#l111" class="linenr"> 111</a>         y += rint ((h - dy) / 2);</div>
+<div class="pre"><a id="l112" href="#l112" class="linenr"> 112</a> </div>
+<div class="pre"><a id="l113" href="#l113" class="linenr"> 113</a>         cairo_push_group_with_content (cr, CAIRO_CONTENT_ALPHA);</div>
+<div class="pre"><a id="l114" href="#l114" class="linenr"> 114</a> </div>
+<div class="pre"><a id="l115" href="#l115" class="linenr"> 115</a>         cairo_set_source_rgb (cr, 1, 1, 1);</div>
+<div class="pre"><a id="l116" href="#l116" class="linenr"> 116</a>         rounded_rectangle (cr, x, y, dx, dy, MIN(w, h)/3);</div>
+<div class="pre"><a id="l117" href="#l117" class="linenr"> 117</a>         cairo_fill (cr);</div>
+<div class="pre"><a id="l118" href="#l118" class="linenr"> 118</a> </div>
+<div class="pre"><a id="l119" href="#l119" class="linenr"> 119</a>         mask = cairo_pop_group (cr);</div>
+<div class="pre"><a id="l120" href="#l120" class="linenr"> 120</a> </div>
+<div class="pre"><a id="l121" href="#l121" class="linenr"> 121</a>         gdk_cairo_set_source_pixbuf (cr, pixbuf, x, y);</div>
+<div class="pre"><a id="l122" href="#l122" class="linenr"> 122</a>         cairo_mask (cr, mask);</div>
+<div class="pre"><a id="l123" href="#l123" class="linenr"> 123</a> </div>
+<div class="pre"><a id="l124" href="#l124" class="linenr"> 124</a>         cairo_pattern_destroy (mask);</div>
+<div class="pre"><a id="l125" href="#l125" class="linenr"> 125</a> }</div>
+<div class="pre"><a id="l126" href="#l126" class="linenr"> 126</a> </div>
+<div class="pre"><a id="l127" href="#l127" class="linenr"> 127</a> /* G(x,y) = 1/(2 * PI * sigma^2) * exp(-(x^2 + y^2)/(2 * sigma^2))</div>
+<div class="pre"><a id="l128" href="#l128" class="linenr"> 128</a>  */</div>
+<div class="pre"><a id="l129" href="#l129" class="linenr"> 129</a> static pixman_fixed_t *</div>
+<div class="pre"><a id="l130" href="#l130" class="linenr"> 130</a> create_gaussian_blur_kernel (int     radius,</div>
+<div class="pre"><a id="l131" href="#l131" class="linenr"> 131</a>                              double  sigma,</div>
+<div class="pre"><a id="l132" href="#l132" class="linenr"> 132</a>                              int    *length)</div>
+<div class="pre"><a id="l133" href="#l133" class="linenr"> 133</a> {</div>
+<div class="pre"><a id="l134" href="#l134" class="linenr"> 134</a>         const double scale2 = 2.0 * sigma * sigma;</div>
+<div class="pre"><a id="l135" href="#l135" class="linenr"> 135</a>         const double scale1 = 1.0 / (M_PI * scale2);</div>
+<div class="pre"><a id="l136" href="#l136" class="linenr"> 136</a> </div>
+<div class="pre"><a id="l137" href="#l137" class="linenr"> 137</a>         const int size = 2 * radius + 1;</div>
+<div class="pre"><a id="l138" href="#l138" class="linenr"> 138</a>         const int n_params = size * size;</div>
+<div class="pre"><a id="l139" href="#l139" class="linenr"> 139</a> </div>
+<div class="pre"><a id="l140" href="#l140" class="linenr"> 140</a>         pixman_fixed_t *params;</div>
+<div class="pre"><a id="l141" href="#l141" class="linenr"> 141</a>         double *tmp, sum;</div>
+<div class="pre"><a id="l142" href="#l142" class="linenr"> 142</a>         int x, y, i;</div>
+<div class="pre"><a id="l143" href="#l143" class="linenr"> 143</a> </div>
+<div class="pre"><a id="l144" href="#l144" class="linenr"> 144</a>         tmp = g_newa (double, n_params);</div>
+<div class="pre"><a id="l145" href="#l145" class="linenr"> 145</a> </div>
+<div class="pre"><a id="l146" href="#l146" class="linenr"> 146</a>         /* caluclate gaussian kernel in floating point format */</div>
+<div class="pre"><a id="l147" href="#l147" class="linenr"> 147</a>         for (i = 0, sum = 0, x = -radius; x &lt;= radius; ++x) {</div>
+<div class="pre"><a id="l148" href="#l148" class="linenr"> 148</a>                 for (y = -radius; y &lt;= radius; ++y, ++i) {</div>
+<div class="pre"><a id="l149" href="#l149" class="linenr"> 149</a>                         const double u = x * x;</div>
+<div class="pre"><a id="l150" href="#l150" class="linenr"> 150</a>                         const double v = y * y;</div>
+<div class="pre"><a id="l151" href="#l151" class="linenr"> 151</a> </div>
+<div class="pre"><a id="l152" href="#l152" class="linenr"> 152</a>                         tmp[i] = scale1 * exp (-(u+v)/scale2);</div>
+<div class="pre"><a id="l153" href="#l153" class="linenr"> 153</a> </div>
+<div class="pre"><a id="l154" href="#l154" class="linenr"> 154</a>                         sum += tmp[i];</div>
+<div class="pre"><a id="l155" href="#l155" class="linenr"> 155</a>                 }</div>
+<div class="pre"><a id="l156" href="#l156" class="linenr"> 156</a>         }</div>
+<div class="pre"><a id="l157" href="#l157" class="linenr"> 157</a> </div>
+<div class="pre"><a id="l158" href="#l158" class="linenr"> 158</a>         /* normalize gaussian kernel and convert to fixed point format */</div>
+<div class="pre"><a id="l159" href="#l159" class="linenr"> 159</a>         params = g_new (pixman_fixed_t, n_params + 2);</div>
+<div class="pre"><a id="l160" href="#l160" class="linenr"> 160</a> </div>
+<div class="pre"><a id="l161" href="#l161" class="linenr"> 161</a>         params[0] = pixman_int_to_fixed (size);</div>
+<div class="pre"><a id="l162" href="#l162" class="linenr"> 162</a>         params[1] = pixman_int_to_fixed (size);</div>
+<div class="pre"><a id="l163" href="#l163" class="linenr"> 163</a> </div>
+<div class="pre"><a id="l164" href="#l164" class="linenr"> 164</a>         for (i = 0; i &lt; n_params; ++i)</div>
+<div class="pre"><a id="l165" href="#l165" class="linenr"> 165</a>                 params[2 + i] = pixman_double_to_fixed (tmp[i] / sum);</div>
+<div class="pre"><a id="l166" href="#l166" class="linenr"> 166</a> </div>
+<div class="pre"><a id="l167" href="#l167" class="linenr"> 167</a>         if (length)</div>
+<div class="pre"><a id="l168" href="#l168" class="linenr"> 168</a>                 *length = n_params + 2;</div>
+<div class="pre"><a id="l169" href="#l169" class="linenr"> 169</a> </div>
+<div class="pre"><a id="l170" href="#l170" class="linenr"> 170</a>         return params;</div>
+<div class="pre"><a id="l171" href="#l171" class="linenr"> 171</a> }</div>
+<div class="pre"><a id="l172" href="#l172" class="linenr"> 172</a> </div>
+<div class="pre"><a id="l173" href="#l173" class="linenr"> 173</a> static cairo_surface_t *</div>
+<div class="pre"><a id="l174" href="#l174" class="linenr"> 174</a> blur_image_surface (cairo_surface_t *surface,</div>
+<div class="pre"><a id="l175" href="#l175" class="linenr"> 175</a>                     int              radius,</div>
+<div class="pre"><a id="l176" href="#l176" class="linenr"> 176</a>                     double           sigma)</div>
+<div class="pre"><a id="l177" href="#l177" class="linenr"> 177</a> {</div>
+<div class="pre"><a id="l178" href="#l178" class="linenr"> 178</a>         static cairo_user_data_key_t data_key;</div>
+<div class="pre"><a id="l179" href="#l179" class="linenr"> 179</a>         pixman_fixed_t *params = NULL;</div>
+<div class="pre"><a id="l180" href="#l180" class="linenr"> 180</a>         int n_params;</div>
+<div class="pre"><a id="l181" href="#l181" class="linenr"> 181</a> </div>
+<div class="pre"><a id="l182" href="#l182" class="linenr"> 182</a>         pixman_image_t *src, *dst;</div>
+<div class="pre"><a id="l183" href="#l183" class="linenr"> 183</a>         int w, h, s;</div>
+<div class="pre"><a id="l184" href="#l184" class="linenr"> 184</a>         gpointer p;</div>
+<div class="pre"><a id="l185" href="#l185" class="linenr"> 185</a> </div>
+<div class="pre"><a id="l186" href="#l186" class="linenr"> 186</a>         g_return_val_if_fail</div>
+<div class="pre"><a id="l187" href="#l187" class="linenr"> 187</a>           (cairo_surface_get_type (surface) != CAIRO_SURFACE_TYPE_IMAGE,</div>
+<div class="pre"><a id="l188" href="#l188" class="linenr"> 188</a>            NULL);</div>
+<div class="pre"><a id="l189" href="#l189" class="linenr"> 189</a> </div>
+<div class="pre"><a id="l190" href="#l190" class="linenr"> 190</a>         w = cairo_image_surface_get_width (surface);</div>
+<div class="pre"><a id="l191" href="#l191" class="linenr"> 191</a>         h = cairo_image_surface_get_height (surface);</div>
+<div class="pre"><a id="l192" href="#l192" class="linenr"> 192</a>         s = cairo_image_surface_get_stride (surface);</div>
+<div class="pre"><a id="l193" href="#l193" class="linenr"> 193</a> </div>
+<div class="pre"><a id="l194" href="#l194" class="linenr"> 194</a>         /* create pixman image for cairo image surface */</div>
+<div class="pre"><a id="l195" href="#l195" class="linenr"> 195</a>         p = cairo_image_surface_get_data (surface);</div>
+<div class="pre"><a id="l196" href="#l196" class="linenr"> 196</a>         src = pixman_image_create_bits (PIXMAN_a8, w, h, p, s);</div>
+<div class="pre"><a id="l197" href="#l197" class="linenr"> 197</a> </div>
+<div class="pre"><a id="l198" href="#l198" class="linenr"> 198</a>         /* attach gaussian kernel to pixman image */</div>
+<div class="pre"><a id="l199" href="#l199" class="linenr"> 199</a>         params = create_gaussian_blur_kernel (radius, sigma, &amp;n_params);</div>
+<div class="pre"><a id="l200" href="#l200" class="linenr"> 200</a>         pixman_image_set_filter (src, PIXMAN_FILTER_CONVOLUTION, params, n_params);</div>
+<div class="pre"><a id="l201" href="#l201" class="linenr"> 201</a>         g_free (params);</div>
+<div class="pre"><a id="l202" href="#l202" class="linenr"> 202</a> </div>
+<div class="pre"><a id="l203" href="#l203" class="linenr"> 203</a>         /* render blured image to new pixman image */</div>
+<div class="pre"><a id="l204" href="#l204" class="linenr"> 204</a>         p = g_malloc0 (s * h);</div>
+<div class="pre"><a id="l205" href="#l205" class="linenr"> 205</a>         dst = pixman_image_create_bits (PIXMAN_a8, w, h, p, s);</div>
+<div class="pre"><a id="l206" href="#l206" class="linenr"> 206</a>         pixman_image_composite (PIXMAN_OP_SRC, src, NULL, dst, 0, 0, 0, 0, 0, 0, w, h);</div>
+<div class="pre"><a id="l207" href="#l207" class="linenr"> 207</a>         pixman_image_unref (src);</div>
+<div class="pre"><a id="l208" href="#l208" class="linenr"> 208</a> </div>
+<div class="pre"><a id="l209" href="#l209" class="linenr"> 209</a>         /* create new cairo image for blured pixman image */</div>
+<div class="pre"><a id="l210" href="#l210" class="linenr"> 210</a>         surface = cairo_image_surface_create_for_data (p, CAIRO_FORMAT_A8, w, h, s);</div>
+<div class="pre"><a id="l211" href="#l211" class="linenr"> 211</a>         cairo_surface_set_user_data (surface, &amp;data_key, p, g_free);</div>
+<div class="pre"><a id="l212" href="#l212" class="linenr"> 212</a>         pixman_image_unref (dst);</div>
+<div class="pre"><a id="l213" href="#l213" class="linenr"> 213</a> </div>
+<div class="pre"><a id="l214" href="#l214" class="linenr"> 214</a>         return surface;</div>
+<div class="pre"><a id="l215" href="#l215" class="linenr"> 215</a> }</div>
+<div class="pre"><a id="l216" href="#l216" class="linenr"> 216</a> </div>
+<div class="pre"><a id="l217" href="#l217" class="linenr"> 217</a> static cairo_surface_t *</div>
+<div class="pre"><a id="l218" href="#l218" class="linenr"> 218</a> create_shadow_surface (double     w,</div>
+<div class="pre"><a id="l219" href="#l219" class="linenr"> 219</a>                        double     h,</div>
+<div class="pre"><a id="l220" href="#l220" class="linenr"> 220</a>                        double     r,</div>
+<div class="pre"><a id="l221" href="#l221" class="linenr"> 221</a>                        GdkPixbuf *pixbuf)</div>
+<div class="pre"><a id="l222" href="#l222" class="linenr"> 222</a> {</div>
+<div class="pre"><a id="l223" href="#l223" class="linenr"> 223</a>         cairo_surface_t *surface, *blured_surface;</div>
+<div class="pre"><a id="l224" href="#l224" class="linenr"> 224</a>         cairo_pattern_t *pattern;</div>
+<div class="pre"><a id="l225" href="#l225" class="linenr"> 225</a>         cairo_t *cr;</div>
+<div class="pre"><a id="l226" href="#l226" class="linenr"> 226</a> </div>
+<div class="pre"><a id="l227" href="#l227" class="linenr"> 227</a>         /* create cairo context for image surface */</div>
+<div class="pre"><a id="l228" href="#l228" class="linenr"> 228</a>         surface = cairo_image_surface_create (CAIRO_FORMAT_A8, w + r + r, h + r + r);</div>
+<div class="pre"><a id="l229" href="#l229" class="linenr"> 229</a>         cr = cairo_create (surface);</div>
+<div class="pre"><a id="l230" href="#l230" class="linenr"> 230</a> </div>
+<div class="pre"><a id="l231" href="#l231" class="linenr"> 231</a>         /* pixbuf to mask pattern */</div>
+<div class="pre"><a id="l232" href="#l232" class="linenr"> 232</a>         cairo_push_group_with_content (cr, CAIRO_CONTENT_ALPHA);</div>
+<div class="pre"><a id="l233" href="#l233" class="linenr"> 233</a>         draw_pixbuf_with_mask (cr, r, r, w, h, pixbuf);</div>
+<div class="pre"><a id="l234" href="#l234" class="linenr"> 234</a>         pattern = cairo_pop_group (cr);</div>
+<div class="pre"><a id="l235" href="#l235" class="linenr"> 235</a> </div>
+<div class="pre"><a id="l236" href="#l236" class="linenr"> 236</a>         /* fill image surface, considering mask pattern from pixbuf */</div>
+<div class="pre"><a id="l237" href="#l237" class="linenr"> 237</a>         cairo_set_source_rgba (cr, 1, 1, 1, alpha);</div>
+<div class="pre"><a id="l238" href="#l238" class="linenr"> 238</a>         cairo_mask (cr, pattern);</div>
+<div class="pre"><a id="l239" href="#l239" class="linenr"> 239</a> </div>
+<div class="pre"><a id="l240" href="#l240" class="linenr"> 240</a>         cairo_pattern_destroy (pattern);</div>
+<div class="pre"><a id="l241" href="#l241" class="linenr"> 241</a>         cairo_destroy (cr);</div>
+<div class="pre"><a id="l242" href="#l242" class="linenr"> 242</a> </div>
+<div class="pre"><a id="l243" href="#l243" class="linenr"> 243</a>         /* render blured surface image surface */</div>
+<div class="pre"><a id="l244" href="#l244" class="linenr"> 244</a>         blured_surface = blur_image_surface (surface, r, sigma);</div>
+<div class="pre"><a id="l245" href="#l245" class="linenr"> 245</a>         cairo_surface_destroy (surface);</div>
+<div class="pre"><a id="l246" href="#l246" class="linenr"> 246</a> </div>
+<div class="pre"><a id="l247" href="#l247" class="linenr"> 247</a>         return blured_surface;</div>
+<div class="pre"><a id="l248" href="#l248" class="linenr"> 248</a> }</div>
+<div class="pre"><a id="l249" href="#l249" class="linenr"> 249</a> </div>
+<div class="pre"><a id="l250" href="#l250" class="linenr"> 250</a> static void</div>
+<div class="pre"><a id="l251" href="#l251" class="linenr"> 251</a> draw_avatar (cairo_t   *cr,</div>
+<div class="pre"><a id="l252" href="#l252" class="linenr"> 252</a>              double     x,</div>
+<div class="pre"><a id="l253" href="#l253" class="linenr"> 253</a>              double     y,</div>
+<div class="pre"><a id="l254" href="#l254" class="linenr"> 254</a>              double     w,</div>
+<div class="pre"><a id="l255" href="#l255" class="linenr"> 255</a>              double     h,</div>
+<div class="pre"><a id="l256" href="#l256" class="linenr"> 256</a>              GdkPixbuf *pixbuf)</div>
+<div class="pre"><a id="l257" href="#l257" class="linenr"> 257</a> {</div>
+<div class="pre"><a id="l258" href="#l258" class="linenr"> 258</a>         cairo_surface_t *shadow;</div>
+<div class="pre"><a id="l259" href="#l259" class="linenr"> 259</a> </div>
+<div class="pre"><a id="l260" href="#l260" class="linenr"> 260</a>         /* draw the shadow */</div>
+<div class="pre"><a id="l261" href="#l261" class="linenr"> 261</a>         shadow = create_shadow_surface (w, h, radius, pixbuf);</div>
+<div class="pre"><a id="l262" href="#l262" class="linenr"> 262</a> </div>
+<div class="pre"><a id="l263" href="#l263" class="linenr"> 263</a>         cairo_set_source_rgb (cr, red, green, blue);</div>
+<div class="pre"><a id="l264" href="#l264" class="linenr"> 264</a>         cairo_mask_surface (cr, shadow, x + offset/2 - radius, y + offset/2 - radius);</div>
+<div class="pre"><a id="l265" href="#l265" class="linenr"> 265</a> </div>
+<div class="pre"><a id="l266" href="#l266" class="linenr"> 266</a>         cairo_surface_destroy (shadow);</div>
+<div class="pre"><a id="l267" href="#l267" class="linenr"> 267</a> </div>
+<div class="pre"><a id="l268" href="#l268" class="linenr"> 268</a>         /* draw the avatar image */</div>
+<div class="pre"><a id="l269" href="#l269" class="linenr"> 269</a>         draw_pixbuf_with_mask (cr, x - offset/2, y - offset/2, w, h, pixbuf);</div>
+<div class="pre"><a id="l270" href="#l270" class="linenr"> 270</a> }</div>
+<div class="pre"><a id="l271" href="#l271" class="linenr"> 271</a> </div>
+<div class="pre"><a id="l272" href="#l272" class="linenr"> 272</a> static gboolean</div>
+<div class="pre"><a id="l273" href="#l273" class="linenr"> 273</a> expose_event_cb (GtkWidget      *widget,</div>
+<div class="pre"><a id="l274" href="#l274" class="linenr"> 274</a>                  GdkEventExpose *event)</div>
+<div class="pre"><a id="l275" href="#l275" class="linenr"> 275</a> {</div>
+<div class="pre"><a id="l276" href="#l276" class="linenr"> 276</a>         cairo_t *cr = gdk_cairo_create (event-&gt;window);</div>
+<div class="pre"><a id="l277" href="#l277" class="linenr"> 277</a>         GTimer *timer = g_timer_new ();</div>
+<div class="pre"><a id="l278" href="#l278" class="linenr"> 278</a>         double x, y, w, h, t;</div>
+<div class="pre"><a id="l279" href="#l279" class="linenr"> 279</a>         char *info;</div>
+<div class="pre"><a id="l280" href="#l280" class="linenr"> 280</a> </div>
+<div class="pre"><a id="l281" href="#l281" class="linenr"> 281</a>         gdk_cairo_region (cr, event-&gt;region);</div>
+<div class="pre"><a id="l282" href="#l282" class="linenr"> 282</a>         cairo_clip (cr);</div>
+<div class="pre"><a id="l283" href="#l283" class="linenr"> 283</a> </div>
+<div class="pre"><a id="l284" href="#l284" class="linenr"> 284</a>         x = 0, y = 0;</div>
+<div class="pre"><a id="l285" href="#l285" class="linenr"> 285</a>         w = widget-&gt;allocation.width;</div>
+<div class="pre"><a id="l286" href="#l286" class="linenr"> 286</a>         h = widget-&gt;allocation.height;</div>
+<div class="pre"><a id="l287" href="#l287" class="linenr"> 287</a> </div>
+<div class="pre"><a id="l288" href="#l288" class="linenr"> 288</a>         draw_background (cr, x, y, w, h);</div>
+<div class="pre"><a id="l289" href="#l289" class="linenr"> 289</a> </div>
+<div class="pre"><a id="l290" href="#l290" class="linenr"> 290</a>         x += 10;</div>
+<div class="pre"><a id="l291" href="#l291" class="linenr"> 291</a>         y += 10;</div>
+<div class="pre"><a id="l292" href="#l292" class="linenr"> 292</a>         w -= 40; w /= 2;</div>
+<div class="pre"><a id="l293" href="#l293" class="linenr"> 293</a>         h -= 20;</div>
+<div class="pre"><a id="l294" href="#l294" class="linenr"> 294</a> </div>
+<div class="pre"><a id="l295" href="#l295" class="linenr"> 295</a>         draw_avatar (cr, x, y, w, h, avatar1);</div>
+<div class="pre"><a id="l296" href="#l296" class="linenr"> 296</a> </div>
+<div class="pre"><a id="l297" href="#l297" class="linenr"> 297</a>         x += w + 20;</div>
+<div class="pre"><a id="l298" href="#l298" class="linenr"> 298</a> </div>
+<div class="pre"><a id="l299" href="#l299" class="linenr"> 299</a>         draw_avatar (cr, x, y, w, h, avatar2);</div>
+<div class="pre"><a id="l300" href="#l300" class="linenr"> 300</a> </div>
+<div class="pre"><a id="l301" href="#l301" class="linenr"> 301</a>         g_timer_stop (timer);</div>
+<div class="pre"><a id="l302" href="#l302" class="linenr"> 302</a>         t = g_timer_elapsed (timer, NULL);</div>
+<div class="pre"><a id="l303" href="#l303" class="linenr"> 303</a> </div>
+<div class="pre"><a id="l304" href="#l304" class="linenr"> 304</a>         info = g_strdup_printf</div>
+<div class="pre"><a id="l305" href="#l305" class="linenr"> 305</a>                 ("Time elapsed: %g ms (%g fps)", 1000 * t, 1/t);</div>
+<div class="pre"><a id="l306" href="#l306" class="linenr"> 306</a> </div>
+<div class="pre"><a id="l307" href="#l307" class="linenr"> 307</a>         cairo_set_source_rgb (cr, 1, 1, 1);</div>
+<div class="pre"><a id="l308" href="#l308" class="linenr"> 308</a>         cairo_move_to (cr, 5, h + 15);</div>
+<div class="pre"><a id="l309" href="#l309" class="linenr"> 309</a>         cairo_show_text (cr, info);</div>
+<div class="pre"><a id="l310" href="#l310" class="linenr"> 310</a>         g_free (info);</div>
+<div class="pre"><a id="l311" href="#l311" class="linenr"> 311</a> </div>
+<div class="pre"><a id="l312" href="#l312" class="linenr"> 312</a>         cairo_destroy (cr);</div>
+<div class="pre"><a id="l313" href="#l313" class="linenr"> 313</a> </div>
+<div class="pre"><a id="l314" href="#l314" class="linenr"> 314</a>         return TRUE;</div>
+<div class="pre"><a id="l315" href="#l315" class="linenr"> 315</a> }</div>
+<div class="pre"><a id="l316" href="#l316" class="linenr"> 316</a> </div>
+<div class="pre"><a id="l317" href="#l317" class="linenr"> 317</a> static GtkWidget *</div>
+<div class="pre"><a id="l318" href="#l318" class="linenr"> 318</a> create_control (GtkTable   *table,</div>
+<div class="pre"><a id="l319" href="#l319" class="linenr"> 319</a>                 const char *title,</div>
+<div class="pre"><a id="l320" href="#l320" class="linenr"> 320</a>                 int         row,</div>
+<div class="pre"><a id="l321" href="#l321" class="linenr"> 321</a>                 double      min,</div>
+<div class="pre"><a id="l322" href="#l322" class="linenr"> 322</a>                 double      max,</div>
+<div class="pre"><a id="l323" href="#l323" class="linenr"> 323</a>                 double      inc)</div>
+<div class="pre"><a id="l324" href="#l324" class="linenr"> 324</a> {</div>
+<div class="pre"><a id="l325" href="#l325" class="linenr"> 325</a>         GtkWidget *label, *control;</div>
+<div class="pre"><a id="l326" href="#l326" class="linenr"> 326</a> </div>
+<div class="pre"><a id="l327" href="#l327" class="linenr"> 327</a>         control = gtk_hscale_new_with_range (min, max, inc);</div>
+<div class="pre"><a id="l328" href="#l328" class="linenr"> 328</a>         gtk_scale_set_value_pos (GTK_SCALE (control), GTK_POS_RIGHT);</div>
+<div class="pre"><a id="l329" href="#l329" class="linenr"> 329</a> </div>
+<div class="pre"><a id="l330" href="#l330" class="linenr"> 330</a>         label = gtk_label_new_with_mnemonic (title);</div>
+<div class="pre"><a id="l331" href="#l331" class="linenr"> 331</a>         gtk_label_set_mnemonic_widget (GTK_LABEL (label), control);</div>
+<div class="pre"><a id="l332" href="#l332" class="linenr"> 332</a>         gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);</div>
+<div class="pre"><a id="l333" href="#l333" class="linenr"> 333</a> </div>
+<div class="pre"><a id="l334" href="#l334" class="linenr"> 334</a>         gtk_table_attach</div>
+<div class="pre"><a id="l335" href="#l335" class="linenr"> 335</a>                 (table, label, 0, 1, row, row + 1,</div>
+<div class="pre"><a id="l336" href="#l336" class="linenr"> 336</a>                  GTK_FILL, GTK_FILL, 0, 0);</div>
+<div class="pre"><a id="l337" href="#l337" class="linenr"> 337</a>         gtk_table_attach</div>
+<div class="pre"><a id="l338" href="#l338" class="linenr"> 338</a>                 (table, control, 1, 2, row, row + 1,</div>
+<div class="pre"><a id="l339" href="#l339" class="linenr"> 339</a>                  GTK_FILL | GTK_EXPAND, GTK_FILL, 0, 0);</div>
+<div class="pre"><a id="l340" href="#l340" class="linenr"> 340</a> </div>
+<div class="pre"><a id="l341" href="#l341" class="linenr"> 341</a>         return control;</div>
+<div class="pre"><a id="l342" href="#l342" class="linenr"> 342</a> }</div>
+<div class="pre"><a id="l343" href="#l343" class="linenr"> 343</a> </div>
+<div class="pre"><a id="l344" href="#l344" class="linenr"> 344</a> static void</div>
+<div class="pre"><a id="l345" href="#l345" class="linenr"> 345</a> int_value_changed_cb (GtkRange *range,</div>
+<div class="pre"><a id="l346" href="#l346" class="linenr"> 346</a>                       int      *value)</div>
+<div class="pre"><a id="l347" href="#l347" class="linenr"> 347</a> {</div>
+<div class="pre"><a id="l348" href="#l348" class="linenr"> 348</a>         *value = gtk_range_get_value (range);</div>
+<div class="pre"><a id="l349" href="#l349" class="linenr"> 349</a>         gtk_widget_queue_draw (canvas);</div>
+<div class="pre"><a id="l350" href="#l350" class="linenr"> 350</a> }</div>
+<div class="pre"><a id="l351" href="#l351" class="linenr"> 351</a> </div>
+<div class="pre"><a id="l352" href="#l352" class="linenr"> 352</a> static GtkWidget *</div>
+<div class="pre"><a id="l353" href="#l353" class="linenr"> 353</a> create_int_control (GtkTable   *table,</div>
+<div class="pre"><a id="l354" href="#l354" class="linenr"> 354</a>                     const char *title,</div>
+<div class="pre"><a id="l355" href="#l355" class="linenr"> 355</a>                     int         row,</div>
+<div class="pre"><a id="l356" href="#l356" class="linenr"> 356</a>                     int        *value,</div>
+<div class="pre"><a id="l357" href="#l357" class="linenr"> 357</a>                     int         min,</div>
+<div class="pre"><a id="l358" href="#l358" class="linenr"> 358</a>                     int         max)</div>
+<div class="pre"><a id="l359" href="#l359" class="linenr"> 359</a> {</div>
+<div class="pre"><a id="l360" href="#l360" class="linenr"> 360</a>         GtkWidget *control;</div>
+<div class="pre"><a id="l361" href="#l361" class="linenr"> 361</a> </div>
+<div class="pre"><a id="l362" href="#l362" class="linenr"> 362</a>         control = create_control (table, title, row, min, max, 1);</div>
+<div class="pre"><a id="l363" href="#l363" class="linenr"> 363</a>         gtk_range_set_value (GTK_RANGE (control), *value);</div>
+<div class="pre"><a id="l364" href="#l364" class="linenr"> 364</a> </div>
+<div class="pre"><a id="l365" href="#l365" class="linenr"> 365</a>         g_signal_connect</div>
+<div class="pre"><a id="l366" href="#l366" class="linenr"> 366</a>                 (control, "value-changed",</div>
+<div class="pre"><a id="l367" href="#l367" class="linenr"> 367</a>                  G_CALLBACK (int_value_changed_cb), value);</div>
+<div class="pre"><a id="l368" href="#l368" class="linenr"> 368</a> </div>
+<div class="pre"><a id="l369" href="#l369" class="linenr"> 369</a>         return control;</div>
+<div class="pre"><a id="l370" href="#l370" class="linenr"> 370</a> }</div>
+<div class="pre"><a id="l371" href="#l371" class="linenr"> 371</a> </div>
+<div class="pre"><a id="l372" href="#l372" class="linenr"> 372</a> static void</div>
+<div class="pre"><a id="l373" href="#l373" class="linenr"> 373</a> dbl_value_changed_cb (GtkRange *range,</div>
+<div class="pre"><a id="l374" href="#l374" class="linenr"> 374</a>                       double   *value)</div>
+<div class="pre"><a id="l375" href="#l375" class="linenr"> 375</a> {</div>
+<div class="pre"><a id="l376" href="#l376" class="linenr"> 376</a>         *value = gtk_range_get_value (range);</div>
+<div class="pre"><a id="l377" href="#l377" class="linenr"> 377</a>         gtk_widget_queue_draw (canvas);</div>
+<div class="pre"><a id="l378" href="#l378" class="linenr"> 378</a> }</div>
+<div class="pre"><a id="l379" href="#l379" class="linenr"> 379</a> </div>
+<div class="pre"><a id="l380" href="#l380" class="linenr"> 380</a> static GtkWidget *</div>
+<div class="pre"><a id="l381" href="#l381" class="linenr"> 381</a> create_dbl_control (GtkTable   *table,</div>
+<div class="pre"><a id="l382" href="#l382" class="linenr"> 382</a>                     const char *title,</div>
+<div class="pre"><a id="l383" href="#l383" class="linenr"> 383</a>                     int         row,</div>
+<div class="pre"><a id="l384" href="#l384" class="linenr"> 384</a>                     double     *value,</div>
+<div class="pre"><a id="l385" href="#l385" class="linenr"> 385</a>                     double      min,</div>
+<div class="pre"><a id="l386" href="#l386" class="linenr"> 386</a>                     double      max,</div>
+<div class="pre"><a id="l387" href="#l387" class="linenr"> 387</a>                     double      inc)</div>
+<div class="pre"><a id="l388" href="#l388" class="linenr"> 388</a> {</div>
+<div class="pre"><a id="l389" href="#l389" class="linenr"> 389</a>         GtkWidget *control;</div>
+<div class="pre"><a id="l390" href="#l390" class="linenr"> 390</a> </div>
+<div class="pre"><a id="l391" href="#l391" class="linenr"> 391</a>         control = create_control (table, title, row, min, max, inc);</div>
+<div class="pre"><a id="l392" href="#l392" class="linenr"> 392</a>         gtk_range_set_value (GTK_RANGE (control), *value);</div>
+<div class="pre"><a id="l393" href="#l393" class="linenr"> 393</a> </div>
+<div class="pre"><a id="l394" href="#l394" class="linenr"> 394</a>         g_signal_connect</div>
+<div class="pre"><a id="l395" href="#l395" class="linenr"> 395</a>                 (control, "value-changed",</div>
+<div class="pre"><a id="l396" href="#l396" class="linenr"> 396</a>                  G_CALLBACK (dbl_value_changed_cb), value);</div>
+<div class="pre"><a id="l397" href="#l397" class="linenr"> 397</a> </div>
+<div class="pre"><a id="l398" href="#l398" class="linenr"> 398</a>         return control;</div>
+<div class="pre"><a id="l399" href="#l399" class="linenr"> 399</a> }</div>
+<div class="pre"><a id="l400" href="#l400" class="linenr"> 400</a> </div>
+<div class="pre"><a id="l401" href="#l401" class="linenr"> 401</a> static GtkWidget *</div>
+<div class="pre"><a id="l402" href="#l402" class="linenr"> 402</a> create_main_window (void)</div>
+<div class="pre"><a id="l403" href="#l403" class="linenr"> 403</a> {</div>
+<div class="pre"><a id="l404" href="#l404" class="linenr"> 404</a>         GtkWidget *vbox, *align, *label, *frame, *table, *window;</div>
+<div class="pre"><a id="l405" href="#l405" class="linenr"> 405</a>         GError *error = NULL;</div>
+<div class="pre"><a id="l406" href="#l406" class="linenr"> 406</a> </div>
+<div class="pre"><a id="l407" href="#l407" class="linenr"> 407</a>         avatar1 = gdk_pixbuf_new_from_file ("avatar1.png", &amp;error);</div>
+<div class="pre"><a id="l408" href="#l408" class="linenr"> 408</a> </div>
+<div class="pre"><a id="l409" href="#l409" class="linenr"> 409</a>         if (error)</div>
+<div class="pre"><a id="l410" href="#l410" class="linenr"> 410</a>                 g_error ("Cannot load avatar: %s", error-&gt;message);</div>
+<div class="pre"><a id="l411" href="#l411" class="linenr"> 411</a> </div>
+<div class="pre"><a id="l412" href="#l412" class="linenr"> 412</a>         avatar2 = gdk_pixbuf_new_from_file ("avatar2.png", &amp;error);</div>
+<div class="pre"><a id="l413" href="#l413" class="linenr"> 413</a> </div>
+<div class="pre"><a id="l414" href="#l414" class="linenr"> 414</a>         if (error)</div>
+<div class="pre"><a id="l415" href="#l415" class="linenr"> 415</a>                 g_error ("Cannot load avatar: %s", error-&gt;message);</div>
+<div class="pre"><a id="l416" href="#l416" class="linenr"> 416</a> </div>
+<div class="pre"><a id="l417" href="#l417" class="linenr"> 417</a>         /* vbox */</div>
+<div class="pre"><a id="l418" href="#l418" class="linenr"> 418</a> </div>
+<div class="pre"><a id="l419" href="#l419" class="linenr"> 419</a>         vbox = gtk_vbox_new (FALSE, GNOME_MARGIN_DEFAULT);</div>
+<div class="pre"><a id="l420" href="#l420" class="linenr"> 420</a> </div>
+<div class="pre"><a id="l421" href="#l421" class="linenr"> 421</a>         /* canvas */</div>
+<div class="pre"><a id="l422" href="#l422" class="linenr"> 422</a> </div>
+<div class="pre"><a id="l423" href="#l423" class="linenr"> 423</a>         canvas = gtk_drawing_area_new ();</div>
+<div class="pre"><a id="l424" href="#l424" class="linenr"> 424</a> </div>
+<div class="pre"><a id="l425" href="#l425" class="linenr"> 425</a>         gtk_widget_set_size_request</div>
+<div class="pre"><a id="l426" href="#l426" class="linenr"> 426</a>                 (canvas,</div>
+<div class="pre"><a id="l427" href="#l427" class="linenr"> 427</a>                  gdk_pixbuf_get_width (avatar1) +</div>
+<div class="pre"><a id="l428" href="#l428" class="linenr"> 428</a>                  gdk_pixbuf_get_width (avatar2) + 100,</div>
+<div class="pre"><a id="l429" href="#l429" class="linenr"> 429</a>                  MAX (gdk_pixbuf_get_height (avatar1),</div>
+<div class="pre"><a id="l430" href="#l430" class="linenr"> 430</a>                       gdk_pixbuf_get_height (avatar2)) + 40);</div>
+<div class="pre"><a id="l431" href="#l431" class="linenr"> 431</a> </div>
+<div class="pre"><a id="l432" href="#l432" class="linenr"> 432</a>         g_signal_connect</div>
+<div class="pre"><a id="l433" href="#l433" class="linenr"> 433</a>                 (canvas, "expose-event",</div>
+<div class="pre"><a id="l434" href="#l434" class="linenr"> 434</a>                  G_CALLBACK (expose_event_cb), NULL);</div>
+<div class="pre"><a id="l435" href="#l435" class="linenr"> 435</a> </div>
+<div class="pre"><a id="l436" href="#l436" class="linenr"> 436</a>         gtk_box_pack_start (GTK_BOX (vbox), canvas, TRUE, TRUE, 0);</div>
+<div class="pre"><a id="l437" href="#l437" class="linenr"> 437</a> </div>
+<div class="pre"><a id="l438" href="#l438" class="linenr"> 438</a>         /* controls */</div>
+<div class="pre"><a id="l439" href="#l439" class="linenr"> 439</a> </div>
+<div class="pre"><a id="l440" href="#l440" class="linenr"> 440</a>         table = g_object_new</div>
+<div class="pre"><a id="l441" href="#l441" class="linenr"> 441</a>                 (GTK_TYPE_TABLE,</div>
+<div class="pre"><a id="l442" href="#l442" class="linenr"> 442</a>                  "border-width", GNOME_MARGIN_DEFAULT,</div>
+<div class="pre"><a id="l443" href="#l443" class="linenr"> 443</a>                  "column-spacing", GNOME_MARGIN_DEFAULT,</div>
+<div class="pre"><a id="l444" href="#l444" class="linenr"> 444</a>                  "row-spacing", GNOME_MARGIN_DEFAULT, NULL);</div>
+<div class="pre"><a id="l445" href="#l445" class="linenr"> 445</a> </div>
+<div class="pre"><a id="l446" href="#l446" class="linenr"> 446</a>         create_int_control (GTK_TABLE (table), "_Radius", 1, &amp;radius,   1, 10);</div>
+<div class="pre"><a id="l447" href="#l447" class="linenr"> 447</a>         create_dbl_control (GTK_TABLE (table), "_Offset", 2, &amp;offset, -10, 10, 0.1);</div>
+<div class="pre"><a id="l448" href="#l448" class="linenr"> 448</a>         create_dbl_control (GTK_TABLE (table), "_Sigma",  3, &amp;sigma,    0, 10, 0.1);</div>
+<div class="pre"><a id="l449" href="#l449" class="linenr"> 449</a>         create_dbl_control (GTK_TABLE (table), "_Alpha",  4, &amp;alpha,    0,  1, 0.1);</div>
+<div class="pre"><a id="l450" href="#l450" class="linenr"> 450</a>         create_dbl_control (GTK_TABLE (table), "R_ed",    5, &amp;red,      0,  1, 0.01);</div>
+<div class="pre"><a id="l451" href="#l451" class="linenr"> 451</a>         create_dbl_control (GTK_TABLE (table), "_Green",  6, &amp;green,    0,  1, 0.01);</div>
+<div class="pre"><a id="l452" href="#l452" class="linenr"> 452</a>         create_dbl_control (GTK_TABLE (table), "_Blue",   7, &amp;blue,     0,  1, 0.01);</div>
+<div class="pre"><a id="l453" href="#l453" class="linenr"> 453</a> </div>
+<div class="pre"><a id="l454" href="#l454" class="linenr"> 454</a>         align = g_object_new</div>
+<div class="pre"><a id="l455" href="#l455" class="linenr"> 455</a>                 (GTK_TYPE_ALIGNMENT,</div>
+<div class="pre"><a id="l456" href="#l456" class="linenr"> 456</a>                  "left-padding", GNOME_MARGIN_DOUBLE, NULL);</div>
+<div class="pre"><a id="l457" href="#l457" class="linenr"> 457</a> </div>
+<div class="pre"><a id="l458" href="#l458" class="linenr"> 458</a>         gtk_container_add (GTK_CONTAINER (align), table);</div>
+<div class="pre"><a id="l459" href="#l459" class="linenr"> 459</a> </div>
+<div class="pre"><a id="l460" href="#l460" class="linenr"> 460</a>         label = g_object_new</div>
+<div class="pre"><a id="l461" href="#l461" class="linenr"> 461</a>                 (GTK_TYPE_LABEL, "use-markup", TRUE,</div>
+<div class="pre"><a id="l462" href="#l462" class="linenr"> 462</a>                  "label", "&lt;b&gt;Settings&lt;/b&gt;", NULL);</div>
+<div class="pre"><a id="l463" href="#l463" class="linenr"> 463</a> </div>
+<div class="pre"><a id="l464" href="#l464" class="linenr"> 464</a>         frame = g_object_new</div>
+<div class="pre"><a id="l465" href="#l465" class="linenr"> 465</a>                 (GTK_TYPE_FRAME, "label-widget", label,</div>
+<div class="pre"><a id="l466" href="#l466" class="linenr"> 466</a>                  "shadow-type", GTK_SHADOW_NONE, NULL);</div>
+<div class="pre"><a id="l467" href="#l467" class="linenr"> 467</a> </div>
+<div class="pre"><a id="l468" href="#l468" class="linenr"> 468</a>         gtk_container_add (GTK_CONTAINER (frame), align);</div>
+<div class="pre"><a id="l469" href="#l469" class="linenr"> 469</a>         gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, TRUE, 0);</div>
+<div class="pre"><a id="l470" href="#l470" class="linenr"> 470</a> </div>
+<div class="pre"><a id="l471" href="#l471" class="linenr"> 471</a>         /* window */</div>
+<div class="pre"><a id="l472" href="#l472" class="linenr"> 472</a> </div>
+<div class="pre"><a id="l473" href="#l473" class="linenr"> 473</a>         window = g_object_new</div>
+<div class="pre"><a id="l474" href="#l474" class="linenr"> 474</a>                 (GTK_TYPE_WINDOW,</div>
+<div class="pre"><a id="l475" href="#l475" class="linenr"> 475</a>                  "border-width", GNOME_MARGIN_DEFAULT, NULL);</div>
+<div class="pre"><a id="l476" href="#l476" class="linenr"> 476</a> </div>
+<div class="pre"><a id="l477" href="#l477" class="linenr"> 477</a>         gtk_container_add (GTK_CONTAINER (window), vbox);</div>
+<div class="pre"><a id="l478" href="#l478" class="linenr"> 478</a>         gtk_widget_show_all (vbox);</div>
+<div class="pre"><a id="l479" href="#l479" class="linenr"> 479</a> </div>
+<div class="pre"><a id="l480" href="#l480" class="linenr"> 480</a>         return window;</div>
+<div class="pre"><a id="l481" href="#l481" class="linenr"> 481</a> }</div>
+<div class="pre"><a id="l482" href="#l482" class="linenr"> 482</a> </div>
+<div class="pre"><a id="l483" href="#l483" class="linenr"> 483</a> int</div>
+<div class="pre"><a id="l484" href="#l484" class="linenr"> 484</a> main (int   argc,</div>
+<div class="pre"><a id="l485" href="#l485" class="linenr"> 485</a>       char *argv[])</div>
+<div class="pre"><a id="l486" href="#l486" class="linenr"> 486</a> {</div>
+<div class="pre"><a id="l487" href="#l487" class="linenr"> 487</a>         GtkWidget *window;</div>
+<div class="pre"><a id="l488" href="#l488" class="linenr"> 488</a> </div>
+<div class="pre"><a id="l489" href="#l489" class="linenr"> 489</a>         g_set_application_name ("Blur Effect");</div>
+<div class="pre"><a id="l490" href="#l490" class="linenr"> 490</a> </div>
+<div class="pre"><a id="l491" href="#l491" class="linenr"> 491</a>         gtk_init (&amp;argc, &amp;argv);</div>
+<div class="pre"><a id="l492" href="#l492" class="linenr"> 492</a> </div>
+<div class="pre"><a id="l493" href="#l493" class="linenr"> 493</a>         window = create_main_window ();</div>
+<div class="pre"><a id="l494" href="#l494" class="linenr"> 494</a> </div>
+<div class="pre"><a id="l495" href="#l495" class="linenr"> 495</a>         g_signal_connect</div>
+<div class="pre"><a id="l496" href="#l496" class="linenr"> 496</a>                 (window, "destroy",</div>
+<div class="pre"><a id="l497" href="#l497" class="linenr"> 497</a>                  G_CALLBACK (gtk_main_quit), NULL);</div>
+<div class="pre"><a id="l498" href="#l498" class="linenr"> 498</a> </div>
+<div class="pre"><a id="l499" href="#l499" class="linenr"> 499</a>         gtk_widget_show (window);</div>
+<div class="pre"><a id="l500" href="#l500" class="linenr"> 500</a>         gtk_main ();</div>
+<div class="pre"><a id="l501" href="#l501" class="linenr"> 501</a> </div>
+<div class="pre"><a id="l502" href="#l502" class="linenr"> 502</a>         return 0;</div>
+<div class="pre"><a id="l503" href="#l503" class="linenr"> 503</a> }</div>
+</div><div class="page_footer">
+<div class="page_footer_text">Some random code.</div>
+<a class="rss_logo" href="http://taschenorakel.de/gitweb/?p=playground;a=rss">RSS</a> <a class="rss_logo" href="http://taschenorakel.de/gitweb/?p=playground;a=atom">Atom</a>
+</div>
+</body>
+</html>

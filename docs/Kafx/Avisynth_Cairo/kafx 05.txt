@@ -1,0 +1,211 @@
+tutorial 5
+
+note: the tutorials will cover the kafx version for the installer (kafx codename "Limitless" ZOMGWTF! sqrt(2) aka 1.42). when we are able to release the svn version i'll (try to) update the tutorials.
+nota: los tutoriales son para la version en el instalador (kafx "Limitless" ZOMGWTF! sqrt(2) (o sea 1.42)). Cuando podamos sacar la version del svn voy a (intentar) actualizar los tutoriales. 
+
+
+ok this will be (i hope so) the last tutorial of kafx... i'll try to cover all the stuff inside the dialog object. at least the stable part. 
+the rest, would be kafx internal and cairo, wich is self explanatory by looking at kafx code, once you've reached certain understanding of the objects and python programming. 
+so i'll simply stop after this so i can devote my time to work stuff and translation and trying to make kafx2 work.
+
+----------
+
+
+so you already has kafx running, done your first script and met the basic functions of the dialog (and so the sillabe) object. what else can you do?
+
+every dialog object has some properties: 
+this ones are only for reading it, if you change them mostly nothing will happen, or the script can fail.
+[code]
+diag.start #the start time, in milliseconds
+diag.end #the end time in milliseconds
+diag.dur #the duration in milliseconds
+diag.texto # the text that will get rendered.. you can actually change this, and it actually will change.. but the text-extents aren't recalculated *2
+[/code]
+this are for the active times (similar to ondialogo and onsilaba) and not other events. If you use it on the other events you won't get what you might expect.
+
+now, one REALLY important property (and also readonly) is [b]progreso[/b] (progress). This one is the core of the "animation".
+[code]
+diag.progreso
+[/code]
+The value of this variable goes from 0 to 1 for each and every event. So you can always know at wich point of the animation you are. 
+This is for every event, and each one is independent.
+so with this you don't need to bother with times, milliseconds nor frames. you want to animate from [i]one[/i] value to [i]another[/i] one, that's all you have to think about. and the interpolation comes very
+easily. I'll teach you how to use it later, but don't forget about it.
+(btw, don't change it without expecting to see weird stuff in the animation)
+
+now, the other important thing to know is the style objects. there are 2 style objects.*1
+[code]
+diag.actual #current one
+diag.original
+[/code]
+this contains all the properties of the text itself. and contains [i]most[/i] of the properties from the ass (the style actually (for reading purposes ([b]actual[/b] may lack some properties for speed up)).
+[b]actual[/b] is the one you'll change, this one you can change it every frame and in every event. And the properties from this one will be using for calculating how to draw the text.
+This object is restored to its original values EACH frame and for EACH event. so don't be afraid to change it, it's for that.
+[b]original[/b] has the original values :D If you change this one, [b]actual[/b] will take the value you set for every frame, so, use it wisely.
+
+now, for providing a way to speeding things up if you know what you are doing, you can actually avoid restoring the [b]actual[/b] style every frame, by setting the property
+[b]reset_estilo[/b] to False in the FX class. (tutorial 2)
+[code]
+class FX(extra.FX):
+	def __init__(self):
+		extra.FX.__init__(self)
+		self.reset_estilo = False
+[/code]
+use it wise as i can't foresee now exactly wich consecuences this could have... but most effects should work if it's based on [b]progreso[/b] (not always)
+
+what can you find in those style objects? 
+[code]
+    #just for setting you on context
+    def OnSilaba(self, s):
+        a = s.actual # this is a little thing i do to try to speed things up. i never had the time to actually test if it does.
+        #These properties are for reading only. if you change them nothing will (hopefully) happen.
+        
+        a.ancho 
+        #this is the width of the dialog, actually i think is the bounding box, remember that you can get more metrics by reading cairo's text extents that are on the original style object
+
+        a.alto #the height
+
+        a.size 
+        #the font size. you can actually change this one, and it'll achieve what you want. but i want to remove it for some speed.
+        #besides this method is not as smooth as the scale, but it will actually allow you to have some other way of control.*2
+
+        a.fuente #The font name, you can change this and the font will actually change..*2
+
+        a.pos_x 
+        a.pos_y
+        #This two are the position of the text in the screen. *3 *4
+
+        a.org_x 
+        a.org_y
+        #This two are the origins point, that is, the point of reference for transformation. the "center" of the transformations. Is just like in ass. When you do a rotate or a scale,
+        #the origin tells the center of the transformation. Also i'm using this point in the svn for getting the 2nd point for things like gradients, but i should change it later.
+
+        a.scale_x
+        a.scale_y
+        #do i need to explain? (default is 1, >1 is bigger, <1 is smaller. Is the same as multiplying the width/height by this value)
+
+        a.angulo
+        #Angle of rotation IN RADIANS (that is multiples of pi). set this to whatever you want and the text gets rotated by its [i]origin[/i]
+
+        a.borde
+        # this is the border size of the text, in pixels. (ie: 1, 2 , 3)
+        a.sombra
+        # Shadow size. 0 means no shadow (it actually doesn't get drawn at all. so speed up).
+        # The shadow has 1 limitation, it has no position offset... you can actually fake this, but its not in the code.. someday...
+
+        a.negrita
+        # Bold, True for yes, False for no. *2
+        a.italica
+        # Italic, just as bold *2
+
+        #also there are 4 special object, for colors:
+        a.color #The front color (also known as primary color)
+        a.ocolor #Outline Color (aka outline color)
+        a.bcolor #Back color (aka shadow)
+        a.scolor #Secundary Color (aka... the other color)
+        *5
+[/code]
+
+Colors works this way, they contain 4 properties, [b]a[/b], [b]r[/b], [b]g[/b] and [b]b[/b], you may have guessed what they are..no? 
+A = Alpha
+R = Red
+G = Green
+B = Blue
+all those range from 0 to 1, and you can set whatever value you want. like this
+
+[code]
+    diag.actual.color.a = 0.5 #This is 50% transparent
+[/code]
+
+
+
+
+How do i animate this ...thing?!
+Well, just by changing the values of any of those properties.
+a simple way would be doing this
+[code]
+def OnSilaba(self, s):
+    s.actual.pos_x = random()*10 #Note that random also is a number from 0 to 1... and multiplying something from 0 to 1 by 10, you get a number between 0 and 10. sweet..
+[/code]
+
+but that would make the text just apear randomly on each frame.
+Animation is all about interpolation. That is, you know the original position, and the ending position, and for each frame you simply calculate the value in between (at least in kafx1).
+
+Now i could explain you about how to play with numbers ranging from 0 to 1 (wich are really cool indeed) but i don't want to loose much time. so i'll introduce you with a usefull function i've made.
+is inside the [b]extra[/b] module so you must import it, (wich we already did.), the function is used like this
+[code]
+    extra.CalcProgreso(from, to, sil.progreso)
+[/code]
+
+so, for example, if you want your dialog to increase its size, you'll probably would use something like this.
+[code]
+def OnSilaba(self, s):
+    s.actual.scale_x = extra.CalcProgreso(1, 2.4, s.progreso)
+    s.actual.scale_y = s.actual.scale_x #this way it scales on height and width alike
+[/code]
+
+One important note, the way to do things is basically, on the event, you set all the properties you want to change (only those), and THEN 
+(after you've changed the properties and/or called [b]Mover/Desvanecer[/b] or any other func) 
+you call [b]Pintar[/b]. You can call the [b]Pintar[/b] method as many times you want. Each time you call it the text gets rendered with the properties you've assigned..
+
+
+And well, that's everything... enjoy.
+You can do a lot more but you need to learn about cairo... 
+maybe some day i'll do more tutorials on kafx internal...
+
+c ya! thanks for reading!! and thanks for using. remember, if you really want to learn practice practice practice. and whatever doubt you might get, don't be afraid to ask.
+
+Also if for some reason you'd like to help me out with this project, just talk to me, i'm sure i can find a job for ya >:D
+
+------------
+Notes:
+
+*1 
+Why two styles, why progreso? well. mostly because of the "random frame access" thing. 
+When i started kafx i encounter the problem that frames can be accessed/requested in random order (and some programs does), that way i'd had to do some calculation to know how to render the stuff.. 
+the best thing i came up with was storing the original value for every property, and doing some interpolation on the fly to know the  "current" value.. 
+there comes [b]progreso[/b]. knowing the progress of the animation i only needed the start value and the end value and i could know the actual value without having to store a buffer for the last value 
+and stuff like that.
+the pro? you can actually encode any effect backwards (without random and particles). and also the interpolation is pretty acurate (most with small numbers and large frames where the floating point precition may fail (wich can be doubted with python)).
+the con: is damm slow, i have to multiply stuff every frame, and restoring the style object for ever yframe (i think) consumes a lot of cpu.
+i will probably change this on kafx2...
+
+*2 
+Also the text extents aren't recalculated when you change the font, the text or the size..
+i want to make it more static, just for speed and simplicity, also i want to make everything derive from a vector.. 
+so the IDEA is that sometime i just add some function like SetText(text, font, size) and that recreates the vector path,
+recalculates the extents and caches everything.
+
+*3
+The coords (coordenate system) in cairo is the so called 4th quadrant. What this means is that x=0, y=0 is the corner of the top left. and increasing the X will move you to the right (as expected)
+but increasing the Y will in fact go down (as oposed to what you may be used to). This is almost the normal way to do it, i also think is wrong but who am i to question it... 
+i hope there's a good reason but i don't know it
+
+*4
+The position of the text has NOTHING to do with align, i'm not completely sure right now, but this value represents the reference point (that is the baseline) for the character.. 
+is not actually neither the top nor the bottom (and certainly not the center)...
+if you really need to know the exact position you should check the text extents properties that get stored on [b]original[/b] but i wont explain them now.
+
+*5 You NEVER copy a style NOR a color by doing
+[code]
+    diag.actual.color = diag.actual.scolor
+    #or
+    diag.actual = diag.original
+[/code]
+
+if you know about pointers references or how python works you'll know why... 
+both color and styles offers a function called [b]CopyFrom[/b] that you can use to copy from another object. for example
+
+[code]
+    diag.actual.color.CopyFrom(diag.actual.scolor)
+    #or
+    diag.actual.CopyFrom(diag.original)
+    #wich also is exactly the same as
+    diag.Restore()
+[/code]
+
+
+
+
+For more text understanding check this out :D
+http://www.freetype.org/freetype2/docs/glyphs/

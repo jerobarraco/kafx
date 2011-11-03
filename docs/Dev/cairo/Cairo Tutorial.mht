@@ -1,0 +1,3417 @@
+Content-Type: multipart/related; start=<op.mhtml.1220413538345.6922fc395d3ab615@192.168.1.99>; boundary=----------5HNybzfxsW8Z73nCejVNo7
+Content-Location: http://www.cairographics.org/tutorial/
+Subject: =?utf-8?Q?Cairo=20Tutorial?=
+MIME-Version: 1.0
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=default.htm
+Content-Type: text/html; charset=UTF-8; name=default.htm
+Content-Id: <op.mhtml.1220413538345.6922fc395d3ab615@192.168.1.99>
+Content-Location: http://www.cairographics.org/tutorial/
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cairo Tutorial</title>
+
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<link rel="stylesheet" href="../local.css" type="text/css" />
+
+
+</head>
+<body>
+
+<div class="header">
+<div id="logo">
+  <a href="/"><img alt="cairo" src="/cairo-banner.png" /></a>
+</div>
+</div>
+
+<div id="navcontainer">
+<ul id="navlist">
+<li><a href="/news/">News</a></li>
+<li><a href="/download/">Download</a></li>
+<li><a href="/documentation/">Documentation</a></li>
+<li><a href="/contact/">Contact</a></li>
+<li><a href="/examples/">Examples</a></li>
+</ul>
+</div>
+
+
+<div id="title">
+Cairo Tutorial
+</div>
+
+
+
+
+
+<div id="content">
+<p>This tutorial is derived from Michael Urman's <a href="http://www.tortall.net/mu/wiki/CairoTutorial">cairo tutorial for python
+programmers</a>. The original
+code snippets have been translated to C, the text has only been changed
+as much as necessary.</p>
+
+<p>Cairo is a powerful 2d graphics library. This document introduces you to how
+cairo works and many of the functions you will use to create the graphic
+experience you desire.</p>
+
+<p>In order to follow along on your computer, you need the following things:</p>
+
+<ol>
+<li><p>Cairo itself. You will need both the library and the development
+files. See <a href="../download/">Download</a> if you don't have it already.</p></li>
+<li><p>A C compiler. The <a href="../FAQ/">FAQ</a> contains a minimal example on how to turn
+the code into a program that produces the desired output.</p>
+
+<p>If you want to see the code snippets included in this tutorial in
+action, you can try to click on some of the images. You will get a
+small C program which includes the described drawing code.</p></li>
+</ol>
+
+<p>Alternately, if you're up for a challenge, you can translate the examples to
+your preferred language and host environment and only need cairo from above.</p>
+
+<blockquote>
+  <p>Note: The text mentions <code>cairo_push_group()</code> and
+  <code>cairo_pop_group()</code>. At least cairo version 1.2.0 is needed for
+  this.</p>
+</blockquote>
+
+<h2>Table of Contents</h2>
+
+<ul>
+<li><a href="#L1draw">Cairo's Drawing Model</a>
+<ul>
+<li><a href="#L2nouns">Nouns</a></li>
+<li><a href="#L2verbs">Verbs</a></li>
+</ul></li>
+<li><a href="#L1drawing">Drawing with Cairo</a>
+<ul>
+<li><a href="#L2preparesource">Preparing and Selecting a Source</a></li>
+<li><a href="#L2createpath">Creating a Path</a></li>
+</ul></li>
+<li><a href="#L1understandingtext">Understanding Text</a></li>
+<li><a href="#L1transforms">Working with Transforms</a></li>
+<li><a href="#L1gonext">Where to Go Next</a></li>
+<li><a href="#L1tips">Tips and Tricks</a>
+<ul>
+<li><a href="#L2linewidth">Line Width</a></li>
+<li><a href="#L2textalign">Text Alignment</a></li>
+</ul></li>
+</ul>
+
+<h1 id="L1drawingmodel">Cairo's Drawing Model</h1>
+
+<p>In order to explain the operations used by cairo, we first delve into a
+model of how cairo models drawing. There are only a few concepts
+involved, which are then applied over and over by the different methods.
+First I'll describe the <a href="#L2nouns">nouns</a>: <a href="#L3destination">destination</a>, <a href="#L3source">source</a>,
+<a href="#L3mask">mask</a>, <a href="#L3path">path</a>, and <a href="#L3context">context</a>. After that I'll describe the <a href="#L2verbs">verbs</a> which offer ways to manipulate the nouns and
+draw the graphics you wish to create.</p>
+
+<h2 id="L2nouns">Nouns</h2>
+
+<p>Cairo's nouns are somewhat abstract. To make them concrete I'm including
+diagrams that depict how they interact. The first three nouns are the three
+layers in the diagrams you see in this section. The fourth noun, the path, is
+drawn on the middle layer when it is relevant. The final noun, the context,
+isn't shown.</p>
+
+<h3 id="L3destination">Destination</h3>
+
+<div class="tutright"><img src="destination.png" alt="" /></div>
+
+<p>The destination is the
+<a href="http://www.cairographics.org/manual/Surfaces.html">surface</a> on which
+you're drawing. It may be tied to an array of pixels like in this
+tutorial, or it might be tied to a SVG or PDF file, or something else.
+This surface collects the elements of your graphic as you apply them,
+allowing you to build up a complex work as though painting on a canvas.</p>
+
+<h3 id="L3source">Source</h3>
+
+<div class="tutright"><img src="source.png" alt="" /></div>
+
+<p>The source is the "paint" you're about to work with. I show this as it
+is&mdash;plain black for several examples&mdash;but translucent to show
+lower layers.  Unlike real paint, it doesn't have to be a single color;
+it can be a
+<a href="http://www.cairographics.org/manual/cairo-Patterns.html">pattern</a> or
+even a previously created destination
+<a href="http://www.cairographics.org/manual/Surfaces.html">surface</a>. Also
+unlike real paint it can contain transparency information&mdash;the
+Alpha channel.</p>
+
+<h3 id="L3mask">Mask</h3>
+
+<div class="tutright"><img src="the-mask.png" alt="" /></div>
+
+<p>The mask is the most important piece: it controls where you apply
+the source to the destination. I will show it as a yellow layer with holes
+where it lets the source through. When you apply a drawing verb, it's like you
+stamp the source to the destination. Anywhere the mask allows, the source is
+copied. Anywhere the mask disallows, nothing happens.</p>
+
+<h3 id="L3path">Path</h3>
+
+<p>The path is somewhere between part of the mask and part of the context. I will
+show it as thin green lines on the mask layer. It is manipulated by path verbs,
+then used by drawing verbs.</p>
+
+<h3 id="L3context">Context</h3>
+
+<p>The context keeps track of everything that verbs affect. It tracks one source,
+one destination, and one mask. It also tracks several helper variables like
+your line width and style, your font face and size, and more. Most importantly
+it tracks the path, which is turned into a mask by drawing verbs.</p>
+
+<p>Before you can start to draw something with cairo, you need to create
+the context. The context is stored in cairo's central data type, called
+<code>cairo_t</code>. When you create a cairo context, it must be tied to a
+specific surface&mdash;for example, an image surface if you want to create a
+PNG file.  There is also a data type for the surface, called
+<code>cairo_surface_t</code>. You can initialize your cairo context like this:</p>
+
+<pre><code>cairo_surface_t *surface;
+cairo_t *cr;
+
+surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, 120, 120);
+cr = cairo_create (surface);
+</code></pre>
+
+<p>The cairo context in this example is tied to an image surface of
+dimension 120&nbsp;x&nbsp;120 and 32 bits per pixel to store RGB and Alpha
+information. Surfaces can be created specific to most cairo backends,
+see the <a href="http://cairographics.org/manual/Surfaces.html">manual</a> for details.</p>
+
+<h2 id="L2verbs">Verbs</h2>
+
+<p>The reason you are using cairo in a program is to draw. Cairo internally draws
+with one fundamental drawing operation: the source and mask are freely placed
+somewhere over the destination. Then the layers are all pressed together and
+the paint from the source is transferred to the destination wherever the mask
+allows it. To that extent the following five drawing verbs, or operations, are
+all similar. They differ by how they construct the mask.</p>
+
+<h3 id="L3stroke">Stroke</h3>
+
+<div class="tutright"><a href="stroke.c"><img src="stroke.png" alt="" /></a></div>
+
+<p>The
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-stroke"><code>cairo_stroke()</code></a>
+operation takes a virtual pen along the path. It allows the source to
+transfer through the mask in a thin (or thick) line around the path,
+according to the pen's
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-set-line-width">line width</a>,
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-set-dash">dash style</a>,
+and <a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-set-line-cap">line caps</a>.</p>
+
+<pre><code>cairo_set_line_width (cr, 0.1);
+cairo_set_source_rgb (cr, 0, 0, 0);
+cairo_rectangle (cr, 0.25, 0.25, 0.5, 0.5);
+cairo_stroke (cr);
+</code></pre>
+
+<h3 id="L3fill">Fill</h3>
+
+<div class="tutright"><a href="fill.c"><img src="fill.png" alt="" /></a></div>
+
+<p>The
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-fill"><code>cairo_fill()</code></a>
+operation instead uses the path like the lines of a coloring book, and
+allows the source through the mask within the hole whose boundaries are
+the path. For complex paths (paths with multiple closed
+sub-paths&mdash;like a donut&mdash;or paths that self-intersect) this is
+influenced by the
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-set-fill-rule">fill rule</a>.
+Note that while stroking the path transfers the source for half of the
+line width on each side of the path, filling a path fills directly up to
+the edge of the path and no further.</p>
+
+<pre><code>cairo_set_source_rgb (cr, 0, 0, 0);
+cairo_rectangle (cr, 0.25, 0.25, 0.5, 0.5);
+cairo_fill (cr);
+</code></pre>
+
+<h3 id="L3showtext">Show Text / Glyphs</h3>
+
+<div class="tutright"><a href="showtext.c"><img src="showtext.png" alt="" /></a></div>
+
+<p>The
+<a href="http://www.cairographics.org/manual/cairo-Text.html#cairo-show-text"><code>cairo_show_text()</code></a>
+operation forms the mask from text. It may be easier to think of
+<code>cairo_show_text()</code> as a shortcut for creating a path with
+<a href="http://www.cairographics.org/manual/cairo-Paths.html#cairo-text-path"><code>cairo_text_path()</code></a>
+and then using
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-fill"><code>cairo_fill()</code></a>
+to transfer it. Be aware <code>cairo_show_text()</code> caches glyphs so is much
+more efficient if you work with a lot of text.</p>
+
+<pre><code>cairo_text_extents_t te;
+cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
+cairo_select_font_face (cr, "Georgia",
+    CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+cairo_set_font_size (cr, 1.2);
+cairo_text_extents (cr, "a", &amp;te);
+cairo_move_to (cr, 0.5 - te.width / 2 - te.x_bearing,
+    0.5 - te.height / 2 - te.y_bearing);
+cairo_show_text (cr, "a");
+</code></pre>
+
+<h3 id="L3paint">Paint</h3>
+
+<div class="tutright"><a href="paint.c"><img src="paint.png" alt="" /></a></div>
+
+<p>The
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-paint"><code>cairo_paint()</code></a>
+operation uses a mask that transfers the entire source to the
+destination. Some people consider this an infinitely large mask, and
+others consider it no mask; the result is the same. The related
+operation
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-paint-with-alpha"><code>cairo_paint_with_alpha()</code></a>
+similarly allows transfer of the full source to destination, but it
+transfers only the provided percentage of the color.</p>
+
+<pre><code>cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
+cairo_paint_with_alpha (cr, 0.5);
+</code></pre>
+
+<h3 id="L3maskverb">Mask</h3>
+
+<div class="tutright"><a href="mask.c"><img src="mask.png" alt="" /></a></div>
+
+<p>The
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-mask"><code>cairo_mask()</code></a>
+and
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-mask-surface"><code>cairo_mask_surface()</code></a>
+operations allow transfer according to the transparency/opacity of a
+second source pattern or surface. Where the pattern or surface is
+opaque, the current source is transferred to the destination.  Where the
+pattern or surface is transparent, nothing is transferred.</p>
+
+<pre><code>cairo_pattern_t *linpat, *radpat;
+linpat = cairo_pattern_create_linear (0, 0, 1, 1);
+cairo_pattern_add_color_stop_rgb (linpat, 0, 0, 0.3, 0.8);
+cairo_pattern_add_color_stop_rgb (linpat, 1, 0, 0.8, 0.3);
+
+radpat = cairo_pattern_create_radial (0.5, 0.5, 0.25, 0.5, 0.5, 0.75);
+cairo_pattern_add_color_stop_rgba (radpat, 0, 0, 0, 0, 1);
+cairo_pattern_add_color_stop_rgba (radpat, 0.5, 0, 0, 0, 0);
+
+cairo_set_source (cr, linpat);
+cairo_mask (cr, radpat);
+</code></pre>
+
+<h1 id="L1drawing">Drawing with Cairo</h1>
+
+<p>In order to create an image you desire, you have to prepare the
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html">context</a> for
+each of the drawing verbs. To use
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-stroke"><code>cairo_stroke()</code></a>
+or
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-fill"><code>cairo_fill()</code></a>
+you first need a path. To use
+<a href="http://www.cairographics.org/manual/cairo-Text.html#cairo-show-text"><code>cairo_show_text()</code></a>
+you must position your text by its insertion point. To use
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-mask"><code>cairo_mask()</code></a>
+you need a second source
+<a href="http://www.cairographics.org/manual/cairo-Patterns.html">pattern</a> or
+<a href="http://www.cairographics.org/manual/cairo-cairo-surface-t.html">surface</a>.
+And to use any of the operations, including
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-paint"><code>cairo_paint()</code></a>,
+you need a primary source.</p>
+
+<h2 id="L2preparesource">Preparing and Selecting a Source</h2>
+
+<p>There are three main kinds of sources in cairo: colors, gradients, and
+images. Colors are the simplest; they use a uniform hue and opacity for
+the entire source. You can select these without any preparation with
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-set-source-rgb"><code>cairo_set_source_rgb()</code></a>
+and
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-set-source-rgba"><code>cairo_set_source_rgba()</code></a>.
+Using <code>cairo_set_source_rgb (cr, r, g, b)</code> is equivalent to using
+<code>cairo_set_source_rgba (cr, r, g, b, 1.0)</code>, and it sets your source
+color to use full opacity.</p>
+
+<div class="tutright"><a href="setsourcergba.c"><img src="setsourcergba.png" alt="" /></a></div>
+
+<pre><code>cairo_set_source_rgb (cr, 0, 0, 0);
+cairo_move_to (cr, 0, 0);
+cairo_line_to (cr, 1, 1);
+cairo_move_to (cr, 1, 0);
+cairo_line_to (cr, 0, 1);
+cairo_set_line_width (cr, 0.2);
+cairo_stroke (cr);
+
+cairo_rectangle (cr, 0, 0, 0.5, 0.5);
+cairo_set_source_rgba (cr, 1, 0, 0, 0.80);
+cairo_fill (cr);
+
+cairo_rectangle (cr, 0, 0.5, 0.5, 0.5);
+cairo_set_source_rgba (cr, 0, 1, 0, 0.60);
+cairo_fill (cr);
+
+cairo_rectangle (cr, 0.5, 0, 0.5, 0.5);
+cairo_set_source_rgba (cr, 0, 0, 1, 0.40);
+cairo_fill (cr);
+</code></pre>
+
+<p>Gradients describe a progression of colors by setting a start and stop
+reference location and a series of "stops" along the way. <a href="http://www.cairographics.org/manual/cairo-Patterns.html#cairo-pattern-create-linear">Linear
+gradients</a>
+are built from two points which pass through parallel lines to define
+the start and stop locations. <a href="http://www.cairographics.org/manual/cairo-Patterns.html#cairo-pattern-create-radial">Radial
+gradients</a>
+are also built from two points, but each has an associated radius of the
+circle on which to define the start and stop locations. Stops are added
+to the gradient with
+<a href="http://www.cairographics.org/manual/cairo-Patterns.html#cairo-pattern-add-color-stop-rgb"><code>cairo_add_color_stop_rgb()</code></a>
+and
+<a href="http://www.cairographics.org/manual/cairo-Patterns.html#cairo-pattern-add-color-stop-rgba"><code>cairo_add_color_stop_rgba()</code></a>
+which take a color like <code>cairo_set_source_rgb*()</code>, as well as an offset
+to indicate where it lies between the reference locations. The colors
+between adjacent stops are averaged over space to form a smooth blend.
+Finally, the behavior beyond the reference locations can be controlled
+with
+<a href="http://www.cairographics.org/manual/cairo-Patterns.html#cairo-pattern-set-extend"><code>cairo_set_extend()</code></a>.</p>
+
+<div class="tutright"><a href="setsourcegradient.c"><img src="setsourcegradient.png" alt="" /></a></div>
+
+<pre><code>int i, j;
+cairo_pattern_t *radpat, *linpat;
+
+radpat = cairo_pattern_create_radial (0.25, 0.25, 0.1,  0.5, 0.5, 0.5);
+cairo_pattern_add_color_stop_rgb (radpat, 0,  1.0, 0.8, 0.8);
+cairo_pattern_add_color_stop_rgb (radpat, 1,  0.9, 0.0, 0.0);
+
+for (i=1; i&lt;10; i++)
+    for (j=1; j&lt;10; j++)
+        cairo_rectangle (cr, i/10.0 - 0.04, j/10.0 - 0.04, 0.08, 0.08);
+cairo_set_source (cr, radpat);
+cairo_fill (cr);
+
+linpat = cairo_pattern_create_linear (0.25, 0.35, 0.75, 0.65);
+cairo_pattern_add_color_stop_rgba (linpat, 0.00,  1, 1, 1, 0);
+cairo_pattern_add_color_stop_rgba (linpat, 0.25,  0, 1, 0, 0.5);
+cairo_pattern_add_color_stop_rgba (linpat, 0.50,  1, 1, 1, 0);
+cairo_pattern_add_color_stop_rgba (linpat, 0.75,  0, 0, 1, 0.5);
+cairo_pattern_add_color_stop_rgba (linpat, 1.00,  1, 1, 1, 0);
+
+cairo_rectangle (cr, 0.0, 0.0, 1, 1);
+cairo_set_source (cr, linpat);
+cairo_fill (cr);
+</code></pre>
+
+<p>Images include both surfaces loaded from existing files with
+<a href="http://www.cairographics.org/manual/cairo-PNG-Support.html#cairo-image-surface-create-from-png"><code>cairo_image_surface_create_from_png()</code></a>
+and surfaces created from within cairo as an earlier destination. As of
+cairo 1.2, the easiest way to make and use an earlier destination as a
+source is with
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-push-group"><code>cairo_push_group()</code></a>
+and either
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-pop-group"><code>cairo_pop_group()</code></a>
+or
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-pop-group-to-source"><code>cairo_pop_group_to_source()</code></a>.
+Use <code>cairo_pop_group_to_source()</code> to use it just until you select a new
+source, and <code>cairo_pop_group()</code> when you want to save it so you can
+select it over and over again with
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-set-source"><code>cairo_set_source()</code></a>.</p>
+
+<h2 id="L2createpath">Creating a Path</h2>
+
+<p>Cairo always has an active path. If you call <a href="#L3stroke"><code>cairo_stroke()</code></a> it will draw the path with your
+line settings. If you call <a href="#L3fill"><code>cairo_fill()</code></a> it will
+fill the inside of the path. But as often as not, the path is empty, and
+both calls will result in no change to your destination. Why is it empty
+so often? For one, it starts that way; but more importantly after each
+<a href="#L3stroke"><code>cairo_stroke()</code></a> or <a href="#L3fill"><code>cairo_fill()</code></a> it is emptied again to let you start
+building your next path.</p>
+
+<p>What if you want to do multiple things with the same path? For instance to draw
+a red rectangle with a black border, you would want to fill the rectangle path
+with a red source, then stroke the same path with a black source. A rectangle
+path is easy to create multiple times, but a lot of paths are more complex.</p>
+
+<p>Cairo supports easily reusing paths by having alternate versions of its
+operations. Both draw the same thing, but the alternate doesn't reset
+the path.  For stroking, alongside
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-stroke"><code>cairo_stroke()</code></a>
+there is
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-stroke-preserve"><code>cairo_stroke_preserve()</code></a>;
+for filling,
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-fill-preserve"><code>cairo_fill_preserve()</code></a>
+joins
+<a href="http://www.cairographics.org/manual/cairo-cairo-t.html#cairo-fill"><code>cairo_fill()</code></a>.
+Even setting the clip has a preserve variant.  Apart from choosing when
+to preserve your path, there are only a couple common operations.</p>
+
+<h3 id="L3moving">Moving</h3>
+
+<div class="tutright"><img src="path-moveto.png" alt="" /></div>
+
+<p>Cairo uses a connect-the-dots style system when creating paths.  Start
+at 1, draw a line to 2, then 3, and so forth. When you start a path, or
+when you need to start a new sub-path, you want it to be like point 1:
+it has nothing connecting to it. For this, use
+<a href="http://www.cairographics.org/manual/cairo-Paths.html#cairo-move-to"><code>cairo_move_to()</code></a>.
+This sets the current reference point without making the path connect
+the previous point to it. There is also a relative coordinate variant,
+<a href="http://www.cairographics.org/manual/cairo-Paths.html#cairo-rel-move-to"><code>cairo_rel_move_to()</code></a>,
+which sets the new reference a specified distance away from the current
+reference instead. After setting your first reference point, use the
+other path operations which both update the reference point and connect
+to it in some way.</p>
+
+<pre><code>cairo_move_to (cr, 0.25, 0.25);
+</code></pre>
+
+<h3 id="L3lines">Straight Lines</h3>
+
+<div class="tutright"><img src="path-lineto.png" alt="" /></div>
+
+<p>Whether with absolute coordinates
+<a href="http://www.cairographics.org/manual/cairo-Paths.html#cairo-line-to"><code>cairo_line_to()</code></a>
+(extend the path from the reference to this point), or relative
+coordinates
+<a href="http://www.cairographics.org/manual/cairo-Paths.html#cairo-rel-line-to"><code>cairo_rel_line_to()</code></a>
+(extend the path from the reference this far in this direction), the
+path connection will be a straight line. The new reference point will be
+at the other end of the line.</p>
+
+<pre><code>cairo_line_to (cr, 0.5, 0.375);
+cairo_rel_line_to (cr, 0.25, -0.125);
+</code></pre>
+
+<h3 id="L3arcs">Arcs</h3>
+
+<div class="tutright"><img src="path-arcto.png" alt="" /></div>
+
+<p>Arcs are parts of the outside of a circle. Unlike straight lines, the
+point you directly specify is not on the path. Instead it is the center
+of the circle that makes up the addition to the path. Both a starting
+and ending point on the circle must be specified, and these points are
+connected either clockwise by
+<a href="http://www.cairographics.org/manual/cairo-Paths.html#cairo-arc"><code>cairo_arc()</code></a>
+or counter-clockwise by
+<a href="http://www.cairographics.org/manual/cairo-Paths.html#cairo-arc-negative"><code>cairo_arc_negative()</code></a>.
+If the previous reference point is not on this new curve, a straight
+line is added from it to where the arc begins. The reference point is
+then updated to where the arc ends. There are only absolute versions.</p>
+
+<pre><code>cairo_arc (cr, 0.5, 0.5, 0.25 * sqrt(2), -0.25 * M_PI, 0.25 * M_PI);
+</code></pre>
+
+<h3 id="L3curves">Curves</h3>
+
+<div class="tutright"><img src="path-curveto.png" alt="" /></div>
+
+<p>Curves in cairo are cubic Bézier splines. They start at the current
+reference point and smoothly follow the direction of two other points
+(without going through them) to get to a third specified point. Like
+lines, there are both absolute
+(<a href="http://www.cairographics.org/manual/cairo-Paths.html#cairo-curve-to"><code>cairo_curve_to()</code></a>)
+and relative
+(<a href="http://www.cairographics.org/manual/cairo-Paths.html#cairo-rel-curve-to"><code>cairo_rel_curve_to()</code></a>)
+versions. Note that the relative variant specifies all points relative
+to the previous reference point, rather than each relative to the
+preceding control point of the curve.</p>
+
+<pre><code>cairo_rel_curve_to (cr, -0.25, -0.125, -0.25, 0.125, -0.5, 0);
+</code></pre>
+
+<h3 id="L3closepath">Close the path</h3>
+
+<div class="tutright"><a href="path-close.c"><img src="path-close.png" alt="" /></a></div>
+
+<p>Cairo can also close the path by drawing a straight line to the
+beginning of the current sub-path. This straight line can be useful for
+the last edge of a polygon, but is not directly useful for curve-based
+shapes. A closed path is fundamentally different from an open path: it's
+one continuous path and has no start or end. A closed path has no line
+caps for there is no place to put them.</p>
+
+<pre><code>cairo_close_path (cr);
+</code></pre>
+
+<h3 id="L3text">Text</h3>
+
+<p>Finally text can be turned into a path with
+<a href="http://www.cairographics.org/manual/cairo-Paths.html#cairo-text-path"><code>cairo_text_path()</code></a>.
+Paths created from text are like any other path, supporting stroke or
+fill operations. This path is placed anchored to the current reference
+point, so <a href="#L3moving"><code>cairo_move_to()</code></a> your desired
+location before turning text into a path. However there are performance
+concerns to doing this if you are working with a lot of text; when
+possible you should prefer using the verb <a href="#L3showtext"><code>cairo_show_text()</code></a> over <a href="#L3text"><code>cairo_text_path()</code></a> and <a href="#L3fill"><code>cairo_fill()</code></a>.</p>
+
+<h1 id="L1understandingtext">Understanding Text</h1>
+
+<div class="tutright"><a href="textextents.c"><img src="textextents.png" alt="" /></a></div>
+
+<p>To use text effectively you need to know where it will go. The methods
+<a href="http://www.cairographics.org/manual/cairo-Text.html#cairo-font-extents"><code>cairo_font_extents()</code></a>
+and
+<a href="http://www.cairographics.org/manual/cairo-Text.html#cairo-text-extents"><code>cairo_text_extents()</code></a>
+get you this information. Since this diagram is hard to see so small, I
+suggest getting its <a href="textextents.c">source</a> and bump the size up to 600. It shows the
+relation between the reference point (red dot); suggested next reference
+point (blue dot); bounding box (dashed blue lines); bearing displacement
+(solid blue line); and height, ascent, baseline, and descent lines
+(dashed green).</p>
+
+<p>The reference point is always on the baseline. The descent line is below that,
+and reflects a rough bounding box for all characters in the font. However it is
+an artistic choice intended to indicate alignment rather than a true bounding
+box. The same is true for the ascent line above. Next above that is the height
+line, the artist-recommended spacing between subsequent baselines. All three of
+these are reported as distances from the baseline, and expected to be positive
+despite their differing directions.</p>
+
+<p>The bearing is the displacement from the reference point to the upper-left
+corner of the bounding box. It is often zero or a small positive value for x
+displacement, but can be negative x for characters like j as shown; it's almost
+always a negative value for y displacement. The width and height then describe
+the size of the bounding box. The advance takes you to the suggested reference
+point for the next letter. Note that bounding boxes for subsequent blocks of
+text can overlap if the bearing is negative, or the advance is smaller than the
+width would suggest.</p>
+
+<p>In addition to placement, you also need to specify a face, style, and
+size. Set the face and style together with
+<a href="http://www.cairographics.org/manual/cairo-Text.html#cairo-select-font-face"><code>cairo_select_font_face()</code></a>,
+and the size with
+<a href="http://www.cairographics.org/manual/cairo-Text.html#cairo-set-font-size"><code>cairo_set_font_size()</code></a>.
+If you need even finer control, try getting a
+<a href="http://www.cairographics.org/manual/cairo-Font-Options.html#cairo-font-options-t"><code>cairo_font_options_t</code></a>
+with
+<a href="http://www.cairographics.org/manual/cairo-Text.html#cairo-get-font-options"><code>cairo_get_font_options()</code></a>,
+tweaking it, and setting it with
+<a href="http://www.cairographics.org/manual/cairo-Text.html#cairo-set-font-options"><code>cairo_set_font_options()</code></a>.</p>
+
+<h1 id="L1transforms">Working with Transforms</h1>
+
+<p>Transforms have three major uses. First they allow you to set up a
+coordinate system that's easy to think in and work in, yet have the
+output be of any size. Second they allow you to make helper functions
+that work at or around a (0, 0) but can be applied anywhere in the
+output image. Thirdly they let you deform the image, turning a circular
+arc into an elliptical arc, etc. Transforms are a way of setting up a
+relation between two coordinate systems. The device-space coordinate
+system is tied to the surface, and cannot change. The user-space
+coordinate system matches that space by default, but can be changed for
+the above reasons. The helper functions
+<a href="http://www.cairographics.org/manual/cairo-Transformations.html#cairo-user-to-device"><code>cairo_user_to_device()</code></a>
+and
+<a href="http://www.cairographics.org/manual/cairo-Transformations.html#cairo-user-to-device-distance"><code>cairo_user_to_device_distance()</code></a>
+tell you what the device-coordinates are for a user-coordinates position
+or distance.  Correspondingly
+<a href="http://www.cairographics.org/manual/cairo-Transformations.html#cairo-device-to-user"><code>cairo_device_to_user()</code></a>
+and
+<a href="http://www.cairographics.org/manual/cairo-Transformations.html#cairo-device-to-user-distance"><code>cairo_device_to_user_distance()</code></a>
+tell you user-coordinates for a device-coordinates position or distance.
+Remember to send positions through the non-distance variant, and
+relative moves or other distances through the distance variant.</p>
+
+<p>I leverage all of these reasons to draw the diagrams in this document.
+Whether I'm drawing 120&nbsp;x&nbsp;120 or 600&nbsp;x&nbsp;600, I use
+<a href="http://www.cairographics.org/manual/cairo-Transformations.html#cairo-scale"><code>cairo_scale()</code></a>
+to give me a 1.0&nbsp;x&nbsp;1.0 workspace. To place the results along
+the right column, such as in the discussion of <a href="#L1drawingmodel">cairo's drawing model</a>, I use
+<a href="http://www.cairographics.org/manual/cairo-Transformations.html#cairo-translate"><code>cairo_translate()</code></a>.
+And to add the perspective view for the overlapping layers, I set up an
+arbitrary deformation with
+<a href="http://www.cairographics.org/manual/cairo-Transformations.html#cairo-transform"><code>cairo_transform()</code></a>
+on a
+<a href="http://www.cairographics.org/manual/cairo-cairo-matrix-t.html#cairo-matrix-t"><code>cairo_matrix_t</code></a>.</p>
+
+<p>To understand your transforms, read them bottom to top, applying them to the
+point you're drawing. To figure out which transforms to create, think through
+this process in reverse. For example if I want my 1.0&nbsp;x&nbsp;1.0 workspace to be
+100&nbsp;x&nbsp;100 pixels in the middle of a 120&nbsp;x&nbsp;120 pixel surface, I can set it up one of
+three ways:</p>
+
+<ol>
+<li><code>cairo_translate (cr, 10, 10); cairo_scale (cr, 100, 100);</code></li>
+<li><code>cairo_scale (cr, 100, 100); cairo_translate (cr, 0.1, 0.1);</code></li>
+<li><code>cairo_matrix_t mat; cairo_matrix_init (&amp;mat, 100, 0, 0, 100, 10, 10); cairo_transform (cr, &amp;mat);</code></li>
+</ol>
+
+<p>Use the first when relevant because it is often the most readable; use the
+third when necessary to access additional control not available with the
+primary functions.</p>
+
+<p>Be careful when trying to draw lines while under transform. Even if you
+set your line width while the scale factor was 1, the line width setting
+is always in user-coordinates and isn't modified by setting the scale.
+While you're operating under a scale, the width of your line is
+multiplied by that scale. To specify a width of a line in pixels, use
+<a href="http://www.cairographics.org/manual/cairo-Transformations.html#cairo-device-to-user-distance"><code>cairo_device_to_user_distance()</code></a>
+to turn a <code>(1, 1)</code> device-space distance into, for example, a <code>(0.01,
+0.01)</code> user-space distance. Note that if your transform deforms the
+image there isn't necessarily a way to specify a line with a uniform
+width.</p>
+
+<h1 id="L1gonext">Where to Go Next</h1>
+
+<p>This wraps up the tutorial. It doesn't cover all functions in cairo, so
+for some "advanced" lesser-used features, you'll need to look elsewhere.
+The code behind the examples (<a href="diagram.c">layer diagrams</a>,
+<a href="draw.c">drawing illustrations</a>)
+uses a handful of techniques that aren't described within, so analyzing
+them may be a good first step.
+Other <a href="../examples/">examples</a> on cairographics.org lead in different directions. As
+with everything, there's a large gap between knowing the rules of the
+tool, and being able to use it well. The final section of this document
+provides some ideas to help you traverse parts of the gap.</p>
+
+<h1 id="L1tips">Tips and Tricks</h1>
+
+<p>In the previous sections you should have built up a firm grasp of the
+operations cairo uses to create images. In this section I've put together a
+small handful of snippets I've found particularly useful or non-obvious. I'm
+still new to cairo myself, so there may be other better ways to do these
+things. If you find a better way, or find a cool way to do something else, let
+me know and perhaps I can incorporate it into these tips.</p>
+
+<h2 id="L2linewidth">Line Width</h2>
+
+<p>When you're working under a uniform scaling transform, you can't just
+use pixels for the width of your line. However it's easy to translate it
+with the help of <code>cairo_device_to_user_distance()</code> (assuming that the
+pixel width is <code>1</code>):</p>
+
+<pre><code>double ux=1, uy=1;
+cairo_device_to_user_distance (cr, &amp;ux, &amp;uy);
+if (ux &lt; uy)
+    ux = uy;
+cairo_set_line_width (cr, ux);
+</code></pre>
+
+<p>When you're working under a deforming scale, you may wish to still have line
+widths that are uniform in device space. For this you should return to a
+uniform scale before you stroke the path. In the image, the arc on the left is
+stroked under a deformation, while the arc on the right is stroked under a
+uniform scale.</p>
+
+<div class="tutright"><a href="tips-ellipse.c"><img src="tips-ellipse.png" alt="" /></a></div>
+
+<pre><code>cairo_set_line_width (cr, 0.1);
+
+cairo_save (cr);
+cairo_scale (cr, 0.5, 1);
+cairo_arc (cr, 0.5, 0.5, 0.40, 0, 2 * M_PI);
+cairo_stroke (cr);
+
+cairo_translate (cr, 1, 0);
+cairo_arc (cr, 0.5, 0.5, 0.40, 0, 2 * M_PI);
+cairo_restore (cr);
+cairo_stroke (cr);
+</code></pre>
+
+<h2 id="L2textalign">Text Alignment</h2>
+
+<p>When you try to center text letter by letter at various locations, you have to
+decide how you want to center it. For example the following code will actually
+center letters individually, leading to poor results when your letters are of
+different sizes. (Unlike most examples, here I assume a 26&nbsp;x&nbsp;1 workspace.)</p>
+
+<div class="tutright"><a href="tips-letter.c"><img src="tips-letter.png" alt="" /></a></div>
+
+<div class="clear"></div>
+
+<pre><code>cairo_text_extents_t te;
+char alphabet[] = "AbCdEfGhIjKlMnOpQrStUvWxYz";
+char letter[2];
+
+for (i=0; i &lt; strlen(alphabet); i++) {
+    *letter = '\0';
+    strncat (letter, alphabet + i, 1);
+
+    cairo_text_extents (cr, letter, &amp;te);
+    cairo_move_to (cr, i + 0.5 - te.x_bearing - te.width / 2,
+            0.5 - te.y_bearing - te.height / 2);
+    cairo_show_text (cr, letter);
+}
+</code></pre>
+
+<p>Instead the vertical centering must be based on the general size of the font,
+thus keeping your baseline steady. Note that the exact positioning now depends
+on the metrics provided by the font itself, so the results are not necessarily
+the same from font to font.</p>
+
+<div class="tutright"><a href="tips-font.c"><img src="tips-font.png" alt="" /></a></div>
+
+<div class="clear"></div>
+
+<pre><code>cairo_font_extents_t fe;
+cairo_text_extents_t te;
+char alphabet[] = "AbCdEfGhIjKlMnOpQrStUvWxYz";
+char letter[2];
+
+cairo_font_extents (cr, &amp;fe);
+for (i=0; i &lt; strlen(alphabet); i++) {
+    *letter = '\0';
+    strncat (letter, alphabet + i, 1);
+
+    cairo_text_extents (cr, letter, &amp;te);
+    cairo_move_to (cr, i + 0.5 - te.x_bearing - te.width / 2,
+            0.5 - fe.descent + fe.height / 2);
+    cairo_show_text (cr, letter);
+}
+</code></pre>
+
+<hr />
+
+<p>Copyright © 2005–2007 Michael Urman</p>
+
+</div>
+
+<div id="footer">
+
+
+<div class="actions">
+<ul>
+
+<li><a href="/ikiwiki?page=tutorial&amp;do=edit">Edit</a></li>
+
+
+<li><a href="../recentchanges/">RecentChanges</a></li>
+
+
+
+<li><a href="/ikiwiki?do=prefs">Preferences</a></li>
+
+
+</ul>
+</div>
+
+
+<div id="pageinfo">
+
+
+
+
+<div id="backlinks">
+Links:
+
+<a href="../cairomm/">cairomm</a>
+
+<a href="../documentation/">documentation</a>
+
+<a href="../operators/">operators</a>
+
+
+</div>
+
+
+<div class="pagedate">
+Last edited Thu Jul  3 13:20:45 2008
+</div>
+
+</div>
+
+<!-- from cairographics.org -->
+</div>
+
+</body>
+</html>
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=style.css
+Content-Type: text/css; charset=UTF-8; name=style.css
+Content-Location: http://www.cairographics.org/style.css
+Content-Transfer-Encoding: 8bit
+
+/* ikiwiki style sheet */
+
+/* Note that instead of modifying this style sheet, you can instead edit
+ * local.css and use it to override or change settings in this one.
+ */
+
+.header {
+	margin: 0;
+	font-weight: bold;
+	line-height: 1em;
+	display: block;
+}
+
+.author {
+	margin: 0;
+	font-weight: bold;
+	display: block;
+}
+
+.actions ul {
+	margin: 0;
+	padding: 6px;
+	list-style-type: none;
+}
+
+.inlinepage .actions ul {
+	border-bottom: 0;
+}
+
+.actions li {
+	display: inline;
+	padding: .2em .4em;
+}
+
+.tags {
+	clear: both;
+}
+
+#footer {
+	border-top: 1px solid #000;
+}
+
+div.tags {
+	margin-top: 1em;
+}
+
+#backlinks {
+	margin-top: 1em;
+}
+
+#searchform {
+	display: inline;
+	float: right;
+}
+
+#editcontent {
+	width: 100%;
+}
+
+img {
+	border-style: none;
+}
+
+/* Stuff for the RecentChanges table. */
+tr.changeheader {
+	background: #eee;
+	color: black !important;
+}
+tr.changeinfo {
+	background: #eee;
+	color: black !important;
+}
+th.changeheader {
+	padding: 1px .3em;
+}
+td.changeinfo {
+	padding: 1px .3em;
+}
+td.changetime {
+	white-space: nowrap;
+	padding: 1px .3em;
+}
+td.changelog {
+	font-style: italic;
+}
+
+/* Used for adding a blog page. */
+#blogform {
+	padding: 10px 10px;
+	border: 1px solid #aaa;
+	background: #eee;
+	color: black !important;
+}
+
+.inlinepage {
+	padding: 10px 10px;
+	border: 1px solid #aaa;
+}
+
+/* Used for invalid form fields. */
+.fb_invalid {
+	color: red;
+	background: white !important;
+}
+
+/* Used for required form fields. */
+.fb_required {
+	font-weight: bold;
+}
+
+/* Orange feed button. */
+.feedbutton {
+	background: #ff6600;
+	color: white !important;
+	border-left: 1px solid #cc9966;
+	border-top: 1px solid #ccaa99;
+	border-right: 1px solid #993300;
+	border-bottom: 1px solid #331100;
+	padding: 0px 0.5em 0px 0.5em;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: small;
+	text-decoration: none;
+	margin-top: 1em;
+}
+.feedbutton:hover {
+	color: white !important;
+	background: #ff9900;
+}
+
+/* Tag cloud. */
+.pagecloud {
+	float: right;
+	width: 30%;
+	text-align: center;
+	padding: 10px 10px;
+	border: 1px solid #aaa;
+	background: #eee;
+	color: black !important;
+}
+.smallestPC { font-size: 70%; }
+.smallPC { font-size: 85%; }
+.normalPC { font-size: 100%; }
+.bigPC { font-size: 115%; }
+.biggestPC { font-size: 130%; }
+
+#sidebar {
+	line-height: 3ex;
+	width: 20ex;
+	float: right;
+	margin-left: 40px;
+	margin-bottom: 40px;
+	padding: 2ex 2ex;
+}
+
+/* outlines */
+li.L1 {
+	list-style: upper-roman;
+}
+li.L2 {
+	list-style: decimal;
+}
+li.L3 {
+	list-style: lower-alpha;
+}
+li.L4 {
+	list-style: disc;
+}
+li.L5 {
+	list-style: square;
+}
+li.L6 {
+	list-style: circle;
+}
+li.L7 {
+	list-style: lower-roman;
+}
+li.L8 {
+	list-style: upper-alpha;
+}
+
+hr.poll {
+	height: 10pt;
+	color: white !important;
+	background: #eee;
+	border: 2px solid black;
+}
+div.poll {
+	margin-top: 1ex;
+	margin-bottom: 1ex;
+	padding: 1ex 1ex;
+	border: 1px solid #aaa;
+}
+
+input#openid_url {
+	background: url(wikiicons/openidlogin-bg.gif) no-repeat;
+	background-color: #fff;
+	background-position: 0 50%;
+	color: #000;
+	padding-left: 18px;
+}
+
+/* Things to hide in printouts. */
+@media print {
+	.actions { display: none; }
+	.tags { display: none; }
+	.feedbutton { display: none; }
+	#searchform { display: none; }
+	#blogform { display: none; }
+	#backlinks { display: none; }
+}
+
+/* Provided for use by template plugin for floating info boxes. */
+.infobox {
+	float: right;
+	margin-left: 2ex;
+	margin-top: 1ex;
+	margin-bottom: 1ex;
+	padding: 1ex 1ex;
+	border: 1px solid #aaa;
+}
+
+/* Provided for use by template plugin for floating note boxes. */
+.notebox {
+	float: right;
+	margin-left: 2ex;
+	margin-top: 1ex;
+	margin-bottom: 1ex;
+	padding: 1ex 1ex;
+	border: 1px solid #aaa;
+	width: 25%
+}
+
+/* Used by the popup template and for backlinks hiding. */
+.popup {
+	border-bottom: 1px dotted #366;
+	color: #366;
+}
+.popup .balloon,
+.popup .paren,
+.popup .expand {
+	display: none;
+}
+.popup:hover .balloon,
+.popup:focus .balloon {
+	position: absolute;
+	display: inline;
+	margin: 1em 0 0 -2em;
+	padding: 0.625em;
+	border: 2px solid;
+	background-color: #dee;
+	color: black;
+	
+	/* Nonstandard, but very nice. */
+	/*
+	opacity: 0.95;
+	-moz-opacity: 0.95;
+	filter: alpha(opacity=95);
+	*/
+}
+
+/* Formbuilder styling */
+fieldset {
+	margin: 1ex 0;
+	border: 1px solid black;
+}
+legend {
+	padding: 0 1ex;
+}
+.fb_submit {
+	float: left;
+	margin: 2px 0;
+}
+#signin_openid_url_label {
+	float: left;
+	margin-right: 1ex;
+}
+#signin_openid {
+	padding: 10px 10px;
+	border: 1px solid #aaa;
+	background: #eee; 
+	color: black !important;
+}
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=local.css
+Content-Type: text/css; charset=UTF-8; name=local.css
+Content-Location: http://www.cairographics.org/local.css
+Content-Transfer-Encoding: 8bit
+
+/* ikiwiki local style sheet */
+
+/* Add local styling here, instead of modifying style.css. */
+body {
+    margin-left: 4%;
+    margin-right: 4%;
+    background-color: white;
+}
+
+h1, .header, #footer, #title {
+    clear: both;
+}
+
+.header {
+    padding-bottom: 1em;
+}
+
+img {
+	border: none;
+}
+
+h1,h2,h3,h4,h5,h6, .header, #title {
+    font-family: sans-serif;
+    clear: both;
+    color: #f39914;
+}
+
+h1, #title {
+    font-weight: bold;
+    font-size: 150%;
+}
+
+h2,h3,h4,h5,h6 {
+    margin-left: 2%;
+    margin-right: 2%;
+    font-size: 125%;
+}
+
+p, ol, ul, hr, table {
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+ol ol {
+    margin-left: 0%;
+    list-style-type: lower-alpha;
+}
+
+ul ul {
+    margin-left: 0;
+}
+
+li p {
+    margin-left: 0%;
+}
+
+pre {
+    font-family: mono;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 1px solid #c5c5f6;
+    background-color: #dbdbf7;
+    padding: .5em;
+}
+
+a:link {
+    color: #4c4ce6;
+}
+
+a:visited {
+    color: #8f8fe6;
+}
+
+a:hover {
+    color: #f29915;
+    text-decoration: underline;
+}
+
+#logo {
+    text-align: center;
+}
+
+#footer {
+    padding-top: .25em;
+    font-size: 80%;
+}
+
+#legal {
+    clear: both;
+    text-align: center;
+    margin-top: 2em;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+#pageinfo {
+    float: right;
+    text-align: right;
+    width: 49%;
+    clear: none;
+}
+
+.actions {
+    float: left;
+    width: 49%;
+    text-align: left;
+}
+
+.actions ul {
+    padding: 0;
+}
+
+.actions ul li {
+    padding-left: 0;
+    padding-right: .5em;
+}
+
+.left {
+    float: left;
+    padding-right: 0.5em;
+}
+
+.right {
+    float: right;
+    padding-left: 0.5em;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    color: black;
+    background-color: black;
+}
+
+/* Navigation list styling courtesy of Listamatic:
+ *
+ *	Centred List Navbar Updated
+ *	http://css.maxdesign.com.au/listamatic/horizontal27.htm
+ */
+#navcontainer ul {
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 0;
+    margin-top: 0;
+    /* cancels gap caused by top padding in Opera 7.54 */
+    margin-left: 0;
+    background-color: #162284;
+    color: white;
+    width: 100%;
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    line-height: 18px;
+    /* fixes Firefox 0.9.3 */
+}
+
+#navcontainer ul li {
+    display: inline;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 5px;
+    /* matches link padding except for left and right */
+    padding-top: 5px;
+}
+
+#navcontainer ul li a {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    color: white;
+    text-decoration: none;
+    border-right: 1px solid #fff;
+}
+
+#navcontainer ul li a:hover {
+    color: #f39914;
+}
+
+#navcontainer #active {
+    border-left: 1px solid #fff;
+}
+
+div.tutright {
+	float:right;
+	background-color: #eee;
+	border: solid 1px #888;
+	padding: 0.5em;
+	margin-left: 1em;
+}
+
+div.tutright img {
+	margin: 0px;
+}
+div.clear {
+	clear: both;
+}
+a {
+	text-decoration: none;
+}
+table {
+	border: solid #aaa 1px;
+	border-spacing: 1px;
+}
+td, th {
+	border: solid #aaa 1px;
+	padding: 5px;
+}
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=cairo-banner.png
+Content-Type: image/png; name=cairo-banner.png
+Content-Location: http://www.cairographics.org/cairo-banner.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAXIAAABRCAYAAADPay0lAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1wYdBw8rwLcP3wAAIABJREFUeJztnXt8XFW1x7/rzCRp82qa
+zCSl1DZNQilURFBBfFzKU+ACchGKXAVBbZMioBfEKzSFsU0pglcBgSYtioDgtT54
+iOIVH0VQpPKWotQmqW0pTWaStEn6SDKz1/1jJiFNZnLmcfJoOd/PBz7NnH3WXic5
++zfn7L32WsIYMG9eIDu4xzMfsc4TOE6FQ1D1IRIS5W2F9ah51J8bWbdhQ6B3LHxy
+cXFxSZeJpmkyqtbnB7ylW7xfRGSpGt1oiT4aEX2WXvN2WSGhlk58ZFuHeFQ+ZlTO
+E0vmoLq8dWb4XtYFwqPqm4uLi0uqTFBNGzUhn15Z956w8ijQrpb5WnDTjS/bneOv
+WnaMGOtWoNgrnLe9sXbraPnn4uLikgoTWdNGRch9VSuOtYw+rsKtwcbaO1M9319Z
+d7UoXzOWnBvatOSl0fDRxcXFJVkmuqY5LuS+9wSmW17vM2rJlcHGJU+ma8dfueJM
+MXqXCYc/Htoa2O6kjy4uLi7JciBomuWkMVCxsjz/K+gtmVwwQLBxyZOC3mJlef4X
+dHTn8l1cXFzicmBomqPG/LPrLrQsLmxprF3Q/1lpRZ2maqe1qXbAr7LKurXG8JNg
+c+1PnPLTxcXFJRkOFE3zOmWI+QGvtYVlBs85Qw8NvojSijrN7s3N7cvafVpWX95T
+vdl79gw9Pvhcg+cGSyK/YH7gETeSxcXFZcw4gDTNsamVsi2e+Qrbgo3Xb7Jr25e9
+5zwVeawve895dm2DjddvUthWtsUz3xFHXVxcXJLgQNI05+bI1TpXRR9PpmlWb+6j
+ovrJrN7cR5MyLfo4ap2bmYMuLi4uKXAAaZpzUyuiJ6jKA/EODX216M3esweE3uw9
+cY8PRVWeQ/RSx3x1cXFxseMA0jTHhFzhUCLyVrxjQ+eL7OaXhhmIyFvq0UOd8tXF
+xcXFjpE0zW5OfKQ5csBxTXMy/LCkLL+vLZ0T7eaXYnZLMvLOxcXFJTUSaloqc+Lx
+cFrTUhJyXYunu973iwSH21q6s9JyzG5+KWY37i+0u973C12LJ51+XVxc3t2kq2mp
+zokPxWlNS2lqZV/H1ENVOLvzHt/hhVeE3hx8TOAtoq8Kbw89b+irhd380jA8eqjA
+sFecznt8h6tw9r6OqYdCx5ZUrsXFxcUlXU2zmxO3jTV3WNNSeiI36ikFsCwzc9hB
+ledE9IR452X35uaK6ieze3Nzk/l5KCJ6AirPDXM+5ke/Xy4u/UyvrHtPacWKu0or
+6l6L/rfirumVde8Zb79cJhYHi6YlLeT67RmTjXAr8Me84vanh3tmHheVuOE0Q+eT
+7H4eZlrlXMQMCwPKK25/GuUZI9yq354xOdlrcTm4KZ297Oiw8grol4Cjov/pl8LK
+K6Wzlx093v65TAwGNE15ZkJpGvwxVU1LSsg7V5V+tDt/31Mi8lj+1NDJsoBhidJb
+ZkbWCczwV66sGnps6HyS3c+D8VeurBKY0TIzsm7oMVlAb35x6CSBx7vz9z3Vuar0
+o8lcj8vBTMBCrIeB4jgHi6PHAg7nGHI50BjQNHg8vzh00oTStKmhk0XksVQ0bcRc
+K52rfXNE+QZoUzg7ctvUy3fuHKn9eOYl6LivqMjb67kOpEKFmwoXhTam2q/LgY+v
+ou6DFvx1pDYGPhRqqn1hrHxymTgcrJqWUMi7GnyLQOdZyC151aFhk/3xUSmtqHta
+lAdbmpeuSe6cxJTNXr5QhUtam2pPBEnql7e7wXeIQb8OsqGgOrQ6Ux9cDizKquo+
+qYYRIwnE4ryWTbWPjZVPLhODg1nT4r5idjX4qlU0WFDd9uXkLxhA1PRFPq3I1/2V
+K85M/rzh+CtXnKnI101f5NPJXjBAXnXo7YLqti8r2hr9w7m8m9CI2exEG5eDi64G
+3yJFWw9oTRMNdjX4quO1GSbk3fX+M4C5hYvaHknH2dDWwHbjkQtFdY2/su7qdGxE
+q2noGuORC9NNwF5Y3fYoqkfGrsflXUJr89LXBHkx0XFBXmxtXvraWPrkMr501/vP
+QPXIwuq2tGK+J4ymRTV5bjxN20/I9zZMnamiD1qiD6fTUT+hTUte8goniPK50oq6
+p/xVy45J5jx/1bJjSivqnhLlc17hhExLIhnhRyr64J67i92ws3cNogZzMXFidIG3
+oseSfxpyObDZc3fxe1T0QSP8KBM7E0XTLNGHVfTBvQ1T9wuXHJgj17Vkd3f414Hm
+5S8KvV+EzG/2ca44rYp0r/a9AtqdP7Ut7sq0y8HJ9DkBXzjsvUrh4wACz3i94e9u
+3xgIjbdvLmNDVNNK/gCSf/BpmuzOnxqc369pA0Le1eBbA3wcNecX1LS/kWmHg5k3
+L5Ad3OOZj1jnCRynwiGo+hAJifK2wnrUPOrPjazbsCHgqNh21RcfiViPoDxdUBNy
+58xdXN4ldNX7ViOciJr/OAg17efAMwXVoYUQE/KuhpLFipyzLywLSr8U7Hay04lA
+693+/EleXSvK4wU1ofrx9sfFxWV06ar31ahw7kGvaegvCqrbVknnXQUlkpWzWYXP
+FC4KJZVE/UCkc7XvXFEe0r6e8sIru9LK0uji4jLxeTdqmtfKzjlDlXxLyR/NTvXO
+qpxdOZ0zLEunW2pyjCHPstht1NpnkLenTG3dOppz2BYUKORb2TlnQNdDo9WPi4vL
++DKgaVAwmv3oWrJ3dZS+x0IPscRMGtA0sXqMke1Tegq3ydWbekarf0vJ79c0rzE6
+Q0QworOc7KTtzuLC7EnWWaqcJfChbnbO8YCFAUUQAVUQFA9Kd4fPdDWwUUXWC/pk
+7z7zq5Kr2zud8seozBIUY3SGUzZdXFwmHgOapjI6moacKarHdXcwx4OxAFQHaZrG
+NC1np+lq8G1U+KsIv3Jc00RniQrG6AwvEp0nF5UPO2E8+D1fQU6YmwQWoRSMmANg
+fyxgrqjOBS7NzrG6uht89d2TPd+YdmnL7kz9EvT42D9ScMnFxeWAo1/T+sd8hux4
+oCwvf2/kJoWaqKYlHfwS1TSYi3JJdo7V1dngW93j5Rv+L4S6MvVrQLMFsSwZiLc9
+q2PVtPJMDHd9f5p/Upj1AteS+WtNgcJ1eXsjL3TeVZBRJY3YdZ0FMOh6XVxcDkKc
+1LTOuwpK8vZGXlC4Dgc0TeDaSWHWd31/mj8TQ0M1zQqr58+AAl6vFV6ZkZvhvquB
+uRnZGM5cycq5KhMDXit8C9EiGhq7XhcXl4OUIZp2Sya2YtrjuKbFtDJtYlo9oGne
+ourWxq7VvqdR5gMX7WoouX1Kddvz6Zm3/gbaB2Rl4uQQ9ir6Sron71pT/GEM0cxl
+wtNFi1obHfMsQ6ZV3exXo+9TMVWKzEQlT1Qni0UvSjfQgkWzYDbtmGHedGJDQboc
+Ovfmkt7eyPEIlSDTRClCYxWmLDpVpV2EtyQSedPTa/62fXsgQbknl8H45wXy2ef5
+mIV8EChTFY+gu1ToUEOzoq+Fmg/fBAsi4+Jf5coqy4SPRKQCdJpi5aOaJbAP0d0K
+W1Frk2rf34KbAzvGw8ehDNG0BbvWFN8+ZWH7X9KxpegrguwFnKx30BfVyvTY1VBy
+PHARMKBpAtC9uuRUVXkKQOHXhdWhtJPDdDZM93m077gIHKJCnqA5GCkSC1VIYnBr
+nyI9HjXtirVlb4SXMokD7aov+TUinwAQ0dPyF7X9Nl1bmaNSWrniBDFcZCxOE+WI
+FE7eC/qCCn9U9JFQ440J84k4QVXVnTm7IrvOsUTONNGtyXOxSXs8iAiq67HkUdMb
+/mG6uSXSxS7N6OCUoqPdn8L1wabaYU+FZXNWVmjYfA30MzByxJjCx4NNtc864Kot
+5eWBSXssz1kKFwoyH5iWwukbQX6nKj8KNvf+CQJmlNy0ZbCmofp/BTVtaedcar3b
+nz/Zw7GCmRkRq1jQHBDbh1WBXDUIlu5UpEeU3R54OyJZ6wurt6e9w7izwfekwBnw
+jqYN2tnp/zNEyxpZyofyakIp5WvubCiZK2qdhujHQY4APQzISddZoAfkn6B/R+UZ
+POa3BQvb/p6Kgd2rSz5kVNZHf5LnCqqDH8nAn7SpqrozpyvSdYmKXgfMccSocH5r
+Y21aic1Gwl+17BhLrc+r8p/EL86QKn0CD3qEwPbG2q0O2LNlYgv5Wk9p5T9vQPV6
+knzKGwshL6sMlBq8XxblCqAoY4NKE8JtuSb8g82bA/sy9zB19tM00ePyFrWNmKd+
+2PlrSo4gYp06WpqmYp4qrG77RyoGdtf7PmikP9/+O5o2UHxZNHKTivUbAAPfBE6x
+M7rjgbK8vL3hy0AWAke/k4vIkZxEOaDvBd6L6IUYoauh5G8i1ve6J1n3JhPJYlS+
+2f9vEXOjE06lSlnF8rM7Teft0SkJBxHL0dfY0tkr3qeidWI4x+GMUlkKnw8rF5RV
+rFjc0rQko4RsBzJTK26ZksXGtSinj7cv/cybF8gO7vN+RZWlYvNmkBJCBbBqj+X9
+ellV3ZfHI/+7iLmx/6k8pgUn252z44GyvPx95ouq5gsYOWo0NU0Quhp8r4Ku2T3Z
++4OkNC2qzUBUs/v/PZD9ML+m/SmIJeQXTu5qKPlSImO6Fk9Xvf+qvL2RRpC7gDGq
+gyhHqerteXsjTV0N/qt1LZ5ELWP+nxR1WB4Z6ykV/7xAfmlF3Q8V+QU4LOKAJ2Ic
+m67wz65bjujLAuc4ZTMOhYo+VDa77oZR7GPC4jv8mwVZ2vckTBwR91csPyy4x/sX
+lG/ipIjvzyw1PFpaUfdD/7zAqG46HEr+orbfotL/1nqSraY1+K/O2xtpUtXbQY4a
+IzePBrkrb2+ksavef5WtpsnAl9GjMc0GhqSxFcuqAWICIbd3NZRcOdTwrnv9Vd3t
+/mcRvRMoc+hiUqUU9I7dHb4/7brXv189vegfpORKkDtiH21HrZqxdG56xS0zZa/3
+eeAzo9VHcW44heT4NohWkUIh7kxQYUVp5fK4yfEPXlSsvvADiMStyD4e+CuXnyHI
+CwhJpWN1gM+wz7t+WvnK8jHqL4rup2l3JNK03R2+P4HeAaRUvd5ByhC9s7vd/+wI
+mnZ77KPtMa0eYL/Bm7+wtcWg5xNdlPSCfLe7w/fG7tX+MwG6VvtOtCL6PKKObB7K
+FIXjrYg+37XadyLA7tX+M7s7fG+AfBfwAHsMen7B4pbWsfLJX7myKkzfM8CRaZze
+hdKE0gS0A4kWi1qdzKgmyIh1C4fQBTTHfAwBqUdTqNxZVrnivSmfd4BSWlFXAxq3
+mvp4UFpR9ylReQwoTPHUXuCt2N++hcT3Z1xEOcJY5pmS8pudDudLSMHiltZBmuZJ
+pGkKjmweyhjRD4+gaV5impa/sLVl8GneoXamVLc9391Q/B+K9ROif+g5RvXHu9ZM
++zQm/BMgdwwuJxWKUX7VubrsYqORh3jnFbFT1FwwpaY9zVDK1JlWdbPfmMiTIDPt
+WwPRm2utWDyqEflLa/OS/f44M2Z8e3LPpO65GM8xgjkF5BSib0GORoEI2qHxA1LC
+wHpVfu/x6O/29npf3bXl+o6hjcpmLZ+tlvVRFfPvglxAnPtqCNmqejdwYubeT2wE
+pqLyVZt4nx3ArwVeNUKHoJPESImKzgM51Ul/yiqXn6zKw0B2kqe8ocgDopFftxaX
+vcGL1X39B6ZPD+T2TfIeK6rnIvI5knqa1RkeS5+cVnXzcTs23RBM6yJSZEp12/Pd
+9cXnqVg/5R1NW9u5uuwzaORHTFBN27Vm2oXGhP+XdzYidQrmwinVwzUt4e0VLfjJ
+YmCxwPcVqoEpo+O3I3SIyGpV/QKwyoJVqdXmy5BowvmngWQiY8KI3pGV5Vn51j9u
+SCET41qPv/LN00DmBBtr70zX1aGUVtZ9LTZP2s8OEe72eML1qRZiKJu1fDYeuUtj
+u85GQpUTg821f0zZYRsmUtQK0EPiSIeNwA2tTeFHEofqqfCB1d7BApouZbOWz1aP
+vExy4/hfoNe0NtU+kkxFpfLywKQ9nqyrUL2RZObbVZ9rnRX5t7HcG7Gfpol8T1UX
+AVPHqv802CXQoPB5bDTN9obWAN7uGVPnEvGkHcA+ZmSZeflb2jdKgDHfOFNaseIm
+0IBdO4WtlmFBy+batDYojAZllSsWqWoD0CoiSwuk4P5Nm67OIGvbWk9pxT/vBrWZ
+C9eHW5uWOr6OMMGEPC4q3JvTk3v1tm3X7HXSl8Ss9ZRWbFwHfCyJxj8LW+HPt28K
+pJzgyTd7+eGWyM+AeUk0X9baVHuTfTNn0QDe7pnFc+izNox13ynjiRyVv63jH3aa
+ZrvAJQHCGvFmHlc6BmjYWzQeIn7IrOVHgNbatVPh78bLCRNJxAGMYacIP+k14cNb
+GpeszkzEARZEWmf2XSlgsxdBPlleHpiUWV8HIrIq2Fi7cOxEHPyz36whCREX0bWt
+TXMuSkfEAULNS9+0LOskom8bdtwQHTtjiwQIa/gA0bRIcpqWVKSCpaY8Y4/GgPHy
+M+yRb2I3LyyyPSLh09s21k68pF25fb9qaaxdsHNzIJVFz5FZFwiLkjDcK0bePq9n
+QiycjyG/b206LKPcQalSXBUoFJFknnyf9E2KXJJpOoAdm24Ihq3wKSDbbJp6wx65
+NZO+0uVg0zS7RakoIkbh6WGdQCeCxxjpEdEekGzB7DNqhREiFkZRy4ulxapUwohb
+0v8uShNImxETAQsUjyXGq1iTQHtRyRFLcwBjNF4mMsl4HjFV/FXLjhFjH38taqrb
+GwN2N/a4ENwQGJVSWDuaa9eXVtT9DUgYk6sR+QiwbjT6n4B0er3hi8Y6b4pXs6pB
+7bLtBbOyrUucioZq3xTYNq1yxaVG+R0jTOEKnO2vWnZMcNONLzvRb7Io0qfocE0T
+ugBLjfQQR9PAYKnlAS3R6KankTVNaMRIO2LCBkuGapqq5FiW5qBETJwoIhFJKjIo
+KSFXkbCofoQhybA09j8ZtPspWjRCYz9JdJ0k+mO7qDxgRE8UGEj4Luhmo9YfRfRs
+FY6IlZ2IGY7Z6N9VJYr2/3O4m32ocWwBMFkkIl+xW2lQ5cetzUufGBuPJhiqjyKJ
+N1eopBWmeUAiKremunicMfMDXraYK22Xw1SuSW3h3Z4djUv+UDp7+YOIXDpSO4nI
+V4DPOdm3LWoiIjJc0/qlLIGmgaDvrP22q8oDlph/U6R8wAb8y1J5WkXPVuWIqC1B
+4mia2GiaityTzOUkNbVSsCi4Nmy8c5CMnpyKVfRShFcF3Qwg0GxUXhfRS8ksr8cf
+vJ7wYQU1bT/PwEbKlJXdlofIBTbNejUcvmZMHJqIWGL3pOVoFZcJTKunp+87Y91p
+6easU+zDYeX51uYlPxyN/sWKXAeMvBYgckFZ2W15o9F/Igpq2n7u9YQPA/6QgZli
+Eb3UqLwu0AzRB1OEVzVTTRPWhY13TsGi4NpkmnsBuuqLj0SslSJMU6VZRX5doFlr
+pXr7HgC9r3zS7r7uC1Qz3wUmyrlG5QlLaDRCj8DZmdoEjolEvBfoWr7bX/dTG6bn
+dknfAlE9Q4TZquzA0q+nmnhrJDSv5wxsY1D1p2Od/W8iYYy+YcmIT4MTOaTVMURY
+Oy6pfUXPt22j3DVa3bc0BlpLK+t+inLJCM1yY2PpZ07127Wm5AiM3JJQ09aSvbvD
+ewE4oGnC2Ub4laU0GZW9AudmfAHKMVme8AV6X/ldcvnmfZBA09RcX1DT/kb0iVys
+e4CTUS0FLhLV+7rpfW13g+9YgN093VeochsODToRzkb5lah9rHGSFCl8q7vDXwOw
+u8F3bDe9r4nqfcBFses6GSOrHOoPABVsU2MqzvZ5oOGxIsM2EO2PviuE3BgrqScr
+p1HBLiV1KFf7fjrKbtTbNUhmLKVEdKwn1LTuDn+NwrdwItMjIMpZKL8SceTBFGCK
+Krft7um+AkbQtKh2R6dWFMoFAnlT26pAaoluxa008GxnQ8nXVNTpMKmXVPQyhLQL
+RsTDQvd1NpR8zcCzRBNV9YLU5k1tqxIIKJQ72Z8odrkz3h6rPNITlayeQpvahPJu
+EPId0fzcY0txVWCGwHtsmj0x2mlmWxtr/wwjl1hMYiylhJ2mWaiz1yy8oqKXAS85
+aVZF9yajad6oD2xV0VmygAgEV3StKlsDkSMR+ZgI/y1irVR1Lke8wkuCfBFYA7zf
+MbtKoYj8Nyo3o/oseN7oz7PS1SDlgjqWD3v69EBueOQVa0Q4CER8raes/B8fVMv6
+AMiRoIcD5ShTEfKJv2sxLNCl0Nure+xScx78Qi6yfjyKLGRFPMeqzRqnqI7JPSqi
+f1KVBSM0OWL69ECuU9NPAlsVKU+kaaqsdLgM+19BFircK3CsU0ZFPHmoia9pq3WW
+qGyFd6JWfoPKNR33Fd049fKdO2MNW4F1bXcW35mTKx9JIzVSIjosOEoBVZ0XS9jk
+THB+xHqtNxKeXXJ1+36bGXbeM2Uq6GdBvuVIP4DJtWZjbBaLVcf8KcwJ5s0LZIf2
+Zl1gVM8V2XiaYsUWbQZtYBx5EHi1f+uzs4PlgEQx47MrOokc+GH1jMk9apA/CYwk
+5JbJtWYDDu22lF+DfnXnPVNuLLpiV8cwTfN4P4zXse/WnTEtI6ZtHTi19d/S13v3
+mGGa1nFfURG9cgnwbYhNrYhajwNF3l7vV4baKbm6vbPP0+fYTkRL9Hf9mcYE+QjI
+752y3RMJ/2XoBQN4PFn/BRQJ1uNO9RUxYhttoYpjC6tjwfQ5AV/Z7Lobgnu9/1L0
+IREuwpkqQe9ujLw6Lt1i2d2jpm1zbzI7MDNGjNpWwklmTCXdX3SsF8XG/n6UXN3e
+2RMJO7i7Wn4f1bJYRlbR3zlluc/TF1fTYlpdFNPuqJDn17S+CvwTuDyesamX79xJ
+NG1lxpghte5UNNksbHa8Fe+CY3wO+Gd+dYtjT0YWlu1bhLHU0bjcUWN+wFtaUXdN
+OOxtVmEFqdVpdLFBPTIuBb9Fjd1TYftYTfkkMxaSGVPJEhvr/yRBfHpMKxzZZT1U
+w4ZqXAa0xLQ3HpcD/4xp96CpAdEfAzO7G8ribt4QWO+Ia7r/7iXHyksN1Obcn9j1
+zIxdn3OIvd+esLQ72uco4C8PTCvd4vk98D+MXpWYdzWiVlp5SzLu1xK7mqBjdn8m
+NRaSGFMpYaNpiTQj5W6GjhtNOc97IrtJa9qAkBvliagPJm4MpMGxRZFiIHZjSxuK
+3dbhpBCJPx/dfz0WODatAqCqtpupwjniWPGH0WBa+cpysbzPgXzcIZOdEp0fdLjs
+54GNRc+4CLmq7Ya/MUswl8xYSGZMpUL/mE+kaYk0I2UUP0j/G0cnDk1HJtLc/usx
+EX7R/9nAFv3Ct9v+2n2Ir5VoNY0Vw042rBNnfs2lRBcdCkHbAJ8TRiXhDi39FNCa
+u73tRSf6eac/6VQbvfKGTTEOvb45TVF5oMhYkadILSSzV+FPovqsWLLBiNmYpVZo
+TyTcFS/hVlF5oEhNjuR4IxP+zWQ0mRxhXIQcYY/NLTpmubi9YVNs970iiKO/p9zt
+bS/GNO1TxNE0gT849MThi2lZCVFtc6RcnJpEO+n1fKC1sKVtILvowG9WAhhFngSO
+3XlPWcXQUwtr2v6KM5VpSgRi314aInrxmbI1d1Fo2Fbw2HUco8iTEkitLJUdBmOb
+KTBivBN2oTDb8t4LVNk2jLJeVS6S3TnFwabak1ubl97Y0lj74+CmG1/e3li7NVHW
+xJ2bAzvjVRR6tzHacdqJULWdzhgzIU9mLCQzplJhkKYdE0/TYprhREhySUzLiGmb
+E5q2Paa5+xG7jmOHatr+xZfhlwBeT2TYq4hEM748MvTzNMg20ddvRKydJJuBcSRE
+H436tz/919F/XU7isTybbdtIJFmhHFPKKpafCnwqiabNgp7W2lR7fLB5ydqWluvs
+YsJdJhAWptmmyaSSOXWHjoUvYkWGCelQkhlTKfdrp2mijzrQjTemZcS0zYEADnkk
+FU3bT8j7CP8G6FGImyPaUv1B5g6CiO4GUIwjwf9WxLov3uca3S3WE7suR8knvxGb
+wsMq1oec7tcJFLkuiTZ/ze4Nf7Claelvx8InF+cx0aiNEfFEOG4sfBHErp9IbEw5
+yoCmJdg5mkg7UqVfy/q1LVMSaW1Mm4dp2n5CXlzdsQvkl8DJ2jB9WDKovJrQCzix
+BdVINAmMSsZb/xVeyFscHDatog3TcxFOAn0iel3OsmnT1T2C2KQY0AlXNME3a8Uh
+gF1B31ZRztm2LZDx3LZ/XsCNhBknsryR9dgsPCt8cCx8EWTEhxpBXsm8MtVwomNf
+n0A4Ka6mLQ6+rLaVrOwZ0LKYtmXISzGt3b+PqP8ng/xyqKYNW31Q0fsBf5f2fiNe
+DxINU8sIQfuinWvGq+aWRnc2DSXmv19V7s+0j0TE8h+MxPvK5qy0faUcS8QyH8Um
+fbEKK1qblziyb0B6PGVO2HFJne0bAyGBN0dqI8p5o+3H9IpbZio6YpbBJMZS2sQ0
+IKGmJdKQVOjXsn5ty4REGjugaVGNHtL/EAq2h54AeV2Ea3etKR72RJk3NfRjkqvH
+lxBjWf2T9JkuGr+ZtyM0LD68s774BBGuBXm9YEfI8fnxfizeCf9JgJi+SNxNVuOH
+HG3TQLU37Fg2PDFWuVO2XFJH7cNuj5xWsWxUpwAjGv4sNg8PSYyltIlqQFTTOuuL
+h02xxDRkxC+8JFDYT9vSZWNMY/dj15riDw9o2vbQsCI1w365EsBYll4GdEnEGrYg
+1rKvbBLIdzNyVY0AGLUyC2hUbm+pKBu+6UGsTwFdlqWXOR2tMpiWpsPWEQ03SoiI
+XFZVdWe8xFLjgtiHRoWczZ9uTnHOlkuqGPiJfRvr86PnwVqPim31n9bYWBoVBmta
+TBv2o6WibDLK7Zn0MaBlMW1LH/luVGOHfBoZWdPiCmnewtCLih4v6HNDj+XvNbWq
+OgtIexFMVLIBJKPt+fIbhcr8vWZY9XpR/bOix+ctDDkaOz6cBRFVVo/cRmd0RTqv
+HV0/UkAYuRKLOFn3VEWDxAtIAAAK4klEQVSRzJPsu6RNqKn2BRS7Kk1fKCm/ee5o
+9F9asXEhMGekNtExNLp1TAc0TfXPQ4/l7zW1CpUgaQdF9GtZv7alaeQpVZ0VV9PQ
+50bStIRPxIXVbf8YWjqt9W5/vqJfEo3cbzyyGLDJNZ3IYZ0EoLbVdRLSGYlYi0Uj
+9yt6Revd/v0W1Apq2n5eWN1mm6THCdTIPURzHSduIyyZVr6yfCz8scdm04VqGfMD
+mYeEAmWz684B5jlhyyUj7ErMZXksc4fTnRaVB4qAZTbNemNjaNQZQdOuEI3cH4lY
+iyG9zVsDWhbTtjToMhZXxDTtS6lqWkpTG7lZ+kng7YLFHa9P+WJwk6hemY7HotHc
+BOnmWRHhiqIrWpoKFne8DuyI+TUuhP615G0Fuxsx11jhB+bNCziVICwDdIdNA49v
+S9YnMu1l+vRArorUZWrHJXNam+c8DNgljDu9bPaKLzrZb5blWQUjp+BQuCf0ryVv
+O9lvKsS0Y0fB4o7Xi65oaRLhinTs9GtZv7alfL7qlVO+GNwU07S3U9W0lIRc4UIR
+nun/Ob+m7QEg5VJmRqSYtHP2yt35i0IPDfwkPKNwYep2nCOnN7wcxSa7m3w8uDfr
+ofEWcxGxXagW1a+CXUmCkQlP8jQA8ZMVuYwxCyKC2hYAV9G7S8tXZPwlDlBasTwg
+yKdH7pC2nN7wcif6S5dhmrYo9BDI3WmYmgp0xLQtVVbFtBRIT9OSFvLWu/35KGdg
+eGPw5/lTQ1chPJZKpxLdwroBm2/rODyaPzX45f0+MbyBcsbQV5GxZNu2QLuiNfYt
+9YLgXu8vp1XdnGGisICV7vRHn/TZhnmJML+08uZh83TJUFV1Z05ZRd33QT6bzvku
+o0NL09LfIqyxaZaNpY+UVdRdnH5Paz3+irrvgNxk11JhsRN7FdIlsaYFvwykuuPT
+D2yQVLfnC4/lTw1dtd9naWha0kI+OUs/AOSIJfsVS5AFRPKLQgtAfp7g1GEIlAFv
+kJqQ/yR/auiiaOmmQbai/uTE/Bs3gs1Lfyrw/SSanmqMec1fseLzsNaTWi8q/orl
+Z5VWeF+ats06PB0/2zcFtglivwisuqx09vJbU4m4Ka28+aOdpvOPmiCvvcv4opPC
+12BfgWeywsOls5ffX1YZSCn5k798xftLZ7/5jMCwAjVDEbgv2FxrG1EzmoyoaVND
+F5FExM8g/MAbMW1LEvl5flFogROalvRTnVHyLSAidA9zZwG9uja4oLu95H8Q+XKc
+0/dDIc8rnq1hjdjlS+5v/52CqaHrhl4wMX9Eo/4ldSGjiG9yeHFwr7ccONmm6TRB
+v1da8eZNsPw+Y1mPhzYd9mq8lfsZM749uTdnzzGKniVmxcUg0Q1G6ikl3bJYalYh
+cq9tO5HrOk3nJ0srl3+7NxL5cbzkWIfMrpsVFjlF0P9E0ws1LC8PTBqvxFLvJoIb
+At3+ypXniUb+jN1DlMilqt4LSitWPChi1rYUlT7Di9XDIpp8h3+zQHp7PyGWdQmq
+Z4N9jlRV1vlzwzWO7DjLAHtNC13c1eHbJjCsylAcJsc0beSosH5U78gvDl3rlKYl
+LeReI9uNpYjqYnhnTqmfqENtX+mq9z+H6F3YpKeNaGTYLy8OIVQWF9YEE25QifmD
+R2Tc08Vu2BDonVpxy/lZ2vckIklUBZeZwE2W0ZtKKzb2QN1GoEWgR9FCkJJe9sxB
+8QqyX/3LiNG00/+2FJc+UNoR/Bo2YWEx5qBSn2157ymtqPs7ylaELMCHiD+iOj1O
+bp/BKML/oHw1UYNd1qQcwBXyMSDYeP0mf9WyT4ixfoN9Culc0GpVqS7tCPZRUbcR
+eFthH0q+CDPo66tAxEKT3dsnz/dGrPM3bKgd91z9HpG3VO00LXRNV73/z4iuwjlN
+u7KgZvimn4F+Y5rmNZL0fo6kp1ZyS4KvAVtQLu5s8CUsYlxQE/yxkn0EcC+QMCbZ
+ZitQL8oa7euZWzCCiHc2+L6FcjGwJa8oOD4FbofQ0fT1XZobOR14KsVTc4guDp6q
+8O+xYg9HkvjLNv2t7y9W94nhc9iETQ7BAuYhnAGcAhyN6vQkzlsuah6wb+YyVgQ3
+3fiyZVkngm5J4bQsoqGkpwqcLcJ8ommQUwmY+F3Y6jt9oqQ2jmlGMpr2U+3rmYuy
+hhHGjI2m9QH3KtlHFNQEE4r4YE2LaW5SJP1HkAVEFGkAELi2q8H/s867CuJO7BdW
+bw8VVIcWeolUqfIt4uT8VSPDXkEU/iVwmydsqgpqQosKr+yKGwnSeVdBSVeD/2cC
+1wKoaH28V5TxIrgh0N3aNOdMFW6G0dlZKpL+EzlAy+bavwhyOTYZHDNBkTtam5YE
+7NrlWGYChGW+u9ix6YY3srI9xwKOZwaNgwK3tjbN+UT7psD4FNmIgywgoqL1kISm
+XdnVVlATWuQJmyqB2xT+NbRNPE0DtqryLS+RqoLq0MLC6u2hePaHaRrSkIqmpRRi
+1nZncWFOjryqSHnsoxZR/iu/JvSjkc5TRfbU+99vLP0QyFGIlqDyF9DjQdpB/yYi
+6/MWBl+Nl4N3MN31votV+A6xJ1JBN/f06NEjFF4eV0orb/4oauqB9zps+p7Wptov
+ZWqkbHbdOSp8j9QjiEZiD6LXtDYubQAoq1h2lGIlfLpQ8RwWbLx+k1Odl1bUjXgP
+tTbVZriNenz7cxaVstk3fwHRW3UUCk0I/MOotSjYfMOwqYuJQCaatnuN/2hVPQ7k
+KNBikOcR/TAqbaB/s4z8Nbcm+MpYaFrKN1hnQ8lcQX4LDEpIL7+JRKzFRVe0NKVq
+L1l23lNW4fGYVaCnD/p4m6KnjdUuzrSZH/D6t2Z9VlRvAA5zxqj8tLVpiSPx8zNm
+BIp7c7y3oHyRNO6JwSg8AXpNsGnpQC5sOyG3lON3NNc6U9wbV8jTYcaMQHFPlve/
+RLgKmOKAyWZRudmX2/fAhg2BcZ8PH4mYpj0FzHjn03HTtLcUPTVVTUs5aVVhdds/
+tK/naOBhBrIX6ukeT+SVznr/qISdddb7L/d4Iq8MumAFHta+nvdPeBEHWBcIBxuX
+/KC1KTxX0NNAfwjEfcWywYA8r8pVliVp7UCLx7ZtgfbWxtpFWHoYSABINcF/F8r9
+WNZHgk215wwW8WSIWOJEaSyXDNi2LdAebK5dqpPDM1S4DOH/SH0Buh30YUX/vbVp
+zmEtzUvunegiDgOa9n4mhqYdnY6mZfSksHuN7wNGWYpy7oAtZS3Z3isLPr8jmIlt
+gK7vT/PTG74LYUHsI0V43BKWj35CrNFGpXT28vcJ8kEVmaPKLIEpYulk1WjiKkVD
+IDssdIuI9Uqv9L04VnOM0ytumRmWvmNROUbhUEsoVGWqKl4R2Sloh4r83URk/aTw
+pPXbtl2TcZEQl4lFeXlg0j6v58ORiLxXROYCZaBF0XuAXhHdqcgWMboxYulLoUbz
+MgRGLdvoWHCgapojr3zd9aVHq5gA8MmoTWlT4asFC4P3280PxUMV6WrwXybCbaAl
+RL+tHhO1Avk1ra864bOLi4tLIuJqmnJdQXXwB2lr2hr/50T51mhomqNzd7sbfMcq
+BBTOjtl+CZWVI4UQDqWr3n8BotcDxxJN+PGEQCCvOpR5iTkXFxeXFDhQNG1UFmE6
+V/vmWMoXFD0T5EgMpxYsDq2zO6+rwXcS8BvQvwvypBG+V7golFE1IhcXF5dMGaJp
+RwCnF1SH/mB3Xtcq33wsfgv6xmhq2v8Div9FTurDP0oAAAAASUVORK5CYII=
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=destination.png
+Content-Type: image/png; name=destination.png
+Content-Location: http://www.cairographics.org/tutorial/destination.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH2AIDEA4pmtve/gAAB11JREFUeJzt3U9sFGUYx/Fntu1uhW0x
+u2q3pbSF2KgZ9FDDpUfiwYTEiCCphhCJARM0JmDgDCYSOXgSDCQQjXhQMTEUY4Sg
+Jy9G05gU0EiA2vJni0jMUki37e7robti6Tzvzsz7zr7v7v4+iSeSl3ln33m/O+zO
+6hDUO2H6AGRipg8AGhsWIBiFBQhGYQGCUViAYFRzhT9vJaKeahxIjbpGRHdNH0Qt
+q7QDThNRrhoHUqO6CBVR4ufkTRJRMeoDqVEOEWVMH0Qt87MABRFdjfpAaliSiJaa
+Poha5TcfSLEcUhxSkJOGFPOQ4pCCLECkWA4pDiFoNpBiOaQ4oDAnCynmIcUBhVmA
+SLEcUhxA2FwgxXJIsU8qJwkp5iHFPqksQKRYDin2QTUTSLEcUlyBjpODFPOQ4gp0
+LECkWA4pltCVB6RYDilm6DwpSDEPKWboXIBIsRxS7EF3FpBiOaT4AVGcDKSYhxQ/
+IIoFiBTLIcX/E1UOkGI5pLgkypOAFPOQ4hLP54LFX8e6KF9Iqg4++ttE4vjXv3Sq
+jmOT4syMOHj8x/F8Pq/6q1PlFDf0c8XeO+ChiSzFi8o/6/X0UyvyfT3pKdVxbBKL
+x531zz+T1jRcw6fYc/LO3r1FKi65ruMveH3T4N8tjmP1b9QFtWL5I8knV3UkNAzV
+8Clmrz4ns+UuJZqUd69EvFkMvfhsVnUc26xbuzqTSCQcDUM19F2xfPtHillIsR7S
+SSPFckixuopXHVIshxSr8bftI8UspFiNr8kixXJIcXi+rzakWA4pDifYdo8Us5Di
+cAJfsSL76VKam16u+hfnZ+acdz/4pmdWCB27hjVOfTdy4/fLk3kNQ00RkY63PUJc
+P6JhGP2crjeCX2VIsRxSHEy4bR4pZiHFwYSaHO6K5XBX7F/oqwsplkOK/VHb3pFi
+FlLsj9KkkGI5pLgy5asKKZZDiuX0bOtIMQspltMyGaRYDinmabuakGI5pNib3u0c
+KWYhxd60TgIplkOKF/vvuWDXdTdeuHDhhBBqr7mT2UJdmYcpuUT9PAshaHbOjmfb
+V/b1ZgfcR1+LxdQuinVrV2euXPsHzxWXLHhPMjAw8P2aNWvWHj58WG1UIYiKuflf
+iVGUzU5S7s4d9YEUFApF2rlzJyXi4rMn+pYdVx1v4tqtqc9P/nxLw6EJIrpE8l+g
+qJ1vw4yNja0fHh7OnzlzRnFkhyim531yR8djFIuZfbvT1BSjd3btorE/b7w6OZlT
+/qUHpPi+Ba/s7du3c6lUavP27dvpjuqu4zQTxVrUxiAix3Goe3mX8jiqevt6adPL
+m2ITN6ffLxbVv8OIu+J5i7aW8+fPf5VOp3/YvXu3+ujOQyG+8rpYa2srtbe1qQ+k
+6KUNGyieaM1cHM9tVh0Ld8XzPA8aKfaGFOvn+YoixTykWC92S0GKeUixPtKDRYq9
+IcX6SF9JpJiHFOtRcStBinlIsTpfB4kUe0OK1fnej1zX3Tg1NXVidHSU2lR3n+I9
+ouKs2hgWOXr0KJ0aPnn1y0OvPJeIN6t9AClmi9S945Kj74sYtfNRnIyNKbbF1q1b
+KZ5o7X5737dvKQ/mtMRo7KMODYdVEwI1zMYU26CpqYn2799Pv45e3HHsi59WKA/Y
+0tIurnzcquHQrBdoAdp4V2yL/v5+2rZtW2z47B+f5Gfm1Pf35nvdos5+N8dL4Hfx
+SDEPKQ4u1G0kUuwNKQ4u1AJEinlIcTCh/yENKeYhxf4p/UsuUuwNKfZPaQEixTyk
+2B/lz7KQYh5SXJmWD1ORYm9IcWVaFiBSzEOK5bROxMbnim1QKBRoaGiIUssSB4+8
+98KHygPOzuaclW/6/f0cq8+i1u8zIcXekGKe1gWIFPNMplgIYeV/RBF8axZ3xTzc
+FS8WyVeKkWJvSPFikSxApJiHu+KFInuoAinmIcX3RfpUD1LsDSm+L9IFiBTzkOJ5
+kT/XiBTzkOIqPbyMFHtDiqvIdd2Nvb29IpfLCVjowIEDwnXdyxTN/m56eiwiqu57
+Bm2fFdeZQqFAg4ODNDc3t29kZGSv5uFLr7V9HKfK76dSqVR7Z2fn9OnTp01ffNY5
+d+6cSKfThZ6enlWaT7vpqbGISFT1x1W03hXXGdd1ac+ePbG2trazVFe3WnJGJooU
+e4soxaXNxj5VT3AZUsyLIMWmp8Siaie4DCnmNVqKjU4QKfamOcWlzcY+xhJchhTz
+NKbY9FRYZCrBZUgxr1FSbMXEkGJvmlJc2mzsYzzBZUgxT0OKTU+BRaYTXIYU8+o9
+xVZNCCn2ppji0mZjH2sSXIYU8xRSbPrQWWRLgsuQYl69ptjKiSDF3kKmuLTZ2Me6
+BJchxbwQKTZ9yCyyLcFlSDGv3lJs9QSQYm8BU1zabOxjbYLLkGJegBSbPlQW2Zrg
+MqSYVy8prokDR4q9+UxxabOxj+M4tbEAU6lUezwev5nNZnX8v3TrTjKZFKlU6vHx
+8fHLHn+MBQhGWb0ArX4PCPUPCxCMwgIEo7AAwSjchNQ/O+9ASv4FfZNdzTme4mwA
+AAAASUVORK5CYII=
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=source.png
+Content-Type: image/png; name=source.png
+Content-Location: http://www.cairographics.org/tutorial/source.png
+Content-Transfer-Encoding: Base64
+
+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
+vZ4AAAAASUVORK5CYII=
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=the-mask.png
+Content-Type: image/png; name=the-mask.png
+Content-Location: http://www.cairographics.org/tutorial/the-mask.png
+Content-Transfer-Encoding: Base64
+
+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
+TkSuQmCC
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=stroke.png
+Content-Type: image/png; name=stroke.png
+Content-Location: http://www.cairographics.org/tutorial/stroke.png
+Content-Transfer-Encoding: Base64
+
+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
+RU5ErkJggg==
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=fill.png
+Content-Type: image/png; name=fill.png
+Content-Location: http://www.cairographics.org/tutorial/fill.png
+Content-Transfer-Encoding: Base64
+
+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
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=showtext.png
+Content-Type: image/png; name=showtext.png
+Content-Location: http://www.cairographics.org/tutorial/showtext.png
+Content-Transfer-Encoding: Base64
+
+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
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=paint.png
+Content-Type: image/png; name=paint.png
+Content-Location: http://www.cairographics.org/tutorial/paint.png
+Content-Transfer-Encoding: Base64
+
+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
+gg==
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=mask.png
+Content-Type: image/png; name=mask.png
+Content-Location: http://www.cairographics.org/tutorial/mask.png
+Content-Transfer-Encoding: Base64
+
+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
+u5LW66LRRaxTsTQ8T42M337/xpuOpLTfHXlfcQAuLJadz0vOYZzDuecQOYvYWZCz
+OJ7F7BnMlWXP4HgWyjnOPYdzz2GcAzm3dL3nl+5zIE4O9aIOpmIRUMnK1WSuZMVK
+/t8ZoCQ1Ms8kkuj3vM4+8uafsZMxQcClXokdEr231EaLM6TYQYfLNgQVDep1JxFW
+nNVTtXoyop6KNt6IE7PoVeLUpRRNUnQpjXEpVaTkLCmkJqI4M1PMnFMzNcOZGVY7
+GTmsBnhgWr/24bXphz64vfPMYZ4ZxNH+7lFRcWKu+biAcBHjElkDbuHkMmbbYLs5
+kmEdiscRkSUvWKlxjLLtp1OQVZzMUG0RepCAWGJRWizAGfZ9zQ5dkn9FrtjUIa7Y
+CQ72liEz14jmDOeMSo2RpROjNnzja+zfpMo0qmrUqD6RWrU4S7Ywwo+wTH6mxAvJ
+uudb2ktdard67V6ItDs+ddtq7Y5a25p1M9M2pwKta5W2V+s6o/UmnVe6IHTBrIto
+F8S6hPh5rvjM6p9aqZZLrm/xmSse5Of/3FHkircYAChcRO0iSNaCZudBzxVN+ByW
+zmI8S2XPoukZoual6Rkqexbj2XLOc1nz6Tng+bzkAmoXES6CXAJeKGuPHE1PyDIV
+OwSjwplDTBAT3ABImAOyMssfgjOiGTbSr31lfP7lq/ZUpDgainbRpdvdktlj6ULS
+7kJI7aWQ2hdSareCtjshddtm7SzSzYJ1M7TtNfWtpNYrfa/WBk29V+sC2gWzPibt
+o2qfQQg1jN9+76k3Hckzp0MPvtwBtorNdwnjEuIugl1E5AK48+DOY+kcWj1H7c4S
+67PE9CyT+CzjlNckPktMzxLrs9TuLFo9h6Vz8/9e5EK+piva1V4o97xcnmEuR2JX
+7KFikwqnDhNHjhU5HA7MoSK4AsiEXGHzmNqP/jfNv/uCf6Jn1EyiOlVbivXd5s61
+mRJnXYz9uEpraApOUgik5FSTU9Xk1BRTQU3UFNRqTFXUMDPnzMQUzDDDBKtERg9M
+6tc+vLayRMW3+MwiDr1lKk5kL/cyC893C/QSIkUTWgaMyhZjnz3ilz07E3lcD7qg
+2eOO83etMBqt4qVFtAdiCb+BaY4XIg2LgPXgMVdXvOTDyBIVO8xVBV4OkWHrECoU
+AXNIyoBEhXrxPThzwtLXvZL3a3KmYnYcnWs7MYXnfWxf8NpdjtptR+t2lG43aTdD
+u1a167CuM+v6aL3X1AejD6Z5i/XB6KJan9DeTOytp1f+1EpVvvCHeWbTW6XiXebx
+PtsGyUA0tlC5BGQt6KoLqD7PXefPyd3fuHM18AGIPK5y9zfucPenzhPH53HVBUQu
+oHoJlUuYvICxle9VPOxFqOfKl3doGajYtMakwqQGKtTydgCk4RDnoHIkJ4g5xDvE
+CX2Uv/aF7vlTq/Lx45ySEAS9EFJ3qafbiqG7nKzbSbHbNevaaH2XaxT73uh7sb7H
+Om/Wx5R8MPpo6qPQR8UntK9cNXr7PWfedCRtpO6m+4qNRZYjg9BsG5HLOLZwbCFc
+wrlLNO0FeflfvHQt4O0XkcdVPuPrXqBpL+DcpXwttnB2GefyvfYHusuLPFIAzsu2
+RGrEapwOIKyLJqwQqzMgnUNS1pTJHLUTpM4gFC//73+dfpVq/7QtuLr2G+Roe40v
+p+AvqXbbKfbbZv1ur/1Oomuj9q1q32vse7Xeq3qv9F7oY1IfzPqoyUfoo5pPlvzL
+Js3nPLy+ev+Bz3Ezzyzq0I/fTNlWS/7Q8zLbxckOZtuY20bTZRJb9OEFOf1Nl2/i
+untETn/TZdr6EoktNF3GCvjyvQrwZHiOFpZswNe85jVf+9GPfvQJs8MVT8g938D3
+/40/wR/5vAfZnfXszjy7s56dWc/urGc2C+zOOnbK8XzMl393zNrA7m7PbteTbAyf
++eq94fID+3avUio1P76/1N6uce6+42LMgJMvf+mF7Te+9n+1xowYYSSouRxamgcn
+EiX8VCJQAma5XMxEIPHWk+t/8qO7sx+YWYqHihGKPcjP/4kHeMMTNxKgzrl4ocXm
+iYAZ2C5mO2i9zdhvc9f5rRu41rXlwd+7zLmXjPFMcWkFYXUJdDPEcnFKfqbVOQCf
+fPLJf/zQQw+9/3Wve93rf/iHf/hwD2EJLv4zsv1ZgRuB1GU1JKtQapSaZDVqjiQj
+lKqsGqXBxPFvf/8iT72QvXcRQyT7MCLgyn7l8v7NAe0q5x4AbFXlb/3t7z2dPvz0
+l15+6OU/Ty2omhEVZIEeERGSIZWJIIKWUjEE1ITaZa/47jNv+sHnnyu54kNo7Nrd
+aK64B/r8wbsOWBSKkGaMdBe4pr13oyLyuNrZd+8wak8Q3S5oyX65XAll8xSdv+Jl
+Pv3002/5qZ/6qf7nfu6Q8U6pYP2PMC+gsJzFiSnhY6QPkS5EWh9og2fmE7t9z07n
+2W49l9uerbbjhZnnlSfX8VHZ9YndkNj1kZ0+sOsjuz6w2wd2fGTXR9oY8WmIcS8B
+as+z7dvuOWc/KPPGOeFtb3sb2//h6S/fPXtx/bLFfhbxrSbfJnyf8H2Kvlfrvan3
+ig9mPig+gE8QophPpiFi/iXj6lUPrxYqPoxD4sThfutGqDi3RmAe076k13rEOsS1
+9HXLXednN3CdG5N7nsrXlFKErFbqQIdnsFwtv/8lXbx48fKpU6f+zDve8Q62t7cP
+9xDNvTC6B0uJpImggVAAGFLEx1CAOIAwMOt7dnvPdhfY7noutz3bXeC1d93NzC9A
+NytA3PWRnZCP7Sz9fTcEdkOki4loy1/q64Byj+zt/7j//vt59NFHZf0jn/ym3Whh
+JwW/KwWEor4D70nBi/pgFjzqIxqSEWLSUPqgfTILCcJbNjYeW0H3BqhviZI1U/G1
+JeSSKokIASMg5lHzOPW4tj8K7TeIyOOKa3uclnsM9yTkZ5BcEcUBZvyTTz75j0+f
+Pv3+b/3Wbz30g/STh0goKUZSyivGQEiREBM+BXof6EKg85FZCOx6z27v2el6tnvP
+VtshBicnU2Y+MgsxA8zHOeh2+nxsp+zvzAHp8zEfChgHSl5+ymtrv2UgvuENX8qk
+rs+sfugTX7ZN8ruKb5OFLsXQY6Ez9V4teFMf1EIwC0EtBNHcA42FZBbULIggX3fP
+XW+cX/wwcc3xdfuKlRx5TeBSLiyQiJNIssBUD937fYVMNZAs5FK8ci9crojKLzJd
+8bIGOSwVm0HrEzMPl6vPQy2hSZdAmAgpEELAp4GS+0zJ3jMLPbves911bLcdl7uO
++1bX6GNiNxTA+cjuAMawoOGd4NkJBYRhAGJgx/v5uT6VijG4DiXvPe4qx9ve9jZm
+v/17X+Gf2drcjRraZKGzvIJq9FjwaiGYhoCFiObmKyxECEmyBlTT+NLR6FUPr564
+/9BxTRHH6DevRcUKYhglSK6KiYIo6pRUHZn2m0vYTKjL9zDJb7iplpIupbzJBwLw
+MFRsBl1IeUZGUF6Ip9nlFGoR1UiySNJI1FQ0YSREjw8eHz1tiBmEfZ/tQt+z3Xbs
+tD0vX9tk16dMwWGZcpe0XljQ8E75+84cpCEDtGjGLgaSLduLRa7Rknn//ffz6Jse
+lTO//sxf3vEpziSGPmnsUswgjMSoGgOEgIWAhSTEZBojKaQCyiQW1Ihfvbn5tYtc
+8SHimmIP8oHrUvEdJ1eNA94qFffDZKGgcyB+ov/D5BxWwjShKaLRk7RoRA3FLoz4
+4OlDTxsCnfe0fZdB2HekJEyrZmHnFdDtFGrO2i/s0X4DBWcw+qI5y98LWNsUiTp8
+sNen5De84Q1MqvrM6Q9/4itaS3FmhB6ix6JHY+8sBDRGTTGiMSaL0YjJLCYlqhET
+RDWLzqz6ujOFig8f13wj9iUHUbEDE4QcPxDnEMvpUaeOKh1tQgKgeSGnZLF8Lyn3
+zbUAjvKOXvPGN0vFIdkwcWgJiIlZMD4+ezVYwFCMiFrCNKIpkFIgaSTEQEg9PgZ8
+9HShYxYCre+Z9R27XctGPaWLaQ6k7JAsa7992nAA5fLykZ3QF63oy7mBWYwLp+Ua
+lOxcoeKPf/Ir9NnLp7ym1FuKPhF9IkZNKSZLSSxFiBGLUTSoWUqkmNComgGpjviy
+evLqh1dW9gaob8UhqdXxq5sHUXHJy1OBVrmYtCQEKmlo3bW6HG9NWtdQSYNavUg+
+aIVpVZ74+rngm6XiUCYO+Wj0YQmIUTnbbvK830QsIBZzhb4F1AJqimpE1c8dFR88
+fRqA2NOGPtuGXcepepVdH5nFOLf9dn1YAuLgpHh2gi803M+BuVO85J3g2YkLr3nX
+Z1C2c2oucgAl33//fTz66KOy+eFnvrlHk0eSN0tBYopICqIxQExmKZmlJJISxAQp
+ITGJ5Q4DtZTQ+JbNk4+tDJMyDzf99UE+8Ob9VFxjVoPVuYyeBpMRTkaoG6HTsdnj
+R6YFzUzQ6Rh15R7DPYet5ezY/pdykNwoFcdkhLKG0Vd51lrWgl1Ufu3SK3NmwFKp
+3tLsmKnHLGAWUQ15WSDFnpA8Ifb0safzHV3IIHVWzbXg7j6HY3A25p7xYCfOabmf
+24RzDek9u7FcL2YPuotx3odzECW/4Q1vYOKqMyc++Kkvi0k1qWrAUjBLUSxFLeAz
+S0lTimJRsaSmSc1SckTFoqGpMqnffureNx1JoUXFfioe5e41GSFuDG6MMMZkgumU
+cZxy/q6VayPhJuS596wwjtN8fRvjZJLvOTyDjMjVMTeWC74RKs6GjRGiFjDqPo2Y
+2PXGvzn3CpyLOJdwlr1zQRGLYAEsYhZQ9dlp0T7biNHjY4cPLZ3vmeLoQmTmYwHM
+km3X77MDw7Lm88Vp8exGX+xAX+xHP7cjd2O+7k4KeN33oRdN6JzjbX/+bex+7JNf
+bud2T0ZJmgxNopoMVSP/m0zHaqYJkoKqWVKTpCRVJKmQXjoevebhE2sHDL68SUqu
+xfFra8tUnPt2hQnoJPdwyLRUMq/g3So2Wj0KLWhmgvQn8G4VdJXcqFTuyYRFD/EI
+brAe8OLFi5df85rX/Jl3vOMdT/zGb/wGa2trV5yT1PIyKAbOXhCW9XS3zksn69y/
+ukXlDJcclSgOQcSVlhFyOhWwJGhSVAVVIagRVAjJ2GBMmxyo5ZScSe4VrKToemHk
+HKPKMa7zmtQVk6ZmUjumTc20rpg2NStNzbSuWS37K03D6r51ohnRuH2f0Stg5d8+
+Jf/4x/7h297/Y1//R0/claZIvQouv/lRV6lllSSrVKyg6QS4FZytgqxinABWEVYw
+Wf22u+5/hItnH5XXPH5AIcYtS67DMym1eFb6d2UVkRO4OMNLy9Mv7zmgavmm5Omf
+2KBO6zh3ojQp5de5uOcUbADjjVfDXIuKzUDNSJZBGJdWSEbcow0T/+L3H8DMqCVS
+u0QtSu0SjQUqIo6Io2hIQs4ta8Csx7Qjpp4Ye3wKhNiz7Tsudj0Xuo4Ls44LszZv
+247n28V2vmazfGzW8nzbcqGsi12br9F1XOzaPetSObYbrozZvvOd72Q6WXnwT3/H
+//1O2sYwUWpLmChVbrzCkTBLSJVfnJagbG5PjWARsYjJKqfu//ZbBsDBUlomCwhE
+VlE7gcgaomu4ap2KDabxpF34gfVbvYld+IF1Jt0mFRs4NhBbRzhR7rW65xnyM91c
+OdbVqFjNUCNzjmXuWWhEXQKjEtTY9fBPnnoZlRgjF2lcohGlrpTaFTC6SCUJkYCT
+gEihZ03khv0eTR1RO0LqaX3HxTaD50Lb83zbFvC1PD9bgOxCm0H2fNtyYQ64dmnN
+Cug6LvbLq+VS33GpbBdhG6iqih/+4R/mt/7DU9/yA+/5pQewZLkHTI3oDFRxlkAU
+TDGXcsOOKuIiohmQRsqAtK+ysz/0h28VCAeIYzGx4ASwhsgaqmsoGygbGCdRPUmY
+nrbf/fubN0PHZib2u39/E9+cwtypfC02UFlHbR2RNRaN6gMtu+HBbliu5xUbS2C0
+DMasEbWsDMJoyscurfLRiydwooyqxKiKjF3K+y7RSKIp+yOJ1EQqApVEGiKNKONq
+cX7lsgKZ+b4ALWvC5wsoB0DmbQFb23Khnc21XtZ8w1rWfgMgWy4ugbCNiyKUV73q
+D/FNf+mb3Hs/8Dv/wIcyLaFSo3KGmWVzbcgCmIHpHJC4iKjmyREuX9TkB+3Jx0c3
+8/lcRxbgQ9bA1hE2EDZz5DL7AAAeXklEQVRwdhLnTmJ2Gk2nqfu7OPeSu+zsu69p
+F5qZ2Nl3r3Lux+6m7u/C5Axmp3HuJM5OIraJsAG2XnqFl4EIXCUNfz156KGH3rdc
+tpXU2OkT211Okw3bvNI8dTYPmZRqlpAC3/G630FQgsKuF3Yi7HjYCca2h+3e2I6J
+WXTMgrKbhDYZswizYMwStMlok9Kqy9uktCpoyfiIGOOm2ICD/Tca7L+q2HwVq6Om
+2IANJ0bF7hu2TcOJ0YgTTcNaM8r79Yi10Yi1ugZLpBR469d8FS+9d+3/+j//ty//
+cQIrRFaobArVClVaIbkV0JU5JRXbDzTbZFk7rAKCyE/Jfe/4X27lM9qDk0Vj+g5w
+HqT07ZbuNUr3mkquZNZ0Ga23Gekufd3i2p6pBsJm9naaFypa16DTMeM4xbtVnJ3A
+FW3q7CTGSZDTYKeBMyB3gZ0B7qYA8JZnwzz99NNvefbZZ899zdd8zfiNb3wjrowE
+mKdVlzoxzQxjoGZdOCqWQfQjT97FO179HA5jWue/pSqDOlZGasCcUEkehFU5o66M
+2gm1gzoZTYImCU1SmgSjBGNNdCp0mn3FLiU6zbG/6ahiEitWRhXTVNOmmk5rOo15
+myJeI73mrddE0ESwRNRcYRMsa/VkimrFauWoHXzf930fX/fn/+w3/PR7n/z5N7/h
+cy5SK4te6WVYiOHU0ELR+eckctO+iYJVhYr/H7n3G37zVj6nA+QE0IP5ed+uquU2
+2qGByEZINcGlFaLbpY4drvJ0LqCzbHek2lFLg8YRUSa4tJq/ULYOso7ZJriTmJ7C
+yUlMNslTEjbYNy/mlgB4kFcspQA4v8u26AYuWysdymaWA89mJFV+4/yUD5+f8toz
+M0SMac2csdTydaoIteTC0zpBHaEWo3a2BEAYJWOUhLEKY3WMozJWo8fok5HKYJoc
+ZvG0WrOSKrpUz1evNX6U8BbxlkEXLBE0Ei1lU2IZfBYxq9Gm5oRzfNZ/8Zm8/e3/
+vfvJ9/6Lv/Nlr3/Vn64ryaPMnIBKblOdx7NLFawTQ5cA6VQxyYGXTMVH6RVvQhkU
+ZRhOwGwAXwNuAjbNlcw6Q6Qnic+xMxnSRI5kuTEdHTPX2nIig5ANsM0MPk6BnSz3
+3dz/MNcdoXU1OX/+/Edf8YpX/LEnn3zyM77yK7+SpIaPlsMkKe/74TcYlrzgPqUS
+kkl4VfqY+NWzDY++fJv8yRi1A4rGc05wefgVlYATShW05UpoJ3NwDtqxclCJ5XBM
+DU3Zr0sWUs0wMYImupSIlgo4M6iSKYqh5NlKWr4+860VarcyMs+G6qIcTnrov/wc
+fvafv3ftP/zOeffFf+Tlv4UwwlwJvlqDSIMwQqzBZJGZEOr5dv7ZyJiV9bu+6/t/
++lZ/s+Xxx9/55uV/O3JYpsiQm5UKcTVmDU5GiOS4odoEV8wEkxMYa8D6gm7lJCKb
+iJxEOYW4U+RZMKdAlvavnA/zXd//M4frC16m4kde/6VUTqhEqFwulc8l80MJvcy1
+5BDItfKTcF0Svu/XNvgrn38pH8eYVkY1FqqYAZUpVzOQotFEo3HQOBg5m1PvKAmj
+yhir0KvSJ+grYWKGN/AqBBOCGcEgmrITEr2GrP10tNB6ZcWlZaWUrZJIRYOTvCRU
+iNZYXXGiqfiOv/ZX+dZv+Z/+7Ac/8uAvPfzal2zhzGHmcg2/c5AEc7l5X5dGmBwk
+R0/FDXAaELClvl2bIExRXQVmiOsQ61ECjghaBjuLoNTli1OGE1mxa+2g4UQnKYHn
+/XIoAC5T8Ud+/d9TN9MMwj1robUyGPNaBqOhfOhcw6+cHfG6e/p8cYFRlbVh7aCu
+8rZJ2f7LoBOalLejZIwTjNXo1OhSBnZfG16hV/BmeDV8AV8wR0QzpMzwyTPzuVgi
+z9JpiiLI7FO7QOMSNYGahpqGihGOSKUVrsmfiZjjvpfdz5/8k4/JE+/9wHd/3h++
+751V5ercqyBVGW1W4cjgkwJErgHEo6fihjyrpQYbmsZzvFCGJiLrMHyuopbFfEDE
+IVbGs9kIkX3DKW3wdgcAXpVpD516GQLU3/5Xvo3aCU0lRVvJMA2c2rmiHQsYy5rb
+jcV4/L5fWyXuK410Aica2BgZ62NYb2yxP877m2NjY0xeI2FjJGyOyMfLf7s5snJ8
+aTXGZiNs1LAxgo0GahfBPMk80XpCagmpw8cWH3v6OKNLPW3smMWONra0YcZu7JiF
+jllomaWOWez58jd/JU0zuvsf/H9Pfi0quSBANXdemXMkKxUqCIbDnMNZ3t8vJmu3
+IUBdkTXhXWTv9G7gHpB7EO4D7stbuT/vy/1I2bfhb9wH3AtyT/5v59e5u1z7mmbe
+kVRADAHqX/yX76OpHE0lNJUrgMxj6euiEQdQLmvIQUv2Cf76r0wPvMfYGesNBXiw
+PpYMqjGsF/BsjDLY8raAbCwFlI7N0QDQfO7mANQRbDSO9SZfZ1IlLHVo6knqSern
+AW8ffQaj9vjY0ceOLvb0qadLeb+LPV3o6LXnL3z9X+DDv/Efv+qp37t4H+KGDGHp
+m6bCSQVa4yTXzRXT98A34egD1IOcYA4+7gW7F+NeBqDBfWAZeMO+yP2Lv3Ef2L35
+v52D8LrTUeGIADgEqL/xG76evt1hVLv5ymBcrLmWHDRl5RZgrIR/d7bm33zqgC+N
+ZCfjRAMbjbLRwHojGTSjDML1kRQtmDXjxjhrvjnIRsLmeACeY7MZgCtsNsrGyGWA
+NsKJRnIPjfao9Zh6Usr7UXti7AjaZyBqR586+tjTpzZX7qSeXgOn7jnNo296o/z0
++z72P2hKY8zlsqRcGlVjVJircq+qVaXP8+oG4dEHqAepyJRZQFgAKLIEMu4v6759
+f1sG3wY34dweakLqfnnooYfe93mf//Drv+d//wEud4HLXSzbwOX+oK3P296z7Rf7
+UQM/81W7NPOvh13xpAa0iWzrRaVLsrD9lIUDopbtv2L7+ZSdkWhGIA/miuRUYVIj
+uZLBKXcxgUk9BKkbVqua1VHDWlPnf9cNa03Dau040TSsVg0rdcVqVbFS1Uxrxxjh
+PT/6o7zyM079qy/9Y6/4ZdQmmIxxNsEoiXkp+zot5UrX+NRuKkB9R/9Mw5GWYj/9
+9NNvee/P/HT/S//6ffPqk3FTtGG1vBVGlezTlAttGRS+9ZeWvkQHfE0EY6UuNt5Y
+5jZc1nbGRiMLmh20XpMpeXMEmw3F/is2YCP5Oo2w3gibTdaoa7XQEKnUI+oXnY3q
+8zJP0j73uSSfl/pM16nHJ0+0wJvf8mae/O1PPnL+/M7dyFKBJjRZE5bKYXHX1x63
+j4pfdDlSDQh5xMf29vYT7/+VX0PryUIDFm24NWi9Lmu7vMJi68sx7/mb/5XnkZek
+g59S9n6xo0KnRl+04qD5es2/DdsbBFV6pYRgSihGtWhAciywaD9FUSlZW7ESGiql
+WnXDSlOxUmctuFLVrI5qVlzWfitVxbSuWXGl/Ms5Js7x0Q99iE998ncvv/XRV/8j
+xI0xG1PJCGOCWV7X036L1799g2VbdrPjVlqfC4j7qPOSuiG3zzCRQqCupJS6VYxr
+x7SurxhHes2XMB+qfcTy0EMPve9zH/r813/X337XXtq9AoAL4G31vlCyLyDsCRp4
+/1vCEhUPciUl51eUgdQr9MnoCvVmEJY4oJVgeaHkqDngkkyJ5HCM5rIUVEGlzJgV
+AxGmVc4fT6oRq00BW9MwLZS7UldMqzqfV1VMqgzAsXOMEH7hvf+Mz3jp5q9/7qvv
++S3MSnWyjTHGIGOwG2elG6PiGwKgmrHbJ3b7xMznn6fvSxJhyPqY5fdBhBLdyCw2
+1FmujHJO/cSoKaNSrvf4twmAp06dWh+Px+fe9UM/Ov78L/6SJfAtab4CwK3OX6H9
+tvoMwMu95/PvCbzri/fFZuSgN3QvKJNlEPaWZ2P0ln+OqVcjmuKNEgvMwehY7MKk
+OSuWjJINyXagDlXQIkzrikmVC1gnVdaEk7pmpaqYuIpJnTXgxGUAjp0wlry67R1+
++Rf/tf3xL37lz6+vTiLYCLNxLpW3m89MOf3z1wlQXxeAu0uFJLs+A7AtkyUWACwZ
+oBJCqyqoXTanJk3FpHasjGpOjBpOjGrWxtlmvpbcNgDCgorf98sfJC1TcXE+tvbQ
+cGCr65dA2HPZl3N8z9/+gsQj91+lXXL+ag4GpSL4IQhdtOBCA2bQRc2h56hKFCkF
+BpDcIndtUKYMG7VzTOqaSeUYD0CrB/DVTF3RelXF2DkmlcuV2SI0Ivz+U0/xwsXz
+7R/9vJf+W2z4paFbAF9+3dej4qsCUM3YmkW22mwebXe5YmkZgH1KhEEDllSplNBZ
+UwnjAr7pKFcVnRjXrI0a1scj1scNm5PxVbXhbQUgLFHx9/0fV3jDW90+229Oxf2C
+hjvPZV+o+L9VGuGGtN/iFV5pJ3rNWRCPETT3sgTNP26czIo2lKL9sl1oNuSBMwgF
+Y1RXjFxdAFYxLgAcV46xqzL4JINw5BwjJ3MA1sBv/vpHuO/MiU++5N61sxzWGbw2
+FR8IwJiMS7PApVlgq81ru5TS7YaYBwTEmAGYcq48a8DS/lBBUznGtTBpsvZbLZpv
+bVyzMRmxMR6zORlxajKh3t/KQAbg0f848pIMueKv+KqvHn/+Fz1SSrGGcv2s1nPy
+3+ZFAMnqpX0liXLZK9/yK8q7vuAqVHK94UJFhpQekJ2QlJ2RqHlSTqbhau6IZHvQ
+ZQNcANM8VZisAUZOsxaQxEiEWoQ6T9wkj4GtELM8q11zT7Y5Bxif/dmv4KmPf/xl
+Z05Nt8ajuj/UG32TueKYjAu7gUu7gUszn0FYFMR2aeiaLQHQay5DUwoFO6MukYxx
+U7RfqDgRa9rU0KWmlLANmhNOXw2Eh3rhNyCZinee+Fe/+kG0WabiKzXgVucXXvA8
+NliO+Z7vfniZige5OUo+6NxoNrcBo5UGK2HuiCQZqNjK72QagtA4R+1KCMk5Rq6i
+qRwj8rGRZM3XOEfjhJqcHaqBSoQL586zvfVC/8rPPHP4IoOrU/EeDahmXNgJee16
+Lu56LrU+a8FiHm2X1tY2RLqU8CkSSdkOFsWVL/KoyfbftHGsjmvWxlkDbkxGbE5G
+nJyOOTUZc2o64fRkypnpdA8d33YNCIvBl9/zP3/H67/n+981d+cHA3/+71IjuOd/
+UpbLfT5/8yPwhffGvV7xDWq/a51bu70/9hZNSkhGyrOWSlHLdGySf7C1EubFEo0Y
+tVgO7jmjkWwyzKe1G7mczlz+73Gcufsutl54Yfzc8zv333PmxDMHPd0NyyJXfE2v
+eGsWC/Vm8F2c5XWpzQpgqwBwx3tmMdLGgNdIMM1lGy5TcFNnAE4L/Z5IFW1q6K0h
+WCSRyvyjYjNK9ppPTfamWm87AGFBxV/11V89ft0Xf8ke0Nke0DEHXdZWe7fbAb7z
+Q8rfenj/HJd9ckhQ1pLX8glqkut2hrCM5WmtQ5FFDVSV5Q4/yaCrRamKzQgOJQfQ
+rVwLEV728gf4nd/++H2b65MLt5uKd/vEVhvZarPtd6kdANhzsfVcavsSgcjssxsC
+bQr0Ggma0DJQy1VGUwvjWpiOK1ZjxUxrOmvwNMQ5+HThsDjHqKoYV/Ue7/hFAeBQ
+tvVNf/EbnviVD36YtfGkfACZEjO8hn8XT0sAl7894nJfh3PGb20Zf/yf92yHsDhf
+9oFVFte+neeMKpd7QkYj1poJ66MRa82YtaZmfTRhrR6x3kxYH41Zq8d5v5mw1oxZ
+r/P++uaU9/6DH+RPf/PfWX3yySdfy21KnakZ20MyoM0231ZbQNh6Ls46LnaeS23H
+VgHgTvDMUiBZ1nyIgtMc4wpKVcFKdKzGitay9ouMUckNgFJZcVZk3ps9hKgGKj76
+qUhXkaFs6/Hv/KusjWvWx032mEYN65OyxiPWJ9mGWB83bIxHbBSbYnltTrN3Vc2L
+WwfQsHct/+02nGOyOKJzxyktHCiMSCqetZZekkVZ/9Bn8pf+8jezurr6GQ899NDf
+uF3v/25pDtvuItt9AWKJw15qey52vvRS9zw/azk3m7Ed/JXgm+8bicR27DnfzTjf
+7nKhz22tl/qWS77lhb5lK/Rc9h3boWc7eLZDz05YmKkvigYcZLmC+gu/ZDE5YihM
+Xe4rkeLuD2so26qqUpxaKmp2Yk+XhvbI6wHpaM8ZWgiseIfLZoSWn0rWwcNHc+m/
+6VKFtWbvsm74ez/+9/iSR77krz/wwAPv/sQnPvHUkb7xZADu+sSOH0BY4rFdDvxf
+ajsudT0XZi1bvt8DtIPAt3wsoVzyMffau4SrjbrYiJPgmDaOaaxZCZl+ZymwVgqk
+XzQNCHv7iq1v59pu72rYnC7tT0ZsTsZZ603HnCxrczzi5HTEqcmY9XFD5eT6mmv/
+3w95zqK6W1gwp81bDeaO1pKzNWjHuLSNpnz2q1/Ft33bt7m1tbVfYAnmRyFtyW4M
+axjouV3WkH16oetuGnzLx7ZC1nxboeVyHLRez0707MaeWQrMomcW/byn+kUFIOwd
+8XFi1LAxaTLdTvbS7R7gTUYZcJMRJydjTk7GnFqZcGo64eQ0b09Nx6w0FQugcANU
+euvnOMkzgCoRKnELMA5fhCXtaKa5uGEfIPfEO0155zvfeVuouItKF3N2Y1jDrO0d
+n+29be8PBb7h2OXQcjl0BXgdu8kX0GXwdRrpUqRLecTJi0rBgxzUV3xFL4ksV1BT
+OtyEZqnIdVTWOEo2cGPu883fsMDttP+aqirV3i57vSLzUmY3b8AShAGQ+VrLXv8C
+kBmAk6rhx3/8x3nkkUeOlIoXcxpzkUEbc5C5DXnGYp4q5knoocCHKEmMndhzIlXs
+popZamh1RKchr+JVDxPHXnQNCFeO+JjU1VwDbk6KxpuOFlRbtF5eJcA5neTtyoTT
+0ymnp5O8JuOyP2WlaXBuLwCOwv4buZxuG7mcZqsrR+Oq0vuSteK8WV9AWALikte/
+J/xU7v6a17zmyKl4eUJZn9J8dSnRxhxqmaVwaPAN21Z7WvV0Gug10CVPr3nMnV9q
+9odjAiBcOW1rVLkF+ArYhmj68jo1nXBqMuHUALQh0l6oOINxGZA5PDKqq0PbfwKM
+65pp3eRihLpmVNWMXVWyHVkb1q7KQHRSaudk4VxxJarMFpoROHIqDknn83mCav69
+Fs0ZjmECxLW83Zs9lkQz4CxfPzC0uMaliEAG4LFQ8CD7qbhywsZklDXK0NS0nOqq
+FmtcO8YxF0KOQ2ASMwW3qWJatt0wciNF+rnqj/N+37QfdFex/5yTTLlOSjB1sSau
+ZlzVueigqmmqilqERhx1WdVA0eIKGGWhFQ+QqqqOlIoX9qYtwkOaiCRCCQcdFfiG
+/Qy6SCTOvf7lSEAqHZ7HCsCrDb5cbep5a2dTXVnSnytwK8bBMa5KcDMOwKuZxgy+
+NgW6VNFrLAnyuPhW6uJNyf+vJdeZV/4tuiEEtHiWpsoR/VHlFiCsCghdxdhlrdi4
+ak7LGYQLah62C5q+EogDFb/73e/+BeAVHCJAnVOIlLKyEiKaO0WLDMdRgS+HZiIq
+CZV8D5Ns68635dmOjYIHudrgy3FVFe92kr3e6WSe2D41yV7vQL2np3vtwDPTFU5P
+c/L7zHSlJMIzHZ+eTDgzmc7POTUpazzl1HjCybI2x2M2xhM2Rnmtj8asNWNO1CNW
+69yMtFI3rNQjpnXDtGqY1A1jVy/ZhwMIy1YctVRUFDBSgMgAxr1APDIqnmdyYJHl
+4chsvqsek7J/Bbsw3x6rBhxkPxUPIsDaqCm0G4r2C9njDYvK42msmcaQNWBJoM8p
+OAV6beYTr7IGzMOGhrEbQ6A4Vz+Xyj+xpYB4Hi9Sl+qXuWae1/otNOGkauYacVTV
+S0B0CxC6ohHLdgDhfjkqKh5sUCfMB4M4txToryyn144QfFUle+4hzuYTMQYzBO4Q
+AF5vBvW4qhhNl+yuumZShwzCKuTwS6yYxky7bazpUpMT6SmDr9dIPwfh0ri1gYY1
+lYIjmzchDVQsAxUPoaG5bVrNk+zLIBxXdQajqzMlu1y8Oqdl2asRB4o+SI6Cip1Q
++q6Xskm1UFe5qqWpBcLRasPGLYYT5B7wYgvPp2RkAB5pxP2wsn/w5UESVec/KpN/
+qCbMy4ZmMdDGHOhsYygBz1hswIX7P2zj4IwUz2z5fzZ3QmwOwHm8UmShCQsAm6EK
+usqgW9aI031rpRrtWavVmJVqdFUQppT4wi/8QmKM3/WhD33o8Zt8W+33Lu3w7OWW
+Z7dbnt3e5dmdlrM7uzy7m9fZnV3OznZJpCMBn3PGfatr3Dtd5b7VE9y7ssZ902Gt
+c99knfum67x85fSdoQEHuRoVL0vtHBvjcenJKBQcAm2qWYl1puAUixbMWm/Y9nMA
+DjP/BgCmeWpsAUD2akGYd4PtBaGbe+ojqeYlRwsQNkyqwTYcNGK9TyNeXQPC4al4
+7sDVuYdjXOdK5qGYdDquWImO7RiOxA5caZrcuNWUVoXCXIM5khkjQ++OAuCN/BzE
+IAMdT2NkWhfgzQEY6AoAswZMewGY4hyE0UrpOItqlmEO4DxMXH6pXcTm3mvlpGRA
+SshI9mrCUXFGxlXNxDVzbTh2zR5aHkk9/zCuJYeh4qFvd+hem5Qy+qkvvRyx1PQZ
+ORtyCPC5ijzWeFR6poeYaZXjpsOXc1T67+8oCh7kRqh4v3RzzRfLfiiaLy00YNqr
+Ab3mHykMS1UqeSyHzlNlQ85iiJS4oQhBZG7T1EUbNsXZmIOrquZab9CCk6pm6kaZ
+ml3DtBoxvgEAwi1Tse36wNntlrM7M57bHbYznpvNODfb5Vw741y7y/l2l0u+O5Qd
+eHI85q7pCndNV7l7uso90xPcMznBPZM17p2ucc94jXsnG9w7Xme1Ht+ZABz6in/i
+J37iqlR8NRkA18W40IAFiL3GMpk1zWOBYV4WpXOHZN4yYLqkBdlDxcsAnNOxuDmt
+DkAcKHfQhAMYJ65mWo2Y3OTvBD755JM88sgjurq6+lk3SMWmagvg7bQ8tzvj3Gyx
+9tfzbYX2lsC3MRpxajrhzGSVuyYZhHeNMwjvnmTw3TNZ497xOveM13Hi7iwKHuRm
+qHi/DNS8WjfX1IDzweOa9qSHhoyBcmWPyqAFBwDO6Vgk23HO5QyIc3Mbb7B7xq5h
+5Kp9ILz5H6m8FSoWYT6xYHccmMWGNjXzHo5cRl8qmV3CeeVyaEly47S7MRqzORlz
+ajLl5HjCxnjCejOex0/X6jEn6vHc4RpinnekBhzkVqj4IMnJ9yEUswDfsJ0PHi/a
+UA8AIbCPimVJEy7KsvZrwpGraGQBwmVH5FblJqnYho6+c7ttXrMZ52ct59uW59vZ
+vkrmLtfzhY6d2NNqT5pnSq70dleaPA1hfTRiYymQf3q8wunxCmfGq9w1PsFd4xPc
+PV7La7S+lJK8g+UwVHyQqNlCA6aFBgylMnnQhPNB5fOG9FwssKcaurx5Cy24H4Ql
++CwDEOvsJbv6mh7vjcpNUPG8LXM3BM7vdpxvMwCHH+y52LX5l6B8y5bv5sWkuylX
+tfQaCCQScR5kblz2qKd1xeqo5kQzYmOUs0cnRxNOjqecHq9yerTCmfH/3961LLcJ
+BMEGdpenXhvlD/K1+gz9k865qlIpJ7FlGQkMOczMAkWsh+1yJIs+66RqemC3uyfD
+V5NhboiEaUAd6RdPQIByxZvN5uxRfAqaMVx1VjC0CSjB6sY41UAI6Ikp1Y3j5sZD
+eT4r4PsQr43FYoHlcvl9tVodGsWdXPCd25nXIl9Oyvd794T7ctcxk+bsainqksNG
+pHyaTSGRDtwyx7EJMdYhpibCLExgTQxrUnwxKeZMQKvT5v+7BgIC7zeKD6FG3SJg
+3VVBUcKOCsIZCZwSQpTQd0qovVdvwjiKE0dxL5j+k1eZkfLl+LXLXYDooRD122Pr
+fHzkaqn4ndDnrQXUjBUgUbxNShmMTYiJjjA1MWYmgdVJQ0I96gXTr4KA1tqxMebH
+er0Oj//69pBlWW2t/fbCKO51w5RV5TaCEvkoC3K/z/FQUoZjW+7xxGbSAnReWuGZ
+7WnsUA+oFydSCqmidbYSOZ2YGFMdY8YEtDrtPYxXQ8ABb8K/y4mqCnd5Q74/Ep2U
+AFFZOEezHNhLYYDn166SRK4cSQUNRoq+eCc6xkQLCfvkA/Ax1RwDLhPK9zGPYxql
+ATecFhSd3D5rDhAVfGhfOsckQK6WwGNHEFfSJYruuDMm4EhFRECVHCyrHBTw8+N4
+QWVRuAjlYye9xu9/fETlFNADnXk6K5qi+mJFxgohoHztvoRhBN8GTq7olSqObbl3
+LiIhoBg1ALTuwn133RgFGgk7fbIg+r8VvQMuCmeVlNeo2dJWuDNTuSGS43jPa9xA
+ho0FkU9Ws3MoNRDwNvDqLMlH4C9Lx6zTELLqyQAAAABJRU5ErkJggg==
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=setsourcergba.png
+Content-Type: image/png; name=setsourcergba.png
+Content-Location: http://www.cairographics.org/tutorial/setsourcergba.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1gcQDwkQLaMyDQAABHBJREFUeJzt3c9NG0EUgPGPOAdKsORT
+OrASyScK4IIUmsAtmBs3qIEmuHJxAygHmrBEF+QADwVizNo7M+/PvK+A2YGfdrF3
+Z5Yj4JksbN8B/hQYaDabMZ1OC4xUt9uLEj9t3e7v77m7uysw0i3fCowCwGaz4enp
+qdRw3VYO96ViwJDIYyuNC4WBIZEPrQYuVACGRN63WrhQCRgSeWg1caEiMCTyV9XG
+hcrAkMif1QIXGgBDIn+sFS40AoZEllriQkNgSOTWuNAYGPpF1sAFBWDoD1kLF5SA
+oR9kTVxQBIb4yNq4oAwMcZEt4IIBYIiHbAUXXoFns5n2PMIgW8E9Pz8HXoGn02ki
+F8gS7unpKfDPJTqRx2URFz78DU7kw7KKC1s+ZCXyflnGhU8+RSfysKzjwo6vSYm8
+Ow+48MX34ETenhdcGHCjI5Hf5wkXBt7JSuSXvOHCHrcqe0f2iAt73ovuFdkrLhzw
+sKE3ZM+4cODTpF6QvePCiMeF0ZEj4MLI58FRkaPgQoEH/tGQI+FCoRUdUZCj4ULB
+JTvekSPiQuE1WV6Ro+JChUV33pAj40KlVZVekKPjQsVls9aRe8CFyuuirSL3gguv
+L0KrmbwcbbPZ1D7UzuT4PeFCo50Nls7knnCh4dYVK8jatcSFxnuTekdujQsKm896
+RdbABaXdhb0ha+GC4vbRXpA1cUF5f3B0ZG1cMLABPCqyBVwwAAzxkK3gghFgiINs
+CRcMAYN/ZGu4YAwY/CJbxAWDwOAP2SouGAUGP8iWccEwMNhHto4LxoHBLrIHXHAA
+DPaQveDC64qO5Z9f2vP4ssfHRx4eCqwKWd6OHmKx+MHFhX3g5dLJGfyC+6A9jbcu
+Ly+5ubnRnsagzANbw5W8IJsGtooreUA2C2wdV7KObBLYC65kGdkcsDdcySqyKWCv
+uJJFZDPA3nEla8gmgKPgSpaQ1YGj4UpWkFWBo+JKFpDVgKPjStrIKsC94EqayM2B
+e8OVtJCbAveKK2kgNwPuHVdqjdwE2AruYrHg+vpaexpNkau/o8MS7nw+ZzVfAS+/
+ZM3k+KvVqupxqp7B1nCl1WrVzZlcDdgqrtQLchVg67hSD8jFgb3gStGRiwJ7w5Ui
+IxcD9oorRUUuAuwdV4qIPBo4Cq4UDXkUcDRcKRLywcBRcaUoyAcBR8eVIiDvDdwL
+ruQdeS/g3nAlz8iDgXvFlbwiDwLuHVfyiPwlcOK+zxvyTuDE3Z4n5E+BE3d3XpC3
+AifusDwg/wecuPtlHfkdcOIelmXkN+DEHZdV5AlwNfk96Qb3jLNqY5+cnHB8fMx6
+va52jCGt1+u3eUyAq81P3f8rCO3O3JrAYAsZDGwAB7+X5c+ycrkGA8DRcCUryKrA
+UXElC8hqwNFxJW1kFeBecCVN5ObAveFKWshNgXvFlTSQmwH3jiu1Rm4CnLjva4lc
+HThxt9cKuSpw4u6uBXI14MQdVm3kKsCJu181kYsDJ+5h1UIuCpy446qBXAw4cctU
+GvkIeC42Wmauv3f0+fq3uhUvAAAAAElFTkSuQmCCCg==
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=setsourcegradient.png
+Content-Type: image/png; name=setsourcegradient.png
+Content-Location: http://www.cairographics.org/tutorial/setsourcegradient.png
+Content-Transfer-Encoding: Base64
+
+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
+DXMeUfGolN3CJG9P0/jmkzOGb/02DIbwkz+Zt8NrgZWd06CaAh3dQf7gNxMjbH/+
+n7N795LtzjBOlu1oudwazreO7c5yfmFgc0z/h74h13d/5RchvIf0CfqI+kjyiegT
+1kWMTbiXTxn+9H+EtTD+Lz+CfecRNgWMxKxvjnGv5m4ePuT4e78XgMu//beRL37x
+YJmwPt997GMfQhf9xS/mvQirBnpZdLAWhh6zGLMQnzwmPn+aAfZK8EJ0QvCJ4BOT
+nRjt0Ow3bJ+xG5+ws2WvQNnkvYmSpUvQidIdHc1zrJ5tse9tceKxyWGTzdpmsTPX
+fHeeUa1PnpAev5M3xmjN2XaeOJcs4ZRZRPfuc6a3nxOCY7ezjKNlt7VMO8v2Muuc
+zx6k2f1un9Jtn9B1Eeerzjk1rtnaCHJvFtE9egt943NZ25xiFq/XyLmssXbBLcvn
+P0/87Gf3CgzL9ReRFw69eTGTpfP+RE2yA7mYIAKGuRRocr6bjSnnvdFIZqy0KiXd
+nlueNOe8Xl2Rv+bUqBPXuOa2xlb5awKXFCuKS1khaYRCbMhi3dWZtaoaq6qUFEMs
+xMZaYzVN+fFuyhH0OGWdVe9nhUbfk3c+cTXnzaN9PXExSzKzVkuNFU1EF/fZQNXr
+U59rVDW3OV6cJi1ZK2iS2Dz9lSakW2qsopZtbEh5SGjTOMcrKdFoJqKGLF5PjqGq
+I5PDLTRWHo8tfHNjrFKV3mSlhibZz8uNLYRGyZjq5NdSVEqSqcg9jdVE01m1UuGU
+pUd1dvNSRJfpyH11pCNhtIC71lhJBrlZ7ouAe1Gx4QVAv5jJWtGV1UWYIqRjHVgV
+xipqvteO/FrAn8wsg93VwEr6TGhUjVVydAXkNmqhDElxUvTNSbBiMTG3kpBmvnn5
+Bqhmq9VS8GhtKAXclJg1VhON3BgLsFVjdTzktGfopAVWTWNlUpsjmUHOCslsvToH
+VirIWmO1tN5DZMYtnveBAW6+Hmb3bMuGVJKySvJgV2DZBJI8ASeURu1subQZdJPJ
+fTV9cjOpIb6UAi2dWHw0zYJNqoRG5p5NEqyYwjUzM1YsPpdaih2aacmkc7Woitfr
+DI0lY5XBzUV+b7OVtt3G+hohS3bNVnAa82OTH1dCw2qadf9VwH6T9a6pyJue96HL
+hVUGWxksk5tOoE5aT2BW+a+GXBbUlOc451FlZaRvIMCe/uo4lbaTYrF9UUlmnrkU
+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
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=path-moveto.png
+Content-Type: image/png; name=path-moveto.png
+Content-Location: http://www.cairographics.org/tutorial/path-moveto.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1gcXFBIAFIad2wAAAfBJREFUeJzt2zFKA1EURuH/SRrtU0Ss
+dAfGIiCKnYi1RTbgHlyBe3ADKaxF7IIiWKg70EpMkV7LcQOmCExe4Mz52rkwF04z
+M7wpSZoIq5ckTWNjolJKNta9hFbLwHAGhjMwnIHhDAxnYDgDwxkYzsBwBoYzMJyB
+4QwMZ2A4A8MZGM7AcAaGMzCcgeEMDGdguF7Nm90+vuf+6SNfs58kyc5gK2dHe7k4
+3q+5RqeUJE2Ng+9XN3d5eZv/e2007Of68nzlO3RNtYPvk+nrwrhJ8vI2z2T6WmOV
+zqkS+OH5s5UZLa9K4O/ZbyszWp5P0XBVAm8PNluZ0fKqBD493G1lRsurEnh8cpDR
+sL/w+mjYz/jkoMYqnVPtPTjxQ0dtpZS6gVWXf/h3gIHhDAxnYDgDwxkYzsBwBoYz
+MJyB4QwMZ2A4A8MZGM7AcAaGMzCcgeEMDGdgOAPDGRjOwHAGhjMwnIHhDAxnYDgD
+wxkYzsBwBoYzMJyB4QwMZ2A4A8MZGM7AcAaGMzCcgeEMDGdgOAPDGRjOwHAGhjMw
+nIHhDAxnYDgDwxkYzsBwBoYzMJyB4QwMZ2A4A8MZGM7AcAaGMzCcgeEMDGdgOAPD
+GRjOwHAGhjMwnIHhDAxnYDgDwxkYzsBwBoYzMJyB4QwMV5I0615Cq/MHL7JB6zbD
+GqUAAAAASUVORK5CYIIK
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=path-lineto.png
+Content-Type: image/png; name=path-lineto.png
+Content-Location: http://www.cairographics.org/tutorial/path-lineto.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1gcXFBIAFIad2wAAA51JREFUeJzt3L9LG3EcxvHnrIqiZlCL
+KVkc0kKnQ7JVcO8i/gku/g3+BR2cMzp2cTOIkL2QOiXHgdD1qBUSNFITi4f51SF+
+bSU/asV8c3nyvKbk7iAfv2/ukgtBB0ALQmsSAFotNWbkOA4mhj2EDJYCk1NgcgpM
+ToHJKTA5BSanwOQUmJwCk1NgcgpMToHJKTA5BSanwOQUmJwCk1NgcgpMToHJKTA5
+BSY3afPF/LKP/EUexdsiACA+G0fqdQrukmtzDGt8/wb5fBXF4h0AIB6fRiq1ANed
+tzaDA6Bl44fvmSADv+x33ecuudha3Rr4DDZlMpfw/Zuu+1x3HltbywOfwdoP372y
+1zMu0D6zvbJnYxQrPO+mZ1ygfWZ7Xu/9L8lK4MJFoWPb9d016s1632NGVaFQfXhc
+b9ZxfXfd95hBsvIeXLotdWw7DA5xFV5hPb6O1HKq6zGjqlS6Q71ZR/4yj1wxh8WZ
+RWy/2+44xgarH7KMoBogqAYAgOxZFrliDhtvNhA2Qsy8mhnGSC8mbIQ4KZ3gy4+v
+qNQqAIBKrYKgGmB1YdX6PFYu0SuzK4+eh40QsanYw/NKrYLj78dIHiSRPk0jbIQ2
+xnpRYSNE+jSN5EESxz8/P8QFgNhUrONvWlmZtjKXlU/RXtnDUXD0aNvfl7BKrXI/
+SXtfYi6BXXcXO+93In9Gh40Q+9/2sefv4fzXeXvj2VvA/4DYVOzhLWhy4vHFcnNz
+GWtrg71dchxn+LdJ9WYdxdsismfZPwt0L8qhu4a9l5hL4GP5E+Ll9Y6wgN3bJGuB
+gf5fdPxrwaIS+n/mHPYXHdYDP0VUQ0d1rn4iGdiIyoJGZY7niHRgY1gLPMphjZEI
+bNhacIawxkgFNgYVgCmsMZKBjZcKwhjWGOnAxnMDMYc1KAIbTw0GgD6sQRXY6Be6
+F7awBmVg4ymhWcMa1IGNbqHZwxpjEdgwoQHQhzXGKvA40n+bHQMKTE6BySkwOQUm
+p8DkFJicApNTYHIKTE6BySkwOQUmp8DkFJicApNTYHIKTE6BySkwOQUmp8DkFJic
+ApNTYHIKTE6BySkwOQUmp8DkFJicApNTYHIKTE6BySkwOQUmp8DkFJicApNTYHIK
+TE6BySkwOQUmp8DkFJicApNTYHIKTE6BySkwOQUmp8DkFJicApNTYHIKTE6BySkw
+OQUmp8DkFJicApNTYHIKTE6BySkwOQUmp8DkFJicA6A17CFkcH4D4uE5WU4jEFsA
+AAAASUVORK5CYIIK
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=path-arcto.png
+Content-Type: image/png; name=path-arcto.png
+Content-Location: http://www.cairographics.org/tutorial/path-arcto.png
+Content-Transfer-Encoding: Base64
+
+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
+BJiVrAAAAABJRU5ErkJgggo=
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=path-curveto.png
+Content-Type: image/png; name=path-curveto.png
+Content-Location: http://www.cairographics.org/tutorial/path-curveto.png
+Content-Transfer-Encoding: Base64
+
+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
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=path-close.png
+Content-Type: image/png; name=path-close.png
+Content-Location: http://www.cairographics.org/tutorial/path-close.png
+Content-Transfer-Encoding: Base64
+
+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
+hXdWvjOnHSWxIFUQ8hblIW9RHqrXV+O367+hoacBB/sPYsIxcd/9P1j3AV7/1+se
+LcsTHACXy+W/v4r54bkPUXmm0u3fNGoNXkx7EbsyduHJhU9KshyTxYRPL3yKhp6G
++/4AVZI2CXv0e/DWiregUWskWd5Mo5OjqO+uR113nbDdLc0sxSd5n/hkeQ/CcZz/
+A9umbWi82Iia8zX3vVUCwNKIpdiWtg3FqcVYp1uHIFXQrMe+ZbuFlsstODxwGK1X
+WuFwOtxuXxKxBHv0e/Dm428iZEGIt09lVqwOKxovNmLw7iBqcmp8vlMlJktgnsPp
+wMH+g6g11qLjRscD7xMeFI4cXQ7WxK1BZnQmUiNSsVCzUNjhMU+YcWH0AjpHOmEc
+MeK0+fR9UYF7PwGpXF2JN5a/Maf/MIFO1sBiHTc6sP/ifhzqP4TRyVFJxuTAoSCp
+AOVZ5Xg2+VmouPn3pZ1iAvPsTjvaTG1oHmrGz8M/z/lCYCpOhRxdDp5f8jy2pW3D
+0oilPlrTwKC4wDOZLCb8cfMPGEeMuGK5gmHLsNueqTZIC12oDtkx2ciKyYI+Vo+Y
+kBgZ11hZFB+YeIfjODqaxDoKzDgKzDgKzDgKzDgKzDgKzDgKzDgKzDgKzDgKzDgK
+zDgKzDgKzDgKzDgKzDgKzDgKzDgKzDgKzDgKzDgKzDgO8OKXz0Tx/gHLqjdh46AY
+9AAAAABJRU5ErkJgggo=
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=textextents.png
+Content-Type: image/png; name=textextents.png
+Content-Location: http://www.cairographics.org/tutorial/textextents.png
+Content-Transfer-Encoding: Base64
+
+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
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=tips-ellipse.png
+Content-Type: image/png; name=tips-ellipse.png
+Content-Location: http://www.cairographics.org/tutorial/tips-ellipse.png
+Content-Transfer-Encoding: Base64
+
+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
+LdNXiQ6PAAAAAElFTkSuQmCCCg==
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=tips-letter.png
+Content-Type: image/png; name=tips-letter.png
+Content-Location: http://www.cairographics.org/tutorial/tips-letter.png
+Content-Transfer-Encoding: Base64
+
+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
+
+------------5HNybzfxsW8Z73nCejVNo7
+Content-Disposition: inline; filename=tips-font.png
+Content-Type: image/png; name=tips-font.png
+Content-Location: http://www.cairographics.org/tutorial/tips-font.png
+Content-Transfer-Encoding: Base64
+
+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
+Q9Yx16k01K0whPrDbEDObJRTKQyp27P29NTL7/FTgTws7VN+3eORLu+zPfxNqLx7
+9Sk/Q5f7DRXT65UFwJmIKYfebXFDg/7rtIi5oDBU9doH/p0XX2w/HyV/AFg7UiiL
+Vv5ORc4lZp9dc8WTnecbkN0Ibap9TIW8gNyYHto5+++K6faCvji06rstw0eV7ClK
+3vfQy+D5Dnz/t7/VFpixDvGLnPHLzNjkxyI0eQ+lP4ZoTf3wXfI/xAXIDb9P9Jle
+GbQ9/WOBOP2WqyxPkPZCq0Gg63YCmUS5W63PIS4SQVZb/jFhfrSJQTOhrGFkIzLo
+ubeLHoc4azgB6ah3Nx5AVg31Kvpa0nucSd2e15F3fzyB76tdc4L63OgSvwypxyNd
+3j2QiUWnXQtd3inim9XeFzm9Ip5HXFKubn/eBzgeMU95lRNvtP28igesQaF/I0Uu
+pkPPY/y+rgI+x8w88GTkff4SefPBu6i2W3Y/+VXsc9tpZrjnIm93/r+yHfR5gu9V
+yAvIXGArvqv8Syqm2ws/RCxFMhpUt4zphQ+SX4TO5vHR73v4Gd1X7kLhLaHESqA1
+wNCBm0MDcqscZH1tIL3PVEivDNrt198E4uwVyN9c9pKUUccOQ6huO+2WHKbixt5h
+CK22xlyR7cQw7DA8iEyyQr7sbyHe3R6dqHuHAXxX1y3yE6xUOwyp2/PxgfT+uEP8
+CXzPKhsqyK97PAqV97QO8UPljXE4dzbdUA/yu9WHkmO7oa5rh+EBJafIMcAR+G2h
+qqlZxo0q3cPxveu8sqKM01V6T5PfNdKKrru7cUHgb6vyWfz3mY3xRfdtxWJSyaxj
+Efi9SmYDeFMKQfp0eplQ5mKNELqj0jdAgu/Kr2pjmo+/fTYN/EaXvzua6hMQbacX
+shXVh89bmMLQK0V1e2xBfFMY0lCnwgAykboX/93eSnqlYRAKwxj5w7d6d3SuKgwL
+8O882E7xDdaXB+S/vYL8usejUHm3UuwdJlTeGOZDdSoMixDnH90sH/QFsv3a1xfh
+eu9pEd/dZcbFSk6TsAnZdSreFPFMKw9WaX+HvOK5lep3EIXuFHHblTYpW+N8p38D
+t1XMy4nkXZxq16brSHuD+KSSl1ph+DPy5W0id30l4UryhduJbG+Hgr4gqYWY8/SL
+7qh2kreTPRS/McVYCdDacNaoPkbebnUZsoV3HVIJVd3XablN8lrgMnw3Zy3SKAyb
+gT/tEGJrp3UoDFBctxeTb1vzA3FNYYhD3QoDhC9wywaflErDIBQGkIN7V7bDqeq7
+uaowgBxw1WluQCYBmdnGgcgBbx3vSapNsgYxHn0IvxwPIAtY2aSmqLwPUX2iB/Uq
+DNkO+hZE+Xoj+VuIX4Rvh90isocX4O9V+puJt6Lvoj0VtYC7kcWqEcTk7hz8OlgT
+OR+heUUWPhQh/RF8t8NZCJkIntUhP1W83S0lv5jSRC481JdZXlxBRjcmlayUCsOZ
++MrCWamEzcPf+uv0IvVBmaovPnQoZRoxJ7gFXzNsEM+rzOqAbLeCQ42/qsIwjv/+
+mohP8xvxD/5koW4vSS3iHGp3qUthgM5120BWBUOX55nCEIdBKAwgSoP2bZ+15VT3
+cQxKYejEXFYY5iEroKHfbpPiPnIX8IqKsgcxHo0i7bOoryoq7w7SXaBah8IQqr8i
+r0nbKLb975eQCZAbJiPKuqNARtEFrk26X+BXlvcUyGog7ppjUHQp3h2BuCsL4rbo
+X3EbBe5RaWW3RS/Hv8iu1GHgEkyqPKRUGPR8slOofHFbyOa72+T0ahW/ynaW7qgu
+CuTHDTG3JUeQlYxOl9boUFVhADGP0QOPG0IrSaYwlKOfum0hXpaqYAqDMCiFAcTM
+Yw3+e/42aZQGUxjil38c30SjU9hC/n6IfhnUeDQGXNtFlhvWE/bg1C+zQWEoCqW9
+vPTIPHyXo26YjChrMb5HrKLQJH9TciwWEZ53hFy794u+NC0LpwfijuLv1rUQBbnf
++eTHVFqPkt9xPFN9v4Nic8cqTCo5KRWGoksQQ6GywqBv6+wlwQMDGXlZx78oJtRR
+vRX/xuOtiCenFByKrEgX+e3dhQxeJ0WUeTzS6euO8QPIhEfnwRSG/uhWty1k0FiN
+eBOour1vCoOg38M+kdLttUwLEC8Z+l3fSXylwRSGdO35FGRlv0jxfwSZ1Me6/HDQ
+49EbkJuc9Z1HbriG+G6D61QYRpByXo5/L5EbppGLNFNcsJXxQmSB7hH8dz4ZWdYY
+ctPyTwiXtwF8gziKbxG3B+QeGTH9AwLpt8hffuiizYRa9O+h6yjyOzZThG9hv0HJ
+u4M4Zn0uk0rGnFIYYr+MOhhFdj9WIp31bcgPKiUjiOKzCnFt9yzi9nQd0vhScARy
+6HwHUsY6XG8NI6G63Qb8gAhat5FjHr47070p9g5iGN1YjJgbLUcmy08jk831keU0
+yB+G3A8ZA+oej8aQifIKxFzkC8wous8jHm3quFytDpYiF5QtR3bwdwGbENOSOu9I
+qpODkIXXxUhfuRkpr43/hmEYxtDgXtaTrZzV4d7UMKoy29yLZhxH3pxkO2kO6BqG
+YRiGYSTlImQrVh/CumeQmTKMEsxWhQHgbeRNLn5CPFMswzAMYG6aJBmGMbfYiO+1
+ZQq5/Oqh+rNjGKUpMkmaLZyF5CnjfuBLA8qLYRiGYRhGadxDuk3k0PzhA82RYZRj
+Nu8wGIZhJMd2GAzDSM0hyFmFKcRc4qnBZscwDMMwDMMwDMMwDMMwjCj8H+5MSXkt
+awIrAAAAAElFTkSuQmCCCg==
+
+------------5HNybzfxsW8Z73nCejVNo7--

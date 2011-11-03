@@ -1,0 +1,696 @@
+Content-Type: multipart/related; start=<op.mhtml.1289271496975.030faa173655b7e4@192.168.1.100>; boundary=----------ZQSrZC8kLW5ZEVdjfwav5Q
+Content-Location: http://coding.derkeiler.com/Archive/Python/comp.lang.python/2004-04/2702.html
+Subject: =?utf-8?Q?comp.lang.python:=20Re:=20Py=5FParseTuple=20Problem?=
+MIME-Version: 1.0
+
+------------ZQSrZC8kLW5ZEVdjfwav5Q
+Content-Disposition: inline; filename=2702.html
+Content-Type: text/html; name=2702.html
+Content-ID: <op.mhtml.1289271496975.030faa173655b7e4@192.168.1.100>
+Content-Location: http://coding.derkeiler.com/Archive/Python/comp.lang.python/2004-04/2702.html
+Content-Transfer-Encoding: Quoted-Printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                      "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>comp.lang.python: Re: Py_ParseTuple  Problem</title>
+<meta name=3D"Author" content=3D"Rick L. Ratzel (rick.ratzel_at_magma-da=
+.com)">
+<meta name=3D"Subject" content=3D"Re: Py_ParseTuple  Problem">
+<link rev=3D"made" href=3D"mailto:webmaster@der-keiler.de">
+
+<link rel=3D"stylesheet" href=3D"http://cdn.derkeiler.com/styles/dkv2.cs=
+s" type=3D"text/css" media=3D"all">
+<link rel=3D"alternate" href=3D"http://coding.derkeiler.com/pdf/Archive/=
+Python/comp.lang.python/2004-04/2702.pdf" type=3D"application/pdf" media=
+=3D"print" title=3D"PDF version">
+<link rel=3D"alternate" type=3D"application/rss+xml" href=3D"http://codi=
+ng.derkeiler.com/Archive/Python/comp.lang.python/rss.xml">
+
+<link href=3D"http://cdn.derkeiler.com/icons/dk.ico" rel=3D"icon" type=3D=
+"image/vnd.microsoft.icon">
+<link href=3D"http://cdn.derkeiler.com/icons/dk.ico" rel=3D"SHORTCUT ICO=
+N">
+</head>
+<body>
+<div id=3D"content">
+<!-- google_ad_section_start -->
+<h1 align=3D"center">Re: Py_ParseTuple  Problem</h1>
+<p class=3D"headers">
+<strong>From:</strong> Rick L. Ratzel (<em>rick.ratzel_at_magma-da.com</=
+em>)<br>
+<strong>Date:</strong> 04/21/04
+</p>
+<ul class=3D"links">
+<li><strong>Next message:</strong> <a href=3D"2703.html">=D0=B4=D0=B0=D0=
+=BC=D1=98=D0=B0=D0=BD =D0=B3.: "Re: Passing argument to setsockopt(socke=
+t.SOL_SOCKET,IN.SO_BINDTODEVICE,intr)"</a>
+<li><strong>Previous message:</strong> <a href=3D"2701.html">Sergei Orga=
+nov: "Re: CamelCase versus wide_names (Prothon)"</a>
+<li><strong>In reply to:</strong> <a href=3D"2645.html">youngdubliner_at=
+_hotmail.com: "Py_ParseTuple  Problem"</a>
+<li><strong>Next in thread:</strong> <a href=3D"2827.html">youngdubliner=
+_at_hotmail.com: "Re: Py_ParseTuple  Problem"</a>
+<li><strong>Reply:</strong> <a href=3D"2827.html">youngdubliner_at_hotma=
+il.com: "Re: Py_ParseTuple  Problem"</a>
+<li><strong>Messages sorted by:</strong> =
+
+<a href=3D"date.html#2702">[ date ]</a>
+<a href=3D"index.html#2702">[ thread ]</a>
+<a href=3D"subject.html#2702">[ subject ]</a>
+<a href=3D"author.html#2702">[ author ]</a>
+</ul>
+<hr>
+<pre>
+Date: Wed, 21 Apr 2004 14:10:03 GMT
+
+</pre>
+<p>
+I'm assuming you mean PyArg_Parse and PyArg_ParseTuple?  I couldn't find=
+ =
+
+<br>
+any docs on Py_Parse or Py_ParseTuple...
+<br>
+<p>Anyway, maybe something like this might work for you (portions taken =
+
+<br>
+from example in <a href=3D"http://elmer.sourceforge.net/PyCon04/elmer_py=
+con04.html">http://elmer.sourceforge.net/PyCon04/elmer_pycon04.html</a>)=
+:
+<br>
+<p>...
+<br>
+PyObject* evalModule;
+<br>
+PyObject* evalDict;
+<br>
+PyObject* evalVal;
+<br>
+PyObject* tupleItem;
+<br>
+unsigned char* my_c_array;
+<br>
+int i;
+<br>
+int tupleSize;
+<br>
+<p>PyRun_SimpleString( &quot;result =3D pyFuncWhichReadsDevice()&quot; )=
+
+<br>
+<p>evalModule =3D PyImport_AddModule( (char*)&quot;__main__&quot; );
+<br>
+evalDict =3D PyModule_GetDict( evalModule );
+<br>
+evalVal =3D PyDict_GetItemString( evalDict, &quot;result&quot; );
+<br>
+<p>if( evalVal =3D=3D NULL ) {
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PyErr_Print();
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;exit( 1 );
+<br>
+<p>} else {
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if( !PyTuple_Check( evalVal ) ) {
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf( &quot;Error: pyFuncWhi=
+chReadsDevice() did not return a tuple&quot; );
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit( 1 );
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;my_c_array =3D (unsigned char*) malloc( sizeo=
+f( unsigned char ) * =
+
+<br>
+PyTuple_Size( evalVal ) );
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;tupleSize =3D PyTuple_Size( evalVal );
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;for( i=3D0; i &lt; tupleSize; i++ ) {
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tupleItem =3D PyTuple_GetItem(=
+ evalVal, i );
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if( !PyInt_Check( tupleItem=
+ ) ) {
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf( &quo=
+t;Error: pyFuncWhichReadsDevice() returned tuple with =
+
+<br>
+non-int value&quot; );
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit( 1 );
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;my_c_array[i] =3D (unsigned ch=
+ar) PyInt_AsLong( tupleItem );
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+}
+<br>
+...
+<br>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;I have no idea if this will work for you sinc=
+e I haven't even tried =
+
+<br>
+to compile it...consider it pseudo-code.
+<br>
+<p>-Rick.
+<br>
+<p>youngdubliner@hotmail.com wrote:
+<br>
+<em class=3D"quotelev1">&gt; Hi All , =
+
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; Bit of a problem with Py_Parse or Py_ParseT=
+uple ? =
+
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; I have a python script that reads a sector =
+of flash in an embedded device. =
+
+</em><br>
+<em class=3D"quotelev1">&gt; it returns the value of each byte within th=
+e sector as a tuple. =
+
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; i.e. [255,255,255,255,255,255,255, .......e=
+tc etc for the whole sector ! =
+
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; We are using this script to read whats curr=
+ently in any sector. =
+
+</em><br>
+<em class=3D"quotelev1">&gt; No problems there.  =
+
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; Now I need to call our script from C. =
+
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; I want to copy each of the bytes within the=
+ sector into an C unsigned char *array
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; Is there any way to do this using Py_ParseT=
+uple or Py_Parse ???
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; something like this for instance ??? ......=
+ =
+
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; Py_ParseTuple[pres,&quot;??&quot;,&amp;my_c=
+_array]
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; so now my_c_array[0] =3D 255 ,my_c_array[1]=
+ =3D 255 ,my_c_array[2] =3D 255 , etc etc =
+
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; =
+
+</em><br>
+<em class=3D"quotelev1">&gt; Thanks for the help !
+</em><br>
+<hr>
+<ul class=3D"links">
+<li><strong>Next message:</strong> <a href=3D"2703.html">=D0=B4=D0=B0=D0=
+=BC=D1=98=D0=B0=D0=BD =D0=B3.: "Re: Passing argument to setsockopt(socke=
+t.SOL_SOCKET,IN.SO_BINDTODEVICE,intr)"</a>
+<li><strong>Previous message:</strong> <a href=3D"2701.html">Sergei Orga=
+nov: "Re: CamelCase versus wide_names (Prothon)"</a>
+<li><strong>In reply to:</strong> <a href=3D"2645.html">youngdubliner_at=
+_hotmail.com: "Py_ParseTuple  Problem"</a>
+<li><strong>Next in thread:</strong> <a href=3D"2827.html">youngdubliner=
+_at_hotmail.com: "Re: Py_ParseTuple  Problem"</a>
+<li><strong>Reply:</strong> <a href=3D"2827.html">youngdubliner_at_hotma=
+il.com: "Re: Py_ParseTuple  Problem"</a>
+<li><strong>Messages sorted by:</strong> =
+
+<a href=3D"date.html#2702">[ date ]</a>
+<a href=3D"index.html#2702">[ thread ]</a>
+<a href=3D"subject.html#2702">[ subject ]</a>
+<a href=3D"author.html#2702">[ author ]</a>
+</ul>
+<hr><table width=3D"100%" border=3D"0" cellspacing=3D"10"><tr><td><h2>Re=
+levant Pages</h2><ul><!-- ffM -->
+<li><a href=3D"http://coding.derkeiler.com/Archive/Python/comp.lang.pyth=
+on/2004-04/2646.html">Re: Embedding Python in C</a><br><b>...</b> <b>PyO=
+bject*</b> evalModule; <b>...</b> <b>evalDict</b> =3D PyModule_GetDict; =
+<b>...</b> &gt; I have a <b>python script</b> that reads a <b>sector</b>=
+ of flash in an embedded device. <b>...</b> <br>(comp.lang.python)</li><=
+li><a href=3D"http://coding.derkeiler.com/Archive/Python/comp.lang.pytho=
+n/2008-04/msg00512.html">how to do "load script; run script" in a loop i=
+n embedded python?</a><br><b>...</b> <b>script dynamically</b> in a C ap=
+plication. <b>...</b> <b>PyObject</b> *LoadScript <b>...</b> <b>pFunc</b=
+> =3D PyDict_GetItemString; <b>...</b> <b>int ret</b> =3D PyInt_AsLong; =
+<b>...</b> <br>(comp.lang.python)</li><li><a href=3D"http://unix.derkeil=
+er.com/Mailing-Lists/FreeBSD/questions/2006-02/msg01974.html">Re: Every =
+12&#45;hrs &#45;&#45; "ad0: TIMEOUT &#45; WRITE DMA"</a><br><b>...</b> I=
+ had a drive dying and it showed up just like this - it turned out to be=
+ the <b>daily scripts</b> that scan for file changes, etc, and my backup=
+ script were tickling a back <b>sector</b> of the disk. <b>...</b> midwa=
+y during the <b>TIMEOUT report period.</b> <b>...</b> <br>(freebsd-quest=
+ions)</li><li><a href=3D"http://coding.derkeiler.com/Archive/Perl/perl.b=
+eginners/2005-09/msg00014.html">tricky list comparison problem</a><br><b=
+>...</b> I'm having a bit of an issue with a <b>script</b> I'm working o=
+n. <b>...</b> Anyway, the issue I have is that I need to determine where=
+ there are gaps between the <b>first sector</b> and last sector (on the =
+entire disk, not on a given <b>partition</b>)<b>.</b> <b>...</b> <b>Part=
+ition Tag Flags Sector</b> <b>...</b> <br>(perl.beginners)</li><li><a hr=
+ef=3D"http://newsgroups.derkeiler.com/Archive/Comp/comp.sys.cbm/2007-06/=
+msg00069.html">Re: Dir Make Up on contemporary PCs</a><br><b>...</b> on =
+my <b>Commodore</b> 64 -- namely, <b>...</b> lot of things on a <b>flopp=
+y.</b> <b>...</b> file (initial track and <b>sector</b> were <b>...</b> =
+<br>(comp.sys.cbm)</li></ul></td><td>
+<div id=3D'rectangle'></div></td></tr></table><hr>
+<!-- google_ad_section_end -->
+<div id=3D"footer">
+	(11)
+	=
+
+</div>
+</div>
+<p id=3D"logo"><a href=3D"/" title=3D"Home"><img src=3D"http://cdn.derke=
+iler.com/images/logo.png" width=3D"46" height=3D"313" alt=3D"derkeiler.c=
+om" title=3D"Home"></a></p>
+<div id=3D"menu1">
+        <ul>
+                <li><a href=3D"http://www.derkeiler.com/">Security</a></=
+li>
+                <li><a href=3D"http://unix.derkeiler.com/">UNIX</a></li>=
+
+                <li><a href=3D"http://linux.derkeiler.com/">Linux</a></l=
+i>
+                <li id=3D"selected1"><a href=3D"http://coding.derkeiler.=
+com/">Coding</a></li>
+		<li><a href=3D"http://newsgroups.derkeiler.com/">Usenet</a></li>
+        </ul>
+</div>
+<div id=3D"menu2">
+        <ul>
+		<li id=3D"selected2"><a href=3D"http://coding.derkeiler.com/Archive/">=
+Archive</a></li><li><a href=3D"http://www.derkeiler.com/about/">About</a=
+></li><li><a href=3D"http://coding.derkeiler.com/privacy/">Privacy</a></=
+li><li><a href=3D"http://coding.derkeiler.com/search/">Search</a></li><l=
+i><a href=3D"http://www.derkeiler.com/about/imprint">Imprint</a></li>
+        </ul>
+</div>
+<div id=3D"nav">
+        <img src=3D"http://cdn.derkeiler.com/images/arrow.gif" width=3D"=
+15" height=3D"7" alt=3D"Path:">
+        <a href=3D"http://coding.derkeiler.com/">coding.derkeiler.com</a=
+> &nbsp;&gt;&nbsp;<a href=3D"http://coding.derkeiler.com/Archive/">Archi=
+ve</a> &nbsp;&gt;&nbsp;<a href=3D"http://coding.derkeiler.com/Archive/Py=
+thon/">Python</a> &nbsp;&gt;&nbsp;<a href=3D"http://coding.derkeiler.com=
+/Archive/Python/comp.lang.python/">comp.lang.python</a> &nbsp;&gt;&nbsp;=
+<a href=3D"http://coding.derkeiler.com/Archive/Python/comp.lang.python/2=
+004-04/">2004-04</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=3D"http://coding.der=
+keiler.com/pdf/Archive/Python/comp.lang.python/2004-04/2702.pdf"><img sr=
+c=3D"http://cdn.derkeiler.com/images/pdf.jpg" height=3D"15" width=3D"16"=
+ alt=3D"Print as PDF" style=3D"position:relative; bottom:-2px;"></a>&nbs=
+p;&nbsp;<a href=3D"http://coding.derkeiler.com/Archive/Python/comp.lang.=
+python/rss.xml"><img src=3D"http://cdn.derkeiler.com/images/xml.gif" hei=
+ght=3D"13" width=3D"35" alt=3D"RSS Feed" style=3D"position:relative; bot=
+tom:-2px;"></a>
+</div>
+
+<div id=3D"topbanner">
+</div>
+
+<div id=3D"skyscraper">
+</div>
+<script type=3D"text/javascript" src=3D"http://www.derkeiler.com/gam/tag=
+.js?site=3Dcoding-derkeiler-com"></script>
+<script type=3D"text/javascript">
+	function tracking(){var a=3Ddocument.createElement("iframe");a.height=3D=
+1;a.width=3D1;a.hspace=3D0;a.vspace=3D0;a.scrolling=3D"no";a.style.borde=
+r=3D"0px none";a.allowTransparency=3Dtrue;document.body.appendChild(a);v=
+ar b=3Da.contentDocument;if(b=3D=3Dundefined||b=3D=3Dnull){b=3Da.content=
+Window.document}b.open();b.write('<img src=3D"http://pixel.quantserve.co=
+m/pixel/p-abMz3F92T4IJ2.gif" style=3D"display: none;" border=3D"0" heigh=
+t=3D"1" width=3D"1" alt=3D"Quantcast"/>');b.write("<div id=3D'beacon_64'=
+ style=3D'position: absolute; left: 0px; top: 0px; visibility: hidden;'>=
+<img src=3D'/ads/adlog.php?bannerid=3D64&amp;campaignid=3D39&amp;zoneid=3D=
+4&amp;source=3D&amp;block=3D0&amp;capping=3D0&amp;session_capping=3D0&am=
+p;cb=3D23801ad22b' width=3D'0' height=3D'0' alt=3D'' style=3D'width: 0px=
+; height: 0px;'></div>");b.close()}function downloadJSAtOnload(){var a=3D=
+document.createElement("script");a.src=3D"http://cdn.derkeiler.com/js/de=
+ferred.js";document.body.appendChild(a);setTimeout("tracking()",1000)}if=
+(window.addEventListener){window.addEventListener("load",downloadJSAtOnl=
+oad,false)}else{if(window.attachEvent){window.attachEvent("onload",downl=
+oadJSAtOnload)}else{window.onload=3DdownloadJSAtOnload}};
+</script>
+<script type=3D"text/javascript" src=3D"http://partner.googleadservices.=
+com/gampad/google_service.js"></script>
+<script type=3D"text/javascript">
+	GS_googleAddAdSenseService("ca-pub-3777565888511862");
+	GS_googleEnableAllServices();
+</script>
+<script type=3D"text/javascript">
+	GA_googleUseIframeRendering(true);
+</script>
+</body>
+</html>
+
+------------ZQSrZC8kLW5ZEVdjfwav5Q
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://cdn.derkeiler.com/images/body_back.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAACYAAACNCAQAAABx78AIAAAACXZwQWcAAAAmAAAA
+jQBKCr0kAAAAVElEQVRo3u3SwQkAIAwEwYuk/y6tQzvw5ScwKWDYQ2uffLuVwGAw
+GAwGg8FgMBgMBoM9rstMM81U5msoU6ZsSJkHUKZMmZnKzDTTTBgMBoPBYLAkF/0a
+A0wtrwKYAAAAAElFTkSuQmCC
+
+------------ZQSrZC8kLW5ZEVdjfwav5Q
+Content-Disposition: inline; filename=dkv2.css
+Content-Type: text/css; name=dkv2.css
+Content-Location: http://cdn.derkeiler.com/styles/dkv2.css
+Content-Transfer-Encoding: Quoted-Printable
+
+body{font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size:11p=
+x;margin:0;padding:0;background:#fff url("/images/body_back.png") repeat=
+-x}table{font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;font-size=
+:11px;margin:0;padding:0}#logo{position:absolute;top:0;left:0;margin:0;c=
+olor:white;z-index:2}#logo[id]{position:fixed}a:link{color:#036;backgrou=
+nd-color:transparent}a:visited{color:#616366;background-color:transparen=
+t}a:hover{color:#00b}a:active{color:#f1edcf}a:focus{color:#036}a:link im=
+g,a:visited img,a:hover img,a:active img{border:none}h1{font-size:20px}h=
+2{font-size:18px}#menu1{width:100%;min-width:700px;font-weight:bold;back=
+ground-color:#036;position:absolute;top:0px;left:0px;height:35px}#menu1 =
+ul{list-style:none; margin-bottom:0px;padding:0px;font-size:12px;positio=
+n:absolute;bottom:0px;width:80%;margin-left:44px;display:inline}#menu1 l=
+i{float:left;list-style:none;margin-bottom:3px;padding-bottom:3px;paddin=
+g-left:3px;padding-right:3px;padding-top:6px;display:inline}#menu1 a{pad=
+ding:5px 20px;border-top:1px solid #FFFDF2;border-left:1px solid #FFFDF2=
+;border-right:1px solid #FFFDF2;background-color:#039;text-decoration:no=
+ne}#menu1 a:link,#menu1 a:visited{color:#ccc}#menu1 a:hover{background-c=
+olor:#06C;color:#fff}#selected1 a,#selected1 a:link,#selected1 a:visited=
+,#selected1 a:hover{background-color:#06C;color:#fff}#menu2{width:100%;m=
+in-width:700px;font-weight:bold;background-color:#06C;position:absolute;=
+top:34px;left:0px;height:20px;z-index:1}#menu2 ul{margin-left:45px;list-=
+style:none;margin-bottom:0px;padding:0px;font-size:10px;position:absolut=
+e;bottom:0px;width:80%;display:inline}#menu2 li{float:left;list-style:no=
+ne;margin-bottom:1px;padding:2px;display:inline}#menu2 a{padding:0px 6px=
+;text-decoration:none}#menu2 a:link,#menu2 a:visited{color:#fff}#menu2 a=
+:hover{color:#fff;text-decoration:underline}#selected2 a,#selected2 a:li=
+nk,#selected2 a:visited,#selected2 a:hover{text-decoration:underline}#to=
+pbanner{position:absolute;top:70px;left:72px;height:90px;width:728px;mar=
+gin:0px;padding:0px}#nav{position:absolute;top:170px;left:72px;border-wi=
+dth:1px;border-color:#808080;border-style:solid;margin:0px;padding:3px;f=
+ont-size:10px;font-weight:bold}#nav a:link,#nav a:visited{text-decoratio=
+n:none;color:#036}#nav a:hover{text-decoration:underline;color:#036}#con=
+tent{position:absolute;top:200px;margin-left:72px;width:728px}#content h=
+1{text-align:center}#skyscraper{position:absolute;top:70px;left:836px;wi=
+dth:160px;margin-right:10px;height:600px;text-align:center}#footer{margi=
+n-top:20px;margin-bottom:5px;background-color:#036;border-width:1px;bord=
+er-color:#06C;border-style:inset;color:#fff;text-align:center;clear:both=
+;padding:5px}#footer hr{width:80%;border-style:dotted;border-color:#ccc}=
+#footer a,#footer a:link,#footer a:visited,#footer a:hover{text-decorati=
+on:none;color:#fff}
+
+------------ZQSrZC8kLW5ZEVdjfwav5Q
+Content-Disposition: inline; filename=dk.ico
+Content-Type: image/x-icon; name=dk.ico
+Content-Location: http://cdn.derkeiler.com/icons/dk.ico
+Content-Transfer-Encoding: Base64
+
+AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAABIL
+AAASCwAAEAAAABAAAAByRBYAe1EnAIFZMQCHYjwAkXFQAJt+YACdgmQApo51AK6a
+hAC4qJUAvrGhAMS6rADKwrcA19TOAN/h3gDp7u8AAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAHy1dQdAAZUH913qDnAdwR9wAfsOctsQTyAAyg6esABPEAC6Dv4gAB9Q
+AOsOeeIAC9Mp+g5wjkABv+m6DnAF1AABALsOcAAAAAAAug5wAAAAAACHC1AAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+------------ZQSrZC8kLW5ZEVdjfwav5Q
+Content-Disposition: inline; filename=logo.png
+Content-Type: image/png; name=logo.png
+Content-Location: http://cdn.derkeiler.com/images/logo.png
+Content-Transfer-Encoding: Base64
+
+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
+AABJRU5ErkJggg==
+
+------------ZQSrZC8kLW5ZEVdjfwav5Q
+Content-Disposition: inline; filename=arrow.gif
+Content-Type: image/gif; name=arrow.gif
+Content-Location: http://cdn.derkeiler.com/images/arrow.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhDwAHAKECAP9mAP7+/v///////ywAAAAADwAHAAACGIRvIcooJ6J8R5mp
+3oxg80ph3wV5iCNlBQA7
+
+------------ZQSrZC8kLW5ZEVdjfwav5Q
+Content-Disposition: inline; filename=pdf.jpg
+Content-Type: image/jpeg; name=pdf.jpg
+Content-Location: http://cdn.derkeiler.com/images/pdf.jpg
+Content-Transfer-Encoding: Base64
+
+/9j/4AAQSkZJRgABAQIAJQAlAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoH
+BwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQME
+BAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU
+FBQUFBQUFBQUFBQUFBT/wAARCAAPABADASIAAhEBAxEB/8QAFgABAQEAAAAAAAAA
+AAAAAAAABwMI/8QAIBAAAgICAgMBAQAAAAAAAAAAAQIDBAYRBQcAEiExUv/EABUB
+AQEAAAAAAAAAAAAAAAAAAAQF/8QAIBEAAgEBCQAAAAAAAAAAAAAAAQIDAAQFERIT
+QVFx8P/aAAwDAQACEQMRAD8AR8y6P7Wu85DQymjYzC+Es2K9lsolAjiMsYVVV3UK
+NBvgB/R/Pk+qOm8uwqrkHYHITXsVn4kLyXC1qd9LAmjVZDLBMXDMY2AiBBI39Pmm
++/c5qdf5Jxd2/YNCC5QlqR3jGZFgcyIfYqoLHQ+ga0da2PCLIO2MQt4ZynAcDl62
+pLtaStXoScbOAzuvqEV2Ueuyf1jrbE/B88GllRGzYk9mrk16zzpplFAO4UA+5r//
+2Q==
+
+------------ZQSrZC8kLW5ZEVdjfwav5Q
+Content-Disposition: inline; filename=xml.gif
+Content-Type: image/gif; name=xml.gif
+Content-Location: http://cdn.derkeiler.com/images/xml.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhIwANAJEAAP/////MAP9mAAAAACH5BAAAAAAALAAAAAAjAA0AAAJKjI+p
+y+IPo5zR0IulFQC4/kUeN0JBdZLfCK4uaqZkO9cqKm9vCLb0g3DoOjRPj1UC6jY+
+FqSpkQmYyNCjSQTCMtyLrgtWMsbkRQEAOw==
+
+------------ZQSrZC8kLW5ZEVdjfwav5Q
+Content-Disposition: inline; filename=tag.js
+Content-Type: application/x-javascript; name=tag.js
+Content-Location: http://www.derkeiler.com/gam/tag.js?site=coding-derkeiler-com
+Content-Transfer-Encoding: Base64
+
+ZnVuY3Rpb24gZ2V0QWRTbG90cygpIHsKICB2YXIgbXlTbG90cyA9IFsgJ2NvZGlu
+Zy1kZXJrZWlsZXItY29tX1RvcF9sZWF0aGVyYm9hcmQnLCAnY29kaW5nLWRlcmtl
+aWxlci1jb21fVG9wX3NreXNjcmFwZXInLCAnY29kaW5nLWRlcmtlaWxlci1jb21f
+Qm90dG9tX3JlY3RhbmdsZScgXTsKICByZXR1cm4gbXlTbG90czsKfQpmdW5jdGlv
+biBnZXRQYXNzYmFja3MoKSB7CiAgdmFyIG15UGFzc2JhY2tzID0gWyAgXTsKICBy
+ZXR1cm4gbXlQYXNzYmFja3M7Cn0K
+
+------------ZQSrZC8kLW5ZEVdjfwav5Q
+Content-Disposition: inline; filename=google_service.js
+Content-Type: text/javascript; charset=UTF-8; name=google_service.js
+Content-Location: http://partner.googleadservices.com/gampad/google_service.js
+Content-Transfer-Encoding: Quoted-Printable
+
+(function(){var f=3Dnull,k=3Dfalse;function l(a){this.t=3D{};this.tick=3D=
+function(b,c,d){d=3Dd?d:(new Date).getTime();this.t[b]=3D[d,c]};this.tic=
+k("start",f,a)}var m=3Dnew l;window.GA_jstiming=3D{Timer:l,load:m};if(wi=
+ndow.GA_jstiming){window.GA_jstiming.d=3D{};window.GA_jstiming.j=3D1;var=
+ q=3Dfunction(a,b,c){var d=3Da.t[b],e=3Da.t.start;if(d&&(e||c)){d=3Da.t[=
+b][0];e=3Dc!=3Dundefined?c:e[0];return d-e}};window.GA_jstiming.report=3D=
+function(a,b,c){var d=3D"";if(a.h)d+=3D"&"+a.h;var e=3Da.t,g=3De.start,j=
+=3D[],n=3D[],h;for(h in e)if(h!=3D"start")if(h.indexOf("_")!=3D0){var o=3D=
+e[h][1];if(o)e[o]&&n.push(h+"."+q(a,h,e[o][0]));else g&&j.push(h+"."+q(a=
+,h))}delete e.start;if(b)for(var t in b)d+=3D"&"+t+"=3D"+b[t];a=3D[c?c:"=
+http://csi.gstatic.com/csi","?v=3D3",
+"&s=3D"+(window.GA_jstiming.sn||"gam")+"&action=3D",a.name,n.length?"&it=
+=3D"+n.join(","):"","",d,"&rt=3D",j.join(",")].join("");b=3Dnew Image;va=
+r i=3Dwindow.GA_jstiming.j++;window.GA_jstiming.d[i]=3Db;b.onload=3Db.on=
+error=3Dfunction(){delete window.GA_jstiming.d[i]};b.src=3Da;b=3Df;retur=
+n a}};var r=3Dthis,s=3Dfunction(a,b,c){a=3Da.split(".");c=3Dc||r;!(a[0]i=
+n c)&&c.execScript&&c.execScript("var "+a[0]);for(var d;a.length&&(d=3Da=
+.shift());)if(!a.length&&b!=3D=3Dundefined)c[d]=3Db;else c=3Dc[d]?c[d]:c=
+[d]=3D{}},u=3Dfunction(a,b){function c(){}c.prototype=3Db.prototype;a.l=3D=
+b.prototype;a.prototype=3Dnew c};var v=3D/^([\w-]+\.)*([\w-]{2,})(\:[0-9=
+]+)?$/,w=3Dfunction(a,b){if(!a)return b;var c=3Da.match(v);return c?c[0]=
+:b};var x,y=3DparseFloat("0.05"),z=3Dx=3DisNaN(y)||y>1||y<0?0:y;var A;va=
+r B=3D"false";A=3DB=3D=3D"true"?true:k;var aa=3DA;var C=3Dfunction(){ret=
+urn w("","pubads.g.doubleclick.net")};var E=3Dfunction(a,b){for(var c=3D=
+0,d=3DString(a).replace(/^[\s\xa0]+|[\s\xa0]+$/g,"").split("."),e=3DStri=
+ng(b).replace(/^[\s\xa0]+|[\s\xa0]+$/g,"").split("."),g=3DMath.max(d.len=
+gth,e.length),j=3D0;c=3D=3D0&&j<g;j++){var n=3Dd[j]||"",h=3De[j]||"",o=3D=
+RegExp("(\\d*)(\\D*)","g"),t=3DRegExp("(\\d*)(\\D*)","g");do{var i=3Do.e=
+xec(n)||["","",""],p=3Dt.exec(h)||["","",""];if(i[0].length=3D=3D0&&p[0]=
+.length=3D=3D0)break;c=3Di[1].length=3D=3D0?0:parseInt(i[1],10);var ba=3D=
+p[1].length=3D=3D0?0:parseInt(p[1],10);c=3DD(c,ba)||D(i[2].length=3D=3D0=
+,p[2].length=3D=3D0)||
+D(i[2],p[2])}while(c=3D=3D0)}return c},D=3Dfunction(a,b){if(a<b)return-1=
+;else if(a>b)return 1;return 0};var F,G,H,I,J=3Dfunction(){return r.navi=
+gator?r.navigator.userAgent:f};I=3DH=3DG=3DF=3Dk;var K;if(K=3DJ()){var c=
+a=3Dr.navigator;F=3DK.indexOf("Opera")=3D=3D0;G=3D!F&&K.indexOf("MSIE")!=
+=3D-1;H=3D!F&&K.indexOf("WebKit")!=3D-1;I=3D!F&&!H&&ca.product=3D=3D"Gec=
+ko"}var da=3DF,L=3DG,ea=3DI,fa=3DH,M;
+a:{var N=3D"",O;if(da&&r.opera){var P=3Dr.opera.version;N=3Dtypeof P=3D=3D=
+"function"?P():P}else{if(ea)O=3D/rv\:([^\);]+)(\)|;)/;else if(L)O=3D/MSI=
+E\s+([^\);]+)(\)|;)/;else if(fa)O=3D/WebKit\/(\S+)/;if(O){var Q=3DO.exec=
+(J());N=3DQ?Q[1]:""}}if(L){var R,S=3Dr.document;R=3DS?S.documentMode:und=
+efined;if(R>parseFloat(N)){M=3DString(R);break a}}M=3DN}var T=3DM,U=3D{}=
+;!L||U["9"]||(U["9"]=3DE(T,"9")>=3D0);L&&(U["9"]||(U["9"]=3DE(T,"9")>=3D=
+0));w("","pagead2.googlesyndication.com");var ga=3Dfunction(a,b){for(var=
+ c in a)Object.prototype.hasOwnProperty.call(a,c)&&b.call(f,a[c],c,a)},V=
+=3Dfunction(a){return!!a&&(a.indexOf("?google_debug")>0||a.indexOf("&goo=
+gle_debug")>0)};var W=3Dfunction(){this.c=3D[];this.b=3D{};for(var a=3D0=
+,b=3Darguments.length;a<b;++a)this.b[arguments[a]]=3D""};W.prototype.i=3D=
+function(a){if(this.b.hasOwnProperty(a))return this.b[a];return""};W.pro=
+totype.geil=3DW.prototype.i;var ha=3Dfunction(a){var b=3D[],c=3Dfunction=
+(d){d!=3D""&&b.push(d)};ga(a.b,c);if(a.c.length>0&&b.length>0)return a.c=
+.join(",")+","+b.join(",");return a.c.join(",")+b.join(",")};function ia=
+(a){var b;b=3D"adsense";if((a=3Da)&&typeof a=3D=3D"string"&&a.length>0)i=
+f(b=3D=3Df)b=3Df;else{var c=3Dwindow.GS_googleServiceIds_[b];if(c=3D=3Df=
+){c=3Db=3D=3D"adsense"?new X:new Y;window.GS_googleServiceIds_[b]=3Dc}b:=
+{for(b=3D0;b<c.a.length;b++)if(a=3D=3Dc.a[b])break b;c.a[c.a.length]=3Da=
+}b=3Dc}else b=3Df;return b}s("GS_googleAddAdSenseService",ia,void 0);fun=
+ction ja(){for(var a in window.GS_googleServiceIds_){var b=3Dwindow.GS_g=
+oogleServiceIds_[a];typeof b!=3D"function"&&b.e()}}s("GS_googleEnableAll=
+Services",ja,void 0);
+function ka(){window.GS_googleServiceIds_=3D{}}s("GS_googleResetAllServi=
+ces",ka,void 0);function la(){var a=3D"adsense";a=3Da=3D=3Df?f:window.GS=
+_googleServiceIds_[a];return a=3Da=3D=3Df?"":a.a.join()}s("GS_googleGetI=
+dsForAdSenseService",la,void 0);function ma(a){return Z(a)}s("GS_googleF=
+indService",ma,void 0);function na(){var a=3DZ("adsense");return a?ha(a.=
+f):""}s("GS_googleGetExpIdsForAdSense",na,void 0);function $(a){this.k=3D=
+a;this.a=3D[];this.f=3Dnew W}
+$.prototype.toString=3Dfunction(){for(var a=3D"["+this.k+" ids: ",b=3D0;=
+b<this.a.length;b++){if(b>0)a+=3D",";a+=3Dthis.a[b]}a+=3D"]";return a};v=
+ar Z=3Dfunction(a){return a=3Da=3D=3Df?f:window.GS_googleServiceIds_[a]}=
+;function Y(){$.call(this,"unknown")}u(Y,$);Y.prototype.e=3Dfunction(){}=
+;function X(){$.call(this,"adsense");this.g=3Dk}u(X,$);
+var oa=3Dfunction(a,b){var c;c=3Da;var d=3DZ("adsense");var e=3Dd.f;d=3D=
+["32942002"];var g;g=3Dtrue;if(g&&!(Math.random()<1.0E-4)&&Math.random()=
+<b){g=3DMath.floor(Math.random()*d.length);e=3De;d=3Dd[g];g=3Dvoid 0;if(=
+d=3D=3D"")d=3D"";else if(g)if(e.b.hasOwnProperty(g))d=3De.b[g]=3Dd;else =
+d=3D"";else{e.c.push(d);d=3Dd}d=3Dd}else d=3D"";c=3Dd=3D=3D=3D"32942002"=
+||c&&(c.indexOf("?use_google_ads2")>0||c.indexOf("&use_google_ads2")>0)?=
+true:k;if(c){if(V(a))return"google_ads_dbg2.js";return"google_ads2.js"}e=
+lse{if(V(a))return"google_ads_dbg.js";return"google_ads.js"}};
+X.prototype.e=3Dfunction(){if(!this.g){var a;a=3Doa(document.URL,z);var =
+b=3D"http://"+w("","partner.googleadservices.com");if(aa)b=3D"https://"+=
+w("","securepubads.g.doubleclick.net");var c=3D"",d;d=3DC();(d=3Dd=3D=3D=
+"pubads.g.doubleclick.net")||(c=3D"?prodhost=3D"+C());a=3Db+"/gampad/"+a=
++c;b=3D"script";document.write("<"+b+' src=3D"'+a+'"><\/script>');this.g=
+=3Dtrue;if(window.GA_jstiming&&window.GA_jstiming.Timer){window.GA_jstim=
+ing.load.name=3D"load";window.GA_jstiming.load.tick("start")}}};
+window.GS_googleServiceIds_||(window.GS_googleServiceIds_=3D{});})()
+
+------------ZQSrZC8kLW5ZEVdjfwav5Q--

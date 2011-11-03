@@ -1,0 +1,2917 @@
+Content-Type: multipart/related; start=<op.mhtml.1264128845495.796f314470404a04@192.168.1.99>; boundary=----------CmSnST95qaLGqB1uxC2Oyl
+Content-Location: http://library.gnome.org/devel/cairo/stable/cairo-paths.html
+Subject: =?utf-8?Q?Paths?=
+MIME-Version: 1.0
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline; filename=cairo-paths.html
+Content-Type: text/html; charset=UTF-8; name=cairo-paths.html
+Content-ID: <op.mhtml.1264128845495.796f314470404a04@192.168.1.99>
+Content-Location: http://library.gnome.org/devel/cairo/stable/cairo-paths.html
+Content-Transfer-Encoding: Quoted-Printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8"=
+>
+<title>Paths</title>
+<meta name=3D"generator" content=3D"DocBook XSL Stylesheets V1.74.0">
+<link rel=3D"home" href=3D"index.html" title=3D"Cairo: A Vector Graphics=
+ Library">
+<link rel=3D"up" href=3D"cairo-drawing.html" title=3D"Drawing">
+<link rel=3D"prev" href=3D"cairo-context.html" title=3D"cairo_t">
+<link rel=3D"next" href=3D"cairo-pattern.html" title=3D"cairo_pattern_t"=
+>
+<meta xmlns=3D"http://www.w3.org/1999/xhtml" name=3D"generator" content=3D=
+'GTK-Doc V"(~lgo)" (XML mode)'></meta><link xmlns=3D"http://www.w3.org/1=
+999/xhtml" rel=3D"stylesheet" type=3D"text/css" href=3D"/skin/lgo.css"><=
+/link><link xmlns=3D"http://www.w3.org/1999/xhtml" media=3D"print" rel=3D=
+"stylesheet" type=3D"text/css" href=3D"/skin/print.css"></link><link xml=
+ns=3D"http://www.w3.org/1999/xhtml" rel=3D"icon" type=3D"image/png" href=
+=3D"/skin/gnome-16.png"></link><link xmlns=3D"http://www.w3.org/1999/xht=
+ml" rel=3D"SHORTCUT ICON" type=3D"image/png" href=3D"/skin/gnome-16.png"=
+></link><link xmlns=3D"http://www.w3.org/1999/xhtml" rel=3D"search" type=
+=3D"application/opensearchdescription+xml" href=3D"/gnome-library-search=
+.xml" title=3D"GNOME Library Search"></link><link xmlns=3D"http://www.w3=
+.org/1999/xhtml" rel=3D"chapter" href=3D"cairo-drawing.html" title=3D"Dr=
+awing"></link><link xmlns=3D"http://www.w3.org/1999/xhtml" rel=3D"chapte=
+r" href=3D"cairo-fonts.html" title=3D"Fonts"></link><link xmlns=3D"http:=
+//www.w3.org/1999/xhtml" rel=3D"chapter" href=3D"cairo-surfaces.html" ti=
+tle=3D"Surfaces"></link><link xmlns=3D"http://www.w3.org/1999/xhtml" rel=
+=3D"chapter" href=3D"cairo-support.html" title=3D"Utilities"></link><lin=
+k xmlns=3D"http://www.w3.org/1999/xhtml" rel=3D"index" href=3D"index-all=
+.html" title=3D"Index"></link><link xmlns=3D"http://www.w3.org/1999/xhtm=
+l" rel=3D"index" href=3D"index-1.2.html" title=3D"Index of new symbols i=
+n 1.2"></link><link xmlns=3D"http://www.w3.org/1999/xhtml" rel=3D"index"=
+ href=3D"index-1.4.html" title=3D"Index of new symbols in 1.4"></link><l=
+ink xmlns=3D"http://www.w3.org/1999/xhtml" rel=3D"index" href=3D"index-1=
+.6.html" title=3D"Index of new symbols in 1.6"></link><link xmlns=3D"htt=
+p://www.w3.org/1999/xhtml" rel=3D"index" href=3D"index-1.8.html" title=3D=
+"Index of new symbols in 1.8"></link><link xmlns=3D"http://www.w3.org/19=
+99/xhtml" rel=3D"appendix" href=3D"language-bindings.html" title=3D"Appe=
+ndix=C2=A0A.=C2=A0Creating a language binding for cairo"></link>
+</head>
+<body bgcolor=3D"white" text=3D"black" link=3D"#0000FF" vlink=3D"#840084=
+" alink=3D"#0000FF">
+<div xmlns=3D"http://www.w3.org/1999/xhtml" id=3D"page"><ul id=3D"genera=
+l"><li id=3D"siteaction-gnome_home" class=3D"home"><a href=3D"http://www=
+.gnome.org/">Home</a></li><li id=3D"siteaction-gnome_news"><a href=3D"ht=
+tp://news.gnome.org">News</a></li><li id=3D"siteaction-gnome_projects"><=
+a href=3D"http://www.gnome.org/projects/">Projects</a></li><li id=3D"sit=
+eaction-gnome_art"><a href=3D"http://art.gnome.org">Art</a></li><li id=3D=
+"siteaction-gnome_support"><a href=3D"http://www.gnome.org/support/">Sup=
+port</a></li><li id=3D"siteaction-gnome_development"><a href=3D"http://d=
+eveloper.gnome.org">Development</a></li><li id=3D"siteaction-gnome_commu=
+nity"><a href=3D"http://www.gnome.org/community/">Community</a></li></ul=
+><div id=3D"header"><div id=3D"header-wrap"><h1>GNOME Documentation Libr=
+ary</h1><div id=3D"control"><div id=3D"search"><form method=3D"get" acti=
+on=3D"http://www.google.com/custom"><input type=3D"hidden" name=3D"domai=
+ns" value=3D"library.gnome.org"></input><input type=3D"hidden" name=3D"s=
+itesearch" value=3D"library.gnome.org"></input><input type=3D"text" name=
+=3D"q" maxlength=3D"255" size=3D"15" class=3D"searchTerms"></input><inpu=
+t type=3D"submit" class=3D"searchButton" value=3D"Search"></input></form=
+></div></div><div id=3D"tabs"><ul id=3D"portal-globalnav"><li id=3D"port=
+altab-root"><a href=3D"/"><span>Home</span></a></li><li id=3D"portaltab-=
+users"><a href=3D"/users/"><span>Users</span></a></li><li id=3D"portalta=
+b-sysadmins"><a href=3D"/admin/"><span>Administrators</span></a></li><li=
+ id=3D"portaltab-developers" class=3D"selected"><a href=3D"/devel/"><spa=
+n>Developers</span></a></li><li id=3D"portaltab-about"><a href=3D"/about=
+/about"><span>About</span></a></li></ul></div></div></div></div><table c=
+lass=3D"navigation" id=3D"top" width=3D"100%" summary=3D"Navigation head=
+er" cellpadding=3D"2" cellspacing=3D"2">
+<tr valign=3D"middle">
+<td><a accesskey=3D"p" href=3D"cairo-context.html"><img src=3D"left.png"=
+ width=3D"24" height=3D"24" border=3D"0" alt=3D"Prev"></a></td>
+<td><a accesskey=3D"u" href=3D"cairo-drawing.html"><img src=3D"up.png" w=
+idth=3D"24" height=3D"24" border=3D"0" alt=3D"Up"></a></td>
+<td><a accesskey=3D"h" href=3D"index.html"><img src=3D"home.png" width=3D=
+"24" height=3D"24" border=3D"0" alt=3D"Home"></a></td>
+<th width=3D"100%" align=3D"center">Cairo: A Vector Graphics Library</th=
+>
+<td><a accesskey=3D"n" href=3D"cairo-pattern.html"><img src=3D"right.png=
+" width=3D"24" height=3D"24" border=3D"0" alt=3D"Next"></a></td>
+</tr>
+<tr><td colspan=3D"5" class=3D"shortcuts"><nobr><a href=3D"#id2754501" c=
+lass=3D"shortcut">Top</a>
+                  =C2=A0|=C2=A0
+                  <a href=3D"#id2757988" class=3D"shortcut">Description<=
+/a></nobr></td></tr>
+</table>
+<div class=3D"refentry" lang=3D"en">
+<a name=3D"cairo-paths"></a><div class=3D"titlepage"></div>
+<div class=3D"refnamediv"><table width=3D"100%"><tr>
+<td valign=3D"top">
+<h2>
+<a name=3D"id2754501"></a><span class=3D"refentrytitle"><a name=3D"cairo=
+-paths.top_of_page"></a>Paths</span>
+</h2>
+<p>Paths =E2=80=94 Creating paths and manipulating path data</p>
+</td>
+<td valign=3D"top" align=3D"right"></td>
+</tr></table></div>
+<div class=3D"refsynopsisdiv">
+<a name=3D"cairo-paths.synopsis"></a><h2>Synopsis</h2>
+<pre class=3D"synopsis">
+                    <a class=3D"link" href=3D"cairo-paths.html#cairo-pat=
+h-t" title=3D"cairo_path_t">cairo_path_t</a>;
+union               <a class=3D"link" href=3D"cairo-paths.html#cairo-pat=
+h-data-t" title=3D"union cairo_path_data_t">cairo_path_data_t</a>;
+enum                <a class=3D"link" href=3D"cairo-paths.html#cairo-pat=
+h-data-type-t" title=3D"enum cairo_path_data_type_t">cairo_path_data_typ=
+e_t</a>;
+<a class=3D"link" href=3D"cairo-paths.html#cairo-path-t" title=3D"cairo_=
+path_t">cairo_path_t</a> *      <a class=3D"link" href=3D"cairo-paths.ht=
+ml#cairo-copy-path" title=3D"cairo_copy_path ()">cairo_copy_path</a>    =
+                 (<a class=3D"link" href=3D"cairo-context.html#cairo-t" =
+title=3D"cairo_t">cairo_t</a> *cr);
+<a class=3D"link" href=3D"cairo-paths.html#cairo-path-t" title=3D"cairo_=
+path_t">cairo_path_t</a> *      <a class=3D"link" href=3D"cairo-paths.ht=
+ml#cairo-copy-path-flat" title=3D"cairo_copy_path_flat ()">cairo_copy_pa=
+th_flat</a>                (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-path-destroy" title=3D"cairo_path_de=
+stroy ()">cairo_path_destroy</a>                  (<a class=3D"link" hre=
+f=3D"cairo-paths.html#cairo-path-t" title=3D"cairo_path_t">cairo_path_t<=
+/a> *path);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-append-path" title=3D"cairo_append_p=
+ath ()">cairo_append_path</a>                   (<a class=3D"link" href=3D=
+"cairo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         const <a class=3D=
+"link" href=3D"cairo-paths.html#cairo-path-t" title=3D"cairo_path_t">cai=
+ro_path_t</a> *path);
+<a class=3D"link" href=3D"cairo-types.html#cairo-bool-t" title=3D"cairo_=
+bool_t">cairo_bool_t</a>        <a class=3D"link" href=3D"cairo-paths.ht=
+ml#cairo-has-current-point" title=3D"cairo_has_current_point ()">cairo_h=
+as_current_point</a>             (<a class=3D"link" href=3D"cairo-contex=
+t.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-get-current-point" title=3D"cairo_ge=
+t_current_point ()">cairo_get_current_point</a>             (<a class=3D=
+"link" href=3D"cairo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a>=
+ *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *x,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *y);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-new-path" title=3D"cairo_new_path ()=
+">cairo_new_path</a>                      (<a class=3D"link" href=3D"cai=
+ro-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-new-sub-path" title=3D"cairo_new_sub=
+_path ()">cairo_new_sub_path</a>                  (<a class=3D"link" hre=
+f=3D"cairo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-close-path" title=3D"cairo_close_pat=
+h ()">cairo_close_path</a>                    (<a class=3D"link" href=3D=
+"cairo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-arc" title=3D"cairo_arc ()">cairo_ar=
+c</a>                           (<a class=3D"link" href=3D"cairo-context=
+.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> xc,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> yc,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> radius,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> angle1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> angle2);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-arc-negative" title=3D"cairo_arc_neg=
+ative ()">cairo_arc_negative</a>                  (<a class=3D"link" hre=
+f=3D"cairo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> xc,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> yc,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> radius,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> angle1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> angle2);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-curve-to" title=3D"cairo_curve_to ()=
+">cairo_curve_to</a>                      (<a class=3D"link" href=3D"cai=
+ro-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x2,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y2,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x3,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y3);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-line-to" title=3D"cairo_line_to ()">=
+cairo_line_to</a>                       (<a class=3D"link" href=3D"cairo=
+-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-move-to" title=3D"cairo_move_to ()">=
+cairo_move_to</a>                       (<a class=3D"link" href=3D"cairo=
+-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-rectangle" title=3D"cairo_rectangle =
+()">cairo_rectangle</a>                     (<a class=3D"link" href=3D"c=
+airo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> width,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> height);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-glyph-path" title=3D"cairo_glyph_pat=
+h ()">cairo_glyph_path</a>                    (<a class=3D"link" href=3D=
+"cairo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         const <a class=3D=
+"link" href=3D"cairo-text.html#cairo-glyph-t" title=3D"cairo_glyph_t">ca=
+iro_glyph_t</a> *glyphs,
+                                                         <GTKDOCLINK HRE=
+F=3D"int">int</GTKDOCLINK> num_glyphs);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-text-path" title=3D"cairo_text_path =
+()">cairo_text_path</a>                     (<a class=3D"link" href=3D"c=
+airo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         const <GTKDOCLI=
+NK HREF=3D"char">char</GTKDOCLINK> *utf8);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-rel-curve-to" title=3D"cairo_rel_cur=
+ve_to ()">cairo_rel_curve_to</a>                  (<a class=3D"link" hre=
+f=3D"cairo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dx1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dy1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dx2,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dy2,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dx3,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dy3);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-rel-line-to" title=3D"cairo_rel_line=
+_to ()">cairo_rel_line_to</a>                   (<a class=3D"link" href=3D=
+"cairo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dx,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dy);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-rel-move-to" title=3D"cairo_rel_move=
+_to ()">cairo_rel_move_to</a>                   (<a class=3D"link" href=3D=
+"cairo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dx,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dy);
+<GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                <a class=3D"l=
+ink" href=3D"cairo-paths.html#cairo-path-extents" title=3D"cairo_path_ex=
+tents ()">cairo_path_extents</a>                  (<a class=3D"link" hre=
+f=3D"cairo-context.html#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *x1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *y1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *x2,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *y2);
+</pre>
+</div>
+<div class=3D"refsect1" lang=3D"en">
+<a name=3D"cairo-paths.description"></a><h2>Description</h2>
+<p>
+Paths are the most basic drawing tools and are primarily used to implici=
+tly
+generate simple masks.
+</p>
+</div>
+<div class=3D"refsect1" lang=3D"en">
+<a name=3D"cairo-paths.details"></a><h2>Details</h2>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-path-t"></a><h3>cairo_path_t</h3>
+<a class=3D"indexterm" name=3D"id2758032"></a><pre class=3D"programlisti=
+ng">typedef struct {
+    cairo_status_t status;
+    cairo_path_data_t *data;
+    int num_data;
+} cairo_path_t;
+</pre>
+<p>
+A data structure for holding a path. This data structure serves as
+the return value for <a class=3D"link" href=3D"cairo-paths.html#cairo-co=
+py-path" title=3D"cairo_copy_path ()"><code class=3D"function">cairo_cop=
+y_path()</code></a> and
+<a class=3D"link" href=3D"cairo-paths.html#cairo-copy-path-flat" title=3D=
+"cairo_copy_path_flat ()"><code class=3D"function">cairo_copy_path_flat(=
+)</code></a> as well the input value for
+<a class=3D"link" href=3D"cairo-paths.html#cairo-append-path" title=3D"c=
+airo_append_path ()"><code class=3D"function">cairo_append_path()</code>=
+</a>.
+</p>
+<p>
+See <a class=3D"link" href=3D"cairo-paths.html#cairo-path-data-t" title=3D=
+"union cairo_path_data_t"><span class=3D"type">cairo_path_data_t</span><=
+/a> for hints on how to iterate over the
+actual data within the path.
+</p>
+<p>
+The num_data member gives the number of elements in the data
+array. This number is larger than the number of independent path
+portions (defined in <a class=3D"link" href=3D"cairo-paths.html#cairo-pa=
+th-data-type-t" title=3D"enum cairo_path_data_type_t"><span class=3D"typ=
+e">cairo_path_data_type_t</span></a>), since the data
+includes both headers and coordinates for each portion.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><a class=3D"link" href=3D"cairo-error-status=
+.html#cairo-status-t" title=3D"enum cairo_status_t">cairo_status_t</a>=C2=
+=A0<em class=3D"structfield"><code>status</code></em>;</span></p></td>
+<td> the current error status
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><a class=3D"link" href=3D"cairo-paths.html#c=
+airo-path-data-t" title=3D"union cairo_path_data_t">cairo_path_data_t</a=
+>=C2=A0*<em class=3D"structfield"><code>data</code></em>;</span></p></td=
+>
+<td> the elements in the path
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><GTKDOCLINK HREF=3D"int">int</GTKDOCLINK>=C2=
+=A0<em class=3D"structfield"><code>num_data</code></em>;</span></p></td>=
+
+<td> the number of elements in the data array
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-path-data-t"></a><h3>union cairo_path_data_t</h3>
+<a class=3D"indexterm" name=3D"id2722256"></a><pre class=3D"programlisti=
+ng">union cairo_path_data_t {
+    struct {
+	cairo_path_data_type_t type;
+	int length;
+    } header;
+    struct {
+	double x, y;
+    } point;
+};
+</pre>
+<p>
+<a class=3D"link" href=3D"cairo-paths.html#cairo-path-data-t" title=3D"u=
+nion cairo_path_data_t"><span class=3D"type">cairo_path_data_t</span></a=
+> is used to represent the path data inside a
+<a class=3D"link" href=3D"cairo-paths.html#cairo-path-t" title=3D"cairo_=
+path_t"><span class=3D"type">cairo_path_t</span></a>.
+</p>
+<p>
+The data structure is designed to try to balance the demands of
+efficiency and ease-of-use. A path is represented as an array of
+<a class=3D"link" href=3D"cairo-paths.html#cairo-path-data-t" title=3D"u=
+nion cairo_path_data_t"><span class=3D"type">cairo_path_data_t</span></a=
+>, which is a union of headers and points.
+</p>
+<p>
+Each portion of the path is represented by one or more elements in
+the array, (one header followed by 0 or more points). The length
+value of the header is the number of array elements for the current
+portion including the header, (ie. length =3D=3D 1 + # of points), and
+where the number of points for each element type is as follows:
+</p>
+<p>
+</p>
+<pre class=3D"programlisting">
+    %CAIRO_PATH_MOVE_TO:     1 point
+    %CAIRO_PATH_LINE_TO:     1 point
+    %CAIRO_PATH_CURVE_TO:    3 points
+    %CAIRO_PATH_CLOSE_PATH:  0 points
+</pre>
+<p>
+</p>
+<p>
+The semantics and ordering of the coordinate values are consistent
+with <a class=3D"link" href=3D"cairo-paths.html#cairo-move-to" title=3D"=
+cairo_move_to ()"><code class=3D"function">cairo_move_to()</code></a>, <=
+a class=3D"link" href=3D"cairo-paths.html#cairo-line-to" title=3D"cairo_=
+line_to ()"><code class=3D"function">cairo_line_to()</code></a>, <a clas=
+s=3D"link" href=3D"cairo-paths.html#cairo-curve-to" title=3D"cairo_curve=
+_to ()"><code class=3D"function">cairo_curve_to()</code></a>, and
+<a class=3D"link" href=3D"cairo-paths.html#cairo-close-path" title=3D"ca=
+iro_close_path ()"><code class=3D"function">cairo_close_path()</code></a=
+>.
+</p>
+<p>
+Here is sample code for iterating through a <GTKDOCLINK HREF=3D"cairo-pa=
+th-t--"><span class=3D"type">""</span></GTKDOCLINK>
+</p>
+<p>
+</p>
+<div class=3D"informalexample"><pre class=3D"programlisting">
+     int i;
+     cairo_path_t *path;
+     cairo_path_data_t *data;
+=C2=A0
+     path =3D cairo_copy_path (cr);
+=C2=A0
+     for (i=3D0; i &lt; path-&gt;num_data; i +=3D path-&gt;data[i].heade=
+r.length) {
+         data =3D &amp;path-&gt;data[i];
+         switch (data-&gt;header.type) {
+         case CAIRO_PATH_MOVE_TO:
+             do_move_to_things (data[1].point.x, data[1].point.y);
+             break;
+         case CAIRO_PATH_LINE_TO:
+             do_line_to_things (data[1].point.x, data[1].point.y);
+             break;
+         case CAIRO_PATH_CURVE_TO:
+             do_curve_to_things (data[1].point.x, data[1].point.y,
+                                 data[2].point.x, data[2].point.y,
+                                 data[3].point.x, data[3].point.y);
+             break;
+         case CAIRO_PATH_CLOSE_PATH:
+             do_close_path_things ();
+             break;
+         }
+     }
+     cairo_path_destroy (path);
+</pre></div>
+<p>
+</p>
+<p>
+As of cairo 1.4, cairo does not mind if there are more elements in
+a portion of the path than needed.  Such elements can be used by
+users of the cairo API to hold extra values in the path data
+structure.  For this reason, it is recommended that applications
+always use <code class=3D"literal">data-&gt;header.length</code> to
+iterate over the path data, instead of hardcoding the number of
+elements for each element type.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-path-data-type-t"></a><h3>enum cairo_path_data_type_t</=
+h3>
+<a class=3D"indexterm" name=3D"id2722420"></a><pre class=3D"programlisti=
+ng">typedef enum _cairo_path_data_type {
+    CAIRO_PATH_MOVE_TO,
+    CAIRO_PATH_LINE_TO,
+    CAIRO_PATH_CURVE_TO,
+    CAIRO_PATH_CLOSE_PATH
+} cairo_path_data_type_t;
+</pre>
+<p>
+<a class=3D"link" href=3D"cairo-paths.html#cairo-path-data-t" title=3D"u=
+nion cairo_path_data_t"><span class=3D"type">cairo_path_data_t</span></a=
+> is used to describe the type of one portion
+of a path when represented as a <a class=3D"link" href=3D"cairo-paths.ht=
+ml#cairo-path-t" title=3D"cairo_path_t"><span class=3D"type">cairo_path_=
+t</span></a>.
+See <a class=3D"link" href=3D"cairo-paths.html#cairo-path-data-t" title=3D=
+"union cairo_path_data_t"><span class=3D"type">cairo_path_data_t</span><=
+/a> for details.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><a name=3D"CAIRO-PATH-MOVE-TO--CAPS"></a><span class=3D"term"><co=
+de class=3D"literal">CAIRO_PATH_MOVE_TO</code></span></p></td>
+<td> A move-to operation
+</td>
+</tr>
+<tr>
+<td><p><a name=3D"CAIRO-PATH-LINE-TO--CAPS"></a><span class=3D"term"><co=
+de class=3D"literal">CAIRO_PATH_LINE_TO</code></span></p></td>
+<td> A line-to operation
+</td>
+</tr>
+<tr>
+<td><p><a name=3D"CAIRO-PATH-CURVE-TO--CAPS"></a><span class=3D"term"><c=
+ode class=3D"literal">CAIRO_PATH_CURVE_TO</code></span></p></td>
+<td> A curve-to operation
+</td>
+</tr>
+<tr>
+<td><p><a name=3D"CAIRO-PATH-CLOSE-PATH--CAPS"></a><span class=3D"term">=
+<code class=3D"literal">CAIRO_PATH_CLOSE_PATH</code></span></p></td>
+<td> A close-path operation
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-copy-path"></a><h3>cairo_copy_path ()</h3>
+<a class=3D"indexterm" name=3D"id2722564"></a><pre class=3D"programlisti=
+ng"><a class=3D"link" href=3D"cairo-paths.html#cairo-path-t" title=3D"ca=
+iro_path_t">cairo_path_t</a> *      cairo_copy_path                     =
+(<a class=3D"link" href=3D"cairo-context.html#cairo-t" title=3D"cairo_t"=
+>cairo_t</a> *cr);</pre>
+<p>
+Creates a copy of the current path and returns it to the user as a
+<a class=3D"link" href=3D"cairo-paths.html#cairo-path-t" title=3D"cairo_=
+path_t"><span class=3D"type">cairo_path_t</span></a>. See <a class=3D"li=
+nk" href=3D"cairo-paths.html#cairo-path-data-t" title=3D"union cairo_pat=
+h_data_t"><span class=3D"type">cairo_path_data_t</span></a> for hints on=
+ how to iterate
+over the returned data structure.
+</p>
+<p>
+This function will always return a valid pointer, but the result
+will have no data (<code class=3D"literal">data=3D=3D<GTKDOCLINK HREF=3D=
+"NULL--CAPS"><code class=3D"literal">NULL</code></GTKDOCLINK></code> and=
+
+<code class=3D"literal">num_data=3D=3D0</code>), if either of the follow=
+ing
+conditions hold:
+</p>
+<p>
+</p>
+<div class=3D"orderedlist"><ol type=3D"1">
+<li>If there is insufficient memory to copy the path. In this
+    case <code class=3D"literal">path-&gt;status</code> will be set to
+    <a class=3D"link" href=3D"cairo-error-status.html#CAIRO-STATUS-NO-ME=
+MORY--CAPS"><code class=3D"literal">CAIRO_STATUS_NO_MEMORY</code></a>.</=
+li>
+<li>If <em class=3D"parameter"><code>cr</code></em> is already in an err=
+or state. In this case
+   <code class=3D"literal">path-&gt;status</code> will contain the same =
+status that
+   would be returned by <a class=3D"link" href=3D"cairo-context.html#cai=
+ro-status" title=3D"cairo_status ()"><code class=3D"function">cairo_stat=
+us()</code></a>.</li>
+</ol></div>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><span class=3D"emphasis"><em>Returns</em></s=
+pan>=C2=A0:</span></p></td>
+<td> the copy of the current path. The caller owns the
+returned object and should call <a class=3D"link" href=3D"cairo-paths.ht=
+ml#cairo-path-destroy" title=3D"cairo_path_destroy ()"><code class=3D"fu=
+nction">cairo_path_destroy()</code></a> when finished
+with it.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-copy-path-flat"></a><h3>cairo_copy_path_flat ()</h3>
+<a class=3D"indexterm" name=3D"id2722745"></a><pre class=3D"programlisti=
+ng"><a class=3D"link" href=3D"cairo-paths.html#cairo-path-t" title=3D"ca=
+iro_path_t">cairo_path_t</a> *      cairo_copy_path_flat                =
+(<a class=3D"link" href=3D"cairo-context.html#cairo-t" title=3D"cairo_t"=
+>cairo_t</a> *cr);</pre>
+<p>
+Gets a flattened copy of the current path and returns it to the
+user as a <a class=3D"link" href=3D"cairo-paths.html#cairo-path-t" title=
+=3D"cairo_path_t"><span class=3D"type">cairo_path_t</span></a>. See <a c=
+lass=3D"link" href=3D"cairo-paths.html#cairo-path-data-t" title=3D"union=
+ cairo_path_data_t"><span class=3D"type">cairo_path_data_t</span></a> fo=
+r hints on
+how to iterate over the returned data structure.
+</p>
+<p>
+This function is like <a class=3D"link" href=3D"cairo-paths.html#cairo-c=
+opy-path" title=3D"cairo_copy_path ()"><code class=3D"function">cairo_co=
+py_path()</code></a> except that any curves
+in the path will be approximated with piecewise-linear
+approximations, (accurate to within the current tolerance
+value). That is, the result is guaranteed to not have any elements
+of type <a class=3D"link" href=3D"cairo-paths.html#CAIRO-PATH-CURVE-TO--=
+CAPS"><code class=3D"literal">CAIRO_PATH_CURVE_TO</code></a> which will =
+instead be replaced by a
+series of <a class=3D"link" href=3D"cairo-paths.html#CAIRO-PATH-LINE-TO-=
+-CAPS"><code class=3D"literal">CAIRO_PATH_LINE_TO</code></a> elements.
+</p>
+<p>
+This function will always return a valid pointer, but the result
+will have no data (<code class=3D"literal">data=3D=3D<GTKDOCLINK HREF=3D=
+"NULL--CAPS"><code class=3D"literal">NULL</code></GTKDOCLINK></code> and=
+
+<code class=3D"literal">num_data=3D=3D0</code>), if either of the follow=
+ing
+conditions hold:
+</p>
+<p>
+</p>
+<div class=3D"orderedlist"><ol type=3D"1">
+<li>If there is insufficient memory to copy the path. In this
+    case <code class=3D"literal">path-&gt;status</code> will be set to
+    <a class=3D"link" href=3D"cairo-error-status.html#CAIRO-STATUS-NO-ME=
+MORY--CAPS"><code class=3D"literal">CAIRO_STATUS_NO_MEMORY</code></a>.</=
+li>
+<li>If <em class=3D"parameter"><code>cr</code></em> is already in an err=
+or state. In this case
+   <code class=3D"literal">path-&gt;status</code> will contain the same =
+status that
+   would be returned by <a class=3D"link" href=3D"cairo-context.html#cai=
+ro-status" title=3D"cairo_status ()"><code class=3D"function">cairo_stat=
+us()</code></a>.</li>
+</ol></div>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><span class=3D"emphasis"><em>Returns</em></s=
+pan>=C2=A0:</span></p></td>
+<td> the copy of the current path. The caller owns the
+returned object and should call <a class=3D"link" href=3D"cairo-paths.ht=
+ml#cairo-path-destroy" title=3D"cairo_path_destroy ()"><code class=3D"fu=
+nction">cairo_path_destroy()</code></a> when finished
+with it.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-path-destroy"></a><h3>cairo_path_destroy ()</h3>
+<a class=3D"indexterm" name=3D"id2711274"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_pat=
+h_destroy                  (<a class=3D"link" href=3D"cairo-paths.html#c=
+airo-path-t" title=3D"cairo_path_t">cairo_path_t</a> *path);</pre>
+<p>
+Immediately releases all memory associated with <em class=3D"parameter">=
+<code>path</code></em>. After a call
+to <a class=3D"link" href=3D"cairo-paths.html#cairo-path-destroy" title=3D=
+"cairo_path_destroy ()"><code class=3D"function">cairo_path_destroy()</c=
+ode></a> the <em class=3D"parameter"><code>path</code></em> pointer is n=
+o longer valid and
+should not be used further.
+</p>
+<p>
+Note: <a class=3D"link" href=3D"cairo-paths.html#cairo-path-destroy" tit=
+le=3D"cairo_path_destroy ()"><code class=3D"function">cairo_path_destroy=
+()</code></a> should only be called with a
+pointer to a <a class=3D"link" href=3D"cairo-paths.html#cairo-path-t" ti=
+tle=3D"cairo_path_t"><span class=3D"type">cairo_path_t</span></a> return=
+ed by a cairo function. Any path
+that is created manually (ie. outside of cairo) should be destroyed
+manually as well.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody><tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>path</code></e=
+m>=C2=A0:</span></p></td>
+<td> a path previously returned by either <a class=3D"link" href=3D"cair=
+o-paths.html#cairo-copy-path" title=3D"cairo_copy_path ()"><code class=3D=
+"function">cairo_copy_path()</code></a> or
+<a class=3D"link" href=3D"cairo-paths.html#cairo-copy-path-flat" title=3D=
+"cairo_copy_path_flat ()"><code class=3D"function">cairo_copy_path_flat(=
+)</code></a>.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-append-path"></a><h3>cairo_append_path ()</h3>
+<a class=3D"indexterm" name=3D"id2711403"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_app=
+end_path                   (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         const <a class=3D=
+"link" href=3D"cairo-paths.html#cairo-path-t" title=3D"cairo_path_t">cai=
+ro_path_t</a> *path);</pre>
+<p>
+Append the <em class=3D"parameter"><code>path</code></em> onto the curre=
+nt path. The <em class=3D"parameter"><code>path</code></em> may be eithe=
+r the
+return value from one of <a class=3D"link" href=3D"cairo-paths.html#cair=
+o-copy-path" title=3D"cairo_copy_path ()"><code class=3D"function">cairo=
+_copy_path()</code></a> or
+<a class=3D"link" href=3D"cairo-paths.html#cairo-copy-path-flat" title=3D=
+"cairo_copy_path_flat ()"><code class=3D"function">cairo_copy_path_flat(=
+)</code></a> or it may be constructed manually.  See
+<a class=3D"link" href=3D"cairo-paths.html#cairo-path-t" title=3D"cairo_=
+path_t"><span class=3D"type">cairo_path_t</span></a> for details on how =
+the path data structure should be
+initialized, and note that <code class=3D"literal">path-&gt;status</code=
+> must be
+initialized to <a class=3D"link" href=3D"cairo-error-status.html#CAIRO-S=
+TATUS-SUCCESS--CAPS"><code class=3D"literal">CAIRO_STATUS_SUCCESS</code>=
+</a>.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>path</code></e=
+m>=C2=A0:</span></p></td>
+<td> path to be appended
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-has-current-point"></a><h3>cairo_has_current_point ()</=
+h3>
+<a class=3D"indexterm" name=3D"id2711545"></a><pre class=3D"programlisti=
+ng"><a class=3D"link" href=3D"cairo-types.html#cairo-bool-t" title=3D"ca=
+iro_bool_t">cairo_bool_t</a>        cairo_has_current_point             =
+(<a class=3D"link" href=3D"cairo-context.html#cairo-t" title=3D"cairo_t"=
+>cairo_t</a> *cr);</pre>
+<p>
+Returns whether a current point is defined on the current path.
+See <a class=3D"link" href=3D"cairo-paths.html#cairo-get-current-point" =
+title=3D"cairo_get_current_point ()"><code class=3D"function">cairo_get_=
+current_point()</code></a> for details on the current point.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><span class=3D"emphasis"><em>Returns</em></s=
+pan>=C2=A0:</span></p></td>
+<td> whether a current point is defined.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class=3D"since">Since 1.6</p>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-get-current-point"></a><h3>cairo_get_current_point ()</=
+h3>
+<a class=3D"indexterm" name=3D"id2711636"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_get=
+_current_point             (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *x,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *y);</pre>
+<p>
+Gets the current point of the current path, which is
+conceptually the final point reached by the path so far.
+</p>
+<p>
+The current point is returned in the user-space coordinate
+system. If there is no defined current point or if <em class=3D"paramete=
+r"><code>cr</code></em> is in an
+error status, <em class=3D"parameter"><code>x</code></em> and <em class=3D=
+"parameter"><code>y</code></em> will both be set to 0.0. It is possible =
+to
+check this in advance with <a class=3D"link" href=3D"cairo-paths.html#ca=
+iro-has-current-point" title=3D"cairo_has_current_point ()"><code class=3D=
+"function">cairo_has_current_point()</code></a>.
+</p>
+<p>
+Most path construction functions alter the current point. See the
+following for details on how they affect the current point:
+<a class=3D"link" href=3D"cairo-paths.html#cairo-new-path" title=3D"cair=
+o_new_path ()"><code class=3D"function">cairo_new_path()</code></a>, <a =
+class=3D"link" href=3D"cairo-paths.html#cairo-new-sub-path" title=3D"cai=
+ro_new_sub_path ()"><code class=3D"function">cairo_new_sub_path()</code>=
+</a>,
+<a class=3D"link" href=3D"cairo-paths.html#cairo-append-path" title=3D"c=
+airo_append_path ()"><code class=3D"function">cairo_append_path()</code>=
+</a>, <a class=3D"link" href=3D"cairo-paths.html#cairo-close-path" title=
+=3D"cairo_close_path ()"><code class=3D"function">cairo_close_path()</co=
+de></a>,
+<a class=3D"link" href=3D"cairo-paths.html#cairo-move-to" title=3D"cairo=
+_move_to ()"><code class=3D"function">cairo_move_to()</code></a>, <a cla=
+ss=3D"link" href=3D"cairo-paths.html#cairo-line-to" title=3D"cairo_line_=
+to ()"><code class=3D"function">cairo_line_to()</code></a>, <a class=3D"=
+link" href=3D"cairo-paths.html#cairo-curve-to" title=3D"cairo_curve_to (=
+)"><code class=3D"function">cairo_curve_to()</code></a>,
+<a class=3D"link" href=3D"cairo-paths.html#cairo-rel-move-to" title=3D"c=
+airo_rel_move_to ()"><code class=3D"function">cairo_rel_move_to()</code>=
+</a>, <a class=3D"link" href=3D"cairo-paths.html#cairo-rel-line-to" titl=
+e=3D"cairo_rel_line_to ()"><code class=3D"function">cairo_rel_line_to()<=
+/code></a>, <a class=3D"link" href=3D"cairo-paths.html#cairo-rel-curve-t=
+o" title=3D"cairo_rel_curve_to ()"><code class=3D"function">cairo_rel_cu=
+rve_to()</code></a>,
+<a class=3D"link" href=3D"cairo-paths.html#cairo-arc" title=3D"cairo_arc=
+ ()"><code class=3D"function">cairo_arc()</code></a>, <a class=3D"link" =
+href=3D"cairo-paths.html#cairo-arc-negative" title=3D"cairo_arc_negative=
+ ()"><code class=3D"function">cairo_arc_negative()</code></a>, <a class=3D=
+"link" href=3D"cairo-paths.html#cairo-rectangle" title=3D"cairo_rectangl=
+e ()"><code class=3D"function">cairo_rectangle()</code></a>,
+<a class=3D"link" href=3D"cairo-paths.html#cairo-text-path" title=3D"cai=
+ro_text_path ()"><code class=3D"function">cairo_text_path()</code></a>, =
+<a class=3D"link" href=3D"cairo-paths.html#cairo-glyph-path" title=3D"ca=
+iro_glyph_path ()"><code class=3D"function">cairo_glyph_path()</code></a=
+>, <GTKDOCLINK HREF=3D"cairo-stroke-to-path"><code class=3D"function">ca=
+iro_stroke_to_path()</code></GTKDOCLINK>.
+</p>
+<p>
+Some functions use and alter the current point but do not
+otherwise change current path:
+<a class=3D"link" href=3D"cairo-text.html#cairo-show-text" title=3D"cair=
+o_show_text ()"><code class=3D"function">cairo_show_text()</code></a>.
+</p>
+<p>
+Some functions unset the current path and as a result, current point:
+<a class=3D"link" href=3D"cairo-context.html#cairo-fill" title=3D"cairo_=
+fill ()"><code class=3D"function">cairo_fill()</code></a>, <a class=3D"l=
+ink" href=3D"cairo-context.html#cairo-stroke" title=3D"cairo_stroke ()">=
+<code class=3D"function">cairo_stroke()</code></a>.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>x</code></em>=C2=
+=A0:</span></p></td>
+<td> return value for X coordinate of the current point
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>y</code></em>=C2=
+=A0:</span></p></td>
+<td> return value for Y coordinate of the current point
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-new-path"></a><h3>cairo_new_path ()</h3>
+<a class=3D"indexterm" name=3D"id2711976"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_new=
+_path                      (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr);</pre>
+<p>
+Clears the current path. After this call there will be no path and
+no current point.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody><tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-new-sub-path"></a><h3>cairo_new_sub_path ()</h3>
+<a class=3D"indexterm" name=3D"id2712046"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_new=
+_sub_path                  (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr);</pre>
+<p>
+Begin a new sub-path. Note that the existing path is not
+affected. After this call there will be no current point.
+</p>
+<p>
+In many cases, this call is not needed since new sub-paths are
+frequently started with <a class=3D"link" href=3D"cairo-paths.html#cairo=
+-move-to" title=3D"cairo_move_to ()"><code class=3D"function">cairo_move=
+_to()</code></a>.
+</p>
+<p>
+A call to <a class=3D"link" href=3D"cairo-paths.html#cairo-new-sub-path"=
+ title=3D"cairo_new_sub_path ()"><code class=3D"function">cairo_new_sub_=
+path()</code></a> is particularly useful when
+beginning a new sub-path with one of the <a class=3D"link" href=3D"cairo=
+-paths.html#cairo-arc" title=3D"cairo_arc ()"><code class=3D"function">c=
+airo_arc()</code></a> calls. This
+makes things easier as it is no longer necessary to manually
+compute the arc's initial coordinates for a call to
+<a class=3D"link" href=3D"cairo-paths.html#cairo-move-to" title=3D"cairo=
+_move_to ()"><code class=3D"function">cairo_move_to()</code></a>.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody><tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr></tbody>
+</table></div>
+<p class=3D"since">Since 1.2</p>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-close-path"></a><h3>cairo_close_path ()</h3>
+<a class=3D"indexterm" name=3D"id2712170"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_clo=
+se_path                    (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr);</pre>
+<p>
+Adds a line segment to the path from the current point to the
+beginning of the current sub-path, (the most recent point passed to
+<a class=3D"link" href=3D"cairo-paths.html#cairo-move-to" title=3D"cairo=
+_move_to ()"><code class=3D"function">cairo_move_to()</code></a>), and c=
+loses this sub-path. After this call the
+current point will be at the joined endpoint of the sub-path.
+</p>
+<p>
+The behavior of <a class=3D"link" href=3D"cairo-paths.html#cairo-close-p=
+ath" title=3D"cairo_close_path ()"><code class=3D"function">cairo_close_=
+path()</code></a> is distinct from simply calling
+<a class=3D"link" href=3D"cairo-paths.html#cairo-line-to" title=3D"cairo=
+_line_to ()"><code class=3D"function">cairo_line_to()</code></a> with th=
+e equivalent coordinate in the case of
+stroking. When a closed sub-path is stroked, there are no caps on
+the ends of the sub-path. Instead, there is a line join connecting
+the final and initial segments of the sub-path.
+</p>
+<p>
+If there is no current point before the call to <a class=3D"link" href=3D=
+"cairo-paths.html#cairo-close-path" title=3D"cairo_close_path ()"><code =
+class=3D"function">cairo_close_path()</code></a>,
+this function will have no effect.
+</p>
+<p>
+Note: As of cairo version 1.2.4 any call to <a class=3D"link" href=3D"ca=
+iro-paths.html#cairo-close-path" title=3D"cairo_close_path ()"><code cla=
+ss=3D"function">cairo_close_path()</code></a> will
+place an explicit MOVE_TO element into the path immediately after
+the CLOSE_PATH element, (which can be seen in <a class=3D"link" href=3D"=
+cairo-paths.html#cairo-copy-path" title=3D"cairo_copy_path ()"><code cla=
+ss=3D"function">cairo_copy_path()</code></a> for
+example). This can simplify path processing in some cases as it may
+not be necessary to save the "last move_to point" during processing
+as the MOVE_TO immediately after the CLOSE_PATH will provide that
+point.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody><tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-arc"></a><h3>cairo_arc ()</h3>
+<a class=3D"indexterm" name=3D"id2712319"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_arc=
+                           (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> xc,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> yc,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> radius,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> angle1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> angle2);</pre>
+<p>
+Adds a circular arc of the given <em class=3D"parameter"><code>radius</c=
+ode></em> to the current path.  The
+arc is centered at (<em class=3D"parameter"><code>xc</code></em>, <em cl=
+ass=3D"parameter"><code>yc</code></em>), begins at <em class=3D"paramete=
+r"><code>angle1</code></em> and proceeds in
+the direction of increasing angles to end at <em class=3D"parameter"><co=
+de>angle2</code></em>. If <em class=3D"parameter"><code>angle2</code></e=
+m> is
+less than <em class=3D"parameter"><code>angle1</code></em> it will be pr=
+ogressively increased by 2*M_PI
+until it is greater than <em class=3D"parameter"><code>angle1</code></em=
+>.
+</p>
+<p>
+If there is a current point, an initial line segment will be added
+to the path to connect the current point to the beginning of the
+arc. If this initial line is undesired, it can be avoided by
+calling <a class=3D"link" href=3D"cairo-paths.html#cairo-new-sub-path" t=
+itle=3D"cairo_new_sub_path ()"><code class=3D"function">cairo_new_sub_pa=
+th()</code></a> before calling <a class=3D"link" href=3D"cairo-paths.htm=
+l#cairo-arc" title=3D"cairo_arc ()"><code class=3D"function">cairo_arc()=
+</code></a>.
+</p>
+<p>
+Angles are measured in radians. An angle of 0.0 is in the direction
+of the positive X axis (in user space). An angle of <GTKDOCLINK HREF=3D"=
+M-PI--CAPS"><code class=3D"literal">M_PI</code></GTKDOCLINK>/2.0 radians=
+
+(90 degrees) is in the direction of the positive Y axis (in
+user space). Angles increase in the direction from the positive X
+axis toward the positive Y axis. So with the default transformation
+matrix, angles increase in a clockwise direction.
+</p>
+<p>
+(To convert from degrees to radians, use <code class=3D"literal">degrees=
+ * (M_PI /
+180.)</code>.)
+</p>
+<p>
+This function gives the arc in the direction of increasing angles;
+see <a class=3D"link" href=3D"cairo-paths.html#cairo-arc-negative" title=
+=3D"cairo_arc_negative ()"><code class=3D"function">cairo_arc_negative()=
+</code></a> to get the arc in the direction of
+decreasing angles.
+</p>
+<p>
+The arc is circular in user space. To achieve an elliptical arc,
+you can scale the current transformation matrix by different
+amounts in the X and Y directions. For example, to draw an ellipse
+in the box given by <em class=3D"parameter"><code>x</code></em>, <em cla=
+ss=3D"parameter"><code>y</code></em>, <em class=3D"parameter"><code>widt=
+h</code></em>, <em class=3D"parameter"><code>height</code></em>:
+</p>
+<p>
+</p>
+<div class=3D"informalexample"><pre class=3D"programlisting">
+cairo_save (cr);
+cairo_translate (cr, x + width / 2., y + height / 2.);
+cairo_scale (cr, width / 2., height / 2.);
+cairo_arc (cr, 0., 0., 1., 0., 2 * M_PI);
+cairo_restore (cr);
+</pre></div>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>xc</code></em>=
+=C2=A0:</span></p></td>
+<td> X position of the center of the arc
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>yc</code></em>=
+=C2=A0:</span></p></td>
+<td> Y position of the center of the arc
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>radius</code><=
+/em>=C2=A0:</span></p></td>
+<td> the radius of the arc
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>angle1</code><=
+/em>=C2=A0:</span></p></td>
+<td> the start angle, in radians
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>angle2</code><=
+/em>=C2=A0:</span></p></td>
+<td> the end angle, in radians
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-arc-negative"></a><h3>cairo_arc_negative ()</h3>
+<a class=3D"indexterm" name=3D"id2712655"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_arc=
+_negative                  (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> xc,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> yc,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> radius,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> angle1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> angle2);</pre>
+<p>
+Adds a circular arc of the given <em class=3D"parameter"><code>radius</c=
+ode></em> to the current path.  The
+arc is centered at (<em class=3D"parameter"><code>xc</code></em>, <em cl=
+ass=3D"parameter"><code>yc</code></em>), begins at <em class=3D"paramete=
+r"><code>angle1</code></em> and proceeds in
+the direction of decreasing angles to end at <em class=3D"parameter"><co=
+de>angle2</code></em>. If <em class=3D"parameter"><code>angle2</code></e=
+m> is
+greater than <em class=3D"parameter"><code>angle1</code></em> it will be=
+ progressively decreased by 2*M_PI
+until it is less than <em class=3D"parameter"><code>angle1</code></em>.
+</p>
+<p>
+See <a class=3D"link" href=3D"cairo-paths.html#cairo-arc" title=3D"cairo=
+_arc ()"><code class=3D"function">cairo_arc()</code></a> for more detail=
+s. This function differs only in the
+direction of the arc between the two angles.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>xc</code></em>=
+=C2=A0:</span></p></td>
+<td> X position of the center of the arc
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>yc</code></em>=
+=C2=A0:</span></p></td>
+<td> Y position of the center of the arc
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>radius</code><=
+/em>=C2=A0:</span></p></td>
+<td> the radius of the arc
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>angle1</code><=
+/em>=C2=A0:</span></p></td>
+<td> the start angle, in radians
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>angle2</code><=
+/em>=C2=A0:</span></p></td>
+<td> the end angle, in radians
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-curve-to"></a><h3>cairo_curve_to ()</h3>
+<a class=3D"indexterm" name=3D"id2712893"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_cur=
+ve_to                      (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x2,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y2,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x3,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y3);</pre>
+<p>
+Adds a cubic B=C3=A9zier spline to the path from the current point to
+position (<em class=3D"parameter"><code>x3</code></em>, <em class=3D"par=
+ameter"><code>y3</code></em>) in user-space coordinates, using (<em clas=
+s=3D"parameter"><code>x1</code></em>, <em class=3D"parameter"><code>y1</=
+code></em>) and
+(<em class=3D"parameter"><code>x2</code></em>, <em class=3D"parameter"><=
+code>y2</code></em>) as the control points. After this call the current =
+point
+will be (<em class=3D"parameter"><code>x3</code></em>, <em class=3D"para=
+meter"><code>y3</code></em>).
+</p>
+<p>
+If there is no current point before the call to <a class=3D"link" href=3D=
+"cairo-paths.html#cairo-curve-to" title=3D"cairo_curve_to ()"><code clas=
+s=3D"function">cairo_curve_to()</code></a>
+this function will behave as if preceded by a call to
+cairo_move_to(<em class=3D"parameter"><code>cr</code></em>, <em class=3D=
+"parameter"><code>x1</code></em>, <em class=3D"parameter"><code>y1</code=
+></em>).</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>x1</code></em>=
+=C2=A0:</span></p></td>
+<td> the X coordinate of the first control point
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>y1</code></em>=
+=C2=A0:</span></p></td>
+<td> the Y coordinate of the first control point
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>x2</code></em>=
+=C2=A0:</span></p></td>
+<td> the X coordinate of the second control point
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>y2</code></em>=
+=C2=A0:</span></p></td>
+<td> the Y coordinate of the second control point
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>x3</code></em>=
+=C2=A0:</span></p></td>
+<td> the X coordinate of the end of the curve
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>y3</code></em>=
+=C2=A0:</span></p></td>
+<td> the Y coordinate of the end of the curve
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-line-to"></a><h3>cairo_line_to ()</h3>
+<a class=3D"indexterm" name=3D"id2713174"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_lin=
+e_to                       (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y);</pre>
+<p>
+Adds a line to the path from the current point to position (<em class=3D=
+"parameter"><code>x</code></em>, <em class=3D"parameter"><code>y</code><=
+/em>)
+in user-space coordinates. After this call the current point
+will be (<em class=3D"parameter"><code>x</code></em>, <em class=3D"param=
+eter"><code>y</code></em>).
+</p>
+<p>
+If there is no current point before the call to <a class=3D"link" href=3D=
+"cairo-paths.html#cairo-line-to" title=3D"cairo_line_to ()"><code class=3D=
+"function">cairo_line_to()</code></a>
+this function will behave as cairo_move_to(<em class=3D"parameter"><code=
+>cr</code></em>, <em class=3D"parameter"><code>x</code></em>, <em class=3D=
+"parameter"><code>y</code></em>).</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>x</code></em>=C2=
+=A0:</span></p></td>
+<td> the X coordinate of the end of the new line
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>y</code></em>=C2=
+=A0:</span></p></td>
+<td> the Y coordinate of the end of the new line
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-move-to"></a><h3>cairo_move_to ()</h3>
+<a class=3D"indexterm" name=3D"id2713343"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_mov=
+e_to                       (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y);</pre>
+<p>
+Begin a new sub-path. After this call the current point will be (<em cla=
+ss=3D"parameter"><code>x</code></em>,
+<em class=3D"parameter"><code>y</code></em>).</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>x</code></em>=C2=
+=A0:</span></p></td>
+<td> the X coordinate of the new position
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>y</code></em>=C2=
+=A0:</span></p></td>
+<td> the Y coordinate of the new position
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-rectangle"></a><h3>cairo_rectangle ()</h3>
+<a class=3D"indexterm" name=3D"id2713465"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_rec=
+tangle                     (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> x,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> y,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> width,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> height);</pre>
+<p>
+Adds a closed sub-path rectangle of the given size to the current
+path at position (<em class=3D"parameter"><code>x</code></em>, <em class=
+=3D"parameter"><code>y</code></em>) in user-space coordinates.
+</p>
+<p>
+This function is logically equivalent to:
+</p>
+<div class=3D"informalexample"><pre class=3D"programlisting">
+cairo_move_to (cr, x, y);
+cairo_rel_line_to (cr, width, 0);
+cairo_rel_line_to (cr, 0, height);
+cairo_rel_line_to (cr, -width, 0);
+cairo_close_path (cr);
+</pre></div>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>x</code></em>=C2=
+=A0:</span></p></td>
+<td> the X coordinate of the top left corner of the rectangle
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>y</code></em>=C2=
+=A0:</span></p></td>
+<td> the Y coordinate to the top left corner of the rectangle
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>width</code></=
+em>=C2=A0:</span></p></td>
+<td> the width of the rectangle
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>height</code><=
+/em>=C2=A0:</span></p></td>
+<td> the height of the rectangle
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-glyph-path"></a><h3>cairo_glyph_path ()</h3>
+<a class=3D"indexterm" name=3D"id2713645"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_gly=
+ph_path                    (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         const <a class=3D=
+"link" href=3D"cairo-text.html#cairo-glyph-t" title=3D"cairo_glyph_t">ca=
+iro_glyph_t</a> *glyphs,
+                                                         <GTKDOCLINK HRE=
+F=3D"int">int</GTKDOCLINK> num_glyphs);</pre>
+<p>
+Adds closed paths for the glyphs to the current path.  The generated
+path if filled, achieves an effect similar to that of
+<a class=3D"link" href=3D"cairo-text.html#cairo-show-glyphs" title=3D"ca=
+iro_show_glyphs ()"><code class=3D"function">cairo_show_glyphs()</code><=
+/a>.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>glyphs</code><=
+/em>=C2=A0:</span></p></td>
+<td> array of glyphs to show
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>num_glyphs</co=
+de></em>=C2=A0:</span></p></td>
+<td> number of glyphs to show
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-text-path"></a><h3>cairo_text_path ()</h3>
+<a class=3D"indexterm" name=3D"id2713765"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_tex=
+t_path                     (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         const <GTKDOCLI=
+NK HREF=3D"char">char</GTKDOCLINK> *utf8);</pre>
+<p>
+Adds closed paths for text to the current path.  The generated
+path if filled, achieves an effect similar to that of
+<a class=3D"link" href=3D"cairo-text.html#cairo-show-text" title=3D"cair=
+o_show_text ()"><code class=3D"function">cairo_show_text()</code></a>.
+</p>
+<p>
+Text conversion and positioning is done similar to <a class=3D"link" hre=
+f=3D"cairo-text.html#cairo-show-text" title=3D"cairo_show_text ()"><code=
+ class=3D"function">cairo_show_text()</code></a>.
+</p>
+<p>
+Like <a class=3D"link" href=3D"cairo-text.html#cairo-show-text" title=3D=
+"cairo_show_text ()"><code class=3D"function">cairo_show_text()</code></=
+a>, After this call the current point is
+moved to the origin of where the next glyph would be placed in
+this same progression.  That is, the current point will be at
+the origin of the final glyph offset by its advance values.
+This allows for chaining multiple calls to to <a class=3D"link" href=3D"=
+cairo-paths.html#cairo-text-path" title=3D"cairo_text_path ()"><code cla=
+ss=3D"function">cairo_text_path()</code></a>
+without having to set current point in between.
+</p>
+<p>
+Note: The <a class=3D"link" href=3D"cairo-paths.html#cairo-text-path" ti=
+tle=3D"cairo_text_path ()"><code class=3D"function">cairo_text_path()</c=
+ode></a> function call is part of what the cairo
+designers call the "toy" text API. It is convenient for short demos
+and simple programs, but it is not expected to be adequate for
+serious text-using applications. See <a class=3D"link" href=3D"cairo-pat=
+hs.html#cairo-glyph-path" title=3D"cairo_glyph_path ()"><code class=3D"f=
+unction">cairo_glyph_path()</code></a> for the
+"real" text path API in cairo.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>utf8</code></e=
+m>=C2=A0:</span></p></td>
+<td> a NUL-terminated string of text encoded in UTF-8, or <GTKDOCLINK HR=
+EF=3D"NULL--CAPS"><code class=3D"literal">NULL</code></GTKDOCLINK>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-rel-curve-to"></a><h3>cairo_rel_curve_to ()</h3>
+<a class=3D"indexterm" name=3D"id2713943"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_rel=
+_curve_to                  (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dx1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dy1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dx2,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dy2,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dx3,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dy3);</pre>
+<p>
+Relative-coordinate version of <a class=3D"link" href=3D"cairo-paths.htm=
+l#cairo-curve-to" title=3D"cairo_curve_to ()"><code class=3D"function">c=
+airo_curve_to()</code></a>. All offsets are
+relative to the current point. Adds a cubic B=C3=A9zier spline to the
+path from the current point to a point offset from the current
+point by (<em class=3D"parameter"><code>dx3</code></em>, <em class=3D"pa=
+rameter"><code>dy3</code></em>), using points offset by (<em class=3D"pa=
+rameter"><code>dx1</code></em>, <em class=3D"parameter"><code>dy1</code>=
+</em>) and
+(<em class=3D"parameter"><code>dx2</code></em>, <em class=3D"parameter">=
+<code>dy2</code></em>) as the control points. After this call the curren=
+t
+point will be offset by (<em class=3D"parameter"><code>dx3</code></em>, =
+<em class=3D"parameter"><code>dy3</code></em>).
+</p>
+<p>
+Given a current point of (x, y), cairo_rel_curve_to(<em class=3D"paramet=
+er"><code>cr</code></em>, <em class=3D"parameter"><code>dx1</code></em>,=
+
+<em class=3D"parameter"><code>dy1</code></em>, <em class=3D"parameter"><=
+code>dx2</code></em>, <em class=3D"parameter"><code>dy2</code></em>, <em=
+ class=3D"parameter"><code>dx3</code></em>, <em class=3D"parameter"><cod=
+e>dy3</code></em>) is logically equivalent to
+cairo_curve_to(<em class=3D"parameter"><code>cr</code></em>, x+<em class=
+=3D"parameter"><code>dx1</code></em>, y+<em class=3D"parameter"><code>dy=
+1</code></em>, x+<em class=3D"parameter"><code>dx2</code></em>, y+<em cl=
+ass=3D"parameter"><code>dy2</code></em>, x+<em class=3D"parameter"><code=
+>dx3</code></em>, y+<em class=3D"parameter"><code>dy3</code></em>).
+</p>
+<p>
+It is an error to call this function with no current point. Doing
+so will cause <em class=3D"parameter"><code>cr</code></em> to shutdown w=
+ith a status of
+<a class=3D"link" href=3D"cairo-error-status.html#CAIRO-STATUS-NO-CURREN=
+T-POINT--CAPS"><code class=3D"literal">CAIRO_STATUS_NO_CURRENT_POINT</co=
+de></a>.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>dx1</code></em=
+>=C2=A0:</span></p></td>
+<td> the X offset to the first control point
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>dy1</code></em=
+>=C2=A0:</span></p></td>
+<td> the Y offset to the first control point
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>dx2</code></em=
+>=C2=A0:</span></p></td>
+<td> the X offset to the second control point
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>dy2</code></em=
+>=C2=A0:</span></p></td>
+<td> the Y offset to the second control point
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>dx3</code></em=
+>=C2=A0:</span></p></td>
+<td> the X offset to the end of the curve
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>dy3</code></em=
+>=C2=A0:</span></p></td>
+<td> the Y offset to the end of the curve
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-rel-line-to"></a><h3>cairo_rel_line_to ()</h3>
+<a class=3D"indexterm" name=3D"id2714311"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_rel=
+_line_to                   (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dx,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dy);</pre>
+<p>
+Relative-coordinate version of <a class=3D"link" href=3D"cairo-paths.htm=
+l#cairo-line-to" title=3D"cairo_line_to ()"><code class=3D"function">cai=
+ro_line_to()</code></a>. Adds a line to the
+path from the current point to a point that is offset from the
+current point by (<em class=3D"parameter"><code>dx</code></em>, <em clas=
+s=3D"parameter"><code>dy</code></em>) in user space. After this call the=
+
+current point will be offset by (<em class=3D"parameter"><code>dx</code>=
+</em>, <em class=3D"parameter"><code>dy</code></em>).
+</p>
+<p>
+Given a current point of (x, y), cairo_rel_line_to(<em class=3D"paramete=
+r"><code>cr</code></em>, <em class=3D"parameter"><code>dx</code></em>, <=
+em class=3D"parameter"><code>dy</code></em>)
+is logically equivalent to cairo_line_to(<em class=3D"parameter"><code>c=
+r</code></em>, x + <em class=3D"parameter"><code>dx</code></em>, y + <em=
+ class=3D"parameter"><code>dy</code></em>).
+</p>
+<p>
+It is an error to call this function with no current point. Doing
+so will cause <em class=3D"parameter"><code>cr</code></em> to shutdown w=
+ith a status of
+<a class=3D"link" href=3D"cairo-error-status.html#CAIRO-STATUS-NO-CURREN=
+T-POINT--CAPS"><code class=3D"literal">CAIRO_STATUS_NO_CURRENT_POINT</co=
+de></a>.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>dx</code></em>=
+=C2=A0:</span></p></td>
+<td> the X offset to the end of the new line
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>dy</code></em>=
+=C2=A0:</span></p></td>
+<td> the Y offset to the end of the new line
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-rel-move-to"></a><h3>cairo_rel_move_to ()</h3>
+<a class=3D"indexterm" name=3D"id2714520"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_rel=
+_move_to                   (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dx,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> dy);</pre>
+<p>
+Begin a new sub-path. After this call the current point will offset
+by (<em class=3D"parameter"><code>x</code></em>, <em class=3D"parameter"=
+><code>y</code></em>).
+</p>
+<p>
+Given a current point of (x, y), cairo_rel_move_to(<em class=3D"paramete=
+r"><code>cr</code></em>, <em class=3D"parameter"><code>dx</code></em>, <=
+em class=3D"parameter"><code>dy</code></em>)
+is logically equivalent to cairo_move_to(<em class=3D"parameter"><code>c=
+r</code></em>, x + <em class=3D"parameter"><code>dx</code></em>, y + <em=
+ class=3D"parameter"><code>dy</code></em>).
+</p>
+<p>
+It is an error to call this function with no current point. Doing
+so will cause <em class=3D"parameter"><code>cr</code></em> to shutdown w=
+ith a status of
+<a class=3D"link" href=3D"cairo-error-status.html#CAIRO-STATUS-NO-CURREN=
+T-POINT--CAPS"><code class=3D"literal">CAIRO_STATUS_NO_CURRENT_POINT</co=
+de></a>.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>dx</code></em>=
+=C2=A0:</span></p></td>
+<td> the X offset
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>dy</code></em>=
+=C2=A0:</span></p></td>
+<td> the Y offset
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class=3D"refsect2" lang=3D"en">
+<a name=3D"cairo-path-extents"></a><h3>cairo_path_extents ()</h3>
+<a class=3D"indexterm" name=3D"id2714706"></a><pre class=3D"programlisti=
+ng"><GTKDOCLINK HREF=3D"void">void</GTKDOCLINK>                cairo_pat=
+h_extents                  (<a class=3D"link" href=3D"cairo-context.html=
+#cairo-t" title=3D"cairo_t">cairo_t</a> *cr,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *x1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *y1,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *x2,
+                                                         <GTKDOCLINK HRE=
+F=3D"double">double</GTKDOCLINK> *y2);</pre>
+<p>
+Computes a bounding box in user-space coordinates covering the
+points on the current path. If the current path is empty, returns
+an empty rectangle ((0,0), (0,0)). Stroke parameters, fill rule,
+surface dimensions and clipping are not taken into account.
+</p>
+<p>
+Contrast with <a class=3D"link" href=3D"cairo-context.html#cairo-fill-ex=
+tents" title=3D"cairo_fill_extents ()"><code class=3D"function">cairo_fi=
+ll_extents()</code></a> and <a class=3D"link" href=3D"cairo-context.html=
+#cairo-stroke-extents" title=3D"cairo_stroke_extents ()"><code class=3D"=
+function">cairo_stroke_extents()</code></a> which
+return the extents of only the area that would be "inked" by
+the corresponding drawing operations.
+</p>
+<p>
+The result of <a class=3D"link" href=3D"cairo-paths.html#cairo-path-exte=
+nts" title=3D"cairo_path_extents ()"><code class=3D"function">cairo_path=
+_extents()</code></a> is defined as equivalent to the
+limit of <a class=3D"link" href=3D"cairo-context.html#cairo-stroke-exten=
+ts" title=3D"cairo_stroke_extents ()"><code class=3D"function">cairo_str=
+oke_extents()</code></a> with <a class=3D"link" href=3D"cairo-context.ht=
+ml#CAIRO-LINE-CAP-ROUND--CAPS"><code class=3D"literal">CAIRO_LINE_CAP_RO=
+UND</code></a> as the
+line width approaches 0.0, (but never reaching the empty-rectangle
+returned by <a class=3D"link" href=3D"cairo-context.html#cairo-stroke-ex=
+tents" title=3D"cairo_stroke_extents ()"><code class=3D"function">cairo_=
+stroke_extents()</code></a> for a line width of 0.0).
+</p>
+<p>
+Specifically, this means that zero-area sub-paths such as
+<a class=3D"link" href=3D"cairo-paths.html#cairo-move-to" title=3D"cairo=
+_move_to ()"><code class=3D"function">cairo_move_to()</code></a>;<a clas=
+s=3D"link" href=3D"cairo-paths.html#cairo-line-to" title=3D"cairo_line_t=
+o ()"><code class=3D"function">cairo_line_to()</code></a> segments, (eve=
+n degenerate cases
+where the coordinates to both calls are identical), will be
+considered as contributing to the extents. However, a lone
+<a class=3D"link" href=3D"cairo-paths.html#cairo-move-to" title=3D"cairo=
+_move_to ()"><code class=3D"function">cairo_move_to()</code></a> will no=
+t contribute to the results of
+<a class=3D"link" href=3D"cairo-paths.html#cairo-path-extents" title=3D"=
+cairo_path_extents ()"><code class=3D"function">cairo_path_extents()</co=
+de></a>.</p>
+<p>
+</p>
+<div class=3D"variablelist"><table border=3D"0">
+<col align=3D"left" valign=3D"top">
+<tbody>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>cr</code></em>=
+=C2=A0:</span></p></td>
+<td> a cairo context
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>x1</code></em>=
+=C2=A0:</span></p></td>
+<td> left of the resulting extents
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>y1</code></em>=
+=C2=A0:</span></p></td>
+<td> top of the resulting extents
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>x2</code></em>=
+=C2=A0:</span></p></td>
+<td> right of the resulting extents
+</td>
+</tr>
+<tr>
+<td><p><span class=3D"term"><em class=3D"parameter"><code>y2</code></em>=
+=C2=A0:</span></p></td>
+<td> bottom of the resulting extents
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class=3D"since">Since 1.6</p>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://library.gnome.org/skin/general_bg.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAAEAAAAbCAYAAAC9WOV0AAAABmJLR0QA/wD/AP+g
+vaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH1gsZAyoK34rn+QAAAD9J
+REFUCNeFyLENgEAQA8HFBREh+u/rzzbJC5GRTDCc110B/FEQB6jtl7SoyXtBcfbZ
+QYlRbBTPPsfIM8hr8QDARDVfzYTSQAAAAABJRU5ErkJggg==
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://library.gnome.org/skin/general_separator.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAAEAAAAaCAYAAAB2BDbRAAAABmJLR0QA/wD/AP+g
+vaeTAAAACXBIWXMAAA5VAAAOVQErS3CmAAAAB3RJTUUH1gsZAzcNvoIeRgAAAGFJ
+REFUCNc9zbENgzAURVH8LP/7vAPreJgMklnTRUZ8EBIpUkRKd7qzjDGesv2Q7VTv
+/VBrzaq1rgI+Am7ZvgVcsn39dQpIAYds7wJ2AVO2pyJiCnirlPJSRGy/w3YumckX
+/LEa7nqfG04AAAAASUVORK5CYII=
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://library.gnome.org/skin/foot.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAA8AAAASCAYAAACEnoQPAAAABmJLR0QA/wD/AP+g
+vaeTAAAACXBIWXMAAC4jAAAuIwF4pT92AAAAB3RJTUUH1gsZAykbnheUyAAAAkhJ
+REFUOMuNkr1rFFEUxc+9zmQ3mWyCsKQRK5NCELGIoEIKkYCkEAxIQPwPgl9Ndmdn
+dnazOzuZBFHY2AiaykKEBYOdVRALtUkjKEgiCKayMeRjE95718LNOtFN9HWXd37n
+vnfuJRxwKmEpY9t2Vmn9tVgoaQCI4nCMmW4aYy6I4AkfBFuW1SCiVQJdaYHXmGkR
+wGVm7iOic9aeOCj7/el0aoGZ5/NT3hIzjwIAEfr8oNBNhAhAWy9iFttFT0/3CIBx
+rfUPAEsAXgMYZOaG4zhHiTD4G5SnzHzfqs1ULolgc2d3d7nLtjeZea2luWOMZAt5
+f2O6WuKuLvsbEQ2IyGMRuVXIFxVFcfULgPWNjc3hTKb3IhGt5ae8D39mUK1NHxeI
+E3jlT+1cmPmeiNTT6XTWzfmvypXAiudqZ0XkKhENGGOOAdghohUAj5KGlCtM2X2Z
+3lOeGyyHUWWMmerMfKLTBEQESqnBoldeAQBKPMu1basK4AgOOSJy3s35b9twFFdP
+M/N7AKl/gM/dnD+xV/OvWdL4f4ALzWZzct8iteDDuM9aaw9AY7oUmr9gEVnvZGCM
+WVBa5wKv/L3jCgOAUuqFbdshgO69C6XU/NbW9t0ojHU0G54kYIKIhkTkmZvzX7b/
+XPTKq8aYB0lXZn4XhbEGACaaI6ISgOsARvZ1BoDt7WbFcXrOABhr5TAfxVVobRwR
+GSUiiIgB8LC9JMluM7NhCkCNiG4njVu5NI0xNzw3aHSEEybDIjJJREMA+onojVKq
+7hdKH5O6n2ZD762a3LngAAAAAElFTkSuQmCC
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://library.gnome.org/skin/top-header-gradient.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAAoAAABGCAIAAAB6ypL9AAAAAXNSR0IArs4c6QAA
+AAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9gMBxIfMem4mOAAAAAZdEVYdENv
+bW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAACQklEQVRIx3WVUXIkMQhD9Shf
+au+Ta+Ws2g8B9kxVMh/pbhsDkpD59/Orv/8OwuTZGGELWcISh15DCCQhISyTZeYk
+QPZuEtJRgSVZ97skqSTrIAk6RqbXnYR9OHoD7/NRJ3e+Wjcc6XSht4HZ4vRNdfSm
+RUot6FB5AU8CSaW8HjaKp7bB5gAKGpr2J7PR6Z4QKmk3pVtOwbY1hWmBTvS2nqMc
+TmQOKUMWtYQECtVlDIcy+nwjllCjegsPTW7M3dWLFYoEOGqBD6620npQ+yJLhJJG
+ybQEVY1AcqfgiPRmsVD53GZQ5Zh9F6eKnLzy5GKuk2TlAOZdSIZBbRrYgQE7U2Jf
+qLorJBXyQVDqUy3VU3tHp/rwntPyAod6Z1DLm0W1FO+YzLO7xp2Sz+Hh5uaVmnr+
+rxxG1oNMqkn8Sa/pM5/MraSQqCVRqqo7LY8UZ8oyr4Vt6fWWZ9p6v05jvxytyayv
+UenMmPTp2XuoZsqqRjotWy6dtjNRfS5GlcGQDpW+nW08aoLxtZkS2QvT42vDBU2/
+t/IPwmSrHJMwIXS9KhIckyhJJ5Xh2PFY9TWPx4j7qa7DzBB9Ycot7dEtZcY6WkxF
+99omf42lc9fIdg2u5uHAq8y+b5xmPq4aZroZm8uM9XQhDyr777BOxDRrD+w+VNlm
+PaKhyTpHUmWCgcRSaxOPkJ8Kh/y77MdRZtBzGyxO966B8HtQU9pI4/xyQZ2qUeKo
+aU27pDOjKM1l1IV/VT6X496BPaH1XfkjjzNhXFFcY/d/NfL6F3L9kdIAAAAASUVO
+RK5CYII=
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://library.gnome.org/skin/library.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAADkAAAAyCAYAAADm33NGAAAABHNCSVQICAgIfAhk
+iAAAAAlwSFlzAAAQGAAAEBgB/AMxtQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3Nj
+YXBlLm9yZ5vuPBoAAAq6SURBVGiBxZpJjyRHFcd/EblV1tLLzHTPhlfw2CAbkGUL
+n5DgzAHJGIzggOAL8AEQ3Dlz5BsgC/kCB5tFQiCwBbJle8bGeLzN0p7uWXqrysxY
+HofIqspq95LVnpGfVF3ZlS8j3ot47/+WSHXhqefe8c5dYA7Skf7LO6/+7tvzPPN5
+Uuydu/DdH/+IM+fO4KzFO4/zHlOVVMZQlSVVWVIUJWVRcOP6Gpcvvf345y34PBQD
+nFpZoShLTGmIoxg0CArx4D04r/CAjmOyvPM5izw/xeOLsqwwRYVkoLXGGoexDmsd
+1lqcdXjnQeTzlPdYFAN4aSe8cG91fOTJZ78D9FuwlsCL7/7nBd9m3PholgaJhAW5
+B/TIk89+C6VeXD17psw6HYUXBMT7YEHWWbz3mLJiZ2srFZHngN+3GTso6dvvpLp3
+O5n1Fwb2+Z/9JHfG4bxDRLDWYsqSsiwZFgXFcMQ/Xv7LaHd7K2s7cDBXhDayK0Ur
+vuNSkqSA5v3L75HnOXm3izGG0XDIsP7keYbSaq5xYwARAREGCwMGCwOUUojIzOfq
+1ausXb+O3CNzHZP4MP5Biykt8aNJtZKAUnzw3kc4J/VggniZgJJxhiiWuYHn0ae/
+/3MFP0UpFGEeNVZCZPKto2hQDIeR4A9REcQLKNEPntW/+eGPfvDrMKSayDzDG/5/
+vQYej4gQJzGj4S5KK5y1WOcm371+iqDmXkUFP37o0QtPfPmrTwSlVBC0qv2sLEqq
+smDt2jVuXLmGdwePHxZHUEK0tLRw8plnHj+ZZSlJmiLicdaHcOcc1lk2Nze5dPHS
+fWEn68VbXBqwcvoUWusgRFVNhKmqEmMN/hhO+bWnn+LkygplWRJpDSiqqqQoRoxG
+JVVVIMCNK9cQ8fS6PfJ+lzTNSNKYOInIOhl5N2d78zYiwomTJzhz5gxRpOl0Onjx
+mMpSGYO1Fc4JvW6fSxcvjUOI0MqVZfKH7z//va8AC0c9orXuCrCztc3Ozi55t0uS
+JIyGBcPhiOFwiHg3WTwvnt5gQJanaKWJ44g0TfFdj3OO4c72xJidc5RVgSB476kq
+Q1VVGFOhVFhMGKOrl5b4GlTMM2LgzX6/Z+I4UfUkQg1SzgXz996RJS4VL4ciuKAm
+gCZO+NMf/8ZoWDQYwrNaKx59/H7mxfjJTrbztcAXR6ilpUX7y1/9IjXWUBUlo9r0
+RqMRw9Gohv0Rb//2JS8iei8ozA4rjLdS8Dz+5AXyPKe7J4SMhkOOAQtTdG2lokwR
+rNvtKuccr/zr36RpQlVVVFVFUYNJWZb0+93wnHckSczZ82eJowitFYOFHs45vPfc
+3Njg9sY6EKzqQFJhflXL0Ol0OH/fw0RRBIRoMA55W1vbXH7vg6mSY9Sbh0SEsipr
+QSO89zjn8c4j4utsxYEEPyuLklvrW+hIo7TGO4fzHu8cVVVM00URDg0hMjX7oii4
+/P77xEojCCHahfmtsZNn6gRdUC13c0xePFVVHcpjrQtJvRescXxw+SPiKAlVjjVY
+a7HWsrDUDQLW4x5GYafqa4Tb67eIkzhggAvg5LwjTTKiKJ4q2d5eG5dOMJU5lN1Z
+C4SEIko0X3z0AboTdK1TtdEQaw3DnRp4vEcdgvXS2GmFYrAwIM/z/dG1lneS1rVB
+1yZPiEtByTiOSNIeaZrR6WQYY1hf38A5W2PVFFgOkHy6O0cseFtZmzRF1znJi2Bs
+MNcTJ06yuDiYMaPXX3ud69c/mZjrvjOoOosRmYaQPYuxd0+PWoT9qBEn50Me8YKp
+nfvNN95ka2tr5r6OAhgF3qOTal/fP9Anx+IdI+Pas5PtFRUvYo0DYGV1hcHCQggj
+ZUVlSqrKTMKN9x5/KGJCw14PndcfcX8/alQh0F8Y0Ov3UGPBRBAfIPnKx1dZv3Gj
+MZnH2uCTSimiSKO1Rmk1qQomSiDgw9VRwvsjfU4+VW20VFJQSrGxts4n/iZK7VHS
+Czu7s+YoIhjrWk0S/GwsWO0YjXUYB3ColTys/XBsc619eTQsuHVrG6VC8uvGccc5
++oOMKJlKJl4CerYg749YfTXNpKZsMrk3M1arGWcp7CQhNi2fWuL0+dMHllplWU4n
+k7AAbUgO9UjG+WI9sCfLOmSdDkmSoLXCi6C1QmvFaDg6ppK1Nc2Dr+NqoxXvjLnu
+xzANHV48Z8+dJU3imYp/7B43N27OIWWgRhXCXFqG8qq9TwYl9p9gRn0R/vDCS+xs
+Dz/Fp5Ti/EMnZ36LogitI0ARRZ4oihAf14VNGHmyk2pej653MhSnR7F6+v0+p8+d
+3ff+hx9+yNrHVwKvFx772sN0Ojl53sU6y2g4ZDQaUYyGFMW0zhwsDHjo4Qf2HXNj
+4ybvXHq3qeS8qUAAEy+eqI2SXli/cZP/vHIRXYeYUFSHakXpqdkLgtahI5AkMUoJ
+Jo6I6xDVpM07m/z55b+ilEyeHaeIcZIQR+lUyeP0/sfdPI7WEY+QpDFLpxboJClR
+ElOVFWVZhEpGCaPdej080ygrh/uQ1ppuLyfN0pCBWYs1oboJNSZTJcfhd97d3Jtn
+HsantGJldZlu3iXNsrpZvDupRia8c7pNmqbknVCF6MpMKphmFaLrkTkU/fYTfI5q
+QKTu8LRgnzebaUPTUktA6TFaBZ/wPg4ZD4Ix5cyD8wgzqRxamEqz8r9bNOOTS8vL
+9Bf2Pzl7/73LXL1y9ViTHLQgwbSamks4fLrLVPtkoFf+/hpr1z9pSlefSSrOnFum
+00uONYm0bXkKU7Oev2w8kKYHPggPfukc5x84jVYaYyqMsfW3IYoUlTm8p3Og7OMG
+Tite+LRdzwuJsxQ3B0mShF6/f2DuelxqNp+OIi+wemaVLMuI4ggRoTfo4ewJqqrk
+vxffnnv+eic9n3W1DqPx0SAcvaEiwuadrTo5D2Fg3Lo0pkJol0o2adpcvocvA4hA
+ksQsLC6SZglxHKMjRZYldHtd1m80wUZ4+413ES8hDxWZlHuCsHSyOxU+jTm5eIKk
+bkk6O25JWnZ3Rty5vTlVcu7sfA9prcmyFKUVOlJEcURZTv1XxBOnGb1+L6R1WhFF
+EVmW4cVTNMon8cJDj3yBbrdL3u2GQ576iCB8706VjBLyvEOkopDQxBKS8nGFdJuG
+ks0eyzFodXWFxaXFmd/+9c9XWVtbq5UUrn90nb+//GrjEFYmvZ3lU4PJc16Etqfl
+u7u7XL78v1CSTZA5jJvnOUmSTZUU5j8maNJbb11ke2tzthfV6POIwMJyn2988+vk
+3S5ZndY1D3LWrmzWzDOPAgfbWKQ1q6urLZvLx9cPgOXlZTpZFl5TqwzWVFSNswiZ
+I8AfHU/3JhBHU22uny3L0FqTpCleqPtCs6VJ27w1MN99AJwm6PcUXedJ5u9epjOm
+6amWVqhx2/4uTzM2lDZGNk8Br5QijmPiOA4tVC/1+WYAH2fDxDHA9uYWSim01ugo
+RqNCN9wYTFWFjzFUpqKs2w8ionZ2dkmSirJMMaZqOL7B1Ncg7Gxvs3X7NsN4hyRN
+SZOkPqwt6jdACorRCAF188b6RPA0TQOg1NlXWb+W6r1TO9vbbG2FpMFZP42n1mF9
+iKubm3fCYhznpd5urv/52P08ISK9o3ivbShZvyOloPx+OxRK2ZCwKq2Ngs3mOz/j
+IqFeWQTQStLH7lfSyZT9VLd+j9sJ8sb/AUNoj2geGGIPAAAAAElFTkSuQmCC
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://library.gnome.org/skin/bar.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAIAAAAW4yFwAAAACXBIWXMAAAsTAAAL
+EwEAmpwYAAAAB3RJTUUH1gsaEwIVAUxIOAAAAB10RVh0Q29tbWVudABDcmVhdGVk
+IHdpdGggVGhlIEdJTVDvZCVuAAAAEElEQVQI12M4c+YMEwMDAwAOaAJn4taK1gAA
+AABJRU5ErkJggg==
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://library.gnome.org/skin/tab_left.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAAcAAAByCAYAAACfvcuhAAAABmJLR0QA/wD/AP+g
+vaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH1wcICQkSmdGDRgAAAQBJ
+REFUSMftlb9KxEAQxr8dEkXExtrCTsRXyRtY3ZW6LAsG8gIGQiyusbrXuMewvd7i
++hUE/ySQjEUudxu9bMA7rtCdaoffzjfDzCwrYFmWpwmAEQMXAkDQgvvJIx9SAXmj
+QEQgogZmeZoEeIeSdzAvZqXURmbqVsMYY2cBtYcwDPHdCA4LbIeZHRAOCO7iHcm6
+I10QS1neHNm95JDlXVVrJQXvqQmDI/utrN3Z3kgeWpNteutcag89/F9Q2I7SMgYw
+Bh1cFpVYQ6Xl7KM+ihblGUx9ippF88qUlvFbfRzNP69QMf3I+fBcnndAp6DX6qT/
+X3maXvuReeihhx7+LfgFWYp18eYNtU4AAAAASUVORK5CYII=
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://library.gnome.org/skin/tab_right.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAARgAAAByCAYAAACIls4EAAAABmJLR0QA/wD/AP+g
+vaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH1wcICQkMY96+JQAAA/tJ
+REFUeNrt3c9qVFccB/DfiZOKlC4a14W+gLs+hn2CrruqWAWRgN0W/FNR0tBFFy2I
+j9CHKLhzI6666S4li4JY1NzjIiYZnXOm5/4ZbqGfDyjh68nNzznw5Z7JZJJu3/0+
+B8AIOSJSxPOI+HX35q07J3nKOSsYYJSu66Lrutj/aS9edOfju+tXUkREOjg4UDDA
+cOnsw51Pd+LB3v148/r17u7NW3e2PDrA6PPRuz+Hh4dx9ZtrERG3IyIUDDCp7e3t
+048Xx9VzVkTHdzwpWvPWtdHjmnPk5rPn5huTly3OnuJd/cSWvM/aPuvmys1nz803
+Jl8pmLz6SR8W6bq8dW3K7decIzefPTff8LxaMKWmzJVncnIMX9t8zZly89lz843O
+0/o7mJNFuXitUt66NlUerz5fa5O5+ey5+YbntU5cRC6crAr/s1Lea23jurly89lz
+843I249IEbXX9pby5rU9rjlLbj57br5J8+oRCWAK5YKpH/6icCBvW9vnmnPk5rPn
+5hueV05Kiyg9iZfLd2ilvHVtn2vOkZvPnptvbJ7a7mBqh6bcmJXyPtecIzefPTff
+mLx8e+OIZD57br6RearWz6L04u/j74815q1r+1xzjtx89tx8A/OoWrqDcfNsPntu
+vmF57aUwpy+0W/57+Y7n3/LWtWnp5yqGfq1N5uaz5+YbnufqHUyhKXPlZw5yjsFr
+2685T24+e26+KfN1T/Ju5BY5/uO3oOaz5+abem7fRTKfPTff+Lz9iOQ5PvPZc/O1
+52ndEWn5AJUrhbQub10bPa45R24+e26+Yfk65VfyVm6Fij8+3rq2xzVnyc1nz803
+PK+clxyRzGfPzTdRvtpA3q4BmMBxuay+ZWbhvTZPXzjTkLeu7XPNOXLz2XPzDc3P
+7lwKb5n5fpzfO1Stz3utbVw3V24+e26+oXn9vsZvdgQ2RsEACgZQMAAKBlAwgIIB
+UDCAggEUDICCARQMoGAAFAygYAAFA6BgAAUDKBgABQMoGEDBACgYQMEACgZAwQAK
+Bvj/Wtz78ZFHARheIulNnD+XI7pXzyLil72H+z+c/Fv64uvH2UMEjDoKpRw7W4fx
+2Ud/xoWtl7/tPdz/0hEJmESXU/x1dDGe/nMpXnQfX7567coNBQNM6ihvxR+vPo+I
+uKdggMn9ffTJ6ceLJz9/5REBJvXt9d/DHQywUQoGUDCAggFQMICCARQMgIIBFAyg
+YAAUDKBgAAUDoGAABQMoGAAFAygYQMEAKBhAwQAKBkDBAAoGUDAACgZQMICCAVAw
+gIIBUDCAggEUDICCARQMoGAAFAygYAAFA6BgAAUDKBgABQMoGEDBACgYQMEACgZA
+wQAKBlAwAGO9BbA1zip3oOJfAAAAAElFTkSuQmCC
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline
+Content-Type: image/gif
+Content-Location: http://library.gnome.org/skin/search_icon.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhEAAQAMZ+AGRmYmZoZGdpZWhpZmlrZmpraGpsaGtra2ttaWxtamxuaWxu
+amxua21ua21vam1vbG5wa29wbG9xbHBxbXR2cnZ4dVmArXp8eFyFs3+AfWGKuYKE
+gYOFgISGgoWHhIaHhWaQv4iKhYmKiYmLiGiTwmmUxW2XxY+Qj5GSkW6ayW+bym+c
+zZOVknKdz3GeznKeznKez3KfznKfz3OfznOfz3agzXWhz3ihzYGjyoWmyoCn1Iqm
+xYmpy6OkoY6oxZapwaeopqipqJutwo+x2Z6vxJaz0pe005e427e3ta26yri4t6K+
+36zG4sLCwq7I48TExLnK3MfHx7TM5rbN5snJyMrKycXM0svLysvMysDT6dHV2cfY
+68fZ7NTW2dbW1tHZ4dLZ4NfY2svb7NnZ2Nja29ra2dra2s7d7drb29Xc5Nrb3Nvb
+29Hg8N7e3tPh8N/f39Xi8Nbi8dvi6dfk8eLi4tnk8d/p8+Dp8+Dp9OLr9ePr9OPr
+9efu9+zy+P///////yH5BAEKAH8ALAAAAAAQABAAAAe/gH+CfxURExAOF4OLgg9Y
+al1aYVUMjIISaD8mNjEkQm0QjAtmOzJbeXZOMT5rCItARDFxfH17bEcuST2DBGUg
+THV4endnOjA4YwSCEGQuUmJuc3BcSzQudKF/Cm81Q1NcWUvVNClrCoIcTzklLdTj
+GjxUHYMbXzEr4zQ0MWACiwZBoMTAQEOFhRlWWHwYsEgBCjlFbsQwkqaAEg8UAvzL
+cKLJGxEA/jRAMiJKAkYhFCgIMSjBFS8nLVlKEFOmzUAAOw==
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline; filename=lgo.css
+Content-Type: text/css; charset=UTF-8; name=lgo.css
+Content-Location: http://library.gnome.org/skin/lgo.css
+Content-Transfer-Encoding: 8bit
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: sans-serif;
+	background: white;
+	color: black;
+	height: 101%;
+}
+
+div {
+	margin: 0;
+}
+
+body.with-star {
+	background: white url(star.png) -100px -200px no-repeat;
+}
+
+#page {
+	margin: 0px;
+	padding: 0px;
+}
+
+#page ul {
+	margin: 0;
+}
+
+div.in-column {
+	margin: 0 0 2em 1em;
+	float: right;
+	max-width: 12em;
+}
+
+hr {
+	color: #888;
+	background: #888;
+	border: 0;
+	height: 1px;
+	width: 90%;
+	text-align: center;
+	clear: both;
+}
+
+
+div.body {
+	clear: both;
+}
+
+
+div.sidebar {
+	position: absolute;
+	text-align: left;
+	right: 0px;
+	top: 60px;
+	width: 27ex;
+	padding-left: 1ex;
+	border-left: 1ex solid #eee;
+	margin-top: 4em;
+}
+
+div.sidebar h2 {
+	margin-top: 0;
+	padding: 5px 2ex 5px 2ex;
+	background: url(t.png) top left repeat-y;
+	font-size: 100%;
+}
+
+ul.i18n,
+ul.toc {
+	padding: 0;
+	padding-left: 20px;
+	margin: 0;
+	margin-right: 10px;
+	list-style: none;
+}
+
+ul.i18n li,
+ul.toc li {
+	margin: 0;
+	margin-left: 1em;
+	padding: 0;
+	list-style: circle;
+}
+
+ul.toc li a {
+	text-decoration: none;
+	color: black;
+}
+
+ul.toc li a:hover {
+	text-decoration: underline;
+}
+
+#general {
+	list-style: none;
+	background: #2E3436 url(general_bg.png) 0 100% repeat-x;
+	text-align: right;
+	padding: 0 1ex;
+	margin: 0;
+	font-size: 70%;
+}
+
+#general li {
+	display: inline;
+	background: url(general_separator.png) 0 0 no-repeat;
+	padding-top: 10px;
+	padding-bottom: 8px;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+
+#general li a {
+	font-weight: bold;
+	color: #FFFFFF;
+	margin: 0 2ex;
+	text-decoration: none;
+	line-height: 30px;
+}
+
+#general li a:hover {
+	text-decoration: underline;
+}
+
+#general .home {
+	float: left;
+	background: url(general_separator.png) 100% 0 no-repeat;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+#general .home a {
+	float: left;
+	background: url(foot.png) 7px 50% no-repeat;
+	margin-left: 0;
+	padding-left: 27px;
+}
+
+
+#header {
+	background: #729FCF url(top-header-gradient.png) top left repeat-x;
+	float: left;
+	width: 100%;
+	font-size: 75%;
+}
+
+#header-wrap {
+	background: transparent url(library.png) 15px 10px no-repeat;
+	min-height: 67px;
+}
+
+#header h1 {
+	margin: 0;
+	margin-left: 85px;
+	padding-top: 25px;
+	font-size: 200%;
+	color: #eeeeec;
+}
+
+#tabs {
+	background: url(bar.png) 0 100% repeat-x;
+	width: 100%;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+#portal-globalnav {
+	float: right;
+	list-style: none;
+	margin: 0;
+	margin-right: 3ex;
+}
+
+#portal-globalnav li {
+	float: left;
+	margin: 0;
+	margin-left: 0.2ex;
+	font-size: 2ex;
+}
+
+#portal-globalnav li a:hover {
+	color: #111111;
+}
+
+#portal-globalnav li a {
+	float: left;
+	text-decoration: none;
+	color: #555555;
+	background: url(tab_left.png) 0 0 no-repeat;
+	padding: 7px 0 7px 7px;
+	border-bottom: 2px solid #CCCCCC;
+}
+
+#portal-globalnav li span {
+	background: url(tab_right.png) 100% 0 no-repeat;
+	padding: 7px 28px 7px 19px;
+}
+
+#portal-globalnav li.selected a {
+	color: #3566A5;
+	background: url(tab_left.png) 0 -57px no-repeat;
+	border-bottom: none;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+#portal-globalnav li.selected a span {
+	background: url(tab_right.png) 100% -57px no-repeat;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+
+
+div.articleinfo h1 {
+	padding-top: 1ex;
+	color: #3f3f3f;
+}
+
+div.articleinfo h3.abstract {
+	font-weight: normal;
+	border: 5px solid #eee;
+	padding: 1ex;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	font-size: 100%;
+	background: white;
+}
+
+div.articleinfo dd.affiliation {
+	color: #a4a4a4;
+	margin-bottom: 1ex;
+}
+
+div.articleinfo dl {
+	margin-left: 1em;
+}
+
+dl.doc-index {
+	margin-left: 1em;
+}
+
+dl.doc-index p {
+	margin: 0.5ex 0;
+}
+
+dl.doc-index dt {
+	margin-top: 2em;
+}
+
+dl.doc-index dd {
+	margin: 0em 1em 2em 1em;
+}
+
+dl.doc-index dt a {
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 110%;
+}
+
+dl.doc-index dt a:hover {
+	text-decoration: underline;
+}
+
+div.body {
+	background-color: transparent;
+	border: none;
+	padding: 1em;
+} 
+
+div.body-sidebar {
+	margin-right: 27ex;
+}
+
+a {
+	color: #3465a4;
+}
+
+div.navbar {
+	margin: 0 29ex 0 2ex;
+}
+
+h1.title {
+	font-size: 1.72em;
+	margin: 0; padding: 0;
+	color: #3f3f3f;
+}
+
+h1.title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+div#language {
+	position: absolute;
+	right: 2em;
+	top: 6ex;
+}
+
+/* from goran css */
+
+#dev, #usr, #adm {
+	float: left;
+	margin: 20px 3% 0px 3%;
+	width: 42%;
+	padding: 5px;
+}
+
+div.sidebar #dev, div.sidebar #usr, div.sidebar #adm {
+	float: none;
+	width: 90%;
+	font-size: 90%;
+	margin-top: 0;
+}
+
+br.clear {
+	clear: both;
+}
+
+#dev p, #usr p, #adm p {
+	margin: 20px;
+}
+
+#usr h2 a, #usr h2 span,
+#dev h2 a, #dev h2 span,
+#adm h2 a, #adm h2 span {
+	display: block; width: 80%;
+	text-decoration: none;	
+	padding: 10px 20px;
+}
+#usr h2 a, #usr h2 span { color: #ffffff; }
+#dev h2 a, #dev h2 span { color: #2e3436; }
+#adm h2 a, #adm h2 span { color: #ffffff; }
+
+#usr h2, #dev h2, #adm h2 {
+	height: 40px;
+	font-size: 11pt;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	padding: 0px;
+	background: none;
+}
+
+#usr h2 { background: #729fcf url(user-icon.png) 95% no-repeat; }
+#dev h2 { background: #edd400 url(dev-icon.png) 95% no-repeat; }
+#adm h2 { background: #00b147 url(adm-icon.png) 95% no-repeat; }
+
+#updated h3 { margin-bottom: 15px; }
+
+div.sidebar h4 a {
+	text-decoration: none;
+	margin: 0px;
+}
+div.sidebar p.i18n {
+	margin-top: -15px;
+}
+
+div.sidebar fieldset { 
+	margin-top: 30px;
+	border: none;
+}
+
+table#top {
+	margin: 1em auto;
+	clear: both;
+	border: 1px solid #faa;
+	background: #fee;
+	width: 95%;
+}
+
+div.book, div.chapter, div.refentry, div.sect1, div.index {
+	margin: 1em;
+}
+
+.synopsis, .classsynopsis 
+{
+	background: #eee;
+	border: solid 1px #aaa;
+	padding: 0.5em;
+}
+.programlisting 
+{
+	background: #eef;
+	border: solid 1px #aaf;
+	padding: 0.5em;
+}
+.variablelist 
+{
+	padding: 4px;
+	margin-left: 3em;
+}
+.variablelist td:first-child
+{
+	vertical-align: top;
+}
+
+.variablelist p {
+	margin: 0;
+}
+
+div.other-languages ul, div.downloads ul {
+	list-style: none;
+	padding: 0 1em;
+	margin: 0;
+}
+
+div.other-languages ul li, div.downloads ul li {
+	margin: 0;
+	padding: 0;
+}
+
+div.other-languages a, div.downloads a {
+	text-decoration: none;
+}
+
+div.other-languages a:hover, div.downloads a:hover {
+	text-decoration: underline;
+}
+
+ul.versions {
+	margin: 0;
+	padding: 0;
+	padding-left: 1em;
+}
+
+ul.versions li {
+	display: inline;
+	margin: 0 0.5ex;
+}
+
+h2.category {
+	background-position: center left;
+	background-repeat: no-repeat;
+	margin-top: 2em;
+	color: #006;
+	min-height: 32px;
+}
+
+h2.cat-accessibility-directory { padding-left: 40px; background-image: url(icons/accessibility-directory.png); }
+h2.cat-gnome-util { padding-left: 40px; background-image: url(icons/gnome-util.png); }
+h2.cat-gnome-joystick { padding-left: 40px; background-image: url(icons/gnome-joystick.png); }
+h2.cat-gnome-graphics { padding-left: 40px; background-image: url(icons/gnome-graphics.png); }
+h2.cat-gnome-globe { padding-left: 40px; background-image: url(icons/gnome-globe.png); }
+h2.cat-gnome-applications { padding-left: 40px; background-image: url(icons/gnome-applications.png); }
+h2.cat-gnome-other { padding-left: 40px; background-image: url(icons/gnome-other.png); }
+h2.cat-gnome-devel { padding-left: 40px; background-image: url(icons/gnome-devel.png); }
+h2.cat-gnome-multimedia { padding-left: 40px; background-image: url(icons/gnome-multimedia.png); }
+h2.cat-gnome-system { padding-left: 40px; background-image: url(icons/gnome-system.png); }
+h2.cat-gnome-other { padding-left: 40px; background-image: url(icons/gnome-other.png); }
+
+h2.cat-gdp-documentation { padding-left: 40px; background-image: url(icons/gdp-32.png); }
+
+h3.subsection {
+	color: #006;
+	font-style: italic;
+	margin-left: 1ex;
+}
+
+span.lang-code {
+	font-size: 70%;
+	color: #666;
+}
+
+li.active-language {
+	font-weight: bold;
+	margin-bottom: 1ex;
+}
+
+p.no-translation {
+	font-style: italic;
+	color: #888;
+	font-size: 80%;
+}
+
+p.no-translation a {
+	text-decoration: none;
+}
+
+div.subindex {
+	margin: 2em 7em 1em 4em;
+	padding-left: 110px;
+	background-position: top left;
+	background-repeat: no-repeat;
+	min-height: 96px;
+}
+
+div.subindex p {
+	color: #666;
+}
+
+div.subindex h2 {
+	padding: 0;
+	margin: 0;
+}
+
+div.subindex h2 a {
+	text-decoration: inherit;
+}
+
+div.subindex h2 a:hover {
+	text-decoration: underline;
+}
+
+h1.subindex {
+	padding-left: 110px;
+	background-position: top left;
+	background-repeat: no-repeat;
+	line-height: 96px;
+	min-height: 96px;
+}
+
+#subindex-references { background-image: url(icons/api-96.png); }
+#subindex-guides { background-image: url(icons/guides-96.png); }
+#subindex-tools { background-image: url(icons/tools-96.png); }
+#subindex-gdp { background-image: url(icons/gdp-96.png); }
+#subindex-gnome-devel { background-image: url(icons/gnome-development-96.png); }
+
+div#search {
+	position: absolute;
+	text-align: right;
+	right: 1em;
+	top: 5em;
+	font-size: 75%;
+}
+
+form#symlookup {
+	margin: 2em 1em 2em 0em;
+	text-align: right;
+}
+
+input.searchTerms {
+	border: 1px solid #888888;
+}
+
+div#search input.searchTerms {
+	margin-right: 1ex;
+}
+
+input.searchButton {
+	background: white url(search_icon.gif) no-repeat scroll 2px center;
+	color: black;
+	cursor: pointer;
+	padding: 1px 1px 1px 15px;
+	text-transform: none;
+	border: 1px solid #888888;
+}
+
+form#symlookup input.searchTerms {
+	width: 100%;
+	margin-bottom: 1ex;
+}
+
+p.other-versions {
+	font-size: 80%;
+	color: #888;
+}
+
+p.other-versions a {
+	text-decoration: none;
+}
+
+p.upcoming-deprecation {
+	padding: 0.5em 1em 0.5em 60px;
+	min-height: 48px;
+	border: solid 1px #e0e0df;
+	background-color: #fffff0;
+	background-position: 6px 0.5em;
+	background-repeat: no-repeat;
+	background-image: url(/skin/admon-warning.png);
+}
+
+p.canonical-ref {
+	padding: 0.5em 1em 0.5em 60px;
+	min-height: 48px;
+	border: solid 1px #e0e0df;
+	margin-right: 29ex;
+	background-color: #fffff0;
+	background-position: 6px 0.5em;
+	background-repeat: no-repeat;
+	background-image: url(/skin/admon-note.png);
+}
+
+ul.indextoc {
+	margin: 1em 0;
+	padding: 0 0 0 1em;
+	list-style: circle;
+}
+
+ul.indextoc ul {
+	padding: 0 0 0 1em;
+}
+
+ul.indextoc li {
+	font-weight: bold;
+}
+
+ul.indextoc li li {
+	font-weight: normal;
+}
+
+ul.indextoc > li {
+	margin-bottom: 1ex;
+}
+
+ul.indextoc a {
+	text-decoration: none;
+}
+
+div.downloads h4 {
+	min-height: 24px;
+	line-height: 24px;
+	background: transparent url(gnome-mime-application-x-archive.png) top left no-repeat;
+	padding-left: 26px;
+}
+
+div.downloads p.devhelp-note {
+	font-size: 80%;
+}
+
+div.downloads p.devhelp-note {
+	font-size: 80%;
+	color: #444;
+}
+
+span.module-more {
+	font-size: 75%;
+}
+
+dl.doc-index dt span.module-more a {
+	font-weight: normal;
+}
+
+div#footer {
+	margin: 2ex 30ex 2ex 1ex;
+	clear: both;
+	text-align: center;
+	border-top: 1px solid gray;
+	padding-top: 1.5em;
+	color: #888;
+}
+
+div#footer p {
+	margin: 0;
+	font-size: 80%;
+}
+
+div#footer a {
+	color: #3465a4;
+	text-decoration: none;
+}
+
+div#footer a:hover {
+	text-decoration: underline;
+}
+
+div.devel-remark {
+	font-style: italic;
+	color: #800;
+	margin: 1ex 0;
+}
+
+p.caution-nightly {
+	background: #eee url(caution-nightly.png) no-repeat;
+	font-weight: bold;
+	border: 1px outset black;
+	padding: 2px 2px 2px 50px;
+	text-align: center;
+	margin-bottom: 2em;
+	min-height: 50px;
+}
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline; filename=print.css
+Content-Type: text/css; charset=UTF-8; name=print.css
+Content-Location: http://library.gnome.org/skin/print.css
+Content-Transfer-Encoding: 8bit
+
+ul#general,
+div#header,
+div.sidebar {
+	display: none;
+}
+
+div.body-sidebar {
+	margin-right: 0;
+}
+
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline; filename=gnome-16.png
+Content-Type: image/png; name=gnome-16.png
+Content-Location: http://library.gnome.org/skin/gnome-16.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsRAAAL
+EQF/ZF+RAAAAB3RJTUUH0gYaEDMRoTuzbQAAAilJREFUeJxjYKAV4OXjY+Lh5fXi
+4eUVZWBgYODh4Yng5uY+xc3NfcTF1VUcp0ZhEVE5IRFRBQEh4XABQaH/oWFhawSF
+RewEBIX+CggK/RcSFvl/5syZOph6JnQDmFhY1igrK+8WFBTkZ2VnZ3BycpJnYWUN
+ZGVnZ2JlZ2eIi4tjMDY23odhs7ScQqC8smqwpKz8Wr/AoP9btm2zSc/KfvLp06cq
+SVn5RilZ+f9ZuXn/v3371oqsjwXGYGZlCxEXFw8szM+1UFSQF9i4ZdvVj5++5Bua
+WbGIiIr9mTKhb7mdrc0WRkbGZVgNEBMXb3JydPSXlpZWjUpIefT///+nDAwMnAwM
+DAxfvn1nSEjLfKOtpVmP4WUY48yxwzf5BQXt0/OKpjOxsCYws7JxMrOyMSBhkeDA
+gEqcBjAwMDDMX7Yy6y8DoygTKxsDOraztWWICA0+iW4ACzKHkYXNAF0BGysrQ2pc
+1L+U2KhGTg6OmXgNYGBmvc3AwGAE42prqDI0lRdd0FZXTdOwcbuHrhnDC/9ZWOb+
+Z2Fl+M/CysDOzc0wt79z6axlaxzV7TxX/GdifhOWXrAQrwG3Du/czcnNM+8/EyvD
+99//Gdzisl5tP3Qi4j8Tq9J/JlaGuLBAHXQDGNEFbt1/yN00ec7GkxevOf///x8u
+nhru/68sLc6fkZFxC14DGBgYGP7//8+8Zf/RvGt3H2RxsrOr6GuoXLczNahkZGTc
+iE09RQAAFeOXxHOKeL8AAAAASUVORK5CYII=
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline; filename=left.png
+Content-Type: image/png; name=left.png
+Content-Location: http://library.gnome.org/devel/cairo/stable/left.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+g
+vaeTAAAACXBIWXMAAAsSAAALEgHS3X78AAAAB3RJTUUH0ggfBTEmubNbKAAAAVhJ
+REFUeJy1lSFPw1AYRe/bKhGIiYpJRCV+COqKr5jE1SJwCOYn9hMQBMWPmGBzCNyW
+kKVyS2aWtIKk4iBolwFtaZfHSZ56fffcr0n7pJYALnDa9lyTYAd45IsMiGyHPwNs
+t1uyLANIrIev12s8zyOOYwD+JVySHUFVeFuBU7M3lhRuNhv5vq/lcrnf6PV6RYmH
+knMfkp6MMbO69pOy5sVqQAacl04ATCTdpGmqMAy/NS/wfb+yXBRFGg6HjqRLSW+l
+zZMkYTAY/GreZI1Go2KKa0nqHISPi+ZBEGg+n1e2bEMnDz+TdGs7fC+QdCpJu91O
+q9XKWvheYIx5lTTr9/uaTqdyXdeuIOdK0szzPKuSvcAYk9qQdLvd+geAE+AFYLFY
+4LruMR8aQHC05IC4ZL0D93+OWicpaPjW2kusCaokVgU/JcVdgK0rs0ySc2dVkEsc
+4CL/dzXiEzNPALcVldzyAAAAAElFTkSuQmCC
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline; filename=up.png
+Content-Type: image/png; name=up.png
+Content-Location: http://library.gnome.org/devel/cairo/stable/up.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+g
+vaeTAAAACXBIWXMAAAsSAAALEgHS3X78AAAAB3RJTUUH0ggfBTIunEWA2QAAASNJ
+REFUeJztkz1KxEAARr9viV0KISuknDKFxRZbWswdPEAaL+EdPICdpYVY2wrarZAy
+jTB2sbOIkMKFz2owu2z+dlaw8EFgmAzvzQwJ8JeQdCpp+RviSNKtfniQFB9SfidJ
+VVXJOecjT8GRbXmWZUrTVGVZhkd2yQEIQHikTx4cGSPfOzJFPjmyj3x0JETeEzlu
+B25C5O3IarXykUJSBElzSarrOkjunziOVRSFj5z56/lQB9baTpkxZmOtc07OOTVN
+46eWEcm1pAsA1wDmnZ/YCIwxfrgGcEXyZQYAJO9JnrAFgMcJ7jduckTyEgBmITse
+w39gkKjn3ScA5HkOa+3OBUmS+OH75LKkc0lfXf/HFnmXhwORBYDFwF5eST5PPsGh
++Aatpxiymj9ZQgAAAABJRU5ErkJggg==
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline; filename=home.png
+Content-Type: image/png; name=home.png
+Content-Location: http://library.gnome.org/devel/cairo/stable/home.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+g
+vaeTAAAACXBIWXMAAAsSAAALEgHS3X78AAAAB3RJTUUH0ggfBTEH9dpLdgAAAhtJ
+REFUeJzVlbFrE3EcxT/fckOH3+BwwwkdfkOEDh1ucLyhQ0FBSgsuQi1cJ0eHDl06
+3KCTf4KDQ8cKLSiIOLTgkAyBHtSAECGFZghEsJCAAYXn0pNrbGJS28EHb3n8eO/7
+7svvd3DDsEkPSroFPAIcsG9mX64tQNIC8Abw51IfSIEGEJW0z2bWn3TowvyBpF6v
+19Pa2pqSJFGr1dIIfJP0cOIGkraAZ+12O1heXibPcwCiKGJ3d5darUaj0QDAOcfm
+5ibe+zPgtpkNxhkHkl5JUrVaVRRFAi4wCAIBWl1dVZqmCsNQWZYVTfw480jSR0na
+2dnR7OzsH+ZlFp9rcXHx0oCZIfMFoAok29vbrK+vMxiMbgqQZRn9/gR7LS9zZWVl
+7NTDjONY8/Pz5QZPh823JP04PT1VHMdTmZfpvdfR0VER8lJSgKQn45Y5LZ1z2tvb
+K0JeIOlDt9uVc+6fzcs8b9IMgDPnHEtLS3Q6HWq1GpVKhSRJ/r64EvI8J89z4jjG
+e4/3HqCDpLuSepLUarUEKE3TUTd1JLIsE6CDg4NC+i7p3oyZ1YE7wKepRh6PDnDH
+zN7PAJhZB/h6jQEDM2vD0EW7Cfz/AcFl4uHhIRsbG1MZ1ev18Qckvet2u7+f4asw
+CAIdHx9LUvOyBm/DMLzfbDY5OTmZavoCc3NzVCoVgNeFduGPdv4KPgbCKyXAGbAP
+PDezn1f0mA6/AAn14joWmTIRAAAAAElFTkSuQmCC
+
+------------CmSnST95qaLGqB1uxC2Oyl
+Content-Disposition: inline; filename=right.png
+Content-Type: image/png; name=right.png
+Content-Location: http://library.gnome.org/devel/cairo/stable/right.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+g
+vaeTAAAACXBIWXMAAAsSAAALEgHS3X78AAAAB3RJTUUH0ggfBTIMSSXBPQAAAWVJ
+REFUeJytlCFvwkAYhp8uJyoqEBMTE00wJBjEBALBJA6/PzF+FaJ2SWVFEXWQTGwO
+AckmltQ0GYLknaDNDrZCu92bnLl89z7vl/vuoIUk3bapb2M8lLTRQamkG9eAWJLy
+PC8ZenEKkZRIUr/fV5qm7iEVIAxDBUHgHmIDgL9BJN1Jikqz05XbgNYQSUFlck42
+oCnEKwFjIFmtVsxms9ogWZax2+2O9oIgII5jRqMRwCtw73ne+2kHY0lKkuQoYdN1
+rpOr2rgtVBQFk8mExWIB0ANiSb4zgA3JsgxgAEydAurkDFBd9nA4hMNlPzkD1ExS
+AWDsQt/3CcOw1mi73bLf75uY/xjTa0mfbR+aMebiQzMAnud9SJoCj4D/S/gB0Dk6
+aAzz+fx88qaStLQ7MMYoiqIq+brRZ3cBsK4AJ+Zvknr/MrcB3W7XvXkJeJak5XLp
+3rwEPFjDtHFqbkF65a/buVz9rS93agABk59L/wAAAABJRU5ErkJggg==
+
+------------CmSnST95qaLGqB1uxC2Oyl--

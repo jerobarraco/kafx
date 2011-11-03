@@ -1,0 +1,478 @@
+Content-Type: multipart/related; start=<op.mhtml.1219973339750.18ce0d3e120aa7a8@192.168.1.99>; boundary=----------pYWqt3f4uj288M1hkguaun
+Content-Location: http://neuron2.net/www.math.berkeley.edu/benrg/avisynth-extensions.html
+Subject: =?utf-8?Q?Writing=20Avisynth=20plugins?=
+MIME-Version: 1.0
+
+------------pYWqt3f4uj288M1hkguaun
+Content-Disposition: inline; filename=avisynth-extensions.html
+Content-Type: text/html; name=avisynth-extensions.html
+Content-Id: <op.mhtml.1219973339750.18ce0d3e120aa7a8@192.168.1.99>
+Content-Location: http://neuron2.net/www.math.berkeley.edu/benrg/avisynth-extensions.html
+Content-Transfer-Encoding: 8bit
+
+<html><head><title>Writing Avisynth plugins</title></head><body>
+
+
+<h1>Writing Avisynth plugins</h1>
+
+
+<h2>An example</h2>
+
+<p>I'll start off with a complete, working Avisynth plugin.  It's called "Invert," and it produces a photo-negative of the input clip.
+
+<p>Here's Invert.cpp:
+
+<font color="#0000C0"><pre>
+#include "avisynth.h"
+
+
+class Invert : public GenericVideoFilter {
+public:
+    Invert(PClip _child) : GenericVideoFilter(_child) {}
+    PVideoFrame __stdcall GetFrame(int n, IScriptEnvironment* env);
+};
+
+
+PVideoFrame __stdcall Invert::GetFrame(int n, IScriptEnvironment* env) {
+
+    PVideoFrame src = child->GetFrame(n, env);
+    PVideoFrame dst = env->NewVideoFrame(vi);
+
+    const unsigned char* srcp = src->GetReadPtr();
+    unsigned char* dstp = dst->GetWritePtr();
+
+    const int src_pitch = src->GetPitch();
+    const int dst_pitch = dst->GetPitch();
+    const int row_size = dst->GetRowSize();
+    const int height = dst->GetHeight();
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < row_size; x++)
+            dstp[x] = srcp[x] ^ 255;
+        srcp += src_pitch;
+        dstp += dst_pitch;
+    }
+
+    return dst;
+}
+
+
+AVSValue __cdecl Create_Invert(AVSValue args, void* user_data, IScriptEnvironment* env) {
+    return new Invert(args[0].AsClip());
+}
+
+
+extern "C" __declspec(dllexport) const char* __stdcall AvisynthPluginInit(IScriptEnvironment* env) {
+    env->AddFunction("Invert", "c", Create_Invert, 0);
+    return "`Invert' sample plugin";
+}
+</pre></font>
+
+Compile this file into a DLL named Invert.dll.  Now create an Avisynth script which looks something like this:
+
+<pre>
+LoadPlugin("d:\path\Invert.dll")
+clip = AVISource("d:\path2\video.avi")
+return clip.Invert()
+</pre>
+
+If all is well, you should see a photo negative of your video clip when you open this script.
+
+
+<h2>How it works</h2>
+
+<p>Here's a line-by-line breakdown of Invert.cpp.
+
+
+<p><font color="#0000C0"><tt>#include "avisynth.h"</tt></font>
+
+<p>This header declares all the classes and miscellaneous constants that you might need when writing a plugin.  All external plugins should #include it.
+
+<p>External plugins do not link with <tt>avisynth.dll</tt>, so they can't directly access functions that are defined in the main Avisynth source code.  Therefore, every important function in <tt>avisynth.h</tt> is either defined inline or declared as <tt>virtual</tt>.  The virtual functions act as callbacks for external DLLs.
+
+
+<p><font color="#0000C0"><tt>class Invert : public GenericVideoFilter {</tt></font>
+
+<p>An Avisynth filter is simply a C++ class implementing the <tt>IClip</tt> interface.  <tt>IClip</tt> has four pure virtual methods: <tt>GetVideoInfo</tt>, <tt>GetFrame</tt>, <tt>GetParity</tt>, and <tt>GetAudio</tt>.
+
+<p>The class <tt>GenericVideoFilter</tt> is a simple do-nothing filter defined in <tt>avisynth.h</tt>.  It derives from <tt>IClip</tt> and implements all four methods.  Most filters can inherit from <tt>GenericVideoFilter</tt> rather than directly from <tt>IClip</tt>; this saves you from having to implement methods that you don't care about, like <tt>GetAudio</tt>.
+
+
+<p><font color="#0000C0"><tt>    Invert(PClip _child) : GenericVideoFilter(_child) {}</tt></font>
+
+<p>A <tt>PClip</tt> is a "smart pointer" to an <tt>IClip</tt>.  It maintains a reference count on the IClip object and automagically deletes it when the last PClip referencing it goes away.  For obvious reasons, you should always use PClip rather than IClip* to refer to clips.
+
+<p>Like a genuine pointer, a <tt>PClip</tt> is only four bytes long, so you can pass it around by value.  Also like a pointer, a <tt>PClip</tt> can be assigned a null value (0), which is often useful as a sentinel.  Unlike a pointer, <tt>PClip</tt> is initialized to 0 by default.
+
+<p>You'll need to make sure your class doesn't contain any circular <tt>PClip</tt> references, or any <tt>PClip</tt>s sitting in dynamically allocated memory that you forget to <tt>delete</tt>.  Other than that, you don't have to worry about the reference-counting machinery.
+
+<p>Avisynth filters have a standardized output channel via <tt>IClip</tt>, but (unlike VirtualDub filters) no standardized input channel.  Each filter is responsible for obtaining its own source material -- usually (as in this case) from another clip, but sometimes from several different clips, or from a file.
+
+<p><tt>GenericVideoFilter</tt> has a single constructor taking a single clip, which it then simply passes through to its output.  We will override the <tt>GetFrame</tt> method to do something more useful, while leaving the other three methods as-is to pass through aspects of the clip that we don't need to change.
+
+
+<p><font color="#0000C0"><tt>PVideoFrame Invert::GetFrame(int n, IScriptEnvironment* env) {</tt></font>
+
+<p>This method is called to make our filter produce frame <tt>n</tt> of its output.  The second argument, <tt>env</tt>, is for our purposes simply a callback suite.  It is actually implemented in Avisynth by a class called <tt>ScriptEnvironment</tt>.  One instance of this class is created for each opened AVS script, so there may sometimes be several instances active at once.  It is important that the callback functions be called through the proper instance.  A particular instance of your class will only be used in one ScriptEnvironment, but different instances might be used in different ScriptEnvironments.
+
+<p>This method returns a PVideoFrame, which is a smart pointer like PClip.
+
+
+<p><font color="#0000C0"><tt>    PVideoFrame src = child->GetFrame(n, env);</tt></font>
+
+<p>"<tt>child</tt>" is a protected member of <tt>GenericVideoFilter</tt>, of type PClip.  It contains the clip that was passed to the constructor.  For our filter to produce frame <tt>n</tt> we need the corresponding frame of the input.  If you need a different frame from the input, all you have to do is pass a different frame number to <tt>child->GetFrame</tt>.
+
+<p><tt>GetFrame</tt> calls are usually intercepted by Avisynth's internal caching code, so the frame request may never actually reach the child filter.
+
+
+<p><font color="#0000C0"><tt>    PVideoFrame dst = env->NewVideoFrame(vi);</tt></font>
+
+<p>The <tt>NewVideoFrame</tt> callback allocates space for a video frame of the supplied size.  (In this case it will hold our filter's output.)  The frame buffer is uninitialized raw memory (except that in the debug build it gets filled with the repeating byte pattern 0A 11 0C A7 ED, which is easy to recognize because it looks like "ALLOCATED").
+
+<p>"<tt>vi</tt>" is another protected member of <tt>GenericVideoFilter</tt> (the only other member, actually).  It is a struct of type <tt>VideoInfo</tt>, which contains information about the clip (like frame size, frame rate, pixel format, audio sample rate, etc.).  <tt>NewVideoFrame</tt> uses the information in this struct to return a frame buffer of the appropriate size.
+
+<p>Frame buffers are reused once all the PVideoFrame references to them go away.  So usually <tt>NewVideoFrame</tt> won't actually need to allocate any memory from the heap.
+
+
+<p><font color="#0000C0">
+<tt>    const unsigned char* srcp = src->GetReadPtr();
+<br>    unsigned char* dstp = dst->GetWritePtr();
+</tt></font>
+
+<p>All frame buffers are readable, but not all are writable.  
+
+<p>The rule about writability is this: <i>A buffer is writable if and only if there is exactly one PVideoFrame pointing to it.</i>  In other words, you can only write to a buffer if no one else might be reading it.  This rule guarantees that as long as you hold on to a PVideoFrame and don't write to it yourself, that frame will remain unchanged.  The only drawback is that you can't have two PVideoFrames pointing to a writable buffer.  This can sometimes be an inconvenience, as I'll explain later.
+
+<p>Any buffer you get from <tt>NewVideoFrame</tt> is guaranteed to be writable (as long as you only assign it to one PVideoFrame!).  Our filter's <tt>dst</tt> came from NewVideoFrame, so we can safely call dst->GetWritePtr().  However, frames you get from other clips via <tt>GetFrame</tt> may not be writable, in which case GetWritePtr() will return a null pointer.
+
+<p>There is an <tt>IsWritable()</tt> method which you can call to find out if a buffer is writable or not, and there's a <tt>MakeWritable</tt> callback (described below) to ensure that it is.
+
+
+<p><font color="#0000C0">
+<tt>    const int src_pitch = src->GetPitch();
+<br>    const int dst_pitch = dst->GetPitch();
+</tt></font>
+
+<p>Just as in VirtualDub, the "pitch" of a frame buffer is the offset (in bytes) from the beginning of one scan line to the beginning of the next.  The source and destination buffers won't necessarily have the same pitch.
+
+<p>Buffers created by <tt>NewVideoFrame</tt> are always quadword (8-byte) aligned and always have a pitch that is a multiple of 8.
+
+
+<p><font color="#0000C0"><tt>    const int row_size = dst->GetRowSize();</tt></font>
+
+<p>The row size is the length of each row in bytes (not pixels).  It's usually equal to the pitch or slightly less, but it may be significantly less if the frame in question has been through <tt>Crop</tt>.
+
+<p>Since our source and destination frames have the same width and pixel format, they will always have the same row size.  Thus I only need one row_size variable, and I could just as well have called src->GetRowSize().
+
+
+<p><font color="#0000C0"><tt>    const int height = dst->GetHeight();</tt></font>
+
+<p>The height is the height.  (In pixels.)  Again, for our filter this is the same for the source and the destination.
+
+
+<font color="#0000C0"><pre>
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < row_size; x++)
+            dstp[x] = srcp[x] ^ 255;
+        srcp += src_pitch;
+        dstp += dst_pitch;
+    }
+</pre></font>
+
+<p>This is the code that does the actual work.  The "srcp += src_pitch; dstp += dst_pitch;" idiom is a useful way of dealing with potentially differing pitches without too much grief.
+
+
+<p><font color="#0000C0"><tt>    return dst;</tt></font>
+
+<p><tt>GetFrame</tt> returns the newly-created frame.  Our own references to this frame and to the source frame will go away with the <tt>src</tt> and <tt>dst</tt> variables.  Our caller will become sole owner of the destination frame (which therefore will still be writable), and the source frame will be retained in the cache and eventually recycled.  All through the magic of C++ classes.
+
+
+<p><font color="#0000C0"><tt>AVSValue __cdecl Create_Invert(AVSValue args, void* user_data, IScriptEnvironment* env) {</tt></font>
+
+<p>In order to use our new filter, we need a scripting-language function which creates an instance of it.  This is that function.
+
+<p>Script functions written in C++ take three arguments.  <tt>args</tt> contains all the arguments passed to the function by the script.  <tt>user_data</tt> contains the void pointer which you passed to <tt>AddFunction</tt> (see below).  Usually you won't need this.  <tt>env</tt> contains the same IScriptEnvironment pointer that will later be passed to <tt>GetFrame</tt>.
+
+<p><tt>AVSValue</tt> is a variant type which can hold any one of the following: a boolean value (true/false); an integer; a floating-point number; a string; a video clip (PClip); an array of AVSValues; or nothing ("undefined").  You can test which one it is with the methods <tt>IsBool()</tt>, <tt>IsInt()</tt>, <tt>IsFloat()</tt>, <tt>IsString()</tt>, <tt>IsClip()</tt>, <tt>IsArray()</tt>, and <tt>Defined()</tt> (which returns true if the AVSValue is not "undefined").  You can get the value with <tt>AsBool()</tt>, <tt>AsInt()</tt>, etc.  For arrays, you can use the <tt>ArraySize()</tt> method to get the number of elements, and <tt>[]</tt> indexing to get the elements themselves.  For convenience, <tt>IsFloat()</tt> and <tt>AsFloat()</tt> will work with integers also.  But boolean values are not treated as numeric (unlike C).
+
+<p>The name "Create_Invert" is arbitrary.  This function will actually be known as "Invert" in scripts, because that's the name we pass to <tt>AddFunction</tt> below.
+
+
+<p><font color="#0000C0"><tt>    return new Invert(args[0].AsClip());</tt></font>
+
+<p>The <tt>args</tt> argument passed to a script function will always be an array.  The return value should be any one of the other types (never an array).
+
+<p>The types of the values in the <tt>args</tt> array are guaranteed to match one of the function signatures that you pass to <tt>AddFunction</tt>, just as in VirtualDub.  Therefore, there's no need to worry about <tt>IsClip</tt> here.
+
+<p><tt>Create_Invert</tt> simply creates and returns a filter instance; it is automatically converted to an AVSValue via the constructor <tt>AVSValue(IClip*)</tt>.
+
+
+<p><font color="#0000C0"><tt>extern "C" __declspec(dllexport) const char* __stdcall AvisynthPluginInit(IScriptEnvironment* env) {</tt></font>
+
+<p>This is the only function which gets exported from the DLL.  It is called by the script function <tt>LoadPlugin</tt> the first time this plugin in loaded <em>in a particular script</em>.  If several scripts are open at once and more than one of them loads this plugin, <tt>AvisynthPluginInit</tt> may be called more than once with different IScriptEnvironments.  Therefore:
+
+<ul>
+<li>You should not save the <tt>env</tt> parameter in a global variable.
+<li>If you need to initialize any static data, you should do it in <tt>DLLMain</tt>, not in this function.
+</ul>
+
+<p>The main purpose of the <tt>AvisynthPluginInit</tt> function is to call <tt>env->AddFunction</tt>.
+
+
+<p><font color="#0000C0"><tt>    env->AddFunction("Invert", "c", Create_Invert, 0);</tt></font>
+
+<p>As promised, we now call <tt>AddFunction</tt> to let Avisynth know of the existence of our filter.  This function takes four arguments: the name of the new script function; the parameter-type string; the C++ function implementing the script function; and the <tt>user_data</tt> cookie.
+
+<p>The parameter-type string is similar to the corresponding entity in VirtualDub, except that:
+
+<ul>
+<li>No return type is given.  Function return values are not type-checked; you can return anything you like.
+<li>There are more types: along with 'i'nt and 's'tring you can specify 'b'ool, 'f'loat, and 'c'lip.
+<li>You can follow any type with '*' or '+' to indicate "zero or more" or "one or more" respectively.  In this case all the matching arguments will be gathered into a sub-array.  For example, if your type string is "is+f", then the integer argument will be args[0], the string arguments will be args[1][0], args[1][1], etc. (and there will be args[1].ArraySize() of them), and the float argument will be args[2].
+<li>'.' matches a <em>single</em> argument of any type.  To match multiple arguments of any type, use ".*" or ".+".
+<li>You can have named arguments, by specifying the name in [brackets] before the type.  Named arguments are also optional arguments; if the user omits them, they will be of the undefined type instead of the type you specify.  For convenience, <tt>AVSValue</tt> offers a set of <tt>As...()</tt> functions which take default values.  See <tt>avisynth.h</tt>.
+</ul>
+
+
+<p><font color="#0000C0"><tt>    return "`Invert' sample plugin";</tt></font>
+
+<p>The return value of <tt>AvisynthPluginInit</tt> is a string which can contain any message you like, such as a notice identifying the version and author of the plugin.  This string becomes the return value of <tt>LoadPlugin</tt>, and will almost always be ignored.  You can also just return 0 if you prefer.
+
+
+<h2>Variations</h2>
+
+
+<h3>An in-place filter</h3>
+
+<p>The <tt>Invert</tt> filter could easily do its work in a single buffer, rather than copying from one buffer to another.  Here's a new implementation of <tt>GetFrame</tt> that does this.
+
+<font color="#0000C0"><pre>
+PVideoFrame Invert::GetFrame(int n, IScriptEnvironment* env) {
+
+    PVideoFrame frame = child->GetFrame(n, env);
+
+    env->MakeWritable(&frame);
+
+    unsigned char* p = frame->GetWritePtr();
+    const int pitch = frame->GetPitch();
+    const int row_size = frame->GetRowSize();
+    const int height = frame->GetHeight();
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < row_size; x++)
+            p[x] ^= 255;
+        p += pitch;
+    }
+
+    return frame;
+}
+</pre></font>
+
+<p>The key difference between this version of the function and the original version is the presence of the <tt>MakeWritable</tt> callback.  This is necessary because this time "we don't know where that frame's been."  Someone else in the filter chain may be holding a reference to it, in which case we won't be allowed to write to it.
+
+<p><tt>MakeWritable</tt> is a simple solution to this problem.  It is implemented as follows (in avisynth.cpp):
+
+<font color="#004080"><pre>
+bool ScriptEnvironment::MakeWritable(PVideoFrame* pvf) {
+  const PVideoFrame& vf = *pvf;
+
+  // If the frame is already writable, do nothing.
+
+  if (vf->IsWritable()) {
+    return false;
+  }
+
+  // Otherwise, allocate a new frame (using NewVideoFrame) and
+  // copy the data into it.  Then modify the passed PVideoFrame
+  // to point to the new buffer.
+
+  else {
+    const int row_size = vf->GetRowSize();
+    const int height = vf->GetHeight();
+    PVideoFrame dst = NewVideoFrame(row_size, height);
+    BitBlt(dst->GetWritePtr(), dst->GetPitch(), vf->GetReadPtr(), vf->GetPitch(), row_size, height);
+    *pvf = dst;
+    return true;
+  }
+}
+</pre></font>
+
+
+<h3>A filter that changes the frame size</h3>
+
+<p>In order to effect a change in frame size, two things must happen:
+
+<ul>
+<li>your <tt>GetVideoInfo</tt> method must return a <tt>VideoInfo</tt> struct with the appropriate size, and
+<li>your <tt>GetFrame</tt> method must return video frames of the appropriate size.
+</ul>
+
+<p>If you derive your filter class from <tt>GenericVideoFilter</tt>, then a convenient way to achieve both of these things is to assign the new values to <tt>vi.width</tt> and <tt>vi.height</tt> in your class constructor.  This way you won't have to override <tt>GetVideoInfo</tt>, since <tt>GenericVideoFilter</tt>'s implementation just returns <tt>vi</tt>.  And if you allocate your output frames using <tt>env->NewVideoFrame(vi)</tt>, then they will be of the appropriate size as well.
+
+<p>For an example of a simple filter which does this, see <tt>Crop</tt> or <tt>StackVertical</tt>.
+
+
+<h3>A filter which processes audio</h3>
+
+<p>Audio processing is handled through the <tt>GetAudio</tt> method, which has the following prototype:
+
+<p><tt>void GetAudio(void* buf, int start, int count, IScriptEnvironment* env);</tt>
+
+<p>You must fill in the <tt>buf</tt>fer with <tt>count</tt> samples beginning with sample number <tt>start</tt>.  A sample may vary from one to four bytes, depending on whether the audio is 8- or 16-bit and mono or stereo.  The flags <tt>vi.stereo</tt> and <tt>vi.sixteen_bit</tt> will tell you this.
+
+<p>If you cannot do your audio processing in-place, you must allocate your own buffer for the source audio using <tt>new</tt> or <tt>malloc</tt>.
+
+
+<h3>A filter which rearranges frames</h3>
+
+<p>Many of the built-in filters do nothing more than rearrange video frames (for example <tt>Trim</tt>, <tt>Splice</tt>, <tt>SelectEvery</tt>, <tt>Interleave</tt>, <tt>Reverse</tt>, and <tt>ChangeFPS</tt>).  If you want to do this, you can write a <tt>GetFrame</tt> method like this:
+
+<font color="#0000C0"><pre>
+PVideoFrame GetFrame(int n, IScriptEnvironment* env) {
+    return child->GetFrame(ConvertFrameNumber(n), env);
+}
+</pre></font>
+
+<p>But you must also do three other things:
+
+<ul>
+<li>Write a companion <tt>GetParity</tt> method so that field information is preserved; for example, <font color="#0000C0"><tt>bool GetParity(int n) { return child->GetParity(ConvertFrameNumber(n)); }</tt></font>;
+<li>Set <tt>vi.num_frames</tt> and/or call <tt>vi.SetFPS</tt> at instance construction time, if you change the frame count or frame rate;
+<li>Decide what you want to do with the audio track, and write a <tt>GetAudio</tt> method if necessary.
+</ul>
+
+
+<h2>Other useful methods in IScriptEnvironment</h2>
+
+
+<p><font color="#004080"><tt>__declspec(noreturn) virtual void ThrowError(const char* fmt, ...);</tt></font>
+
+<p>This function throws an exception (of type <tt>AvisynthError</tt>).  Usually, your error message will end up being displayed on the user's screen in lieu of the video clip they were expecting.
+
+<p>You can safely call <tt>ThrowError</tt> from anywhere except inside <tt>GetParity</tt> and <tt>GetVideoInfo</tt>.
+
+<p>I declared this function as <tt>__declspec(noreturn)</tt> to prevent "not all control paths return a value" warnings.  But it didn't work -- I still get the warnings.  Go figure.
+
+
+<p><font color="#004080"><tt>virtual long GetCPUFlags();</tt></font>
+
+<p>This is exactly the same as the corresponding VirtualDub function (to the point of being implemented with code taken directly from VirtualDub -- sorry Avery ;-) ).
+
+<p>To find out if you're running on a CPU that supports MMX, test <tt>env->GetCPUFlags() & CPUF_MMX</tt>.  There's a complete list of flags in <tt>avisynth.h</tt>.
+
+
+<p><font color="#004080"><tt>virtual char* SaveString(const char* s, int length = -1);</tt></font>
+
+<p>This function copies its argument to a safe "permanent" location and returns a pointer to the new location.
+
+<p>Each <tt>ScriptEnvironment</tt> instance has a buffer set aside for storing strings, which is expanded as needed.  The strings are not deleted until the <tt>ScriptEnvironment</tt> instance goes away (when the script file is closed, usually).  This is usually all the permanence that is needed, since all related filter instances will already be gone by then.
+
+<p>The returned pointer is not const-qualified, and you're welcome to write to it, as long as you don't stray beyond the bounds of the string.
+
+
+<p><font color="#004080"><tt>virtual char* Sprintf(const char* fmt, ...);</tt></font>
+<p><font color="#004080"><tt>virtual char* VSprintf(const char* fmt, char* val);</tt></font>
+
+<p>These store strings away in the same way as <tt>SaveString</tt>, but they treat their arguments like <tt>printf</tt> and <tt>vprintf</tt>.
+
+<p>Currently there's a size limit of 4096 characters on strings created this way.  (The implementation uses <tt>_vsnprintf</tt>, so you don't need to worry about buffer overrun.)
+
+
+<p><font color="#004080"><tt>virtual AVSValue Invoke(const char* name, const AVSValue args, const char** arg_names=0);</tt></font>
+
+<p>You can use this to call a script function.  There are many script functions which can be useful from other filters; for example, the <tt>Bob</tt> filter uses <tt>SeparateFields</tt>, and several source filters use <tt>UnalignedSplice</tt>.  Some functions, like <tt>Weave</tt>, are implemented entirely in terms of other functions.
+
+<p>If you're calling a function taking exactly one argument, you can simply pass it in the <tt>args</tt> parameter; <tt>Invoke</tt> will convert it into an array for you.  In order to call a function taking multiple arguments, you will need to create the array yourself; it can be done like this:
+
+<pre>
+    AVSValue args[5] = { clip, 0, true, 4.7, "my hovercraft is full of eels" };
+    env->Invoke("Frob", AVSValue(args, 5));
+</pre>
+
+<p>In this case <tt>Frob</tt> would need to have a parameter-type string like "cibfs" or "cfbfs" or "cf.*".
+
+<p>The <tt>arg_names</tt> parameter can be used to specify named arguments.  Named arguments can also be given positionally, if you prefer.
+
+<p><tt>Invoke</tt> throws <tt>IScriptEnvironment::NotFound</tt> if it can't find a matching function prototype.  You should be prepared to catch this unless you know that the function exists and will accept the given arguments.
+
+
+<p><font color="#004080"><tt>virtual void BitBlt(unsigned char* dstp, int dst_pitch, const unsigned char* srcp, int src_pitch, int row_size, int height);</tt></font>
+
+<p>This brilliantly-named function does a line-by-line copy from the source to the destination.  It's useful for quite a number of things; the built-in filters <tt>DoubleWeave</tt>, <tt>FlipVertical</tt>, <tt>AddBorders</tt>, <tt>PeculiarBlend</tt>, <tt>StackVertical</tt>, <tt>StackHorizontal</tt>, and <tt>ShowFiveVersions</tt> all use it to do their dirty work.
+
+
+<p><font color="#004080"><tt>typedef void (__cdecl *ShutdownFunc)(void* user_data, IScriptEnvironment* env);</tt></font>
+<br><font color="#004080"><tt>virtual void AtExit(ShutdownFunc function, void* user_data);</tt></font>
+
+<p>If you find yourself wanting an <tt>AvisynthPluginShutdown</tt> export, this is the way to get that effect.  Functions added through <tt>AtExit</tt> are called (in the opposite order that they were added) when the corresponding ScriptEnvironment goes away.
+
+<p><hr>
+
+<p><a href="../benrg/email.html"><img src="../benrg/sig.gif" width=305 height=59 alt="Ben Rudiak-Gould"></a>
+
+<ul>
+<li><a href="../benrg/index.html">Home</a>
+<li>Software
+  <ul>
+  <li><a href="../benrg/avisynth.html">Avisynth</a>
+    <ul>
+    <li><a href="../benrg/avisynth-tutorial.html">language tutorial</a>
+    <li><a href="../benrg/avisynth-reference.html">language reference</a>
+    <li><a href="../benrg/avisynth-premiere.html">Adobe Premiere plugins</a>
+    <li><a href="../benrg/avisynth-apps.html">supported applications</a>
+    <li><a href="../benrg/avisynth-beta.html">1.0 beta</a>
+      <ul>
+      <li><b>Writing Avisynth plugins</b>
+      </ul>
+    </ul>
+  <li><a href="../benrg/huffyuv.html">HuffYUV</a>
+  <li><a href="../benrg/tmpgenc-english.html">TMPGEnc English patch</a>
+  <li><a href="../benrg/trflight.html">Tomb Raider flight patch</a>
+  </ul>
+<li>Texts
+  <ul>
+  <li><a href="../benrg/donations.html">Donations</a>
+  <li><a href="../benrg/copyright-dmca.html">Digital media and the DMCA</a>
+  </ul>
+</ul>
+
+<p><hr>
+
+</body></html>
+
+------------pYWqt3f4uj288M1hkguaun
+Content-Disposition: inline; filename=sig.gif
+Content-Type: image/gif; name=sig.gif
+Content-Location: http://neuron2.net/www.math.berkeley.edu/benrg/sig.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODdhMQE7AIAAAAAAAP///ywAAAAAMQE7AAAC/oyPqcvtD6OctNqLs968+w+G
+4kiW5omm6sq27guHAPDQdNzZ887P6I37AA09XmRXGxaHFCPEh1gGfM4TVLPMVkVM
+1dXRBR+20++CrEBqzY11eEyUjm/FUu9yP6I5bCvyOQHVN/cmCFh29sewp5gW9zaV
+CAn5REcpednWyJcJYpgUuJfQd3VJRTlYZkpKVKOZmFHaqbpZIWox61FaGZo62gXk
+S8ublmsmHAcGnPsb1amIXMm8uCJ7KFGr7DyXhMwWvQ2n59qM56i8zAkOm/Ll3TTt
+Hiytp7SeLE78Gm6bvn+uDsM0LKOOwMPFDZ82bPbM5QNF7uHBcuwqbsgG8UfD/oz6
+miSM1DHjPX6z3kURaJFfyovxBgpUMo6hQ5CIrsWsObOkwY8TARZcKISZS5Q82/T0
+2Copx5hDk4F7pjKQ0WJLA2LzAnPnVYeCngk9RRBnRKAvp/4Uw6VkU1tRzWplWzPa
+QLCxdGyt2s+twkVryf6zUhTt3Yl0bW4d2Uyu14uCJa4MathEMLVI8yJSjMtuXbF/
+/81FRVGvjFXV9o59K7XV07lKy2K2yZqsMMSW+WJtHdnvTc25D9HmRhl2bWondadt
+7Ifzabyy17m0FDa4SLjIUfUNZRvryK/DnX82TXhw43iGJ12vHNpPS/QhlXfe/Xwe
+arP3TIK/LznM+V7D/nuvxHgGHja4p89rEdX31je/seSTRpmxhwlVBh4E3VFPaeVd
+gvYsyGBbdgBIXGp8DVIhc+RYYgwTAHZ1jXM3/cJhDme1A2KA7NXhmYKOHYYiPcXI
+4sRsk4kIlBxBuMNCifOhY6Qq6Tk5DIEQyUNiKms8eVaKOMK4ZXGeCBnYh/iFWM+A
+I3rJJTTxmebGflBqomCbtdzySFBXhkMbkKJsaBSdDU7pZoGrBIrbI10SkgeGS90p
+yYgb5Ylij+k1wuiS+xA6Voy6bCkXdmPiw2k2NUL5CULgqcnkMdQxpOmNR2LUqUyF
+UiXlJt7RMWt77BQCInnwtCprmDTKg+Z7nllK/uunu0ppnITL2PdisO0km6SOO/5Z
+ZLTZMfsKbxDCSe1yzYJbWrgOWpRJffL5l+Wayj62rbBk6opONYVUq1e6q+q004Is
+9tccwMhJg6mx3EKWL7s2HswwSGuV+u2Z8sarcGIFz4vlaKeRht5iBnEIMZHaDCmw
+aGgBS++7Hf41m6m5ZmwxYzR5ysu6EZuc3cXwTsxHSNa5PGG3D3srrdAqY2twsjoj
+7eGmkYGGhceggIzrqiMrKbK42y7dNMwrUzyz19ouPPXQDRebc9UuIxsa1zy/PZPJ
+5n2NM61mj9o1nmpbrbVPKPf9o8bGTSIg2mRfHd16LV5r4uHxus34zmUN/pwrpIYz
+neVmR79MUuRJm0v23+OCHXWzrMQdtuRe/mZN0SHu8qDr1Ir+ucScJG3t2qmDHnrh
+cL/b+u6NYy4R5JzXK6PkuR/F7YW/E+KMV/rutZ1QHdFOOqvXxbncUN8M/1D1vEfP
+sVjqWi+S8cL/enud13vvT/aTpqh6lMeKjSjN9Km/fj9U+/kRf+mHcCdrFPKURzSA
+kCJdAHwb1pJjJ/iJ72xMExW5zDNAXzBib8Sp0s/OJj3+UVB7asHbj7BnqH+l8A/W
+0QIJ61AjP9kKGjfLmx0+JKcGgi8HatBBolSmwxNSalBl+mH/gqC7EbTpiEgERPma
+CMUoSnGKVKyiERWviMUsanGLXOyiF78YhAIAADs=
+
+------------pYWqt3f4uj288M1hkguaun--

@@ -1,0 +1,690 @@
+Content-Type: multipart/related; start=<op.mhtml.1270238722976.22f04a536849576c@192.168.1.99>; boundary=----------aO61vjvD2thSw7Dt2QdXeB
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/glyphs-6.html
+Subject: =?utf-8?Q?FreeType=20Glyph=20Conventions?=
+MIME-Version: 1.0
+
+------------aO61vjvD2thSw7Dt2QdXeB
+Content-Disposition: inline; filename=glyphs-6.html
+Content-Type: text/html; charset=iso-8859-1; name=glyphs-6.html
+Content-ID: <op.mhtml.1270238722976.22f04a536849576c@192.168.1.99>
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/glyphs-6.html
+Content-Transfer-Encoding: 8bit
+
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en"
+          "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=iso-8859-1">
+  <meta name="Author"
+        content="David Turner">
+  <title>FreeType Glyph Conventions</title>
+</head>
+
+<body text="#000000"
+      bgcolor="#FFFFFF"
+      link="#0000EF"
+      vlink="#51188E"
+      alink="#FF0000">
+
+<h1 align=center>
+  FreeType Glyph Conventions
+</h1>
+
+<h2 align=center>
+  Version&nbsp;2.1
+</h2>
+
+<h3 align=center>
+  Copyright&nbsp;1998-2000 David Turner (<a
+  href="mailto:david@freetype.org">david@freetype.org</a>)<br>
+  Copyright&nbsp;2000, 2006 The FreeType Development Team (<a
+  href="mailto:devel@freetype.org">devel@freetype.org</a>)
+</h3>
+
+<center>
+<table width="65%">
+<tr><td>
+
+  <center>
+  <table width="100%"
+         border=0
+         cellpadding=5>
+  <tr bgcolor="#CCFFCC"
+      valign=center>
+    <td align=center
+        width="30%">
+      <a href="glyphs-5.html">Previous</a>
+    </td>
+    <td align=center
+        width="30%">
+      <a href="index.html">Contents</a>
+    </td>
+    <td align=center
+        width="30%">
+      <a href="glyphs-7.html">Next</a>
+    </td>
+  </tr>
+  </table>
+  </center>
+
+  <p><hr></p>
+
+  <table width="100%">
+  <tr bgcolor="#CCCCFF"
+      valign=center><td>
+    <h2>
+      VI. FreeType outlines
+    </h2>
+  </td></tr>
+  </table>
+
+    <p>The purpose of this section is to present the way FreeType manages
+    vectorial outlines, as well as the most common operations that can be
+    applied on them.</p>
+
+    <a name="section-1">
+    <h3>
+      1. FreeType outline description and structure
+    </h3>
+
+      <h4>
+        a. Outline curve decomposition
+      </h4>
+
+      <p>An outline is described as a series of closed contours in the 2D
+      plane.  Each contour is made of a series of line segments and
+      B&eacute;zier arcs.  Depending on the file format, these can be
+      second-order or third-order polynomials.  The former are also called
+      quadratic or conic arcs, and they are used in the TrueType format.
+      The latter are called cubic arcs and are mostly used in the
+      Type&nbsp;1 format.</p>
+
+      <p>Each arc is described through a series of start, end, and control
+      points.  Each point of the outline has a specific tag which indicates
+      whether it is used to describe a line segment or an arc.  The tags can
+      take the following values:</p>
+
+      <center>
+      <table cellspacing=5
+             cellpadding=5
+             width="80%">
+      <tr VALIGN=TOP>
+        <td valign=top>
+          <tt>FT_CURVE_TAG_ON</tt>
+        </td>
+        <td valign=top>
+          <p>Used when the point is "on" the curve.  This corresponds to
+          start and end points of segments and arcs.  The other tags specify
+          what is called an "off" point, i.e. a point which isn't located on
+          the contour itself, but serves as a control point for a
+          B&eacute;zier arc.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign=top>
+          <tt>FT_CURVE_TAG_CONIC</tt>
+        </td>
+        <td valign=top>
+          <p>Used for an "off" point used to control a conic B&eacute;zier
+          arc.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign=top>
+          <tt>FT_CURVE_TAG_CUBIC</tt>
+        </td>
+        <td valign=top>
+          <p>Used for an "off" point used to control a cubic B&eacute;zier
+          arc.</p>
+        </td>
+      </tr>
+      </table>
+      </center>
+
+      <p>Use the <tt>FT_CURVE_TAG(tag)</tt> macro to filter out other,
+      internally used flags.
+
+      <p>The following rules are applied to decompose the contour's points
+      into segments and arcs:</p>
+
+      <ul>
+        <li>
+          Two successive "on" points indicate a line segment joining them.
+        </li>
+        <li>
+          One conic "off" point amidst two "on" points indicates a conic
+          B&eacute;zier arc, the "off" point being the control point, and
+          the "on" ones the start and end points.
+        </li>
+        <li>
+          Two successive cubic "off" points amidst two "on" points indicate
+          a cubic B&eacute;zier arc.  There must be exactly two cubic
+          control points and two "on" points for each cubic arc (using a
+          single cubic "off" point between two "on" points is forbidden, for
+          example).
+        </li>
+        <li>
+          Finally, two successive conic "off" points forces the rasterizer
+          to create (during the scan-line conversion process exclusively) a
+          virtual "on" point amidst them, at their exact middle.  This
+          greatly facilitates the definition of successive conic
+          B&eacute;zier arcs.  Moreover, it is the way outlines are
+          described in the TrueType specification.
+        </li>
+      </ul>
+
+      <p>Note that it is possible to mix conic and cubic arcs in a single
+      contour, even though no current font driver produces such
+      outlines.</p>
+
+      <center>
+      <table>
+      <tr>
+        <td>
+          <img src="points_segment.png"
+               height=166 width=221
+               alt="segment example">
+        </td>
+        <td>
+          <img src="points_conic.png"
+               height=183 width=236
+               alt="conic arc example">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="points_cubic.png"
+               height=162 width=214
+               alt="cubic arc example">
+        </td>
+        <td>
+          <img src="points_conic2.png"
+               height=204 width=225
+               alt="cubic arc with virtual 'on' point">
+        </td>
+      </tr>
+      </table>
+      </center>
+
+
+      <h4>
+        b. Outline descriptor
+      </h4>
+
+      <p>A FreeType outline is described through a simple structure:</p>
+
+      <center>
+      <table cellspacing=3
+             cellpadding=3>
+      <caption>
+        <b><tt>FT_Outline</tt></b>
+      </caption>
+
+      <tr>
+        <td>
+          <tt>n_points</tt>
+        </td>
+        <td>
+          the number of points in the outline
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <tt>n_contours</tt>
+        </td>
+        <td>
+          the number of contours in the outline
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <tt>points</tt>
+        </td>
+        <td>
+          array of point coordinates
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <tt>contours</tt>
+        </td>
+        <td>
+          array of contour end indices
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <tt>tags</tt>
+        </td>
+        <td>
+          array of point flags
+        </td>
+      </tr>
+      </table>
+      </center>
+
+      <p>Here, <tt>points</tt> is a pointer to an array of
+      <tt>FT_Vector</tt> records, used to store the vectorial coordinates of
+      each outline point.  These are expressed in 1/64th of a pixel, which
+      is also known as the <em>26.6&nbsp;fixed float format</em>.</p>
+
+      <p><tt>contours</tt> is an array of point indices used to delimit
+      contours in the outline.  For example, the first contour always starts
+      at point&nbsp;0, and ends at point <tt>contours[0]</tt>.  The second
+      contour starts at point <tt>contours[0]+1</tt> and ends at
+      <tt>contours[1]</tt>, etc.</p>
+
+      <p>Note that each contour is closed, and that <tt>n_points</tt> should
+      be equal to <tt>contours[n_contours-1]+1</tt> for a valid outline.</p>
+
+      <p>Finally, <tt>tags</tt> is an array of bytes, used to store each
+      outline point's tag.</p>
+
+
+    <a name="section-2">
+    <h3>
+      2. Bounding and control box computations
+    </h3>
+
+    <p>A <em>bounding box</em> (also called <em>bbox</em>) is simply a
+    rectangle that completely encloses the shape of a given outline.  The
+    interesting case is the smallest bounding box possible, and in the
+    following we subsume this under the term "bounding box".  Because of the
+    way arcs are defined, B&eacute;zier control points are not necessarily
+    contained within an outline's (smallest) bounding box.</p>
+
+    <p>This situation happens when one B&eacute;zier arc is, for example,
+    the upper edge of an outline and an "off" point happens to be above the
+    bbox.  However, it is very rare in the case of character outlines
+    because most font designers and creation tools always place "on" points
+    at the extrema of each curved edges, as it makes hinting much
+    easier.</p>
+
+    <p>We thus define the <em>control box</em> (also called <em>cbox</em>)
+    as the smallest possible rectangle that encloses all points of a given
+    outline (including its "off" points).  Clearly, it always includes the
+    bbox, and equates it in most cases.</p>
+
+    <p>Unlike the bbox, the cbox is much faster to compute.</p>
+
+    <center>
+    <table>
+    <tr>
+      <td>
+        <img src="bbox1.png"
+             height=264 width=228
+             alt="a glyph with different bbox and cbox">
+      </td>
+      <td>
+        <img src="bbox2.png"
+             height=229 width=217
+             alt="a glyph with identical bbox and cbox">
+      </td>
+    </tr>
+    </table>
+    </center>
+
+    <p>Control and bounding boxes can be computed automatically through the
+    functions <tt>FT_Outline_Get_CBox()</tt> and
+    <tt>FT_Outline_Get_BBox()</tt>.  The former function is always very
+    fast, while the latter <em>may</em> be slow in the case of "outside"
+    control points (as it needs to find the extreme of conic and cubic arcs
+    for "perfect" computations).  If this isn't the case, it is as fast as
+    computing the control box.
+
+    <p>Note also that even though most glyph outlines have equal cbox and
+    bbox to ease hinting, this is not necessary the case anymore when a
+    transformation like rotation is applied to them.</p>
+
+
+    <a name="section-3">
+    <h3>
+      3. Coordinates, scaling and grid-fitting
+    </h3>
+
+    <p>An outline point's vectorial coordinates are expressed in the
+    26.6&nbsp;format, i.e. in 1/64th of a pixel, hence the coordinates
+    (1.0,-2.5) is stored as the integer pair (x:64,y:-192).</p>
+
+    <p>After a master glyph outline is scaled from the EM grid to the
+    current character dimensions, the hinter or grid-fitter is in charge of
+    aligning important outline points (mainly edge delimiters) to the pixel
+    grid.  Even though this process is much too complex to be described in a
+    few lines, its purpose is mainly to round point positions, while trying
+    to preserve important properties like widths, stems, etc.</p>
+
+    <p>The following operations can be used to round vectorial distances in
+    the 26.6&nbsp;format to the grid:</p>
+
+    <pre>
+    round( x )   == ( x + 32 ) &amp; -64
+    floor( x )   ==          x &amp; -64
+    ceiling( x ) == ( x + 63 ) &amp; -64</pre>
+
+    <p>Once a glyph outline is grid-fitted or transformed, it often is
+    interesting to compute the glyph image's pixel dimensions before
+    rendering it.  To do so, one has to consider the following:</p>
+
+    <p>The scan-line converter draws all the pixels whose <em>centers</em>
+    fall inside the glyph shape.  It can also detect <em>drop-outs</em>,
+    i.e. discontinuities coming from extremely thin shape fragments, in
+    order to draw the "missing" pixels.  These new pixels are always located
+    at a distance less than half of a pixel but it is not easy to predict
+    where they will appear before rendering.</p>
+
+    <p>This leads to the following computations:</p>
+
+    <ul>
+      <li>
+        <p>compute the bbox</p>
+      </li>
+      <li>
+        <p>grid-fit the bounding box with the following:</p>
+
+        <pre>
+    xmin = floor( bbox.xMin )
+    xmax = ceiling( bbox.xMax )
+    ymin = floor( bbox.yMin )
+    ymax = ceiling( bbox.yMax )</pre>
+      </li>
+      <li>
+        return pixel dimensions, i.e.
+
+        <pre>
+    width = (xmax - xmin)/64</pre>
+
+        and
+
+        <pre>
+    height = (ymax - ymin)/64</pre>
+      </li>
+    </ul>
+
+    <p>By grid-fitting the bounding box, it is guaranteed that all the pixel
+    centers that are to be drawn, <em>including those coming from drop-out
+    control</em>, will be <em>within</em> the adjusted box.  Then the box's
+    dimensions in pixels can be computed.</p>
+
+    <p>Note also that, when translating a grid-fitted outline, one should
+    <em>always use integer distances</em> to move an outline in the 2D
+    plane.  Otherwise, glyph edges won't be aligned on the pixel grid
+    anymore, and the hinter's work will be lost, producing <em>very low
+    quality </em>bitmaps and pixmaps.</p>
+
+
+  <p><hr></p>
+
+  <center>
+  <table width="100%"
+         border=0
+         cellpadding=5>
+  <tr bgcolor="#CCFFCC"
+      valign=center>
+    <td align=center
+        width="30%">
+      <a href="glyphs-5.html">Previous</a>
+    </td>
+    <td align=center
+        width="30%">
+      <a href="index.html">Contents</a>
+    </td>
+    <td align=center
+        width="30%">
+      <a href="glyphs-7.html">Next</a>
+    </td>
+  </tr>
+  </table>
+  </center>
+
+</td></tr>
+</table>
+</center>
+
+<font size=-1>Last update: 31-Aug-2006</font>
+
+</body>
+</html>
+
+------------aO61vjvD2thSw7Dt2QdXeB
+Content-Disposition: inline; filename=points_segment.png
+Content-Type: image/png; name=points_segment.png
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/points_segment.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAN0AAACmAQAAAAEBXYcjAAACXElEQVR42u2WT2sT
+QRiH67dQESNW8ROIeNqLXhQVvFkoPXiqsAQ8VKTUAc9FEOxBRQqCeqoHYxJwaeck
+e6i4h4Ko6e4ecshB41S2ZjeZzaxud2Pzi5tXm2qpJYHMmyfP/Hln5s2SkSiK1ka2
+3qhMcbPz6RsfZNKk8ePGjRvWp4swbnXQyewSv+jIKK/SKJKo/mA+iP6JlMXv+6u/
+EhVLokxZpJEnUaX9ZBrFQOvI7eWpRv1oOdN/fK1tRNdI83UHXyfaNdjSADlYiZ05
+oMSpOKCPCzFAH9NggD4myQBrO3s4im1ge2GhMFf0zrnrMzF+Wl2ePH998fHsvSvZ
+Y0X6TlG+tSYFVMEOX3c4xK4L7cIWosDOHFDhVBJRIDLANqbhI7qIDLCNW/ARXUQG
+2Mbt+4guoGKAEo9OIHJAhecsEU0S/89C+nF0QiXYOcWZBN+pxqqjTlb1s6diXFEN
++/KXotDHyzHaj4xrEzcKR8afnO5bDMS6Pbfw2fnw4NIm1i/MveBdqJdLnKic5p75
+deMrGMq9L8McIdcpqRHTetSaGiE9KluNkFVinz+fyFmyRpxQ98BfZI04WxjYK03i
+VkLqyixChtRlW4QMqTKxCNmkCmyekE2qNOcJ2SSKOshRUhtUDh8Y/0bKnu+4ZJvy
+69GrwX3zUPXgqDZrPbuzsn/NHJuwOiOLtmcvBRennx9u5I0puyCN6byZylbFbrwv
+VcYqjlN3H07ZT2NZzkqIU9nmtr5P5VIS/rz2yrslqb86/lLPlJWyypv6Uj1LhvsO
+BN7tY2/OuP2yXRxW366Q3wHg0892Rx3C4wAAAABJRU5ErkJggg==
+
+------------aO61vjvD2thSw7Dt2QdXeB
+Content-Disposition: inline; filename=points_conic.png
+Content-Type: image/png; name=points_conic.png
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/points_conic.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAOwAAAC3AQAAAAFO5r8bAAADFUlEQVR42u2Vz2sT
+QRTHgx48FsGbSgWh/4D4A8WuhwpK0R57qgURsaRJoWqr3dbxZC8FQRDqpTkIgkLp
+oW6XUswcFHOp7kFo1ZCuUrGUNtlq1UmzmVmzm02yO9mdabI9+CN7mH3f+bzZeW/m
+zWzIMIx8iNFAs0EMF0L1YbNRzEb44TssG6jBdB+wrWx6IhtC3sPM55PT0Kp6vAwM
+anAuGngbPqvrKPbN1TOb6M0sgW1OUaeBqhG0DVjuwbQPNqaKBjByJUR8piDGDi+U
+HihTEkdxVQOeOzh7oWvfRRMpI2g6bPaAHV1w+8nXpXVK57jjoUtr1f4ae7yQ1526
+4E2Eira+TsC240VuTeh4VEpDSgO3zlHzYUrrlEaUTnB04P0yYlpFEz0hScsDC+/J
+ArR4y/f+zUPXu54fzXT6jEflRTB1bvGmeFvSnvb/BDsV3z+uOfVXxf+6fImQd+lC
+ggrln3dqs5bmHefVMivauqcdGtcYD+JwjcNVDoccDticcOLHHK5zOKpx/5Qa9Z9X
+f93u/wextlizdWSIfH24JkbCIGFpIGaItLYV6cGL1n3Y+wyJZwcWpehbZI/fqm1+
+XS9vuqkfha+MnnogfuzUBEtPDRmTIpE3360U+dQtY1Jekn8lUfH+hdT3YOP+9Hs2
+GlgOhB1XkxcGRhDs5eHGiJM3CLZqiDMasDHywYg9N7JUqMn/45/NZg/ywaQY1ijw
+xpv2e9Qbl/9VdwXmfme9MGYmBnQ21thYDVJMhL3mmI11/o4xsMbESGVjyP44YGLC
+rnPMxjobIzbWAuFuNhbYGDAxYR//DRAEN341deFCMbUXXsNWVREXJuDA1Y7msaaO
+g09aJy63KSeHz42TI0IZn0bTEfJLHUjP3Vk/Hr63P54eFD/AEsYv5GgqnobH0nOX
+0pI8k4zPIFEG1MUFASvyL0SoN7FCHPdLh02tnCjHMQBVV28Jv04djqqDbe19cvJG
+j/xGmr6GH/dVcCYl98UGo0lFLuQOU1AcwVZeNl5d3tXSeuLV+eaXK2NnlOX5veNk
+d6yCtUYp/i/4N4wh9ZXV3JF6AAAAAElFTkSuQmCC
+
+------------aO61vjvD2thSw7Dt2QdXeB
+Content-Disposition: inline; filename=points_cubic.png
+Content-Type: image/png; name=points_cubic.png
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/points_cubic.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAANYAAACiAQAAAAFiLD7CAAADXklEQVR42u1XTWgT
+QRQuIngQvPUg1eYmVkERhIqiXqSXFk/Wag/24EGttDkEUm3azqHeVAIe/EWCpx6k
+CmKz1CWZg9oiUosUlbqsk4JY1CarRjOtm5l1f2aTmW2ybSQVxS7Jvvn2m/czb9+8
+TGoMw0jVlLwtaCUIwka4rBoqR3huoOjIHkEGqeiotA/ob9688suS0JK6YX5Maa7J
+6PDM04uYLmUPRdBYX18Bf8cDSJXLzZ+vQIKl5g06kjCMPTw0GY8e5LA1HZtSYxKx
+55BJ4EhacdyOxBTnLJldmMsmInycbB6B1Jb7Lw4Azt/y7LMrVW0YM7+0CIF74yYj
+FxKvKQooDzXnlTBoUwC4EPuFQQVIdGeMxcnU2UoYMBxzJoum3ogQCTAPRLiSieXh
+nT0ztzdelUbWh7dZ8FYuAXpxdE6FKmC5ivC6ANsZQTb8er+us0F6d006Nm11g8SN
+NemG81LzzSMzILXCtfFPwFetrW1EZPMr5DcVEIs/z8Oss5dciIS9YG0pLkgibjrd
+adGCX60AkRgGdA1wG9YbMxQhYhCLK9Kcsc4g80M8yw9UAqud9nwl8N8sYM2YtGrB
+OQ7U9o6Mbh7dcvru4QsW/JZMYNCeGbpyFFowI7eNyO05Kfw66JqCgmUS8vM7a71k
+T29nsGP3sNGkdyrHhz/Z544f94yeyFl0Im3D7W+3PjsUetD2sPb5X9pzhCu/yi3B
+aT6c7A7IYm7SEZnMBx9/5E+vj1SiZ3e5xwZdV8Zm1ulqpTgKCj8ui7hZN0FE5Iir
+VjovhY4cW8y5j8z/DUjgEHdcMg569TAXFPFw3Gko79Gj3NGIuWYcMXQ+kxgJekIp
+iX8dDCC8gpgnL4JRjkOzIkd5Peh5r4NFjhplOaL71ITmw8HyHPWpM8WH03w4WJ77
+Yvwet9oHq85ZW+e9Vd1U5BCra8kqYmrXdKF21bgWn1MkVbr8qElNdkld8ZfJtAQc
+bofWryggIalyNzqQxs1JPfmxx+FeoMCmllBgPDg1trYF1IekyV314Xkhzp8dqMpr
+RwSyxuO2F5sbOzU1fubSuZPDOwOxJxP7okPXG/cufA7YXKTRDH6aqIk4iCbTCpA3
+5OrmM45eWJuQu6f6TQ4F40+VoNwVV3IZxPwhn1ii/2ed/QKA0siofI5FkAAAAABJ
+RU5ErkJggg==
+
+------------aO61vjvD2thSw7Dt2QdXeB
+Content-Disposition: inline; filename=points_conic2.png
+Content-Type: image/png; name=points_conic2.png
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/points_conic2.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAOEAAADMAQAAAAHa/cmpAAAEtUlEQVR42u1YS2wb
+RRheiUMlDhxA4iGQfKmEBEJBCFARbXzh0AMCqYciiGgQElDJcZyq4AZZ7ljiUBBU
+PSACLVV9IRdM46LKNqqxF1oiHlVjtSiOko29oNAYnKy31NSbZHZ22PXOvsbrad0E
+ClJs2bPffP//zzcz/zxsDmO8wvX+pWDeWyd22rVy28ynP0HIcptJj/rEu9LlC3bW
+iV2N+Y666QF5xHyCMUTqFDxsmVxzGRuvxLofoOzUQH8b1GvkKuZ1r3L/6ccf2mLU
+iLQNjzGivWq+ATemlElZIqWol03KTgYYB11YtHjR0KprhgQjrBll0PbnjVIzWnHF
+032g7sGtunQopOTX1R9RfwOuJA1OvX40zU3HjtXrgaTDQwxLhh6+uXY25+PfAO0S
+Nl7Ei5j3a+dTUpYYOuh5+g/glW44beKmhSEmSdFTfM3GzX7jEfEWBhhQ9jL5WFgj
+WYLt1UDFh0SVhbVDosUjSs+CL9Y69PLs/iDw78wPGWw992V9mBLcGqgKn798RswW
+JLjHZT/VLZ52eUvyhfGJY8NDp0w+Mp2eiddGs38JzvgCV/tVDbr9D79UzYfCeFeG
+L/QZ+N2x4pmrws+/59547Z4b7k9d3Jjx2IRd4GovkB1KZrKiF/JMY+CBGrNdZMFa
+0MPyTTfUzCiKfZa0FcgEQvJIoOJtSMbOZkDyPmBqtGQEyD7AmWFFYs+ZVgrZ+Yix
+StriiNMRnkDEHGfohbVe4Ga2+8AlfWadi4eRoLLBhkJDl8PpwflLhZMpwOGHUziC
+5bhYLqSXMLemPDa3q/LRHnlv6qfbHd/gjbVrTnABmxcb7dLkxO7h506H6hkzGaal
+8liRP3/hZDsZ6muFg2OFpCAO2VlHJWHXhhBUjTZi7XVmprd5bLbZ8RS4hjKpUa18
+0binZJaApmVSMW33jGE8PvLFqeXZ3M4n5L19TmRw0+Ncfd4DS6IHypF/errZ58Im
+u8leh/12HSx1e1nwsryXrXhZQPkCN4mYmiHl63G1T7cEtbqdU7x7ZJ7JAi+reEJr
+CssXdczCLz6SbXYVXwGAlmyxIGneXDxzYLPtlpK2ZB/N9vhpdG6Irt0eQ4pVTK8a
+JYqwVgdv84py/gFov542RVH9teA7npGy2EFrgAH2XF0SnHvG2rqSFOt0UO/UKr0W
+XC2BRABTv7aazHUkM1mRxaoB7JuvPqxCsxu39pXr+AIWu8JkFbbv5g58C1jRu22j
+PiP9VRwx2ffuCnw3ta1278X71H1Htx98dMf26CcLVxfvPmH8ssaVCfmEpJzdXxlR
+qhdyUIgLWanUOBddDhpsuSpnJ7Nz5WqrVclHYVbV2YHlgajE+6hqIZbmD28iN+xd
+AXXsk/quo5EtUa44W5r5X008d3/+STT3deizMIzMCzvhW1nBxR6IRRehUFzKSjBS
+ESQIs46vumOxeedW9UD/8VeeUR/84YNv1N/OPdWhWdv4+a39iFF7IpuyZ4ka7B+x
+jx8poSPzbx/ff/77wFdS/9ZnwQNvNoImK+Wj0iEkzqLZX/MNORcWo/kizIWxxb46
+mUMzQvz98Jd1gx2IFYVcmPdTxbM0a+AWZHvrcJbFVlQGu3LHvv/D+v0bwmbpsFBx
+BoYAAAAASUVORK5CYII=
+
+------------aO61vjvD2thSw7Dt2QdXeB
+Content-Disposition: inline; filename=bbox1.png
+Content-Type: image/png; name=bbox1.png
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/bbox1.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAOQAAAEICAMAAAEPf5hkAAADAFBMVEUAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACSklWS
+kqoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///9Uo8UAAAAI
+A0lEQVR42u2d2ZakKhBF9/+/yQ9z+1amAqYDQwSiRnVXZ69UOBxiYCbwRz/Y08an
+aOISniKWM5tPMfmqPv37/fx8/qerOXd9yBUFQiFbClNSgElOtjxZTXIegriakOTM
+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
+SUVORK5CYII=
+
+------------aO61vjvD2thSw7Dt2QdXeB
+Content-Disposition: inline; filename=bbox2.png
+Content-Type: image/png; name=bbox2.png
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/bbox2.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAANkAAADlCAMAAAGe35IEAAADAFBMVEUAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACSklWS
+kqoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///9Uo8UAAAAH
+XUlEQVR42u2d27LqIAyGv/e/sy/MdquFUKGFNPTgiqPjaAvhhySEEFLCyou2i2hL
+UriR7gahLrnWjlhKUS0GDfqDF8l/7+vbxGTPlyzT0qBnifc7Yw01ziOu0VcO47bQ
+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
+
+------------aO61vjvD2thSw7Dt2QdXeB--

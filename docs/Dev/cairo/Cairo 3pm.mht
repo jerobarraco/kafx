@@ -1,0 +1,966 @@
+Content-Type: multipart/related; start=<op.mhtml.1220487423577.d13d9b7d3f44f2bc@192.168.1.99>; boundary=----------hVanx1vKhfJ3RvzvuWGB4K
+Content-Location: http://crpppc19.epfl.ch/cgi-bin/dwww/usr/share/man/man3/Cairo.3pm.gz?type=man
+Subject: =?utf-8?Q?Cairo(3pm)?=
+MIME-Version: 1.0
+
+------------hVanx1vKhfJ3RvzvuWGB4K
+Content-Disposition: inline; filename=Cairo.htm
+Content-Type: text/html; charset=UTF-8; name=Cairo.htm
+Content-Id: <op.mhtml.1220487423577.d13d9b7d3f44f2bc@192.168.1.99>
+Content-Location: http://crpppc19.epfl.ch/cgi-bin/dwww/usr/share/man/man3/Cairo.3pm.gz?type=man
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html40/loose.dtd">
+<html>
+<head>
+	<title>Cairo(3pm)</title>
+</head>
+
+<body text="#000000" bgcolor="#FFFFFF" link="#0000CC" alink="#FF0000" vlink="#0000FF">
+<h1><img src="/dwww/debian.png" alt="[Debian Logo]" border="0" width="204" height="51" hspace="10" align="bottom"> <b>Cairo(3pm)</b></h1>
+<small><a href="/dwww/">dwww Home</a> | <a href="/dwww/man/">Manual pages</a> | <a href="/cgi-bin/dwww?search=/usr/share/man/man3/Cairo.3pm.gz&amp;searchtype=f">Find package</a></small>
+<br>
+<hr>
+<p>
+<!-- vim:set ft=html: -->
+<pre class="man"><A HREF="/cgi-bin/dwww?type=runman&amp;location=Cairo/3pm">Cairo(3pm)</A>            User Contributed Perl Documentation           <A HREF="/cgi-bin/dwww?type=runman&amp;location=Cairo/3pm">Cairo(3pm)</A>
+
+<strong>NAME</strong>
+       Cairo - Perl interface to the cairo library
+
+<strong>SYNOPSIS</strong>
+         use Cairo;
+
+         my $surface = Cairo::ImageSurface-&gt;create ('argb32', 100, 100);
+         my $cr = Cairo::Context-&gt;create ($surface);
+
+         $cr-&gt;rectangle (10, 10, 40, 40);
+         $cr-&gt;set_source_rgb (0, 0, 0);
+         $cr-&gt;fill;
+
+         $cr-&gt;rectangle (50, 50, 40, 40);
+         $cr-&gt;set_source_rgb (1, 1, 1);
+         $cr-&gt;fill;
+
+         $cr-&gt;show_page;
+
+         $surface-&gt;write_to_png ('output.png');
+
+<strong>ABSTRACT</strong>
+       Cairo provides Perl bindings for the vector graphics library cairo.  It
+       supports multiple output targets, including PNG, PDF and SVG.  Cairo
+       produces identical output on all those targets.
+
+<strong>API</strong> <strong>DOCUMENTATION</strong>
+       Note that this listing still lacks entries for <em>Cairo::Surface</em>s and some
+       utility methods.
+
+       <strong>Drawing</strong>
+
+       <em>Cairo::Context</em> <em>--</em> <em>The</em> <em>cairo</em> <em>drawing</em> <em>context</em>
+
+       <em>Cairo::Context</em> is the main object used when drawing with Cairo. To draw
+       with Cairo, you create a <em>Cairo::Context</em>, set the target surface, and
+       drawing options for the <em>Cairo::Context</em>, create shapes with methods like
+       "$cr-"move_to&gt; and "$cr-&gt;line_to", and then draw shapes with
+       "$cr-&gt;stroke" or "$cr-&gt;fill".
+
+       <em>Cairo::Context</em>’s can be pushed to a stack via "$cr-&gt;save". They may
+       then safely be changed, without loosing the current state. Use
+       "$cr-&gt;restore" to restore to the saved state.  =over
+
+       $cr = Cairo::Context-&gt;create ($surface)
+
+       $surface: <em>Cairo::Surface</em>
+
+       $cr-&gt;save
+
+       $cr-&gt;restore
+
+       $status = $cr-&gt;status
+
+       $surface = $cr-&gt;get_target
+
+       $cr-&gt;push_group [1.2]
+
+       $cr-&gt;push_group_with_content ($content) [1.2]
+
+       $content: <em>Cairo::Content</em>
+
+       $pattern = $cr-&gt;pop_group [1.2]
+
+       $cr-&gt;pop_group_to_source [1.2]
+
+       $surface = $cr-&gt;get_group_target [1.2]
+
+       $cr-&gt;set_source_rgb ($red, $green, $blue)
+
+       $red: double
+       $green: double
+       $blue: double
+
+       $cr-&gt;set_source_rgba ($red, $green, $blue, $alpha)
+
+       $red: double
+       $green: double
+       $blue: double
+       $alpha: double
+
+       $cr-&gt;set_source ($source)
+
+       $source: <em>Cairo::Pattern</em>
+
+       $cr-&gt;set_source_surface ($surface, $x, $y)
+
+       $surface: <em>Cairo::Surface</em>
+       $x: double
+       $y: double
+
+       $source = $cr-&gt;get_source
+
+       $cr-&gt;set_antialias ($antialias)
+
+       $antialias: <em>Cairo::Antialias</em>
+
+       $antialias = $cr-&gt;get_antialias
+
+       $cr-&gt;set_dash ($offset, ...)
+
+       $offset: double
+       ...: list of doubles
+
+       $cr-&gt;set_fill_rule ($fill_rule)
+
+       $fill_rule: <em>Cairo::FillRule</em>
+
+       $fill_rule = $cr-&gt;get_fill_rule
+
+       $cr-&gt;set_line_cap ($line_cap)
+
+       $line_cap: <em>Cairo::LineCap</em>
+
+       $line_cap = $cr-&gt;get_line_cap
+
+       $cr-&gt;set_line_join ($line_join)
+
+       $line_join: <em>Cairo::LineJoin</em>
+
+       $line_join = $cr-&gt;get_line_join
+
+       $cr-&gt;set_line_width ($width)
+
+       $width: double
+
+       $width = $cr-&gt;get_line_width
+
+       $cr-&gt;set_miter_limit ($limit)
+
+       $limit: double
+
+       ($offset, @dashes) = $cr-&gt;get_dash [1.4]
+
+       $limit = $cr-&gt;get_miter_limit
+
+       $cr-&gt;set_operator ($op)
+
+       $op: <em>Cairo::Operator</em>
+
+       $op = $cr-&gt;get_operator
+
+       $cr-&gt;set_tolerance ($tolerance)
+
+       $tolerance: double
+
+       $tolerance = $cr-&gt;get_tolerance
+
+       $cr-&gt;clip
+
+       $cr-&gt;clip_preserve
+
+       ($x1, $y1, $x2, $y2) = $cr-&gt;clip_extents [1.4]
+
+       @rectangles = $cr-&gt;copy_clip_rectangle_list [1.4]
+
+       $cr-&gt;reset_clip
+
+       $cr-&gt;fill
+
+       $cr-&gt;fill_preserve
+
+       ($x1, $y1, $x2, $y2) = $cr-&gt;fill_extents
+
+       $bool = $cr-&gt;in_fill ($x, $y)
+
+       $x: double
+       $y: double
+
+       $cr-&gt;mask ($pattern)
+
+       $pattern: <em>Cairo::Pattern</em>
+
+       $cr-&gt;mask_surface ($surface, $surface_x, $surface_y)
+
+       $surface: <em>Cairo::Surface</em>
+       $surface_x: double
+       $surface_y: double
+
+       $cr-&gt;paint
+
+       $cr-&gt;paint_with_alpha ($alpha)
+
+       $alpha: double
+
+       $cr-&gt;stroke
+
+       $cr-&gt;stroke_preserve
+
+       ($x1, $y1, $x2, $y2) = $cr-&gt;stroke_extents
+
+       $bool = $cr-&gt;in_stroke ($x, $y)
+
+       $x: double
+       $y: double
+
+       $cr-&gt;copy_page
+
+       $cr-&gt;show_page
+
+       <em>Paths</em> <em>--</em> <em>Creating</em> <em>paths</em> <em>and</em> <em>manipulating</em> <em>path</em> <em>data</em>
+
+         $path = [
+           { type =&gt; "move-to", points =&gt; [[1, 2]] },
+           { type =&gt; "line-to", points =&gt; [[3, 4]] },
+           { type =&gt; "curve-to", points =&gt; [[5, 6], [7, 8], [9, 10]] },
+           ...
+           { type =&gt; "close-path", points =&gt; [] },
+         ];
+
+       <em>Cairo::Path</em> is a data structure for holding a path. This data structure
+       serves as the return value for "$cr-&gt;copy_path_data" and
+       "$cr-&gt;copy_path_data_flat" as well the input value for
+       "$cr-&gt;append_path".
+
+       <em>Cairo::Path</em> is represented as an array reference that contains path
+       elements, represented by hash references with two keys: <em>type</em> and
+       <em>points</em>.  The value for <em>type</em> can be either of the following:
+
+       "move-to"
+       "line-to"
+       "curve-to"
+       "close-path"
+
+       The value for <em>points</em> is an array reference which contains zero or more
+       points.  Points are represented as array references that contain two
+       doubles: <em>x</em> and <em>y</em>.  The necessary number of points depends on the <em>type</em>
+       of the path element:
+
+       "move-to": 1 point
+       "line_to": 1 point
+       "curve-to": 3 points
+       "close-path": 0 points
+
+       The semantics and ordering of the coordinate values are consistent with
+       "$cr-&gt;move_to", "$cr-&gt;line_to", "$cr-&gt;curve_to", and "$cr-&gt;close_path".
+
+       $path = $cr-&gt;copy_path
+
+       $path = $cr-&gt;copy_path_flat
+
+       $cr-&gt;append_path ($path)
+
+       $path: <em>Cairo::Path</em>
+
+       $bool = $cr-&gt;has_current_point [1.6]
+
+       ($x, $y) = $cr-&gt;get_current_point
+
+       $cr-&gt;new_path
+
+       $cr-&gt;new_sub_path [1.2]
+
+       $cr-&gt;close_path
+
+       ($x1, $y1, $x2, $y2) = $cr-&gt;path_extents [1.6]
+
+       $cr-&gt;arc ($xc, $yc, $radius, $angle1, $angle2)
+
+       $xc: double
+       $yc: double
+       $radius: double
+       $angle1: double
+       $angle2: double
+
+       $cr-&gt;arc_negative ($xc, $yc, $radius, $angle1, $angle2)
+
+       $xc: double
+       $yc: double
+       $radius: double
+       $angle1: double
+       $angle2: double
+
+       $cr-&gt;curve_to ($x1, $y1, $x2, $y2, $x3, $y3)
+
+       $x1: double
+       $y1: double
+       $x2: double
+       $y2: double
+       $x3: double
+       $y3: double
+
+       $cr-&gt;line_to ($x, $y)
+
+       $x: double
+       $y: double
+
+       $cr-&gt;move_to ($x, $y)
+
+       $x: double
+       $y: double
+
+       $cr-&gt;rectangle ($x, $y, $width, $height)
+
+       $x: double
+       $y: double
+       $width: double
+       $height: double
+
+       $cr-&gt;glyph_path (...)
+
+       ...: list of <em>Cairo::Glyph</em>’s
+
+       $cr-&gt;text_path ($utf8)
+
+       $utf8: string in utf8 encoding
+
+       $cr-&gt;rel_curve_to ($dx1, $dy1, $dx2, $dy2, $dx3, $dy3)
+
+       $dx1: double
+       $dy1: double
+       $dx2: double
+       $dy2: double
+       $dx3: double
+       $dy3: double
+
+       $cr-&gt;rel_line_to ($dx, $dy)
+
+       $dx: double
+       $dy: double
+
+       $cr-&gt;rel_move_to ($dx, $dy)
+
+       $dx: double
+       $dy: double
+
+       <em>Patterns</em> <em>--</em> <em>Gradients</em> <em>and</em> <em>filtered</em> <em>sources</em>
+
+       $status = $pattern-&gt;status
+
+       $type = $pattern-&gt;get_type [1.2]
+
+       $pattern-&gt;set_matrix ($matrix)
+
+       $matrix: <em>Cairo::Matrix</em>
+
+       $matrix = $pattern-&gt;get_matrix
+
+       $pattern = Cairo::SolidPattern-&gt;create_rgb ($red, $green, $blue)
+
+       $red: double
+       $green: double
+       $blue: double
+
+       $pattern = Cairo::SolidPattern-&gt;create_rgba ($red, $green, $blue,
+       $alpha)
+
+       $red: double
+       $green: double
+       $blue: double
+       $alpha: double
+
+       ($r, $g, $b, $a) = $pattern-&gt;get_rgba [1.4]
+
+       $pattern = Cairo::SurfacePattern-&gt;create ($surface)
+
+       $surface: <em>Cairo::Surface</em>
+
+       $pattern-&gt;set_extend ($extend)
+
+       $extend: <em>Cairo::Extend</em>
+
+       $extend = $pattern-&gt;get_extend
+
+       $pattern-&gt;set_filter ($filter)
+
+       $filter: <em>Cairo::Filter</em>
+
+       $filter = $pattern-&gt;get_filter
+
+       $surface = $pattern-&gt;get_surface [1.4]
+
+       $pattern = Cairo::LinearGradient-&gt;create ($x0, $y0, $x1, $y1)
+
+       $x0: double
+       $y0: double
+       $x1: double
+       $y1: double
+
+       ($x0, $y0, $x1, $y1) = $pattern-&gt;get_points [1.4]
+
+       $pattern = Cairo::RadialGradient-&gt;create ($cx0, $cy0, $radius0, $cx1,
+       $cy1, $radius1)
+
+       $cx0: double
+       $cy0: double
+       $radius0: double
+       $cx1: double
+       $cy1: double
+       $radius1: double
+
+       ($x0, $y0, $r0, $x1, $y1, $r1) = $pattern-&gt;get_circles [1.4]
+
+       $pattern-&gt;add_color_stop_rgb (double offset, double red, double green,
+       double blue)
+
+       $offset: double
+       $red: double
+       $green: double
+       $blue: double
+
+       $pattern-&gt;add_color_stop_rgba (double offset, double red, double green,
+       double blue, double alpha)
+
+       $offset: double
+       $red: double
+       $green: double
+       $blue: double
+       $alpha: double
+
+       @stops = $pattern-&gt;get_color_stops [1.4]
+
+       A color stop is represented as an array reference with five elements:
+       offset, red, green, blue, and alpha.
+
+       <em>Transformations</em> <em>--</em> <em>Manipulating</em> <em>the</em> <em>current</em> <em>transformation</em> <em>matrix</em>
+
+       $cr-&gt;translate ($tx, $ty)
+
+       $tx: double
+       $ty: double
+
+       $cr-&gt;scale ($sx, $sy)
+
+       $sx: double
+       $sy: double
+
+       $cr-&gt;rotate ($angle)
+
+       $angle: double
+
+       $cr-&gt;transform ($matrix)
+
+       $matrix: <em>Cairo::Matrix</em>
+
+       $cr-&gt;set_matrix ($matrix)
+
+       $matrix: <em>Cairo::Matrix</em>
+
+       $matrix = $cr-&gt;get_matrix
+
+       $cr-&gt;identity_matrix
+
+       ($x, $y) = $cr-&gt;user_to_device ($x, $y)
+
+       $x: double
+       $y: double
+
+       ($dx, $dy) = $cr-&gt;user_to_device_distance ($dx, $dy)
+
+       $dx: double
+       $dy: double
+
+       ($x, $y) = $cr-&gt;device_to_user ($x, $y)
+
+       $x: double
+       $y: double
+
+       ($dx, $dy) = $cr-&gt;device_to_user_distance ($dx, $dy)
+
+       $dx: double
+       $dy: double
+
+       <em>Text</em> <em>--</em> <em>Rendering</em> <em>text</em> <em>and</em> <em>sets</em> <em>of</em> <em>glyphs</em>
+
+       Glyphs are represented as anonymous hash references with three keys:
+       <em>index</em>, <em>x</em> and <em>y</em>.  Example:
+
+         my @glyphs = ({ index =&gt; 1, x =&gt; 2, y =&gt; 3 },
+                       { index =&gt; 2, x =&gt; 3, y =&gt; 4 },
+                       { index =&gt; 3, x =&gt; 4, y =&gt; 5 });
+
+       $cr-&gt;select_font_face ($family, $slant, $weight)
+
+       $family: string
+       $slant: <em>Cairo::FontSlant</em>
+       $weight: <em>Cairo::FontWeight</em>
+
+       $cr-&gt;set_font_size ($size)
+
+       $size: double
+
+       $cr-&gt;set_font_matrix ($matrix)
+
+       $matrix: <em>Cairo::Matrix</em>
+
+       $matrix = $cr-&gt;get_font_matrix
+
+       $cr-&gt;set_font_options ($options)
+
+       $options: <em>Cairo::FontOptions</em>
+
+       $options = $cr-&gt;get_font_options
+
+       $cr-&gt;set_scaled_font ($scaled_font) [1.2]
+
+       $scaled_font: <em>Cairo::ScaledFont</em>
+
+       $scaled_font = $cr-&gt;get_scaled_font [1.4]
+
+       $cr-&gt;show_text ($utf8)
+
+       $utf8: string
+
+       $cr-&gt;show_glyphs (...)
+
+       ...: list of glyphs
+
+       $face = $cr-&gt;get_font_face
+
+       $extents = $cr-&gt;font_extents
+
+       $cr-&gt;set_font_face ($font_face)
+
+       $font_face: <em>Cairo::FontFace</em>
+
+       $cr-&gt;set_scaled_font ($scaled_font)
+
+       $scaled_font: <em>Cairo::ScaledFont</em>
+
+       $extents = $cr-&gt;text_extents ($utf8)
+
+       $utf8: string
+
+       $extents = $cr-&gt;glyph_extents (...)
+
+       ...: list of glyphs
+
+       <strong>Fonts</strong>
+
+       <em>Cairo::FontFace</em> <em>--</em> <em>Base</em> <em>class</em> <em>for</em> <em>fonts</em>
+
+       $status = $font_face-&gt;status
+
+       $type = $font_face-&gt;get_type [1.2]
+
+       <em>Scaled</em> <em>Fonts</em> <em>--</em> <em>Caching</em> <em>metrics</em> <em>for</em> <em>a</em> <em>particular</em> <em>font</em> <em>size</em>
+
+       $scaled_font = Cairo::ScaledFont-&gt;create ($font_face, $font_matrix,
+       $ctm, $options)
+
+       $font_face: <em>Cairo::FontFace</em>
+       $font_matrix: <em>Cairo::Matrix</em>
+       $ctm: <em>Cairo::Matrix</em>
+       $options: <em>Cairo::FontOptions</em>
+
+       $status = $scaled_font-&gt;status
+
+       $extents = $scaled_font-&gt;extents
+
+       $extents = $scaled_font-&gt;text_extents ($utf8) [1.2]
+
+       $utf8: string
+
+       $extents = $scaled_font-&gt;glyph_extents (...)
+
+       ...: list of glyphs
+
+       $font_face = $scaled_font-&gt;get_font_face [1.2]
+
+       $options = $scaled_font-&gt;get_font_options [1.2]
+
+       $font_matrix = $scaled_font-&gt;get_font_matrix [1.2]
+
+       $ctm = $scaled_font-&gt;get_ctm [1.2]
+
+       $type = $scaled_font-&gt;get_type [1.2]
+
+       <em>Font</em> <em>Options</em> <em>--</em> <em>How</em> <em>a</em> <em>font</em> <em>should</em> <em>be</em> <em>rendered</em>
+
+       $font_options = Cairo::FontOptions-&gt;create
+
+       $status = $font_options-&gt;status
+
+       $font_options-&gt;merge ($other)
+
+       $other: <em>Cairo::FontOptions</em>
+
+       $hash = $font_options-&gt;hash
+
+       $bools = $font_options-&gt;equal ($other)
+
+       $other: <em>Cairo::FontOptions</em>
+
+       $font_options-&gt;set_antialias ($antialias)
+
+       $antialias: <em>Cairo::AntiAlias</em>
+
+       $antialias = $font_options-&gt;get_antialias
+
+       $font_options-&gt;set_subpixel_order ($subpixel_order)
+
+       $subpixel_order: <em>Cairo::SubpixelOrder</em>
+
+       $subpixel_order = $font_options-&gt;get_subpixel_order
+
+       $font_options-&gt;set_hint_style ($hint_style)
+
+       $hint_style: <em>Cairo::HintStyle</em>
+
+       $hint_style = $font_options-&gt;get_hint_style
+
+       $font_options-&gt;set_hint_metrics ($hint_metrics)
+
+       $hint_metrics: <em>Cairo::HintMetrics</em>
+
+       $hint_metrics = $font_options-&gt;get_hint_metrics
+
+       <em>FreeType</em> <em>Fonts</em> <em>--</em> <em>Font</em> <em>support</em> <em>for</em> <em>FreeType</em>
+
+       If your cairo library supports it, the FreeType integration allows you
+       to load font faces from font files.  You can query for this capability
+       with "Cairo::HAS_FT_FONT".  To actually use this, you’ll need the
+       Font::FreeType module.
+
+       my $face = Cairo::FtFontFace-&gt;create ($ft_face, $load_flags=0)
+
+       $ft_face: <em>Font::FreeType::Face</em>
+       $load_flags: integer
+
+       This method allows you to create a <em>Cairo::FontFace</em> from a
+       <em>Font::FreeType::Face</em>.  To obtain the latter, you can for example load
+       it from a file:
+
+         my $file = '/usr/share/fonts/truetype/ttf-bitstream-vera/Vera.ttf';
+         my $ft_face = Font::FreeType-&gt;new-&gt;face ($file);
+         my $face = Cairo::FtFontFace-&gt;create ($ft_face);
+
+       <strong>Surfaces</strong>
+
+       <em>Cairo::Surface</em> <em>--</em> <em>Base</em> <em>class</em> <em>for</em> <em>surfaces</em>
+
+       $new = $old-&gt;create_similar ($content, $width, $height)
+
+       $content: <em>Cairo::Content</em>
+       $width: integer
+       $height: integer
+
+       $status = $surface-&gt;status
+
+       $surface-&gt;finish
+
+       $surface-&gt;flush
+
+       $font_options = $surface-&gt;get_font_options
+
+       $content = $surface-&gt;get_content [1.2]
+
+       $surface-&gt;mark_dirty
+
+       $surface-&gt;mark_dirty_rectangle ($x, $y, $width, $height)
+
+       $x: integer
+       $y: integer
+       $width: integer
+       $height: integer
+
+       $surface-&gt;set_device_offset ($x_offset, $y_offset)
+
+       $x_offset: integer
+       $y_offset: integer
+
+       ($x_offset, $y_offset) = $surface-&gt;get_device_offset [1.2]
+
+       $surface-&gt;set_fallback_resolution ($x_pixels_per_inch,
+       $y_pixels_per_inch) [1.2]
+
+       $x_pixels_per_inch: double
+       $y_pixels_per_inch: double
+
+       $type = $surface-&gt;get_type [1.2]
+
+       $status = $surface-&gt;copy_page [1.6]
+
+       $status: <em>Cairo::Status</em>
+
+       $status = $surface-&gt;show_page [1.6]
+
+       $status: <em>Cairo::Status</em>
+
+       <em>Image</em> <em>Surfaces</em> <em>--</em> <em>Rendering</em> <em>to</em> <em>memory</em> <em>buffers</em>
+
+       $surface = Cairo::ImageSurface-&gt;create ($format, $width, $height)
+
+       $format: <em>Cairo::Format</em>
+       $width: integer
+       $height: integer
+
+       $surface = Cairo::ImageSurface-&gt;create_for_data ($data, $format,
+       $width, $height, $stride)
+
+       $data: image data
+       $format: <em>Cairo::Format</em>
+       $width: integer
+       $height: integer
+       $stride: integer
+
+       $data = $surface-&gt;get_data [1.2]
+
+       $format = $surface-&gt;get_format [1.2]
+
+       $width = $surface-&gt;get_width
+
+       $height = $surface-&gt;get_height
+
+       $stride = $surface-&gt;get_stride [1.2]
+
+       <em>PDF</em> <em>Surfaces</em> <em>--</em> <em>Rendering</em> <em>PDF</em> <em>documents</em>
+
+       $surface = Cairo::PdfSurface-&gt;create ($filename, $width_in_points,
+       $height_in_points) [1.2]
+
+       $filename: string
+       $width_in_points: double
+       $height_in_points: double
+
+       $surface = Cairo::PdfSurface-&gt;create_for_stream ($callback,
+       $callback_data, $width_in_points, $height_in_points) [1.2]
+
+       $callback: Cairo::WriteFunc
+       $callback_data: scalar
+       $width_in_points: double
+       $height_in_points: double
+
+       $surface-&gt;set_size ($width_in_points, $height_in_points) [1.2]
+
+       $width_in_points: double
+       $height_in_points: double
+
+       <em>PNG</em> <em>Support</em> <em>--</em> <em>Reading</em> <em>and</em> <em>writing</em> <em>PNG</em> <em>images</em>
+
+       $surface = Cairo::ImageSurface-&gt;create_from_png ($filename)
+
+       $filename: string
+
+       Cairo::ReadFunc: $data = sub { my ($callback_data, $length) = @_; }
+
+       $data: binary image data, of length $length
+       $callback_data: scalar, user data
+       $length: integer, bytes to read
+
+       $surface = Cairo::ImageSurface-&gt;create_from_png_stream ($callback,
+       $callback_data)
+
+       $callback: Cairo::ReadFunc
+       $callback_data: scalar
+
+       $status = $surface-&gt;write_to_png ($filename)
+
+       $filename: string
+
+       Cairo::WriteFunc: sub { my ($callback_data, $data) = @_; }
+
+       $callback_data: scalar, user data
+       $data: binary image data, to be written
+
+       $status = $surface-&gt;write_to_png_stream ($callback, $callback_data)
+
+       $callback: Cairo::WriteFunc
+       $callback_data: scalar
+
+       <em>PostScript</em> <em>Surfaces</em> <em>--</em> <em>Rendering</em> <em>PostScript</em> <em>documents</em>
+
+       $surface = Cairo::PsSurface-&gt;create ($filename, $width_in_points,
+       $height_in_points) [1.2]
+
+       $filename: string
+       $width_in_points: double
+       $height_in_points: double
+
+       $surface = Cairo::PsSurface-&gt;create_for_stream ($callback,
+       $callback_data, $width_in_points, $height_in_points) [1.2]
+
+       $callback: Cairo::WriteFunc
+       $callback_data: scalar
+       $width_in_points: double
+       $height_in_points: double
+
+       $surface-&gt;set_size ($width_in_points, $height_in_points) [1.2]
+
+       $width_in_points: double
+       $height_in_points: double
+
+       $surface-&gt;dsc_begin_setup [1.2]
+
+       $surface-&gt;dsc_begin_page_setup [1.2]
+
+       $surface-&gt;dsc_comment ($comment) [1.2]
+
+       $comment: string
+
+       $surface-&gt;restrict_to_level ($level) [1.6]
+
+       $level: <em>Cairo::PsLevel</em>
+
+       @levels = Cairo::PsSurface::get_levels [1.6]
+
+       $string = Cairo::PsSurface::level_to_string ($level) [1.6]
+
+       $level: <em>Cairo::PsLevel</em>
+
+       $surface-&gt;set_eps ($eps) [1.6]
+
+       $eps: boolean
+
+       $eps = $surface-&gt;get_eps [1.6]
+
+       <em>SVG</em> <em>Surfaces</em> <em>--</em> <em>Rendering</em> <em>SVG</em> <em>documents</em>
+
+       $surface = Cairo::SvgSurface-&gt;create ($filename, $width_in_points,
+       $height_in_points) [1.2]
+
+       $filename: string
+       $width_in_points: double
+       $height_in_points: double
+
+       $surface = Cairo::SvgSurface-&gt;create_for_stream ($callback,
+       $callback_data, $width_in_points, $height_in_points) [1.2]
+
+       $callback: Cairo::WriteFunc
+       $callback_data: scalar
+       $width_in_points: double
+       $height_in_points: double
+
+       $surface-&gt;restrict_to_version ($version) [1.2]
+
+       $version: <em>Cairo::SvgVersion</em>
+
+       @versions = Cairo::SvgSurface::get_versions [1.2]
+
+       $string = Cairo::SvgSurface::version_to_string ($version) [1.2]
+
+       $version: <em>Cairo::SvgVersion</em>
+
+       <strong>Utilities</strong>
+
+       <em>Version</em> <em>Information</em> <em>--</em> <em>Run-time</em> <em>and</em> <em>compile-time</em> <em>version</em> <em>checks.</em>
+
+       $version = Cairo-&gt;version
+
+       $string = Cairo-&gt;version_string
+
+       $version_code = Cairo-&gt;VERSION
+
+       $version_code = Cairo-&gt;VERSION_ENCODE ($major, $minor, $micro)
+
+       $major: integer
+       $minor: integer
+       $micro: integer
+
+       $stride = Cairo::Format::stride_for_width ($format, $width) [1.6]
+
+       $format: <em>Cairo::Format</em>
+       $width: integer
+
+<strong>SEE</strong> <strong>ALSO</strong>
+       <A HREF="http://cairographics.org/documentation">http://cairographics.org/documentation</A>
+           Lists many available resources including tutorials and examples
+
+       <A HREF="http://cairographics.org/manual/">http://cairographics.org/manual/</A>
+           Contains the reference manual
+
+<strong>AUTHORS</strong>
+       Ross McFarland &lt;rwmcfa1 at neces dot com&gt;
+       Torsten Schoenfeld &lt;kaffeetisch at gmx dot de&gt;
+
+<strong>COPYRIGHT</strong>
+       Copyright (C) 2004-2008 by the cairo perl team
+
+perl v5.10.0                      2008-06-21                        <A HREF="/cgi-bin/dwww?type=runman&amp;location=Cairo/3pm">Cairo(3pm)</A>
+</pre>
+<!-- vim:set ft=html: -->
+<p>
+<hr>
+<small><i>Generated by <a href="/dwww/"><b>dwww</b></a> version 1.10.15 on Thu Sep  4 02:05:16 CEST 2008.</i></small>
+</body>
+</html>
+
+------------hVanx1vKhfJ3RvzvuWGB4K
+Content-Disposition: inline; filename=debian.png
+Content-Type: image/png; name=debian.png
+Content-Location: http://crpppc19.epfl.ch/dwww/debian.png
+Content-Transfer-Encoding: Base64
+
+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
+uNYvAAAAAElFTkSuQmCC
+
+------------hVanx1vKhfJ3RvzvuWGB4K--

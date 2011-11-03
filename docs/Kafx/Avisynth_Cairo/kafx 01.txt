@@ -1,0 +1,230 @@
+Como usar el kafx:
+Aclaracion importante, 
+el KAFX sigue una idea, la de hacer efectos de manera sencilla.
+El kafx 1 es una version en desarollo, pero que será abandonada por el kafx 2, 
+por lo que contiene varias incongruencias.
+(y cosas implementadas lo minimo para probar que funcionan y ya no pude seguir (Caso vectores))
+Y de mejorar se mejorará el 2.
+
+1º parte instalacion:
+Lamentablemente el kafx 1 funciona solo en windows (el dos sera independiente) 
+pero funciona en linux usando wine, se instala igual que en windows y les
+recomiendo el virtualdub y al menos el codec de xvid.
+
+Zeth se hizo un instalador para windows que nos ahorra toda la tarea, bajenlo e
+instalen todo.
+http://my.opera.com/BlastNight/blog/kickass-fx-installer
+http://subversion.assembla.com/svn/kafx/milestones/
+( por favor no hagan direct link a los archivos )
+
+Esta van a ser una serie más técnica de como funciona y como usar el kafx.
+Por lo que también les paso el svn donde encontrarán todo el código y algunas
+perlitas.
+( http://subversion.assembla.com/svn/kafx )
+
+--------------------------------
+2º Qué es kafx?
+kafx nació inspirado en overlua.
+Es un plugin para avisynth por lo que la compresion/decompresión la hace
+avisynth.
+Los dibujos se realizan mediante cairo, lo que permite ... muchas cosas.
+Los efectos se programan usando python (a diferencia de overLUA).
+Y lo mas importante, está diseñado para ser fácil de programar y extensible.
+
+Para el kafx2 tengo muchas ideas.
+Compresion y decompresion interna, independiente del sistema operativo.
+No dependerá de ass (o ssa) para los tiempos de los karaokes.
+Y quizas permita editar el karaoke desde el kafx mismo
+(aunque aegi es bueno para el tema del timing)
+Incluirá una interfaz gráfica desde la cual no será necesario escribir codigo 
+(a menos que se quiera).
+Posible integración con los plugines de AfterEffects.
+
+3º Como funciona/como usar.
+El punto de entrada es el archivo .avs, el avisynth.
+Paso a explicarles.
+Este es un ejemplo:
+[code]
+#A
+loadplugin("KAFX.dll")
+#B
+AviSource("C:\video.avi")
+#C 
+converttorgb32()
+FlipVertical()
+#D
+KAFX("fxs.PRUEBA", "test.ass")
+#Damos vuelta el video verticalmente (para que quede como antes)
+FlipVertical()
+#Fin
+[/code]
+A La primer parte es la dll del kafx (kafx.dll). Esta es el plugin de avisynth.
+se encarga de tomar los frames de video del avisynth y ejecutar el codigo en python.
+recibe los parámetros del archivo .avs. 
+Por esto es importante que el archivo .avs esté en la misma carpeta que la dll.
+(y no le cambien los nombres a las dlls ni los .py)
+ 
+B Llamamos a nuestro video, puede ser por Avi o por DirectShow (usando directshowsource)
+Acá pongan la carpeta completa donde se encuentra el video al que le quieren hacer efectos.
+No voy a explicar mucho de esto porque corresponde a avisynth. Solo les dire q pueden tener
+problemas con los codecs segun usen avi o directshow, y que en linux no recomiendo directshow.
+
+C Convertimos el color de todo a RGB32 y Damos vuelta el video verticalmente.
+Simplemente el kafx necesita los frames de esta forma por lo que usamos avs para esto
+(porque asumo que el avs es mucho mas rápido y eficiente para estas tareas)
+
+D Esta es la otra linea (ademas del video) 
+Acá le pasamos la configuración a la dll de kafx...
+el "fxs.PRUEBA" significa que cargue el grupo de efectos PRUEBA.py de la carpeta fxs.
+Y le decimos que use el archivo "test.ass" para los subtitulos.
+aca pueden poner la carpeta si lo desean (ejemplo "c:\misubperry\chubra.ass")
+Notas Importantes: 
+Noten que separamos "fxs" y "PRUEBA" con un punto '.' y que omitimos el '.py'
+No pongan los .py en otra carpeta que no sea fxs, y cuiden las mayusculas y minúsculas.
+En cuanto a subs, solo programé la carga de archivos ASS hechos con el aegi, 
+los archivos ssa probablemente no sirvan porque cambia el header del estilo.... 
+El kafx no toma el encoding según el estilo de cada linea, porque me parece estúpido.
+usa un solo encoding para todo el archivo. UTF-8.
+
+(ejemplo por zeth, thanks)
+
+
+------------
+
+4º y ahora? Qué hago?
+
+Bueno, hay que saber que hace el avisynth. El avisynth es como un intermedio entre el video
+original y lo que vemos, agregando y modificando cosas en tiempo real.
+(ojo, no es una analogia 100% exacta)
+Pueden abrir el archivo avs que crearon antes con cualquier programa de video.
+Por ejemplo pueden hacer pr to make some sacrifices that eviews del efecto con el mplayer2 (yo hago eso).
+Y para comprimirlo solo basta con abrirlo en el virtualdub (u otro compresor de video)
+y guardarlo comprimido.
+
+Nota: 
+El avisynth tiene sus pro y sus contra, el mayor contra es que permite acceder a los cuadros
+de video en cualquier orden, por lo que hace que el kafx sea muy lento, y hace que 
+los efectos como los de partículas sean mucho mas lentos, consuman mas memoria y generen
+errores si no se siguen los frames en el orden correcto.
+
+
+------------------------
+
+English (For english speaking y spanish non-speaker ppl )
+
+Howto use kafx:
+Important notice:
+Kafx is meant for the idea of simplify the task of effect making.
+KAFX1 is a development version, and will be dropped for kafx2,
+due to a lot of stuff i've already ranted about (time work etc) 
+i had to make some sacrifices, that is, documentation, and some incongruencies on the code.
+(and other that are implemented just to probe they work (at their minimal expression)) (ie vectors)
+All this will improve on 2.
+
+1º part Installation: 
+Sadly, kafx1 only works on windows (kafx2 will be independent).
+But it also works on linux using wine, you have to install it just like windows.
+I recommend also virtualdub and xvid codec (that works under wine)
+
+Zeth made a windows installer that will save us a lot of pain, 
+download it and install everything
+http://my.opera.com/BlastNight/blog/kickass-fx-installer
+http://subversion.assembla.com/svn/kafx/milestones/
+( please dont publish direct links of the files )
+
+This textes are more of a technical explanation of how kafx works and how to use it.
+(well, just not really basic and not so technicla either.)
+So, here's the code in the svn repository where you can find all the code (kafx 1&2)
+and some intresting stuff.
+( http://subversion.assembla.com/svn/kafx )
+
+--------------------------------
+2º What's kafx?
+Kafx is inspired on OverLua.
+Is an avisynth plugin, so video de/compression is handled by avisynth.
+The drawings on the video is done using cairo, wich allows... a lot of stuff.
+And you program the effects using python (main difference with overLUA).
+But most important is the fact that it's designed to be easy and useful to programan and
+extensible.
+
+For kafx2 i have a lot of ideas.
+Internal/native de/compresion, independent from the operating system.
+It won't depend on ass (or ssa) for the time in the text of the karaokes.
+And maybe it'll allow to edit the karaoke from kafx itself. 
+(but aegisub is really good for karaokes.)
+It'll include a grafical interface from where you won't need to write any code
+(unless you want to).
+Posible integration with AfterEffects plugins :D:D:D.
+
+3º How it works, how to use:
+The entry point is the .avs file, for avisynth.
+Let me explain.
+This is an example:
+
+[code]
+#A
+loadplugin("KAFX.dll")
+#B
+AviSource("C:\video.avi")
+#C 
+converttorgb32()
+FlipVertical()
+#D
+KAFX("fxs.PRUEBA", "test.ass")
+#Flip vertically the frame again (so it goes back to how it was)
+FlipVertical()
+#End
+[/code]
+A
+The first part is the dll (kafx.dll). This dll is the avisynth plugin.
+It takes the video frames and execute the python program with it.
+It gets its settings from the avs file. 
+That's why it's important that the .avs file is in the same folder than the dll.
+(also, don't change the names to the dlls nor .py)
+ 
+B
+Load our video, it can be with Avi or DirectShow (using directshowsource() )
+You should write there the complete folder (path) to the video where you want to put the effects.
+I wont explain much of this because is avisynth stuff. i'll just tell you, that you can run
+into problems using directshow (or avisynth) depending on your codecs.
+and on linux i only recommend using avisource.
+
+C 
+Then we make avisynth convert the video to the format that kafx wants.
+Kafx needs the frame this way so we use avisynth for the conversion
+(i asume is faster and more efficient for this task than any other program)
+
+D 
+this it the other line (besides the avisource) that you'll need to "change"
+Here we set kafx, giving the dll the proper configuration.
+"fxs.PRUEBA" tells kafx that must use the file PRUEBA.py inside the "fxs" folder for effects.
+And to use the file "test.ass" for subtitles.
+I think you can put the folder in the subtitles if you want (ie "c:\misubperry\chubra.ass")
+Important!:
+Notice we need to separate "fxs" and "PRUEBA" with 1 dot '.' and that we dont include the '.py'
+Don't put the .py in another folder except fxs, and be careful with the caps ! is case sensitive
+About subs, i only programmed loading ASS files, (as done with aegi), SSA files probably wont work fine
+(mostly styles stuff)
+KAFX DONT  uses the encoding for each line as set in the header, because is plain idiotic.
+it only uses UTF-8 for ALL The file, be warned.
+
+(example by zeth, gracias)
+
+
+------------
+
+4º Now what?
+
+Ok, we have to know what avisynth does. Avisynth is between the original video and the one we see 
+on the screen, fixing and modifiying things on real time.
+(be careful, this is not 100% like i said)
+
+You can open the avs file with any video player.
+For example, you can do a preview of the effect with mplayer2 (i do that).
+And to compress it you just need to open it with virtualdub (or any other video compressor) 
+and save it encoded.
+
+Notes:
+Avisynth has its pro and cons, the biggest contra is that it allows to access the frames in 
+any order, so, it makes kafx really slow and effects like particles can get slow, eat up more 
+memory than i'd like or generate errors in the video if it's accesed in random order (like particles on a random frame).

@@ -1,0 +1,511 @@
+Content-Type: multipart/related; start=<op.mhtml.1289270902427.a8d387784230d9e9@192.168.1.100>; boundary=----------3XLRN5S1qL7AIlAg2cMsld
+Content-Location: http://superjared.com/entry/anatomy-python-c-module/
+Subject: =?utf-8?Q?Anatomy=20of=20a=20Python=20C=20Module=20=C2=B7=20SuperJared.com?=
+MIME-Version: 1.0
+
+------------3XLRN5S1qL7AIlAg2cMsld
+Content-Disposition: inline; filename=default.htm
+Content-Type: text/html; charset=utf-8; name=default.htm
+Content-ID: <op.mhtml.1289270902427.a8d387784230d9e9@192.168.1.100>
+Content-Location: http://superjared.com/entry/anatomy-python-c-module/
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="Writing Python modules in C is relatively easy. The main reason to do so is to increase performance over using Python code. I will demonstrate how to implement a Fibonacci Python function in C.
+">
+    <link rel="openid.server" href="http://openid.claimid.com/server">
+    <link rel="openid.delegate" href="http://openid.claimid.com/superjared">
+    <link rel="alternate" type="application/rss+xml" title="SuperJared.com Blog RSS feed" href="http://feeds.feedburner.com/Superjared">
+    <title>Anatomy of a Python C Module &middot; SuperJared.com</title>
+    <link rel="stylesheet" href="/foo.css" type="text/css" charset="utf-8">
+</head>
+<body>
+<div id="skip"><a href="#content">Skip to Content</a></div>
+<div id="sidebar">
+    <h1><a href="/">SuperJared.com</a></h1>
+    <ul id="nav">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/search/">Search</a></li>
+        <li><a href="http://feeds.feedburner.com/Superjared">RSS</a></li>
+    </ul>
+    <ul id="subnav">
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="http://flickr.com/photos/superjared/">Photos</a></li>
+    </ul>
+    
+    <div id="flickr_badge_uber_wrapper">
+       <div id="flickr_badge_wrapper">
+           <script type="text/javascript"
+    src="http://www.flickr.com/badge_code_v2.gne?count=6&display=random&size=s&layout=x&source=user&user=56995071%40N00"></script>
+       </div>
+    </div>
+</div>
+<div id="content">
+    
+    <div class="entry">
+        <h1>Anatomy of a Python C Module</h1>
+        <p class="date">March 13, 2008</p>
+        <div class="text">
+            <p class="small"><a href="http://www.geosincrona.com/?p=127">Traducción Español</a></p>
+
+<p>Writing Python modules in C is relatively easy. The main reason to do so is to increase performance over using Python code. I will demonstrate how to implement the following Python function in C. This function was originally found <a href="http://docs.python.org/tut/node6.html#SECTION006600000000000000000">here</a>:</p>
+
+<pre><code>def fib2(n): # return Fibonacci series up to n
+    """Return a list containing the Fibonacci series up to n."""
+    result = []
+    a, b = 0, 1
+    while b &lt; n:
+        result.append(b)    # see below
+        a, b = b, a+b
+    return result
+</code></pre>
+
+<p>Note that this isn&#8217;t a particularly slow function&#8212;in fact it&#8217;s quite fast&#8212;it simply has a number of aspects interesting to implementing a C module, like creating and appending a Python list in C. The Python <a href="http://docs.python.org/ext/simpleExample.html">Example</a> for creating a C module isn&#8217;t as comprehensive as it could be, so hopefully implementing the Fibonacci sequence in C will explain just a bit more.</p>
+
+<p>To start, we <em>always</em> include <code>Python.h</code>:</p>
+
+<pre><code>#include &lt;Python.h&gt;
+</code></pre>
+
+<p>Next we&#8217;ll create the <code>fib</code> function. First we define the function as a Python Object, which is passed arguments:</p>
+
+<pre><code>static PyObject *
+fib(PyObject *self, PyObject *args)
+{
+</code></pre>
+
+<p>Then we get to the body of the fucntion. First, let&#8217;s initialize some variables:</p>
+
+<pre><code>int a = 0, b = 1, c, n;
+</code></pre>
+
+<p>Then we move on to parsing the arguments passed to the function. For this we utilize <code>PyArg_ParseTuple</code>. Read more in the documentation page <a href="http://docs.python.org/api/arg-parsing.html">Parsing arguments and building values</a>, which gives an overview on how to parse different types of arguments. Our example, however, only accepts a single integer. If that doesn&#8217;t work, we return <code>NULL</code>.</p>
+
+<pre><code>if (!PyArg_ParseTuple(args, "i", &amp;n))
+    return NULL;
+</code></pre>
+
+<p>Then we instantiate a new Python list, using <code>PyList_New</code>, which accepts an integer as the length of the list. Since we don&#8217;t know how long the list will be when we finish, we start with zero.</p>
+
+<pre><code>PyObject *list = PyList_New(0);
+</code></pre>
+
+<p>Then we get to the guts of the actual calculation. The line we pay attention to is the <code>PyList_Append(list, PyInt_FromLong(b));</code>, as that is where and how we add another item to the list. <code>PyList_Append</code> is analogous to Python&#8217;s <code>list.append()</code> method. We use <code>PyInt_FromLong</code> to create a Python object from the integer in the loop.</p>
+
+<pre><code>while(b &lt; n){
+    PyList_Append(list, PyInt_FromLong(b));
+    c = a+b;
+    a = b;
+    b = c;
+}
+</code></pre>
+
+<p>And then we return the list:</p>
+
+<pre><code>    return list;
+}
+</code></pre>
+
+<p>That makes up the guts of the function, but how do we integrate this into Python as a module? First we create a <code>PyMethodDef</code> object with the functions we want to build into the module. Since we only have the one function, we only have one definition, like so:</p>
+
+<pre><code>PyMethodDef methods[] = {
+    {"fib", fib, METH_VARARGS, "Returns a fibonacci sequence as a list"},
+    {NULL, NULL, 0, NULL}
+};
+</code></pre>
+
+<p>The last step is to initialize the module. To understand what&#8217;s going on here, read through <a href="http://docs.python.org/ext/methodTable.html">this page</a> as it has a thorough explanation of everything happening.</p>
+
+<pre><code>PyMODINIT_FUNC 
+initfib()
+{
+    (void) Py_InitModule("fib", methods);   
+}
+</code></pre>
+
+<p>Now that our Python C module is complete, we need to compile it. The easiest way to do so is by using the <a href="http://docs.python.org/lib/module-distutils.html">distutils</a> module. We create a <code>setup.py</code> like so:</p>
+
+<pre><code>from distutils.core import setup, Extension
+
+setup(name = "Fib",
+      version = "1.0",
+      ext_modules = [Extension("fib", ["fib.c"])])
+</code></pre>
+
+<p>That tells <code>distutils</code> that our module is located in <code>fib.c</code>. Now we run:</p>
+
+<pre><code>$ python setup.py build
+$ python setup.py install
+</code></pre>
+
+<p>And it&#8217;s installed! To use it we import the module and use the function accordingly:</p>
+
+<pre><code>$ python
+&gt;&gt;&gt; import fib
+&gt;&gt;&gt; fib.fib(123)
+[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+</code></pre>
+
+<p>A fibonacci sequence is easy to calculate, and doing so in C is an exercise to display how one might implement their own function or module in C. However, despite being easy to calculate, the C version outperforms its Python equivalent by a factor of four. This simple example should show how easy it can be&#8212;and useful&#8212;it is to implement C extensions.</p>
+
+<p>There&#8217;s a lot more to this process, so if you are interested, I highly recommend reading through the <a href="http://docs.python.org/ext/ext.html">Extending and Embedding the Python Interpreter</a> document.</p>
+
+
+        </div>
+       
+        <hr/>
+        <div id="comments">
+            
+            
+                <h2>Comments</h2>
+                
+
+                    
+                    <div class="comment">
+                        <p>This is a good concise writeup.  Where were you six months ago when I was writing my first extension module? :)</p>
+                        <p class="light">Posted by <strong>Ned Batchelder</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>Thank you for this. Well-written and and (more importantly) correct. Helped to get me from a C file to a Python module in ~10 minutes.</p>
+                        <p class="light">Posted by <strong>Andrew Winslow</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>Would you mind if i do a spanish translation of this post? Is just great.</p>
+                        <p class="light">Posted by <strong>Edorka</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>Edorka: No problem, just make sure to credit me :)</p>
+                        <p class="light">Posted by <strong>SuperJared</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>done, you have it at <a href="http://www.geosincrona.com/?p=127" rel="nofollow">http://www.geosincrona.com/?p=127</a></p>
+
+<p>I&#39;ve done some changes (not 1st or 2nd persons form and will add some details to de install process)</p>
+
+<p>In near future i will try to extend the tutorial to build modules with objects and attributes, i&#39;ll tell you.</p>
+
+<p>Thanks a lot for your job :)</p>
+                        <p class="light">Posted by <strong>Edorka</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>When you initialize the new Python list using:</p>
+
+<p>PyObject *list = PyList_New(0);</p>
+
+<p>how would I alter this to declare a new integer named sum? I&#39;m using this tutorial to make another function, in which I need to declare a new integer, but I can&#39;t figure out how to do this. If you know of any helpful links, any help would be greatly appreciated. Thanks!</p>
+
+<p>Mike</p>
+                        <p class="light">Posted by <strong>Mike Jones</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>I believe there may be a typo in the setup.py example.</p>
+
+<p>&lt;pre&gt;<br />from distutils.core import setup, Extension</p>
+
+<p>setup(name = &quot;Fib&quot;,<br />      version = &quot;1.0&quot;,<br />      ext_modules = [Extension(&quot;fib&quot;, [&quot;fib.c&quot;])])<br />&lt;/pre&gt;</p>
+
+<p>The first arg to the Extension constructor should be &quot;_fib&quot;, not &quot;fib&quot;.  I&#39;m building this on Windows using MSVC, and if the value is &quot;fib&quot;, I get the following error:</p>
+
+<p>&lt;pre&gt;<br />C:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\bin\link.exe /DLL /nologo<br /> /INCREMENTAL:NO /LIBPATH:d:\programs\Python24\libs /LIBPATH:d:\programs\Python2<br />4\PCBuild /EXPORT:initexample build\temp.win32-2.4\Release\example.obj build\tem<br />p.win32-2.4\Release\example_wrap.obj /OUT:build\lib.win32-2.4\example.pyd /IMPLI<br />B:build\temp.win32-2.4\Release\example.lib<br />example_wrap.obj : error LNK2001: unresolved external symbol initexample<br />build\temp.win32-2.4\Release\example.lib : fatal error LNK1120: 1 unresolved ext<br />ernals<br />LINK : fatal error LNK1141: failure during build of exports file<br />error: command &#39;&quot;C:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\bin\link<br />.exe&quot;&#39; failed with exit status 1141<br />&lt;/pre&gt;</p>
+
+<p>On Linux, it builds, but fails when you try to import the module in Python.</p>
+
+<p>The intro article on SWIG (<a href="http://www.swig.org/Doc1.3/Python.html" rel="nofollow">http://www.swig.org/Doc1.3/Python.html</a>) touches upon this point somewhat.</p>
+                        <p class="light">Posted by <strong>Misha</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>When I try building this example, I get the following errors:</p>
+
+<p>fib.c<br />fib.c(9) : error C2275: &#39;PyObject&#39; : illegal use of this type as an expression<br />        c:\python26\include\object.h(108) : see declaration of &#39;PyObject&#39;<br />fib.c(9) : warning C4013: &#39;list&#39; undefined; assuming extern returning int<br />fib.c(11) : warning C4047: &#39;function&#39; : &#39;PyObject *&#39; differs in levels of indire<br />ction from &#39;int (__cdecl *)()&#39;<br />fib.c(11) : warning C4024: &#39;PyList_Append&#39; : different types for formal and actu<br />al parameter 1<br />fib.c(16) : warning C4047: &#39;return&#39; : &#39;PyObject *&#39; differs in levels of indirect<br />ion from &#39;int (__cdecl *)()&#39;<br />error: command &#39;&quot;C:\Program Files\Microsoft Visual Studio 9.0\VC\BIN\cl.exe&quot;&#39; fa<br />iled with exit status 2</p>
+
+<p>Any ideas on why using PyObject causes an error? I&#39;m running Windows XP and MSVC++ 9.0.</p>
+                        <p class="light">Posted by <strong>Pete</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>Sorry, it&#39;s actually the following error, although the main problem of PyObject is still there:</p>
+
+<p>fib.c<br />fib.c(9) : error C2275: &#39;PyObject&#39; : illegal use of this type as an expression<br />        c:\python26\include\object.h(108) : see declaration of &#39;PyObject&#39;<br />fib.c(9) : error C2065: &#39;list&#39; : undeclared identifier<br />fib.c(11) : error C2065: &#39;list&#39; : undeclared identifier<br />fib.c(11) : warning C4047: &#39;function&#39; : &#39;PyObject *&#39; differs in levels of indire<br />ction from &#39;int&#39;<br />fib.c(11) : warning C4024: &#39;PyList_Append&#39; : different types for formal and actu<br />al parameter 1<br />fib.c(16) : error C2065: &#39;list&#39; : undeclared identifier<br />fib.c(16) : warning C4047: &#39;return&#39; : &#39;PyObject *&#39; differs in levels of indirect<br />ion from &#39;int&#39;<br />error: command &#39;&quot;C:\Program Files\Microsoft Visual Studio 9.0\VC\BIN\cl.exe&quot;&#39; fa<br />iled with exit status 2</p>
+                        <p class="light">Posted by <strong>Pete</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>Did you ever find a solution to Pete&#39;s problem? I&#39;m having the same trouble with a different extension module.</p>
+                        <p class="light">Posted by <strong>limscoder</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>Thank you very much for this example: much clearer than the Python example! Now I can call C programs from within the interpreter. Great!<br />Only one minor problem when I do &quot;python setup.py install&quot; the installer wants to copy the program under the general Python installation where I don&#39;t have write permission... is there a way to tell install where to put the compiled file? <br />Sorry I am rather new to Python. In any case it&#39;s not a big deal because one can manually copy fib.so..</p>
+                        <p class="light">Posted by <strong>Gio</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>hey, thanks for this ...  but it seems there is a memory leak ...</p>
+
+<p>&gt;&gt;&gt; import fib<br />&gt;&gt;&gt; while True:<br />...     fib.fib(3212)</p>
+                        <p class="light">Posted by <strong>deli</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>BTW I have just found out how to build your C extension in your current directory:</p>
+
+<p>python setup.py build_ext --inplace</p>
+                        <p class="light">Posted by <strong>Gio</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>Is this the internal or external anatomy of a python</p>
+                        <p class="light">Posted by <strong>al</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>Thank you so much for writing this simple example up.</p>
+
+<p>I copy pasted the source here:<br /><a href="http://github.com/ivanistheone/arXivLDA/tree/master/project/pythonext-example/" rel="nofollow">http://github.com/ivanistheone/arXivL...</a></p>
+                        <p class="light">Posted by <strong>ivan</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>@deli  It is true that this example has a memory leak.<br />Here is the corrected code:</p>
+
+<p>number = PyInt_FromLong(b); // Need to get the pointer (see below)<br />PyList_Append(list, number);<br />Py_DECREF(number); // so I can DECREF it if necessary<br />// more info: <a href="http://www.python.org/doc/2.3.5/api/refcountDetails.html" rel="nofollow">http://www.python.org/doc/2.3.5/api/r...</a></p>
+
+<p>and somewhere above you have to define:</p>
+
+<p>PyObject *number;</p>
+
+<p>now there is no more memory leak ;)</p>
+                        <p class="light">Posted by <strong>ivan</strong></p>
+                    </div>
+                    
+                    
+                
+
+                    
+                    <div class="comment">
+                        <p>Thanks you very much for the write-up. I&#39;ve been looking into building C modules for Python for a while now, but could never find any documentation other than what to put in the C files. Once I found this, I got started in 10 minutes.</p>
+                        <p class="light">Posted by <strong>Colin Wallace</strong></p>
+                    </div>
+                    
+                    
+                
+            
+        </div>
+        
+        <div id="comments_form">
+            <h2>Add your comment</h2>
+            <p><em>No HTML; Only URLs and line breaks are converted.</em></p>
+            
+
+<form action="/comments/postfree/" method="post">
+<p><label for="id_person_name">Your name:</label> <input type="text" id="id_person_name" name="person_name" /></p>
+<p><label for="id_comment">Comment:</label><br /><textarea name="comment" id="id_comment" rows="10" cols="60"></textarea></p>
+<p>
+<input type="hidden" name="options" value="ip" />
+<input type="hidden" name="target" value="11:69" />
+<input type="hidden" name="gonzo" value="faa89a606e817836053b232bb307c53b" />
+<input type="submit" name="preview" value="Preview comment" />
+</p>
+</form>
+
+
+        </div>
+    </div>
+
+    
+    <div id="footer">Copyright 2006&ndash;2009 Jared Kuolt</div>
+</div>
+
+</body>
+</html>
+
+------------3XLRN5S1qL7AIlAg2cMsld
+Content-Disposition: inline; filename=foo.css
+Content-Type: text/css; name=foo.css
+Content-Location: http://superjared.com/foo.css
+Content-Transfer-Encoding: 8bit
+
+@media screen {
+body {font-family: Helvetica, Georgia; margin: 20px; color: #333;}
+h1 { color: #928a6f; margin:0; padding:0;}
+h1, h2, h3 {font-family: Helvetica, sans-serif;}
+a {color:#3872c8; text-decoration:none;}
+a:hover {color:#15a;}
+a:active {color: #000;}
+a, img {border:none;}
+blockquote {font-style:italic; font-family: Georgia;}
+hr {background-color: #DDD; border:none;height:1px; margin: 30px 0 10px 0;}
+
+div#skip {display:none}
+div#content {width: 600px;}
+div#sidebar {position: absolute; left: 640px;}
+div#sidebar a {text-decoration: none; padding: 2px;}
+div#sidebar a:hover {background: #DDD; color: #333;}
+div#sidebar h1 {font-weight: normal;}
+div#sidebar ul {padding:0; margin:1px 0 2px 0; list-style:none; font-family: Helvetica, sans-serif; line-height: 1.3em;}
+div.comment {border-top: 5px solid #BBB; background: #EEE; padding: 5px 10px; margin-top: 15px; }
+ul#nav {font-size: 1.45em;}
+ul#nav a {color: #5a0;}
+ul#subnav {font-size:1em;}
+ul#subnav a {color: #d40000;}
+p {line-height: 1.5em; font-size: 0.85em;}
+p.date {margin: 0; padding: 0; font-size: 1.4em; color:#CCC; font-family: Helvetica, sans-serif; line-height: 1em;}
+p.light {color: #999;}
+p a {text-decoration: underline;}
+code { font-size: 12px; }
+/*
+div#content pre {color: #EEE; background-color: #778; padding: 10px; font-size:1.25em;}
+div#content code { font-size: 1.2em;}
+div#content pre code {font-size: 0.8em;}
+*/
+div#footer {padding: 5px; border-top: 1px solid #DDD; font-size: 0.8em; color: #999; clear:both;}
+abbr { border-bottom: 1px dashed #CCC; cursor: help;}
+.right {float:right; margin-left: 1.2em;}
+.left {float:left; margin-right: 1.2em;}
+.small {font-size: 0.8em;}
+
+
+#flickr_badge_uber_wrapper {text-align:center; width:200px;}
+#flickr_badge_wrapper {padding:10px 0 10px 0;}
+.flickr_badge_image {margin:0 10px 10px 0; float: left;}
+.flickr_badge_image img {border: 1px solid black; }
+#flickr_badge_source {text-align:left; margin:0 10px 0 10px;}
+#flickr_badge_icon {float:left; margin-right:5px;}
+#flickr_www {display:block; padding:0 10px 0 10px; font: 11px
+Arial, Helvetica, Sans serif; color:#3993ff;}
+#flickr_badge_uber_wrapper a:hover,
+#flickr_badge_uber_wrapper a:link,
+#flickr_badge_uber_wrapper a:active,
+#flickr_badge_uber_wrapper a:visited {text-decoration:none;
+background:inherit;color:#3993ff;}
+}
+
+@media print {
+  div#sidebar, div#comments, div#skip, div#comments_form {display:none;}
+}
+
+------------3XLRN5S1qL7AIlAg2cMsld
+Content-Disposition: inline; filename=badge_code_v2.js
+Content-Type: application/x-javascript; charset=utf-8; name=badge_code_v2.js
+Content-Location: http://www.flickr.com/badge_code_v2.gne?count=6&display=random&size=s&layout=x&source=user&user=56995071%40N00
+Content-Transfer-Encoding: Base64
+
+dmFyIGJfdHh0ID0gJyc7CgovLyB3cml0ZSB0aGUgYmFkZ2UKCQoJCgkJIAkgCQkK
+CWJfdHh0Kz0gJzxkaXYgY2xhc3M9ImZsaWNrcl9iYWRnZV9pbWFnZSIgaWQ9ImZs
+aWNrcl9iYWRnZV9pbWFnZTEiPjxhIGhyZWY9Imh0dHA6Ly93d3cuZmxpY2tyLmNv
+bS9waG90b3Mvc3VwZXJqYXJlZC8zMTgzMzM1MjYwLyI+PGltZyBzcmM9Imh0dHA6
+Ly9mYXJtNC5zdGF0aWMuZmxpY2tyLmNvbS8zNDcxLzMxODMzMzUyNjBfMDVjZDIz
+Zjc5YV9zLmpwZyIgYWx0PSJBIHBob3RvIG9uIEZsaWNrciIgdGl0bGU9IiIgaGVp
+Z2h0PSI3NSIgd2lkdGg9Ijc1Ij48L2E+PC9kaXY+JzsKCQoJCSAJIAkJCgliX3R4
+dCs9ICc8ZGl2IGNsYXNzPSJmbGlja3JfYmFkZ2VfaW1hZ2UiIGlkPSJmbGlja3Jf
+YmFkZ2VfaW1hZ2UyIj48YSBocmVmPSJodHRwOi8vd3d3LmZsaWNrci5jb20vcGhv
+dG9zL3N1cGVyamFyZWQvMzE4MTE4MTUwMC8iPjxpbWcgc3JjPSJodHRwOi8vZmFy
+bTQuc3RhdGljLmZsaWNrci5jb20vMzQ1MC8zMTgxMTgxNTAwX2MwMzA5YzRiYTBf
+cy5qcGciIGFsdD0iQSBwaG90byBvbiBGbGlja3IiIHRpdGxlPSIiIGhlaWdodD0i
+NzUiIHdpZHRoPSI3NSI+PC9hPjwvZGl2Pic7CgkKCQkgCSAJCQoJYl90eHQrPSAn
+PGRpdiBjbGFzcz0iZmxpY2tyX2JhZGdlX2ltYWdlIiBpZD0iZmxpY2tyX2JhZGdl
+X2ltYWdlMyI+PGEgaHJlZj0iaHR0cDovL3d3dy5mbGlja3IuY29tL3Bob3Rvcy9z
+dXBlcmphcmVkLzMxODI0ODcwMTkvIj48aW1nIHNyYz0iaHR0cDovL2Zhcm00LnN0
+YXRpYy5mbGlja3IuY29tLzM0NzQvMzE4MjQ4NzAxOV9hYzFmOTUzZTM0X3MuanBn
+IiBhbHQ9IkEgcGhvdG8gb24gRmxpY2tyIiB0aXRsZT0iIiBoZWlnaHQ9Ijc1IiB3
+aWR0aD0iNzUiPjwvYT48L2Rpdj4nOwoJCgkJIAkgCQkKCWJfdHh0Kz0gJzxkaXYg
+Y2xhc3M9ImZsaWNrcl9iYWRnZV9pbWFnZSIgaWQ9ImZsaWNrcl9iYWRnZV9pbWFn
+ZTQiPjxhIGhyZWY9Imh0dHA6Ly93d3cuZmxpY2tyLmNvbS9waG90b3Mvc3VwZXJq
+YXJlZC80NDY4NTM1MDkwLyI+PGltZyBzcmM9Imh0dHA6Ly9mYXJtNS5zdGF0aWMu
+ZmxpY2tyLmNvbS80MDA2LzQ0Njg1MzUwOTBfYjExN2U5NWE1MV9zLmpwZyIgYWx0
+PSJBIHBob3RvIG9uIEZsaWNrciIgdGl0bGU9IiIgaGVpZ2h0PSI3NSIgd2lkdGg9
+Ijc1Ij48L2E+PC9kaXY+JzsKCQoJCSAJIAkJCgliX3R4dCs9ICc8ZGl2IGNsYXNz
+PSJmbGlja3JfYmFkZ2VfaW1hZ2UiIGlkPSJmbGlja3JfYmFkZ2VfaW1hZ2U1Ij48
+YSBocmVmPSJodHRwOi8vd3d3LmZsaWNrci5jb20vcGhvdG9zL3N1cGVyamFyZWQv
+MzczMDA0NDY5My8iPjxpbWcgc3JjPSJodHRwOi8vZmFybTMuc3RhdGljLmZsaWNr
+ci5jb20vMjU3NS8zNzMwMDQ0NjkzXzE3YjY4MDU0NDNfcy5qcGciIGFsdD0iQSBw
+aG90byBvbiBGbGlja3IiIHRpdGxlPSIiIGhlaWdodD0iNzUiIHdpZHRoPSI3NSI+
+PC9hPjwvZGl2Pic7CgkKCQkgCSAJCQoJYl90eHQrPSAnPGRpdiBjbGFzcz0iZmxp
+Y2tyX2JhZGdlX2ltYWdlIiBpZD0iZmxpY2tyX2JhZGdlX2ltYWdlNiI+PGEgaHJl
+Zj0iaHR0cDovL3d3dy5mbGlja3IuY29tL3Bob3Rvcy9zdXBlcmphcmVkLzM3Mjc4
+NjY3NDMvIj48aW1nIHNyYz0iaHR0cDovL2Zhcm00LnN0YXRpYy5mbGlja3IuY29t
+LzM0NzYvMzcyNzg2Njc0M182YmYyNDQ1YmJkX3MuanBnIiBhbHQ9IkEgcGhvdG8g
+b24gRmxpY2tyIiB0aXRsZT0iIiBoZWlnaHQ9Ijc1IiB3aWR0aD0iNzUiPjwvYT48
+L2Rpdj4nOwoKCmJfdHh0ICs9ICc8c3BhbiBzdHlsZT0icG9zaXRpb246YWJzb2x1
+dGU7bGVmdDotOTk5ZW07dG9wOi05OTllbTt2aXNpYmlsaXR5OmhpZGRlbiIgY2xh
+c3M9ImZsaWNrcl9iYWRnZV9iZWFjb24iPjxpbWcgc3JjPSJodHRwOi8vZ2VvLnlh
+aG9vLmNvbS9wP3M9NzkyNjAwMTAyJnQ9NGIxOTdiOGU5MDE0Y2JiMDU2OGYzNjQz
+ZDllNGUzM2Imcj1odHRwJTNBJTJGJTJGc3VwZXJqYXJlZC5jb20lMkZlbnRyeSUy
+RmFuYXRvbXktcHl0aG9uLWMtbW9kdWxlJTJGJmZsX2V2PTAmbGFuZz1lbiZpbnRs
+PWFyIiB3aWR0aD0iMCIgaGVpZ2h0PSIwIiBhbHQ9IiIgLz48L3NwYW4+JzsKCmRv
+Y3VtZW50LndyaXRlKGJfdHh0KTs=
+
+------------3XLRN5S1qL7AIlAg2cMsld--

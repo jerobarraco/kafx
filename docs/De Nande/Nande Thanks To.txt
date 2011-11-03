@@ -1,0 +1,42 @@
+Is always good to thank.
+Basically i keep this file because i found intresting all those lil' helps that makes possible a project in so many ways.
+I know i'd be still fighting with ffmpeg if it weren't for some ppl.
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+1st of all my mother.
+No, i'm not that edipic, but basically, 
+(besides giving my birth) she pays for everything i use :D
+So i owe she everything.
+
+Zheo, who is always helping me with kafx and with whom i hold all the discussions about
+technical details.. Also because he knows a lot of encoding, effects, and everything
+referrent to fansubbing; so he always knows all the techniques for effects, and all 
+the variants on the different programs.. Thanks to him i didn't had to evaluate that much
+how to make the program, also i've met overlua from him and that made me choose cairo.
+
+JFS for making overlua (and developing aegi?),
+that was the inspiration for the startpoint of the avs version of
+kafx, also for choosing cairo, for making it opensource and for NOT choosing python :D
+Also is good to know that both softwares aim for different targets.
+
+Johnny, who i ask everything about new ideas, and to whom this program is dedicated to.
+
+Zeth, who demostrated intrest in kafx and created the installer,
+wich gave a big kickstart for new users
+
+Zheo, Sakura, Zeth, AbelKM who help me on continue 
+
+And all the comunity at myopera, for the support, for watching, commenting, criticizing,
+ideas, basically everything :D
+
+People that gave me some hints in mails/mailing lists, etc.
+At cairo@cairographics.org:
+Chris Wilson
+
+At some other place:
+Mirko (from macslow.thepimp.net)
+From from #cairo@irc.freenode.net
+	sanooj (thanks for the help!!)
+	tdaven
+	

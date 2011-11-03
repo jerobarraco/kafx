@@ -1,0 +1,375 @@
+Content-Type: multipart/related; start=<op.mhtml.1220745827370.c524cb314c6fbbfd@192.168.1.99>; boundary=----------UFlKioFOjTnbqGMmxaXSV6
+Content-Location: http://www.python.org/doc/1.5.2p2/ext/methodTable.html
+Subject: =?utf-8?Q?1.4=20The=20Module's=20Method=20Table=20and=20Initialization=20Function?=
+MIME-Version: 1.0
+
+------------UFlKioFOjTnbqGMmxaXSV6
+Content-Disposition: inline; filename=methodTable.html
+Content-Type: text/html; charset=iso-8859-1; name=methodTable.html
+Content-Id: <op.mhtml.1220745827370.c524cb314c6fbbfd@192.168.1.99>
+Content-Location: http://www.python.org/doc/1.5.2p2/ext/methodTable.html
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>1.4 The Module's Method Table and Initialization Function </title>
+<META NAME="description" CONTENT="1.4 The Module's Method Table and Initialization Function ">
+<META NAME="keywords" CONTENT="ext">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="STYLESHEET" href="ext.css">
+<LINK REL="next" href="compilation.html">
+<LINK REL="previous" href="backToExample.html">
+<LINK REL="up" href="intro.html">
+<LINK REL="next" href="compilation.html">
+</head>
+<body bgcolor="#ffffff">
+<div class='navigation'>
+<table align='center' width='100%' cellpadding='0' cellspacing='2'>
+<tr>
+<td><A href="compilation.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A></td>
+<td><A href="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A></td>
+<td><A href="backToExample.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A></td>
+<td align='center' bgcolor='#99CCFF' width='100%'>
+ <b class=title>Extending and Embedding the Python Interpreter</b></td>
+<td><A href="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A></td>
+<td><img width=32 height=32 align=bottom border=0 alt=""
+ src="../icons/blank.gif"></td>
+<td><img width=32 height=32 align=bottom border=0 alt=""
+ src="../icons/blank.gif"></td>
+</tr></table><b class='navlabel'>Next:</b> <span class='sectref'><A href="compilation.html">1.5 Compilation and Linkage</A></span>
+<b class='navlabel'>Up:</b> <span class='sectref'><A href="intro.html">1. Extending Python with</A></span>
+<b class='navlabel'>Previous:</b> <span class='sectref'><A href="backToExample.html">1.3 Back to the</A></span>
+<br><hr></div>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION003400000000000000000"></A>
+<BR>
+1.4 The Module's Method Table and Initialization Function
+         
+</H1>
+
+<P>
+I promised to show how <tt class="cfunction">spam_system()</tt> is called from Python
+programs.  First, we need to list its name and address in a ``method
+table'':
+
+<P>
+<dl><dd><pre class="verbatim">
+static PyMethodDef SpamMethods[] = {
+    ...
+    {"system",  spam_system, METH_VARARGS},
+    ...
+    {NULL,      NULL}        /* Sentinel */
+};
+</pre></dl>
+
+<P>
+Note the third entry ("<tt class="samp">METH_VARARGS</tt>").  This is a flag telling
+the interpreter the calling convention to be used for the C
+function.  It should normally always be "<tt class="samp">METH_VARARGS</tt>" or
+"<tt class="samp">METH_VARARGS | METH_KEYWORDS</tt>"; a value of <code>0</code> means that an
+obsolete variant of <tt class="cfunction">PyArg_ParseTuple()</tt> is used.
+
+<P>
+When using only "<tt class="samp">METH_VARARGS</tt>", the function should expect
+the Python-level parameters to be passed in as a tuple acceptable for
+parsing via <tt class="cfunction">PyArg_ParseTuple()</tt>; more information on this
+function is provided below.
+
+<P>
+The <tt class="constant">METH_KEYWORDS</tt> bit may be set in the third field if keyword
+arguments should be passed to the function.  In this case, the C
+function should accept a third "<tt class="samp">PyObject *</tt>" parameter which will
+be a dictionary of keywords.  Use <tt class="cfunction">PyArg_ParseTupleAndKeywords()</tt>
+to parse the arguments to such a function.
+
+<P>
+The method table must be passed to the interpreter in the module's
+initialization function (which should be the only non-<code>static</code>item defined in the module file):
+
+<P>
+<dl><dd><pre class="verbatim">
+void
+initspam()
+{
+    (void) Py_InitModule("spam", SpamMethods);
+}
+</pre></dl>
+
+<P>
+When the Python program imports module <tt class="module">spam</tt> for the first
+time, <tt class="cfunction">initspam()</tt> is called. (See below for comments about
+embedding Python.)  It calls
+<tt class="cfunction">Py_InitModule()</tt>, which creates a ``module object'' (which
+is inserted in the dictionary <code>sys.modules</code> under the key
+<code>"spam"</code>), and inserts built-in function objects into the newly
+created module based upon the table (an array of <tt class="ctype">PyMethodDef</tt>
+structures) that was passed as its second argument.
+<tt class="cfunction">Py_InitModule()</tt> returns a pointer to the module object
+that it creates (which is unused here).  It aborts with a fatal error
+if the module could not be initialized satisfactorily, so the caller
+doesn't need to check for errors.
+
+<P>
+When embedding Python, the <tt class="cfunction">initspam()</tt> function is not
+called automatically unless there's an entry in the
+<tt class="cdata">_PyImport_Inittab</tt> table.  The easiest way to handle this is to 
+statically initialize your statically-linked modules by directly
+calling <tt class="cfunction">initspam()</tt> after the call to
+<tt class="cfunction">Py_Initialize()</tt> or <tt class="cfunction">PyMac_Initialize()</tt>:
+
+<P>
+<dl><dd><pre class="verbatim">
+int main(int argc, char **argv)
+{
+    /* Pass argv[0] to the Python interpreter */
+    Py_SetProgramName(argv[0]);
+
+    /* Initialize the Python interpreter.  Required. */
+    Py_Initialize();
+
+    /* Add a static module */
+    initspam();
+</pre></dl>
+
+<P>
+And example may be found in the file <font class="file" face="sans-serif">Demo/embed/demo.c</font> in the
+Python source distribution.
+
+<P>
+<b>Note:</b>  Removing entries from <code>sys.modules</code> or importing
+compiled modules into multiple interpreters within a process (or
+following a <tt class="cfunction">fork()</tt> without an intervening
+<tt class="cfunction">exec()</tt>) can create problems for some extension modules.
+Extension module authors should exercise caution when initializing
+internal data structures.
+
+<P>
+A more substantial example module is included in the Python source
+distribution as <font class="file" face="sans-serif">Modules/xxmodule.c</font>.  This file may be used as a 
+template or simply read as an example.  The <b class="program">modulator.py</b>
+script included in the source distribution or Windows install provides 
+a simple graphical user interface for declaring the functions and
+objects which a module should implement, and can generate a template
+which can be filled in.  The script lives in the
+<font class="file" face="sans-serif">Tools/modulator/</font> directory; see the <font class="file" face="sans-serif">README</font> file there
+for more information.
+
+<P>
+<p>
+<div class='navigation'><hr><table align='center' width='100%' cellpadding='0' cellspacing='2'>
+<tr>
+<td><A href="compilation.html"><img width=32 height=32 align=bottom border=0 alt="next"
+ src="../icons/next.gif"></A></td>
+<td><A href="intro.html"><img width=32 height=32 align=bottom border=0 alt="up"
+ src="../icons/up.gif"></A></td>
+<td><A href="backToExample.html"><img width=32 height=32 align=bottom border=0 alt="previous"
+ src="../icons/previous.gif"></A></td>
+<td align='center' bgcolor='#99CCFF' width='100%'>
+ <b class=title>Extending and Embedding the Python Interpreter</b></td>
+<td><A href="contents.html"><img width=32 height=32 align=bottom border=0 alt="contents"
+ src="../icons/contents.gif"></A></td>
+<td><img width=32 height=32 align=bottom border=0 alt=""
+ src="../icons/blank.gif"></td>
+<td><img width=32 height=32 align=bottom border=0 alt=""
+ src="../icons/blank.gif"></td>
+</tr></table><b class='navlabel'>Next:</b> <span class='sectref'><A href="compilation.html">1.5 Compilation and Linkage</A></span>
+<b class='navlabel'>Up:</b> <span class='sectref'><A href="intro.html">1. Extending Python with</A></span>
+<b class='navlabel'>Previous:</b> <span class='sectref'><A href="backToExample.html">1.3 Back to the</A></span>
+</div>
+<!--End of Navigation Panel-->
+<ADDRESS>
+<hr>Send comments on this document to <a href="mailto:python-docs@python.org">python-docs@python.org</a>.
+</ADDRESS>
+</BODY>
+</HTML>
+
+------------UFlKioFOjTnbqGMmxaXSV6
+Content-Disposition: inline; filename=ext.css
+Content-Type: text/css; charset=iso-8859-1; name=ext.css
+Content-Location: http://www.python.org/doc/1.5.2p2/ext/ext.css
+Content-Transfer-Encoding: 8bit
+
+/*
+ * The first part of this is the standard CSS generated by LaTeX2HTML,
+ * with the "empty" declarations removed.
+ */
+
+/* Century Schoolbook font is very similar to Computer Modern Math: cmmi */
+.MATH    { font-family: "Century Schoolbook", serif; }
+.MATH I  { font-family: "Century Schoolbook", serif; font-weight: bold }
+.BOLDMATH { font-family: "Century Schoolbook", serif; font-weight: bold }
+
+/* implement both fixed-size and relative sizes */
+SMALL.XTINY		{ font-size : xx-small }
+SMALL.TINY		{ font-size : x-small  }
+SMALL.SCRIPTSIZE	{ font-size : smaller  }
+SMALL.FOOTNOTESIZE	{ font-size : small    }
+BIG.XLARGE		{ font-size : large    }
+BIG.XXLARGE		{ font-size : x-large  }
+BIG.HUGE		{ font-size : larger   }
+BIG.XHUGE		{ font-size : xx-large }
+
+/*
+ * Document-specific styles come next;
+ * these are added for the Python documentation.
+ *
+ * Note that the size specifications for the H* elements are because
+ * Netscape on Solaris otherwise doesn't get it right; they all end up
+ * the normal text size.
+ */
+
+h1, h2, h3, h4, h5, h6	{ font-family: avantgarde, sans-serif;
+			  font-weight: bold }
+h1			{ font-size: 180% }
+h2			{ font-size: 150% }
+h3, h4			{ font-size: 120% }
+code, tt		{ font-family: monospace }
+var			{ font: italic normal serif }
+
+.navigation .title	{ font-family: avantgarde, sans-serif;
+			  font-size: 110% }
+
+.verbatim		{ color: darkblue }
+
+.email			{ font-family: avantgarde, sans-serif }
+.mimetype		{ font-family: avantgarde, sans-serif }
+.newsgroup		{ font-family: avantgarde, sans-serif }
+.url			{ font-family: avantgarde, sans-serif }
+.file			{ font-family: avantgarde, sans-serif }
+
+.refcount-info          { font-style: italic }
+.refcount-info .value   { font-weight: bold;
+                          color: #006600 }
+
+/*
+ * Some decoration for the "See also:" blocks, in part inspired by some of
+ * the styling on Lars Marius Garshol's XSA pages.
+ * (The blue in the navigation bars is #99CCFF.)
+ */
+.seealso		{ background-color: floralwhite;
+                          border: thin solid black;
+                          padding: 4pt }
+
+.seealso .heading	{ font-size: 110% }
+
+/*
+ * Class 'availability' is used for module availability statements at
+ * the top of modules.  Otherwise, rely on context for platform specifiers
+ * (generated by \platform and \platformof).
+ */
+.availability .platform { font-weight: bold }
+
+------------UFlKioFOjTnbqGMmxaXSV6
+Content-Disposition: inline; filename=next.gif
+Content-Type: image/gif; name=next.gif
+Content-Location: http://www.python.org/doc/1.5.2p2/icons/next.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhIAAgAMT/AP///5nM/4/C9Ya57Hyv4nOm2Wmcz1+SxVaJvEx/skN2qTpt
+oDBjliZZjB1Qgwo9cAAzZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACwAAAAAIAAgAAAFgmAgjmRpnmiqrmzrvnAsl0dj38RsLlDf
+PwMdSeDw9RwC4WjwMEIYyhHBCVFERQfq4RpQUHPXhhNIKlLPaCNylG6nF6Kpe+4s
+BLL0/DaQyM8fYDoCYmpBQgNmPg1JQgRNRnBKB48+CFF9Rg8GUTyZgTNETmuHCjc2
+Coxcqqusra6vJSEAOw==
+
+------------UFlKioFOjTnbqGMmxaXSV6
+Content-Disposition: inline; filename=up.gif
+Content-Type: image/gif; name=up.gif
+Content-Location: http://www.python.org/doc/1.5.2p2/icons/up.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhIAAgAMT/AP///5nM/4/C9Ya57Hyv4nOm2Wmcz1+SxVaJvEx/skN2qTpt
+oDBjliZZjB1QgxNGeQo9cAAzZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACwAAAAAIAAgAAAFwWAgjmQ5CmaqqgLDrPAqOFGkxPhIQHV9
+5DEDrxeBEICqA5EIQSFJi+XS8RS1pNLFc0DDShHAnddrwB2GvQTxEWUeZUvIoUBs
+BLq924reMwYQRAkBAmgRPytqNQ5OCkSHYjUFMG0MTgENRJIiSjUxmFokSyVqDzGG
+JQNEVCULdjJlJXw1LyUCsE+JNYJVKgxEt7wleBEDwSmixiUEdcklBkSgzSK5EbvS
+l5nXIg9EltJM2gGyEa7XgHnhBQnrCZrhxiEAOw==
+
+------------UFlKioFOjTnbqGMmxaXSV6
+Content-Disposition: inline; filename=previous.gif
+Content-Type: image/gif; name=previous.gif
+Content-Location: http://www.python.org/doc/1.5.2p2/icons/previous.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhIAAgAMT/AP///5nM/4/C9Ya57Hyv4nOm2Wmcz1+SxVaJvEx/skN2qTpt
+oDBjliZZjB1QgxNGeQo9cAAzZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACwAAAAAIAAgAAAFgWAgjmRpnmiqrmzrvnAsB0dj38VMLlHf
+QwSdSMDw9RxB4cBhjDQEwgAB0lxEaVQj4opoQg5XnhEYFTCb6HT6ISKc1XA1IyDI
+xu/NhOiA7/sMIwp+fUkiRWMDV3RvR1BXA3Y9c4oEaAqKNGhgioJjhVENXo5lDDc2
+l5ipqqusra4rIQA7
+
+------------UFlKioFOjTnbqGMmxaXSV6
+Content-Disposition: inline; filename=contents.gif
+Content-Type: image/gif; name=contents.gif
+Content-Location: http://www.python.org/doc/1.5.2p2/icons/contents.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhIAAgAMT/AP///5nM/4/C9Ya57Hyv4nOm2Wmcz1+SxVaJvEx/skN2qTpt
+oDBjliZZjB1QgxNGeQo9cAAzZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACwAAAAAIAAgAAAF/2AgjmRpnmiqrmzrvnDsEjJ7KLV6REd+
+Eo1IZJEo3RKMgkmASCQWAhKhEHkUaCLCoxhARAykglXkcJQIQylkQYqYRTulCAIp
+Jb4jAT06EmbTIwMDJUF8AQsRCCQDfgFBgypugUKGAQYRDAFobymXXAE7DSWIPV44
+KgoRcgF3nwGMoqwRricOdQZRXq4LEJA7pyICWCKwBGCvgKAQw3oPfANQi0KuBxAJ
+BQrRJAYQWwqKJgSQJQWrJ+U+6errLgILmQUNigSKCgcNDQQKDQr0Afb49H1CYICG
+AwEMpjxwxEpJLDEMr2EzFEufJQRU4jVkGCCjqGsDOHEsUIRkAQYLPjs6bHDgZMqN
+C3qIeFjyWgIHKkfezDkg1j8CUcwoKOckJ80EKqP47GkGgQN4CXpuxDc0qkoCDtiw
+29oiBAA7
+
+------------UFlKioFOjTnbqGMmxaXSV6
+Content-Disposition: inline; filename=blank.gif
+Content-Type: image/gif; name=blank.gif
+Content-Location: http://www.python.org/doc/1.5.2p2/icons/blank.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODdhIAAgAIcAAAAAAAEBAQICAgMDAwQEBAUFBQYGBgcHBwgICAkJCQAAADMA
+AGYAAJkAAMwAAP8AAAAzADMzAGYzAJkzAMwzAP8zAABmADNmAGZmAJlmAMxmAP9m
+AACZADOZAGaZAJmZAMyZAP+ZAADMADPMAGbMAJnMAMzMAP/MAAD/ADP/AGb/AJn/
+AMz/AP//AAAAMzMAM2YAM5kAM8wAM/8AMwAzMzMzM2YzM5kzM8wzM/8zMwBmMzNm
+M2ZmM5lmM8xmM/9mMwCZMzOZM2aZM5mZM8yZM/+ZMwDMMzPMM2bMM5nMM8zMM//M
+MwD/MzP/M2b/M5n/M8z/M///MwAAZjMAZmYAZpkAZswAZv8AZgAzZjMzZmYzZpkz
+ZswzZv8zZgBmZjNmZmZmZplmZsxmZv9mZgCZZjOZZmaZZpmZZsyZZv+ZZgDMZjPM
+ZmbMZpnMZszMZv/MZgD/ZjP/Zmb/Zpn/Zsz/Zv//ZgAAmTMAmWYAmZkAmcwAmf8A
+mQAzmTMzmWYzmZkzmcwzmf8zmQBmmTNmmWZmmZlmmcxmmf9mmQCZmTOZmWaZmZmZ
+mcyZmf+ZmQDMmTPMmWbMmZnMmczMmf/MmQD/mTP/mWb/mZn/mcz/mf//mQAAzDMA
+zGYAzJkAzMwAzP8AzAAzzDMzzGYzzJkzzMwzzP8zzABmzDNmzGZmzJlmzMxmzP9m
+zACZzDOZzGaZzJmZzMyZzP+ZzADMzDPMzGbMzJnMzMzMzP/MzAD/zDP/zGb/zJn/
+zMz/zP//zAAA/zMA/2YA/5kA/8wA//8A/wAz/zMz/2Yz/5kz/8wz//8z/wBm/zNm
+/2Zm/5lm/8xm//9m/wCZ/zOZ/2aZ/5mZ/8yZ//+Z/wDM/zPM/2bM/5nM/8zM///M
+/wD//zP//2b//5n//8z//////+Li4uPj4+Tk5OXl5ebm5ufn5+jo6Onp6erq6uvr
+6+zs7O3t7e7u7u/v7/Dw8PHx8fLy8vPz8/T09PX19fb29vf39/j4+Pn5+fr6+vv7
++/z8/P39/f7+/v///ywAAAAAIAAgAEAI/wCzZcuWLVu2bNmyZcuWLVu2bNmyZcuW
+LVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2
+bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmy
+ZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuW
+LVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2
+bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZf/Lli1btmzZ
+smXLli1btmzZsmXLli1btmzZsmXLli1bNoDZsmXLli1btmzZsmXLli1btmzZsmXL
+li1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1b
+tmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZ
+smXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXL
+li1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1b
+tmzZsmXLli3/W7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs
+2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YNYLZs2bJly5YtW7Zs2bJly5YtW7Zs2bJl
+y5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5Yt
+W7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs
+2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs2bJl
+y5YtW7Zs2bJly5YtW7Zs2bJly5YtW7Zs/9myZcuWLVu2bNmyZcuWLVu2bNmyZcuW
+LVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2
+bNmyZcuWLVu2bNmyZcuWLVu2bNmyZQOYLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmy
+ZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuW
+LVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2
+bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZcuWLVu2bNmyZYvLli1btmzZ
+smXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXL
+li1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1btmzZsmXLli1b
+tmzZsmXLli1btmzZsmXLli1btmzZAGbLli1btmzZsmXLli0gADs=
+
+------------UFlKioFOjTnbqGMmxaXSV6--

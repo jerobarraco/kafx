@@ -1,0 +1,424 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.77 [en] (X11; U; Linux 2.4.3-12 i686) [Netscape]">
+   <meta name="Author" content="Kåre Sjölander">
+   <title>Examples using Snack</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FE" vlink="#980066" alink="#FE0000">
+
+<center>
+<h1>
+<font face="Arial,Helvetica">A tutorial on using Snack with Tcl</font></h1></center>
+<font face="Arial,Helvetica"><font size=-1>Snack can be used for a wide
+array of tasks relating to sound files and audio data. From simple one
+line commands, like playing a sound file or finding its extreme values
+to complex sound analysis applications with graphical user interfaces.
+This tutorial is intended to get you started using Snack and to familiarize
+you with some basic concepts. The tutorial describes Snack in combination
+with Tcl, but many of the examples are applicable to Python as well using
+simple translation. Only a rudimentary knowledge of Tcl is needed to understand
+the examples.</font></font>
+<p><font face="Arial,Helvetica"><font size=-1><a href="#gettingstarted">Getting
+started with Snack</a></font></font>
+<p><font face="Arial,Helvetica"><font size=-1><a href="#play">Playing a
+sound file from disk</a></font></font>
+<p><font face="Arial,Helvetica"><font size=-1><a href="#rtgen">Real-time
+sound generation</a></font></font><img SRC="new.gif" height=12 width=31>
+<p><font face="Arial,Helvetica"><font size=-1><a href="#pipe">Streaming
+audio using pipes</a></font></font>
+<p><font face="Arial,Helvetica"><font size=-1><a href="#stream">Streaming
+audio using sockets</a></font></font>
+<p><font face="Arial,Helvetica"><font size=-1><a href="#batch">Batch processing
+of sound files</a></font></font>
+<p><font face="Arial,Helvetica"><font size=-1><a href="#wrap">Compiling
+scripts into stand-alone executables</a></font></font><img SRC="new.gif" height=12 width=31>
+<br>&nbsp;
+<h2>
+<a NAME="gettingstarted"></a><font face="Arial,Helvetica"><font size=+1>Getting
+started with Snack</font></font></h2>
+<font face="Arial,Helvetica"><font size=-1>First you need to start the
+wish console application (the Tcl interpreter), this is done in different
+ways on different platforms</font></font>
+<p><font face="Arial,Helvetica"><font size=-1><b>Unix: </b>type wish8.4
+at a terminal window prompt (depending on which version you have installed,
+or simply wish)</font></font>
+<p><font face="Arial,Helvetica"><font size=-1><b>Windows: </b>choose wish
+from the Start menu (Start | Programs | Tcl | Wish)</font></font>
+<p><font face="Arial,Helvetica"><font size=-1><b>Macintosh:</b> double-click
+the wish icon in the Tcl/Tk folder</font></font>
+<p><font face="Arial,Helvetica"><font size=-1>Two windows will appear,
+one console and one initial application window which can be used for graphical
+user interfaces.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Now load the Snack extension
+by typing</font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>package require snack</font></font></i>
+<p><font face="Arial,Helvetica"><font size=-1>at the console prompt. Wish
+will return a number which corresponds to the version of Snack that has
+been installed.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Create an initial sound
+object by typing</font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>snack::sound s</font></font></i>
+<p><font face="Arial,Helvetica"><font size=-1>You have now created a Snack
+sound object named <b>s</b>. Sound objects are the main building blocks
+of Snack scripts.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>You can read a sound file
+into a sound object using the <b>read</b> command.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Do this by typing</font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>s read ../snack2.2/ex1.wav</font></font></i>
+<p><font face="Arial,Helvetica"><font size=-1>the path name might vary
+depending on your installation, Unix users can find the file as <i>snack2.2a1/demos/tcl/ex1.wav</i>.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>The command will return
+the string WAV corresponding to the file format of the file read.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>As a convenience you can
+combine the last two commands into one. That is, you can specify a file
+to be read when the sound object is first created</font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>snack::sound s -load ../snack2.2/ex1.wav</font></font></i>
+<p><font face="Arial,Helvetica"><font size=-1>In order to play the sound
+you simply type</font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>s play</font></font></i>
+<p><font face="Arial,Helvetica"><font size=-1>Note that if you want to
+play the same sound again you simply repeat this command. There is no need
+to create new objects and read the sound file all over again.</font></font>
+<p><font face="Arial,Helvetica"><font size=-1>If you want to save this
+sound in AU file format you can do this by typing</font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>s write test.au</font></font></i>
+<p><font face="Arial,Helvetica"><font size=-1>If you want the length of
+the sound in seconds type</font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>s length -unit seconds</font></font></i>
+<p><font face="Arial,Helvetica"><font size=-1>The console is only usable
+for small tasks because of the need to type everything by hand. The normal
+use would be to put the commands in a text file and run it as a script.
+Scripts should have the extension .tcl and have this general form</font></font>
+<p><font face="Courier New,Courier"><font size=-1>
+#!/bin/sh
+<br># the next line restarts
+using wish \
+<br>exec wish8.4 "$0" "$@"
+<p>package require snack
+<p>snack::sound snd
+<p>snd read ex1.wav
+<br>snd write ex1.au
+<p>exit</font></font>
+<br>
+<p><font face="Arial,Helvetica"><font size=-1>The first three lines makes
+this script executable (with correct permissions) on Unix. It is good practice
+to start every script like that. Next two statements load snack and creates
+a sound object named <b>snd</b>.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>The <b>read</b> command
+is used to read the sound file <b>ex1.wav </b>in the current directory
+and <b>write</b> is used to save it back as an AU file (the file format
+to use for saving is inferred from the file name extension).</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Finally exit quits the script.</font></font>
+<br>&nbsp;
+<h2>
+<a NAME="play"></a><font face="Arial,Helvetica"><font size=+1>Playing a
+sound file from disk</font></font></h2>
+<font face="Arial,Helvetica"><font size=-1>If the sound file you want to
+play is very large it might not be practical to read it into memory first.
+Snack sound objects can link to a disk file as an alternative to storing
+the audio data in memory. To use this feature create the sound object like
+this</font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>snack::sound s -file ex1.wav</font></font></i>
+<p><font face="Arial,Helvetica"><font size=-1>The audio data will now reside
+on disk and only be accessed as necessary.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>If you want to play another
+file later, you can configure which file the sound object should link to
+using the configure command</font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>s configure -file ex2.wav</font></font></i>
+<br>&nbsp;
+<h2>
+<a NAME="rtgen"></a><font face="Arial,Helvetica"><font size=+1>Real-time
+sound generation</font></font></h2>
+<font face="Arial,Helvetica"><font size=-1>Snack can generate sound data
+on-the-fly during play. The following commands would play a short 440Hz
+sine beep</font></font><font face="Arial,Helvetica"><font size=-1></font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>set f [snack::filter generator
+440.0 30000 0.0 sine 8000]</font></font></i>
+<br><i><font face="Arial,Helvetica"><font size=-1>set s [snack::sound]</font></font></i>
+<br><i><font face="Arial,Helvetica"><font size=-1>$s play -filter $f</font></font></i>
+<p><font face="Arial,Helvetica"><font size=-1>The last parameter to the
+generator filter is the number of samples to generate, in this case 8000.
+The value -1 would generate samples for ever, or until a "stop" command
+is issued.</font></font>
+<p><font face="Arial,Helvetica"><font size=-1>A procedure for generating
+beeps might be defined like this</font></font>
+<p><font face="Courier New,Courier"><font size=-1>proc beep {freq} {</font></font>
+<br><font face="Courier New,Courier"><font size=-1>&nbsp; set len 8000</font></font>
+<br><font face="Courier New,Courier"><font size=-1>&nbsp; set f [snack::filter
+generator $freq 30000 0.0 sine $len]</font></font>
+<br><font face="Courier New,Courier"><font size=-1>&nbsp; set s [snack::sound
+-rate 22050]</font></font>
+<br><font face="Courier New,Courier"><font size=-1>&nbsp; $s play -filter
+$f -command "$s destroy;$f destroy"</font></font>
+<br><font face="Courier New,Courier"><font size=-1>}</font></font>
+<p><font face="Arial,Helvetica"><font size=-1>This would create the necessary
+filter and sound objects, play the sound, and clean up everything once
+the sound has been played. The option <b>-command</b>, which is given to
+the play command, specifies a command to execute once playback has completed.
+In this case it is the commands needed to deallocate (destroy) the objects.
+The newly defined procedure is called with one argument giving the freqency
+of the beep</font></font><font face="Arial,Helvetica"><font size=-1></font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>beep 440</font></font></i><font face="Arial,Helvetica"><font size=-1></font></font>
+<p><font face="Arial,Helvetica"><font size=-1>Note that the sound generated
+is immediately sent to the audio device, none of it is kept in memory.
+What you actually have done is to play an empty sound with a generator
+filter applied. This means that you can not save it to disk with a subsequent
+<b>write</b> command. If you want to generate the beep and keep the result
+in the sound object the following statements would be used</font></font><font face="Arial,Helvetica"><font size=-1></font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>set f [snack::filter generator
+440.0 30000 0.0 sine 8000]</font></font></i>
+<br><i><font face="Arial,Helvetica"><font size=-1>set s [snack::sound]</font></font></i>
+<br><i><font face="Arial,Helvetica"><font size=-1>$s filter $f</font></font></i><i><font face="Arial,Helvetica"><font size=-1></font></font></i>
+<p><font face="Arial,Helvetica"><font size=-1>At this point the sound can
+be written to a file using a <b>write</b> command. In this case you can
+simply play it using</font></font><font face="Arial,Helvetica"><font size=-1></font></font>
+<p><i><font face="Arial,Helvetica"><font size=-1>$s play</font></font></i><i><font face="Arial,Helvetica"><font size=-1></font></font></i>
+<p><font face="Arial,Helvetica"><font size=-1>Try the commands below for
+a more advanced example. The filters create a simple formant speech synthesizer
+using a square wave generator pipelined with four formant filters. The
+resulting combination will generate a neutral vowel.</font></font>
+
+<font face="Courier New,Courier"><font size=-1>
+<p>set g [snack::filter generator 75 2500 0.1 rectangle -1]
+<p>set f1 [snack::filter formant 500 50]
+<p>set f2 [snack::filter formant 1500 75]
+<p>set f3 [snack::filter formant 2500 100]
+<p>set f4 [snack::filter formant 3500 150]
+<p>set synth [snack::filter compose $g $f1 $f2 $f3 $f4]
+<p>snack::sound s
+<p>s play -filter $synth</font></font>
+
+<p><font face="Arial,Helvetica"><font size=-1>The filters can naturally
+be reconfigured for other frequencies while the sound is being generated.
+Try this by adding a slider connected to the first formant filter</font></font>
+<font face="Courier New,Courier"><font size=-1>
+<p>pack [scale .s -from 200 -to 1000 -command "$f1 configure"]
+</font></font>
+<p><font face="Arial,Helvetica"><font size=-1>See also the formant.tcl
+demo in the distribution.</font></font>
+<br>&nbsp;
+<br>&nbsp;
+<h2>
+<a NAME="pipe"></a><font face="Arial,Helvetica"><font size=+1>Streaming
+audio using pipes</font></font></h2>
+<font face="Arial,Helvetica"><font size=-1>Snack sound objects can not
+only be linked to files but also to channels such as pipes. This allows
+you to play sound data coming in through a pipe or to record sound data
+and send it.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Put the following statements
+in a Snack script called playpipe.tcl</font></font>
+<font face="Courier New,Courier"><font size=-1
+<p>package require snack
+<p>sound s -channel stdin
+<br>s play -command exit -blocking yes</font></font>
+<p><font face="Arial,Helvetica"><font size=-1>Now try this command line
+in an ordinary terminal window, e.g. in an xterm or similar</font></font>
+<p><font face="Arial,Helvetica"><font size=-1>cat ex1.wav | playpipe.tcl</font></font>
+<br>
+<br>
+<h2>
+<a NAME="stream"></a><font face="Arial,Helvetica"><font size=+1>Streaming
+audio using sockets</font></font></h2>
+<font face="Arial,Helvetica"><font size=-1>Snack sound objects can also
+be linked to socket channels. This allows you to play sound data coming
+in from a socket or to record sound data and write it to a socket.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>The following code creates
+a minimal audio server</font></font>
+<font face="Courier New,Courier"><font size=-1>
+<p>package require snack
+<p>proc ServerCmd {sock args} {
+<br>&nbsp;set snd [snack::sound -channel $sock]
+<br>&nbsp;$snd play -command "[list close $sock];$snd destroy"
+<br>}
+<p>socket -server ServerCmd 23654</font></font>
+<p><font face="Arial,Helvetica"><font size=-1>Each time a client makes
+a connection at port 23654, of the computer that runs this code, the procedure
+ServerCmd will be called. This will create a new sound object linked to
+the client channel and start a play operation. Note that this code snippet
+is capable of playing several simultaneous MP3 streams.</font></font>
+<p><font face="Arial,Helvetica"><font size=-1>The following commands create
+matching client connection</font></font>
+<p><font face="Courier New,Courier"><font size=-1>package require snack
+<p>set sock [socket localhost 23654]
+<br>fconfigure $sock -translation binary
+<br>fconfigure $sock -encoding binary
+<p>sound s -channel $sock
+<br>s record -fileformat wav</font></font>
+<p><font face="Arial,Helvetica"><font size=-1>Change localhost to be the
+network name of the computer the server code is run on. The socket channel
+is first configured for binary data, otherwise the stream would be corrupted
+by end-of-line conversions and similar. There will be a delay in the sound
+transfer due to buffering.</font></font>
+<p><font face="Arial,Helvetica"><font size=-1>See also the aserver.tcl,
+rplay.tcl, and recrplay.tcl demos in the distribution.</font></font>
+<h2>
+<a NAME="batch"></a><font face="Arial,Helvetica"><font size=+1>Batch processing
+of sound files</font></font></h2>
+<font face="Arial,Helvetica"><font size=-1>Since Snack is used in conjunction
+with a scripting language it lends itself quite naturally to batch processing
+tasks.</font></font>
+<h3>
+<font face="Arial,Helvetica"><font size=+0>Sound file format conversion</font></font></h3>
+<font face="Arial,Helvetica"><font size=-1>The previous script can easily
+be modified to perform batch processing. The Tcl language contains many
+commands which are useful for Snack users, such as the <b>glob</b> command,
+which returns a list with files matching the given patterns. For example,
+the following script reads all Kay Elemetrics .nsp-files and all Entropic
+.sd-files in the current directory and saves them as WAV files</font></font>
+<font face="Courier New,Courier"><font size=-1>
+<p>#!/bin/sh
+<br># the next line restarts using wish \
+<br>exec wish8.4 "$0" "$@"
+<p>package require snack
+<p>snack::sound s
+<p>foreach file [glob *.sd *.nsp] {
+<br>&nbsp; s read $file
+<br>&nbsp; s write [file rootname $file].wav
+<br>}
+<p>exit
+</font></font>
+<br>
+<h3>
+<font face="Arial,Helvetica"><font size=+0>Sound data format normalization</font></font></h3>
+<font face="Arial,Helvetica"><font size=-1>You can also do other kinds
+of transformation. The following script is similar to the last one but
+takes all AU files in the current directory and converts them from their
+original sound format into linear 16 bits, single channel, with sample
+frequency 16kHz, and saves them as WAV files</font></font>
+<font face="Courier New,Courier"><font size=-1>
+<p>#!/bin/sh
+<br># the next line restarts using wish \
+<br>exec wish8.4 "$0" "$@"
+<p>package require snack
+<p>snack::sound s
+<p>foreach file [glob *.au] {
+<br>&nbsp; s read $file
+<br>&nbsp; s convert -frequency 16000 -channels mono -format Lin16
+<br>&nbsp; s write [file rootname $file].wav
+<br>}
+<p>exit
+</font></font>
+<br>
+<h3>
+<font face="Arial,Helvetica"><font size=+0>Pitch and formant extraction</font></font></h3>
+<font face="Arial,Helvetica"><font size=-1>It is straight forward to modify
+the script to read the list of speech files, to be processed, from a text file.
+The following script reads the text file <b>list.txt</b>, which contains
+file names, one per line, of sound files which are to be processed. For each
+sound file, a list of pitch values is computed and saved as a text file
+with the same root name but with the extension .f0. Similarly, a list of formant values is calculated and saved in a file with the extension .frm.</font></font>
+<p><font face="Courier New,Courier"><font size=-1>
+<p>#!/bin/sh
+<br># the next line restarts using wish \
+<br>exec wish8.4 "$0" "$@"
+<p>package require snack
+<p>snack::sound s
+<p>set f [open list.txt]
+<br>set list [read $f]
+<br>close $f
+<p>foreach file $list {
+<br>&nbsp;s read $file
+<br>
+<br>&nbsp;set fd [open [file rootname $file].f0 w]
+<br>&nbsp;puts $fd [join [s pitch -method esps] \n]   
+<br>&nbsp;close $fd
+<br>
+<br>&nbsp;set fd [open [file rootname $file].frm w]
+<br>&nbsp;puts $fd [join [s formant] \n]   
+<br>&nbsp;close $fd 
+<br>}
+<p>exit</font></font>
+<br>
+<h3>
+<font face="Arial,Helvetica"><font size=+0>Long time average spectra</font></font></h3>
+<font face="Arial,Helvetica"><font size=-1>The above script only needs
+some minor modifications to generate files containing the long time average
+spectrum of each sound file instead. These are saved in text files with
+the extension .ltas</font></font>
+<font face="Courier New,Courier"><font size=-1>
+<p>#!/bin/sh
+<br># the next line restarts using wish \
+<br>exec wish8.4 "$0" "$@"
+<p>package require snack
+<p>snack::sound s
+<p>set f [open list.txt]
+<br>set list [read $f]
+<br>close $f
+<p>foreach file $list {
+<br>&nbsp;s read $file
+<br>&nbsp;if [catch {open [file rootname $file].ltas w} out] {
+<br>&nbsp;&nbsp;error $out
+<br>&nbsp;} else {
+<br>&nbsp;&nbsp;foreach value [s dBPowerSpectrum -fftlength 512 -windowlength 512 \
+<br>&nbsp;&nbsp;&nbsp;-windowtype Hanning] {
+<br>&nbsp;&nbsp;&nbsp;puts $out $value
+<br>&nbsp;&nbsp;}
+<br>&nbsp;}
+<br>&nbsp;close $out
+<br>}
+<p>exit</font></font>
+<br>&nbsp;
+<h3>
+<font face="Arial,Helvetica"><font size=+0>Mean pitch per speaker</font></font></h3>
+<font face="Arial,Helvetica"><font size=-1>The following script calculates
+the average pitch per speaker for a number of sound files each. The script
+looks for files that match the pattern d:/test/sp0?/sp0?.*.wav and computes
+the mean pitch for all voiced segments in all files for each of the speakers
+sp01, sp02, sp03, and sp04.</font></font>
+<font face="Courier New,Courier"><font size=-1>
+<p>#!/bin/sh
+<br># the next line restarts using wish \
+<br>exec wish8.4 "$0" "$@"
+<p>package require snack
+<br>snack::sound snd
+<p>foreach speaker {sp01 sp02 sp03 sp04} {
+<br>&nbsp; set sumPitch 0.0
+<br>&nbsp; set count 0
+<br>&nbsp; foreach fn [lsort [glob D:/test/$speaker/$speaker.*.wav]] {
+<br>&nbsp;&nbsp; snd read $fn
+<br>&nbsp;&nbsp; foreach value [snd pitch] {
+<br>&nbsp;&nbsp;&nbsp; if {$value != 0} {
+<br>&nbsp;&nbsp;&nbsp;&nbsp; set sumPitch [expr $sumPitch + $value]
+<br>&nbsp;&nbsp;&nbsp;&nbsp; incr count
+<br>&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp; }
+<br>&nbsp; }
+<br>&nbsp; puts "$sp: [expr $sumPitch / $count]"
+<br>}</font></font>
+<br>
+<br>
+<p><a NAME="wrap"></a>
+<h2>
+<font face="Arial,Helvetica"><font size=+1>Compiling scripts into stand-alone
+executables</font></font></h2>
+<font face="Arial,Helvetica"><font size=-1>When deploying an application
+that has been created using Tcl/Tk and Snack it can be convenient to create
+a stand-alone executable. This saves the end user the trouble of having
+to install Tcl/Tk and Snack first, before using your application. The tool
+<b>wrap.tcl</b>,
+which is included in the distribution, is used to compile a Tcl script
+together with Tcl/Tk and Snack into a self-contained binary executable.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>On Unix you would type the
+following command in a terminal window</font></font>
+<p><i>wrap.tcl app.tcl</i>
+<p>Windows users simply run <b>wrap.tcl</b> and choose the name of the
+script to compile, in the dialog that pops up.
+<br>Running <b>wrap.tcl</b> will generate an application called <b>app</b>
+(<b>app.exe</b> on Windows). The resulting binary has no dependencies on
+Tcl/Tk or Snack at all and does not need any installation apart from the
+copying of the file itself. Most applications will fit on a diskette.
+<p>&nbsp;The <b>wrap.tcl</b> script relies on the <a href="http://freewrap.sourceforge.net/">freewrap
+tool</a> which needs to be installed first. You might have to edit <b>wrap.tcl</b>
+first in order to specify the path to freewrap.
+<p>
+<hr WIDTH="100%">
+<br><font face="Arial,Helvetica"><font size=-1><a href="http://www.speech.kth.se/snack/examples.html">A
+collection of example scripts</a></font></font>
+<p><b><font face="Arial,Helvetica"><font size=-1><a href="http://www.speech.kth.se/snack/index.html">Snack
+home</a></font></font></b>
+
+<p><font face="Arial,Helvetica"><font size=-1>Last up dated </font></font>January 23, 2006
+</body>
+</html>

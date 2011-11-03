@@ -1,0 +1,599 @@
+Content-Type: multipart/related; start=<op.mhtml.1270238974848.60724a536849566c@192.168.1.99>; boundary=----------HQQOAt5r7wDcTEEDicZa0i
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/glyphs-7.html
+Subject: =?utf-8?Q?FreeType=20Glyph=20Conventions?=
+MIME-Version: 1.0
+
+------------HQQOAt5r7wDcTEEDicZa0i
+Content-Disposition: inline; filename=glyphs-7.html
+Content-Type: text/html; charset=iso-8859-1; name=glyphs-7.html
+Content-ID: <op.mhtml.1270238974848.60724a536849566c@192.168.1.99>
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/glyphs-7.html
+Content-Transfer-Encoding: 8bit
+
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en"
+          "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=iso-8859-1">
+  <meta name="Author"
+        content="David Turner">
+  <title>FreeType Glyph Conventions</title>
+</head>
+
+<body text="#000000"
+      bgcolor="#FFFFFF"
+      link="#0000EF"
+      vlink="#51188E"
+      alink="#FF0000">
+
+<h1 align=center>
+  FreeType Glyph Conventions
+</h1>
+
+<h2 align=center>
+  Version&nbsp;2.1
+</h2>
+
+<h3 align=center>
+  Copyright&nbsp;1998-2000 David Turner (<a
+  href="mailto:david@freetype.org">david@freetype.org</a>)<br>
+  Copyright&nbsp;2000 The FreeType Development Team (<a
+  href="mailto:devel@freetype.org">devel@freetype.org</a>)
+</h3>
+
+<center>
+<table width="65%">
+<tr><td>
+
+  <center>
+  <table width="100%"
+         border=0
+         cellpadding=5>
+  <tr bgcolor="#CCFFCC"
+      valign=center>
+    <td align=center
+        width="30%">
+      <a href="glyphs-6.html">Previous</a>
+    </td>
+    <td align=center
+        width="30%">
+      <a href="index.html">Contents</a>
+    </td>
+    <td align=center
+        width="30%">
+      &nbsp;
+    </td>
+  </tr>
+  </table>
+  </center>
+
+  <p><hr></p>
+
+  <table width="100%">
+  <tr bgcolor="#CCCCFF"
+      valign=center><td>
+    <h2>
+      VII. FreeType bitmaps
+    </h2>
+  </td></tr>
+  </table>
+
+    <p>The purpose of this section is to present the way FreeType manages
+    bitmaps and pixmaps, and how they relate to the concepts previously
+    defined.  The relationships between vectorial and pixel coordinates is
+    explained.</p>
+
+
+    <a name="section-1">
+    <h3>
+      1. Vectorial versus pixel coordinates
+    </h3>
+
+    <p>This sub-section explains the differences between vectorial and pixel
+    coordinates.  To make things clear, brackets will be used to describe
+    pixel coordinates, e.g. [3,5], while parentheses will be used for
+    vectorial ones, e.g. (-2,3.5).</p>
+
+    <p>In the pixel case, as we use the <em>Y&nbsp;upwards</em> convention;
+    the coordinate [0,0] always refers to the <em>lower left pixel</em> of a
+    bitmap, while coordinate [width-1, rows-1] to its <em>upper right
+    pixel</em>.</p>
+
+    <p>In the vectorial case, point coordinates are expressed in floating
+    units, like (1.25, -2.3). Such a position doesn't refer to a given
+    pixel, but simply to an immaterial point in the 2D plane.</p>
+
+    <p>The pixels themselves are indeed <em>square boxes</em> of the 2D
+    plane, whose centers lie in half pixel coordinates.  For example, the
+    lower left pixel of a bitmap is delimited by the square (0,0)-(1,1), its
+    center being at location (0.5,0.5).</p>
+
+    <p>This introduces some differences when computing distances.  For
+    example, the <em>length</em> in pixels of the line [0,0]-[10,0] is 11.
+    However, the vectorial distance between (0,0)-(10,0) covers exactly
+    10&nbsp;pixel centers, hence its length is&nbsp;10.</p>
+
+    <center>
+      <img src="grid_1.png"
+           height=390 width=402
+           alt="bitmap and vector grid">
+    </center>
+
+
+    <a name="section-2">
+    <h3>
+      2. FreeType bitmap and pixmap descriptor
+    </h3>
+
+    <p>A bitmap or pixmap is described through a single structure, called
+    <tt>FT_Bitmap</tt>, defined in the file
+    <tt>&lt;freetype/ftimage.h&gt;</tt>.  It is a simple descriptor whose
+    fields are:</p>
+
+    <center>
+    <table cellspacing=3
+           cellpadding=5
+           width="80%">
+    <caption>
+      <b><tt>FT_Bitmap</tt></b>
+    </caption>
+
+    <tr>
+      <td valign=top>
+        <tt>rows</tt>
+      </td>
+      <td valign=top>
+        the number of rows, i.e. lines, in the bitmap
+      </td>
+    </tr>
+
+    <tr>
+      <td valign=top>
+        <tt>width</tt>
+      </td>
+      <td valign=top>
+        the number of horizontal pixels in the bitmap
+      </td>
+    </tr>
+
+    <tr>
+      <td valign=top>
+        <tt>pitch</tt>
+      </td>
+      <td valign=top>
+        its absolute value is the number of bytes per bitmap line; it can
+        be either positive or negative depending on the bitmap's vertical
+        orientation
+      </td>
+    </tr>
+
+    <tr>
+      <td valign=top>
+        <tt>buffer</tt>
+      </td>
+      <td valign=top>
+        a typeless pointer to the bitmap pixel bufer
+      </td>
+    </tr>
+
+    <tr>
+      <td valign=top>
+        <tt>pixel_mode</tt>
+      </td>
+      <td valign=top>
+        an enumeration used to describe the pixel format of the bitmap;
+        examples are <tt>ft_pixel_mode_mono</tt> for 1-bit monochrome
+        bitmaps and <tt>ft_pixel_mode_grays</tt> for 8-bit anti-aliased
+        "gray" values
+      </td>
+    </tr>
+
+    <tr>
+      <td valign=top>
+        <tt>num_grays</tt>
+      </td>
+      <td valign=top>
+        this is only used for "gray" pixel modes, it gives the number of
+        gray levels used to describe the anti-aliased gray levels --
+        256&nbsp;by default with FreeType&nbsp;2
+      </td>
+    </tr>
+    </table>
+    </center>
+
+
+    <p>Note that the sign of the <tt>pitch</tt> fields determines whether
+    the rows in the pixel buffer are stored in ascending or descending
+    order.</p>
+
+    <p>Remember that FreeType uses the <em>Y&nbsp;upwards</em> convention in
+    the 2D plane, which means that a coordinate of (0,0) always refer to the
+    <em>lower-left corner</em> of a bitmap.</p>
+
+    <p>If the pitch is positive, the rows are stored in decreasing vertical
+    position; the first bytes of the pixel buffer are part of the
+    <em>upper</em> bitmap row.</p>
+
+    <p>On the opposite, if the pitch is negative, the first bytes of the
+    pixel buffer are part of the <em>lower</em> bitmap row.</p>
+
+    <p>In all cases, one can see the pitch as the byte increment needed to
+    skip to the <em>next lower scanline</em> in a given bitmap buffer.</p>
+
+    <center>
+    <table>
+    <tr>
+      <td>
+        <img src="up_flow.png"
+             height=261 width=275
+             alt="negative 'pitch'">
+      </td>
+      <td>
+        <img src="down_flow.png"
+             height=263 width=273
+             alt="positive 'pitch'">
+      </td>
+    </tr>
+    </table>
+    </center>
+
+    <p>The "positive pitch" convention is very often used, though
+    some systems might need the other.</p>
+
+
+    <a name="section-3">
+    <h3>
+      3. Converting outlines into bitmaps and pixmaps
+    </h3>
+
+    <p>Generating a bitmap or pixmap image from a vectorial image is easy
+    with FreeType.  However, one must understand a few points regarding the
+    positioning of the outline in the 2D plane before converting it to a
+    bitmap:</p>
+
+    <ul>
+      <li>
+        <p>The glyph loader and hinter always places the outline in the 2D
+        plane so that (0,0) matches its character origin.  This means that
+        the glyph's outline, and corresponding bounding box, can be placed
+        anywhere in the 2D plane (see the graphics in section&nbsp;III).</p>
+      </li>
+      <li>
+        <p>The target bitmap's area is mapped to the 2D plane, with its
+        lower left corner at (0,0).  This means that a bitmap or pixmap of
+        dimensions [<tt>w,h</tt>] will be mapped to a 2D rectangle window
+        delimited by (0,0)-(<tt>w,h</tt>).</p>
+      </li>
+      <li>
+        <p>When scan-converting the outline, everything that falls within
+        the bitmap window is rendered, the rest is ignored.</p>
+      </li>
+
+      <p>A common mistake made by many developers when they begin using
+      FreeType is believing that a loaded outline can be directly rendered
+      in a bitmap of adequate dimensions.  The following images illustrate
+      why this is a problem.</p>
+
+      <ul>
+        <li>
+          The first image shows a loaded outline in the 2D plane.
+        </li>
+        <li>
+          The second one shows the target window for a bitmap of arbitrary
+          dimensions [w,h].
+        </li>
+        <li>
+          The third one shows the juxtaposition of the outline and window in
+          the 2D plane.
+        </li>
+        <li>
+          The last image shows what will really be rendered in the bitmap.
+        </li>
+      </ul>
+
+      <center>
+        <img src="clipping.png"
+             height=151 width=539
+             alt="clipping algorithm">
+      </center>
+    </ul>
+
+    <p>Indeed, in nearly all cases, the loaded or transformed outline must
+    be translated before it is rendered into a target bitmap, in order to
+    adjust its position relative to the target window.</p>
+
+    <p>For example, the correct way of creating a <em>standalone</em> glyph
+    bitmap is as follows</p>
+
+    <ul>
+      <li>
+        <p>Compute the size of the glyph bitmap.  It can be computed
+        directly from the glyph metrics, or by computing its bounding box
+        (this is useful when a transformation has been applied to the
+        outline after the load, as the glyph metrics are not valid
+        anymore).</p>
+      </li>
+      <li>
+        <p>Create the bitmap with the computed dimensions.  Don't forget to
+        fill the pixel buffer with the background color.</p>
+      </li>
+      <li>
+        <p>Translate the outline so that its lower left corner matches
+        (0,0).  Don't forget that in order to preserve hinting, one should
+        use integer, i.e. rounded distances (of course, this isn't required
+        if preserving hinting information doesn't matter, like with rotated
+        text).  Usually, this means translating with a vector
+        <tt>(-ROUND(xMin), -ROUND(yMin))</tt>.</p>
+      </li>
+      <li>
+        <p>Call the rendering function (it can be
+        <tt>FT_Outline_Render()</tt> for example).</p>
+      </li>
+    </ul>
+
+    <p>In the case where one wants to write glyph images directly into a
+    large bitmap, the outlines must be translated so that their vectorial
+    position correspond to the current text cursor/character origin.</p>
+
+  <p><hr></p>
+
+  <center>
+  <table width="100%"
+         border=0
+         cellpadding=5>
+  <tr bgcolor="#CCFFCC"
+      valign=center>
+    <td align=center
+        width="30%">
+      <a href="glyphs-6.html">Previous</a>
+    </td>
+    <td align=center
+        width="30%">
+      <a href="index.html">Contents</a>
+    </td>
+    <td align=center
+        width="30%">
+      &nbsp;
+    </td>
+  </tr>
+  </table>
+  </center>
+
+</td></tr>
+</table>
+</center>
+
+</body>
+</html>
+
+------------HQQOAt5r7wDcTEEDicZa0i
+Content-Disposition: inline; filename=grid_1.png
+Content-Type: image/png; name=grid_1.png
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/grid_1.png
+Content-Transfer-Encoding: Base64
+
+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
+M+ETAAAAAElFTkSuQmCC
+
+------------HQQOAt5r7wDcTEEDicZa0i
+Content-Disposition: inline; filename=up_flow.png
+Content-Type: image/png; name=up_flow.png
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/up_flow.png
+Content-Transfer-Encoding: Base64
+
+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
+ABH/AvOSOihbkeEzAAAAAElFTkSuQmCC
+
+------------HQQOAt5r7wDcTEEDicZa0i
+Content-Disposition: inline; filename=down_flow.png
+Content-Type: image/png; name=down_flow.png
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/down_flow.png
+Content-Transfer-Encoding: Base64
+
+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
+iACR/wG9JlsLh4bYjgAAAABJRU5ErkJggg==
+
+------------HQQOAt5r7wDcTEEDicZa0i
+Content-Disposition: inline; filename=clipping.png
+Content-Type: image/png; name=clipping.png
+Content-Location: http://www.freetype.org/freetype2/docs/glyphs/clipping.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAhsAAACXCAMAAAH8E1mTAAADAFBMVEUAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABtbVVtbaoAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACSklWS
+kqoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAC2tqoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8CjOsfAAAI
+h0lEQVR42u2dabqkKhBEY8PUXmQxbI/uW6MDIEMCaVXw/rzvtoXBMUwSRIQXKNBV
+CRorh4ScsZXgXsJ/kVWyO02wLIdjtkqQoQevH+2vYWElvr0S7I/BnkmVveFXTN8l
+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
+
+------------HQQOAt5r7wDcTEEDicZa0i--

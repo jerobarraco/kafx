@@ -1,0 +1,652 @@
+<html>
+<head>
+	<title>XML.com: Proper XML Output in Python</title>
+        <script language="javascript" src="/common.js"></script>
+</head>
+<body>
+
+<a href="http://www.xml.com/"><img src="/images/xml-logo130.jpg" alt="XML.com" width="130" height="57" border="0" hspace="0" vspace="0"></a>&nbsp;
+
+<br clear="all" />
+&nbsp;<font face="verdana,arial,helvetica" size="1">Published on <b><a href="http://xml.com/">XML.com</a></b>&nbsp;<a href="/pub/a/2002/11/13/py-xml.html">http://www.xml.com/pub/a/2002/11/13/py-xml.html</a><br />
+<a href="/pub/a/admin/printhelp.html">See this</a> if you're having trouble printing code examples</font>
+<p>
+&nbsp;</p>
+<font face="verdana,arial,helvetica">
+
+
+<!-- ISI_LISTEN_START -->
+<span class=ISI_MESSAGE><!--  This article is brought to you by XML.com, your source for all XML news.  --></span>  
+
+
+
+<font size="3"><b>Proper XML Output in Python</b></font><br />
+<font size="1"><b>By</b> Uche Ogbuji<br />
+November 13, 2002</font></font>
+<!--CS_PAGE_BREAK--> 
+<!-- sidebar begins -->
+<!-- don't move sidebars -->
+<!-- sidebar ends -->
+
+<p>I planned to conclude my exploration of 4Suite this time, but
+  events since last month's article led me to discuss some fundamental
+  techniques for Python-XML processing first.  First, I consider ways
+  of producing XML output in Python, which might make you wonder
+  what's wrong with good old <code>print</code>?  Indeed programmers
+  often use simple print statements in order to generate XML.  But
+  this approach is not without hazards, and it's good to be aware of
+  them. It's even better to learn about tools that can help you avoid
+  the hazards.</p>
+
+
+
+  <h3>Minding the Law</h3>
+
+  <p>The main problem with simple <code>print</code> is that it knows
+  nothing about the syntactic restrictions in XML standards.  As long
+  as you can trust all sources of text to be rendered as proper XML,
+  you can constrain the output as appropriate; but it's very easy to
+  run into subtle problems which even experts may miss.
+  </p>
+
+
+
+<!-- sidebar begins -->
+<table width="140" border="1" cellspacing="2" cellpadding="10" align="right" style="border: 1px solid #333333; margin: 8px;"><tr>
+<td width="140" valign="top" bgcolor="#ffffff" style="border: none;">
+<p class="headline">Related Reading</p>
+
+<a href="http://www.oreilly.com/catalog/pythonxml/index.html?CMP=ILL-4GV796923290">
+
+<img src="/catalog/covers/0596001282_cat.gif" alt="Python & XML" border="0" />
+
+</a>
+<p class="medlist"><span class="title"><a href="http://www.oreilly.com/catalog/pythonxml/index.html?CMP=ILL-4GV796923290">Python & XML</a></span><strong><br />
+
+By <a href="http://www.oreillynet.com/pub/au/718">Christopher A. Jones</a>, <a href="http://www.oreillynet.com/pub/au/719">Fred L. Drake, Jr.</a></strong>
+</p>
+<div class="secondary">
+<!-- builds links to list in sidebar -->
+ <a href="http://www.oreilly.com/catalog/pythonxml/toc.html?CMP=ILL-4GV796923290">Table of Contents</a><br /> 
+  <a href="http://www.oreilly.com/catalog/pythonxml/inx.html?CMP=ILL-4GV796923290">Index</a><br /> 
+ 
+ <a href="http://www.oreilly.com/catalog/pythonxml/chapter/index.html?CMP=ILL-4GV796923290">Sample Chapter</a><br /> 
+ 
+
+
+
+<br /><b><a href="http://safari.oreilly.com/0596001282">Read Online--Safari</a></b>
+<span class="tiny">Search this book on Safari:</span>
+<form action="http://safari.oreilly.com/JVXSL.asp" method="post">
+<input type="hidden" name="s" value="1" /><input type="hidden" name="b" value="1" />
+<input type="hidden" name="t" value="1" /><input type="hidden" name="f" value="1" />
+<input type="hidden" name="c" value="1" /><input type="hidden" name="l" value="1" />
+<input type="hidden" name="view" value="section" />
+<input tabindex="1" name="se_text" type="text" value="" size="15" />&nbsp;<input name="go" type="image" title="Execute the search" src="http://www.oreillynet.com/images/safari_btn_go.gif" width="23" height="17" border="0" align="absmiddle"  alt="Go" /><br />
+<select name="se_isbn">
+<option value="0-596-00128-2">Only This Book</option>
+<option value="">All of Safari</option>
+</select><br />
+<input type="checkbox" name="code" value="1" /><span class="tiny">Code Fragments only</span>
+</form>						  
+
+</div>
+</td>
+</tr></table>
+<!-- sidebar ends -->
+
+
+  <p>XML has been praised partly because, by setting down some
+  important syntactic rules, it eases the path to interoperability
+  across languages, tools, and platforms.  When these rules are
+  ignored, XML loses much of its advantage.  Unfortunately, developers
+  often produce XML carelessly, resulting in broken XML.  The RSS
+  community is a good example.  RSS uses XML (and, in some variants,
+  RDF) in order to standardize syntax, but many RSS feeds produce
+  malformed XML.  Since some of these feeds are popular, the result
+  has been a spate of RSS processors that are so forgiving, they will
+  even accept broken XML.  Which is a pity.</p>
+
+  <p>Eric van der Vlist -- as reported in his article for XML.com, "<a
+  href="http://www.xml.com/pub/a/2002/06/26/vocabularies.html">Cataloging
+  XML Vocabularies</a>" -- found that a significant number of Web
+  documents with XML namespaces are not well-formed, including XHTML
+  documents.  Even a tech-savvy outfit like Wired has had <a
+  href="http://xmlhack.com/read.php?item=1802">problems</a> developing
+  systems that reliably put out well-formed XML.  </p>
+
+  <p>My point is that there's no reason why Python developers
+  shouldn't be good citizens in producing well-formed XML output.  We
+  have a variety of tools and a language which allows us to express
+  our intent very clearly.  All we need is to take a suitable amount
+  of care.  Consider the snippet in Listing 1.  It defines a function,
+  <code>write_xml_log_entry</code>, for writing log file entries as
+  little XML documents, using the <code>print</code> keyword and
+  formatted strings.</p>
+
+  <h4>Listing 1: Simple script to write XML log entries</h4>
+  <pre><code>import time
+
+LOG_LEVELS = ['DEBUG', 'WARNING', 'ERROR']
+
+def write_xml_log_entry(level, msg):
+    #Note: in a real application, I would use ISO 8601 for the date
+    #asctime used here for simplicity
+    now = time.asctime(time.localtime())
+    params = {'level': LOG_LEVELS[level], 'date': now, 'msg': msg}
+    print '&lt;entry level="%(level)s" date="%(date)s"&gt; \
+\n%(msg)s\n&lt;/entry&gt;' % params
+    return
+
+write_xml_log_entry(0, "'Twas brillig and the slithy toves")
+#sleep one second
+#Space out the log messages just for fun
+time.sleep(1)
+write_xml_log_entry(1, "And as in uffish thought he stood,")
+time.sleep(1)
+write_xml_log_entry(0, "The vorpal blade went snicker snack")  </code></pre>
+
+  <p>Listing 1 also includes a few lines to exercise the
+  <code>write_xml_log_entry</code> function.  All in all, this script
+  is straightforward enough.  The output looks like
+  </p>
+
+  <pre><code>$ python listing1.py 
+&lt;entry level="DEBUG" date="Mon Oct 21 22:11:01 2002"&gt;
+'Twas brillig and the slithy toves
+&lt;/entry&gt;
+&lt;entry level="WARNING" date="Mon Oct 21 22:11:03 2002"&gt;
+And as in uffish thought he stood,
+&lt;/entry&gt;
+&lt;entry level="DEBUG" date="Mon Oct 21 22:11:07 2002"&gt;
+The vorpal blade went snicker snack
+&lt;/entry&gt;  </code></pre>
+
+  <p>But what if someone uses this function thus:</p>
+
+  <pre><code>&gt;&gt;&gt; write_xml_log_entry(2, "In any triangle, each interior angle &lt; 90 degrees")
+&lt;entry level="ERROR" date="Tue Oct 22 05:41:31 2002"&gt;
+In any triangle, each interior angle &lt; 90 degrees
+&lt;/entry&gt;  </code></pre>
+
+  <p>Now the result isn't well-formed XML.  The character "&lt;"
+  should, of course, have been escaped to "&amp;lt;".  And there's a
+  policy issue to consider.  Are messages passed into the logging
+  function merely strings of unescaped character data, or are they
+  structured, markup-containing XML fragments?  The latter policy
+  might be prudent if you want to allow people to mark up log entries
+  by, say, italicizing a portion of the message:  </p>
+
+  <pre><code>&gt;&gt;&gt; write_xml_log_entry(2, "Came no church of cut stone signed: &lt;i&gt;Adamo me fecit.&lt;/i&gt;")
+&lt;entry level="ERROR" date="Tue Oct 22 05:41:31 2002"&gt;
+Came no church of cut stone signed: &lt;i&gt;Adamo me fecit.&lt;/i&gt;
+&lt;/entry&gt;  </code></pre>
+
+  <p>I've reused the <code>write_xml_log_entry</code> function because
+  <code>msg</code>-as-markup is the policy implied by the function as
+  currently written.  There are further policy issues to consider.  In
+  particular, to what XML vocabularies do you constrain output, if
+  any?  Allowing the user to pass markup often entails that they have
+  the responsibility for passing in well-formed markup.  The other
+  approach, where the <code>msg</code> parameter is merely character
+  data, usually entails that the <code>write_xml_log_entry</code>
+  function will perform the escaping required to produce well-formed
+  XML in the end.  For this purpose I can use the <code>escape</code>
+  utility function in the <code>xml.sax.saxutils</code> module.
+  Listing 2 defines a function,
+  <code>write_xml_cdata_log_entry</code>, which performs such
+  escaping. </p>
+
+  <h4>Listing 2: Simple script to write XML log entries, with the
+  policy that messages passed in are considered character data</h4>
+  <pre><code>import time
+from xml.sax import saxutils
+
+LOG_LEVELS = ['DEBUG', 'WARNING', 'ERROR']
+
+def write_xml_cdata_log_entry(level, msg):
+    #Note: in a real application, I would use ISO 8601 for the date
+    #asctime used here for simplicity
+    now = time.asctime(time.localtime())
+    params = {'level': LOG_LEVELS[level], 'date': now, 
+              'msg': saxutils.escape(msg)}
+    print '&lt;entry level="%(level)s" date="%(date)s"&gt; \
+\n%(msg)s\n&lt;/entry&gt;' % params
+    return  </code></pre>
+
+  <p>This function is now a bit safer to use for arbitrary text.  </p>
+
+  <pre><code>$ python -i listing2.py
+&gt;&gt;&gt; write_xml_cdata_log_entry(2, "In any triangle, each interior angle &lt; 90\260")
+&lt;entry level="ERROR" date="Tue Oct 22 06:33:51 2002"&gt;
+In any triangle, each interior angle &amp;lt; 90°
+&lt;/entry&gt;
+&gt;&gt;&gt; </code></pre>
+
+  <p>And it enforces the policy of no embedded markup in messages.  </p>
+
+  <pre><code>&gt;&gt;&gt; write_xml_cdata_log_entry(2, "Came no church of cut stone signed: &lt;i&gt;Adamo me fecit.&lt;/i&gt;")
+&lt;entry level="ERROR" date="Tue Oct 22 06:41:31 2002"&gt;
+Came no church of cut stone signed: &amp;lt;i&amp;gt;Adamo me fecit.&amp;lt;/i&amp;gt;
+&lt;/entry&gt;
+&gt;&gt;&gt;  </code></pre>
+
+  <p>Notice that <code>escape</code> also escapes "&gt;" characters,
+  which is not required by XML in character data but is often
+  preferred by users for congruity.  </p>
+
+
+  <h3>Minding Your Character</h3>
+
+  <p>Python's regular strings are byte arrays. Characters are
+  represented as one or more bytes each, depending on the encoding, but
+  the string does not indicate which encoding was used. If it surprises
+  you to hear that characters might be represented using more than one
+  byte, consider Asian writing systems, where there are far more
+  characters available than could be squeezed into the 255 a byte can
+  represent.  For this reason, some character encodings, such as
+  UTF-8, use more than one byte to encode a single character.  Other
+  encodings, such as UTF-16 and UTF-32, effectively organize the byte
+  sequence into groups of two or four bytes, each of which is the
+  basic unit of the character encoding.</p>
+
+  <p>Because most single-byte encodings, such as as ISO-8859-1, are
+  identical in the ASCII byte range (<code>0x00</code> to
+  <code>0x7F</code>), it's generally safe to use Python's strings if
+  they contain only ASCII characters and you're using a single-byte
+  encoding (other than the old IBM mainframe standard, EBCDIC, which
+  is different from ASCII throughout its range). But in any case,
+  especially if you put non-ASCII characters in one of these regular
+  strings, both the sender and receiver of these bytes need to be in
+  agreement about what encoding was used.</p>
+
+  <p>The problems associated with encoded strings are easy to
+  demonstrate. Consider one of the earlier examples, with a slight
+  change -- the word "degrees" has been replaced with the byte
+  B0 (octal 260), which is the degree symbol in the
+  popular ISO-8859-1 and Windows-1252 character encodings:  </p>
+
+  <pre><code>$ python -i listing2.py
+&gt;&gt;&gt; write_xml_cdata_log_entry(2, "In any triangle, each interior angle &lt; 90\260")
+&lt;entry level="ERROR" date="Tue Oct 22 06:33:51 2002"&gt;
+In any triangle, each interior angle &amp;lt; 90°
+&lt;/entry&gt;
+&gt;&gt;&gt;  </code></pre>
+
+  <p>The <code>\260</code> is an octal escape for characters in Python.  It
+   represents a byte of octal value 260 (B0 hex, 176 decimal).</p>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td><p class="secondary">
+
+
+<!--CS_PAGE_INDEX-->
+</p></td><td><p class="secondary" align="right">
+<a href="<!--CS_NEXT_REF-->">
+ 
+</a></p></td></tr></table>
+
+
+
+
+
+<!--CS_PAGE_BREAK-->
+
+<p>
+
+
+<!--CS_PAGE_INDEX-->
+</p>
+
+
+
+
+
+
+  <p>As for the output produced by
+  <code>write_xml_cdata_log_entry</code>, the characters seem properly
+  escaped, but there may still be a problem.  If this output is to
+  stand alone as an XML document, it's not be well-formed.  The
+  problem is that there is no XML declaration, so the character
+  encoding is assumed by XML processors to be UTF-8.  But the degree
+  symbol at the end of the string makes it illegal UTF-8; an XML
+  parser would signal an error.  This is one of the most common
+  symptoms of bad XML I have seen: documents encoded in ISO-8859-1 or
+  some other encoding which are not marked as such in an XML
+  declaration.  </p>
+
+  <p>Just adding an XML declaration is not necessarily a solution.  If
+  I have the function add</p>
+
+  <pre><code>"&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;"</code></pre>
+
+  <p>then the previous function invocation produces problem-free
+  XML. But nothing prevents <code>write_xml_cdata_log_entry</code> from being
+  passed a message in an encoding other than ISO-8859-1.  Almost any
+  sequence of bytes can be interpreted ISO-8859-1, so no error would
+  be detected.  But this is merely masking a deeper, more insidious
+  problem: the text would be completely misinterpreted.  To illustrate
+  this specious fix, Listing 3 forces an ISO-8859-1 XML declaration.
+  </p>
+
+  <h4>Listing 3: a variation on write_xml_cdata_log_entry which
+  always puts out an ISO-8859-1 XML declaration</h4>
+
+  <pre><code>import time
+from xml.sax import saxutils
+
+LOG_LEVELS = ['DEBUG', 'WARNING', 'ERROR']
+
+def write_xml_cdata_log_entry(level, msg):
+    #Note: in a real application, I would use ISO 8601 for the date
+    #asctime used here for simplicity
+    now = time.asctime(time.localtime())
+    params = {'level': LOG_LEVELS[level], 'date': now, 
+              'msg': saxutils.escape(msg)}
+    print '&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;'
+    print '&lt;entry level="%(level)s" date="%(date)s"&gt; \
+\n%(msg)s\n&lt;/entry&gt;' % params
+    return  </code></pre>
+
+  <p>To understand the nastiness that lurks within this seeming fix,
+  take the case where a user passes in a string with a UTF-8 sequence
+  with a Japanese message, which translates to "Welcome" in English.
+  </p>
+
+  <pre><code>$ python -i listing2.py
+&gt;&gt;&gt; write_xml_cdata_log_entry(2, "\343\202\210\343\201\206\343\201\223\343\201\235")
+&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+&lt;entry level="ERROR" date="Tue Oct 22 15:54:36 2002"&gt;
+ã‚ˆãfl†ãfl“ãfl?
+&lt;/entry&gt;
+&gt;&gt;&gt;  </code></pre>
+
+  <p>An XML parser would accept this with no complaint.  The problem
+  is that any processing tools looking at this XML would read the
+  individual sequences of the UTF-8 encoding as separate ISO-8859-1
+  characters. Which means they would see twelve characters, rather
+  than the four which our imaginary Japanese user thought she had
+  specified.  Even worse, unless this text is displayed in a system
+  localized for Japanese, it will come out as a mess of accented "a"s
+  and other strange characters, rather than the dignified Japanese
+  welcome intended by the user, illustrated in Figure 1.
+  </p>
+
+  <h4>Figure 1: A Japanese Welcome</h4>
+  
+    <img src="/2002/11/13/graphics/figure1.png"/>
+  
+
+  <p>Character encoding issues are a very tricky business, and you
+  should always defer to the tools that your language and operating
+  environment provide for such magic, if for no other reason than to
+  pass the buck when something goes wrong.  In Python's case, this
+  means using the Unicode facilities available in Python 1.6 and 2.x
+  (although I still highly recommend Python 2.2 or more recent for XML
+  processing).  In fact, I use and strongly encourage the following
+  rule for XML processing in Python: <b>In all public APIs for XML
+  processing, character data should be passed in strictly as Python
+  Unicode objects.</b></p>
+
+  <p>In fact, I encourage that all use of strings in programs that
+  process XML should be in the form of Unicode objects, but following
+  the above rule alone will prevent a lot of problems.  Listing 4
+  updates <code>write_xml_cdata_log_entry</code> to follow this rule.
+  </p>
+
+  <h4>Listing 4: a variation on write_xml_cdata_log_entry which
+  strictly accepts Python Unicode objects for message text.</h4>
+
+  <pre><code>import time, types
+from xml.sax import saxutils
+
+LOG_LEVELS = ['DEBUG', 'WARNING', 'ERROR']
+
+def write_xml_cdata_log_entry(level, msg):
+    if not isinstance(msg, types.UnicodeType):
+        raise TypeError("XML character data must be passed in as a unicode object")
+    now = time.asctime(time.localtime())
+    encoded_msg = saxutils.escape(msg).encode('UTF-8')
+    params = {'level': LOG_LEVELS[level], 'date': now, 'msg': encoded_msg}
+    print '&lt;entry level="%(level)s" date="%(date)s"&gt; \
+\n%(msg)s\n&lt;/entry&gt;' % params
+    return  </code></pre>
+
+  <p>Pay particular attention to the line </p>
+
+  <pre><code>encoded_msg = saxutils.escape(msg).encode('UTF-8')</code></pre>
+
+  <p>Not only does this line escape characters that are illegal in XML
+  character data, but it also encodes the Unicode object as a UTF-8
+  byte string.  This is needed because most output, including printing
+  to consoles and writing to files on most operating systems, requires
+  conversion to byte streams.  This means using an 8-bit encoding for
+  strings that were originally in Unicode (because of my suggested
+  rule).  The <code>write_xml_cdata_log_entry</code> function always
+  uses UTF-8 for this output encoding, which means that it doesn't
+  have to put out an XML declaration that specifies an encoding.  I
+  should point out that in general it's considered good practice to
+  always use an XML declaration which specifies an encoding, but I
+  wrote the function this way as an illustration.
+  </p>
+
+  <p>This version of the <code>write_xml_cdata_log_entry</code>
+  function is safe as far as character encodings are concerned.  It
+  doesn't care whether the character data came from an ISO-8859-1
+  string, a UTF-8 string, or any other form of string, as long as it
+  is passed in as a Unicode object.
+  </p>
+
+  <pre><code>$ python -i listing4.py
+&gt;&gt;&gt; write_xml_cdata_log_entry(2, "In any triangle, each interior angle &lt; 90\260")
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in ?
+  File "listing4.py", line 8, in write_xml_cdata_log_entry
+    raise TypeError("XML character data must be passed in as a unicode object")
+TypeError: XML character data must be passed in as a unicode object  </code></pre>
+
+  <p>This exception is as expected.  We passed in a plain byte string
+  rather than a Unicode object and the function is enforcing policy.
+  </p>
+
+  <pre><code>&gt;&gt;&gt; write_xml_cdata_log_entry(2, u"In any triangle, each interior angle &lt; 90\u00B0")
+&lt;entry level="ERROR" date="Tue Oct 22 17:58:08 2002"&gt;
+In any triangle, each interior angle &amp;lt; 90Â°
+&lt;/entry&gt;  </code></pre>
+
+  <p>The log message unicode object includes a character,
+  <code>\u00B0</code> in the Python notation for explicitly representing a
+  Unicode <b>code point</b>.  A code point is a number that uniquely
+  identifies one of the many characters Unicode defines.  Here, of course,
+  the code point represents the degree symbol.  In this case, it would
+  also be correct to use the regular octal escape character <code>\260</code>,
+  but I recommend using the "\u" form of escape in Python Unicode objects.
+  Be wary of using the
+  position of the character you want in your local encoding as the
+  Unicode code point.  For example, on Macs predating OS X, the 176th
+  character is the infinity symbol (<code>"\u221E"/</code>), rather than the
+  degree symbol.</p>
+
+  <p>The function outputs the single degree character as a two-byte UTF-8
+  sequence.  Since my console thinks it is displaying ISO-8859-1, the
+  bytes appear to be separate characters, but an XML processor would
+  properly read the sequence as a single character.</p>
+
+  <pre><code>&gt;&gt;&gt; #The following two lines are equivalent
+&gt;&gt;&gt; msg = unicode("\343\202\210\343\201\206\343\201\223\343\201\235", "UTF-8")
+&gt;&gt;&gt; msg = "\343\202\210\343\201\206\343\201\223\343\201\235".decode("UTF-8")
+&gt;&gt;&gt; write_xml_cdata_log_entry(2, msg)
+&lt;entry level="ERROR" date="Tue Oct 22 18:10:57 2002"&gt;
+ã‚ˆãfl†ãfl“ãfl?
+&lt;/entry&gt;  </code></pre>
+
+  <p>First, I create a Unicode object from the UTF-8-encoded string,
+  and then pass it to the function, which outputs it as UTF-8.  This
+  is no longer a problem because the parser will recognize the
+  encoding as UTF-8, rather than confusing it as ISO-8859-1, as
+  before.
+  </p>
+
+
+
+
+  <h3>Not Quite There Yet</h3>
+
+  <p>But this function is still not failsafe.  A remaining problem
+  is that XML only allows a limited set of characters to be present in
+  markup.  For example, the form feed character is illegal.  There is
+  nothing in our function to prevent a user from inserting a form feed
+  character, which would result in malformed XML.  There are other
+  subtleties to consider. Users of 4Suite have handy functions that
+  take care of most of the concerns surrounding the output of XML
+  character data.  The one of most interest in this discussion is
+  <code>Ft.Xml.Lib.String.TranslateCdata</code>.  Listing 5 is a
+  version of <code>write_xml_cdata_log_entry</code> that uses
+  <code>TranslateCdata</code> to render character data as well-formed
+  XML.
+  </p>
+
+  <h4>Listing 5: a variation on write_xml_cdata_log_entry which uses
+  Ft.Xml.Lib.String.TranslateCdata from 4Suite for safer XML
+  outout.</h4>
+
+  <pre><code>import time, types
+from xml.sax import saxutils
+from Ft.Xml.Lib.String import TranslateCdata
+
+LOG_LEVELS = ['DEBUG', 'WARNING', 'ERROR']
+
+def write_xml_cdata_log_entry(level, msg):
+    if not isinstance(msg, types.UnicodeType):
+        raise TypeError("XML character data must be passed in as a unicode object")
+    #Note: in a real application, I would use ISO 8601 for the date
+    #asctime used here for simplicity
+    now = time.asctime(time.localtime())
+    encoded_msg = TranslateCdata(msg)
+    params = {'level': LOG_LEVELS[level], 'date': now, 'msg': encoded_msg}
+    print '&lt;entry level="%(level)s" date="%(date)s"&gt; \
+\n%(msg)s\n&lt;/entry&gt;'% params
+    return  </code></pre>
+
+  <p>The key bit is now <code>encoded_msg = TranslateCdata(msg)</code>.</p>
+
+  <p>Which uses the 4Suite function.  This takes care of the escaping,
+  the character encoding, trapping illegal XML characters, and more.
+  4Suite also provides functions that prepare character data to be
+  output inside an XML attribute or for HTML output.</p>
+
+  <p>But just to put another twist on the matter, even now the 4Suite
+  developers are refining these functions for better design, and the
+  signatures may change in future releases.  Since in many cases you
+  have a special task to fulfill, and don't want to bear all the
+  burden of XML correctness, this reinforces the importance of relying
+  on third-party tools.  </p>
+
+  <h3>Conclusion</h3>
+  
+<table width="150" border="0" cellspacing="0" cellpadding="4" align="right">
+<tr> 
+<td rowspan="5">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td width="150" valign="top" height="4" bgcolor="#990066"><p class="headline" align="center"><font color="#ffffff"><b>Also in Python and XML</b>
+</p>
+</td></tr> 
+<tr>
+<td bgcolor="#efefef"><p class="smalltext">
+<a href="/pub/a/2005/09/14/processing-atom-in-python.html">Processing Atom 1.0</a><p class="smalltext">
+<a href="/pub/a/2005/08/24/py-xml.html">Should Python and XML Coexist?</a><p class="smalltext">
+<a href="/pub/a/2005/07/27/py-xml.html">EaseXML: A Python Data-Binding Tool</a><p class="smalltext">
+<a href="/pub/a/2005/06/15/py-xml.html">More Unicode Secrets</a><p class="smalltext">
+<a href="/pub/a/2005/05/18/unicode.html">Unicode Secrets</a></td></tr> <tr><td width="150" valign="top" height="4" bgcolor="#990066"> </td></tr></table>
+  
+  <p>So much for the notion that XML output is nothing more than an
+  exercise for the Python <code>print</code> keyword.  I haven't even
+  plumbed all the issues involved, and I'll return to further concerns
+  in future articles.  The main point I want to get across is that
+  generating XML is not as easy as it would at first seem, and that
+  you should use established tools as much as possible.  I have
+  pointed out utility functions in the standard Python library and in
+  4Suite.  Another approach is to create a DOM tree and then serialize
+  it.  Just remember to always generate XML with a great deal of care
+  and to test all output thoroughly with reliable XML parsers.  The
+  world could certainly do with more good XML citizens.
+  </p>
+
+  <p>Thanks to <a href="http://skew.org/xml/">Mike Brown</a>,an expert
+  on the intersection of XML and character set arcana.  He reviewed
+  this article for technical correctness and suggested important
+  clarifications.</p>
+
+  <h3>Python-XML Happenings</h3>
+
+  <p>Here is a brief on significant new happenings relevant to
+  Python-XML development, including significant software releases.
+  Not much to report this month.</p>
+
+  <p>Walter D&ouml;rwald <a
+  href="http://mail.python.org/pipermail/xml-sig/2002-October/008676.html">announced</a>
+  version 2.0 of <a href="">XIST</a>, an XML-based extensible HTML
+  generator written in Python.  The announcement also led to sime
+  discussion of the use of namespaces in XIST, leading to this <a
+  href="http://mail.python.org/pipermail/xml-sig/2002-October/008696.html">clarification</a>.
+  </p>
+
+  <p>Henry Thompson appears to have responded to my teasing about the
+  lack of distutils in <a
+  href="http://www.ltg.ed.ac.uk/~ht/xsv-status.html">XSV</a> with a <a
+  href="http://mail.python.org/pipermail/xml-sig/2002-November/008752.html">new
+  release</a>.</p>
+
+<!-- sidebar begins -->
+<table width="80%" border="0" cellspacing="8" cellpadding="4" align="center">
+<tr>
+<td width="100%" valign="top" bgcolor="#efefef">
+
+
+  <h3>Resources</h3>
+  <ul>
+  
+  <li>Mike Brown maintains <a href="http://skew.org/xml/">the skew.org
+  XML &amp; XSLT resources</a>, which includes articles and tutorials
+  featuring many important tips on character sets, XML, XSLT, HTTP and
+  other related topics.  In particular, <a
+  href="http://www.skew.org/xml/tutorial/">The skew.org XML
+  Tutorial. A reintroduction to XML with an emphasis on character
+  encoding</a> is probably the best background resource available for
+  many of the issues raised in this article.</li>
+
+    <li><a href="http://www.python.org/peps/pep-0100.html">PEP
+  100</a>, by Marc-Andre Lemburg, formally describes the Python
+  Unicode system, but beginners to the topic should start with <a
+  href="http://www.egenix.com/files/python/Unicode-EPC2002-Talk.pdf">the
+  PDF slides of Marc-Andre's tutorial</a> or with <a
+  href="http://www.reportlab.com/i18n/python_unicode_tutorial.html">Andy
+  Robinson's tutorial</a>.</li> </ul>
+
+</td></tr></table>
+<!-- sidebar ends -->
+
+
+
+
+<p><font face="verdana,arial,helvetica" size="1"><b>XML.com</b> Copyright &copy; 1998-2006 O'Reilly Media, Inc.</font></p></body>
+
+
+
+<!-- ISI_LISTEN_STOP -->
+
+
+
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+

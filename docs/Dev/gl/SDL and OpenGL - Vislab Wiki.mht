@@ -1,0 +1,2194 @@
+Content-Type: multipart/related; start=<op.mhtml.1204649108463.a93fb4766a6b84bb@127.0.1.1>; boundary=----------HBqtO1xlZHhqO47FjihnGq
+Content-Location: http://wiki.vislab.usyd.edu.au/moinwiki/SDL_and_OpenGL
+Subject: =?utf-8?Q?SDL=20and=20OpenGL=20-=20Vislab=20Wiki?=
+MIME-Version: 1.0
+
+------------HBqtO1xlZHhqO47FjihnGq
+Content-Disposition: inline; filename=SDL_and_OpenGL.htm
+Content-Type: text/html; name=SDL_and_OpenGL.htm
+Content-Id: <op.mhtml.1204649108463.a93fb4766a6b84bb@127.0.1.1>
+Content-Location: http://wiki.vislab.usyd.edu.au/moinwiki/SDL_and_OpenGL
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="robots" content="index,nofollow">
+
+
+<title>SDL and OpenGL - Vislab Wiki</title>
+
+<script type="text/javascript">
+<!--// common functions
+
+// We keep here the state of the search box
+searchIsDisabled = false;
+
+function searchChange(e) {
+    // Update search buttons status according to search box content.
+    // Ignore empty or whitespace search term.
+    var value = e.value.replace(/\s+/, '');
+    if (value == '' || searchIsDisabled) { 
+        searchSetDisabled(true);
+    } else {
+        searchSetDisabled(false);
+    }
+}
+
+function searchSetDisabled(flag) {
+    // Enable or disable search
+    document.getElementById('fullsearch').disabled = flag;
+    document.getElementById('titlesearch').disabled = flag;
+}
+
+function searchFocus(e) {
+    // Update search input content on focus
+    if (e.value == 'Buscar') {
+        e.value = '';
+        e.style.color = 'black';
+        searchIsDisabled = false;
+    }
+}
+
+function searchBlur(e) {
+    // Update search input content on blur
+    if (e.value == '') {
+        e.value = 'Buscar';
+        e.style.color = 'gray';
+        searchIsDisabled = true;
+    }
+}
+
+function actionsMenuInit(title) {
+    // Initiliaze action menu
+    for (i = 0; i < document.forms.length; i++) {
+        var form = document.forms[i];
+        if (form.className == 'actionsmenu') {
+            // Check if this form needs update
+            var div = form.getElementsByTagName('div')[0];
+            var label = div.getElementsByTagName('label')[0];
+            if (label) {
+                // This is the first time: remove label and do buton.
+                div.removeChild(label);
+                var dobutton = div.getElementsByTagName('input')[0];
+                div.removeChild(dobutton);
+                // and add menu title
+                var select = div.getElementsByTagName('select')[0];
+                var item = document.createElement('option');
+                item.appendChild(document.createTextNode(title));
+                item.value = 'show';
+                select.insertBefore(item, select.options[0]);
+                select.selectedIndex = 0;
+            }
+        }
+    }
+}
+//-->
+</script>
+
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="/wiki/vislab/css/common.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="screen" href="/wiki/vislab/css/screen.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="print" href="/wiki/vislab/css/print.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="projection" href="/wiki/vislab/css/projection.css">
+
+<link rel="Start" href="/moinwiki/FrontPage">
+<link rel="Alternate" title="Formato Wiki" href="/moinwiki/SDL_and_OpenGL?action=raw">
+<link rel="Alternate" media="print" title="Vista de Impresión" href="/moinwiki/SDL_and_OpenGL?action=print">
+<link rel="Search" href="/moinwiki/FindPage">
+<link rel="Index" href="/moinwiki/TitleIndex">
+<link rel="Glossary" href="/moinwiki/WordIndex">
+<link rel="Help" href="/moinwiki/HelpOnFormatting">
+</head>
+
+<body  lang="es" dir="ltr">
+
+<div id="header">
+
+<form id="searchform" method="get" action="">
+<div>
+<input type="hidden" name="action" value="fullsearch">
+<input type="hidden" name="context" value="180">
+<label for="searchinput">Buscar:</label>
+<input id="searchinput" type="text" name="value" value="" size="20"
+    onfocus="searchFocus(this)" onblur="searchBlur(this)"
+    onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search">
+<input id="titlesearch" name="titlesearch" type="submit"
+    value="Títulos" alt="Search Titles">
+<input id="fullsearch" name="fullsearch" type="submit"
+    value="Texto" alt="Search Full Text">
+</div>
+</form>
+<script type="text/javascript">
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<div id="logo"><a href="/moinwiki/FrontPage">Vislab Wiki</a></div>
+</div>
+
+<div id="sidebar">
+<div class="sidepanel">
+<h1>Wiki</h1>
+
+<ul id="navibar">
+<li class="wikilink"><a href="/moinwiki/FrontPage">FrontPage</a></li>
+<li class="wikilink"><a href="/moinwiki/CambiosRecientes">CambiosRecientes</a></li>
+<li class="wikilink"><a href="/moinwiki/FindPage">FindPage</a></li>
+<li class="wikilink"><a href="/moinwiki/HelpContents">HelpContents</a></li>
+<li class="current"><a href="/moinwiki/SDL_and_OpenGL">SDL and OpenGL</a></li>
+</ul>
+
+</div>
+<div class="sidepanel">
+<h1>Página</h1>
+<ul class="editbar">
+<li>Página inmutable</li>
+<li><a href="/moinwiki/SDL_and_OpenGL?action=diff">Mostrar cambios</a></li>
+<li><a href="/moinwiki/SDL_and_OpenGL?action=info">Obtener Información</a></li>
+<li>
+<form class="actionsmenu" method="get" action="">
+<div>
+    <label>Más Acciones</label>
+    <select name="action"
+        onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="raw">Texto sin formato</option>
+<option value="print">Vista de Impresión</option>
+<option value="refresh">Eliminar Caché</option>
+<option value="show" disabled class="disabled">--------</option>
+<option value="AttachFile">Adjuntar Archivo</option>
+<option value="SpellCheck">Corregir ortografía</option>
+<option value="LikePages">Mostrar Páginas Similares</option>
+<option value="LocalSiteMap">Mostrar Mapa Del Sitio</option>
+<option value="show" disabled class="disabled">--------</option>
+<option value="RenamePage" disabled class="disabled">Renombrar Página</option>
+<option value="DeletePage" disabled class="disabled">Eliminar Página</option>
+    </select>
+    <input type="submit" value="Hacer">
+</div>
+<script type="text/javascript">
+<!--// Init menu
+actionsMenuInit('Más Acciones');
+//-->
+</script>
+</form>
+</li>
+</ul>
+
+</div>
+<div class="sidepanel">
+<h1>Usuario</h1>
+<ul id="username"><li><a href="/moinwiki/UserPreferences">Ingresar</a></li></ul>
+
+</div>
+<ul id="credits">
+<li><a href="http://moinmoin.wikiwikiweb.de/">MoinMoin Powered</a></li>
+<li><a href="http://www.python.org/">Python Powered</a></li>
+<li><a href="http://validator.w3.org/check?uri=referer"><img
+  src="http://www.w3.org/Icons/valid-html401"
+  alt="Valid HTML 4.01!" height="20" width="52"></a></li>
+</ul>
+
+</div>
+
+<div id="page" lang="en" dir="ltr"><!-- start page -->
+
+
+<h1 id="title"><a title="Haz click aquí para efectuar una búsqueda de contenidos para este título" href="/moinwiki/SDL_and_OpenGL?action=fullsearch&amp;value=%27SDL+and+OpenGL%27&amp;literal=1&amp;case=1&amp;context=180">SDL and OpenGL</a></h1>
+<div lang="en" id="content" dir="ltr">
+<a id="top"></a>
+
+<h2 id="head-5eb789816bf5a298b0860cb8c7a57e15fb3e2e30">SDL and OpenGL</h2>
+
+<p>Welcome to this tutorial ! </p>
+<p>I will explain you how to code with both SDL and OpenGL library. But I expect you already know how to use SDL and  OpenGL basics. If you don't I recommend you to go to this wiki page for SDL : <a href="http://wiki.vislab.usyd.edu.au/moinwiki/Ostrich/ToolsEvaluation/SDLEvaluation"><img src="/wiki/vislab/img/moin-www.png" alt="[WWW]" height="11" width="11"> http://wiki.vislab.usyd.edu.au/moinwiki/Ostrich/ToolsEvaluation/SDLEvaluation</a>. You will find some links for SDL tutorials. And this one for OpenGL basics : <a href="http://wiki.vislab.usyd.edu.au/moinwiki/Multimedia_Computing_and_Processing/Tutorials/OpenGL_Basics"><img src="/wiki/vislab/img/moin-www.png" alt="[WWW]" height="11" width="11"> http://wiki.vislab.usyd.edu.au/moinwiki/Multimedia_Computing_and_Processing/Tutorials/OpenGL_Basics</a> </p>
+
+<h3 id="head-0f9b2c68b75658fc65cde6325e8f76710364f85f">Why using SDL ?</h3>
+
+<p>SDL is a low level Multimedia library. Using SDL make programming events, using pictures ... easier ! </p>
+
+<h3 id="head-a0ca7c4b15f2484f336ea45adb0f9d96f92c25c8">Prepare SDL project for OpenGL</h3>
+
+<p>First of all, you will need OpenGL and SDL libraries. For the first one I advise you to download the latest GLUT pack. It includes everything we need for OpenGL programming. For The seconde one you just have to install the SDL library properly. </p>
+<p>In both cases, don't forgot to link these libraries : <strong>SDL.lib SDLmain.lib opengl32.lib glu32.lib</strong> to your project. </p>
+<p>Let's begin, this is the minimal code (just an example but it's easy to begin with) for a SDL project : </p>
+
+<div lang="en" class="codearea" dir="ltr">
+<script type="text/JavaScript">
+function isnumbered(obj) {
+  return obj.childNodes.length && obj.firstChild.childNodes.length && obj.firstChild.firstChild.className == 'LineNumber';
+}
+function nformat(num,chrs,add) {
+  var nlen = Math.max(0,chrs-(''+num).length), res = '';
+  while (nlen>0) { res += ' '; nlen-- }
+  return res+num+add;
+}
+function addnumber(did, nstart, nstep) {
+  var c = document.getElementById(did), l = c.firstChild, n = 1;
+  if (!isnumbered(c))
+    if (typeof nstart == 'undefined') nstart = 1;
+    if (typeof nstep  == 'undefined') nstep = 1;
+    n = nstart;
+    while (l != null) {
+      if (l.tagName == 'SPAN') {
+        var s = document.createElement('SPAN');
+        s.className = 'LineNumber'
+        s.appendChild(document.createTextNode(nformat(n,4,' ')));
+        n += nstep;
+        if (l.childNodes.length)
+          l.insertBefore(s, l.firstChild)
+        else
+          l.appendChild(s)
+      }
+      l = l.nextSibling;
+    }
+  return false;
+}
+function remnumber(did) {
+  var c = document.getElementById(did), l = c.firstChild;
+  if (isnumbered(c))
+    while (l != null) {
+      if (l.tagName == 'SPAN' && l.firstChild.className == 'LineNumber') l.removeChild(l.firstChild);
+      l = l.nextSibling;
+    }
+  return false;
+}
+function togglenumber(did, nstart, nstep) {
+  var c = document.getElementById(did);
+  if (isnumbered(c)) {
+    remnumber(did);
+  } else {
+    addnumber(did,nstart,nstep);
+  }
+  return false;
+}
+</script>
+
+<script type="text/javascript">
+document.write('<a href="#" onClick="return togglenumber(\'CA-7f49b9f3f30c02209f31b9961aa36b9990bb03b7_000\', 1, 1);" \
+                class="codenumbers">Toggle line numbers<\/a>');
+</script>
+<pre lang="en" id="CA-7f49b9f3f30c02209f31b9961aa36b9990bb03b7_000" dir="ltr">
+<span class="line"><span class="LineNumber">   1 </span><span class="Preprc"></span></span>
+<span class="line"><span class="LineNumber">   2 </span><span class="Preprc">#include &lt;SDL/SDL.h&gt;</span></span>
+<span class="line"><span class="LineNumber">   3 </span></span>
+<span class="line"><span class="LineNumber">   4 </span><span class="ResWord">int</span> <span class="ID">main</span><span class="SPChar">(</span><span class="ResWord">int</span> <span class="ID">argc</span><span class="SPChar">,</span> <span class="ResWord">char</span> <span class="SPChar">*</span><span class="ID">argv</span><span class="SPChar">[</span><span class="SPChar">]</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber">   5 </span></span>
+<span class="line"><span class="LineNumber">   6 </span><span class="SPChar">{</span></span>
+<span class="line"><span class="LineNumber">   7 </span>    <span class="ID">SDL_Init</span><span class="SPChar">(</span><span class="ID">SDL_INIT_VIDEO</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">   8 </span></span>
+<span class="line"><span class="LineNumber">   9 </span>    <span class="ID">SDL_Surface</span><span class="SPChar">*</span> <span class="ID">screen</span> <span class="SPChar">=</span> <span class="ID">SDL_SetVideoMode</span><span class="SPChar">(</span><span class="Number">6</span><span class="Number">4</span><span class="Number">0</span><span class="SPChar">,</span> <span class="Number">4</span><span class="Number">8</span><span class="Number">0</span><span class="SPChar">,</span> <span class="Number">3</span><span class="Number">2</span><span class="SPChar">,</span> <span class="ID">SDL_HWSURFACE</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  10 </span></span>
+<span class="line"><span class="LineNumber">  11 </span>    <span class="ID">SDL_Flip</span><span class="SPChar">(</span><span class="ID">screen</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  12 </span></span>
+<span class="line"><span class="LineNumber">  13 </span>    <span class="ResWord">bool</span> <span class="ID">keepdoing</span> <span class="SPChar">=</span> <span class="ConsWord">true</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  14 </span>    <span class="ID">SDL_Event</span> <span class="ID">event</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  15 </span></span>
+<span class="line"><span class="LineNumber">  16 </span>    <span class="ResWord">while</span> <span class="SPChar">(</span><span class="ID">keepdoing</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber">  17 </span>    <span class="SPChar">{</span></span>
+<span class="line"><span class="LineNumber">  18 </span>        <span class="ID">SDL_WaitEvent</span><span class="SPChar">(</span><span class="SPChar">&amp;</span><span class="ID">event</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  19 </span>        <span class="ResWord">switch</span><span class="SPChar">(</span><span class="ID">event</span><span class="SPChar">.</span><span class="ID">type</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber">  20 </span>        <span class="SPChar">{</span></span>
+<span class="line"><span class="LineNumber">  21 </span>            <span class="ResWord">case</span> <span class="ID">SDL_QUIT</span><span class="SPChar">:</span></span>
+<span class="line"><span class="LineNumber">  22 </span>                <span class="ID">keepdoing</span> <span class="SPChar">=</span> <span class="ConsWord">false</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  23 </span>        <span class="SPChar">}</span></span>
+<span class="line"><span class="LineNumber">  24 </span>    <span class="SPChar">}</span></span>
+<span class="line"><span class="LineNumber">  25 </span></span>
+<span class="line"><span class="LineNumber">  26 </span>    <span class="ID">SDL_Quit</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  27 </span></span>
+<span class="line"><span class="LineNumber">  28 </span>    <span class="ResWord">return</span> <span class="Number">0</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  29 </span><span class="SPChar">}</span></span>
+<span class="line"><span class="LineNumber">  30 </span></span>
+</pre>
+</div>
+<p>This code creates a simple window (640X480 32bit). It also defines the screen as surface to set video. </p>
+<p>As we want to use OpenGL library, we have to change the  
+</p>
+<div lang="en" class="codearea" dir="ltr">
+<script type="text/javascript">
+document.write('<a href="#" onClick="return togglenumber(\'CA-f2d526e226a4ed520d8ca13ae31db09362094225_001\', 1, 1);" \
+                class="codenumbers">Toggle line numbers<\/a>');
+</script>
+<pre lang="en" id="CA-f2d526e226a4ed520d8ca13ae31db09362094225_001" dir="ltr">
+<span class="line"><span class="LineNumber">   1 </span><span class="ID">SDL_SetVideoMode</span><span class="SPChar">(</span><span class="Number">6</span><span class="Number">4</span><span class="Number">0</span><span class="SPChar">,</span> <span class="Number">4</span><span class="Number">8</span><span class="Number">0</span><span class="SPChar">,</span> <span class="Number">3</span><span class="Number">2</span><span class="SPChar">,</span> <span class="ID">SDL_HWSURFACE</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+</pre>
+</div>
+<p>by this one 
+</p>
+<div lang="en" class="codearea" dir="ltr">
+<script type="text/javascript">
+document.write('<a href="#" onClick="return togglenumber(\'CA-9793fdf6a850552028a3e06ab0c65f40f4ad9cd7_002\', 1, 1);" \
+                class="codenumbers">Toggle line numbers<\/a>');
+</script>
+<pre lang="en" id="CA-9793fdf6a850552028a3e06ab0c65f40f4ad9cd7_002" dir="ltr">
+<span class="line"><span class="LineNumber">   1 </span><span class="ID">SDL_SetVideoMode</span><span class="SPChar">(</span><span class="Number">6</span><span class="Number">4</span><span class="Number">0</span><span class="SPChar">,</span> <span class="Number">4</span><span class="Number">8</span><span class="Number">0</span><span class="SPChar">,</span> <span class="Number">3</span><span class="Number">2</span><span class="SPChar">,</span> <span class="ID">SDL_OPENGL</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+</pre>
+</div>
+<p>The <tt>&nbsp;SDL_DOUBLEBUF&nbsp;</tt> is no need anymore. The OpenGL equivalent is activate by default. </p>
+<p>Now let's include the OpenGL library (Glut in this case) </p>
+
+<div lang="en" class="codearea" dir="ltr">
+<script type="text/javascript">
+document.write('<a href="#" onClick="return togglenumber(\'CA-217c7933dbd5ffe1ad6d3390a2ab7b9c5dccde5e_003\', 1, 1);" \
+                class="codenumbers">Toggle line numbers<\/a>');
+</script>
+<pre lang="en" id="CA-217c7933dbd5ffe1ad6d3390a2ab7b9c5dccde5e_003" dir="ltr">
+<span class="line"><span class="LineNumber">   1 </span><span class="Preprc">#include &lt;windows.h&gt; // This is only necessary with Visual C++  </span></span>
+<span class="line"><span class="LineNumber">   2 </span><span class="Preprc">#include &lt;GL/gl.h&gt;   // We are using the Glut library</span></span>
+<span class="line"><span class="LineNumber">   3 </span><span class="Preprc">#include &lt;GL/glut.h&gt;</span></span>
+</pre>
+</div>
+<p>For the example we will draw a basic 2D triangle. </p>
+
+<div lang="en" class="codearea" dir="ltr">
+<script type="text/javascript">
+document.write('<a href="#" onClick="return togglenumber(\'CA-ae2cbacab98d4c0492be67fe3a17a1442ee1e5b3_004\', 1, 1);" \
+                class="codenumbers">Toggle line numbers<\/a>');
+</script>
+<pre lang="en" id="CA-ae2cbacab98d4c0492be67fe3a17a1442ee1e5b3_004" dir="ltr">
+<span class="line"><span class="LineNumber">   1 </span><span class="ID">glClear</span><span class="SPChar">(</span><span class="ID">GL_COLOR_BUFFER_BIT</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">   2 </span></span>
+<span class="line"><span class="LineNumber">   3 </span><span class="ID">glBegin</span><span class="SPChar">(</span><span class="ID">GL_TRIANGLES</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">   4 </span>    <span class="ID">glColor3ub</span><span class="SPChar">(</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span>    <span class="ID">glVertex2d</span><span class="SPChar">(</span><span class="SPChar">-</span><span class="Number">0.75</span><span class="SPChar">,</span><span class="SPChar">-</span><span class="Number">0.75</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">   5 </span>    <span class="ID">glColor3ub</span><span class="SPChar">(</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span>    <span class="ID">glVertex2d</span><span class="SPChar">(</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0.75</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">   6 </span>    <span class="ID">glColor3ub</span><span class="SPChar">(</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">)</span><span class="SPChar">;</span>    <span class="ID">glVertex2d</span><span class="SPChar">(</span><span class="Number">0.75</span><span class="SPChar">,</span><span class="SPChar">-</span><span class="Number">0.75</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">   7 </span><span class="ID">glEnd</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+</pre>
+</div>
+<p>We also need to change the  
+</p>
+<div lang="en" class="codearea" dir="ltr">
+<script type="text/javascript">
+document.write('<a href="#" onClick="return togglenumber(\'CA-73ec805f5e715b43a9e26523005864b024c20bb9_005\', 1, 1);" \
+                class="codenumbers">Toggle line numbers<\/a>');
+</script>
+<pre lang="en" id="CA-73ec805f5e715b43a9e26523005864b024c20bb9_005" dir="ltr">
+<span class="line"><span class="LineNumber">   1 </span><span class="ID">SDL_Flip</span><span class="SPChar">(</span><span class="ID">screen</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+</pre>
+</div>
+<p>By this new fonction 
+</p>
+<div lang="en" class="codearea" dir="ltr">
+<script type="text/javascript">
+document.write('<a href="#" onClick="return togglenumber(\'CA-b651469337f5be84abad2557b247fcee3708edbd_006\', 1, 1);" \
+                class="codenumbers">Toggle line numbers<\/a>');
+</script>
+<pre lang="en" id="CA-b651469337f5be84abad2557b247fcee3708edbd_006" dir="ltr">
+<span class="line"><span class="LineNumber">   1 </span><span class="ID">glFlush</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">   2 </span><span class="ID">SDL_GL_SwapBuffers</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">   3 </span></span>
+<span class="line"><span class="LineNumber">   4 </span></span>
+</pre>
+</div>
+<p><tt>glFlush();</tt> checks every OpenGL commands have been done <tt>SDL_GL_SwapBuffers();</tt> is the equivalant of SDL_Flip </p>
+<p>Here is the complete code ! </p>
+
+<div lang="en" class="codearea" dir="ltr">
+<script type="text/javascript">
+document.write('<a href="#" onClick="return togglenumber(\'CA-8332ee93525d03fe29d83274c92a2fc589b9dc88_007\', 1, 1);" \
+                class="codenumbers">Toggle line numbers<\/a>');
+</script>
+<pre lang="en" id="CA-8332ee93525d03fe29d83274c92a2fc589b9dc88_007" dir="ltr">
+<span class="line"><span class="LineNumber">   1 </span><span class="Preprc">#include &lt;windows.h&gt;</span></span>
+<span class="line"><span class="LineNumber">   2 </span><span class="Preprc">#include &lt;SDL/SDL.h&gt;</span></span>
+<span class="line"><span class="LineNumber">   3 </span><span class="Preprc">#include &lt;GL/gl.h&gt;</span></span>
+<span class="line"><span class="LineNumber">   4 </span><span class="Preprc">#include &lt;GL/glu.h&gt;</span></span>
+<span class="line"><span class="LineNumber">   5 </span></span>
+<span class="line"><span class="LineNumber">   6 </span><span class="ResWord">int</span> <span class="ID">main</span><span class="SPChar">(</span><span class="ResWord">int</span> <span class="ID">argc</span><span class="SPChar">,</span> <span class="ResWord">char</span> <span class="SPChar">*</span><span class="ID">argv</span><span class="SPChar">[</span><span class="SPChar">]</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber">   7 </span><span class="SPChar">{</span></span>
+<span class="line"><span class="LineNumber">   8 </span>    <span class="ID">SDL_Init</span><span class="SPChar">(</span><span class="ID">SDL_INIT_VIDEO</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">   9 </span>    <span class="ID">SDL_WM_SetCaption</span><span class="SPChar">(</span><span class="String">"My first OpenGL programm !"</span><span class="SPChar">,</span><span class="ConsWord">NULL</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  10 </span>    <span class="ID">SDL_SetVideoMode</span><span class="SPChar">(</span><span class="Number">6</span><span class="Number">4</span><span class="Number">0</span><span class="SPChar">,</span> <span class="Number">4</span><span class="Number">8</span><span class="Number">0</span><span class="SPChar">,</span> <span class="Number">3</span><span class="Number">2</span><span class="SPChar">,</span> <span class="ID">SDL_OPENGL</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  11 </span></span>
+<span class="line"><span class="LineNumber">  12 </span>    <span class="ResWord">bool</span> <span class="ID">keepdoing</span> <span class="SPChar">=</span> <span class="ConsWord">true</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  13 </span>    <span class="ID">SDL_Event</span> <span class="ID">event</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  14 </span></span>
+<span class="line"><span class="LineNumber">  15 </span>    <span class="ResWord">while</span> <span class="SPChar">(</span><span class="ID">keepdoing</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber">  16 </span>    <span class="SPChar">{</span></span>
+<span class="line"><span class="LineNumber">  17 </span>        <span class="ID">SDL_WaitEvent</span><span class="SPChar">(</span><span class="SPChar">&amp;</span><span class="ID">event</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  18 </span>        <span class="ResWord">switch</span><span class="SPChar">(</span><span class="ID">event</span><span class="SPChar">.</span><span class="ID">type</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber">  19 </span>        <span class="SPChar">{</span></span>
+<span class="line"><span class="LineNumber">  20 </span>            <span class="ResWord">case</span> <span class="ID">SDL_QUIT</span><span class="SPChar">:</span></span>
+<span class="line"><span class="LineNumber">  21 </span>                <span class="ID">keepdoing</span> <span class="SPChar">=</span> <span class="ConsWord">false</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  22 </span>        <span class="SPChar">}</span></span>
+<span class="line"><span class="LineNumber">  23 </span></span>
+<span class="line"><span class="LineNumber">  24 </span>         <span class="ID">glClear</span><span class="SPChar">(</span><span class="ID">GL_COLOR_BUFFER_BIT</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  25 </span></span>
+<span class="line"><span class="LineNumber">  26 </span>        <span class="ID">glBegin</span><span class="SPChar">(</span><span class="ID">GL_TRIANGLES</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  27 </span>            <span class="ID">glColor3ub</span><span class="SPChar">(</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span>    <span class="ID">glVertex2d</span><span class="SPChar">(</span><span class="SPChar">-</span><span class="Number">0.75</span><span class="SPChar">,</span><span class="SPChar">-</span><span class="Number">0.75</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  28 </span>            <span class="ID">glColor3ub</span><span class="SPChar">(</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span>    <span class="ID">glVertex2d</span><span class="SPChar">(</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0.75</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  29 </span>            <span class="ID">glColor3ub</span><span class="SPChar">(</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">)</span><span class="SPChar">;</span>    <span class="ID">glVertex2d</span><span class="SPChar">(</span><span class="Number">0.75</span><span class="SPChar">,</span><span class="SPChar">-</span><span class="Number">0.75</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  30 </span>        <span class="ID">glEnd</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  31 </span></span>
+<span class="line"><span class="LineNumber">  32 </span>        <span class="ID">glFlush</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  33 </span>        <span class="ID">SDL_GL_SwapBuffers</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  34 </span>    <span class="SPChar">}</span></span>
+<span class="line"><span class="LineNumber">  35 </span></span>
+<span class="line"><span class="LineNumber">  36 </span>    <span class="ID">SDL_Quit</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  37 </span></span>
+<span class="line"><span class="LineNumber">  38 </span>    <span class="ResWord">return</span> <span class="Number">0</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  39 </span><span class="SPChar">}</span></span>
+</pre>
+</div>
+
+<h3 id="head-38720ed81dcc8f925f8f3a139e7045273b6de3eb">OpenGL Functions</h3>
+
+<p>OpenGL functions are easy to locate because they all begin with gl. Even I tolld you I won't explain you openGl Basics, I'll just remember essentials functions. This is a litttle .gif I found on an internet tutorial. Very usefull for drawing functions. In this example  </p>
+<p><img src="http://img403.imageshack.us/img403/3271/10201lt5.gif" alt="10201lt5"> </p>
+<p>Here is a little 2D exercise to train using OpenGL transformations, drawing functions and SDL events. </p>
+<p>Here is just the code with commens, to be continued ... </p>
+
+<div lang="en" class="codearea" dir="ltr">
+<script type="text/javascript">
+document.write('<a href="#" onClick="return togglenumber(\'CA-74802ee59afeb1429d510dbebd874c233daa78f9_008\', 1, 1);" \
+                class="codenumbers">Toggle line numbers<\/a>');
+</script>
+<pre lang="en" id="CA-74802ee59afeb1429d510dbebd874c233daa78f9_008" dir="ltr">
+<span class="line"><span class="LineNumber">   1 </span></span>
+<span class="line"><span class="LineNumber">   2 </span><span class="Comment">// 2D Crane exercise //</span></span>
+<span class="line"><span class="LineNumber">   3 </span><span class="Preprc"></span></span>
+<span class="line"><span class="LineNumber">   4 </span><span class="Preprc"></span></span>
+<span class="line"><span class="LineNumber">   5 </span><span class="Preprc">#include &lt;windows.h&gt;</span></span>
+<span class="line"><span class="LineNumber">   6 </span><span class="Preprc">#include &lt;SDL/SDL.h&gt;</span></span>
+<span class="line"><span class="LineNumber">   7 </span><span class="Preprc">#include &lt;GL/gl.h&gt;</span></span>
+<span class="line"><span class="LineNumber">   8 </span><span class="Preprc">#include &lt;GL/glu.h&gt;</span></span>
+<span class="line"><span class="LineNumber">   9 </span></span>
+<span class="line"><span class="LineNumber">  10 </span><span class="Comment">// There we define the Crane's important length for arms, base...//</span></span>
+<span class="line"><span class="LineNumber">  11 </span><span class="Preprc"></span></span>
+<span class="line"><span class="LineNumber">  12 </span><span class="Preprc">#define ARM1_WIDTH 150</span></span>
+<span class="line"><span class="LineNumber">  13 </span><span class="Preprc">#define ARM1_HEIGHT 20</span></span>
+<span class="line"><span class="LineNumber">  14 </span><span class="Preprc"></span></span>
+<span class="line"><span class="LineNumber">  15 </span><span class="Preprc">#define ARM2_WIDTH 100</span></span>
+<span class="line"><span class="LineNumber">  16 </span><span class="Preprc">#define ARM2_HEIGHT 20</span></span>
+<span class="line"><span class="LineNumber">  17 </span><span class="Preprc"></span></span>
+<span class="line"><span class="LineNumber">  18 </span><span class="Preprc">#define BASE_WIDTH 100</span></span>
+<span class="line"><span class="LineNumber">  19 </span><span class="Preprc">#define BASE_HEIGHT 50</span></span>
+<span class="line"><span class="LineNumber">  20 </span><span class="Preprc"></span></span>
+<span class="line"><span class="LineNumber">  21 </span><span class="Preprc">#define CHAIN_HEIGHT 4</span></span>
+<span class="line"><span class="LineNumber">  22 </span></span>
+<span class="line"><span class="LineNumber">  23 </span><span class="Comment">// The screen size is define with Crane size. </span></span>
+<span class="line"><span class="LineNumber">  24 </span><span class="Comment">// Then you can resize the Crane, the Screen will resize automatically</span></span>
+<span class="line"><span class="LineNumber">  25 </span><span class="Preprc"></span></span>
+<span class="line"><span class="LineNumber">  26 </span><span class="Preprc">#define SCREEN_WIDTH (BASE_WIDTH+ARM1_WIDTH+ARM2_WIDTH+200)  </span></span>
+<span class="line"><span class="LineNumber">  27 </span><span class="Preprc">#define SCREEN_HEIGHT (BASE_HEIGHT+ARM1_WIDTH+ARM2_WIDTH+200)</span></span>
+<span class="line"><span class="LineNumber">  28 </span></span>
+<span class="line"><span class="LineNumber">  29 </span><span class="Comment">// Here are the variables we want to control</span></span>
+<span class="line"><span class="LineNumber">  30 </span></span>
+<span class="line"><span class="LineNumber">  31 </span><span class="ResWord">int</span> <span class="ID">angle1</span> <span class="SPChar">=</span> <span class="Number">4</span><span class="Number">5</span><span class="SPChar">;</span>                <span class="Comment">// first angle between the base and the first arm</span></span>
+<span class="line"><span class="LineNumber">  32 </span><span class="ResWord">int</span> <span class="ID">angle2</span> <span class="SPChar">=</span> <span class="SPChar">-</span><span class="Number">2</span><span class="Number">0</span><span class="SPChar">;</span>               <span class="Comment">// second angle between the first and the second arm</span></span>
+<span class="line"><span class="LineNumber">  33 </span><span class="ResWord">int</span> <span class="ID">chain_length</span> <span class="SPChar">=</span> <span class="Number">1</span><span class="Number">0</span><span class="Number">0</span><span class="SPChar">;</span>         <span class="Comment">// Length of the chain</span></span>
+<span class="line"><span class="LineNumber">  34 </span></span>
+<span class="line"><span class="LineNumber">  35 </span></span>
+<span class="line"><span class="LineNumber">  36 </span><span class="Comment">// We are going to draw a rectangle with the center in the middle of the left line //</span></span>
+<span class="line"><span class="LineNumber">  37 </span><span class="Comment">// We will use this function to draw every rectangle of the scene //</span></span>
+<span class="line"><span class="LineNumber">  38 </span></span>
+<span class="line"><span class="LineNumber">  39 </span></span>
+<span class="line"><span class="LineNumber">  40 </span><span class="ResWord">void</span> <span class="ID">drawrectangle</span><span class="SPChar">(</span><span class="ResWord">double</span> <span class="ID">width</span><span class="SPChar">,</span><span class="ResWord">double</span> <span class="ID">height</span><span class="SPChar">,</span><span class="ID">GLubyte</span> <span class="ID">red</span><span class="SPChar">,</span><span class="ID">GLubyte</span> <span class="ID">green</span><span class="SPChar">,</span><span class="ID">GLubyte</span> <span class="ID">blue</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber">  41 </span></span>
+<span class="line"><span class="LineNumber">  42 </span><span class="SPChar">{</span>       </span>
+<span class="line"><span class="LineNumber">  43 </span>        </span>
+<span class="line"><span class="LineNumber">  44 </span>        <span class="ID">glBegin</span><span class="SPChar">(</span><span class="ID">GL_QUADS</span><span class="SPChar">)</span><span class="SPChar">;</span>                  <span class="Comment">// Quads draw rectangle</span></span>
+<span class="line"><span class="LineNumber">  45 </span></span>
+<span class="line"><span class="LineNumber">  46 </span>                <span class="ID">glColor3ub</span><span class="SPChar">(</span><span class="ID">red</span><span class="SPChar">,</span><span class="ID">green</span><span class="SPChar">,</span><span class="ID">blue</span><span class="SPChar">)</span><span class="SPChar">;</span>     <span class="Comment">// Color the rectangle</span></span>
+<span class="line"><span class="LineNumber">  47 </span>                <span class="ID">glVertex2d</span><span class="SPChar">(</span><span class="Number">0</span><span class="SPChar">,</span><span class="ID">height</span><span class="SPChar">/</span><span class="Number">2</span><span class="SPChar">)</span><span class="SPChar">;</span>         <span class="Comment">// These are the vertices</span></span>
+<span class="line"><span class="LineNumber">  48 </span>                <span class="ID">glVertex2d</span><span class="SPChar">(</span><span class="Number">0</span><span class="SPChar">,</span><span class="SPChar">-</span><span class="ID">height</span><span class="SPChar">/</span><span class="Number">2</span><span class="SPChar">)</span><span class="SPChar">;</span>        <span class="Comment">// be careful, ordering points does matter</span></span>
+<span class="line"><span class="LineNumber">  49 </span>                <span class="ID">glVertex2d</span><span class="SPChar">(</span><span class="ID">width</span><span class="SPChar">,</span><span class="SPChar">-</span><span class="ID">height</span><span class="SPChar">/</span><span class="Number">2</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  50 </span>                <span class="ID">glVertex2d</span><span class="SPChar">(</span><span class="ID">width</span><span class="SPChar">,</span><span class="ID">height</span><span class="SPChar">/</span><span class="Number">2</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  51 </span></span>
+<span class="line"><span class="LineNumber">  52 </span>        <span class="ID">glEnd</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  53 </span></span>
+<span class="line"><span class="LineNumber">  54 </span><span class="SPChar">}</span></span>
+<span class="line"><span class="LineNumber">  55 </span></span>
+<span class="line"><span class="LineNumber">  56 </span><span class="Comment">// Here is the function that draw the scene, using transformations and the drawrectangle fonction </span></span>
+<span class="line"><span class="LineNumber">  57 </span>        </span>
+<span class="line"><span class="LineNumber">  58 </span></span>
+<span class="line"><span class="LineNumber">  59 </span><span class="ResWord">void</span> <span class="ID">draw</span><span class="SPChar">(</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber">  60 </span></span>
+<span class="line"><span class="LineNumber">  61 </span><span class="SPChar">{</span></span>
+<span class="line"><span class="LineNumber">  62 </span></span>
+<span class="line"><span class="LineNumber">  63 </span>        <span class="ID">glClear</span><span class="SPChar">(</span> <span class="ID">GL_COLOR_BUFFER_BIT</span> <span class="SPChar">)</span><span class="SPChar">;</span>                 <span class="Comment">// Clear the color buffer</span></span>
+<span class="line"><span class="LineNumber">  64 </span></span>
+<span class="line"><span class="LineNumber">  65 </span>    <span class="ID">glMatrixMode</span><span class="SPChar">(</span> <span class="ID">GL_MODELVIEW</span> <span class="SPChar">)</span><span class="SPChar">;</span>                       <span class="Comment">// </span></span>
+<span class="line"><span class="LineNumber">  66 </span>    <span class="ID">glLoadIdentity</span><span class="SPChar">(</span> <span class="SPChar">)</span><span class="SPChar">;</span>                                  <span class="Comment">// First thing to do before using Matrix !</span></span>
+<span class="line"><span class="LineNumber">  67 </span></span>
+<span class="line"><span class="LineNumber">  68 </span>        <span class="ID">glPushMatrix</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span>                                                                 </span>
+<span class="line"><span class="LineNumber">  69 </span>        <span class="ID">glTranslated</span><span class="SPChar">(</span><span class="ID">BASE_WIDTH</span><span class="SPChar">/</span><span class="Number">2</span><span class="SPChar">,</span><span class="ID">BASE_HEIGHT</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span>       <span class="Comment">// Change Coordinates system    </span></span>
+<span class="line"><span class="LineNumber">  70 </span>        <span class="ID">drawrectangle</span><span class="SPChar">(</span><span class="ID">BASE_WIDTH</span><span class="SPChar">,</span><span class="ID">BASE_HEIGHT</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span>  <span class="Comment">// draw the base</span></span>
+<span class="line"><span class="LineNumber">  71 </span>        <span class="ID">glTranslated</span><span class="SPChar">(</span><span class="ID">BASE_WIDTH</span><span class="SPChar">/</span><span class="Number">2</span><span class="SPChar">,</span><span class="ID">BASE_HEIGHT</span><span class="SPChar">/</span><span class="Number">2</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span>     <span class="Comment">// Go to the middle of rectangle's top line     </span></span>
+<span class="line"><span class="LineNumber">  72 </span>        <span class="ID">glRotated</span><span class="SPChar">(</span><span class="ID">angle1</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">1</span><span class="SPChar">)</span><span class="SPChar">;</span>                        <span class="Comment">// Rotation around Z, first angle</span></span>
+<span class="line"><span class="LineNumber">  73 </span></span>
+<span class="line"><span class="LineNumber">  74 </span>        <span class="ID">drawrectangle</span><span class="SPChar">(</span><span class="ID">ARM1_WIDTH</span><span class="SPChar">,</span><span class="ID">ARM1_HEIGHT</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">)</span><span class="SPChar">;</span>  <span class="Comment">// draw first arm       </span></span>
+<span class="line"><span class="LineNumber">  75 </span>                                                                                                                </span>
+<span class="line"><span class="LineNumber">  76 </span>                <span class="ID">glTranslated</span><span class="SPChar">(</span><span class="ID">ARM1_WIDTH</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span>           <span class="Comment">// Change Coordinates system one more time      </span></span>
+<span class="line"><span class="LineNumber">  77 </span>                <span class="ID">glRotated</span><span class="SPChar">(</span><span class="ID">angle2</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">1</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  78 </span></span>
+<span class="line"><span class="LineNumber">  79 </span>        <span class="ID">drawrectangle</span><span class="SPChar">(</span><span class="ID">ARM2_WIDTH</span><span class="SPChar">,</span><span class="ID">ARM2_HEIGHT</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">)</span><span class="SPChar">;</span>  <span class="Comment">// draw second arm</span></span>
+<span class="line"><span class="LineNumber">  80 </span></span>
+<span class="line"><span class="LineNumber">  81 </span>                <span class="ID">glTranslated</span><span class="SPChar">(</span><span class="ID">ARM2_WIDTH</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span>           <span class="Comment">// Change Coordinates system one more time      </span></span>
+<span class="line"><span class="LineNumber">  82 </span>                <span class="ID">glRotated</span><span class="SPChar">(</span><span class="SPChar">-</span><span class="ID">angle1</span><span class="SPChar">-</span><span class="ID">angle2</span><span class="SPChar">-</span><span class="Number">9</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">1</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  83 </span></span>
+<span class="line"><span class="LineNumber">  84 </span>        <span class="ID">drawrectangle</span><span class="SPChar">(</span><span class="ID">chain_length</span><span class="SPChar">,</span><span class="ID">CHAIN_HEIGHT</span><span class="SPChar">,</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span> <span class="Comment">// draw the chain</span></span>
+<span class="line"><span class="LineNumber">  85 </span>        </span>
+<span class="line"><span class="LineNumber">  86 </span>                <span class="ID">glTranslated</span><span class="SPChar">(</span><span class="ID">chain_length</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  87 </span>        </span>
+<span class="line"><span class="LineNumber">  88 </span>        <span class="ID">drawrectangle</span><span class="SPChar">(</span><span class="Number">5</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">5</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">,</span><span class="Number">2</span><span class="Number">5</span><span class="Number">5</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  89 </span></span>
+<span class="line"><span class="LineNumber">  90 </span>        <span class="ID">glPopMatrix</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  91 </span></span>
+<span class="line"><span class="LineNumber">  92 </span>    <span class="ID">glFlush</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span>                                                                            </span>
+<span class="line"><span class="LineNumber">  93 </span>    <span class="ID">SDL_GL_SwapBuffers</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber">  94 </span></span>
+<span class="line"><span class="LineNumber">  95 </span><span class="SPChar">}</span></span>
+<span class="line"><span class="LineNumber">  96 </span></span>
+<span class="line"><span class="LineNumber">  97 </span><span class="Comment">// This is the main function, including the event that permit arms to move</span></span>
+<span class="line"><span class="LineNumber">  98 </span></span>
+<span class="line"><span class="LineNumber">  99 </span><span class="ResWord">int</span> <span class="ID">main</span><span class="SPChar">(</span><span class="ResWord">int</span> <span class="ID">argc</span><span class="SPChar">,</span> <span class="ResWord">char</span> <span class="SPChar">*</span><span class="ID">argv</span><span class="SPChar">[</span><span class="SPChar">]</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber"> 100 </span><span class="SPChar">{</span></span>
+<span class="line"><span class="LineNumber"> 101 </span></span>
+<span class="line"><span class="LineNumber"> 102 </span>        <span class="ID">SDL_Event</span> <span class="ID">event</span><span class="SPChar">;</span>        <span class="Comment">// This is the only SDL_Event type variable we will need.</span></span>
+<span class="line"><span class="LineNumber"> 103 </span></span>
+<span class="line"><span class="LineNumber"> 104 </span>    <span class="ID">SDL_Init</span><span class="SPChar">(</span><span class="ID">SDL_INIT_VIDEO</span><span class="SPChar">)</span><span class="SPChar">;</span>   <span class="Comment">// Initialize SDL video                 </span></span>
+<span class="line"><span class="LineNumber"> 105 </span>        <span class="ID">atexit</span><span class="SPChar">(</span><span class="ID">SDL_Quit</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 106 </span></span>
+<span class="line"><span class="LineNumber"> 107 </span>        <span class="Comment">// Change Window's name</span></span>
+<span class="line"><span class="LineNumber"> 108 </span>    <span class="ID">SDL_WM_SetCaption</span><span class="SPChar">(</span><span class="String">"Exercise"</span><span class="SPChar">,</span><span class="ConsWord">NULL</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 109 </span></span>
+<span class="line"><span class="LineNumber"> 110 </span>        <span class="Comment">// Set video Screen size, Color depth and Precise OpenGL use</span></span>
+<span class="line"><span class="LineNumber"> 111 </span>    <span class="ID">SDL_SetVideoMode</span><span class="SPChar">(</span><span class="ID">SCREEN_WIDTH</span><span class="SPChar">,</span> <span class="ID">SCREEN_HEIGHT</span><span class="SPChar">,</span> <span class="Number">3</span><span class="Number">2</span><span class="SPChar">,</span> <span class="ID">SDL_OPENGL</span><span class="SPChar">)</span><span class="SPChar">;</span>      </span>
+<span class="line"><span class="LineNumber"> 112 </span></span>
+<span class="line"><span class="LineNumber"> 113 </span></span>
+<span class="line"><span class="LineNumber"> 114 </span>        <span class="ID">glMatrixMode</span><span class="SPChar">(</span> <span class="ID">GL_PROJECTION</span> <span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 115 </span>        <span class="ID">glLoadIdentity</span><span class="SPChar">(</span> <span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 116 </span>        <span class="ID">gluOrtho2D</span><span class="SPChar">(</span><span class="Number">0</span><span class="SPChar">,</span><span class="ID">SCREEN_WIDTH</span><span class="SPChar">,</span><span class="Number">0</span><span class="SPChar">,</span><span class="ID">SCREEN_HEIGHT</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 117 </span></span>
+<span class="line"><span class="LineNumber"> 118 </span>        <span class="ID">SDL_EnableKeyRepeat</span><span class="SPChar">(</span><span class="Number">1</span><span class="Number">0</span><span class="SPChar">,</span><span class="Number">1</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span>             <span class="Comment">// enable key repeat and change repeat delays</span></span>
+<span class="line"><span class="LineNumber"> 119 </span></span>
+<span class="line"><span class="LineNumber"> 120 </span>        <span class="ID">draw</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span>                                 <span class="Comment">// draw the scene even if there are no events</span></span>
+<span class="line"><span class="LineNumber"> 121 </span></span>
+<span class="line"><span class="LineNumber"> 122 </span>        <span class="Comment">// events</span></span>
+<span class="line"><span class="LineNumber"> 123 </span></span>
+<span class="line"><span class="LineNumber"> 124 </span>    <span class="ResWord">while</span><span class="SPChar">(</span><span class="ID">SDL_WaitEvent</span><span class="SPChar">(</span><span class="SPChar">&amp;</span><span class="ID">event</span><span class="SPChar">)</span><span class="SPChar">)</span>                <span class="Comment">// Waiting for an event</span></span>
+<span class="line"><span class="LineNumber"> 125 </span>    <span class="SPChar">{</span></span>
+<span class="line"><span class="LineNumber"> 126 </span>        <span class="ResWord">switch</span><span class="SPChar">(</span><span class="ID">event</span><span class="SPChar">.</span><span class="ID">type</span><span class="SPChar">)</span>                      <span class="Comment">// Function used to determine type of event</span></span>
+<span class="line"><span class="LineNumber"> 127 </span>        <span class="SPChar">{</span></span>
+<span class="line"><span class="LineNumber"> 128 </span>            <span class="ResWord">case</span> <span class="ID">SDL_QUIT</span><span class="SPChar">:</span>                      <span class="Comment">// Type = Quit                                  </span></span>
+<span class="line"><span class="LineNumber"> 129 </span>            <span class="ID">exit</span><span class="SPChar">(</span><span class="Number">0</span><span class="SPChar">)</span><span class="SPChar">;</span>                                    </span>
+<span class="line"><span class="LineNumber"> 130 </span>            <span class="ResWord">break</span><span class="SPChar">;</span>                                                                              </span>
+<span class="line"><span class="LineNumber"> 131 </span>            <span class="ResWord">case</span> <span class="ID">SDL_KEYDOWN</span><span class="SPChar">:</span>                   <span class="Comment">// Type = key pressed                                                                                                   </span></span>
+<span class="line"><span class="LineNumber"> 132 </span>            <span class="ResWord">switch</span> <span class="SPChar">(</span><span class="ID">event</span><span class="SPChar">.</span><span class="ID">key</span><span class="SPChar">.</span><span class="ID">keysym</span><span class="SPChar">.</span><span class="ID">sym</span><span class="SPChar">)</span>       <span class="Comment">// Enable detection of key                              </span></span>
+<span class="line"><span class="LineNumber"> 133 </span>            <span class="SPChar">{</span></span>
+<span class="line"><span class="LineNumber"> 134 </span></span>
+<span class="line"><span class="LineNumber"> 135 </span></span>
+<span class="line"><span class="LineNumber"> 136 </span><span class="Comment">// Classical switch with conditions to limit chain length and angles</span></span>
+<span class="line"><span class="LineNumber"> 137 </span></span>
+<span class="line"><span class="LineNumber"> 138 </span>                <span class="ResWord">case</span> <span class="ID">SDLK_UP</span><span class="SPChar">:</span>                                           </span>
+<span class="line"><span class="LineNumber"> 139 </span>                <span class="ID">chain_length</span> <span class="SPChar">-</span><span class="SPChar">-</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 140 </span>                <span class="ResWord">if</span> <span class="SPChar">(</span><span class="ID">chain_length</span> <span class="SPChar">&lt;</span> <span class="Number">1</span><span class="Number">0</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber"> 141 </span>                    <span class="ID">chain_length</span> <span class="SPChar">=</span> <span class="Number">1</span><span class="Number">0</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 142 </span>                <span class="ResWord">break</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 143 </span>                <span class="ResWord">case</span> <span class="ID">SDLK_DOWN</span><span class="SPChar">:</span></span>
+<span class="line"><span class="LineNumber"> 144 </span>                <span class="ID">chain_length</span> <span class="SPChar">+</span><span class="SPChar">+</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 145 </span>                <span class="ResWord">if</span> <span class="SPChar">(</span><span class="ID">chain_length</span> <span class="SPChar">&gt;</span> <span class="Number">1</span><span class="Number">0</span><span class="Number">0</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber"> 146 </span>                    <span class="ID">chain_length</span> <span class="SPChar">=</span> <span class="Number">1</span><span class="Number">0</span><span class="Number">0</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 147 </span>                <span class="ResWord">break</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 148 </span>                <span class="ResWord">case</span> <span class="ID">SDLK_LEFT</span><span class="SPChar">:</span></span>
+<span class="line"><span class="LineNumber"> 149 </span>                                <span class="ID">angle1</span><span class="SPChar">+</span><span class="SPChar">+</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 150 </span>                <span class="ResWord">if</span> <span class="SPChar">(</span><span class="ID">angle1</span> <span class="SPChar">&gt;</span> <span class="Number">9</span><span class="Number">0</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber"> 151 </span>                    <span class="ID">angle1</span> <span class="SPChar">=</span> <span class="Number">9</span><span class="Number">0</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 152 </span>                                <span class="ResWord">break</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 153 </span>                                <span class="ResWord">case</span> <span class="ID">SDLK_a</span><span class="SPChar">:</span></span>
+<span class="line"><span class="LineNumber"> 154 </span>                <span class="ID">angle2</span><span class="SPChar">+</span><span class="SPChar">+</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 155 </span>                <span class="ResWord">if</span> <span class="SPChar">(</span><span class="ID">angle2</span> <span class="SPChar">&gt;</span> <span class="Number">9</span><span class="Number">0</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber"> 156 </span>                    <span class="ID">angle2</span> <span class="SPChar">=</span> <span class="Number">9</span><span class="Number">0</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 157 </span>                <span class="ResWord">break</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 158 </span>                <span class="ResWord">case</span> <span class="ID">SDLK_RIGHT</span><span class="SPChar">:</span></span>
+<span class="line"><span class="LineNumber"> 159 </span>                <span class="ID">angle1</span><span class="SPChar">-</span><span class="SPChar">-</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 160 </span>                <span class="ResWord">if</span> <span class="SPChar">(</span><span class="ID">angle1</span> <span class="SPChar">&lt;</span> <span class="Number">1</span><span class="Number">0</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber"> 161 </span>                    <span class="ID">angle1</span> <span class="SPChar">=</span> <span class="Number">1</span><span class="Number">0</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 162 </span>                                <span class="ResWord">break</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 163 </span>                                <span class="ResWord">case</span> <span class="ID">SDLK_q</span><span class="SPChar">:</span></span>
+<span class="line"><span class="LineNumber"> 164 </span>                <span class="ID">angle2</span><span class="SPChar">-</span><span class="SPChar">-</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 165 </span>                <span class="ResWord">if</span> <span class="SPChar">(</span><span class="ID">angle2</span> <span class="SPChar">&lt;</span> <span class="SPChar">-</span><span class="Number">9</span><span class="Number">0</span><span class="SPChar">)</span></span>
+<span class="line"><span class="LineNumber"> 166 </span>                    <span class="ID">angle2</span> <span class="SPChar">=</span> <span class="SPChar">-</span><span class="Number">9</span><span class="Number">0</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 167 </span>                <span class="ResWord">break</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 168 </span>            <span class="SPChar">}</span></span>
+<span class="line"><span class="LineNumber"> 169 </span>            <span class="ResWord">break</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 170 </span>        <span class="SPChar">}</span></span>
+<span class="line"><span class="LineNumber"> 171 </span>        <span class="ID">draw</span><span class="SPChar">(</span><span class="SPChar">)</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 172 </span>    <span class="SPChar">}</span></span>
+<span class="line"><span class="LineNumber"> 173 </span></span>
+<span class="line"><span class="LineNumber"> 174 </span></span>
+<span class="line"><span class="LineNumber"> 175 </span>    <span class="ResWord">return</span> <span class="Number">0</span><span class="SPChar">;</span></span>
+<span class="line"><span class="LineNumber"> 176 </span><span class="SPChar">}</span></span>
+<span class="line"><span class="LineNumber"> 177 </span></span>
+</pre>
+</div>
+<a id="bottom"></a>
+
+</div>
+<div id="pagebottom"></div>
+<p id="pageinfo" class="info" lang="es" dir="ltr">última edición 2007-04-20 02:14:51 efectuada por <span title="visitor5.vislab.usyd.edu.au"><a href="/moinwiki/RomainCiemniewski">RomainCiemniewski</a></span></p>
+
+</div> <!-- end page -->
+
+
+</body>
+</html>
+
+
+------------HBqtO1xlZHhqO47FjihnGq
+Content-Disposition: inline; filename=common.css
+Content-Type: text/css; name=common.css
+Content-Location: http://wiki.vislab.usyd.edu.au/wiki/vislab/css/common.css
+Content-Transfer-Encoding: 8bit
+
+/*  common.css - MoinMoin Default Styles
+
+Copyright (c) 2001, 2002, 2003 by Juergen Hermann
+*/
+
+/* content styles */
+
+html {
+	background-color: white;
+	color: black;
+	font-family: Arial, Lucida Grande, sans-serif;
+	font-size: 1em;
+	line-height: 1.25em;
+}
+
+
+/* links */
+
+a {color: maroon;}
+a:hover {color: red;}
+a.nonexistent, a.badinterwiki {color: #404040;}
+
+
+/* Headings */
+
+h1 {
+	/* h1 is out of the content div! */
+	margin: 0;
+	padding: 0;
+	color: maroon;
+	font-size: 2em;
+	line-height: 1.2em;
+}
+
+h1 a {
+	text-decoration: none;    
+}
+
+h2, h3, h4, h5, h6
+{
+	margin: 1.5em 0 0 0;
+	padding: 0 0 0.3em 0;
+	color: black;
+	border-bottom: 3px solid maroon;
+	line-height: 1.2em;
+}	
+
+h2 {font-size: 1.6em;}
+h3 {font-size: 1.3em;}
+h4 {font-size: 1.1em;}
+h5, h6 {font-size: 1em;}
+
+li p {
+	margin: .25em 0;
+}
+
+li.gap {
+	margin-top: 0.5em;
+}
+
+a, img, img.drawing {
+	border: 0;
+}
+
+dt {
+	font-weight: bold;
+}
+
+pre {
+	padding: 0.5em;
+	font-family: courier, monospace;
+	border: 1pt solid #c0c0c0;
+	background: #F0ECE6;
+	white-space: pre;
+	/* begin css 3 or browser specific rules - do not remove!
+	see: http://forums.techguy.org/archive/index.php/t-249849.html */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    /* end css 3 or browser specific rules */
+}
+
+table
+{
+	margin: 0.5em 0;
+	border-collapse: collapse;
+}
+
+td
+{
+	padding: 0.25em;
+	border: 1px solid tan;
+}
+
+td p {
+	margin: 0;
+	padding: 0;
+}
+
+/* standard rule ---- */
+hr {
+	height: 1px;
+	background-color: #c0c0c0;
+	border: none;
+}
+
+/* custom rules ----- to ---------- */
+.hr1 {height: 2px;}
+.hr2 {height: 3px;}
+.hr3 {height: 4px;}
+.hr4 {height: 5px;}
+.hr5 {height: 6px;}
+.hr6 {height: 7px;}
+
+/* Replacement for html 3 u tag */
+.u {text-decoration: underline;}
+
+.footnotes ul {
+	padding: 0 2em;
+	margin: 0 0 1em;
+}
+
+.footnotes li {
+	list-style: none;
+}
+
+.info {
+    font-size: 0.85em;
+    color: gray;
+}
+
+#pageinfo {
+    margin-top: 2em;
+}
+
+/* eye catchers */
+.warning 
+{
+	color: red;
+}
+
+.error 
+{
+	color: red;
+}
+
+strong.highlight 
+{
+	background-color: #ffcc99;
+	padding: 1pt;
+}
+
+#credits img {
+	vertical-align: middle;
+}
+
+/* Recent changes */
+
+.recentchanges p {
+	margin: 0.25em;
+}
+
+.recentchanges td {
+	vertical-align: top;
+	border: none;
+	border-bottom: 1pt solid #F0ECE6;
+	background: #F7F6F2;
+}
+
+.rcdaybreak td {
+	background: tan;
+	border: none;
+}
+
+.rcdaybreak td a {
+	font-size: 0.88em;
+}
+
+.rcicon1, .rcicon2 {
+	text-align: center;
+}
+
+.rcpagelink {
+	width: 33%;
+}
+
+.rctime {
+	font-size: 0.88em;
+	white-space: nowrap;
+}
+
+.rceditor {
+	white-space: nowrap;
+	font-size: 0.88em;
+}
+
+.rccomment {
+	width: 66%;
+	color: gray;
+	font-size: 0.88em;
+}
+
+.rcrss {
+	float: right;
+}
+
+.recentchanges[dir="rtl"] .rcrss {
+	float: left;
+}
+
+/* User Preferences */
+
+.userpref table, .userpref td {
+	border: none;
+}
+
+
+/* CSS for new code_area markup used by Colorizer and ParserBase */
+
+div.codearea { /* the div makes the border */
+	margin: 0.5em 0;
+	padding: 0;
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	color: black;
+}
+
+div.codearea pre { /* the pre has no border and is inside the div */
+	margin: 0;
+	padding: 10pt;
+	border: none;
+}
+
+a.codenumbers { /* format of the line numbering link */
+	margin: 0 10pt;
+	font-size: 0.85em;
+	color: gray;
+}
+
+/* format of certain syntax spans */
+div.codearea pre span.LineNumber {color: gray;}
+div.codearea pre span.ID         {color: #000000;}
+div.codearea pre span.Operator   {color: #0000C0;}
+div.codearea pre span.Char       {color: #004080;}
+div.codearea pre span.Comment    {color: #008000;}
+div.codearea pre span.Number     {color: #0080C0;}
+div.codearea pre span.String     {color: #004080;}
+div.codearea pre span.SPChar     {color: #0000C0;}
+div.codearea pre span.ResWord    {color: #A00000;}
+div.codearea pre span.ConsWord   {color: #008080; font-weight: bold;}
+div.codearea pre span.Error      {color: #FF8080; border: solid 1.5pt #FF0000;}
+div.codearea pre span.ResWord2   {color: #0080ff; font-weight: bold;}
+div.codearea pre span.Special    {color: #0000ff;}
+div.codearea pre span.Preprc     {color: #803999;}
+
+
+
+------------HBqtO1xlZHhqO47FjihnGq
+Content-Disposition: inline; filename=screen.css
+Content-Type: text/css; name=screen.css
+Content-Location: http://wiki.vislab.usyd.edu.au/wiki/vislab/css/screen.css
+Content-Transfer-Encoding: 8bit
+
+/* Edited with EditCSS */
+/**** LINK-tag style sheet screen.css ****/
+
+/*  screen.css - MoinMoin Default Styles
+
+   Copyright (c) 2001, 2002, 2003 by Juergen Hermann
+   */
+
+/* content styles */
+
+body {
+    margin:0;
+    background: #e5e5e5;
+    height: 100%;
+}
+
+.footnotes div {
+    width: 5em;
+    border-top: 1px solid #e5e5e5;
+}
+
+input {
+    font-size: 1em;
+    font-family: Arial, Lucida Grande, sans-serif;
+}
+
+textarea {
+    font-size: 12px;
+    font-family: monospace;
+}
+
+span.sep {
+    display: none;
+}
+
+/* user interface styles */
+
+#header {
+    background: #e5e5e5;
+    font: 1em, sans-serif;
+    margin: 0px 0px 0px 100px;
+    padding: 20px 0;
+}
+
+#logo {
+    margin: 0;
+    padding: 5px 10px;
+    /* For text only logo */
+    font-size: 24px;
+    line-height: 1em;
+    white-space: nowrap;
+}
+
+#logo img {
+    vertical-align: middle;
+}
+
+#logo a {
+    color: #616161;  
+    text-decoration: none;
+}
+
+#searchform {
+    float: right;
+    margin: 5px 90px 0 10px;
+    padding: 0;
+    white-space: nowrap;
+}
+
+#searchform form div {
+    display: inline;
+}
+
+#page {
+    margin: 0px 280px 10px 100px;
+    padding: 15px 30px;
+    border-bottom: 2px solid #9c9c9c;
+    background-color: white;
+    font:  14px, sans-serif;
+    border-top: 1px solid #616161; 
+
+}
+
+#title h1 {
+    margin: 0;
+    padding:10px 0;
+    font-size: 2em;
+    line-height: 1.2em;
+}
+
+#title h1 a {
+    text-decoration: none;
+}
+
+#sidebar {
+    width: 200px;
+    padding: 0;	
+    font: bold 
+    0.84em,sans-serif;
+    float: right;
+    clear: right;
+    background:#e5e5e5;
+    margin: 0px 75px 0px 80px;
+}
+
+.sidepanel {
+    margin: 0 0 30px 0;
+    float: right;
+    width: 200px;
+    line-height: 1em;
+    background: #e5e5e5;
+}
+
+.sidepanel h1 {
+    margin: 0;
+    padding: 0.2em 10px;
+    border: none;
+    font-size: 1em;
+    text-align:left;
+    font:  1em,sans-serif; #616161;
+    border-top: 1px solid #9c9c9c;
+    color: #616161;
+    background: #e5e5e5;
+}
+
+.sidepanel h2 {
+    margin: 0;
+    padding: 0.2em 10px;
+    font-size: 1em;
+    border: none;
+    color: #336699;
+}
+
+.sidepanel ul {
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+}
+
+.sidepanel li {
+    margin: 0;
+    padding:2px 10px;
+    background: #e5e5e5;
+}
+
+.sidepanel li form {
+    margin: 0;
+}
+
+.sidepanel a {
+    text-decoration: none;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: #336699;
+}
+a.nonexistent {
+/*     text-decoration: underline; */
+    color: maroon;
+}
+
+/* a:link { */
+/*     color: #336699; */
+/* } */
+
+/* a:visited { */
+/*     color: #336699; */
+/* } */
+
+/* a:active { */
+/*     color: #336699; */
+/* } */
+
+
+/* a:hover { */
+/*     color: #000000; */
+/*     text-decoration: underline; */
+/* } */
+
+#navibar li.current {
+    border: none;
+    background: #e5e5e5;
+}
+
+.editbar form, .editbar form div {
+    display: inline;
+    margin: 0;
+}
+
+#credits, #version, #timings{
+    float: right;
+    clear: right;
+    margin: 5px 0;
+    width: 200px;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+    font-size: 0.88em;
+    color: gray;
+}
+
+
+#message {
+    margin: 10px 280px 10px 100px;
+    padding: 5px 10px;
+    background-color: #F0ECE6;
+    border: 1px solid #9c9c9c;
+    border-bottom: 2px solid #9c9c9c;
+}
+
+#message p{
+    margin: 5px 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+#message div.buttons {
+    font-weight: normal;
+}
+
+form.dialog {
+    margin: 0 15px;
+}
+
+.dialog td {
+    border: none;
+    padding: 5px;
+}
+
+.dialog td.label {
+    text-align: right;
+    font-weight: bold;
+    width: 25%;
+}
+
+*[dir="rtl"] .dialog td.label {
+    text-align: left;
+}
+
+.dialog td.content input {
+    width: 100%;
+}
+
+/* We use here dumb css1 ids becuase of IE suckiness */
+#editor-textarea, #editor-comment {
+    width: 110%;
+}
+
+#pagebottom {
+    clear: both;
+}
+
+#preview {
+    border: 2px solid #e5e5e5;
+    padding: .5em;
+    background: url(../img/draft.png);
+}
+
+.diff {
+    width:99%;
+}
+
+.diff-title {
+    background-color: #C0C0C0;
+}
+
+.diff-added {
+    background-color: #E0FFE0;
+    vertical-align: sub;
+}
+
+.diff-removed {
+    background-color: #FFFFE0;
+    vertical-align: sub;
+}
+
+.diff-added span {
+    background-color: #80FF80;
+}
+
+.diff-removed span {
+    background-color: #FFFF80;
+}
+
+.searchresult dd span {
+    font-weight: bold;
+}
+
+
+
+earchresult dd span {
+    font-weight: bold;
+}
+
+
+
+
+------------HBqtO1xlZHhqO47FjihnGq
+Content-Disposition: inline; filename=print.css
+Content-Type: text/css; name=print.css
+Content-Location: http://wiki.vislab.usyd.edu.au/wiki/vislab/css/print.css
+Content-Transfer-Encoding: 8bit
+
+/*  print.css - MoinMoin Default Styles
+
+Copyright (c) 2001, 2002, 2003 by Juergen Hermann
+*/
+
+/* content styles */
+
+html {
+	font-family: Times, serif;
+	font-size: 12pt;
+}
+
+body {
+    /* Give about 3.4cm in Mozilla/Firefox and about 2.2cm in Safari */
+	margin: 1.5cm;
+}
+
+a, a:visited, a.nonexistent, a.badinterwiki {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+pre {
+	font-size: 10pt;
+}
+
+a.interwiki:before, a.badinterwiki:before {
+	content: attr(title) ":";
+}
+
+a.interwiki img, a.badinterwiki img {
+	display: none;
+}
+
+.footnotes div {
+	width: 5em;
+	border-top: 1pt solid gray;
+}
+
+/* user interface styles */
+
+#header, #sidebar, #footer, #timings, #credits {
+	display: none;
+}
+
+------------HBqtO1xlZHhqO47FjihnGq
+Content-Disposition: inline; filename=screen.css
+Content-Type: text/css; name=screen.css
+Content-Location: http://wiki.vislab.usyd.edu.au/wiki/vislab/css/screen.css
+Content-Transfer-Encoding: 8bit
+
+/* Edited with EditCSS */
+/**** LINK-tag style sheet screen.css ****/
+
+/*  screen.css - MoinMoin Default Styles
+
+   Copyright (c) 2001, 2002, 2003 by Juergen Hermann
+   */
+
+/* content styles */
+
+body {
+    margin:0;
+    background: #e5e5e5;
+    height: 100%;
+}
+
+.footnotes div {
+    width: 5em;
+    border-top: 1px solid #e5e5e5;
+}
+
+input {
+    font-size: 1em;
+    font-family: Arial, Lucida Grande, sans-serif;
+}
+
+textarea {
+    font-size: 12px;
+    font-family: monospace;
+}
+
+span.sep {
+    display: none;
+}
+
+/* user interface styles */
+
+#header {
+    background: #e5e5e5;
+    font: 1em, sans-serif;
+    margin: 0px 0px 0px 100px;
+    padding: 20px 0;
+}
+
+#logo {
+    margin: 0;
+    padding: 5px 10px;
+    /* For text only logo */
+    font-size: 24px;
+    line-height: 1em;
+    white-space: nowrap;
+}
+
+#logo img {
+    vertical-align: middle;
+}
+
+#logo a {
+    color: #616161;  
+    text-decoration: none;
+}
+
+#searchform {
+    float: right;
+    margin: 5px 90px 0 10px;
+    padding: 0;
+    white-space: nowrap;
+}
+
+#searchform form div {
+    display: inline;
+}
+
+#page {
+    margin: 0px 280px 10px 100px;
+    padding: 15px 30px;
+    border-bottom: 2px solid #9c9c9c;
+    background-color: white;
+    font:  14px, sans-serif;
+    border-top: 1px solid #616161; 
+
+}
+
+#title h1 {
+    margin: 0;
+    padding:10px 0;
+    font-size: 2em;
+    line-height: 1.2em;
+}
+
+#title h1 a {
+    text-decoration: none;
+}
+
+#sidebar {
+    width: 200px;
+    padding: 0;	
+    font: bold 
+    0.84em,sans-serif;
+    float: right;
+    clear: right;
+    background:#e5e5e5;
+    margin: 0px 75px 0px 80px;
+}
+
+.sidepanel {
+    margin: 0 0 30px 0;
+    float: right;
+    width: 200px;
+    line-height: 1em;
+    background: #e5e5e5;
+}
+
+.sidepanel h1 {
+    margin: 0;
+    padding: 0.2em 10px;
+    border: none;
+    font-size: 1em;
+    text-align:left;
+    font:  1em,sans-serif; #616161;
+    border-top: 1px solid #9c9c9c;
+    color: #616161;
+    background: #e5e5e5;
+}
+
+.sidepanel h2 {
+    margin: 0;
+    padding: 0.2em 10px;
+    font-size: 1em;
+    border: none;
+    color: #336699;
+}
+
+.sidepanel ul {
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+}
+
+.sidepanel li {
+    margin: 0;
+    padding:2px 10px;
+    background: #e5e5e5;
+}
+
+.sidepanel li form {
+    margin: 0;
+}
+
+.sidepanel a {
+    text-decoration: none;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: #336699;
+}
+a.nonexistent {
+/*     text-decoration: underline; */
+    color: maroon;
+}
+
+/* a:link { */
+/*     color: #336699; */
+/* } */
+
+/* a:visited { */
+/*     color: #336699; */
+/* } */
+
+/* a:active { */
+/*     color: #336699; */
+/* } */
+
+
+/* a:hover { */
+/*     color: #000000; */
+/*     text-decoration: underline; */
+/* } */
+
+#navibar li.current {
+    border: none;
+    background: #e5e5e5;
+}
+
+.editbar form, .editbar form div {
+    display: inline;
+    margin: 0;
+}
+
+#credits, #version, #timings{
+    float: right;
+    clear: right;
+    margin: 5px 0;
+    width: 200px;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+    font-size: 0.88em;
+    color: gray;
+}
+
+
+#message {
+    margin: 10px 280px 10px 100px;
+    padding: 5px 10px;
+    background-color: #F0ECE6;
+    border: 1px solid #9c9c9c;
+    border-bottom: 2px solid #9c9c9c;
+}
+
+#message p{
+    margin: 5px 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+#message div.buttons {
+    font-weight: normal;
+}
+
+form.dialog {
+    margin: 0 15px;
+}
+
+.dialog td {
+    border: none;
+    padding: 5px;
+}
+
+.dialog td.label {
+    text-align: right;
+    font-weight: bold;
+    width: 25%;
+}
+
+*[dir="rtl"] .dialog td.label {
+    text-align: left;
+}
+
+.dialog td.content input {
+    width: 100%;
+}
+
+/* We use here dumb css1 ids becuase of IE suckiness */
+#editor-textarea, #editor-comment {
+    width: 110%;
+}
+
+#pagebottom {
+    clear: both;
+}
+
+#preview {
+    border: 2px solid #e5e5e5;
+    padding: .5em;
+    background: url(../img/draft.png);
+}
+
+.diff {
+    width:99%;
+}
+
+.diff-title {
+    background-color: #C0C0C0;
+}
+
+.diff-added {
+    background-color: #E0FFE0;
+    vertical-align: sub;
+}
+
+.diff-removed {
+    background-color: #FFFFE0;
+    vertical-align: sub;
+}
+
+.diff-added span {
+    background-color: #80FF80;
+}
+
+.diff-removed span {
+    background-color: #FFFF80;
+}
+
+.searchresult dd span {
+    font-weight: bold;
+}
+
+
+
+earchresult dd span {
+    font-weight: bold;
+}
+
+
+
+
+------------HBqtO1xlZHhqO47FjihnGq
+Content-Disposition: inline; filename=projection.css
+Content-Type: text/css; name=projection.css
+Content-Location: http://wiki.vislab.usyd.edu.au/wiki/vislab/css/projection.css
+Content-Transfer-Encoding: 8bit
+
+/*  projection.css - MoinMoin Slide Styles
+
+Copyright (c) 2003 by Juergen Hermann
+*/
+
+@import url("screen.css");
+
+html { line-height: 1.8em; }
+
+body, b, em, a, span, div, p, td { font-size: 22pt; }
+/*h1 { font-size: 28pt; } */
+h2 { font-size: 24pt; }
+h3 { font-size: 22pt; }
+h4 { font-size: 20pt; }
+h5 { font-size: 18pt; }
+h6 { font-size: 16pt; }
+tt,pre { font-size: 18pt; }
+sup, sub { font-size: 14pt; }
+
+.navigation {
+	font-size: 16pt;
+	padding-top: 8pt;
+	padding-bottom: 8pt;
+}
+
+
+------------HBqtO1xlZHhqO47FjihnGq
+Content-Disposition: inline; filename=valid-html401.png
+Content-Type: image/png; name=valid-html401.png
+Content-Location: http://www.w3.org/Icons/valid-html401
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAMAAABUFvrSAAAB0VBMVEUAAAAMCQQL
+CwsRDQYWEQgbFQoeGAwUFBQcHBwkHQ4sIxExJxM1KhUjIyMoKCg0MzI7OztCNBpH
+OBxNPR5OSz9XRSJbSCRjTydsVitvWCx1RzlyWy1+ZDFOTk5ST0tWUk1VVVVcXFxq
+XUplZWVra2tya2FwcHB7e3sAWpwIX58JYJ8OY6ERZaIVaKQaa6Yebaghb6klcqop
+dawxea82fbE4frI+grRFhrZMi7pVkb1alL9dlsBkm8NoncRtocZ0pcl8qsyWBAOZ
+AACcCASIIBmdNiegDge3PB6mPiqFajWJbTaTdTqWeDyffz+6QiG/TCahclPATifB
+UCjIXy/QbzfWej3Yfj+Rh2ujgkGui0WxjUa0gVi2kUi6lEq/mEyjkmuzn2e7pnLE
+nE7eikXOpFHQplPWq1XarlbesVjjlUrmm03poFDtqVTjtVrmuFzsvF70w2H5xmL+
+y2WDg4OXl5eYmJippZ61rZisrKy0tLS/v7+Crs6FsNCLtNKQt9SWu9aYvNebvtif
+wdqjw9uox92ryd6yzeG20OPCwsLMzMzU1NTA1ufG2ujN3+zT4+7d6fL/7Mbn5+fs
+7Ozl7vXp8fbu9Pj09PTy9/r1+Pv+/v7MzMx5jUMsAAAAm3RSTlP/////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+AJVWkpgAAAABYktHRACIBR1IAAAACXBIWXMAAABIAAAASABGyWs+AAADJ0lEQVRI
+x+2W+08TQRDHp1ogQBGkgqmIgmKYSisvEUuAQusLKajxxUVEgQYqsdzdShSChGAD
+8kYpbW79a529bY+WyCMN+pPf5Ob22uzntt+dmS2snbo+/xKCNX68frCTa/Tdtf/g
+3MBaOMJYNKzpYVPTbIIu+jSsMVWMcgaHwcmYC5QImHKxfHAw1gcQZgNw+RBwrNFP
+sxeaFgQk4XY3kpp8nCc/1a3zOSMLrI+MOGBgZJLAMMbyjgbvoJeI37FNgJdRqocb
+1QBn1kvXU+CiUOg8KDS1HCYo5tsdlQo4jwTzFtyi6ME9ih3oi8eX0Jvks3Cuvqzg
+zG4KbCoTPADFTtfRYD/OU2zFGEUv7nCjWQyry8iF6/WWx7rmygLrdnh7DHgDb3O+
+h0i+bmIL2W26UiC+MpLZm5cBZv2VTIIrFGUsAxwIWFnRQC58Q2zgvAf9fO8mbtLW
+lfwpK0zwJMU8u8AI8JDwyLEPvhcQZAn20U/3YStukN0bvBPd3Qnau0ywHlEZUyMa
+TZ2O6BSjUYFRaaxFSFYqj94PCKXAMfQZDbeW0R9HD73Gi9hq8JmcKu9RQEqCE+hZ
+wa6Eu2UJO8TzpgeX+Wou4Ccpbrry2siHFd6OMjM478LOw3uFrh3PTYO/IroNygbE
+hPm8gs0HwQpARNy1SgCnyqrsUG69afCjHDyzuGnwFuJdUYJ4R6KWsXFXjpJJCVbz
+bBKsQFUf9LNQyALrDwMPpvbX2xvIbEKNuGiW4AJf7DCtaF+V5LpVCa50VkjwRVCZ
+yD3VAgte8EN6vb2XsrpbF8bNEtymZPMnYh6MGbU/Bdcme4VydjoFLgSqDhtZkga/
+NHnBcckNPs1umyutIm40UYZ40Y2iFNcKampLYEZ6XOQMOaBPM+tDY7bijBXrgwFL
+weCbA/3YmDdvPXRtd3u9nWIP12sKSmdTm1doE/U1+djF+mE4LLrDvhXWnhF4Koej
+qQKizAEsSk3YPkELJw2lyM8tbi5nXnhYo4uWqgyp4olkFfKLNPfUD9NXKe7pn9Lj
+QZP7F47/qal/9r9i7lh9eX9yvb6RBlefQBdOrqtXSk3wb5pxjmKbvWqoAAAAAElF
+TkSuQmCC
+------------HBqtO1xlZHhqO47FjihnGq
+Content-Disposition: inline; filename=moin-www.png
+Content-Type: image/png; name=moin-www.png
+Content-Location: http://wiki.vislab.usyd.edu.au/wiki/vislab/img/moin-www.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAAsAAAALAgMAAADUwp+1AAAACVBMVEUA/wC/v78A
+AP+0MGACAAAAAnRSTlP/AOW3MEoAAAABYktHRAJmC3xkAAAALUlEQVR42mMIZQgB
+wikMEUxLGLIUVjBkaS1gyGKA4CigWFjXFIbQVSEMoaEhAPFLC8/vqdQnAAAAAElF
+TkSuQmCC
+------------HBqtO1xlZHhqO47FjihnGq
+Content-Disposition: inline; filename=10201lt5.gif
+Content-Type: image/gif; name=10201lt5.gif
+Content-Location: http://img403.imageshack.us/img403/3271/10201lt5.gif
+Content-Transfer-Encoding: Base64
+
+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
+jk7qXqP+PGpepOZhqul4nI7nqaWdVgoppf54Ap8jqKrqHquXCv/kqnmwlprqqq3i
+Guutr+ba666zjlfreBTIqqutwXonAHzF8korswIBAN+y7jWb7HbUmtestO5lS2y0
+00LrD7fmeevdtuFWC2634pI7nrnbocuuuuPC90m76Wq7rnn3uhfCvuP1q68/BtgL
+37/1uifweAgXrPDBAjnML8QEG+xvxBab1zB8plAs8XgdX1yxeyFrjDHJHnOcMsoi
+f+xdyQyfbB7M3iE8AXybwOeCzOPlLPLN7vls3s7+AG2e0OMRbXTPFC/tHdLeKY2z
+zgI5vR3U20kdNNVFwzcK11Zb97V7Wps39tBVew222mSn7d7ZSbttNtcisG3eFXKP
+dwnd8O097R7e/tTtnt93CyS4eYSPB/jhesO3eN+OGw7535K7R0nkgcN3OeWZW445
+495tXnjn5omueOWlYw7f6gMFBAAh+QQFyAD/ACwOAAoAeACHAAAI/wD/CRxIsOA/
+QQgRFnr1aiFBfxAjQmz4qmBCQYUO/vP3j2LFgRghCpT4UWDIgv4uYmSYcOErlRkN
+ypxpkInNmy+ZlNwoMaIgnQVvMjnwbyjHny8JGuXIE6IgpQeYCowq1GZOnD+FEqXJ
+deZQhgwPAh3Yk2PKsQNfSWPikEnRnDlddizrlG1af2rtFj3AcC3Yr2JdDu1KOCjR
+hHAfmpWI1GDjov8OSDug86e0lnTPSjNZSKROiEMRUv44WCzprYULD8aKlmfTujtN
+jjXK2q3NqIt9QnU611/V2Vsfl05NeHDexGRzw3YMHK/fnw4ZiuwZVuBSpKD5ArYe
+vCpq4lxDC/8abRnz04MrLXPmSHmzb9xvyytMiRA93vN7Pb/KvlcQy6EL/XTAgAfg
+Bx5Nv111U1RBJTWQUQRRhdtTDnLn203x7ZZSb6tZlZWHrR0o4ogklmjiiSimqOKK
+LLbo4oswxijjjDTWaOONOOYoUx48ouIjKowEycgjRD4yyZGTpKJkKpg0qcmTmnAi
+JSegVAmKK1i6IsqWopDiJSmnhHlKLGTG0kgjOqap5ppstunmm3DGKeecdNZp5514
+5qnnnnz26eefgAYq6KCEFmrooYgmquiijDbq6KOQRirppJRWaumlmGaq6aacdurp
+p6CGKuqopJZq6qmopqrqqqy26uqrsMZ9KuustNZq66245qrrrrz26uuvwAYr7LDE
+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
+FQsK+ieoZKFXr05qbPiqpKCTLV2+JOmykL+RNVGeJPjyJs2XOl8xlAl04tCfhf7F
+rEnSpr+UQh+GJMiEyb+qTFpmXXlQIFatVa8e8Fr1gL+wV7MKykrVbNiva6MWxPrV
+qEGsaV+RterV7E22Uj221YuS5FaNEAWiZHJA6FqYjJVKY7KTMcrJWhEyPttYqd64
+DC2j1Gt3buPRCGFq5gvartGKm11qJc31td+10gyP9RmVccmxWseOdGtWNui7B2SS
+buhbtkBpJVcfkHaArevEps9WnY04McTNf9/u/1773SpctWU5a0cvlyrdw8zfHhYv
+dn17ilPVv8J8vCv+tjxRlptKf/XWGX9ZLTbQZvuxF9ppKAmG3Gi0QTaWVU9h1lBp
+bf2mFG413STTTuoVOJI0SY3EBIolxnXcP8R5qBV0Jmmn3FI1RobfRgndZl13Cb2H
+Hl0XvkdaZIaBVWRZYgnk4nxLnkdkWnSBhdWFYyUUV19NJgnkl2CGKeaYZJZp5plo
+pqnmmmy26eabcMYp55x01mnnnXjmqeeefPbp55+ABlrnA4KeeVGhXxKKaJmHLqrR
+A4pq5ItAtlAq0CP/6DJJpqkIhAkw/3z6jybE/MNJqZwc848rqrqyzD+iMP/zDymy
+nlLrN//EgutrjiYEKWKo+ILKP5USK9AtmW6qS6fTpAKqqJoIY2qpoKha7aoCvfoP
+M6JsS8o/zvxzCq7ketfrP5BGmhAgwQbLiC3vYqrLP5Msu6yzzn4abbSnnlptta50
+0w2sy7zKDDO2hkvuN7o2UtG56SKWxz++CAsvvLc8krEuHE8yzT/NAgMqMPsKQ8yp
+xFR7DCgDB/yqwbQi7Iwz3yzcSCQSOZquuggB8k+wFftiy9C3ZHxLvRynMs3IwAjT
+tDDCoJzqMaoeI7CrBS9zMCnOMOPMuDXX7HBXhe4MZsVDv2uLxrdwnPQ0cIv8qTDR
+mkwMMcekTHU3AXf/s4woWh/sNTPfzBz2RjsGujOhPCuE9tC2FL2x23A7K7LIUNt9
+N9V7C+x31oJ7PTPNNa8zNtl/QmpExGdDHrnkbusCd9yYZ645550LDHrgo5NeM+KJ
+9/nA6qw37rjrkevStuyyL7305ZnfLf3eVusOuuC9l77rhn4OrzrjYtrCC9GSL988
+7bVDPT3unn8e+Auij176P5HgLBWf3ufP+AAPDICYL+MbH/mKRrnZXe5p6ltf7tz3
+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
+/csM3QfQ3Q79MOCOEhAAOw==
+
+------------HBqtO1xlZHhqO47FjihnGq--

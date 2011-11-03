@@ -1,0 +1,3 @@
+http://www.libsdl.org/intro.php < SDL
+http://www.pygame.org < PyGame
+http://www.cs.lth.se/home/Calle_Lejdfors/pygpu/ < PyGpu (very intresting)

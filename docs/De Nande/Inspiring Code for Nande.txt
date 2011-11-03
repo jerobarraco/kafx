@@ -1,0 +1,19 @@
+Well, what would have been of this project if it werent for snippets ripped off from goole?
+
+My respect to all these who gave me a hint on all those bad documented pieces of software i choose to use.
+
+----------------------------------------------------------------------------
+#Using LibAVCodec (old -_-º)
+http://www.inb.uni-luebeck.de/~boehme/using_libavcodec.html
+
+#glReadPixels & PIL
+http://www.zeuux.org/pipermail/zeuux-python/2006-June/025883.html
+
+#AVBin (Abandoned?)
+http://code.google.com/p/avbin/
+
+#Stream 360
+http://code.google.com/p/stream-360/source/browse/trunk/transcoder.cc
+
+#CAIROcks
+http://code.google.com/p/cairocks/

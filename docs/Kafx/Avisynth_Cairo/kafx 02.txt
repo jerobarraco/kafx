@@ -1,0 +1,338 @@
+KAFX Howto 2
+Es hora de explicar como usar el kafx.
+bueno lo han instalado correctamente ya saben como comprimir, solo falta saber como hacer
+un efecto.
+
+Bueno intentaré abordar el tema desde lo más "sencillo" hasta lo mas "difícil". 
+Creo que es la mejor manera de que todos vayamos aprendiendo y logremos todos llegar
+al máximo de posibilidades. Aunque por cuestiones de tiempo no les voy a poder explicar
+lo referente a python mismo.
+
+La idea original era no [i]necesitar[/i] saber python.
+Pero es importante que sepan lo básico de programación y lo básico de python 
+(sobretodo el tema de la indentación).
+Para el kafx1 vamos a estar usando python2.5 (si o si) cualquier duda no duden en 
+buscar en el sitio de ellos [s]python.com[/s] python.org ( http://python.org/doc/2.5.4/ )
+
+y cuando no sepan si algo es como ustedes piensan SIMPRE les recomiendo jugar con la consola
+(inicio->ejecutar "cmd" y ahi ponen 
+# cd c:\PYTHON25
+# python.exe
+)
+
+Tambien usaremos cairo, que si bien intenté que no necesiten saber NADA de cairo, pero si
+les interesa hacer cosas realmente novedosas les vendria bien conocerlo.
+
+
+Empecemos.
+Este es un pequeño resumen:
+Kafx se encarga de cargar el ass. 
+Lo único que toma del archivo son los estilos (no todo), el texto, los tiempos y los karaokes (\k)(1)
+Y (tratará de ) ofrece un objeto sencillo de manejar, para que te puedas olvidar del ass.
+
+El kafx buscará en tu script una clase llamada FX.
+Esta clase contiene lo general para todo el video.
+Alguna configuración para todo el video, una lista con los efectos (o sea, FX no es el efecto sino el grupo)
+y un par de eventos.
+Luego crearemos varias clases adicionales, cada una de estas sera un efecto en si y las indicaremos en la 
+clase FX
+Los efectos se manejan de la siguiente manera:
+Existen varios "eventos" (que describiré luego). Para cada uno de estos, kafx llamará al efecto correspondiente
+y al evento que corresponda.
+Por ejemplo cuando un karaoke le toque animarse, kafx, automáticamente llama a la función que corresponda, con el
+dialogo/silaba(3) que corresponda animarse.
+Y adentro de esta funcion uno pone lo que quiere que pase.
+
+Sencillo no? 
+
+ok, manos a la obra
+
+Lo que unico que necesitas hacer es crear un archivo de texto que termine en .py 
+(No en .txt) dentro de la carpeta "fxs" (2)
+
+Les recomiendo usar el notepad++ que viene incluido con el instalador de zeth si es 
+que no poseen otro editor mejor.
+
+Supongamos que creamos el archivo myfx.py, cambiamos el archivo avs que usaremos y ponemos
+[code]
+KAFX('fxs.myfx', 'mybigbad.ass')
+[/code]
+
+Ahora en el archivo myfx.py lo primero que deberán poner es el siguiente código
+(recuerden que en python Mayusculas y minusculas no son lo mismo)
+[code]
+from libs import extra
+class FX(extra.FX):
+	def __init__(self):
+		extra.FX.__init__(self)
+[/code]
+La primera linea [b]importa[/b] el módulo "extra" para que podamos usarlo
+en la segunda [b]definimos[/b] la [b]clase[/b] FX (asi tal cual escrita), esta clase
+es la que buscará el kafx.
+En la tercera definimos la [b]función[/b] __init__ que es la que se llamará
+automáticamente cuando se crea una [b]instancia[/b] de la clase.
+La cuarta hace que se inicialice correctamente nuestra clase. Es algo de python.
+Kafx buscará dentro de la clase FX todo lo que necesite y creará una instancia de eso.
+
+EXPLICACIÓN DE LA CLASE FX
+Contiene las siguientes propiedades:
+	self.inms 
+	Esto indica la cantidad de milisegundos que usará el kafx para un evento que generará automáticamente.
+	Este evento es el evento de entrada para el dialogo, o sea, antes de aparecer.
+	
+	self.outms
+	como el anterior, son los milisegundos que usará el kafx para el evento de salida del dialogo, o sea, 
+	luego de terminar.
+	
+	self.sinms
+	Como los anteriores, son los milisegundos antes de que cada silaba empiece.
+	
+	self.soutms
+	Igual pero para la salida de cada silaba.
+	
+	Estos cuatro tiempo, por defecto valdrán todos 0. (lo que en teoria haría que sea más rapido)
+	
+	self.reset_estilo
+	Esto indica si se resetea el estilo (se vuelve al original) tras cada cuadro para cada silaba.
+	Solo deben cambiarlo a False si saben que hacen.
+	
+	self.noQuieroTodosLosFrames
+	Esto le indica al kafx si vas a usar todos los cuadros del video, incluyendo aquellos en los que no aparezcan
+	dialogos/silabas. Si vale True entonces el kafx irá mucho mas rápido, porque no procesará los cuadros en los que
+	no aparezcan dialogos.
+	Es util cuando por ejemplo haces cosas con el video, o usás partículas, (que pueden 
+	aparecer aún cuando el dialogo ha terminado).
+	Por defecto vale True (o sea que no se procesarán los cuadros "vacios" e irá más rápido)
+	
+	Las propiedades anteriores no es importante que las incluyas, excepto si quieres poner otra cosa que no sea
+	el valor por defecto.
+	
+	self.funcs
+	A diferencia de los anteriores esta es la unica propiedad que hay que definir si o si.
+	Esta propiedad contiene los diferentes efectos que harás. Por ejemplo, para un video si tenes una linea de kanjis,
+	una con la traducción y una con la letra; podés crear un efecto para cada tipo.
+	
+	
+	Eventos:
+	La clase FX cuenta con 2 eventos:
+	
+	OnCuadroInicia
+	Esto se ejecuta justo cuando empieza el cuadro. Antes que cualquier dialogo.
+	
+	OnCuadroFin
+	Esto se ejecuta al terminar el cuadro. Luego de todos los dialogos.
+	
+	Estos dos eventos sirven, por ejemplo, para aplicar efectos a todos los dialogos en todo momento.
+	Ej: glow, blur.
+	También es útil para las partículas.
+	
+	
+Acá un ejemplo:
+[code]
+class FX(extra.FX):
+	def __init__(self):
+		extra.FX.__init__(self)
+		self.inms = 250 
+		self.outms = 250
+		self.sinms = 200
+		self.soutms = 200
+
+		self.funcs = (EKanji(),ERo(), ERoman(),ECredits())#se los explico despues
+	def OnCuadroInicia(self):
+		cairo_advanced.StartGroup()
+	def OnCuadroFin(self):
+		cairo_advanced.fGlow()
+		cairo_advanced.EndGroup()
+[/code]
+
+Bueno hasta acá llegamos con la clase principal.
+No es dificil pero intenté detallar lo máximo.
+Queda la clase para cada efecto, como se usan los dialogos y las funciones extras.
+Cualquier duda pregunten asi se que poner.
+
+
+Notas: 
+(1) usen solo \k los otros no tienen sentido. La idea es hacer los efectos en kafx,
+ asi que cualquier cosa que tenga que ver con efectos en ass era solo una perdida 
+ de tiempo como programador
+
+(2) Windows les puede traer problemas para cambiar la extensión de un archivo txt a .py
+si son usuarios muy novatos... 
+si ven que no pueden copien uno de los archivos .py y editenlo.
+
+(3) Cuando diga dialogo, es lo mismo que silaba, a menos que diga lo contrario.
+
+
+
+
+
+
+
+
+
+
+---------------
+English Version
+
+KAFX Howto 2
+Its time to explain howto use kafx.
+Ok, you've installed it properly, you know how to encode, you only need to know how to write your effect.
+
+well, i'll try to start from "simple" to "complicated".
+I think that's the best way in wich we all can learn, and reach the maximum posibilities.
+But, i won't be able to explain much of python, beacause i don't have the time (and besides,
+in english, you'll find PLENTY (and i mean it) of documentations and better explanitions than mines)
+
+Oroginally i meant that the user didn't [b]need[/b] to know python.
+But is very important that you know the basics of developing, and python basics.
+(Mostly about indentation)
+For kafx1 we'll be using python2.5 (this version is mandatory) and when you get any doubt please check the
+documentation at python.org ( http://python.org/doc/2.5.4/ )
+
+And when you are not sure of somthing ALWAYS check it out in the console, play with it.
+(start->run "cmd" and then
+# cd c:\PYTHON25
+# python.exe
+)
+
+Also, we'll be using cairo. You won't (at the beginning) need to know ANYTHING of cairo, 
+but if you DO want to do really cool stuff, you'll probably want to learn something about it.
+
+
+Let's get this started.
+In few words:
+Kafx will handle the ass file.
+The only thing it takes from it is : styles (not everything), text, times and karaokes (\k) (1)
+And will (try to) offer an easy to handle object, so you can easily forget about ass.
+
+Kafx will search in your script for a class named FX.
+This class contains the general stuff for the whole video, the effect list (so, FX is not the fx itself, is the 
+container), and a couple of events.
+Then we'll create some aditional classes, one for each different effect we'll render. 
+The effects are handled by events (wich i'll describe later), for each one of those, kafx will call the 
+correspondend effect with the corresponded dialog.
+
+For example, when a karaoke needs to be animated, kafx will automatically call the corresponding function, with
+the dialog to animate (3).
+And inside that function you can put what you want to happend
+Simple, ain't it?
+
+Ok, let's work
+The only thing you need is create a text file with the name ending in .py (not .txt) 
+inside the folder named "fxs" (2)
+
+I'll recommend using notepad++ that comes included with Zeth's installer if you don't have something better.
+
+Let's assume we've created the file myfx.py, then we change the [b]avs[/b] file we'll use and write.
+[code]
+KAFX('fxs.myfx', 'mybigbad.ass')
+[/code]
+Note we don't put the .py
+
+Now in the file myfx.py yhe first thing you need to write is the following code.
+(Remember that in python Caps (case) ARE importants)
+
+[code]
+from libs import extra
+class FX(extra.FX):
+	def __init__(self):
+		extra.FX.__init__(self)
+[/code]
+The first line [b]imports[/b] the module "extra" so we can use it.
+In the second, we'll [b]define[/b] a [b]class[/b] named FX (you have to name it exactly that way, in caps).
+Kafx will look for this class.
+In the third line (san di hang you) we'll define the [b]function __init__[/B].
+The fourth makes the class to initialize correctly. This is a python stuff.
+Kafx will create an [b]instance[/b] of this class and look into it for what it needs.
+
+FX CLASS EXPLANATION
+Contains the following properties
+Contiene las siguientes propiedades:
+	self.inms 
+	This indicates the ammount of miliseconds kafx will use for an special event.
+	This event triggers BEFORE the dialog appears (only dialog).
+	
+	self.outms
+	Same as above, the miliseconds used for the event that triggers when the dialog (and only dialog) disapears.
+	
+	self.sinms
+	As above, miliseconds before the sillabe starts (only sillab)
+	
+	self.soutms
+	Same, but for sillab ending (sillab only)
+	
+	Those four times, will be 0 by defaul. (Wich in theory will make things faster)
+	
+	
+	self.reset_estilo
+	(means Reset Style)
+	(True or False) Indicates whether the style goes back to the original after each frame. 
+	Only change it to False if you know what you're doing.
+	
+	
+	self.noQuieroTodosLosFrames
+	(means IDontWantEveryFrame)
+	This tells kafx to process or not every frame in the video, including those where there aren't any dialogs
+	If it's True, then, kafx will go much faster, because it'll simply skip the frames where there are not dialogs.
+	Is useful, in example, when you do things on the video, or use particles, (that can (and surely will) appear
+	even when the dialog has finished)
+	True by default (so kafx will NOT process any "emtpy" frame and will go faster)
+	
+	Is not important to put the properties from above, except if you want to change them from the default value
+	
+	self.funcs
+	Unlike the other properties, this one is the only you'll need to include ALWAYS.
+	This contains a list for the different effects you'll make. In example, if you have for a vide : kanjis, 
+	translation and the lyric (romanji) you can create a effect for each type of line.
+	
+	
+	Events:
+	The class has 2 events:
+	
+	OnCuadroInicia
+	(means OnFrameBegins)
+	This is when the frame will start, just before every dialog.
+	
+	OnCuadroFin
+	(means OnFrameEnds)
+	This triggers when the frame has endend, just after every dialog gets processed.
+	
+	This two events are useful, in example, to apply some effect to every dialog at every frame.
+	Ie.: glow, blur.
+	Also needed for particles.
+	
+	
+Here's an example:
+[code]
+class FX(extra.FX):
+	def __init__(self):
+		extra.FX.__init__(self)
+		self.inms = 250 
+		self.outms = 250
+		self.sinms = 200
+		self.soutms = 200
+
+		self.funcs = (EKanji(),ERo(), ERoman(),ECredits())
+		#This get's explained the next time ;)
+	def OnCuadroInicia(self):
+		cairo_advanced.StartGroup()
+	def OnCuadroFin(self):
+		cairo_advanced.fGlow()
+		cairo_advanced.EndGroup()
+[/code]
+
+Ok, this covers the main class.
+It isn't hard, i tried to explain the most detailed way possible.
+We still need to learn about the class for each effect, how to use dialogs and the extra functions.
+Any doubt you have, just ask, so i know what to include here.
+
+
+Notas: 
+(1) Use only \k (not \kf or \ko), the others won't make any sense.
+The idea is to make the effects in kafx, so anything referent effects in ass is a waste of time as a developer
+
+(2) Windows can cause you some problems to change the extension from .txt to .py
+if you are kinda newbie...
+If you can't do it. copy one of the .py files and edit it with notepad++
+
+(3) When i say dialog i mean dialog or sillab, wich is almos the same, unless of course, when noted.

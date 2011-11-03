@@ -1,0 +1,1614 @@
+Content-Type: multipart/related; start=<op.mhtml.1269844845212.0114bf244c1349e4@192.168.1.100>; boundary=----------AOqpjSyW7Q1NvdST1PAWfs
+Content-Location: http://www.cairographics.org/operators/
+Subject: =?utf-8?Q?Cairo's=20compositing=20operators?=
+MIME-Version: 1.0
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=default.htm
+Content-Type: text/html; charset=UTF-8; name=default.htm
+Content-ID: <op.mhtml.1269844845212.0114bf244c1349e4@192.168.1.100>
+Content-Location: http://www.cairographics.org/operators/
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cairo&#x27;s compositing operators</title>
+
+<link rel="stylesheet" href="../style.css" type="text/css" />
+<link rel="stylesheet" href="../local.css" type="text/css" />
+
+
+</head>
+<body>
+
+<div class="header">
+<div id="logo">
+  <a href="/"><img alt="cairo" src="/cairo-banner.png" /></a>
+</div>
+</div>
+
+<div id="navcontainer">
+<ul id="navlist">
+<li><a href="/news/">News</a></li>
+<li><a href="/download/">Download</a></li>
+<li><a href="/documentation/">Documentation</a></li>
+<li><a href="/contact/">Contact</a></li>
+<li><a href="/examples/">Examples</a></li>
+</ul>
+</div>
+
+
+<div id="title">
+Cairo&#x27;s compositing operators
+</div>
+
+
+
+
+
+<div id="content">
+<p>Normally, you will be using cairo to draw objects on top of each other.
+But cairo can do differently, if you need it! In fact, you can use all
+the Porter/Duff compositing operators.</p>
+
+<p>Fourteen different operators are currently available in cairo. This page
+is a try to describe them. It may contain errors and is possibly
+incomplete. Please help to improve it!</p>
+
+<h1>Example images</h1>
+
+<p>It is probably best to describe the effect of compositing operators by
+showing example images, so that's what is done below. The images show
+the result of drawing an object (a translucent blue rectangle) onto a surface which
+already contains another image (a translucent red rectangle).</p>
+
+<p>The operator names try to describe what the operators mean. Two words
+need to be mentioned: the <em>source</em> and the <em>destination</em> (or <em>dest</em>). In
+this context, these provide the two objects which contribute to the
+graphical output of the drawing operation. The destination is the name
+of the surface before the drawing operation, the source is the name of
+what is added while drawing.</p>
+
+<h2>The Destination</h2>
+
+<p>To create the example images, the red rectangle is first drawn to the
+(empty) destination surface with the default operator:</p>
+
+<pre><code>cairo_rectangle (cr, 0, 0, 120, 90);
+cairo_set_source_rgba (cr, 0.7, 0, 0, 0.8);
+cairo_fill (cr);
+</code></pre>
+
+<p>The surface is now a transparent plane with a partially transparent
+rectangle in it. This represents the destination to which the next
+drawing operation will be performed. Both the red and the fully
+transparent part of the surface are now natural parts of the
+destination.</p>
+
+<h2>Setting the compositing operator</h2>
+
+<p>The current operator is now set using
+<a href="http://cairographics.org/manual/cairo-context.html#cairo-set-operator"><code>cairo_set_operator()</code></a>.</p>
+
+<h2>The Source</h2>
+
+<p>The <a href="../tutorial/">tutorial</a> describes how drawing works in cairo:</p>
+
+<blockquote>
+  <p>"Cairo internally draws with one fundamental drawing operation: the
+source and mask are freely placed somewhere over the destination. Then
+the layers are all pressed together and the paint from the source is
+transferred to the destination wherever the mask allows it."</p>
+</blockquote>
+
+<p>However, there is no mention of a mask in the names of the compositing
+operators. They refer to a source and a destination only. This allows
+for two different interpretations with regard to what should be regarded
+as the source for the compositing operation:</p>
+
+<ol>
+<li><p>Since the mask determines where the paint from the source is
+transferred, it also determines the area in which the compositing
+operation is performed. This interpretation can be called
+<strong>bounded</strong>.</p></li>
+<li><p>The area where the compositing operation is performed is not bounded
+by the mask. Instead, any parts where the source layer is not
+transferred are considered to be fully transparent. We call this
+interpretation of the source <strong>unbounded</strong>.</p></li>
+</ol>
+
+<p>For some of the operators, both interpretations lead to the same result,
+for others they do not. In cairo, the actual interpretation depends on
+the operator.  The unbounded operators modify destination outside of the
+bounds of the mask.  However, their effect can still be limited by way
+of clipping.  See the section on <a href="#clipmask">clipping and masking</a>
+for those details.</p>
+
+<p>The blue rectangle is drawn with the new operator in effect:</p>
+
+<pre><code>cairo_rectangle (cr, 40, 30, 120, 90);
+cairo_set_source_rgba (cr, 0, 0, 0.9, 0.4);
+cairo_fill (cr);
+</code></pre>
+
+<p>The results can be seen in the images below. Note that both rectangles
+are drawn with transparency. When studying the images, you may be able
+to guess how they would look for opaque objects, too. For reference, the
+<a href="ops.c">code</a> to create the images is also available.</p>
+
+<h1>Operators</h1>
+
+<p>For the mathematical description, it is convenient to use the following
+conventions:</p>
+
+<ol>
+<li><p>The index A (assigned to color components and transparency factor)
+refers to the source, while the index B refers to the destination.
+The index R refers to the result of the compositing operation.</p></li>
+<li><p>Each pixel in both the source and the destination is fully described
+by a tuple (r, g, b, a). We will use "x" as a shorthand for any
+color component, since they are always treated the same. "a"
+describes the alpha value (opacity) and is treated differently.</p></li>
+<li><p>The product of xA and aA is described by xaA. xaB and xaR have
+analogous meaning.</p></li>
+</ol>
+
+<p>The color computations equations contain a division by aR, which cannot
+be done where aR is zero. But in this case the color doesn't matter
+anyway (full transparency) and can also be set to zero. (Internally, the
+colors may be handled differently, so this might or might not be
+necessary.)</p>
+
+<h2 id="clear">CAIRO_OPERATOR_CLEAR</h2>
+
+<div class="tutright"><img src="./clear.png" alt="" width="160" height="120" /></div>
+
+<p>Where the second object is drawn, the first is completely removed.
+Anywhere else it is left intact. The second object itself is not drawn.</p>
+
+<p>The effect of the <code>CLEAR</code> operator depends on the interpretation of the
+source. In cairo, this operator is <strong>bounded</strong>.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>0</td>
+    <td>0</td>
+</tr>
+</table>
+
+<h2 id="source">CAIRO_OPERATOR_SOURCE</h2>
+
+<div class="tutright"><img src="./source.png" alt="" width="160" height="120" /></div>
+
+<p>The second object is drawn as if nothing else were below. Only outside
+of the blue rectangle the red one is left intact.</p>
+
+<p>The effect of the <code>SOURCE</code> operator depends on the interpretation of the
+source. In cairo, this operator is <strong>bounded</strong>.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>aA</td>
+    <td>xA</td>
+</tr>
+</table>
+
+<h2 id="over">CAIRO_OPERATOR_OVER</h2>
+
+<div class="tutright"><img src="./over.png" alt="" width="160" height="120" /></div>
+
+<p>The image shows what you would expect if you held two semi-transparent
+slides on top of each other. This operator is cairo's default operator. </p>
+
+<p>The output of the <code>OVER</code> operator is the same for both bounded and
+unbounded source.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>aA + aB·(1-aA)</td>
+    <td>(xaA + xaB·(1-aA))/aR</td>
+</tr>
+</table>
+
+<h2 id="in">CAIRO_OPERATOR_IN</h2>
+
+<div class="tutright"><img src="./in.png" alt="" width="160" height="120" /></div>
+
+<p>The first object is removed completely, the second is only drawn where
+the first was.</p>
+
+<p>Note that the transparency of the first object is taken into account.
+That is, the small blue rectangle is slightly lighter than it would have
+been, had the first object been opaque.</p>
+
+<p>The effect of the <code>IN</code> operator depends on the interpretation of the
+source. In cairo, this operator is <strong>unbounded</strong>.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>aA·aB</td>
+    <td>xA</td>
+</tr>
+</table>
+
+<h2 id="out">CAIRO_OPERATOR_OUT</h2>
+
+<div class="tutright"><img src="./out.png" alt="" width="160" height="120" /></div>
+
+<p>The blue rectangle is drawn only where the red one wasn't. Since the red
+one was partially transparent, you can see a blue shadow in the
+overlapping area. Otherwise, the red object is completely removed.</p>
+
+<p>The effect of the <code>OUT</code> operator depends on the interpretation of the
+source. In cairo, this operator is <strong>unbounded</strong>.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>aA·(1-aB)</td>
+    <td>xA</td>
+</tr>
+</table>
+
+<h2 id="atop">CAIRO_OPERATOR_ATOP</h2>
+
+<div class="tutright"><img src="./atop.png" alt="" width="160" height="120" /></div>
+
+<p>This leaves the first object mostly intact, but mixes both objects in
+the overlapping area. The second object object is not drawn except
+there.</p>
+
+<p>If you look closely, you will notice that the resulting color in the
+overlapping area is different from what the <code>OVER</code> operator produces.
+Any two operators produce different output in the overlapping area!</p>
+
+<p>The output of the <code>ATOP</code> operator is the same for both bounded and
+unbounded source.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>aB</td>
+    <td>xaA + xB·(1-aA)</td>
+</tr>
+</table>
+
+<h2 id="dest">CAIRO_OPERATOR_DEST</h2>
+
+<div class="tutright"><img src="./dest.png" alt="" width="160" height="120" /></div>
+
+<p>Leaves the first object untouched, the second is discarded completely.</p>
+
+<p>The output of the <code>DEST</code> operator is the same for both bounded and
+unbounded source.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>aB</td>
+    <td>xB</td>
+</tr>
+</table>
+
+<h2 id="dest_over">CAIRO_OPERATOR_DEST_OVER</h2>
+
+<div class="tutright"><img src="./dest_over.png" alt="" width="160" height="120" /></div>
+
+<p>The result is similar to the <code>OVER</code> operator. Except that the "order" of
+the objects is reversed, so the second is drawn below the first.</p>
+
+<p>The output of the <code>DEST_OVER</code> operator is the same for both bounded and
+unbounded source.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>(1-aB)·aA + aB</td>
+    <td>(xaA·(1-aB) + xaB)/aR</td>
+</tr>
+</table>
+
+<h2 id="dest_in">CAIRO_OPERATOR_DEST_IN</h2>
+
+<div class="tutright"><img src="./dest_in.png" alt="" width="160" height="120" /></div>
+
+<p>The blue rectangle is used to determine which part of the red one is
+left intact. Anything outside the overlapping area is removed.</p>
+
+<p>This works like the <code>IN</code> operator, but again with the second object
+"below" the first.</p>
+
+<p>Similar to the two interpretations of the source, it is possible to
+imagine the same distinction with regard to the destination. In cairo,
+the <code>DEST_IN</code> operator is <strong>unbounded</strong>.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>aA·aB</td>
+    <td>xB</td>
+</tr>
+</table>
+
+<h2 id="dest_out">CAIRO_OPERATOR_DEST_OUT</h2>
+
+<div class="tutright"><img src="./dest_out.png" alt="" width="160" height="120" /></div>
+
+<p>The second object is used to reduce the visibility of the first in the
+overlapping area. Its transparency/opacity is taken into account. The
+second object is not drawn itself.</p>
+
+<p>The output of the <code>DEST_OUT</code> operator is the same for both bounded and
+unbounded interpretations.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>(1-aA)·aB</td>
+    <td>xB</td>
+</tr>
+</table>
+
+<h2 id="dest_atop">CAIRO_OPERATOR_DEST_ATOP</h2>
+
+<div class="tutright"><img src="./dest_atop.png" alt="" width="160" height="120" /></div>
+
+<p>Same as the <code>ATOP</code> operator, but again as if the order of the drawing
+operations had been reversed.</p>
+
+<p>In cairo, the <code>DEST_ATOP</code> operator is <strong>unbounded</strong>.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>aA</td>
+    <td>xA·(1-aB) + xaB</td>
+</tr>
+</table>
+
+<h2 id="xor">CAIRO_OPERATOR_XOR</h2>
+
+<div class="tutright"><img src="./xor.png" alt="" width="160" height="120" /></div>
+
+<p>The output of the <code>XOR</code> operator is the same for both bounded and
+unbounded source interpretations.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>aA + aB - 2·aA·aB</td>
+    <td>(xaA·(1-aB) + xaB·(1-aA))/aR</td>
+</tr>
+</table>
+
+<h2 id="add">CAIRO_OPERATOR_ADD</h2>
+
+<div class="tutright"><img src="./add.png" alt="" width="160" height="120" /></div>
+
+<p>The output of the <code>ADD</code> operator is the same for both bounded and
+unbounded source interpretations.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>min(1, aA+aB)</td>
+    <td>(xaA + xaB)/aR</td>
+</tr>
+</table>
+
+<h2 id="saturate">CAIRO_OPERATOR_SATURATE</h2>
+
+<div class="tutright"><img src="./saturate.png" alt="" width="160" height="120" /></div>
+
+<p>The output of the <code>SATURATE</code> operator is the same for both bounded and
+unbounded source interpretations.</p>
+
+<table>
+<tr>
+    <td>Resulting alpha (aR)</td>
+    <td>Resulting color (xR)</td>
+</tr>
+<tr>
+    <td>min(1, aA+aB)</td>
+    <td>(min(aA, 1-aB)·xA + xaB)/aR</td>
+</tr>
+</table>
+
+<h1 id="clipmask">Clipping and masking</h1>
+
+<p>This section augments the documentation of cairo's compositing model
+by describing how clipping and masking are taken into account when
+rendering.  In this context the <i>clip</i> and <i>mask</i> are treated as
+cairo surfaces with <a href="http://cairographics.org/manual/cairo-surface.html#cairo-content-t&quot;&quot;">alpha
+content</a> that both default to full opaqueness when not explicitly given.
+The basic approach to clipping in cairo is to first perform the
+operation without clipping and then interpolating by the clip
+pointwise between the unclipped result and the destination.  In the
+descriptions below this is achieved using a ternary operator
+<i>A</i> LERP<i><sub>T</sub></i> <i>B</i> that is defined here as:</p>
+
+<p><center>
+    <i>A</i> LERP<i><sub>T</sub></i> <i>B</i> := (<i>A</i> IN
+    <i>T</i>) ADD (<i>B</i> OUT <i>T</i>)
+</center></p>
+
+<p>The approach to masking is to combine it using operator IN with either the <i>clip</i>, for
+the bounded operators, or with the source for the unbounded ones.</p>
+
+<p>There are three distinct rendering equations used within cairo to
+implement clipping and masking, which can be described using the
+(unclipped, unmasked) operators IN, OUT and ADD operators as primitives.</p>
+
+<table align="center" border="1">
+ <tr>
+  <th>Kind</th>
+  <th>Equation</th>
+ </tr>
+ <tr>
+  <td>XRender</td>
+  <td align="right"> ((<i>src</i> IN <i>mask</i>) <i>OP</i> <i>dst</i>) LERP<sub><i>clip</i></sub> <i>dst</i></td>
+ </tr>
+ <tr>
+  <td>Bounded</td>
+  <td align="right"> (<i>src OP dst</i>) LERP<sub>(<i>clip</i> IN <i>mask</i>)</sub> <i>dst</i> </td>
+ </tr>
+ <tr>
+  <td>Simple</td>
+  <td align="right"> (<i>src</i> IN (<i>clip</i> IN <i>mask</i>)) <i>OP</i> <i>dst</i> </td>
+ </tr>
+</table>
+
+<p>The XRender-kind definition most closely matches the letter of the
+XRender specification as it reduces to XRender's equation when
+<i>clip</i> is binary valued -- the only kind of clip talked about in
+the spec.  The Simple-kind definition is the fastest to execute and
+was conceived of as an optimisation of the XRender-kind
+definition to take advantage of the fact that for many operators the two coincide.
+The Bounded definition is a variation of the XRender-kind
+definition where the mask is considered to be a part of the clip.  It
+is used for the SOURCE and CLEAR operators only, and is used 
+to make those operators be explicitly bounded by <i>mask</i>.
+The following table gives the rendering equation used by each of cairo's
+operators.  The entries marked with Any are operators for
+which all three variants coincide.</p>
+
+<table align="center" border="1">
+ <tr>
+  <th>Operator</th>
+  <th>Kind</th>
+ </tr>
+ <tr>
+  <td>CLEAR</td>
+  <td>Bounded</td>
+ </tr>
+ <tr>
+  <td>SOURCE</td>
+  <td>Bounded</td>
+ </tr>
+ <tr>
+  <td>OVER</td>
+  <td>Any</td>
+ </tr>
+ <tr>
+  <td>IN</td>
+  <td>XRender</td>
+ </tr>
+ <tr>
+  <td>OUT</td>
+  <td>XRender</td>
+ </tr>
+ <tr>
+  <td>ATOP</td>
+  <td>Any</td>
+ </tr>
+ <tr>
+  <td>DEST</td>
+  <td>Any</td>
+ </tr>
+ <tr>
+  <td>DEST_OVER</td>
+  <td>Any</td>
+ </tr>
+ <tr>
+  <td>DEST_IN</td>
+  <td>XRender</td>
+ </tr>
+ <tr>
+  <td>DEST_OUT</td>
+  <td>Any</td>
+ </tr>
+ <tr>
+  <td>DEST_ATOP</td>
+  <td>XRender</td>
+ </tr>
+ <tr>
+  <td>XOR</td>
+  <td>Any</td>
+ </tr>
+ <tr>
+  <td>ADD</td>
+  <td>Any</td>
+ </tr>
+ <tr>
+  <td>SATURATE</td>
+  <td>Simple</td>
+ </tr>
+</table>
+
+<h1 id="links">Links</h1>
+
+<ul>
+<li><p>The original paper by Thomas Porter and Tom Duff:
+<a href="http://keithp.com/~keithp/porterduff/p253-porter.pdf">http://keithp.com/~keithp/porterduff/p253-porter.pdf</a>,</p></li>
+<li><p>The description of the X Rendering Extension by Keith Packard
+is where the information about the <code>ADD</code> and <code>SATURATE</code> operators
+comes from:
+<a href="http://keithp.com/~keithp/render/protocol.html">http://keithp.com/~keithp/render/protocol.html</a></p></li>
+<li><p>A description of compositing in SVG 1.2 by Craig Northway:
+<a href="http://www.svgopen.org/2005/papers/abstractsvgopen/">http://www.svgopen.org/2005/papers/abstractsvgopen/</a></p></li>
+</ul>
+
+</div>
+
+<div id="footer">
+
+
+<div class="actions">
+<ul>
+
+<li><a href="http://cairographics.org/ikiwiki?page=operators&amp;do=edit">Edit</a></li>
+
+
+<li><a href="../recentchanges/">RecentChanges</a></li>
+
+
+
+<li><a href="http://cairographics.org/ikiwiki?do=prefs">Preferences</a></li>
+
+
+</ul>
+</div>
+
+
+<div id="pageinfo">
+
+
+
+
+<div id="backlinks">
+Links:
+
+<a href="../cookbook/">cookbook</a>
+
+
+</div>
+
+
+<div class="pagedate">
+Last edited <span class="date">Wed 07 Jan 2009 04:13:53 PM PST</span>
+</div>
+
+</div>
+
+<!-- from cairographics.org -->
+</div>
+
+</body>
+</html>
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=style.css
+Content-Type: text/css; charset=UTF-8; name=style.css
+Content-Location: http://www.cairographics.org/style.css
+Content-Transfer-Encoding: 8bit
+
+/* ikiwiki style sheet */
+
+/* Note that instead of modifying this style sheet, you can instead edit
+ * local.css and use it to override or change settings in this one.
+ */
+
+.header {
+	margin: 0;
+	font-weight: bold;
+	line-height: 1em;
+	display: block;
+}
+
+.author {
+	margin: 0;
+	font-weight: bold;
+	display: block;
+}
+
+.actions ul {
+	margin: 0;
+	padding: 6px;
+	list-style-type: none;
+}
+
+.inlinepage .actions ul {
+	border-bottom: 0;
+}
+
+.actions li {
+	display: inline;
+	padding: .2em .4em;
+}
+
+.tags {
+	clear: both;
+}
+
+#footer {
+	border-top: 1px solid #000;
+}
+
+div.tags {
+	margin-top: 1em;
+}
+
+#backlinks {
+	margin-top: 1em;
+}
+
+#searchform {
+	display: inline;
+	float: right;
+}
+
+#editcontent {
+	width: 100%;
+}
+
+img {
+	border-style: none;
+}
+
+/* Stuff for the RecentChanges table. */
+tr.changeheader {
+	background: #eee;
+	color: black !important;
+}
+tr.changeinfo {
+	background: #eee;
+	color: black !important;
+}
+th.changeheader {
+	padding: 1px .3em;
+}
+td.changeinfo {
+	padding: 1px .3em;
+}
+td.changetime {
+	white-space: nowrap;
+	padding: 1px .3em;
+}
+td.changelog {
+	font-style: italic;
+}
+
+/* Used for adding a blog page. */
+#blogform {
+	padding: 10px 10px;
+	border: 1px solid #aaa;
+	background: #eee;
+	color: black !important;
+}
+
+.inlinepage {
+	padding: 10px 10px;
+	border: 1px solid #aaa;
+}
+
+/* Used for invalid form fields. */
+.fb_invalid {
+	color: red;
+	background: white !important;
+}
+
+/* Used for required form fields. */
+.fb_required {
+	font-weight: bold;
+}
+
+/* Orange feed button. */
+.feedbutton {
+	background: #ff6600;
+	color: white !important;
+	border-left: 1px solid #cc9966;
+	border-top: 1px solid #ccaa99;
+	border-right: 1px solid #993300;
+	border-bottom: 1px solid #331100;
+	padding: 0px 0.5em 0px 0.5em;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: small;
+	text-decoration: none;
+	margin-top: 1em;
+}
+.feedbutton:hover {
+	color: white !important;
+	background: #ff9900;
+}
+
+/* Tag cloud. */
+.pagecloud {
+	float: right;
+	width: 30%;
+	text-align: center;
+	padding: 10px 10px;
+	border: 1px solid #aaa;
+	background: #eee;
+	color: black !important;
+}
+.smallestPC { font-size: 70%; }
+.smallPC { font-size: 85%; }
+.normalPC { font-size: 100%; }
+.bigPC { font-size: 115%; }
+.biggestPC { font-size: 130%; }
+
+#sidebar {
+	line-height: 3ex;
+	width: 20ex;
+	float: right;
+	margin-left: 40px;
+	margin-bottom: 40px;
+	padding: 2ex 2ex;
+}
+
+/* outlines */
+li.L1 {
+	list-style: upper-roman;
+}
+li.L2 {
+	list-style: decimal;
+}
+li.L3 {
+	list-style: lower-alpha;
+}
+li.L4 {
+	list-style: disc;
+}
+li.L5 {
+	list-style: square;
+}
+li.L6 {
+	list-style: circle;
+}
+li.L7 {
+	list-style: lower-roman;
+}
+li.L8 {
+	list-style: upper-alpha;
+}
+
+hr.poll {
+	height: 10pt;
+	color: white !important;
+	background: #eee;
+	border: 2px solid black;
+}
+div.poll {
+	margin-top: 1ex;
+	margin-bottom: 1ex;
+	padding: 1ex 1ex;
+	border: 1px solid #aaa;
+}
+
+input#openid_url {
+	background: url(wikiicons/openidlogin-bg.gif) no-repeat;
+	background-color: #fff;
+	background-position: 0 50%;
+	color: #000;
+	padding-left: 18px;
+}
+
+/* Things to hide in printouts. */
+@media print {
+	.actions { display: none; }
+	.tags { display: none; }
+	.feedbutton { display: none; }
+	#searchform { display: none; }
+	#blogform { display: none; }
+	#backlinks { display: none; }
+}
+
+/* Provided for use by template plugin for floating info boxes. */
+.infobox {
+	float: right;
+	margin-left: 2ex;
+	margin-top: 1ex;
+	margin-bottom: 1ex;
+	padding: 1ex 1ex;
+	border: 1px solid #aaa;
+}
+
+/* Provided for use by template plugin for floating note boxes. */
+.notebox {
+	float: right;
+	margin-left: 2ex;
+	margin-top: 1ex;
+	margin-bottom: 1ex;
+	padding: 1ex 1ex;
+	border: 1px solid #aaa;
+	width: 25%
+}
+
+/* Used by the popup template and for backlinks hiding. */
+.popup {
+	border-bottom: 1px dotted #366;
+	color: #366;
+}
+.popup .balloon,
+.popup .paren,
+.popup .expand {
+	display: none;
+}
+.popup:hover .balloon,
+.popup:focus .balloon {
+	position: absolute;
+	display: inline;
+	margin: 1em 0 0 -2em;
+	padding: 0.625em;
+	border: 2px solid;
+	background-color: #dee;
+	color: black;
+	
+	/* Nonstandard, but very nice. */
+	/*
+	opacity: 0.95;
+	-moz-opacity: 0.95;
+	filter: alpha(opacity=95);
+	*/
+}
+
+/* Formbuilder styling */
+fieldset {
+	margin: 1ex 0;
+	border: 1px solid black;
+}
+legend {
+	padding: 0 1ex;
+}
+.fb_submit {
+	float: left;
+	margin: 2px 0;
+}
+#signin_openid_url_label {
+	float: left;
+	margin-right: 1ex;
+}
+#signin_openid {
+	padding: 10px 10px;
+	border: 1px solid #aaa;
+	background: #eee; 
+	color: black !important;
+}
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=local.css
+Content-Type: text/css; charset=UTF-8; name=local.css
+Content-Location: http://www.cairographics.org/local.css
+Content-Transfer-Encoding: 8bit
+
+/* ikiwiki local style sheet */
+
+/* Add local styling here, instead of modifying style.css. */
+body {
+    margin-left: 4%;
+    margin-right: 4%;
+    color: black;
+    background-color: white;
+}
+
+h1, .header, #footer, #title {
+    clear: both;
+}
+
+.header {
+    padding-bottom: 1em;
+}
+
+img {
+	border: none;
+}
+
+h1,h2,h3,h4,h5,h6, .header, #title {
+    font-family: sans-serif;
+    clear: both;
+    color: #f39914;
+}
+
+h1, #title {
+    font-weight: bold;
+    font-size: 150%;
+}
+
+h2,h3,h4,h5,h6 {
+    margin-left: 2%;
+    margin-right: 2%;
+    font-size: 125%;
+}
+
+p, ol, ul, hr, table {
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+ol ol {
+    margin-left: 0%;
+    list-style-type: lower-alpha;
+}
+
+ul ul {
+    margin-left: 0;
+}
+
+li p {
+    margin-left: 0%;
+}
+
+pre {
+    font-family: mono;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 1px solid #c5c5f6;
+    background-color: #dbdbf7;
+    padding: .5em;
+}
+
+a:link {
+    color: #4c4ce6;
+}
+
+a:visited {
+    color: #8f8fe6;
+}
+
+a:hover {
+    color: #f29915;
+    text-decoration: underline;
+}
+
+#logo {
+    text-align: center;
+}
+
+#footer {
+    padding-top: .25em;
+    font-size: 80%;
+}
+
+#legal {
+    clear: both;
+    text-align: center;
+    margin-top: 2em;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+#pageinfo {
+    float: right;
+    text-align: right;
+    width: 49%;
+    clear: none;
+}
+
+.actions {
+    float: left;
+    width: 49%;
+    text-align: left;
+}
+
+.actions ul {
+    padding: 0;
+}
+
+.actions ul li {
+    padding-left: 0;
+    padding-right: .5em;
+}
+
+.left {
+    float: left;
+    padding-right: 0.5em;
+}
+
+.right {
+    float: right;
+    padding-left: 0.5em;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    color: black;
+    background-color: black;
+}
+
+/* Navigation list styling courtesy of Listamatic:
+ *
+ *	Centred List Navbar Updated
+ *	http://css.maxdesign.com.au/listamatic/horizontal27.htm
+ */
+#navcontainer ul {
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 0;
+    margin-top: 0;
+    /* cancels gap caused by top padding in Opera 7.54 */
+    margin-left: 0;
+    background-color: #162284;
+    color: white;
+    width: 100%;
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    line-height: 18px;
+    /* fixes Firefox 0.9.3 */
+}
+
+#navcontainer ul li {
+    display: inline;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 5px;
+    /* matches link padding except for left and right */
+    padding-top: 5px;
+}
+
+#navcontainer ul li a {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    color: white;
+    text-decoration: none;
+    border-right: 1px solid #fff;
+}
+
+#navcontainer ul li a:hover {
+    color: #f39914;
+}
+
+#navcontainer #active {
+    border-left: 1px solid #fff;
+}
+
+div.tutright {
+	float:right;
+	background-color: #eee;
+	border: solid 1px #888;
+	padding: 0.5em;
+	margin-left: 1em;
+}
+
+div.tutright img {
+	margin: 0px;
+}
+div.clear {
+	clear: both;
+}
+a {
+	text-decoration: none;
+}
+table {
+	border: solid #aaa 1px;
+	border-spacing: 1px;
+}
+td, th {
+	border: solid #aaa 1px;
+	padding: 5px;
+}
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=cairo-banner.png
+Content-Type: image/png; name=cairo-banner.png
+Content-Location: http://www.cairographics.org/cairo-banner.png
+Content-Transfer-Encoding: Base64
+
+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
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=clear.png
+Content-Type: image/png; name=clear.png
+Content-Location: http://www.cairographics.org/operators/clear.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAsZYgh+QAAAStJREFUeJzt3DERAgEQBMGFeknYQC02
+EIWDJyAYCroVbDB14V0e23P8rPt2qzecudYD+G8CJCVAUgIkJUBSAiQlQFICJCVA
+UgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIk
+JUBSRz3gnW//7sRnXEBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQl
+QFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFIC
+JCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVA
+UgIkJUBSAiQlQFICJCVAAAAAAAAAAAAAAAAAAAAAAAAAgG3bCxY3AzfnJ9d2AAAA
+AElFTkSuQmCC
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=source.png
+Content-Type: image/png; name=source.png
+Content-Location: http://www.cairographics.org/operators/source.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAsZYgh+QAAAXFJREFUeJzt1EENwgAURMFfgiRs1EZF
+1QY20FEdOGhP5AWYUbCHl12eM6/hZ60zj3rDmVs9gP8mQFICJCVAUgIkJUBSAiQl
+QFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFIC
+JCVAUgIkda8HXFnn2OsNX26rB5zxgKQESEqApARISoCkBEhKgKQESEqApARISoCk
+BEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhK
+gKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQE
+SEqApARISoCkBEhKgKQESEqApARISoCklnrAtWOrF/A5HpCUAEkJkJQASQmQlABJ
+CZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCU
+AEkJkJQASQmQ1BsNRQZwCLHdzQAAAABJRU5ErkJggg==
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=over.png
+Content-Type: image/png; name=over.png
+Content-Location: http://www.cairographics.org/operators/over.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAsZYgh+QAAAXZJREFUeJzt1EENwgAURMFfggSkYAMb
+TRCBJg7YQAc6cNCeyAswo2APL7s8Zp7Dz7rMnOsNWw71AP6bAEkJkJQASQmQlABJ
+CZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCU
+AEkJkJQASQmQ1LEesOc+11O94bvd1nrBFg9ISoCkBEhKgKQESEqApARISoCkBEhK
+gKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQE
+SEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqA
+pARISoCkBEhKgKQESEqApARISoCkBEhKgKQESGqpB+x7rfUCPscDkhIgKQGSEiAp
+AZISICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZIS
+ICkBkhIgKQGSEiApAZJ6A9akBkwcz1bqAAAAAElFTkSuQmCC
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=in.png
+Content-Type: image/png; name=in.png
+Content-Location: http://www.cairographics.org/operators/in.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAsZYgh+QAAAOpJREFUeJzt0kEVQAAUAMFPDLEEFUsO
+DTguz0yCPewMAAAAAAAAAAAAAAAAAAAAAAAAvMVSBzw797rg27ajLriz1gH8mwFJ
+GZCUAUkZkJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJGZCU
+AUkZkJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJGZCUAUkZ
+kJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJGZCUAUkZEAAA
+AAAAAAAAAAAAAAAAAAAAAGBmZi7e4wJ4WaSftwAAAABJRU5ErkJggg==
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=out.png
+Content-Type: image/png; name=out.png
+Content-Location: http://www.cairographics.org/operators/out.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAtEo8RbwAAASlJREFUeJzt1MENQFAAREFECSr7/Z/V
+oQNc5BEzFezhZacJAAAAAAAAAAAAAAAAAAAAAAAA3mKuB1zbt3rBx416wJmlHsC/
+CZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCU
+AEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJ
+kJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQA
+Sa31gBtGPYDneEBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFIC
+JCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgf0/wJU+Fz3HQAAAABJ
+RU5ErkJggg==
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=atop.png
+Content-Type: image/png; name=atop.png
+Content-Location: http://www.cairographics.org/operators/atop.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAtEo8RbwAAAS9JREFUeJzt1EERAQAARNFlRFJDBOlE
+cNJBKA04/sF7CfbwZw/37Tl+1mU71xveOdYD+G8CJCVAUgIkJUBSAiQlQFICJCVA
+UgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIk
+JUBSp3rAJ49d6wlf7lYPeMsDkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkB
+khIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIg
+KQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGS
+EiApAZISICkBkhIgKQGSEiApAQIAAAAAAAAAAAAAAAAAAAAAAABs2146igRvMmfT
+zwAAAABJRU5ErkJggg==
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=dest.png
+Content-Type: image/png; name=dest.png
+Content-Location: http://www.cairographics.org/operators/dest.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAtEo8RbwAAAR9JREFUeJzt0kERgwAAxMArmrBRtbWB
+KBzwzQzdVZBHPr/tGq/13c664clRB/DfDEjKgKQMSMqApAxIyoCkDEjKgKQMSMqA
+pAxIyoCkDEjKgKQMSMqApAxIyoCkDEjKgKQMSMqApAxIyoCkDEjKgKQMSMqApAxI
+yoCkDEjKgKQMSMqApAxIyoCkDEjKgKQMSMqApAxIyoCkDEjKgKQMSMqApAxIyoCk
+DEjKgKQMSMqApAxIyoCkDEjKgKQMSMqApAxIyoCkDEjKgKQMSMqApAxIyoCkDEjK
+gKQMSMqApAxIyoCkDEjKgKQMSMqApAxIyoCkDEjKgKQMSMqApAxIyoCkDEjKgKQM
+SMqAAAAAAAAAAAAAAAAAAAAAAAAAANu2GxApArRFnAScAAAAAElFTkSuQmCC
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=dest_over.png
+Content-Type: image/png; name=dest_over.png
+Content-Location: http://www.cairographics.org/operators/dest_over.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAtEo8RbwAAAXRJREFUeJzt1DERwgAURMEfBgmRgg1s
+xCA2qBBBjQQcJBXzBthVcMWbW24z9+FnXWcu9YY9p3oA/02ApARISoCkBEhKgKQE
+SEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqA
+pARISoCkBEjqXA848pp1rTd8t8dWL9jjAUkJkJQASQmQlABJCZCUAEkJkJQASQmQ
+lABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJ
+CZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCU
+AEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJLfWAY8+tXsDneEBSAiQlQFICJCVA
+UgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIk
+JUBSAiQlQFICJCVAUm9+tAaN0dmRkQAAAABJRU5ErkJggg==
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=dest_in.png
+Content-Type: image/png; name=dest_in.png
+Content-Location: http://www.cairographics.org/operators/dest_in.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAui4ZA1QAAAO1JREFUeJzt0sENwgAAxLCjCyIxaKVu
+yAbwDKj2BHlkAwAAAAAAAAAAAAAAAAAAAAAAgF/xqAO+ubZX3fDPnttZN3xy1AHc
+mwFJGZCUAUkZkJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJ
+GZCUAUkZkJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJGZCU
+AUkZkJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJGZCUAUkZkJQBSRmQlAFJGZCUAUkZ
+EAAAAAAAAAAAAAAAAAAAAAAAAGDb9gaeowJ4y9tktwAAAABJRU5ErkJggg==
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=dest_out.png
+Content-Type: image/png; name=dest_out.png
+Content-Location: http://www.cairographics.org/operators/dest_out.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAui4ZA1QAAAStJREFUeJzt1EENAgEAA8EeQRI2sMrn
+bCAKB/Aim8CMgj42Pc7tOX7WfbvVG9651AP4bwIkJUBSAiQlQFICJCVAUgIkJUBS
+AiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQl
+QFLXesAnx/aoN/A9HpCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJ
+kJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQA
+SQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQ
+lABJCZCUAEkJkJQASQkQAAAAAAAAAAAAAAAAAAAAAAAAYNv2AnhfA2Wwk5cUAAAA
+AElFTkSuQmCC
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=dest_atop.png
+Content-Type: image/png; name=dest_atop.png
+Content-Location: http://www.cairographics.org/operators/dest_atop.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAui4ZA1QAAATFJREFUeJzt1EERAjEABMEEP9jKHyXo
+OUOnAweX19VA0a1gH1M7BgAAAAAAAAAAAAAAAAAAAAAAAHyLWQ/YeY/nqjf8stc4
+6gmXHvUA/psASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCU
+AEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJ
+kJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQA
+SQmQlABJCZDUrAfsnatewH08ICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZIS
+ICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiCpD4wHBEsD
+25bqAAAAAElFTkSuQmCC
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=xor.png
+Content-Type: image/png; name=xor.png
+Content-Location: http://www.cairographics.org/operators/xor.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAui4ZA1QAAAXRJREFUeJzt1EENwgAURMFfghBEYAMb
+NYgEEk7oqA4ctCfyAswo2MPLLveZ1/CzbjPXesOeUz2A/yZAUgIkJUBSAiQlQFIC
+JCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVA
+UgIkJUBSAiR1rgcc2ebyqDd8t+daL9jjAUkJkJQASQmQlABJCZCUAEkJkJQASQmQ
+lABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJ
+CZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCU
+AEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJLfWAY9taL+BzPCApAZISICkBkhIg
+KQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGS
+EiApAZISICkBkhIgqTdrYwcy7nbSyQAAAABJRU5ErkJggg==
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=add.png
+Content-Type: image/png; name=add.png
+Content-Location: http://www.cairographics.org/operators/add.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAv/IFwQwAAAXVJREFUeJzt1DENAgEURMF/BEdgAwfU
+JwY72EACNTpwcFeRF2BGwRYvu9xnHsPPusyc6w1bDvUA/psASQmQlABJCZCUAEkJ
+kJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQA
+SQmQlABJCZDUsR6w5znXU73hu93WesEWD0hKgKQESEqApARISoCkBEhKgKQESEqA
+pARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARI
+SoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCk
+BEhKgKQESEqApARISoCkBEhKgKQESEqApARIaqkH7Hut9QI+xwOSEiApAZISICkB
+khIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIg
+KQGSEiApAZISICkBknoDgOAGmA2MudMAAAAASUVORK5CYII=
+
+------------AOqpjSyW7Q1NvdST1PAWfs
+Content-Disposition: inline; filename=saturate.png
+Content-Type: image/png; name=saturate.png
+Content-Location: http://www.cairographics.org/operators/saturate.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAABmJLR0QA/wD/AP+g
+vaeTAAAAB3RJTUUH1woHDBAv/IFwQwAAAXRJREFUeJzt1DENAgEURMF/BD00YAMb
+Z5AGEUigRgcO7iryAswo2OJll9vMY/hZ15lLvWHLoR7AfxMgKQGSEiApAZISICkB
+khIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIg
+KQGSEiApAZI61gP2POd0rjd8t/taL9jiAUkJkJQASQmQlABJCZCUAEkJkJQASQmQ
+lABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJ
+CZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJCZCU
+AEkJkJQASQmQlABJCZCUAEkJkJQASQmQlABJLfWAfa+1XsDneEBSAiQlQFICJCVA
+UgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIkJUBSAiQlQFICJCVAUgIk
+JUBSAiQlQFICJCVAUm9HYAaYHZHx/wAAAABJRU5ErkJggg==
+
+------------AOqpjSyW7Q1NvdST1PAWfs--
