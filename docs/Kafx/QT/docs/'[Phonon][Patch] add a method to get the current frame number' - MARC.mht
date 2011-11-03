@@ -1,0 +1,348 @@
+Content-Type: multipart/related; start=<op.mhtml.1309401308465.4aa77228661564db@192.168.1.100>; boundary=----------oZyfiNYCYz0EiNCsesqrqd
+Content-Location: http://lists.kde.org/?l=kde-multimedia&m=120602882424691
+Subject: =?utf-8?Q?'[Phonon][Patch]=20add=20a=20method=20to=20get=20the=20current=20frame=20number'=20-=20MARC?=
+MIME-Version: 1.0
+
+------------oZyfiNYCYz0EiNCsesqrqd
+Content-Disposition: inline; filename=default.htm
+Content-Type: text/html; name=default.htm
+Content-ID: <op.mhtml.1309401308465.4aa77228661564db@192.168.1.100>
+Content-Location: http://lists.kde.org/?l=kde-multimedia&m=120602882424691
+Content-Transfer-Encoding: 8bit
+
+<head>
+ <meta http-equiv="Content-Type" content="text/html ">
+ <title>'[Phonon][Patch] add a method to get the current frame number' - MARC</title>
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#0000C0" vlink="#800080">
+<pre><b>[<a href="?l=kde-multimedia&m=120577652202804&w=2">prev in list</a>] [<a href="?l=kde-multimedia&m=120654844803180&w=2">next in list</a>] [<font color="#c0c0c0">prev in thread</font>] [<a href="?l=kde-multimedia&m=120654844803180&w=2">next in thread</a>] </b>
+<b><font size=+1>
+List:       <a href="?l=kde-multimedia&r=1&w=2">kde-multimedia</a>
+Subject:    <a href="?t=120602888000004&r=1&w=2">[Phonon][Patch] add a method to get the current frame number</a>
+From:       <a href="?a=109880119300001&r=1&w=2">"Sylvain \"Skarsnik\" Colinet" &lt;scolinet () gmail ! com&gt;</a>
+Date:       <a href="?l=kde-multimedia&r=1&w=2&b=200803">2008-03-20 15:59:39</a>
+Message-ID: <a href="?i=903bdef20803200859r5fc0be13o3c1bd6056f09d1b6%20()%20mail%20!%20gmail%20!%20com">903bdef20803200859r5fc0be13o3c1bd6056f09d1b6 () mail ! gmail ! com</a></font>
+[<a href="?l=kde-multimedia&m=120602882424691&q=raw">Download message RAW</a>]</b>
+
+<a href="?l=kde-multimedia&m=120602882424691&q=p2"><b>[Attachment #2 (multipart/alternative)]</b></a>
+
+
+Hi,
+Here a patch that add a method to the mediaObject class
+for getting the current frame number.
+
+qint64 currentFrameNumber(), return -1 on failure
+
+Why a method for that?
+I like karaoke, and I need to write a multios Lyrics timer,
+the format of time's file is frame based so I need the frame number.
+
+
+I make the method in mediaobjectinterface not pure to don't break
+compilation of backends, but if you prefer I can add the method in all
+backend (return -1 when unimplanted)
+
+Attached also the patch for xine backend, It herits the currentTime bug
+(when no tickinterval is set) because the only way I found in xine to get
+the frame number is calculate it with the frame duration.
+
+I have a quick look at gstreamer, and It seems also the way to get it.
+It very unaccurate with stream with variable FPS
+
+Also attached a small use case that just print the frame number on mouse
+click and release event.
+
+-- 
+Sylvain "Skarsnik" Colinet
+
+Victory was near but the power of the ring couldn't be undone
+
+<a href="?l=kde-multimedia&m=120602882424691&q=p5"><b>[Attachment #5 (text/html)]</b></a>
+
+Hi,&lt;br&gt;Here a patch that add a method to the mediaObject class&lt;br&gt;for getting the \
+current frame number.&lt;br&gt;&lt;br&gt;qint64 currentFrameNumber(), return -1 on \
+failure&lt;br&gt;&lt;br&gt;Why a method for that?&lt;br&gt;I like karaoke, and I need to write a \
+multios Lyrics timer,&lt;br&gt; the format of time&amp;#39;s file is frame based so I need the \
+frame number.&lt;br&gt;&lt;br&gt;&lt;br&gt;I make the method in mediaobjectinterface not pure to \
+don&amp;#39;t break&lt;br&gt;compilation of backends, but if you prefer I can add the method in \
+all&lt;br&gt; backend (return -1 when unimplanted)&lt;br&gt;&lt;br&gt;Attached also the patch for xine \
+backend, It herits the currentTime bug &lt;br&gt;(when no tickinterval is set) because the \
+only way I found in xine to get&lt;br&gt;the frame number is calculate it with the frame \
+duration. &lt;br&gt; &lt;br&gt;I have a quick look at gstreamer, and It seems also the way to get \
+it.&lt;br&gt;It very unaccurate with stream with variable FPS&lt;br&gt;&lt;br&gt;Also attached a small \
+use case that just print the frame number on mouse &lt;br&gt;click and release event.&lt;br \
+clear="all"&gt; &lt;br&gt;-- &lt;br&gt;Sylvain &amp;quot;Skarsnik&amp;quot; Colinet&lt;br&gt;&lt;br&gt;Victory was near \
+but the power of the ring couldn&amp;#39;t be undone
+
+
+<a href="?l=kde-multimedia&m=120602882424691&q=p6"><b>["mediaobject-currentframenumber.patch" (text/x-diff)]</b></a>
+
+Index: mediaobject.cpp
+===================================================================
+--- mediaobject.cpp	(revision 788064)
++++ mediaobject.cpp	(working copy)
+@@ -86,6 +86,7 @@
+ PHONON_INTERFACE_GETTER(bool, hasVideo, false)
+ PHONON_INTERFACE_GETTER(bool, isSeekable, false)
+ PHONON_INTERFACE_GETTER(qint64, currentTime, d-&gt;currentTime)
++PHONON_INTERFACE_GETTER(qint64, currentFrameNumber, d-&gt;currentFrameNumber)
+ 
+ 
+ void MediaObject::play()
+@@ -314,6 +315,7 @@
+     if (m_backendObject) {
+         state = pINTERFACE_CALL(state());
+         currentTime = pINTERFACE_CALL(currentTime());
++        currentFrameNumber = pINTERFACE_CALL(currentFrameNumber());
+         tickInterval = pINTERFACE_CALL(tickInterval());
+     }
+     return true;
+Index: mediaobject.h
+===================================================================
+--- mediaobject.h	(revision 788064)
++++ mediaobject.h	(working copy)
+@@ -355,6 +355,12 @@
+             void clearQueue();
+ 
+             /**
++            * Get the current frame number if the actuel file currently played has frame, unless
++            * return -1
++            */
++            qint64 currentFrameNumber() const;
++
++            /**
+              * Get the current time (in milliseconds) of the file currently being played.
+              *
+              * \return The current time in milliseconds.
+Index: mediaobjectinterface.h
+===================================================================
+--- mediaobjectinterface.h	(revision 788064)
++++ mediaobjectinterface.h	(working copy)
+@@ -147,6 +147,12 @@
+          * \returns whether the current media may be seeked.
+          */
+         virtual bool isSeekable() const = 0;
++
++        /** Get the current frame number of the file currently being played,
++         * unless -1
++         */
++        virtual qint64 currentFrameNumber() const {return -1;};
++
+         /**
+          * Get the current time (in milliseconds) of the file currently being played.
+          */
+Index: mediaobject_p.h
+===================================================================
+--- mediaobject_p.h	(revision 788064)
++++ mediaobject_p.h	(working copy)
+@@ -60,6 +60,7 @@
+ 
+         MediaObjectPrivate()
+             : currentTime(0),
++            currentFrameNumber(-1),
+             tickInterval(0),
+             metaData(),
+             errorString(),
+@@ -75,6 +76,7 @@
+         }
+ 
+         qint64 currentTime;
++        qint64 currentFrameNumber;
+         qint32 tickInterval;
+         QMultiMap&lt;QString, QString&gt; metaData;
+         QString errorString;
+
+<a href="?l=kde-multimedia&m=120602882424691&q=p7"><b>["xine-currentframenumber.patch" (text/x-diff)]</b></a>
+
+Index: xine/BUGS
+===================================================================
+--- xine/BUGS	(revision 788062)
++++ xine/BUGS	(working copy)
+@@ -1 +1,3 @@
+ currentTime() doesn't report any progress when the tickInterval isn't set
++currentFrameNumber() is not accurate and can be complety broken when the
++stream doesn't have a constant fps
+Index: xine/xinestream.h
+===================================================================
+--- xine/xinestream.h	(revision 788062)
++++ xine/xinestream.h	(working copy)
+@@ -68,6 +68,7 @@
+ 
+         int totalTime() const;
+         int remainingTime() const;
++        int currentFrameNumber() const;
+         int currentTime() const;
+         bool hasVideo() const;
+         bool isSeekable() const;
+@@ -225,6 +226,8 @@
+         int m_volume;
+         int m_startTime;
+         int m_totalTime;
++        int m_frameDuration;
++        int m_currentFrameNumber;
+         int m_currentTime;
+         int m_waitForPlayingTimerId;
+         int m_availableSubtitles;
+Index: xine/mediaobject.cpp
+===================================================================
+--- xine/mediaobject.cpp	(revision 788062)
++++ xine/mediaobject.cpp	(working copy)
+@@ -149,6 +149,23 @@
+     return m_stream-&gt;isSeekable();
+ }
+ 
++qint64 MediaObject::currentFrameNumber() const
++{
++    switch(m_stream-&gt;state()) {
++    case Phonon::PausedState:
++    case Phonon::BufferingState:
++    case Phonon::PlayingState:
++        return m_stream-&gt;currentFrameNumber();
++    case Phonon::StoppedState:
++    case Phonon::LoadingState:
++        return 0;
++    case Phonon::ErrorState:
++        break;
++    }
++    return -1;
++}
++
++
+ qint64 MediaObject::currentTime() const
+ {
+     //kDebug(610) &lt;&lt; kBacktrace();
+Index: xine/xinestream.cpp
+===================================================================
+--- xine/xinestream.cpp	(revision 788062)
++++ xine/xinestream.cpp	(working copy)
+@@ -69,6 +69,8 @@
+     m_volume(100),
+ //    m_startTime(-1),
+     m_totalTime(-1),
++    m_frameDuration(0),
++    m_currentFrameNumber(-1),
+     m_currentTime(-1),
+     m_availableSubtitles(-1),
+     m_availableAudioChannels(-1),
+@@ -246,6 +248,17 @@
+ }
+ 
+ // called from main thread
++int XineStream::currentFrameNumber() const
++{
++    if (!m_stream || m_mrl.isEmpty()) {
++	    return -1;
++	}
++	if (!m_frameDuration)
++	    return -1;
++	return m_currentTime * 90 / m_frameDuration;
++}
++
++// called from main thread
+ int XineStream::currentTime() const
+ {
+     if (!m_stream || m_mrl.isEmpty()) {
+@@ -341,6 +354,8 @@
+         if (m_hasVideo) {
+             uint32_t width = xine_get_stream_info(m_stream, XINE_STREAM_INFO_VIDEO_WIDTH);
+             uint32_t height = xine_get_stream_info(m_stream, XINE_STREAM_INFO_VIDEO_HEIGHT);
++            m_frameDuration = xine_get_stream_info(m_stream, XINE_STREAM_INFO_FRAME_DURATION);
++            kDebug(610) &lt;&lt; "Frame duration is: " &lt;&lt; m_frameDuration;
+             handleDownstreamEvent(new FrameFormatChangeEvent(width, height, 0, 0));
+         }
+     }
+Index: xine/mediaobject.h
+===================================================================
+--- xine/mediaobject.h	(revision 788062)
++++ xine/mediaobject.h	(working copy)
+@@ -57,6 +57,7 @@
+         State state() const;
+         bool hasVideo() const;
+         bool isSeekable() const;
++        qint64 currentFrameNumber() const;
+         qint64 currentTime() const;
+         qint64 totalTime() const;
+         Q_INVOKABLE qint64 remainingTime() const;
+
+<a href="?l=kde-multimedia&m=120602882424691&q=p8"><b>["timefrm.cpp" (text/x-c++src)]</b></a>
+
+
+#include &lt;QApplication&gt;
+#include &lt;phonon/videowidget.h&gt;
+#include &lt;phonon/mediaobject.h&gt;
+#include &lt;phonon/audiooutput.h&gt;
+#include &lt;iostream&gt;
+#include &lt;QMainWindow&gt;
+
+class QToytime : public QMainWindow
+{
+  Q_OBJECT;
+  public:
+    QToytime(QString );
+
+  protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+	  
+  private:
+    Phonon::VideoWidget *m_videoWidget;
+    Phonon::MediaObject *m_mediaObject;
+};
+
+
+QToytime::QToytime(QString toplay)
+{
+  m_mediaObject = new Phonon::MediaObject(this);
+  m_videoWidget = new Phonon::VideoWidget(this);
+  Phonon::createPath(m_mediaObject, m_videoWidget);
+  Phonon::AudioOutput *audioOutput =  new Phonon::AudioOutput(Phonon::VideoCategory, this);
+  Phonon::createPath(m_mediaObject, audioOutput);
+  setCentralWidget(m_videoWidget);
+  m_mediaObject-&gt;enqueue(toplay);
+  m_mediaObject-&gt;play();
+  m_mediaObject-&gt;setTickInterval(20);
+}
+
+void QToytime::mousePressEvent(QMouseEvent *event)
+{
+  std::cout &lt;&lt; m_mediaObject-&gt;currentFrameNumber() &lt;&lt; " ";
+}
+
+void QToytime::mouseReleaseEvent(QMouseEvent *event)
+{
+  std::cout &lt;&lt; m_mediaObject-&gt;currentFrameNumber() &lt;&lt; "\n";
+}
+
+// maybe the smallest .frm time application
+
+int	main(int ac, char *ag[])
+{
+  QApplication app(ac, ag);
+  QApplication::setApplicationName("QToyTime");
+  QToytime t(ag<A NAME="-1"></A><A HREF="#1">[1]</A>);
+  t.show();
+  return app.exec();
+}
+
+#include "timefrm.moc"
+
+
+_______________________________________________
+kde-multimedia mailing list
+kde-multimedia@kde.org
+<a href="https://mail.kde.org/mailman/listinfo/kde-multimedia">https://mail.kde.org/mailman/listinfo/kde-multimedia</a>
+
+
+<b>[<a href="?l=kde-multimedia&m=120577652202804&w=2">prev in list</a>] [<a href="?l=kde-multimedia&m=120654844803180&w=2">next in list</a>] [<font color="#c0c0c0">prev in thread</font>] [<a href="?l=kde-multimedia&m=120654844803180&w=2">next in thread</a>] </b>
+</pre>
+  </pre><br><center>
+    <a href="?q=configure">Configure</a> | 
+
+    <a href="http://www.kde.org/">The&nbsp;K&nbsp;Desktop&nbsp;Environment&nbsp;home&nbsp;page</a> |
+    <a href="http://marc.info/">Other&nbsp;List&nbsp;Archives&nbsp;at&nbsp;MARC</a>
+</center>
+</body>
+</html>
+
+------------oZyfiNYCYz0EiNCsesqrqd--

@@ -1,0 +1,254 @@
+Content-Type: multipart/related; start=<op.mhtml.1309401897790.d6d6cc6503320a87@192.168.1.100>; boundary=----------V6Iy8sQeT4A4qtZYrIuU5W
+Content-Location: http://lists.qt.nokia.com/pipermail/qt-interest/2009-March/004359.html
+Subject: =?utf-8?Q?[Qt-interest]=20Intercepting=20Phonon=20VideoWidget=20frames=20as=20they=20are=20pushed?=
+MIME-Version: 1.0
+
+------------V6Iy8sQeT4A4qtZYrIuU5W
+Content-Disposition: inline; filename=004359.html
+Content-Type: text/html; charset=UTF-8; name=004359.html
+Content-ID: <op.mhtml.1309401897790.d6d6cc6503320a87@192.168.1.100>
+Content-Location: http://lists.qt.nokia.com/pipermail/qt-interest/2009-March/004359.html
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Qt-interest] Intercepting Phonon VideoWidget frames as they	are pushed
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:qt-interest%40qt.nokia.com?Subject=Re:%20%5BQt-interest%5D%20Intercepting%20Phonon%20VideoWidget%20frames%20as%20they%0A%09are%20pushed&In-Reply-To=%3CBFCAD97E-FA37-4304-AC8D-1764C8F8CECA%40tuggle.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004352.html">
+   <LINK REL="Next"  HREF="004440.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Qt-interest] Intercepting Phonon VideoWidget frames as they	are pushed</H1>
+    <B>Trenton Tuggle</B> 
+    <A HREF="mailto:qt-interest%40qt.nokia.com?Subject=Re:%20%5BQt-interest%5D%20Intercepting%20Phonon%20VideoWidget%20frames%20as%20they%0A%09are%20pushed&In-Reply-To=%3CBFCAD97E-FA37-4304-AC8D-1764C8F8CECA%40tuggle.org%3E"
+       TITLE="[Qt-interest] Intercepting Phonon VideoWidget frames as they	are pushed">Trent at tuggle.org
+       </A><BR>
+    <I>Tue Mar 24 22:38:21 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="004352.html">[Qt-interest] Intercepting Phonon VideoWidget frames as they	are pushed
+</A></li>
+        <LI>Next message: <A HREF="004440.html">[Qt-interest] Intercepting Phonon VideoWidget frames as they	are pushed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4359">[ date ]</a>
+              <a href="thread.html#4359">[ thread ]</a>
+              <a href="subject.html#4359">[ subject ]</a>
+              <a href="author.html#4359">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mar 24, 2009, at 4:02 PM, Kaleb Pederson wrote:
+
+&gt;<i> On Tuesday 24 March 2009 11:50:56 am Trenton Tuggle wrote:
+</I>&gt;&gt;<i> Interesting update...
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I've been unable to &quot;capture&quot; VideoWidget paint events at all -- it
+</I>&gt;&gt;<i> appears as if it somehow gets drawn outside of a PaintEvent -- but  
+</I>&gt;&gt;<i> how
+</I>&gt;&gt;<i> could it then be captured and redirected onto a
+</I>&gt;&gt;<i> QGraphicsViewProxyWidget?
+</I>&gt;<i>
+</I>&gt;<i> Wouldn't you really need a proxy QPaintDevice?  The QPaintDevice  
+</I>&gt;<i> could then render onto whatever it wanted.
+</I>&gt;<i>
+</I>&gt;<i> Please let us know how it goes.
+</I>
+
+Kaleb, thanks for the thoughts!  I'm trying to use a QImage as my proxy.
+
+What I've tried to create is a QWidget subclass which draws to a  
+QImage, then emits a signal signifying the update.
+
+The primary methods I'm trying are capturing PaintEvents, and  
+overloading the paintEngine().  Neither technique seems to be working  
+-- I know this because my image never gets updated and PaintEvents  
+never get seen.
+
+Note that my only test case is trying to capture a  
+Phonon::VideoWidget, so I suppose a possibility is that I'm doing the  
+right things, but VideoWidget somehow bypasses normal stuff for  
+performance purposes.  I've been looking through the Phonon backend  
+(Quicktime) code, but it's not apparent how drawing is performed.
+
+Here's my code:
+
+class WidgetImager
+     : public QWidget
+{
+     Q_OBJECT
+
+public:
+     WidgetImager(QWidget *parent = 0, Qt::WindowFlags f = 0);
+     virtual ~WidgetImager();
+
+     QImage *image();
+
+signals:
+     void updated();
+
+protected:
+     virtual QPaintEngine * paintEngine () const;
+     virtual bool event(QEvent *event);
+     virtual void paintEvent(QPaintEvent *event);
+     virtual void resizeEvent(QResizeEvent *event);
+
+private:
+     QImage* image_;
+};
+
+
+WidgetImager::WidgetImager(QWidget *parent, Qt::WindowFlags f)
+:<i> QWidget(parent, f)
+</I>{
+     setAttribute(Qt::WA_PaintOnScreen);
+     setAttribute(Qt::WA_NoSystemBackground);
+     setAttribute(Qt::WA_OpaquePaintEvent, true);
+
+     image_ = new QImage(size(), QImage::Format_RGB32);
+}
+
+WidgetImager::~WidgetImager()
+{
+     delete image_;
+}
+
+QImage *WidgetImager::image()
+{
+     return image_;
+}
+
+bool WidgetImager::event(QEvent *event)
+{
+     if (event-&gt;type() == QEvent::Paint)
+     {
+         //Make sure all paint operations redirect here
+         QPainter::setRedirected(this, image_);
+         bool accept = QWidget::event(event);
+
+         // Notify clients of the update
+         emit updated();
+
+         return accept;
+     }
+
+     return QWidget::event(event);
+}
+
+void WidgetImager::paintEvent(QPaintEvent *event)
+{
+     Q_UNUSED(event);
+}
+
+void WidgetImager::resizeEvent(QResizeEvent *event)
+{
+     QWidget::resizeEvent(event);
+
+     delete image_;
+     image_ = new QImage(event-&gt;size(), QImage::Format_RGB32);
+}
+
+QPaintEngine * WidgetImager::paintEngine () const
+{
+     // Try using the image's painter to capture updates
+     return image_-&gt;paintEngine();
+}
+
+
+&gt;<i> --Kaleb
+</I>&gt;<i>
+</I>&gt;&gt;<i> What's the mechanism that QGraphicsViewProxyWidget uses to &quot;capture&quot;
+</I>&gt;&gt;<i> the paint events of its children and &quot;redirect&quot; them to be drawn on
+</I>&gt;&gt;<i> the appropriate Graphics View/Scene?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Thanks in advance for any pointers...
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> -Trent Tuggle &lt;<A HREF="http://lists.qt.nokia.com/mailman/listinfo/qt-interest">Trent at Tuggle.Org</A>&gt;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Mar 21, 2009, at 11:39 AM, Trenton Tuggle wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I have an interesting challenge I've been working on:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I'm working on video processing, and am investigating using Phonon  
+</I>&gt;&gt;&gt;<i> for
+</I>&gt;&gt;&gt;<i> platform-independent back-ends.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> My interest is not the usual, though -- I have little interest in
+</I>&gt;&gt;&gt;<i> showing the video on-screen (although that would be nice, also) but
+</I>&gt;&gt;&gt;<i> primarily, I'm interested in obtaining the video frames.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Now I know it's easy to render() a widget (such as VideoWidget)  
+</I>&gt;&gt;&gt;<i> onto a
+</I>&gt;&gt;&gt;<i> pixmap or other, but I'm really interested in obtaining the frames  
+</I>&gt;&gt;&gt;<i> in
+</I>&gt;&gt;&gt;<i> a more automated way -- such as getting a signal when the next frame
+</I>&gt;&gt;&gt;<i> is ready, etc.  My thought is that since VideoWidget can be embedded
+</I>&gt;&gt;&gt;<i> in a graphics scene, it must be possible to intercept its painting
+</I>&gt;&gt;&gt;<i> events and redirect it to a qimage or something: but so far I've
+</I>&gt;&gt;&gt;<i> failed.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> So that's my question: how can I embed a VideoWidget in something  
+</I>&gt;&gt;&gt;<i> that
+</I>&gt;&gt;&gt;<i> can intercept paint events, redirect them to a QImage, then signal a
+</I>&gt;&gt;&gt;<i> processor that a frame is ready for processing?
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I've tried stuff along these lines:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> <A HREF="http://www.kdedevelopers.org/node/3644">http://www.kdedevelopers.org/node/3644</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> The thought was that I'll create a Phonon path to play on a
+</I>&gt;&gt;&gt;<i> VideoWidget embedded in something like that which would capture the
+</I>&gt;&gt;&gt;<i> frame, then signal my processor....
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> But so far, I've been unable to get the widget I create to receive  
+</I>&gt;&gt;&gt;<i> any
+</I>&gt;&gt;&gt;<i> paint events, or intercept anything at all -- it doesn't even get
+</I>&gt;&gt;&gt;<i> resized properly when a video is loaded!
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> If anyone has any advice or input on this, I'd really appreciate it!
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Thanks in advance!
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Trent Tuggle &lt;<A HREF="http://lists.qt.nokia.com/mailman/listinfo/qt-interest">Trent at Tuggle.Org</A>&gt;
+</I>&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;<i> Qt-interest mailing list
+</I>&gt;&gt;&gt;<i> <A HREF="http://lists.qt.nokia.com/mailman/listinfo/qt-interest">Qt-interest at trolltech.com</A>
+</I>&gt;&gt;&gt;<i> <A HREF="http://lists.trolltech.com/mailman/listinfo/qt-interest">http://lists.trolltech.com/mailman/listinfo/qt-interest</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> Qt-interest mailing list
+</I>&gt;&gt;<i> <A HREF="http://lists.qt.nokia.com/mailman/listinfo/qt-interest">Qt-interest at trolltech.com</A>
+</I>&gt;&gt;<i> <A HREF="http://lists.trolltech.com/mailman/listinfo/qt-interest">http://lists.trolltech.com/mailman/listinfo/qt-interest</A>
+</I>&gt;&gt;<i>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="004352.html">[Qt-interest] Intercepting Phonon VideoWidget frames as they	are pushed
+</A></li>
+	<LI>Next message: <A HREF="004440.html">[Qt-interest] Intercepting Phonon VideoWidget frames as they	are pushed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4359">[ date ]</a>
+              <a href="thread.html#4359">[ thread ]</a>
+              <a href="subject.html#4359">[ subject ]</a>
+              <a href="author.html#4359">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.qt.nokia.com/mailman/listinfo/qt-interest">More information about the Qt-interest
+mailing list</a><br>
+</body></html>
+
+------------V6Iy8sQeT4A4qtZYrIuU5W--
