@@ -1,4 +1,4 @@
-Voy a empezar diciendo que no estoy de acuerdo con el uso de capas,
+﻿Voy a empezar diciendo que no estoy de acuerdo con el uso de capas,
 que puede parecer mas sencillo, pero para kafx le toma mucho trabajo,
 y lo mismo se puede obtener utilizando el valor layer del ass y usando bien los grupos..
 Porque las cree? simple, abelkm las quería. y creo que _alguna_ utilidad tiene.
@@ -7,8 +7,7 @@ usando grupos y adivinando que se pinta primero y que después (aunque kafx es m
 y estricto con esto)
 
 
-Igualmente, si logran combinar el uso de capas con el resto de las funciones de kafx, lograrán llegar
-más lejos.
+Igualmente, si logran combinar el uso de capas con el resto de las funciones de kafx, lograrán llegar más lejos.
 
 En definitiva, no usen capas porque los voy a mirar feo, PERO si se encuentran con un problema que
 no pueden solucionarlo o si son suficientemente perrys o si son abelkm pueden usarlas con tranquilidad.
@@ -24,14 +23,14 @@ Que implica:
 Cada capa es un nuevo contexto de cairo, esto implica millones de cosas.
 1º es (no tan) lento y consume memoria.
 Deben crearse por cada cuadro, asi que si ven que se pone lenta la cosa no es mi culpa.
-(Sobretodo para los que quieran hacer 1080p no se quejen que AFX es mas lento)
+(Sobretodo para los que quieran hacer 1080p y no se quejen porque AFX es mas lento)
 
 Todas las operaciones funcionan por capa sin tocar el resto, esto incluye:
 	Grupos, ModoPintado, Blur, etc..
 
 Los grupos funcionan sobre el contexto, kafx no sabe que grupo pertenece a cual capa y si dejaste
 algun grupo abierto al cambiar de capa.. Esto es peligroso ya que las grupos deben ser cerrados
-en la capa correspondiente y la cantidad de veces que corresponda y en la capa que corresponda.
+en la capa correspondiente y la cantidad de veces que corresponda a cuantos grupos se abrieron.
 Abrir un grupo en una capa y cerrarlo en otra podria hacer que el kafx explote.
 
 El modo de pintado funciona por contexto tambien. Esto es mas delicado. Puede funcionar si cambian de
@@ -41,7 +40,7 @@ el modo de pintado.
 No estoy 100% seguro que tan eficiente es cairo a la hora de pasar informacion de un contexto a otro
 pero tengan en cuenta que se necesita pasar los cuadros de un lado para el otro al compactar
 esto consume tiempo.
-Y no estoy tengo idea como reaccionará cairo a usar varios contextos cuando:
+Y no estoy seguro como reaccionará cairo a usar varios contextos cuando:
 se usa un backend opengl (no lo he probado aun)
 se usa un entorno multythread (la idea del kafx)
 se comparten surfaces a traves de los diferentes contextos (vectores, patterns, csprites, etc)
@@ -89,3 +88,7 @@ CUIDADO porque al activar una capa quedará activa hasta el próximo cuadro, inc
 
 Sean felices y si tienen un problema pueden venir al irc a que los ayudemos, y si nos pueden
 ayudar a seguir mejorando el kafx mejor :)
+
+nande et all.
+irc.rizon.net/#nande
+kafx.com.ar

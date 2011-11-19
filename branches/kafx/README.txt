@@ -1,10 +1,9 @@
 How to install:
 Avisynth only works for windows, so this is for windows users. 
-Though i'm creating a script for running kafx using ffmpeg for encoding, in that case you won't need avisynth, and you can run on linux. 
-Installing the other stuff in that case will be trivial.
+Though there's a script for running kafx using ffmpeg for encoding, in that case you won't need avisynth, and you can run on linux natively (Installing the other stuff in that case will be trivial).
 
 When using windows, at ALL CASES you'll need 32bit binaries.
-This is because Avisynth is in 32b, so the kafx api dll is 32 bits. so python is 32 bits. Also, cairo in 64 bits is experimental.
+This is because Avisynth is in 32b, so the kafx api dll is 32 bits. so python is 32 bits. 
 And on top of that i don't use 64b, so there's no real reason to have 2 dlls when we can use the old 32b.
 
 For using on linux, there's an experimental way to achieve this, read "kafx without avisynth" on the "extra" folder
@@ -12,7 +11,7 @@ For using on linux, there's an experimental way to achieve this, read "kafx with
 
 Simply install: (The order is very important)
 1) Avisynth
-2) All in one (gtk+)
+2) PyGTK All in one (gtk+)
 	Try using the installer : 
 		Select the option that installs the "Compatibility DLL's"
 		I recommend to install on the recommended location (<programfiles>/bin)		
@@ -32,10 +31,9 @@ Python:
 	You'll need python 2.6 (newest version of 2.6 (actually is 2.6.6) (not 2.7))
 	example link: http://python.org/download/releases/2.6.6/
 
-All in one:
+PyGtk All in one:
 	http://ftp.gnome.org/pub/GNOME/binaries/win32/pygtk/2.24/pygtk-all-in-one-2.24.0.win32-py2.6.msi
 	
-PyGObject
 
 Optionals:
 
