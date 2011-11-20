@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>KAFX2</class>
+ <widget class="QMainWindow" name="KAFX2">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,10 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>KAFX2</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="video_button">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -27,7 +27,7 @@
      <string>VIDEO</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="fx_button">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -40,7 +40,7 @@
      <string>FX</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="ass_button">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -53,7 +53,7 @@
      <string>ASS</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="encode_button">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -147,7 +147,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="fps">
     <property name="geometry">
      <rect>
       <x>10</x>
