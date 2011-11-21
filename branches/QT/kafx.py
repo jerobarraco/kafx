@@ -5,12 +5,16 @@ class Ventana():
 	def __init__(self):
 		loader = QtUiTools.QUiLoader() 
 		self.ui = loader.load("gui.ui")
-		#self.ui.setupUi(self)
-		#QtCore.QMetaObject.connectSlotsByName(ui)
-		self.ui.pushButton.clicked.connect(self.vidbutton)
-		self.ui.pushButton_2.clicked.connect(self.fxbutton)
-		self.ui.pushButton_3.clicked.connect(self.assbutton)
-		self.ui.pushButton_4.clicked.connect(self.encbutton)
+		
+		#esto no anda pero deberia
+		#self.ui.on_videoButton_clicked = Ventana.vidbutton
+		#QtCore.QMetaObject.connectSlotsByName(self.ui)
+		
+		self.ui.video_button.clicked.connect(self.vidbutton)
+		#self.ui.pushButton_2.clicked.connect(self.fxbutton)
+		#self.ui.pushButton_3.clicked.connect(self.assbutton)
+		#self.ui.pushButton_4.clicked.connect(self.encbutton)
+		
 	def show(self):
 		self.ui.show()
                 
