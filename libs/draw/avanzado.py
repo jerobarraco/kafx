@@ -19,14 +19,14 @@ del todo bien, y que probablemente hay otra forma correcta
 de hacerlo y que probablemente no buscaste como hacerlo.
 recuerden que pueden preguntar en el irc.
 """
-_capas = {} 
+_capas = {}
 class Capa:
 	"""Clase interna para cada capa, no tocar :D"""
 	def __init__(self,  opacidad=1.0, modo='over'):
 		#todo copiar capa
 		#Esto me suena a que va a ser super costoso... pero bueno, me lo han pedido taaaaaaaaaaaaaaanto...
 		global OPERATORS
-		
+
 		vi = video.vi
 		"""sfc = video.cf.ctx.get_target().create_similar(cairo.CONTENT_COLOR_ALPHA,  vi.width,  vi.height)
 		self.ctx = cairo.Context(sfc)
@@ -36,10 +36,10 @@ class Capa:
 		self.ctx = cairo.Context(cairo.ImageSurface(vi.modo, vi.width, vi.height))
 		if modo not in OPERATORS :
 			modo = 'over'
-			
+
 		self.modo = OPERATORS.index(modo)
 		self.alpha = opacidad
-		
+
 def CapasInicia():
 	"""Llamar en cada EnCuadroInicia"""
 	global _capas
@@ -79,7 +79,7 @@ def CapasFin():
 	global _capas
 	video.cf.ctx = _capas['base'].ctx
 	ctx = video.cf.ctx
-	
+
 	nombres = _capas.keys()
 	nombres.sort()
 	nombres.remove('base')
@@ -90,7 +90,7 @@ def CapasFin():
 		ctx.set_operator(capa.modo)
 		ctx.paint_with_alpha(capa.alpha)
 	_capas = {}
-	
+
 """Notes
 set_source toma un pattern
 set_source_surface toma un surface
@@ -552,10 +552,10 @@ class cParticleSystem():
 		def Reset(self, activa=False, x=300, y=300, life=1, color=None, xi=0, yi=0, sc1=1, sc2=1, xg=0, yg=0, rotacion=0.1):
 			"""Llamado por el sistema de particulas para "crear" una particula nueva"""
 			self.activa = activa #indica si la particula está activa o muerta
-			self.life = 0 #indica cuanta vida tiene (como el progreso d 0 a 1) (1=muerta)
+			self.life = 0 #indica cuanta vida tiene (como el progress d 0 a 1) (1=muerta)
 			self.escala = sc1
 			self.fade = ((random()/10)+0.1) /life
-			#esto indica la velocidad con que muere, al tener /life ahi, el valor de esa variable, puede ser sumada a life y life pasa a funcionar como el progreso de los dialogos..
+			#esto indica la velocidad con que muere, al tener /life ahi, el valor de esa variable, puede ser sumada a life y life pasa a funcionar como el progress de los dialogos..
 			#aumentando el valor de life aumenta la cantidad d animaciones requeridas para morir.
 			#considerable como "paso" de animacion (step)
 
