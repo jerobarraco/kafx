@@ -18,7 +18,7 @@ def ElegirPorCuadro(cuadro_ini, cuadro_fin, active, inactive=None ):
 	d.actual.pos_x = ElegirPorFrame(100, 200, 0, 20)
 	esto hara que la posicion_x del dialogo sea 20 SOLAMENTE entre el frame 100 y el 200, y luego vuelva a 0
 	tambien pueden usarse otros objetos como:
-	d.actual.color1.CopiarDe(ElegirPorFrame(100, 400, d.actual.color2, d.actual.color3)
+	d.actual.color1.CopyFrom(ElegirPorFrame(100, 400, d.actual.color2, d.actual.color3)
 	"""
 
 	if cuadro_ini <= video.cf.framen  <= cuadro_fin:
