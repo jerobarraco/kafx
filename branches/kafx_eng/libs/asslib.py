@@ -66,7 +66,7 @@ class cPropiedades():
 		#Estos necesitan estar afuera porque si no estan inicializados, en el caso q se cree directamente una  instancia cPropiedades dara error!!
 		self.color1 = extra.cCairoColor(numero=0xFFFF2020) #Notar q el 0x hace q sea un numero de verdad, y no un string. color primario
 		self.color2 = extra.cCairoColor(numero=0xFF808080) #color secundario
-		self.color3 = extra.cCairoColor(numero=0xFF101010) #borde
+		self.color3 = extra.cCairoColor(numero=0xFF101010) #border
 		self.color4 = extra.cCairoColor(numero=0xFF808080) #shadow
 		#colores: primario Secundario Outline Back
 		self._capa = 0
@@ -79,8 +79,8 @@ class cPropiedades():
 			#escalado, x e y respectivamente
 			self.scale_x = 1.0
 			self.scale_y = 1.0
-			#tamaño del borde en pixels
-			self.borde = 3
+			#tamaño del border en pixels
+			self.border = 3
 			#tamaño de la shadow en pixels
 			self.shadow = 0
 			self.angle = 0
@@ -95,7 +95,7 @@ class cPropiedades():
 			self.shad_y = 0
 			#modes de pintado
 			self.mode_relleno = 0
-			self.mode_borde = 0
+			self.mode_border = 0
 			self.mode_shadow = 0
 			self.mode_particula = 0
 			#no animables
@@ -179,10 +179,10 @@ class cPropiedades():
 		self.color4.CopiarDe(other.color4)
 		self.color3.CopiarDe(other.color3)
 		self.color2.CopiarDe(other.color2)
-		self.borde = other.borde
+		self.border = other.border
 		self.shadow = other.shadow
 		self.mode_relleno = other.mode_relleno
-		self.mode_borde = other.mode_borde
+		self.mode_border = other.mode_border
 		self.mode_shadow = other.mode_shadow
 		self.mode_particula = other.mode_particula
 
@@ -195,7 +195,7 @@ class cPropiedades():
 		self.color3 = extra.cCairoColor(texto=estilo.get(S_OCOLOR, 0))
 		self.color4 = extra.cCairoColor(texto=estilo.get(S_BCOLOR, 0))
 		self.color2 = extra.cCairoColor(texto=estilo.get(S_SCOLOR, 0))
-		self.borde = comun.SafeGetFloat(estilo, S_OUTLINE)
+		self.border = comun.SafeGetFloat(estilo, S_OUTLINE)
 		self.shadow = int(comun.SafeGetFloat(estilo, S_SHADOW)) #el zheo me dijo q podia ser flotante pero no tiene sentido aca
 
 		self.scale_x = comun.SafeGetFloat(estilo, S_SCALE_X, 100)/100.0
