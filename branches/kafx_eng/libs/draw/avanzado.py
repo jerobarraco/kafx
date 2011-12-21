@@ -22,7 +22,7 @@ recuerden que pueden preguntar en el irc.
 _capas = {}
 class Capa:
 	"""Clase interna para cada capa, no tocar :D"""
-	def __init__(self,  opacidad=1.0, modo='over'):
+	def __init__(self,  opacidad=1.0, mode='over'):
 		#todo copiar capa
 		#Esto me suena a que va a ser super costoso... pero bueno, me lo han pedido taaaaaaaaaaaaaaanto...
 		global OPERATORS
@@ -33,11 +33,11 @@ class Capa:
 		self.ctx.set_operator(cairo.OPERATOR_CLEAR)
 		self.ctx.paint()
 		self.ctx.set_operator(cairo.OPERATOR_OVER)"""
-		self.ctx = cairo.Context(cairo.ImageSurface(vi.modo, vi.width, vi.height))
-		if modo not in OPERATORS :
-			modo = 'over'
+		self.ctx = cairo.Context(cairo.ImageSurface(vi.mode, vi.width, vi.height))
+		if mode not in OPERATORS :
+			mode = 'over'
 
-		self.modo = OPERATORS.index(modo)
+		self.mode = OPERATORS.index(mode)
 		self.alpha = opacidad
 
 def CapasInicia():
@@ -50,7 +50,7 @@ def CapasInicia():
 		base.ctx = video.cf.ctx
 		_capas['base'] = base
 
-def CapasCrear(capa, opacidad=1.0, modo='over'):
+def CapasCrear(capa, opacidad=1.0, mode='over'):
 	"""Crea una capa.
 	Usar CapasActivar para activarla luego.
 	@capa
@@ -58,12 +58,12 @@ def CapasCrear(capa, opacidad=1.0, modo='over'):
 		las capas. Siempre se pintaran segun el orden de su nombre (1,2,3) ('a','b','c') etc
 	@opacidad=1.0
 		opacidad de la capa. Valor entre 0.0 y 1.0
-	@modo='over'
-		Modo de pintado de la capa. un texto. igual que en ModoPintado.
+	@mode='over'
+		mode de pintado de la capa. un texto. igual que en ModePainted.
 		(Ver valores posibles en avanzado.OPERATORS)
 	"""
 	global _capas
-	_capas[capa] = Capa(opacidad, modo)
+	_capas[capa] = Capa(opacidad, mode)
 
 def CapasActivar(capa=0):
 	"""Activa una capa.
@@ -87,7 +87,7 @@ def CapasFin():
 		#@Type capa Capa
 		capa = _capas[nombre]
 		ctx.set_source_surface(capa.ctx.get_target())
-		ctx.set_operator(capa.modo)
+		ctx.set_operator(capa.mode)
 		ctx.paint_with_alpha(capa.alpha)
 	_capas = {}
 
@@ -142,12 +142,12 @@ OPERATORS = [
 #El tipo de operacion de pintado default es over
 paint_operator = cairo.OPERATOR_OVER
 
-def ModoPintado(op=None):
+def ModePainted(op=None):
 	"""
-	Cambia el modo de pintado comun,
-	@op : opcional ha de ser un string con el nombre del modo de pintado tal cual esta en el array OPERATORS
-	Si no se especifica la operacion, se restaura al ultimo modo que se usó, util porque algunas funciones cambiarán el modo de pintado de manera temporal,
-	de esta manera se puede hacer poner un modo global e intercambiarlo para funciones especificas, como glow"""
+	Cambia el mode de pintado comun,
+	@op : opcional ha de ser un string con el nombre del mode de pintado tal cual esta en el array OPERATORS
+	Si no se especifica la operacion, se restaura al ultimo mode que se usó, util porque algunas funciones cambiarán el mode de pintado de manera temporal,
+	de esta manera se puede hacer poner un mode global e intercambiarlo para funciones especificas, como glow"""
 	ctx = video.cf.ctx
 	global OPERATORS, paint_operator
 	if op in OPERATORS:
@@ -292,13 +292,13 @@ fBlur = fBlurs[0]
 o de la misma manera que acá arriba desde el script de efecto obvio, no modifiquen este archivo por un efecto.
 """
 
-def Sombra(pattern, size=5, offx=0, offy=0, pintar=True):
+def Shadow(pattern, size=5, offx=0, offy=0, paint=True):
 	"""
 	@pattern es el patron usado como máscara. (o sea, el relleno de la sombra)
 	opcionales:
 	@size el tamaño del blur (cantidad de pasos y pixels)
 	@offx, offy desplazamiento de la sombra sobre x e y respectivamente.
-	@pintar booleano indicando si se debe pintar o solo devolver el patron
+	@paint booleano indicando si se debe pintar o solo devolver el patron
 	@return devuelve lo que se pinto como patron
 	"""
 	ctx = video.cf.ctx
@@ -312,15 +312,15 @@ def Sombra(pattern, size=5, offx=0, offy=0, pintar=True):
 	ctx.set_source(pattern)
 	ctx.paint()
 	op = 0.0
-	if pintar : op = 1.0
+	if paint : op = 1.0
 
 	return GrupoFin(opacidad=op)
 
-def fDirBlur(angulo=0, pasos=1,  opacidad=0.25):
+def fDirBlur(angle=0, pasos=1,  opacidad=0.25):
 	"""
 		Blur Direccional
 	opcionales:
-	@angulo=0 angulo en radianes de la dirección
+	@angle=0 angulo en radianes de la dirección
 	@pasos=1 cantidad de pixels y pasos que tendrá el blur
 	@opacidad=0.25 opacidad de cada paso
 	"""
@@ -330,20 +330,20 @@ def fDirBlur(angulo=0, pasos=1,  opacidad=0.25):
 	#creamos un pattern porque parece q tiene un minimo overhead menor al surface además no tenemos el dilema del "al pintar d nuevo cambia el source con la pintada anterior"
 	ctx.set_source(pat) #lo ponemos como source
 	m = cairo.Matrix()#creamos una matriz de transformación para el pat
-	xi = cos(angulo)
-	yi = sin(angulo)
+	xi = cos(angle)
+	yi = sin(angle)
 
 	for a in range(1, int(pasos+1)):
 		m.translate(xi, yi)
 		pat.set_matrix(m)
 		ctx.paint_with_alpha(opacidad)
 
-def fDirBlurB(angulo=0, pasos=1, opacidad=0.25):
+def fDirBlurB(angle=0, pasos=1, opacidad=0.25):
 	"""blur direccional usando surface"""
 	ctx = video.cf.ctx
 	sfc=ctx.get_group_target()
-	x= xi = cos(angulo)
-	y= yi = sin(angulo)
+	x= xi = cos(angle)
+	y= yi = sin(angle)
 
 	for a in range(1, pasos+1):
 		ctx.set_source_surface(sfc,  x, y)
@@ -351,16 +351,16 @@ def fDirBlurB(angulo=0, pasos=1, opacidad=0.25):
 		x+=xi
 		y+=yi
 
-def fBiDirBlur(angulo=0, pasos=1, opacidad=0.25):
+def fBiDirBlur(angle=0, pasos=1, opacidad=0.25):
 	"""Blur bidireccional
 	opcionales:
 	opcionales:
-	@angulo=0 angulo en radianes de la dirección
+	@angle=0 angulo en radianes de la dirección
 	@pasos=1 cantidad de pixels y pasos que tendrá el blur
 	@opacidad=0.25 opacidad de cada paso
 	"""
-	fDirBlur(angulo, pasos, opacidad)
-	fDirBlur(angulo+pi, pasos, opacidad)
+	fDirBlur(angle, pasos, opacidad)
+	fDirBlur(angle+pi, pasos, opacidad)
 
 def fGlow(pasos=3, opacidad=0.05):
 	"""
@@ -371,7 +371,7 @@ def fGlow(pasos=3, opacidad=0.05):
 	"""
 	video.cf.ctx.set_operator(cairo.OPERATOR_ADD)
 	fBlur(pasos, opacidad)
-	ModoPintado()
+	ModePainted()
 
 def GrupoInicio(copiarFondo=False):
 	"""Comienza un grupo de pintado.
@@ -396,7 +396,7 @@ def GrupoFin(opacidad=1.0, matriz=None):
 	"""
 	Finaliza un grupo,
 	opcionales:
-	@pintar Indica si al finalizar el grupo se pinta el contenido
+	@paint Indica si al finalizar el grupo se pinta el contenido
 	@matriz Matriz del tipo cairo.matrix con la transformacion sobre el grupo anterior
 	@return devuelve un pattern con el resultado del grupo
 	"""
@@ -421,12 +421,12 @@ def fTimeBlur(opacidad=0.15):
 	_time_blur_pat = ctx.get_group_target()
 """
 
-def fRotoZoom(pasos=4, opacidad=0.25, escala=1, angulo=0, org_x=0, org_y=0):
+def fRotoZoom(pasos=4, opacidad=0.25, escala=1, angle=0, org_x=0, org_y=0):
 	"""Realiza un efecto de rotacion y zoom progresivos sobre todo el contenido del cuadro
 	@pasos : cantidad de pasos
 	@opacidad : opacidad de cada paso
 	@escala : incremento de escala por paso
-	@angulo : incremento del ángulo por paso, en radianes
+	@angle : incremento del ángulo por paso, en radianes
 	@org_x, org_y : el origen sobre el que se realizan las transformaciones
 	"""
 	ctx = video.cf.ctx
@@ -434,19 +434,19 @@ def fRotoZoom(pasos=4, opacidad=0.25, escala=1, angulo=0, org_x=0, org_y=0):
 	pat = cairo.SurfacePattern(sfc)
 	#creamos un pattern porque parece q tiene un minimo overhead menor al surface además no tenemos el dilema del "al pintar d nuevo cambia el source con la pintada anterior"
 	ctx.set_source(pat) #lo ponemos como source
-	fangulo = angulo
+	fangle = angle
 
 	for a in xrange(int(pasos)):
 		fescala = 1.0/(1.0+(a*escala)) #1/a*2
-		fangulo += angulo
+		fangle += angle
 		pat.set_matrix(
-			extra.CrearMatriz(org_x, org_y, org_x, org_y, fangulo, fescala, fescala, inversa=True)
+			extra.CrearMatriz(org_x, org_y, org_x, org_y, fangle, fescala, fescala, inversa=True)
 		)
 		ctx.paint_with_alpha(opacidad)
 
 def fOnda( inicio,  delta=0.1,  amplitud = 10,  vertical=True,  borrar=True):
 	"""Realiza un efecto de ondulacion sobre la imagen activa.
-	@inicio : un offset del angulo de inicio (si se quiere animar esto se debe modificar)
+	@inicio : un offset del angle de inicio (si se quiere animar esto se debe modificar)
 	@delta = 0.1 : el delta que indica cuanto cambiará la onda de pixel a pixel (es como el ancho de la onda (en vertical)) (mientras mas pequeño, la onda es mas ancha) (esto es lo mismo que frecuencia)
 	@amplitud = 10 : cuan fuerte es la deformacion (el alto de la onda (en vertical))
 	@vertical = True : True si se quiere hacer una onda vertical, False si se la quiere horizontal
@@ -460,7 +460,7 @@ def fOnda( inicio,  delta=0.1,  amplitud = 10,  vertical=True,  borrar=True):
 	if borrar:
 		ctx.set_operator(cairo.OPERATOR_CLEAR)
 		ctx.paint()
-		ModoPintado()
+		ModePainted()
 
 	x1,  x2,  y1,  y2 = 0,  vi.width,  0,  vi.height
 	if vertical :
@@ -492,11 +492,11 @@ def fOnda( inicio,  delta=0.1,  amplitud = 10,  vertical=True,  borrar=True):
 class cSprite():
 	#Implementación basica de una imagen estática
 	#Para animar cambien las propiedades
-	def __init__(self, text=None, x = 0, y = 0, angulo=0, color=None, modo=1, escala=1.0):
+	def __init__(self, text=None, x = 0, y = 0, angle=0, color=None, mode=1, escala=1.0):
 		"""
 		@text : pattern que se usará como textura
 			(se puede cargar con extra.CargarTextura("archivo.png") o simplemente pasar el nombre de archivo "archivo.png")
-		@modo =1: 1-> textura solida, 0-> un solo color y mascara
+		@mode =1: 1-> textura solida, 0-> un solo color y mascara
 		"""
 		if text == None:
 			text = cairo.SurfacePattern(cairo.ImageSurface.create_from_png("texturas/sakura.png"))
@@ -508,9 +508,9 @@ class cSprite():
 		self._alto = (self._s.get_height())
 		self.org_x = (self._ancho/2)
 		self.org_y = (self._alto/2)
-		self.angulo = angulo
+		self.angle = angle
 		self.color = color or extra.cCairoColor()
-		self.modo = modo
+		self.mode = mode
 		self.x = x
 		self.y = y
 		self.Escalar(escala, escala)
@@ -522,18 +522,18 @@ class cSprite():
 		self.scale_x = 1.0/(x or 1.0)
 		self.scale_y = 1.0/(y or 1.0)
 
-	def Pintar(self):
+	def Paint(self):
 		"""Pinta la imagen sobre el cuadro según las propiedades
 		"""
 		"""mat = cairo.Matrix()
 		mat.translate(self.org_x, self.org_y)
-		mat.rotate(self.angulo)
+		mat.rotate(self.angle)
 		mat.scale(self.sx, self.sy)
 		mat.translate(-self.x, -self.y)
 		self.pat.set_matrix(mat)"""
-		self._pat.set_matrix(extra.CrearMatriz(self.x, self.y, self.org_x, self.org_y, self.angulo, self.scale_x, self.scale_y, True))
+		self._pat.set_matrix(extra.CrearMatriz(self.x, self.y, self.org_x, self.org_y, self.angle, self.scale_x, self.scale_y, True))
 		ctx = video.cf.ctx
-		if self.modo:
+		if self.mode:
 			ctx.set_source(self._pat)
 			ctx.paint_with_alpha(self.color.a)
 		else:
@@ -542,7 +542,7 @@ class cSprite():
 
 class cParticleSystem():
 	class cEmisor():
-		x = y = angulo = vel = mapertura = xg = yg = mw = mh = 0.0
+		x = y = angle = vel = mapertura = xg = yg = mw = mh = 0.0
 
 	class cParticula():
 		def __init__(self, i=0):
@@ -568,10 +568,10 @@ class cParticleSystem():
 			self.xi = xi
 			self.yi = yi
 
-			#angulo
-			self.angulo = random()*2*pi
-			#incremento del angulo aka animacion de la rotacon
-			self.anguloi = random()*rotacion
+			#angle
+			self.angle = random()*2*pi
+			#incremento del angle aka animacion de la rotacon
+			self.anglei = random()*rotacion
 			#incremento de la escala.
 			self.sci = (sc2-sc1)*self.fade
 			#gravedad
@@ -584,7 +584,7 @@ class cParticleSystem():
 			  tambien podes definir el tuyo y pasarlo por parametro al instanciar el sistema de particulas
 			  asegurate de modificar el valor de activa
 			"""
-			self.angulo += self.anguloi
+			self.angle += self.anglei
 			self.y += self.yi
 			self.x += self.xi
 			self.escala += self.sci
@@ -594,7 +594,7 @@ class cParticleSystem():
 			self.life += self.fade
 			self.activa = (self.life<1) #mas rapido (??) acuerdense que aca adentro estamos si p.active == True
 
-	def __init__(self, png="texturas/blast.png", emitir_parts=5, max_parts=500, max_life=2, modo=None, color=None, escala_de=1.0, escala_a=2.0, rotacion= 0.1, animador=None):
+	def __init__(self, png="texturas/blast.png", emitir_parts=5, max_parts=500, max_life=2, mode=None, color=None, escala_de=1.0, escala_a=2.0, rotacion= 0.1, animador=None):
 		"""
 		todos los valores son opcionales
 
@@ -603,8 +603,8 @@ class cParticleSystem():
 		emitir_parts maxima cantidad de particulas que se crearan por vez que se llama a Emitir
 		color = None -> Color random, o instancia de cCairoColor
 		max_life entero con el máximo de vida de cada particula
-		modo = 0-> textura, 1->mascara con color solido, 2-> mascara tomando el color del punto sobre el que cae
-			Para mejor funcionamiento, no especificar color si se usará el modo 0
+		mode = 0-> textura, 1->mascara con color solido, 2-> mascara tomando el color del punto sobre el que cae
+			Para mejor funcionamiento, no especificar color si se usará el mode 0
 		escala_de valor de escala inical para cada particula
 		escala_a valor de escala final para cada particula
 		animador una función que se llama por cada particula, por cada cuadro, que recibe como parametro la particula en cuestion
@@ -612,13 +612,13 @@ class cParticleSystem():
 		self.parts = [self.cParticula(i=i) for i in xrange(max_parts)]
 		self.ppc = emitir_parts
 		self.life = max_life or 1 #0 daría ZeroDivide en part.Reset
-		if modo == None:
+		if mode == None:
 			if color == None:
-				modo = 0
+				mode = 0
 			else:
-				modo = 1
+				mode = 1
 
-		self.modo = modo
+		self.mode = mode
 		self.color = color
 		self.sfc = cairo.ImageSurface.create_from_png(png)
 
@@ -630,7 +630,7 @@ class cParticleSystem():
 		self.centy = (self.sfc.get_height()/2)
 		self.w = self.sfc.get_width()
 		self.h = self.sfc.get_height()
-		self.anguloi = rotacion
+		self.anglei = rotacion
 		self.emisor = self.cEmisor()
 		self.Animar = animador or self.cParticula.AnimadorBase
 		#notar q hacemos referencia a AnimadorBase de la CLASE cParticula, no de una INSTANCIA, por lo q hay q poner explicitamente el primer parámetro
@@ -653,7 +653,7 @@ class cParticleSystem():
 					c = extra.cCairoColor(ccolor=self.color)
 				else:
 					c = extra.cCairoColor()
-					if self.modo==2:
+					if self.mode==2:
 						im = video.cf.ctx.get_group_target()
 						stride = im.get_stride() #Normalmente es w*4 (4 bytes por pixels)
 						#El tipo de esto es un buffer, altamente eficiente (supuestamente) es como un vector de c
@@ -674,35 +674,35 @@ class cParticleSystem():
 						c.g = random()
 						c.b = random()
 						c.a = 1
-				xi = -cos(e.angulo+e.mapertura-(e.mapertura*2.0*random()))*e.vel
-				yi = sin(e.angulo+e.mapertura-(e.mapertura*2.0*random()))*e.vel
+				xi = -cos(e.angle+e.mapertura-(e.mapertura*2.0*random()))*e.vel
+				yi = sin(e.angle+e.mapertura-(e.mapertura*2.0*random()))*e.vel
 				p.Reset(True, x=x, y=y, life=self.life, color=c, xi=xi, yi=yi,
-					sc1=self.sc1, sc2=self.sc2, xg=e.xg, yg=e.yg, rotacion=self.anguloi)
+					sc1=self.sc1, sc2=self.sc2, xg=e.xg, yg=e.yg, rotacion=self.anglei)
 				newparts+=1
 
-	def DarPosicion(self, x, y):
+	def GivePosition(self, x, y):
 		"""Para cambiar la posicion del emisor
 		@x, y : Posición en pixels"""
 		self.emisor.x=x
 		self.emisor.y=y
 
-	def DarAngulo(self, angulo, velocidad, apertura=0):
-		"""Para cambiar el angulo de emision
-		@angulo : el ángulo en radianes de la emisión
+	def GiveAngle(self, angle, velocidad, apertura=0):
+		"""Para cambiar el angle de emision
+		@angle : el ángulo en radianes de la emisión
 		@velocidad : la velocidad de la emisión, en pixels por cuadro
 		@apertura : angulo en radianes para el ángulo de apertura máxima de emisión"""
 		e = self.emisor
-		e.angulo = angulo
+		e.angle = angle
 		e.vel = velocidad
 		e.mapertura = apertura/2.0
 
-	def DarGravedad(self, angulo, velocidad ):
+	def GiveGravity(self, angle, velocidad ):
 		"""para cambiar la gravedad del sistema de partículas
-		@angulo : angulo en radianes de la gravedad
+		@angle : angulo en radianes de la gravedad
 		@velocidad : la velocidad de ACELEARCION de la gravedad en pixels por cuadro
 		"""
-		self.emisor.xg = -cos(angulo)*velocidad
-		self.emisor.yg = sin(angulo)*velocidad
+		self.emisor.xg = -cos(angle)*velocidad
+		self.emisor.yg = sin(angle)*velocidad
 		#para la gravedad si lo guardamos como coordenada.
 		#porque no da para ir calculando el seno y eso cada cuadro,
 		#además como que la gravedad no cambia igual python es tan versatil ;)
@@ -716,7 +716,7 @@ class cParticleSystem():
 		self.emisor.mw = ancho/2.0
 		self.emisor.mh = alto/2.0
 
-	def Pintar(self):
+	def Paint(self):
 		"""Cada vez que se llama a esta funcion se pintan todas las particulas vivas, se calcula su nueva posicion, y si estan vivas
 		o no.
 		Se crean particulas nuevas si se llamó a Emitir
@@ -726,7 +726,7 @@ class cParticleSystem():
 			if p.activa:#Si está viva
 				mat = cairo.Matrix()
 				mat.translate(self.centx, self.centy)
-				mat.rotate(p.angulo)
+				mat.rotate(p.angle)
 				mat.scale(p.escala, p.escala)
 				mat.translate(p.x, p.y)
 				self.pat.set_matrix(mat)
@@ -737,9 +737,9 @@ class cParticleSystem():
 				#Además para velocidad, x,y , xi, yi están premultiplicados por -1 (o sea, cambiados de signos)
 				#eso se hace una sola vez al crear la particula
 				self.pat.set_matrix(
-					extra.CrearMatriz( p.x, p.y, self.centx, self.centy, p.angulo, p.escala, p.escala, True)
+					extra.CrearMatriz( p.x, p.y, self.centx, self.centy, p.angle, p.escala, p.escala, True)
 				)"""
-				if self.modo:
+				if self.mode:
 					ctx.set_source_rgba(p.color.r, p.color.g, p.color.b, p.color.a)
 					ctx.mask(self.pat)
 				else:
@@ -748,7 +748,7 @@ class cParticleSystem():
 				#Este es el animador de la particula, puede ser uno personalizado
 				self.Animar(p)
 
-def CrearParticulas(box, textura, escala=1.0, alpha_min=0.1, barrido_vertical=True, modo=0 ):
+def CrearParticulas(box, textura, escala=1.0, alpha_min=0.1, barrido_vertical=True, mode=0 ):
 		"""Super Lento
 		parametros:
 		@box -> tupla con las coordenadas de donde buscar (x0, y0, ancho, alto) (todos los items DEBEN ser enteros (int)))
@@ -758,7 +758,7 @@ def CrearParticulas(box, textura, escala=1.0, alpha_min=0.1, barrido_vertical=Tr
 		@alpha_min=40 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
 		@barrido_vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
 				las partículas en el array, por lo tanto la forma en que se recorre
-		@modo=0 -> el modo de las particulas
+		@mode=0 -> el mode de las particulas
 		"""
 
 		#creamos un array de particulas
@@ -818,7 +818,7 @@ def CrearParticulas(box, textura, escala=1.0, alpha_min=0.1, barrido_vertical=Tr
 					c.g = g
 					c.b = b
 					#y creamos una "particula"
-					parts.append(cSprite(text= textura, x=x, y=y, escala=escala, color=c, modo=modo))
+					parts.append(cSprite(text= textura, x=x, y=y, escala=escala, color=c, mode=mode))
 				except:
 					import traceback
 					print "Error al crear las particulas", traceback.print_exc()

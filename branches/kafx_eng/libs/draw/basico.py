@@ -4,14 +4,14 @@ from libs import video
 
 #Las funciones S setean un surce
 #NO OLIVDAR QUE LOS SOURCES SON RELATIVOS AL PUNTO DE POSICION DEL VECTOR!
-def SSolido(obj, color, parte):
+def SSolido(obj, color, part):
 	"""usa el color definido en obj.actual como source"""
 	#Tambien podriamos usar cairo.SolidPattern(a.r, a.g, a.b, a.a) #tener en cuenta para crear un pattern de un ccairocolor
 	video.cf.ctx.set_source_rgba(color.r, color.g, color.b, color.a)
 
-def STextura(obj, mycolor, parte):
+def STextura(obj, mycolor, part):
 	"""Setea el source, usa la textura (pattern) almacenada en obj.actual.source como source"""
-	txt = obj.texturas[parte]
+	txt = obj.texturas[part]
 	ctx = video.cf.ctx
 	ctx.set_source(txt)
 	if mycolor.a < 1:
@@ -29,20 +29,20 @@ def Linear(x,y,x1,y1,c1,c2):
 	lineal.add_color_stop_rgba(1, c2.r, c2.g, c2.b, c2.a)
 	video.cf.ctx.set_source(lineal)
 
-def SDegradadoVertical(obj, color, parte):
+def SDegradadoVertical(obj, color, part):
 	"""Setea el source como un dergadado lineal verticalmente, el alto del degradado es el alto de la linea,
 	para que sea el mismo aun pintando diferentes sílabas por separado"""
 	Linear(0, -obj.original._alto_linea, 0, 0, color, obj.actual.color2)
 
-def SDegradadoHorizontal(obj, color, parte):
+def SDegradadoHorizontal(obj, color, part):
 	"""Setea el source como un degradado lineal horizontalmente"""
 	Linear(0,0, obj.original._ancho,0, color, obj.actual.color2)
 
-def SDegradadoDiagonal(obj, color, parte):
+def SDegradadoDiagonal(obj, color, part):
 	"""Setea el source con un degradado lineal en diagonal desde arriba a la izquierda a abajo a la derecha"""
 	Linear(0, -obj.original._alto_linea, obj.original._ancho,0, color, obj.actual.color2)
 
-def SDegradadoRadial(obj, color, parte):
+def SDegradadoRadial(obj, color, part):
 	"""Setea el source como un degradado radial con centro en el punto de origen"""
 	a = obj.actual
 	cx = a.org_x
@@ -54,7 +54,7 @@ def SDegradadoRadial(obj, color, parte):
 	radial.add_color_stop_rgba(1, hasta.r, hasta.g, hasta.b, hasta.a)
 	video.cf.ctx.set_source(radial)
 
-def SDegradadoLinealAnimado(obj, color, parte):
+def SDegradadoLinealAnimado(obj, color, part):
 	"""Crea un degradado lineal a lo ancho, usando el progress para el punto medio, creando un barrido"""
 	a = obj.actual
 	hasta = a.color2
@@ -65,7 +65,7 @@ def SDegradadoLinealAnimado(obj, color, parte):
 	lineal.add_color_stop_rgba(1, hasta.r, hasta.g, hasta.b, hasta.a)
 	video.cf.ctx.set_source(lineal)
 
-def SDegradadoRadialAnimado(obj, color, parte):
+def SDegradadoRadialAnimado(obj, color, part):
 	"""Un degradado radial que va creciendo con el progress)"""
 	a = obj.actual
 	cx = a.org_x
@@ -77,8 +77,8 @@ def SDegradadoRadialAnimado(obj, color, parte):
 	r.add_color_stop_rgba(1, a.color2.r, a.color2.g, a.color2.b, a.color2.a)
 	video.cf.ctx.set_source(r)
 
-def SColorPattern(obj, color, parte):
-	txt = obj.texturas[parte]
+def SColorPattern(obj, color, part):
+	txt = obj.texturas[part]
 	ctx = video.cf.ctx
 	ctx.set_source_rgba(color.r, color.g, color.b, color.a)
 	ctx.push_group()
@@ -86,7 +86,7 @@ def SColorPattern(obj, color, parte):
 	ctx.set_source(txt)
 	ctx.pop_group_to_source()
 
-def SBevel(obj, color, parte):
+def SBevel(obj, color, part):
 	#untested
 	#Codigo contribuido por cairocool y ranma42 en #cairo@irc.freenode.net
 	# ver http://code.google.com/p/cairocks/
@@ -109,14 +109,14 @@ Podes implementar los tuyos en tu efecto, sólo agregalos al array al final,
 tu función debe tener 3 parametros
 	obj -> el objeto (cDialogo, cSilaba o cVector)
 	color -> el color sugerido (color para relleno, ocolor para borde, bcolor para sombra)
-	parte -> 0, 1 o 2 indicando borde, relleno o sombra respectivamente
+	part -> 0, 1 o 2 indicando borde, relleno o sombra respectivamente
 
 para usarla sólo debes agregar el nombre de tu función al final  (recomiendo usar
 	basico.sources.append(xxxxx)
 desde tu script, nunca modifiques este archivo)
 
-y poner el indice que corresponda al usar ModoRelleno/Borde/Sombra
-ej: diag.ModoSombra(8)
+y poner el indice que corresponda al usar ModeRelleno/Borde/Shadow
+ej: diag.ModeShadow(8)
 """
 sources = [SSolido, STextura, SDegradadoVertical, SDegradadoHorizontal, SDegradadoDiagonal,
 	SDegradadoRadial, SDegradadoLinealAnimado, SDegradadoRadialAnimado, SColorPattern, SBevel
