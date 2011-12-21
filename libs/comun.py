@@ -56,27 +56,27 @@ def i_log(p):
 #esto es lo que yo queria hacer con beziers hace raaaaaaaaaaaaaaaaato pero no me daba
 #los mismos resultados, igual la idea es hacerlo con splines, aunque creo que no vale la pena
 def i_b_default(p):
-	return PuntoBezier(p, 0, 0, 0.25, 0.1, 0.25, 1, 1, 1)[1]
+	return PointBezier(p, 0, 0, 0.25, 0.1, 0.25, 1, 1, 1)[1]
 
 def i_b_ease_in(p):
-	return PuntoBezier(p, 0, 0, 0.42, 0.0, 1, 1, 1, 1)[1]
+	return PointBezier(p, 0, 0, 0.42, 0.0, 1, 1, 1, 1)[1]
 
 def i_b_ease_out(p):
-	return PuntoBezier(p, 0, 0, 0, 0, 0.58, 1, 1, 1)[1]
+	return PointBezier(p, 0, 0, 0, 0, 0.58, 1, 1, 1)[1]
 
 def i_b_ease_in_out(p):
-	return PuntoBezier(p, 0, 0, 0.42, 0.0, 0.58, 1, 1, 1)[1]
+	return PointBezier(p, 0, 0, 0.42, 0.0, 0.58, 1, 1, 1)[1]
 
 def i_b_cubic(p):
-	return PuntoBezier(p, 0, 0, 0, 1.0, 1.0, 0, 1, 1)[1]
+	return PointBezier(p, 0, 0, 0, 1.0, 1.0, 0, 1, 1)[1]
 
 def i_b_backstart(p):
-	return PuntoBezier(p, 0, 0,
+	return PointBezier(p, 0, 0,
 		0.2, -0.3, 0.6, 0.26,
 		1, 1)[1]
 
 def i_b_boing(p):
-	return PuntoBezier(p,
+	return PointBezier(p,
 	0, 0,
 	0.42, 0.0,
 	0.58, 1.5,
@@ -115,8 +115,8 @@ def RanmaBezier(progress, points):
 	@progress como en interpolar, normalmente un numero entre 0 y 1 indicando el avance de sobre la curva
 	@points : array de points -> [ [0, 0], [1, 1], [2, 2] ]
 
-	es como PuntoBezier pero permite curvas de cualquier cantidad de points de control (de 1 a (teoricamente) infinito))
-	es algo mas lento que PuntoBezier para curvas de la misma cantidad de points
+	es como PointBezier pero permite curvas de cualquier cantidad de points de control (de 1 a (teoricamente) infinito))
+	es algo mas lento que PointBezier para curvas de la misma cantidad de points
 	escrito por Ranma42 @ irc.freenode.net/#cairo
 	"""
 
@@ -125,12 +125,12 @@ def RanmaBezier(progress, points):
 		for i in range(len(points) - 1):
 			px0,py0 = points[i]
 			px1,py1 = points[i+1]
-			p = (Interpolar(progress, px0, px1), LERP(progress, py0, py1))
+			p = (Interpolate(progress, px0, px1), LERP(progress, py0, py1))
 			points2.append(p)
 		points = points2
 	return points[0]
 
-def PuntoBezier(progress, x_ini, y_ini,  x_int1, y_int1, x_int2, y_int2, x_fin, y_fin):
+def PointBezier(progress, x_ini, y_ini,  x_int1, y_int1, x_int2, y_int2, x_fin, y_fin):
 	"""
 	Devuelve un punto (x, y) sobre una curva bezier dado el avance en la misma
 	@x_ini, y_ini : punto inicial de la curva

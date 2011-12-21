@@ -67,7 +67,7 @@ class cPropiedades():
 		self.color1 = extra.cCairoColor(numero=0xFFFF2020) #Notar q el 0x hace q sea un numero de verdad, y no un string. color primario
 		self.color2 = extra.cCairoColor(numero=0xFF808080) #color secundario
 		self.color3 = extra.cCairoColor(numero=0xFF101010) #borde
-		self.color4 = extra.cCairoColor(numero=0xFF808080) #sombra
+		self.color4 = extra.cCairoColor(numero=0xFF808080) #shadow
 		#colores: primario Secundario Outline Back
 		self._capa = 0
 
@@ -81,22 +81,22 @@ class cPropiedades():
 			self.scale_y = 1.0
 			#tamaño del borde en pixels
 			self.borde = 3
-			#tamaño de la sombra en pixels
-			self.sombra = 0
-			self.angulo = 0
+			#tamaño de la shadow en pixels
+			self.shadow = 0
+			self.angle = 0
 			#posición del vector (del punto de inicio del vector)
 			self.pos_x = 30
 			self.pos_y = 30
 			#origen de las transformaciones (y de algunos pintados)
 			self.org_x = 0
 			self.org_y = 0
-			#desplazamiento de la sombra en pixels, en x e y respectivamente
+			#desplazamiento de la shadow en pixels, en x e y respectivamente
 			self.shad_x = 0
 			self.shad_y = 0
 			#modes de pintado
 			self.mode_relleno = 0
 			self.mode_borde = 0
-			self.mode_sombra = 0
+			self.mode_shadow = 0
 			self.mode_particula = 0
 			#no animables
 			#nombre del estilo
@@ -174,29 +174,29 @@ class cPropiedades():
 		self.shad_y = other.shad_y
 		self.scale_x = other.scale_x
 		self.scale_y = other.scale_y
-		self.angulo = other.angulo
+		self.angle = other.angle
 		self.color1.CopiarDe(other.color1)
 		self.color4.CopiarDe(other.color4)
 		self.color3.CopiarDe(other.color3)
 		self.color2.CopiarDe(other.color2)
 		self.borde = other.borde
-		self.sombra = other.sombra
+		self.shadow = other.shadow
 		self.mode_relleno = other.mode_relleno
 		self.mode_borde = other.mode_borde
-		self.mode_sombra = other.mode_sombra
+		self.mode_shadow = other.mode_shadow
 		self.mode_particula = other.mode_particula
 
 	def FromDict(self, estilo):
 		"""Crea los valores desde un diccionario, para uso interno"""
 		#animables
 		import math
-		self.angulo = math.radians(comun.SafeGetFloat(estilo, S_ANGLE))
+		self.angle = math.radians(comun.SafeGetFloat(estilo, S_ANGLE))
 		self.color1  = extra.cCairoColor(texto=estilo.get(S_PCOLOR, 0))
 		self.color3 = extra.cCairoColor(texto=estilo.get(S_OCOLOR, 0))
 		self.color4 = extra.cCairoColor(texto=estilo.get(S_BCOLOR, 0))
 		self.color2 = extra.cCairoColor(texto=estilo.get(S_SCOLOR, 0))
 		self.borde = comun.SafeGetFloat(estilo, S_OUTLINE)
-		self.sombra = int(comun.SafeGetFloat(estilo, S_SHADOW)) #el zheo me dijo q podia ser flotante pero no tiene sentido aca
+		self.shadow = int(comun.SafeGetFloat(estilo, S_SHADOW)) #el zheo me dijo q podia ser flotante pero no tiene sentido aca
 
 		self.scale_x = comun.SafeGetFloat(estilo, S_SCALE_X, 100)/100.0
 		self.scale_y = comun.SafeGetFloat(estilo, S_SCALE_Y, 100)/100.0
@@ -318,7 +318,7 @@ class cDialogo(extra.cVector):
 		px= o.pos_x
 		py= o.pos_y
 
-		if o.angulo :
+		if o.angle :
 			"""#esto funciona bastante bien pero obliga a cambiarle el origen a 0,0
 			#se compportaria como si el dialogo tuviese \an1
 			o.org_x = 0
@@ -329,10 +329,10 @@ class cDialogo(extra.cVector):
 			"""
 			#basico y obsoleto (tendria problemas con scale y translates)
 			r = sqrt((px**2)+(py**2))
-			pre = cos(o.angulo)*r , sin(o.angulo)*r
+			pre = cos(o.angle)*r , sin(o.angle)*r
 			"""
 
-			#esto tendria que usarse en caso del angulo pero no funciona bien (aun)
+			#esto tendria que usarse en caso del angle pero no funciona bien (aun)
 			#creamos la matriz de transformacion del dialogo
 			self._UpdateMatrix()
 			#y calculamos el punto 0,0 del dialogo, que es el punto de inicio del texto
