@@ -72,7 +72,7 @@ class cPropiedades():
 		self._capa = 0
 
 		if other:
-			self.CopiarTodoDe(other)
+			self.CopyAllFrom(other)
 		else:
 			#valores por default
 			#animables
@@ -130,9 +130,9 @@ class cPropiedades():
 			if dicc:
 				self.FromDict(dicc)#porque al dict le pueden faltar valores
 
-	def CopiarTodoDe(self, other):
+	def CopyAllFrom(self, other):
 		#Esto es importante porque el estilo original de los dialgos se inicia en realidad pasandole un estilo al momento de crearlo
-		self.CopiarDe(other)
+		self.CopyFrom(other)
 		#No animables
 		self._name = other._name
 		self._fuente = other._fuente
@@ -160,7 +160,7 @@ class cPropiedades():
 		self._max_x_advance = other._max_x_advance
 		self._max_y_advance = other._max_y_advance"""
 
-	def CopiarDe(self,  other):
+	def CopyFrom(self,  other):
 		"""Copia los datos de other objeto del mismo tipo
 		@other es un objeto del tipo cPropiedades
 
@@ -175,10 +175,10 @@ class cPropiedades():
 		self.scale_x = other.scale_x
 		self.scale_y = other.scale_y
 		self.angle = other.angle
-		self.color1.CopiarDe(other.color1)
-		self.color4.CopiarDe(other.color4)
-		self.color3.CopiarDe(other.color3)
-		self.color2.CopiarDe(other.color2)
+		self.color1.CopyFrom(other.color1)
+		self.color4.CopyFrom(other.color4)
+		self.color3.CopyFrom(other.color3)
+		self.color2.CopyFrom(other.color2)
 		self.border = other.border
 		self.shadow = other.shadow
 		self.mode_relleno = other.mode_relleno
