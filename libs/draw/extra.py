@@ -120,12 +120,12 @@ class cCairoColor():
 		3 formas
 		@numero creado como con DesdeNumero, recibe un entero (0xAARRGGBB)
 		@texto creado como con DesdeTexto, recibe un string ('AARRGGBB')
-		@ccolor creado como con CopiarDe, recibe un objeto del tipo cCairoColor
+		@ccolor creado como con CopyFrom, recibe un objeto del tipo cCairoColor
 		"""
 		if texto:
 			self.DesdeTexto(texto)
 		elif ccolor:
-			self.CopiarDe(ccolor)
+			self.CopyFrom(ccolor)
 		elif (numero is not None):
 			self.DesdeNumero(numero)
 		else:
@@ -169,7 +169,7 @@ class cCairoColor():
 		color = color / 256
 		self.a = color / 255.0"""
 
-	def CopiarDe(self, other):
+	def CopyFrom(self, other):
 		"""Copia un color desde otro
 		@otro debe ser un objeto del tipo cCairoColor
 		"""
@@ -319,7 +319,7 @@ class cVector():
 			props.org_x = (props._ancho/2.0)
 			props.org_y = -(props._alto_linea/2.0) + props._descent
 
-		self.actual.CopiarTodoDe(props)
+		self.actual.CopyAllFrom(props)
 		return (props.pos_x + props._x_advance, props.pos_y + props._y_advance)
 
 	def _SetPathProps(self):
@@ -336,7 +336,7 @@ class cVector():
 
 		o.org_x = o._x_bearing + (o._ancho/2.0)
 		o.org_y = -(o._alto/2.0)
-		self.actual.CopiarTodoDe(o)
+		self.actual.CopyAllFrom(o)
 
 	def ObtenerForma(self):
 		"""
@@ -485,7 +485,7 @@ class cVector():
 
 	def Restore(self):
 		"""Restaura el estilo de un vector"""
-		self.actual.CopiarDe(self.original)
+		self.actual.CopyFrom(self.original)
 		self.path = self._old_path
 
 	def PaintWithCache(self, conFondo=False, matriz=None):
