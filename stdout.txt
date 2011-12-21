@@ -1,0 +1,14 @@
+Python version (2, 6, 6, 'final', 0)
+Cargando Cairo...
+Cairo cargado. Version: (1, 10, 8)
+Cargando KAFX...
+KAFX cargado. Librerias version: (1, 666, 12, 'newfinalrc1')
+Yay! se han cargado todas las librerias.
+Dll-> Parece que todo esta cargado, intentemos inicializar
+ME INICIALIZAN
+Importando el efecto
+Cargando los subtitulos
+Precalculando los eventos
+Todo se cargo aparentemente bien
+Dll-> Ya cargamos todo
+Me voy, me dijeron que termine
