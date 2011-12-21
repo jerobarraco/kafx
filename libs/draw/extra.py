@@ -169,27 +169,27 @@ class cCairoColor():
 		color = color / 256
 		self.a = color / 255.0"""
 
-	def CopiarDe(self, otro):
+	def CopiarDe(self, other):
 		"""Copia un color desde otro
 		@otro debe ser un objeto del tipo cCairoColor
 		"""
-		self.r=otro.r
-		self.g=otro.g
-		self.b=otro.b
-		self.a=otro.a
+		self.r=other.r
+		self.g=other.g
+		self.b=other.b
+		self.a=other.a
 
-	def Interpolar(self, progress, otro, inter=comun.i_lineal):
+	def Interpolar(self, progress, other, inter=comun.i_lineal):
 		"""Interpola un color con otro, segun un progress
 		La interpolacion es lineal, asique no esperen algo de croma ni nada por el estilo.
 
 		@progress : indicador de progress de la interpolacion, es un valor entre 0 y 1
-		@otro : el color al cual se interpolará
+		@other : el color al cual se interpolará
 		"""
 		i = comun.Interpolar
-		self.r = i(progress, self.r, otro.r, inter)
-		self.g = i(progress, self.g, otro.g, inter)
-		self.b = i(progress, self.b, otro.b, inter)
-		self.a = i(progress, self.a, otro.a, inter)
+		self.r = i(progress, self.r, other.r, inter)
+		self.g = i(progress, self.g, other.g, inter)
+		self.b = i(progress, self.b, other.b, inter)
+		self.a = i(progress, self.a, other.a, inter)
 
 class cVector():
 	"""Clase basica de objetos de cairo.
@@ -536,12 +536,12 @@ class cVector():
 			ctx.set_line_width(a.borde)
 			#Ponemos el source usando la funcion para sources
 			#asignada al borde y lo mismo haremos para el resto de las partes
-			basico.sources[a.modo_borde](self, a.color3, 0)
+			basico.sources[a.mode_borde](self, a.color3, 0)
 			#self.__SBorde(self, a.color3, 0)
 			ctx.stroke_preserve()
 
 		#relleno
-		basico.sources[a.modo_relleno](self, a.color1, 1)
+		basico.sources[a.mode_relleno](self, a.color1, 1)
 		#self.__SRelleno(self, a.color1, 1)
 		ctx.fill()
 
@@ -552,7 +552,7 @@ class cVector():
 
 		#sombra. notar que la cargamos antes de restaurar la matriz identidad,
 		#para q sea concordante en caso de no ser solida, y que los points de control no sean un caso y sean iguales en todos los casos (borde/relleno)
-		basico.sources[a.modo_sombra](self, a.color4, 2)
+		basico.sources[a.mode_sombra](self, a.color4, 2)
 		#self.__SSombra(self, a.color4, 2)
 
 		#Devolvemos el patron con la sombra integrada
@@ -707,18 +707,18 @@ class cVector():
 		a = self.actual
 		o = self.original
 		if parte == self.PART_BORDE:
-			o.modo_borde = a.modo_borde = self.P_TEXTURA
+			o.mode_borde = a.mode_borde = self.P_TEXTURA
 		elif parte == self.PART_RELLENO:
-			o.modo_relleno = a.modo_relleno = self.P_TEXTURA
+			o.mode_relleno = a.mode_relleno = self.P_TEXTURA
 		elif parte == self.PART_SOMBRA:
-			o.modo_sombra = a.modo_sombra = self.P_TEXTURA
+			o.mode_sombra = a.mode_sombra = self.P_TEXTURA
 		elif parte == self.PART_PARTICULA:
-			o.modo_particula = a.modo_particula = self.P_TEXTURA
+			o.mode_particula = a.mode_particula = self.P_TEXTURA
 
 	def MoverTextura(self, pos_x, pos_y, org_x=0, org_y=0, angulo=0, scale_x=1, scale_y=1, parte=0):
 		self.texturas[parte].set_matrix(CrearMatriz(pos_x, pos_y, org_x, org_y, angulo, scale_x, scale_y, inversa=True))
 
-	def CrearParticulas(self, textura=None, escala=1.0, alpha_min=0.2, barrido_vertical=True, modo=0):
+	def CrearParticulas(self, textura=None, escala=1.0, alpha_min=0.2, barrido_vertical=True, mode=0):
 		"""Super Lento
 		parametros:
 		@textura -> pattern con la textura a usar
@@ -727,7 +727,7 @@ class cVector():
 		@alpha_min=40 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
 		@barrido_vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
 				las partículas en el array, por lo tanto la forma en que se recorre
-		@modo=0 -> el modo de las particulas
+		@mode=0 -> el mode de las particulas
 		"""
 		if not textura:
 			textura = self.texturas[3]
@@ -748,7 +748,7 @@ class cVector():
 		#pintamos el vector/dialogo/silaba
 		self.Pintar()
 		#creamos las particulas
-		parts = avanzado.CrearParticulas(box, textura, escala, alpha_min, barrido_vertical, modo)
+		parts = avanzado.CrearParticulas(box, textura, escala, alpha_min, barrido_vertical, mode)
 		avanzado.GrupoFin(opacidad=0.0)
 		return parts
 
