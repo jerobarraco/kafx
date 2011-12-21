@@ -1,0 +1,29 @@
+is somehow experimental, but it works pretty well...
+i've left 2 scripts wich uses ffmpeg for de/compressing videos..
+that makes avisynth (and the dll) completely unnecesary.
+
+you'll only need python (py)cairo and ffmpeg, so basically you can use it on linux (at a fair speed)
+(install : python pycairo cairo pyopengl and ffmpeg)
+
+how do you use it?
+well, i wont explain really much... so you will need programming knowledge..
+
+there's a script kafx.py, it uses opengl to show the video on a window...
+
+how to use?
+if you're using windows, you'll need ffmpeg on the path... basically nobody knows how to do that, so probably is best is to copy 
+ffmpeg.exe in the same folder as kafx (the kafx root folder (where the kafx_main file is)) (A).
+also copy myconfig.py to the kafx root folder (A) basically you'll have:
+ffmpeg.exe
+kafx.py
+myconfig.py
+kafx_main.py
+libs/
+etc...
+
+myconfig has some basic configuration you will need to modify for each video.. 
+kafx will mix all the stuff: decoding, load kafx, process, coding
+
+excecuting "python kafx.py" will do the trick... 
+then wait for it to finish (or fail)
+or close the console to cancel

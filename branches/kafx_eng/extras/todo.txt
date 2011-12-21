@@ -1,0 +1,38 @@
+
+cosas q tengo pendiente :
+	checkear que todo ande bien
+	la creacion de matrices que me da LA paja de revisar pej
+	
+	
+	meter todo lo que venia haciendo en el changelog xDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd -_-º
+
+importante pero later:
+robar la mejora que hizo nickle al parseo de ass (robarselo de nuevo cuando ande bien)
+fijarse si conseguimos el cario 1.19 q SI trae el blending mode DIFERENCE (el q yo queria para bad apple ¬¬)
+
+
+
+despues de lanzar el kafx:
+serie de videotutoriales. Mi sugerencias: 
+
+- Instalación 
+- Funcionamiento (¿como procesa? ¿como recorre los tiempos? ¿como genera el efecto?) 
+- Métodos básicos.
+
+documentar efectos, crear tutoriales fijarse que hayan demos basicos 
+de abelkm
+"21/06/10 18:57:14 ] [a=0][c=4][TnG]Martín[/c][/a=1]  щ(ﾟДﾟщ) : bueno, entonces mi unico pedido serian varios scripts basicos con fx bien, pero bien, simples
+[21/06/10 18:57:22 ] [a=0][c=4][TnG]Martín[/c][/a=1]  щ(ﾟДﾟщ) : junto con ass listos para aplicarlos
+[21/06/10 18:58:39 ] [a=0][c=4][TnG]Martín[/c][/a=1]  щ(ﾟДﾟщ) : jaja1ya testeados y todo
+[21/06/10 18:59:17 ] [a=0][c=4][TnG]Martín[/c][/a=1]  щ(ﾟДﾟщ) : no veo otra cosa mas que puedas hacer
+"
+----
+checkeados :
+wish, badapple, angels, evergreen, ssleep, fake, game, gogo, neko, heartbreaker (a ojo), secretl, romance
+los tiempos (no detalladamente pero a simple vista andan bien)
+{
+	terminar de incluir el entorno OGL y arreglar el bug en windows q ffmpeg se queda trabado luego de un rato (si, era el pipe lleno (probar usando -quiet))
+	crear una funcion que sea algo como CairoSurfaceToGlTexture
+}---> no time, won't do
+
+funcion bezier

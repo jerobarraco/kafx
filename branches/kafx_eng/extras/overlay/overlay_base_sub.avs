@@ -1,0 +1,6 @@
+loadplugin("KAFX.dll")
+BlankClip(pixel_type="RGB32", length=3000, width=640, height=480, fps=25)
+#, color=$FF000000)
+FlipVertical()
+KAFX("fxs.simple", "test.ass")
+FlipVertical()
