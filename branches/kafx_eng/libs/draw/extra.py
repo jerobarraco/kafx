@@ -55,7 +55,7 @@ def CargarTextura(archivo, extend=cairo.EXTEND_REPEAT):
 	"""Devuelve una textura (SurfacePattern) de cairo, a partir de un archivo png.
 	Para usar con set_source o lo que fuere
 	@archivo: el nombre del archivo. Debe ser un PNG.
-	
+
 	@extend: el extend default de la textura (default EXTEND_REPEAT)
 			Para usar con cSprite el extend debe ser cairo.EXTEND_NONE"""
 	t = cairo.SurfacePattern(cairo.ImageSurface.create_from_png(archivo))
@@ -178,18 +178,18 @@ class cCairoColor():
 		self.b=otro.b
 		self.a=otro.a
 
-	def Interpolar(self, progreso, otro, inter=comun.i_lineal):
-		"""Interpola un color con otro, segun un progreso
+	def Interpolar(self, progress, otro, inter=comun.i_lineal):
+		"""Interpola un color con otro, segun un progress
 		La interpolacion es lineal, asique no esperen algo de croma ni nada por el estilo.
 
-		@progreso : indicador de progreso de la interpolacion, es un valor entre 0 y 1
+		@progress : indicador de progress de la interpolacion, es un valor entre 0 y 1
 		@otro : el color al cual se interpolará
 		"""
 		i = comun.Interpolar
-		self.r = i(progreso, self.r, otro.r, inter)
-		self.g = i(progreso, self.g, otro.g, inter)
-		self.b = i(progreso, self.b, otro.b, inter)
-		self.a = i(progreso, self.a, otro.a, inter)
+		self.r = i(progress, self.r, otro.r, inter)
+		self.g = i(progress, self.g, otro.g, inter)
+		self.b = i(progress, self.b, otro.b, inter)
+		self.a = i(progress, self.a, otro.a, inter)
 
 class cVector():
 	"""Clase basica de objetos de cairo.
@@ -222,7 +222,7 @@ class cVector():
 		@parent el objeto padre
 		"""
 		from libs import asslib
-		self.progreso = 0.0
+		self.progress = 0.0
 		self._end = 0
 		self._start = 0
 		self._dur = 0
@@ -236,8 +236,8 @@ class cVector():
 		self.original = asslib.cPropiedades(estilo)
 		self.actual = asslib.cPropiedades(estilo)
 		self._texto = ""
-		self.puntosw = None
-		
+		self.pointsw = None
+
 		if figura :
 			self.CrearDesdeFigura(figura)
 		elif texto:
@@ -345,7 +345,7 @@ class cVector():
 		esto es para zheo, saben que odio ass asi que no usen esto para nada util,
 		lo dejo como ejemplo para que entiendan mas de ass y cairo
 		"""
-		#para entender un poco mas podes ver el Deformar que lo que hace es un FOR a traves de los puntos del path
+		#para entender un poco mas podes ver el Deformar que lo que hace es un FOR a traves de los points del path
 		#Para saber como obtener un "path" fijate en UpdateTextPath, que hace un ctx.copy_path
 		figura = ''
 		lp = '' # ultimo punto, porque el vsfilter se mea en la cama.
@@ -443,11 +443,11 @@ class cVector():
 
 	def Deformar(self, func):
 		"""Deforma el vector del objeto,
-		@func debe ser una funcion que sera llamada por cada grupo de de puntos del vector, debe recibir los siguientes parametros
+		@func debe ser una funcion que sera llamada por cada grupo de de points del vector, debe recibir los siguientes parametros
 			self : el dialogo sobre el que se efectua el deformar
 			tipo : entero especificando el tipo de punto (0=mover, 1=linea, 2=curva, 3=cerrar path (esto sale de unas constantes de cairo que no recuerdo como se llaman))
-			puntos : un array con puntos de longitud: 2 para mover, 2 para linea, 6 para curva, 0 para cerrar
-		debe devolver un array con los puntos (o sea, lo mismo q recibio pero modificado)
+			points : un array con points de longitud: 2 para mover, 2 para linea, 6 para curva, 0 para cerrar
+		debe devolver un array con los points (o sea, lo mismo q recibio pero modificado)
 		"""
 		ctx = video.cf.ctx
 		ctx_funcs = ( #Este map está hecho para mapear los tipos de item en el path con su funcion, para entonces poder construir "paths" a mano ya que no podemos modificarlo directamente.
@@ -466,7 +466,7 @@ class cVector():
 
 	def DeformarCompleto(self, func):
 		"""Igual que deformar pero recibe un solo objeto, con un array de tuplas como las recibiria deformar, y se espera que devuelva un solo array de tuplas
-		Esto te permite mayor control sobre los puntos, pudiendo quitar o agregar puntos a placer.
+		Esto te permite mayor control sobre los points, pudiendo quitar o agregar points a placer.
 		"""
 		ctx = video.cf.ctx
 		ctx_funcs = (
@@ -551,7 +551,7 @@ class cVector():
 		pat = avanzado.GrupoFin(0.0, matriz2)
 
 		#sombra. notar que la cargamos antes de restaurar la matriz identidad,
-		#para q sea concordante en caso de no ser solida, y que los puntos de control no sean un caso y sean iguales en todos los casos (borde/relleno)
+		#para q sea concordante en caso de no ser solida, y que los points de control no sean un caso y sean iguales en todos los casos (borde/relleno)
 		basico.sources[a.modo_sombra](self, a.color4, 2)
 		#self.__SSombra(self, a.color4, 2)
 
@@ -561,7 +561,7 @@ class cVector():
 		return pat
 
 	def PintarReferencia(self, matriz=None):
-		"""Pinta los puntos de referencia del vector, note que puede no estar sujeta a ciertas transformaciones"""
+		"""Pinta los points de referencia del vector, note que puede no estar sujeta a ciertas transformaciones"""
 		ctx = video.cf.ctx
 		if matriz:
 			self.matrix = matriz
@@ -615,8 +615,8 @@ class cVector():
 		@de tupla (x,y)
 		@a tupla (x,y)
 		"""
-		self.actual.pos_x = comun.Interpolar(self.progreso, de[0], a[0], inter)
-		self.actual.pos_y = comun.Interpolar(self.progreso, de[1], a[1], inter)
+		self.actual.pos_x = comun.Interpolar(self.progress, de[0], a[0], inter)
+		self.actual.pos_y = comun.Interpolar(self.progress, de[1], a[1], inter)
 
 	def MoverA(self, x, y, inter=comun.i_lineal):
 		"""Anima el movimiento de un vector desde el punto indicado hasta su posicion original
@@ -642,7 +642,7 @@ class cVector():
 		@hasta float con el valor final
 		ambos valores tienen un rango de 0 a 1
 		"""
-		self.Alpha(comun.Interpolar(self.progreso, desde, hasta, inter))
+		self.Alpha(comun.Interpolar(self.progress, desde, hasta, inter))
 
 	def Alpha(self, alpha):
 		"""Especifica el alfa para todos los colores
@@ -655,7 +655,7 @@ class cVector():
 		@desde angulo inical en radianes
 		@hasta angulo final en radianes
 		"""
-		self.actual.angulo = comun.Interpolar(self.progreso, desde, hasta, inter)
+		self.actual.angulo = comun.Interpolar(self.progress, desde, hasta, inter)
 
 	def Escalar(self, desde, hasta, inter=comun.i_lineal):
 		"""Anima el escalado de un vector
@@ -663,32 +663,32 @@ class cVector():
 		@hasa escala final
 		ambos son float donde 1 es el valor normal >1 es mas grande y <1 es mas pequeño
 		"""
-		self.actual.scale_x = self.actual.scale_y = comun.Interpolar(self.progreso, desde, hasta, inter)
+		self.actual.scale_x = self.actual.scale_y = comun.Interpolar(self.progress, desde, hasta, inter)
 
 	def Sacudir(self, amplitud=4):
 		"""
 		Anima la posición como un shake
 		@amplitud = cantidad de pixels que se moverá
 		(requiere que los estilos se restauren)"""
-		self.actual.pos_x += comun.Interpolar(self.progreso, -amplitud, amplitud, comun.i_rand)
-		self.actual.pos_y += comun.Interpolar(self.progreso, -amplitud, amplitud, comun.i_rand)
+		self.actual.pos_x += comun.Interpolar(self.progress, -amplitud, amplitud, comun.i_rand)
+		self.actual.pos_y += comun.Interpolar(self.progress, -amplitud, amplitud, comun.i_rand)
 
 	def Wiggle(self, amplitud=4, frecuencia=2):
 		"""
-		Anima la posición como un movimiento entre puntos aleatorios
+		Anima la posición como un movimiento entre points aleatorios
 		@amplitud = cantidad de pixels que se moverá
-		@frecuencia = cantidad de puntos a los que irá
+		@frecuencia = cantidad de points a los que irá
 		(requiere que los estilos se restauren)
 		"""
-		if self.puntosw == None:
-			self.puntosw = []
-			self.puntosw.append( (0, 0) )
+		if self.pointsw == None:
+			self.pointsw = []
+			self.pointsw.append( (0, 0) )
 			for i in range(frecuencia):
 				randomx = comun.LERP(random(), -amplitud, amplitud)
 				randomy = comun.LERP(random(), -amplitud, amplitud)
-				self.puntosw.append( (randomx, randomy) )
-				self.puntosw.append( (0, 0) )
-		x, y = comun.RanmaBezier(self.progreso, self.puntosw)
+				self.pointsw.append( (randomx, randomy) )
+				self.pointsw.append( (0, 0) )
+		x, y = comun.RanmaBezier(self.progress, self.pointsw)
 		self.actual.pos_x += x
 		self.actual.pos_y += y
 		return x, y
