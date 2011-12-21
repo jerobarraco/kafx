@@ -2,7 +2,7 @@
 import codecs
 from draw import extra
 import comun
-"""Este módulo define las cosas necesarias para cargar un archivo ASS, y los objetos que permiten el pintado de texto con cairo"""
+"""Este mÃ³dulo define las cosas necesarias para cargar un archivo ASS, y los objetos que permiten el pintado de texto con cairo"""
 
 #Constantes, no cambien nada si no quieren que el programa se rompa
 #Del Estilo
@@ -79,12 +79,12 @@ class cPropiedades():
 			#escalado, x e y respectivamente
 			self.scale_x = 1.0
 			self.scale_y = 1.0
-			#tamaño del border en pixels
+			#tamaÃ±o del border en pixels
 			self.border = 3
-			#tamaño de la shadow en pixels
+			#tamaÃ±o de la shadow en pixels
 			self.shadow = 0
 			self.angle = 0
-			#posición del vector (del punto de inicio del vector)
+			#posiciÃ³n del vector (del punto de inicio del vector)
 			self.pos_x = 30
 			self.pos_y = 30
 			#origen de las transformaciones (y de algunos pintados)
@@ -101,7 +101,7 @@ class cPropiedades():
 			#no animables
 			#nombre del estilo
 			self._name ='EstiloManualmenteCreado'
-			#tamaño de la fuente
+			#tamaÃ±o de la fuente
 			self._size = 12
 			#nombre de la fuente
 			self._fuente = "Verdana"
@@ -113,7 +113,7 @@ class cPropiedades():
 			self._marginv = 30
 			self._marginr = 30
 			self._marginl = 30
-			#alineación segun ass (an creo)
+			#alineaciÃ³n segun ass (an creo)
 			self._alin = 2
 			#capa, completamente sin usar
 			self._capa = 0
@@ -164,7 +164,7 @@ class cPropiedades():
 		"""Copia los datos de other objeto del mismo tipo
 		@other es un objeto del tipo cPropiedades
 
-		copia solo los datos animables para hacerlo más rapido.
+		copia solo los datos animables para hacerlo mÃ¡s rapido.
 		"""
 		self.pos_x = other.pos_x
 		self.pos_y = other.pos_y
@@ -228,7 +228,7 @@ class cSilaba(extra.cVector):
 		self._letras = None
 
 	def DividirLetras(self):
-		"""Computa los caracteres de la sílaba...
+		"""Computa los caracteres de la sÃ­laba...
 		Usar si cambian el _texto
 		es muy lento y consume mas ram
 		para acceder a las silabas luego usen _letras
@@ -241,7 +241,7 @@ class cSilaba(extra.cVector):
 		#Si hay chars
 		if not self._texto:#atrapa '' y None
 			self._texto = ' '
-			#para evitar codigo duplicado, de igual manera no deberias llamar a esto sin texto ò_ó
+			#para evitar codigo duplicado, de igual manera no deberias llamar a esto sin texto Ã²_Ã³
 
 		#calculamos la duracion de cada caracter
 		cdur = float(self._dur) / len(self._texto)
@@ -258,11 +258,11 @@ class cSilaba(extra.cVector):
 
 	def Encadenar(self, funcion, duracion=None):
 		"""Permite encadenar los caracteres a una animacion.
-		Antes de llamar a esta función llamen a DividirLetras
+		Antes de llamar a esta funciÃ³n llamen a DividirLetras
 		o activen la opcion en FxsGroup
 		@funcion funcion a llamar con cada silaba y el progress
 		@duracion=None duracion de la animacion de cada caracter,
-			Si no se especifica, se usará una duración tal que
+			Si no se especifica, se usarÃ¡ una duraciÃ³n tal que
 			se anime solo un caracter por vez.
 		(Nota: no cambien el _texto si no quieren inconsistencias)
 		"""
@@ -279,7 +279,7 @@ class cDialogo(extra.cVector):
 		@dialogo es la linea de dialogo en forma ass (interno)
 		@estilos es el array con estilos
 		opcionales
-		@max_effect numero máximo que puede tomar como efecto
+		@max_effect numero mÃ¡ximo que puede tomar como efecto
 		"""
 		t_estilo = dialogo[E_STYLE]
 		est = estilos[0]
@@ -299,7 +299,7 @@ class cDialogo(extra.cVector):
 		extra.cVector.__init__(self, estilo)
 
 		#Seteamos los tiempos, traducimos todo a frames
-		#guardamos los tiempos como ms para tener mas precisión
+		#guardamos los tiempos como ms para tener mas precisiÃ³n
 		self._start = TimeToMS(dialogo[E_START])
 		self._end = TimeToMS(dialogo[E_END])
 		self._dur = self._end - self._start
@@ -307,12 +307,12 @@ class cDialogo(extra.cVector):
 		#Ponemos que efecto debe usar
 		self.efecto = min(max_effect, int(comun.SafeGetFloat(dialogo, E_EFFECT)))
 
-		#Cargamos las silabas (esta función setea el _texto)
+		#Cargamos las silabas (esta funciÃ³n setea el _texto)
 		self.__SetSilabas( dialogo[E_TEXT] )
 		#El texto lo sabemos luego de parsear las silabas
 		self.CambiarTexto(self._texto)
 
-		#Como la pos depende de la alineacion y por ende del tamaño del texto, solo lo podemos
+		#Como la pos depende de la alineacion y por ende del tamaÃ±o del texto, solo lo podemos
 		#hacer despues de parsear las silabas
 		o = self.original
 		px= o.pos_x
@@ -359,7 +359,8 @@ class cDialogo(extra.cVector):
 		(\d+) = cualkier digito, en este caso, el tiempo de las \k
 		([\\\-a-zA-Z_0-9]*)} = para el inline_fx ({\k20\-0} karaoke)
 		(\s*)([^{]*)(\s*) = espacio - cualkier caracter alfanumerico y signos-espacio"""
-		#probar con el nuevo regex de alch
+		#TODO probar con el nuevo regex de alch
+		#TODO cuando encuentre la sintaxis de una forma en el dialogo que en vez de crear un dialogo lo cree usando la forma
 		"""KARA = re.compile(
     r'''
     (?:\\[\w\d]+)*              # ignore tags before k
@@ -408,7 +409,7 @@ class cDialogo(extra.cVector):
 		"""Permite encadenar las silabas a una animacion
 		@funcion funcion a llamar con cada silaba y el progress
 		@duracion=None duracion de la animacion de cada silaba
-			Si no se especifica, se usará una duración tal que
+			Si no se especifica, se usarÃ¡ una duraciÃ³n tal que
 			se anime solo una silaba por vez.
 		"""
 		comun.Encadenar(self._dur, self.progress, self._silabas, funcion, duracion)
@@ -429,7 +430,7 @@ class Ass():
 	def __init__(self,  file,  max):
 		"""Al crear la clase se le puede indicar de que archivo cargar
 		@file archivo .ass a cargar
-		@max el numero máximo de efectos"""
+		@max el numero mÃ¡ximo de efectos"""
 
 		if file:
 			self.LoadFromFile(file,  max)
