@@ -70,7 +70,7 @@ class cPropiedades():
 		self.color4 = extra.cCairoColor(numero=0xFF808080) #sombra
 		#colores: primario Secundario Outline Back
 		self._capa = 0
-		
+
 		if otro:
 			self.CopiarTodoDe(otro)
 		else:
@@ -260,13 +260,13 @@ class cSilaba(extra.cVector):
 		"""Permite encadenar los caracteres a una animacion.
 		Antes de llamar a esta función llamen a DividirLetras
 		o activen la opcion en FxsGroup
-		@funcion funcion a llamar con cada silaba y el progreso
+		@funcion funcion a llamar con cada silaba y el progress
 		@duracion=None duracion de la animacion de cada caracter,
 			Si no se especifica, se usará una duración tal que
 			se anime solo un caracter por vez.
 		(Nota: no cambien el _texto si no quieren inconsistencias)
 		"""
-		comun.Encadenar(self._dur, self.progreso, self._letras, funcion, duracion)
+		comun.Encadenar(self._dur, self.progress, self._letras, funcion, duracion)
 
 class cDialogo(extra.cVector):
 	"""Un Dialogo representa una linea de texto,
@@ -384,7 +384,7 @@ class cDialogo(extra.cVector):
 			syl._start = tiempo
 
 			dur = int(ti)*10.0
-			
+
 			syl._dur = dur
 			syl._end = tiempo =  syl._start + syl._dur
 
@@ -406,12 +406,12 @@ class cDialogo(extra.cVector):
 
 	def Encadenar(self, funcion, duracion=None):
 		"""Permite encadenar las silabas a una animacion
-		@funcion funcion a llamar con cada silaba y el progreso
+		@funcion funcion a llamar con cada silaba y el progress
 		@duracion=None duracion de la animacion de cada silaba
 			Si no se especifica, se usará una duración tal que
 			se anime solo una silaba por vez.
 		"""
-		comun.Encadenar(self._dur, self.progreso, self._silabas, funcion, duracion)
+		comun.Encadenar(self._dur, self.progress, self._silabas, funcion, duracion)
 
 	def FullWiggle(self, amplitud=4, frecuencia=2):
 		#el wiggle que queria AbelKM

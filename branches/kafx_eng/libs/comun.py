@@ -8,11 +8,11 @@ import random
 
 from libs import video
 
-def ElegirPorCuadro(cuadro_ini, cuadro_fin, activo, inactivo=None ):
+def ElegirPorCuadro(cuadro_ini, cuadro_fin, active, inactive=None ):
 	"""frame_ini tiene el cuadro en que inicia
 	frame_Fin el cuadro donde termina
-	inactivo es lo que devuelve cuando el cuadro actual no esta entre frame_ini ni frame_fin
-	activo es lo que te devuelve si estas dentro del frame
+	inactive es lo que devuelve cuando el cuadro actual no esta entre frame_ini ni frame_fin
+	active es lo que te devuelve si estas dentro del frame
 
 	ejemplo
 	d.actual.pos_x = ElegirPorFrame(100, 200, 0, 20)
@@ -22,17 +22,17 @@ def ElegirPorCuadro(cuadro_ini, cuadro_fin, activo, inactivo=None ):
 	"""
 
 	if cuadro_ini <= video.cf.framen  <= cuadro_fin:
-		return activo
+		return active
 	else:
-		return inactivo #el else no es necesario pero es para que entiendas
+		return inactive #el else no es necesario pero es para que entiendas
 	#tambien podria usar esto perque quedaria muy criptico, lo dejo para el lulz
-	#return ( (cuadro_ini <= video.cf.framen) and activo) or inactivo
+	#return ( (cuadro_ini <= video.cf.framen) and active) or inactive
 
-def Elegir(progreso, vector):
-	#Segun un progreso (de 0.0 a 1.0) devuelve un item de un vector (array o lista) de elementos
-	progreso = Clamp(progreso)#el clamp es importante sino dara access error
+def Elegir(progress, vector):
+	#Segun un progress (de 0.0 a 1.0) devuelve un item de un vector (array o lista) de elementos
+	progress = Clamp(progress)#el clamp es importante sino dara access error
 	l = len(vector)
-	i = int(l*progreso)
+	i = int(l*progress)
 	if i == l: i = l-1
 	return vector[i]
 
@@ -83,107 +83,107 @@ def i_b_boing(p):
 	1, 1
 	)[1]
 
-def Interpolar(progreso, de, hasta, funcion=i_lineal):
+def Interpolate(progress, de, hasta, function=i_lineal):
 	"""
 	devuelve un número flotante entre 2 valores, el número devuelto corresponde a una cantidad indicada por el primer valor
 
-	@progreso indicador de que tan cerca del inico o fin debe estar el valor devuelto, debe ser un número entre 0 y 1 (aunque otros valores funcionan)
+	@progress indicador de que tan cerca del inico o fin debe estar el valor devuelto, debe ser un número entre 0 y 1 (aunque otros valores funcionan)
 	@de valor inicial, o comienzo del rango
 	@hasta valor final, o final del rango
-	@funcion funcion personal que devuelva un valor entre 0 y 1 (siempre float) dado un valor de progreso entre 0 y 1
+	@funcion funcion personal que devuelva un valor entre 0 y 1 (siempre float) dado un valor de progress entre 0 y 1
 	(puede usar las funciones que comienzan por i_)
 	"""
 	#http://es.wikipedia.org/wiki/Interpolación
-	return (funcion(progreso) * (hasta-de))+de
+	return (function(progress) * (hasta-de))+de
 
-def LERP(progreso, de, hasta):
+def LERP(progress, de, hasta):
 	"""
 	devuelve un número flotante entre 2 valores, el número devuelto corresponde a una cantidad indicada por el primer valor
 
-	@progreso indicador de que tan cerca del inico o fin debe estar el valor devuelto, debe ser un número entre 0 y 1 (aunque otros valores funcionan)
+	@progress indicador de que tan cerca del inico o fin debe estar el valor devuelto, debe ser un número entre 0 y 1 (aunque otros valores funcionan)
 	@de valor inicial, o comienzo del rango
 	@hasta valor final, o final del rango
 	Esta funcion es lo mismo que interpolar lineal, pero un poco mas rapida,
 	solo para funciones que requieran unicamente interpolacion lineal
 	"""
-	return de+(float(progreso)*(hasta-de))
+	return de+(float(progress)*(hasta-de))
 
-def RanmaBezier(progreso, puntos):
+def RanmaBezier(progress, points):
 	"""
 	Devuelve un punto (x, y) sobre una curva bezier dado el avance en la misma
 	Admite curvas biezer de cualquier orden
-	@progreso como en interpolar, normalmente un numero entre 0 y 1 indicando el avance de sobre la curva
-	@puntos : array de puntos -> [ [0, 0], [1, 1], [2, 2] ]
+	@progress como en interpolar, normalmente un numero entre 0 y 1 indicando el avance de sobre la curva
+	@points : array de points -> [ [0, 0], [1, 1], [2, 2] ]
 
-	es como PuntoBezier pero permite curvas de cualquier cantidad de puntos de control (de 1 a (teoricamente) infinito))
-	es algo mas lento que PuntoBezier para curvas de la misma cantidad de puntos
+	es como PuntoBezier pero permite curvas de cualquier cantidad de points de control (de 1 a (teoricamente) infinito))
+	es algo mas lento que PuntoBezier para curvas de la misma cantidad de points
 	escrito por Ranma42 @ irc.freenode.net/#cairo
 	"""
 
-	while len(puntos)>1:
-		puntos2 = []
-		for i in range(len(puntos) - 1):
-			px0,py0 = puntos[i]
-			px1,py1 = puntos[i+1]
-			p = (Interpolar(progreso, px0, px1), LERP(progreso, py0, py1))
-			puntos2.append(p)
-		puntos = puntos2
-	return puntos[0]
+	while len(points)>1:
+		points2 = []
+		for i in range(len(points) - 1):
+			px0,py0 = points[i]
+			px1,py1 = points[i+1]
+			p = (Interpolar(progress, px0, px1), LERP(progress, py0, py1))
+			points2.append(p)
+		points = points2
+	return points[0]
 
-def PuntoBezier(progreso, x_ini, y_ini,  x_int1, y_int1, x_int2, y_int2, x_fin, y_fin):
+def PuntoBezier(progress, x_ini, y_ini,  x_int1, y_int1, x_int2, y_int2, x_fin, y_fin):
 	"""
 	Devuelve un punto (x, y) sobre una curva bezier dado el avance en la misma
 	@x_ini, y_ini : punto inicial de la curva
 	@x_int1, y_int1 : 1º punto de control de la curva
 	@x_int2, y_int2 : 2º punto de control de la curva
 	@x_fin, y_fin : punto final de la curva
-	@progreso : avance sobre la curva (0 a 1)
+	@progress : avance sobre la curva (0 a 1)
 
 	Esta funcion es igual que Bezier pero es algo más rápida, además,
 	Está limitada a:
 					1 Punto de inicio
-					2 Puntos de control
+					2 points de control
 					1 Punto final
-	y todos los puntos son pasados por parámetro secuencialmente.
+	y todos los points son pasados por parámetro secuencialmente.
 	#with help of ranma42!
 	"""
 
-	curvx1 = LERP(progreso, x_ini, x_int1)
-	curvx2 = LERP(progreso, x_int1, x_int2)
-	curvx3 = LERP(progreso, x_int2, x_fin)
+	curvx1 = LERP(progress, x_ini, x_int1)
+	curvx2 = LERP(progress, x_int1, x_int2)
+	curvx3 = LERP(progress, x_int2, x_fin)
 
-	curvx4 = LERP(progreso, curvx1, curvx2)
-	curvx5 = LERP(progreso, curvx2, curvx3)
+	curvx4 = LERP(progress, curvx1, curvx2)
+	curvx5 = LERP(progress, curvx2, curvx3)
 
-	curvx6 = LERP(progreso, curvx4, curvx5)
+	curvx6 = LERP(progress, curvx4, curvx5)
 
-	curvy1 = LERP(progreso, y_ini, y_int1)
-	curvy2 = LERP(progreso, y_int1, y_int2)
-	curvy3 = LERP(progreso, y_int2, y_fin)
+	curvy1 = LERP(progress, y_ini, y_int1)
+	curvy2 = LERP(progress, y_int1, y_int2)
+	curvy3 = LERP(progress, y_int2, y_fin)
 
-	curvy4 = LERP(progreso, curvy1, curvy2)
-	curvy5 = LERP(progreso, curvy2, curvy3)
+	curvy4 = LERP(progress, curvy1, curvy2)
+	curvy5 = LERP(progress, curvy2, curvy3)
 
-	curvy6 = LERP(progreso, curvy4, curvy5)
+	curvy6 = LERP(progress, curvy4, curvy5)
 	return curvx6, curvy6
 
-def Encadenar(duracion, progreso, objetos, funcion, tiempo=None):
+def Encadenar(duracion, progress, objetos, function, tiempo=None):
 	"""Realiza una animación en cadena.
-	dado una duración maestra y un progreso maestro aplicados a
+	dado una duración maestra y un progress maestro aplicados a
 	un array de objetos y un tiempo de animacion por objeto
-	se calcula el progreso para cada objeto y se llama a la funcion pasada por parametro para cada uno.
+	se calcula el progress para cada objeto y se llama a la funcion pasada por parametro para cada uno.
 
 	La idea es poder animar sílabas según el diálogo, o letras según la sílaba,
 	pero aun así lo pongo acá para que pueda ser usado de otras formas
 
 	@duración Duración del tiempo maestro
-	@progreso float de rango 0 a 1 que dice el progreso maestro
+	@progress float de rango 0 a 1 que dice el progress maestro
 	@objetos array de objetos a ser animados en cadena.
 		serán pasados a la función func. (sólo debe implementar len y ser iterables (string y array funcionan))
 
 	@función debe ser una funcion
 	será llamada progresivamente vez por cada objeto en orden de aparición con los siguientes parámetros:
-		objeto, progreso
+		objeto, progress
 
 	@tiempo define el tiempo que dura la animación de cada objeto
 		si el tiempo es mayor a la duración/len(objetos)
@@ -195,18 +195,18 @@ def Encadenar(duracion, progreso, objetos, funcion, tiempo=None):
 	duracion = float(duracion)
 	slen = len(objetos)
 	if slen == 0 : return
-	tsil = duracion/slen#Tiempo por sílaba en progreso constante
+	tsil = duracion/slen#Tiempo por sílaba en progress constante
 
 	if not tiempo:
 		tiempo = tsil
-	#El progreso va a ser calculado de atrás para adelante. o sea, que terminen cuando les corresponda.
+	#El progress va a ser calculado de atrás para adelante. o sea, que terminen cuando les corresponda.
 	#Pero van a empezar cuando convenga para ajustarse al tiempo de animación.
 
-	#Cuanto del progreso del diálogo le corresponde
+	#Cuanto del progress del diálogo le corresponde
 	#a cada sílaba
 	#Para eso el calculo de las sílabas debe ser secuencial y en orden
 	finacum = tsil#Acumula los tiempos d fin (en que finaliza cada sílaba(respecto del diálogo))
-	tactualdiag=(progreso*duracion)
+	tactualdiag=(progress*duracion)
 	for obj in objetos:
 		tini = finacum - tiempo
 		tactualsilaba = (tactualdiag - tini)
@@ -217,7 +217,7 @@ def Encadenar(duracion, progreso, objetos, funcion, tiempo=None):
 		else:
 			prog = tactualsilaba/tiempo
 
-		funcion(obj, prog)#This is magic!
+		function(obj, prog)#This is magic!
 		finacum += tsil
 
 def SafeGetFloat(dicc, prop, default=0.0):
@@ -298,7 +298,7 @@ class Fx():
 	def EnSilabaMuerta(self, *args):
 		pass
 	def EnSilabaDorm(self, *args):
-		#Sílaba dormida común (el progreso es igual para todas las sílabas dormidas del mismo diálogo)
+		#Sílaba dormida común (el progress es igual para todas las sílabas dormidas del mismo diálogo)
 		pass
 
 	#Hasta aca son las animaciones normales
@@ -342,7 +342,7 @@ class Evento():
 ####Cosas mas bien internas
 
 def MyImport(name):
-	#función interna que uso para cargar un modulo a partir de un string separado por puntos, no recomiendo que lo usen
+	#función interna que uso para cargar un modulo a partir de un string separado por points, no recomiendo que lo usen
 	mod = __import__(name)
 	components = name.split('.')
 	for comp in components[1:]:
