@@ -15,7 +15,7 @@ import traceback
 traceback.sys.stdout = open('stdout.txt', 'w', 0)
 traceback.sys.stderr = open('stderr.txt',  'w', 0)
 
-version_info = (1, 666, 12, 'newfinalrc1')
+version_info = (1, 7, 8, 'newfinalrc2')
 print 'Python version', traceback.sys.version_info
 if traceback.sys.version_info[:3] < (2, 6, 6):
 	"""
