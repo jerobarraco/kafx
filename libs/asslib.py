@@ -57,10 +57,10 @@ def TimeToMS(tiempo):
 
 
 class cPropiedades():
-	def __init__(self, otro=None, dicc=None):
+	def __init__(self, other=None, dicc=None):
 		"""Hay 3 formas de crear un estilo:
 			sin nada, se crea con valores default.
-			cPropiedades(otro=otroacopiar) o cPropiedades(otroacopiar) copia los valores de otro
+			cPropiedades(other=otroacopiar) o cPropiedades(otroacopiar) copia los valores de otro
 			cPropiedades(dicc=diccionario) lo inicializa con los valores de un diccionario ass"""
 
 		#Estos necesitan estar afuera porque si no estan inicializados, en el caso q se cree directamente una  instancia cPropiedades dara error!!
@@ -71,8 +71,8 @@ class cPropiedades():
 		#colores: primario Secundario Outline Back
 		self._capa = 0
 
-		if otro:
-			self.CopiarTodoDe(otro)
+		if other:
+			self.CopiarTodoDe(other)
 		else:
 			#valores por default
 			#animables
@@ -93,11 +93,11 @@ class cPropiedades():
 			#desplazamiento de la sombra en pixels, en x e y respectivamente
 			self.shad_x = 0
 			self.shad_y = 0
-			#modos de pintado
-			self.modo_relleno = 0
-			self.modo_borde = 0
-			self.modo_sombra = 0
-			self.modo_particula = 0
+			#modes de pintado
+			self.mode_relleno = 0
+			self.mode_borde = 0
+			self.mode_sombra = 0
+			self.mode_particula = 0
 			#no animables
 			#nombre del estilo
 			self._name ='EstiloManualmenteCreado'
@@ -130,61 +130,61 @@ class cPropiedades():
 			if dicc:
 				self.FromDict(dicc)#porque al dict le pueden faltar valores
 
-	def CopiarTodoDe(self, otro):
+	def CopiarTodoDe(self, other):
 		#Esto es importante porque el estilo original de los dialgos se inicia en realidad pasandole un estilo al momento de crearlo
-		self.CopiarDe(otro)
+		self.CopiarDe(other)
 		#No animables
-		self._name = otro._name
-		self._fuente = otro._fuente
-		self._size  = otro._size
-		self._negrita = otro._negrita
-		self._italica = otro._italica
-		self._marginv = otro._marginv
-		self._marginr = otro._marginr
-		self._marginl = otro._marginl
-		self._alin = otro._alin
-		#self._capa = otro._capa # no es necesario
+		self._name = other._name
+		self._fuente = other._fuente
+		self._size  = other._size
+		self._negrita = other._negrita
+		self._italica = other._italica
+		self._marginv = other._marginv
+		self._marginr = other._marginr
+		self._marginl = other._marginl
+		self._alin = other._alin
+		#self._capa = other._capa # no es necesario
 
 		"""
 		calculados
-		self._ancho = otro._ancho
-		self._alto = otro._alto
-		self._alto_linea = otro._alto_linea
+		self._ancho = other._ancho
+		self._alto = other._alto
+		self._alto_linea = other._alto_linea
 
-		self._x_bearing = otro._x_bearing
-		self._y_bearing = otro._y_bearing
-		self._x_advance = otro._x_advance
-		self._y_advance = otro._y_advance
-		self._ascent = otro._ascent
-		self._descent = otro._descent
-		self._max_x_advance = otro._max_x_advance
-		self._max_y_advance = otro._max_y_advance"""
+		self._x_bearing = other._x_bearing
+		self._y_bearing = other._y_bearing
+		self._x_advance = other._x_advance
+		self._y_advance = other._y_advance
+		self._ascent = other._ascent
+		self._descent = other._descent
+		self._max_x_advance = other._max_x_advance
+		self._max_y_advance = other._max_y_advance"""
 
-	def CopiarDe(self,  otro):
-		"""Copia los datos de otro objeto del mismo tipo
-		@otro es un objeto del tipo cPropiedades
+	def CopiarDe(self,  other):
+		"""Copia los datos de other objeto del mismo tipo
+		@other es un objeto del tipo cPropiedades
 
 		copia solo los datos animables para hacerlo más rapido.
 		"""
-		self.pos_x = otro.pos_x
-		self.pos_y = otro.pos_y
-		self.org_x = otro.org_x
-		self.org_y = otro.org_y
-		self.shad_x = otro.shad_x
-		self.shad_y = otro.shad_y
-		self.scale_x = otro.scale_x
-		self.scale_y = otro.scale_y
-		self.angulo = otro.angulo
-		self.color1.CopiarDe(otro.color1)
-		self.color4.CopiarDe(otro.color4)
-		self.color3.CopiarDe(otro.color3)
-		self.color2.CopiarDe(otro.color2)
-		self.borde = otro.borde
-		self.sombra = otro.sombra
-		self.modo_relleno = otro.modo_relleno
-		self.modo_borde = otro.modo_borde
-		self.modo_sombra = otro.modo_sombra
-		self.modo_particula = otro.modo_particula
+		self.pos_x = other.pos_x
+		self.pos_y = other.pos_y
+		self.org_x = other.org_x
+		self.org_y = other.org_y
+		self.shad_x = other.shad_x
+		self.shad_y = other.shad_y
+		self.scale_x = other.scale_x
+		self.scale_y = other.scale_y
+		self.angulo = other.angulo
+		self.color1.CopiarDe(other.color1)
+		self.color4.CopiarDe(other.color4)
+		self.color3.CopiarDe(other.color3)
+		self.color2.CopiarDe(other.color2)
+		self.borde = other.borde
+		self.sombra = other.sombra
+		self.mode_relleno = other.mode_relleno
+		self.mode_borde = other.mode_borde
+		self.mode_sombra = other.mode_sombra
+		self.mode_particula = other.mode_particula
 
 	def FromDict(self, estilo):
 		"""Crea los valores desde un diccionario, para uso interno"""
