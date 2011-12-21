@@ -79,11 +79,11 @@ def SetEstilo(estilo):
 	ctx.select_font_face(estilo._fuente, int(estilo._italica),  int(estilo._negrita))
 	ctx.set_font_size(estilo._size)
 
-def CrearMatriz(pos_x=0, pos_y=0, org_x=0, org_y=0, angulo=0, scale_x=1, scale_y=1, inversa=False):
+def CrearMatriz(pos_x=0, pos_y=0, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=1, inversa=False):
 	"""Crea una matriz segun las transformaciones comunes
 	pos_x, pos_y posicion x/y final
 	org_x, org_y el punto de origen de la transformación
-	angulo angulo en radianes
+	angle angulo en radianes
 	scale_x scale_y la escala
 	inversa = False indica si es una matriz inversa (para patrones (puede fallar)) o normal, para contexto
 	en caso de ser una matriz inversa, los scales deben estar invertidos o sea, 1.0/escala"""
@@ -98,7 +98,7 @@ def CrearMatriz(pos_x=0, pos_y=0, org_x=0, org_y=0, angulo=0, scale_x=1, scale_y
 		#el punto de origen para la POSICION en los dialogos no es el mismo que el punto de origen, y esta siempre en el baseline,
 		#por eso mismo. hay que sumarle el origen, esto no es "deseable" en las particulas pej, donde quermos que estén centradas.
 		m.translate(org_x, org_y)
-		m.rotate(angulo)
+		m.rotate(angle)
 		m.scale(scale_x, scale_y)
 		m.translate(-pos_x, -pos_y)
 	else:
@@ -108,7 +108,7 @@ def CrearMatriz(pos_x=0, pos_y=0, org_x=0, org_y=0, angulo=0, scale_x=1, scale_y
 		#recuerden lean la doc y piensen las cosas
 		m.translate(pos_x, pos_y)
 		m.scale(scale_x, scale_y)
-		m.rotate(-angulo)
+		m.rotate(-angle)
 		m.translate(-org_x, -org_y)
 	return m
 
@@ -178,14 +178,14 @@ class cCairoColor():
 		self.b=other.b
 		self.a=other.a
 
-	def Interpolar(self, progress, other, inter=comun.i_lineal):
+	def Interpolate(self, progress, other, inter=comun.i_lineal):
 		"""Interpola un color con otro, segun un progress
 		La interpolacion es lineal, asique no esperen algo de croma ni nada por el estilo.
 
 		@progress : indicador de progress de la interpolacion, es un valor entre 0 y 1
 		@other : el color al cual se interpolará
 		"""
-		i = comun.Interpolar
+		i = comun.Interpolate
 		self.r = i(progress, self.r, other.r, inter)
 		self.g = i(progress, self.g, other.g, inter)
 		self.b = i(progress, self.b, other.b, inter)
@@ -211,7 +211,7 @@ class cVector():
 	P_PATRON_COLOREADO = 8
 	PART_BORDE = 0
 	PART_RELLENO = 1
-	PART_SOMBRA = 2
+	PART_SHADOW = 2
 	PART_PARTICULA = 3
 
 	def __init__(self, estilo=None, texto='', figura=None, parent=None):
@@ -229,7 +229,7 @@ class cVector():
 		self._indice = 0
 		self._parent = parent
 		self.efecto = 0
-		self.texturas = [None, None, None, None] #borde, relleno, sombra, particulas
+		self.texturas = [None, None, None, None] #borde, relleno, shadow, particulas
 		#Es la matriz de transformación del vector
 		self.matrix = cairo.Matrix()
 
@@ -245,7 +245,7 @@ class cVector():
 		else:
 			self._old_path = self.path = None
 
-		#el pattern usado por PintarConCache, si se quiere reestablecer se puede proceder a borrar esta variable (asignandole None, nunca con "del _pat")
+		#el pattern usado por PaintWithCache, si se quiere reestablecer se puede proceder a borrar esta variable (asignandole None, nunca con "del _pat")
 		self._pat_cache = None
 
 	def _SetTextVertPos(self):
@@ -278,7 +278,7 @@ class cVector():
 			props.pos_x = video.vi.width - props._ancho - props._marginr
 
 		return
-		"""if props.angulo and not self._parent:
+		"""if props.angle and not self._parent:
 				props.pos_x, props.pos_y = self.matrix.transform_distance(props.pos_x, props.pos_y)"""
 
 
@@ -304,10 +304,10 @@ class cVector():
 			self._SetTextHorizPos()
 			self._SetTextVertPos()
 
-		if self._parent and props.angulo:
+		if self._parent and props.angle:
 			#con el self.__parent evitamos modificar el dialogo
 			#fix porque cuando el origen esta en otro lado, calcula para el orto
-			#para arreglar el tema de las silabas a partir de un texto con angulo
+			#para arreglar el tema de las silabas a partir de un texto con angle
 			props.org_x = 0
 			props.org_y = 0
 			#self._UpdateMatrix()
@@ -419,7 +419,7 @@ class cVector():
 	def _UpdateMatrix(self):
 		#updates the transformation matrix for the vector with the current style
 		a = self.actual
-		self.matrix = CrearMatriz(a.pos_x+a.org_x, a.pos_y-a.org_y, a.org_x, a.org_y, a.angulo, a.scale_x, a.scale_y, False)
+		self.matrix = CrearMatriz(a.pos_x+a.org_x, a.pos_y-a.org_y, a.org_x, a.org_y, a.angle, a.scale_x, a.scale_y, False)
 
 	def _UpdateTextPath(self):
 		#Creates the path from a text, the style must be already set, position is ignored
@@ -488,7 +488,7 @@ class cVector():
 		self.actual.CopiarDe(self.original)
 		self.path = self._old_path
 
-	def PintarConCache(self, conFondo=False, matriz=None):
+	def PaintWithCache(self, conFondo=False, matriz=None):
 		"""Pinta un vector utilizando cache... notar que solo se crea la pintura la primera vez que se llama, luego se pintara lo cacheado
 		opcionales:
 		@conFondo=False Booleano indica si se pasa el fondo al texto (GrupoInicio con fondo)
@@ -499,14 +499,14 @@ class cVector():
 			ctx.set_source(self._pat_cache)
 			ctx.paint()
 		else:
-			self._pat_cache = self.Pintar(conFondo, matriz)
+			self._pat_cache = self.Paint(conFondo, matriz)
 		return self._pat_cache
 
 	def BorrarCache(self):
 		#Elimina el cache de pintura, trivial, para facilitarte la vida.
 		self._pat_cache = None
 
-	def Pintar(self, conFondo=False, matriz=None, matriz2=None):
+	def Paint(self, conFondo=False, matriz=None, matriz2=None):
 		"""Pinta un vector utilizando el estilo actual
 		opcionales:
 		@conFondo=False Booleano indica si se pasa el fondo al texto (GrupoInicio con fondo)
@@ -515,7 +515,7 @@ class cVector():
 		"""
 		a = self.actual
 		ctx = video.cf.ctx
-		#empezamos un grupo por la sombra
+		#empezamos un grupo por la shadow
 		avanzado.GrupoInicio(conFondo)
 
 		if matriz:
@@ -550,17 +550,17 @@ class cVector():
 		#sobre el raster y no sobre el vector, eso trae consecuencias
 		pat = avanzado.GrupoFin(0.0, matriz2)
 
-		#sombra. notar que la cargamos antes de restaurar la matriz identidad,
+		#shadow. notar que la cargamos antes de restaurar la matriz identidad,
 		#para q sea concordante en caso de no ser solida, y que los points de control no sean un caso y sean iguales en todos los casos (borde/relleno)
-		basico.sources[a.mode_sombra](self, a.color4, 2)
-		#self.__SSombra(self, a.color4, 2)
+		basico.sources[a.mode_shadow](self, a.color4, 2)
+		#self.__SShadow(self, a.color4, 2)
 
-		#Devolvemos el patron con la sombra integrada
-		pat =  avanzado.Sombra(pat, a.sombra, a.shad_x, a.shad_y)
+		#Devolvemos el patron con la shadow integrada
+		pat =  avanzado.Shadow(pat, a.shadow, a.shad_x, a.shad_y)
 		ctx.identity_matrix()
 		return pat
 
-	def PintarReferencia(self, matriz=None):
+	def PaintReference(self, matriz=None):
 		"""Pinta los points de referencia del vector, note que puede no estar sujeta a ciertas transformaciones"""
 		ctx = video.cf.ctx
 		if matriz:
@@ -615,8 +615,8 @@ class cVector():
 		@de tupla (x,y)
 		@a tupla (x,y)
 		"""
-		self.actual.pos_x = comun.Interpolar(self.progress, de[0], a[0], inter)
-		self.actual.pos_y = comun.Interpolar(self.progress, de[1], a[1], inter)
+		self.actual.pos_x = comun.Interpolate(self.progress, de[0], a[0], inter)
+		self.actual.pos_y = comun.Interpolate(self.progress, de[1], a[1], inter)
 
 	def MoverA(self, x, y, inter=comun.i_lineal):
 		"""Anima el movimiento de un vector desde el punto indicado hasta su posicion original
@@ -642,7 +642,7 @@ class cVector():
 		@hasta float con el valor final
 		ambos valores tienen un rango de 0 a 1
 		"""
-		self.Alpha(comun.Interpolar(self.progress, desde, hasta, inter))
+		self.Alpha(comun.Interpolate(self.progress, desde, hasta, inter))
 
 	def Alpha(self, alpha):
 		"""Especifica el alfa para todos los colores
@@ -652,10 +652,10 @@ class cVector():
 
 	def Girar(self, desde, hasta, inter=comun.i_lineal):
 		"""Anima la rotacion de un vector
-		@desde angulo inical en radianes
-		@hasta angulo final en radianes
+		@desde angle inical en radianes
+		@hasta angle final en radianes
 		"""
-		self.actual.angulo = comun.Interpolar(self.progress, desde, hasta, inter)
+		self.actual.angle = comun.Interpolate(self.progress, desde, hasta, inter)
 
 	def Escalar(self, desde, hasta, inter=comun.i_lineal):
 		"""Anima el escalado de un vector
@@ -663,15 +663,15 @@ class cVector():
 		@hasa escala final
 		ambos son float donde 1 es el valor normal >1 es mas grande y <1 es mas pequeño
 		"""
-		self.actual.scale_x = self.actual.scale_y = comun.Interpolar(self.progress, desde, hasta, inter)
+		self.actual.scale_x = self.actual.scale_y = comun.Interpolate(self.progress, desde, hasta, inter)
 
 	def Sacudir(self, amplitud=4):
 		"""
 		Anima la posición como un shake
 		@amplitud = cantidad de pixels que se moverá
 		(requiere que los estilos se restauren)"""
-		self.actual.pos_x += comun.Interpolar(self.progress, -amplitud, amplitud, comun.i_rand)
-		self.actual.pos_y += comun.Interpolar(self.progress, -amplitud, amplitud, comun.i_rand)
+		self.actual.pos_x += comun.Interpolate(self.progress, -amplitud, amplitud, comun.i_rand)
+		self.actual.pos_y += comun.Interpolate(self.progress, -amplitud, amplitud, comun.i_rand)
 
 	def Wiggle(self, amplitud=4, frecuencia=2):
 		"""
@@ -693,30 +693,30 @@ class cVector():
 		self.actual.pos_y += y
 		return x, y
 
-	def CargarTextura(self, archivo, parte=PART_BORDE, extend=cairo.EXTEND_REPEAT):
+	def CargarTextura(self, archivo, part=PART_BORDE, extend=cairo.EXTEND_REPEAT):
 		"""Esto carga la textura para todos los pintados, desde un archivo png
 		@archivo path al archivo .png
-		@parte para que parte del texto se usará (0=borde, 1=relleno, 2=sombra, 3=particulas)
-		(o usar .PART_BORDE .PART_RELLENO .PART_SOMBRA o .PART_PARTICULAS)
+		@part para que parte del texto se usará (0=borde, 1=relleno, 2=shadow, 3=particulas)
+		(o usar .PART_BORDE .PART_RELLENO .PART_SHADOW o .PART_PARTICULAS)
 		@extend tipo de extend de cairo default: cairo.EXTEND_REPEAT
 		"""
 		t = CargarTextura(archivo, extend)
-		self.texturas[parte] = t
+		self.texturas[part] = t
 		#esto es un fix para las texturas con otro extend.
-		self.MoverTextura(pos_x = 0, pos_y=-self.original._ascent, parte=parte)
+		self.MoverTextura(pos_x = 0, pos_y=-self.original._ascent, part=part)
 		a = self.actual
 		o = self.original
-		if parte == self.PART_BORDE:
+		if part == self.PART_BORDE:
 			o.mode_borde = a.mode_borde = self.P_TEXTURA
-		elif parte == self.PART_RELLENO:
+		elif part == self.PART_RELLENO:
 			o.mode_relleno = a.mode_relleno = self.P_TEXTURA
-		elif parte == self.PART_SOMBRA:
-			o.mode_sombra = a.mode_sombra = self.P_TEXTURA
-		elif parte == self.PART_PARTICULA:
+		elif part == self.PART_SHADOW:
+			o.mode_shadow = a.mode_shadow = self.P_TEXTURA
+		elif part == self.PART_PARTICULA:
 			o.mode_particula = a.mode_particula = self.P_TEXTURA
 
-	def MoverTextura(self, pos_x, pos_y, org_x=0, org_y=0, angulo=0, scale_x=1, scale_y=1, parte=0):
-		self.texturas[parte].set_matrix(CrearMatriz(pos_x, pos_y, org_x, org_y, angulo, scale_x, scale_y, inversa=True))
+	def MoverTextura(self, pos_x, pos_y, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=1, part=0):
+		self.texturas[part].set_matrix(CrearMatriz(pos_x, pos_y, org_x, org_y, angle, scale_x, scale_y, inversa=True))
 
 	def CrearParticulas(self, textura=None, escala=1.0, alpha_min=0.2, barrido_vertical=True, mode=0):
 		"""Super Lento
@@ -746,13 +746,13 @@ class cVector():
 		#Creamos un nuevo grupo para que no hayan cochinadas en el medio
 		avanzado.GrupoInicio()
 		#pintamos el vector/dialogo/silaba
-		self.Pintar()
+		self.Paint()
 		#creamos las particulas
 		parts = avanzado.CrearParticulas(box, textura, escala, alpha_min, barrido_vertical, mode)
 		avanzado.GrupoFin(opacidad=0.0)
 		return parts
 
-	def PintarReflejo(self, alto = None):
+	def PaintReflection(self, alto = None):
 		"""@alto : el alto en pixels para el degradado, o None para usar el default"""
 
 		#cache
@@ -762,7 +762,7 @@ class cVector():
 		alto = alto or self.original._alto
 
 		avanzado.GrupoInicio()
-		self.Pintar()
+		self.Paint()
 		avanzado.fBlur()
 		mt = CrearMatriz(org_y=posy-self.actual.org_y, pos_y=posy+alto_linea+descent, scale_y = -1)
 		pat = avanzado.GrupoFin(0.0, matriz = mt)
