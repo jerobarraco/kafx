@@ -12,6 +12,9 @@ Contents:
    :maxdepth: 2
 	
    comun.rst
+   video.rst
+   asslib.rst
+   extra.rst
    
 Indices and tables
 ==================
