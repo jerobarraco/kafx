@@ -209,7 +209,7 @@ class cVector():
 	P_AN_DEG_LIN = 6
 	P_AN_DEG_RAD = 7
 	P_PATRON_COLOREADO = 8
-	PART_BORDE = 0
+	PART_BORDER = 0
 	PART_RELLENO = 1
 	PART_SHADOW = 2
 	PART_PARTICULA = 3
@@ -229,7 +229,7 @@ class cVector():
 		self._indice = 0
 		self._parent = parent
 		self.efecto = 0
-		self.texturas = [None, None, None, None] #borde, relleno, shadow, particulas
+		self.texturas = [None, None, None, None] #border, relleno, shadow, particulas
 		#Es la matriz de transformación del vector
 		self.matrix = cairo.Matrix()
 
@@ -530,14 +530,14 @@ class cVector():
 		#tambien está el ctx.transform, pero creo q eso va multiplicando las matrices (o sea, suma las distorciones)
 		ctx.new_path()
 		ctx.append_path(self.path)
-		#borde
-		if a.borde:
-			#Si HAY borde hacemos toda la maniobra (esto acelera las cosas en caso que no se quieran bordes)
-			ctx.set_line_width(a.borde)
+		#border
+		if a.border:
+			#Si HAY border hacemos toda la maniobra (esto acelera las cosas en caso que no se quieran bordes)
+			ctx.set_line_width(a.border)
 			#Ponemos el source usando la funcion para sources
-			#asignada al borde y lo mismo haremos para el resto de las partes
-			basico.sources[a.mode_borde](self, a.color3, 0)
-			#self.__SBorde(self, a.color3, 0)
+			#asignada al border y lo mismo haremos para el resto de las partes
+			basico.sources[a.mode_border](self, a.color3, 0)
+			#self.__SBorder(self, a.color3, 0)
 			ctx.stroke_preserve()
 
 		#relleno
@@ -551,7 +551,7 @@ class cVector():
 		pat = avanzado.GrupoFin(0.0, matriz2)
 
 		#shadow. notar que la cargamos antes de restaurar la matriz identidad,
-		#para q sea concordante en caso de no ser solida, y que los points de control no sean un caso y sean iguales en todos los casos (borde/relleno)
+		#para q sea concordante en caso de no ser solida, y que los points de control no sean un caso y sean iguales en todos los casos (border/relleno)
 		basico.sources[a.mode_shadow](self, a.color4, 2)
 		#self.__SShadow(self, a.color4, 2)
 
@@ -596,7 +596,7 @@ class cVector():
 		Esto no es valido para paths deformados, en ese caso puede ser mejor usar ctx.path_extents
 		"""
 		o= self.original
-		bord= self.actual.borde
+		bord= self.actual.border
 		#compatible con rectangle de cairo.....
 		return (-o._x_bearing-bord, -o._alto-bord, o._x_bearing+o._ancho+(bord*2), o._alto+o._descent+(bord*2))
 		#NO OLVIDAR QUE ES X, Y, ANCHO, ALTO
@@ -693,11 +693,11 @@ class cVector():
 		self.actual.pos_y += y
 		return x, y
 
-	def CargarTextura(self, archivo, part=PART_BORDE, extend=cairo.EXTEND_REPEAT):
+	def CargarTextura(self, archivo, part=PART_BORDER, extend=cairo.EXTEND_REPEAT):
 		"""Esto carga la textura para todos los pintados, desde un archivo png
 		@archivo path al archivo .png
-		@part para que parte del texto se usará (0=borde, 1=relleno, 2=shadow, 3=particulas)
-		(o usar .PART_BORDE .PART_RELLENO .PART_SHADOW o .PART_PARTICULAS)
+		@part para que parte del texto se usará (0=border, 1=relleno, 2=shadow, 3=particulas)
+		(o usar .PART_BORDER .PART_RELLENO .PART_SHADOW o .PART_PARTICULAS)
 		@extend tipo de extend de cairo default: cairo.EXTEND_REPEAT
 		"""
 		t = CargarTextura(archivo, extend)
@@ -706,8 +706,8 @@ class cVector():
 		self.MoverTextura(pos_x = 0, pos_y=-self.original._ascent, part=part)
 		a = self.actual
 		o = self.original
-		if part == self.PART_BORDE:
-			o.mode_borde = a.mode_borde = self.P_TEXTURA
+		if part == self.PART_BORDER:
+			o.mode_border = a.mode_border = self.P_TEXTURA
 		elif part == self.PART_RELLENO:
 			o.mode_relleno = a.mode_relleno = self.P_TEXTURA
 		elif part == self.PART_SHADOW:
@@ -736,10 +736,10 @@ class cVector():
 		x1, y1, x2, y2 = map(int, self.Box())
 		a = self.actual
 		#lo transportamos a las coordenadas absolutas (o relativas a la pantalla)
-		x1 += int(a.pos_x-a.borde)
-		x2 += int(a.pos_x+a.borde)
-		y1 += int(a.pos_y-a.borde)
-		y2 += int(a.pos_y+a.borde)
+		x1 += int(a.pos_x-a.border)
+		x2 += int(a.pos_x+a.border)
+		y1 += int(a.pos_y-a.border)
+		y2 += int(a.pos_y+a.border)
 
 		box = (x1, y1, x2, y2)
 

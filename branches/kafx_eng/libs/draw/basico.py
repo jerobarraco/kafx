@@ -108,14 +108,14 @@ def SBevel(obj, color, part):
 Podes implementar los tuyos en tu efecto, sólo agregalos al array al final,
 tu función debe tener 3 parametros
 	obj -> el objeto (cDialogo, cSilaba o cVector)
-	color -> el color sugerido (color para relleno, ocolor para borde, bcolor para sombra)
-	part -> 0, 1 o 2 indicando borde, relleno o sombra respectivamente
+	color -> el color sugerido (color para relleno, ocolor para border, bcolor para sombra)
+	part -> 0, 1 o 2 indicando border, relleno o sombra respectivamente
 
 para usarla sólo debes agregar el nombre de tu función al final  (recomiendo usar
 	basico.sources.append(xxxxx)
 desde tu script, nunca modifiques este archivo)
 
-y poner el indice que corresponda al usar ModeRelleno/Borde/Shadow
+y poner el indice que corresponda al usar ModeRelleno/Border/Shadow
 ej: diag.ModeShadow(8)
 """
 sources = [SSolido, STextura, SDegradadoVertical, SDegradadoHorizontal, SDegradadoDiagonal,
