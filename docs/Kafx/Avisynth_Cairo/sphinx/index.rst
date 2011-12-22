@@ -13,8 +13,12 @@ Contents:
 	
    comun.rst
    video.rst
+   audio.rst
+   formas.rst
    asslib.rst
    extra.rst
+   basico.rst
+   avanzado.rst
    
 Indices and tables
 ==================
@@ -22,8 +26,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-Otra cosa:
-
-.. automodule:: kafx_main
-	:members:
