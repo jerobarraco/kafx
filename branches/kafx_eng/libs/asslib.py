@@ -94,7 +94,7 @@ class cPropiedades():
 			self.shad_x = 0
 			self.shad_y = 0
 			#modes de pintado
-			self.mode_relleno = 0
+			self.mode_padding = 0
 			self.mode_border = 0
 			self.mode_shadow = 0
 			self.mode_particula = 0
@@ -181,7 +181,7 @@ class cPropiedades():
 		self.color2.CopyFrom(other.color2)
 		self.border = other.border
 		self.shadow = other.shadow
-		self.mode_relleno = other.mode_relleno
+		self.mode_padding = other.mode_padding
 		self.mode_border = other.mode_border
 		self.mode_shadow = other.mode_shadow
 		self.mode_particula = other.mode_particula
