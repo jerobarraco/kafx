@@ -59,7 +59,7 @@ def PintarEnPantalla(msg):
 	lasty = 15
 	for n in msg.split('\n'):
 		lasty = error_obj.CambiarTexto(n, (15, lasty))[1] + error_obj.original._alto_linea
-		error_obj.Pintar()
+		error_obj.Paint()
 
 def Error(msg=""):
 	"""Escribe un mensaje de error al archivo y en la pantalla,
