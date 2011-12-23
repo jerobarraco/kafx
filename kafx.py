@@ -124,7 +124,10 @@ if __name__ == '__main__':
 			module = os.sys.argv[1]
 			module = os.path.split(module)[-1]
 			module = module.split('.')[0]
-
+			
+		if len(os.sys.argv)>2:
+			profiling = bool(os.sys.argv[2])
+			kf.SetProfiling(profiling)
 		conf = __import__(module)
 		print "importado el modulo", module, conf
 
