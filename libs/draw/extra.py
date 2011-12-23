@@ -210,7 +210,7 @@ class cVector():
 	P_AN_DEG_RAD = 7
 	P_PATRON_COLOREADO = 8
 	PART_BORDER = 0
-	PART_RELLENO = 1
+	PART_FILL = 1
 	PART_SHADOW = 2
 	PART_PARTICULA = 3
 
@@ -229,7 +229,7 @@ class cVector():
 		self._indice = 0
 		self._parent = parent
 		self.efecto = 0
-		self.texturas = [None, None, None, None] #border, relleno, shadow, particulas
+		self.texturas = [None, None, None, None] #border, fill, shadow, particulas
 		#Es la matriz de transformación del vector
 		self.matrix = cairo.Matrix()
 
@@ -540,9 +540,9 @@ class cVector():
 			#self.__SBorder(self, a.color3, 0)
 			ctx.stroke_preserve()
 
-		#relleno
-		basico.sources[a.mode_relleno](self, a.color1, 1)
-		#self.__SRelleno(self, a.color1, 1)
+		#fill
+		basico.sources[a.mode_fill](self, a.color1, 1)
+		#self.__SFill(self, a.color1, 1)
 		ctx.fill()
 
 		#finalizamos el grupo y aplicamos la 2º matriz
@@ -551,7 +551,7 @@ class cVector():
 		pat = avanzado.GrupoFin(0.0, matriz2)
 
 		#shadow. notar que la cargamos antes de restaurar la matriz identidad,
-		#para q sea concordante en caso de no ser solida, y que los points de control no sean un caso y sean iguales en todos los casos (border/relleno)
+		#para q sea concordante en caso de no ser solida, y que los points de control no sean un caso y sean iguales en todos los casos (border/fill)
 		basico.sources[a.mode_shadow](self, a.color4, 2)
 		#self.__SShadow(self, a.color4, 2)
 
@@ -696,8 +696,8 @@ class cVector():
 	def CargarTextura(self, archivo, part=PART_BORDER, extend=cairo.EXTEND_REPEAT):
 		"""Esto carga la textura para todos los pintados, desde un archivo png
 		@archivo path al archivo .png
-		@part para que parte del texto se usará (0=border, 1=relleno, 2=shadow, 3=particulas)
-		(o usar .PART_BORDER .PART_RELLENO .PART_SHADOW o .PART_PARTICULAS)
+		@part para que parte del texto se usará (0=border, 1=fill, 2=shadow, 3=particulas)
+		(o usar .PART_BORDER .PART_FILL .PART_SHADOW o .PART_PARTICULAS)
 		@extend tipo de extend de cairo default: cairo.EXTEND_REPEAT
 		"""
 		t = CargarTextura(archivo, extend)
@@ -708,8 +708,8 @@ class cVector():
 		o = self.original
 		if part == self.PART_BORDER:
 			o.mode_border = a.mode_border = self.P_TEXTURA
-		elif part == self.PART_RELLENO:
-			o.mode_relleno = a.mode_relleno = self.P_TEXTURA
+		elif part == self.PART_FILL:
+			o.mode_fill = a.mode_fill = self.P_TEXTURA
 		elif part == self.PART_SHADOW:
 			o.mode_shadow = a.mode_shadow = self.P_TEXTURA
 		elif part == self.PART_PARTICULA:
