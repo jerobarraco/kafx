@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Kick Ass FX
-copyright Barraco Mármol Jerónimo, David Pineda Melendez y Colaboradores 2007
+copyright Barraco Mármol Jerónimo, David Pineda Melendez, Martín (Abelkm) y Colaboradores 2007
 GNU/GPL
 """
 
@@ -28,7 +28,6 @@ if traceback.sys.version_info[:3] < (2, 6, 6):
 
 print "Cargando Cairo..." #si, el sistema de loggin rulea
 import cairo
-#import cProfile
 print 'Cairo cargado. Version:', cairo.version_info
 print 'Cargando KAFX...'
 from libs import video, comun, asslib

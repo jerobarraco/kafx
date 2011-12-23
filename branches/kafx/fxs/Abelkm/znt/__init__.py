@@ -60,4 +60,3 @@ class Evento2(comun.Evento):
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		self.fxs = (FX1(), FX1())
-		self.tipo_blur = 1
