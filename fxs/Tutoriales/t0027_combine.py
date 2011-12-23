@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-
+﻿# -*- coding: utf-8 -*-
 from libs import comun
 
 class EfectoGenerico(comun.Fx):
@@ -10,12 +9,7 @@ class EfectoGenerico(comun.Fx):
 				diag.actual.color1.CopyFrom(diag.actual.color2)
 				diag.Paint()
 
-
-
-
-
 class Efecto2(comun.Fx):
-
 		def EnLetra(self, let):
 				let.Pintar()
 
@@ -24,10 +18,6 @@ class Efecto2(comun.Fx):
 class Compuesto (EfectoGenerico, Efecto2):
 		pass
 
-
-
 class FxsGroup(comun.FxsGroup):
-
-        #fxs = (Compuesto(), )#si queres podes definir SOLO el compuesto
-
-        fxs = (EfectoGenerico(), Efecto2(), Compuesto())
+	def __init__(self):
+        self.fxs = (EfectoGenerico(), Efecto2(), Compuesto())
