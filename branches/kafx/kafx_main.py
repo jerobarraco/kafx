@@ -12,11 +12,11 @@ asique veran que les faltan varias cosas a las librerias y muchisimas cosas por 
 """
 import traceback, cProfile
 """
-#lo dejamos por lo de kafx.py, hay que sacarlo de la dll
 traceback.sys.stdout = open('stdout.txt', 'w', 0)
-traceback.sys.stderr = open('stderr.txt',  'w', 0)
+traceback.sys.stderr = open('stderr.txt', 'w', 0)
 """
-version_info = (1, 7, 1)
+
+version_info = (1, 7, 8, 'newfinalrc2')
 print 'Python version', traceback.sys.version_info
 if traceback.sys.version_info[:3] < (2, 6, 6):
 	"""
@@ -25,9 +25,11 @@ if traceback.sys.version_info[:3] < (2, 6, 6):
 	"""
 #TODO agregar verificacion de frame >=0 en carga de tiempos... porque me odias abel???
 #TODO agregar verificacion de que se haya cargado el efecto correctamente
+#TODO cambiar el preload para que organice las cosas como debe
 
 print "Cargando Cairo..." #si, el sistema de loggin rulea
 import cairo
+#import cProfile
 print 'Cairo cargado. Version:', cairo.version_info
 print 'Cargando KAFX...'
 from libs import video, comun, asslib
@@ -49,7 +51,6 @@ fop = None
 m = None
 ass = None
 
-
 def DBug(msg):
 	#Esta funcion es llamada desde la dll, imprime el error actual
 	traceback.sys.stdout.write(str(msg))
@@ -60,7 +61,7 @@ def PintarEnPantalla(msg):
 	lasty = 15
 	for n in msg.split('\n'):
 		lasty = error_obj.CambiarTexto(n, (15, lasty))[1] + error_obj.original._alto_linea
-		error_obj.Pintar()
+		error_obj.Paint()
 
 def Error(msg=""):
 	"""Escribe un mensaje de error al archivo y en la pantalla,
@@ -134,16 +135,18 @@ def OnFrame(pframe, stride, cuadro):
 		cf.sfc = cairo.ImageSurface.create_for_data(cuadro, vi.modo, vi.width, vi.height, stride)
 		cf.ctx = cairo.Context(cf.sfc)
 
+		cf.ctx.set_antialias(cairo.ANTIALIAS_SUBPIXEL)
+		#cairo.ANTIALIAS_SUBPIXEL
+		#cairo.ANTIALIAS_NONE
+		#cairo.ANTIALIAS_GRAY
 		cf.ctx.set_font_options(fop)
 		cf.ctx.set_line_join(cairo.LINE_JOIN_ROUND)
 		cf.ctx.set_line_cap(cairo.LINE_CAP_ROUND)
-		cf.ctx.set_antialias(cairo.ANTIALIAS_GRAY)
+		
 		#definitivamente nadie lo usa. lo deshabilite porque usa mucho CPU
 		#cf.tiempo = video.CuadroAMS(cf.framen)
 
 		#Llamamos a los eventos
-		#para habilitar el profiling descomentar la siguiente linea y comentar la que le sigue
-		#cProfile.runctx('__CallFuncs()', globals(), locals(), filename='profile')
 		__CallFuncs()
 		cf.sfc.flush()
 	except:
@@ -152,7 +155,7 @@ def OnFrame(pframe, stride, cuadro):
 
 def __CallFuncsProfile():
 	cProfile.runctx('__CallFuncsNormal()', globals(), locals(), filename='profile')
-	
+
 def __CallFuncsNormal():
 	"""Esta funcion llama a todos los eventos del efecto
 	Si agregan un evento no olvidar ponerlo en __PreLoad"""
@@ -163,12 +166,26 @@ def __CallFuncsNormal():
 
 	#Nueva forma de llamar, por eventos
 	for (evento, o, prog) in frame:
-		o.progreso = prog
+		o.progress = prog
 		if fx.reset_estilo:
 			o.Restore()
 		evento(o)
 
 	fx.EnCuadroFin()
+
+#Esto es para profiling, como es algo lento, intentamos hacerlo mas rapido con este hack
+#En cualquier caso iniciamos la funcion __CallFuncs que se llama en OnFrame con el CallFuncsNormal
+__CallFuncs = __CallFuncsNormal
+def SetProfiling(do=False):
+	global __CallFuncs, __CallFuncsNormal, __CallFuncsProfile
+	#Si do es True (Y lo pongo en otra variable para que el dia de mañana pueda venir como parametro)
+	if do:
+		#CallFuncs ahora apunta al CallFuncs del Profile
+		print "Profiling active"
+		__CallFuncs = __CallFuncsProfile
+	else:
+		print "Profiling inactive"
+		__CallFuncs = __CallFuncsNormal
 
 def __PreLoad():
 	"""Esta función crea los arrays de no_frames y frames,
@@ -199,7 +216,7 @@ def __PreLoad():
 
 	#los tiempos van siempre en ms para tener presición
 	for diag in ass.dialogos:
-		diag.progreso = 0.0
+		diag.progress = 0.0
 		#efecto se usa más abajo en eventos extras y las silabas lo cambian
 		#notar que cada dialogo y silaba puede tener un efecto individual (sobre todo con el inline fx >.>;)
 		efecto = fs[diag.efecto]
@@ -218,8 +235,8 @@ def __PreLoad():
 		for i, f in enumerate(xrange(inif, endf)): #El range es por frames
 			p = i/diff #el +1 va en gusto, con +1 se aseguran de que llegue a 1.0, aunque puede pasarse, sin el +1 empieza siempre en 0, y quizas no llegue a 1.0
 			#primero se van a dibujar todos los dialogos que salgan de todos los frames
-			#frame[f] es el frame numero f, y es un array (array de dialogos con su progreso y evento)
-			frames[f].append( (efecto.EnDialogoSale, diag, p) )
+			#frame[f] es el frame numero f, y es un array (array de dialogos con su progress y evento)
+			frames[f].insert(0, (efecto.EnDialogoSale, diag, p) )
 			#y marcamos el cuadro f como cuadro que no se puede saltear
 			no_frames[f] = False
 
@@ -234,7 +251,7 @@ def __PreLoad():
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(range(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnDialogoEntra, diag, p))
+			frames[f].insert(0, (efecto.EnDialogoEntra, diag, p))
 			no_frames[f] = False
 
 		#Dialogo Animado o Activo
@@ -247,7 +264,7 @@ def __PreLoad():
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].insert(0,(efecto.EnDialogo, diag, p))
+			frames[f].append( (efecto.EnDialogo, diag, p))
 			no_frames[f]=False
 
 		#Eventos personalizados
@@ -262,7 +279,7 @@ def __PreLoad():
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				frames[f].insert(0,(evento.EnDialogo, diag, p ) )
+				frames[f].insert(0, (evento.EnDialogo, diag, p ) )
 				no_frames[f]=False
 
 		#Prelodeamos las silabas :D
@@ -276,7 +293,7 @@ def __PreLoad():
 		"""una funcion que por cada item en cada frame, devuelve el valor con que comparar
 		explicado es:
 		cada frame contiene muchos items, al ordenarlo, se llama a esta funcion por cada item
-		cada item posee 3 elementos, el evento, el dialogo y el progreso
+		cada item posee 3 elementos, el evento, el dialogo y el progress
 		tomamos el elemento 1 (el 2º) el dialogo.
 		del dialogo tomamos el estilo original, y de ahi el layer
 		"""
@@ -287,9 +304,9 @@ def __PreLoad():
 		f = frames[i]
 		f.sort(key=keyfunc)
 		#lo pasamos a tuplas con el afan de hacerlo más rapido...
-		#frames[i] = tuple(f)
+		frames[i] = tuple(f)
 	#a este tambien
-	#frames = tuple(frames)
+	frames = tuple(frames)
 
 	#y a este
 	no_frames = tuple(no_frames)
@@ -304,7 +321,7 @@ def __PreLoadSilabas(diag):
 
 	#Ahora las Silabas!!! (T^T)
 	for sil in diag._silabas:
-		sil.progreso = 0.0
+		sil.progress = 0.0
 		efecto = fs[sil.efecto]
 		efecto.EnSilabaInicia(sil)
 
@@ -318,7 +335,7 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnSilabaMuerta, sil, p ) )
+			frames[f].insert(0, (efecto.EnSilabaMuerta, sil, p ) )
 			no_frames[f] = False
 
 		#Silaba Dormida
@@ -331,7 +348,7 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnSilabaDorm, sil, p ) )
+			frames[f].insert(0, (efecto.EnSilabaDorm, sil, p ) )
 			no_frames[f]=False
 
 		#Silaba entra
@@ -344,7 +361,7 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnSilabaEntra, sil, p) )
+			frames[f].insert(0, (efecto.EnSilabaEntra, sil, p) )
 			no_frames[f]=False
 
 		#Silaba sale
@@ -357,7 +374,7 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnSilabaSale, sil, p ) )
+			frames[f].insert(0, (efecto.EnSilabaSale, sil, p ) )
 			no_frames[f]=False
 
 		#Silaba Animada
@@ -370,7 +387,7 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].insert(0, (efecto.EnSilaba, sil, p ))
+			frames[f].append( (efecto.EnSilaba, sil, p ))
 			no_frames[f] = False
 
 			#Eventos personalizados
@@ -405,7 +422,7 @@ def __PreLoadLetras(sil):
 	sil.DividirLetras()
 	for letra in sil._letras:
 		#letra entra
-		letra.progreso = 0.0
+		letra.progress = 0.0
 		efecto = fs[letra.efecto]
 		efecto.EnLetraInicia(letra)
 
@@ -418,7 +435,7 @@ def __PreLoadLetras(sil):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnLetraEntra, letra, p) )
+			frames[f].insert(0, (efecto.EnLetraEntra, letra, p) )
 			no_frames[f]=False
 
 		#letra sale
@@ -431,7 +448,7 @@ def __PreLoadLetras(sil):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnLetraSale, letra, p ) )
+			frames[f].insert(0, (efecto.EnLetraSale, letra, p ) )
 			no_frames[f] = False
 
 		#letra Animada
@@ -444,7 +461,7 @@ def __PreLoadLetras(sil):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].insert(0, (efecto.EnLetra, letra, p ))
+			frames[f].append( (efecto.EnLetra, letra, p ))
 			no_frames[f] = False
 
 		#Eventos personalizados
@@ -461,20 +478,3 @@ def __PreLoadLetras(sil):
 				p = i/diff
 				frames[f].insert(0, (evento.EnLetra, letra, p ) )
 				no_frames[f]=False
-
-#Esto es para profiling, como es algo lento, intentamos hacerlo mas rapido con este hack
-#En cualquier caso iniciamos la funcion __CallFuncs que se llama en OnFrame con el CallFuncsNormal
-__CallFuncs = __CallFuncsNormal
-def SetProfiling(do=False):
-	global __CallFuncs, __CallFuncsNormal, __CallFuncsProfile
-	#Si do es True (Y lo pongo en otra variable para que el dia de mañana pueda venir como parametro)
-	if do:
-		#CallFuncs ahora apunta al CallFuncs del Profile
-		print "Profiling active"
-		__CallFuncs = __CallFuncsProfile
-	else:
-		print "Profiling inactive"
-		__CallFuncs = __CallFuncsNormal
-		
-#Esto podria venir por parametro luego
-SetProfiling(False)
