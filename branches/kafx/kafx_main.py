@@ -11,11 +11,12 @@ las cosas se van a ir implementando a medida q sean necesarias y en forma que se
 asique veran que les faltan varias cosas a las librerias y muchisimas cosas por implementar
 """
 import traceback
+"""
 #lo dejamos por lo de kafx.py, hay que sacarlo de la dll
 traceback.sys.stdout = open('stdout.txt', 'w', 0)
 traceback.sys.stderr = open('stderr.txt',  'w', 0)
-
-version_info = (1, 666, 12, 'newfinalrc1')
+"""
+version_info = (1, 7, 1)
 print 'Python version', traceback.sys.version_info
 if traceback.sys.version_info[:3] < (2, 6, 6):
 	"""

@@ -24,7 +24,7 @@ except ImportError, e:
 import kafx_main
 setup(
 	name = "kafx",
-	version = ','.join(map(str, kafx_main.version_info)),
+	version = '.'.join(map(str, kafx_main.version_info)),
 	author = "Jerónimo Barraco Mármol",
  	author_email = "jerobarraco@yahoo.com.ar",
 	url = "http://kafx.com.ar",
