@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# -*- coding: utf-8 -*-
-"""Este efecto muestra lo mas simple, lo basico"""
+
 from libs import comun
 
 class EfectoComun(comun.Fx):#Imaginate que aca hay todo un codigo re largo que hace algo complejo pero que es exactamente igual para dos (al menos) efectos que usas
