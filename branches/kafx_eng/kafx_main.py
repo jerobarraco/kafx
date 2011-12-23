@@ -159,7 +159,7 @@ def __CallFuncs():
 
 	#Nueva forma de llamar, por eventos
 	for (evento, o, prog) in frame:
-		o.progreso = prog
+		o.progress = prog
 		if fx.reset_estilo:
 			o.Restore()
 		evento(o)
@@ -195,7 +195,7 @@ def __PreLoad():
 
 	#los tiempos van siempre en ms para tener presición
 	for diag in ass.dialogos:
-		diag.progreso = 0.0
+		diag.progress = 0.0
 		#efecto se usa más abajo en eventos extras y las silabas lo cambian
 		#notar que cada dialogo y silaba puede tener un efecto individual (sobre todo con el inline fx >.>;)
 		efecto = fs[diag.efecto]
@@ -214,7 +214,7 @@ def __PreLoad():
 		for i, f in enumerate(xrange(inif, endf)): #El range es por frames
 			p = i/diff #el +1 va en gusto, con +1 se aseguran de que llegue a 1.0, aunque puede pasarse, sin el +1 empieza siempre en 0, y quizas no llegue a 1.0
 			#primero se van a dibujar todos los dialogos que salgan de todos los frames
-			#frame[f] es el frame numero f, y es un array (array de dialogos con su progreso y evento)
+			#frame[f] es el frame numero f, y es un array (array de dialogos con su progress y evento)
 			frames[f].append( (efecto.EnDialogoSale, diag, p) )
 			#y marcamos el cuadro f como cuadro que no se puede saltear
 			no_frames[f] = False
@@ -272,7 +272,7 @@ def __PreLoad():
 		"""una funcion que por cada item en cada frame, devuelve el valor con que comparar
 		explicado es:
 		cada frame contiene muchos items, al ordenarlo, se llama a esta funcion por cada item
-		cada item posee 3 elementos, el evento, el dialogo y el progreso
+		cada item posee 3 elementos, el evento, el dialogo y el progress
 		tomamos el elemento 1 (el 2º) el dialogo.
 		del dialogo tomamos el estilo original, y de ahi el layer
 		"""
@@ -300,7 +300,7 @@ def __PreLoadSilabas(diag):
 
 	#Ahora las Silabas!!! (T^T)
 	for sil in diag._silabas:
-		sil.progreso = 0.0
+		sil.progress = 0.0
 		efecto = fs[sil.efecto]
 		efecto.EnSilabaInicia(sil)
 
@@ -401,7 +401,7 @@ def __PreLoadLetras(sil):
 	sil.DividirLetras()
 	for letra in sil._letras:
 		#letra entra
-		letra.progreso = 0.0
+		letra.progress = 0.0
 		efecto = fs[letra.efecto]
 		efecto.EnLetraInicia(letra)
 
