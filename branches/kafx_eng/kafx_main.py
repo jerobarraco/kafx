@@ -13,8 +13,9 @@ asique veran que les faltan varias cosas a las librerias y muchisimas cosas por 
 import traceback, cProfile
 """
 traceback.sys.stdout = open('stdout.txt', 'w', 0)
-traceback.sys.stderr = open('stderr.txt',  'w', 0)
+traceback.sys.stderr = open('stderr.txt', 'w', 0)
 """
+
 version_info = (1, 7, 8, 'newfinalrc2')
 print 'Python version', traceback.sys.version_info
 if traceback.sys.version_info[:3] < (2, 6, 6):
@@ -24,6 +25,7 @@ if traceback.sys.version_info[:3] < (2, 6, 6):
 	"""
 #TODO agregar verificacion de frame >=0 en carga de tiempos... porque me odias abel???
 #TODO agregar verificacion de que se haya cargado el efecto correctamente
+#TODO cambiar el preload para que organice las cosas como debe
 
 print "Cargando Cairo..." #si, el sistema de loggin rulea
 import cairo
@@ -133,7 +135,7 @@ def OnFrame(pframe, stride, cuadro):
 		cf.sfc = cairo.ImageSurface.create_for_data(cuadro, vi.modo, vi.width, vi.height, stride)
 		cf.ctx = cairo.Context(cf.sfc)
 
-		cf.ctx.set_antialias(cairo.ANTIALIAS_GRAY)
+		cf.ctx.set_antialias(cairo.ANTIALIAS_SUBPIXEL)
 		#cairo.ANTIALIAS_SUBPIXEL
 		#cairo.ANTIALIAS_NONE
 		#cairo.ANTIALIAS_GRAY
@@ -145,8 +147,6 @@ def OnFrame(pframe, stride, cuadro):
 		#cf.tiempo = video.CuadroAMS(cf.framen)
 
 		#Llamamos a los eventos
-		#para habilitar el profiling descomentar la siguiente linea y comentar la que le sigue
-		#cProfile.runctx('__CallFuncs()', globals(), locals(), filename='profile')
 		__CallFuncs()
 		cf.sfc.flush()
 	except:
@@ -236,7 +236,7 @@ def __PreLoad():
 			p = i/diff #el +1 va en gusto, con +1 se aseguran de que llegue a 1.0, aunque puede pasarse, sin el +1 empieza siempre en 0, y quizas no llegue a 1.0
 			#primero se van a dibujar todos los dialogos que salgan de todos los frames
 			#frame[f] es el frame numero f, y es un array (array de dialogos con su progress y evento)
-			frames[f].append( (efecto.EnDialogoSale, diag, p) )
+			frames[f].insert(0, (efecto.EnDialogoSale, diag, p) )
 			#y marcamos el cuadro f como cuadro que no se puede saltear
 			no_frames[f] = False
 
@@ -251,7 +251,7 @@ def __PreLoad():
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(range(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnDialogoEntra, diag, p))
+			frames[f].insert(0, (efecto.EnDialogoEntra, diag, p))
 			no_frames[f] = False
 
 		#Dialogo Animado o Activo
@@ -279,7 +279,7 @@ def __PreLoad():
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				frames[f].append( (evento.EnDialogo, diag, p ) )
+				frames[f].insert(0, (evento.EnDialogo, diag, p ) )
 				no_frames[f]=False
 
 		#Prelodeamos las silabas :D
@@ -304,9 +304,9 @@ def __PreLoad():
 		f = frames[i]
 		f.sort(key=keyfunc)
 		#lo pasamos a tuplas con el afan de hacerlo más rapido...
-		#frames[i] = tuple(f)
+		frames[i] = tuple(f)
 	#a este tambien
-	#frames = tuple(frames)
+	frames = tuple(frames)
 
 	#y a este
 	no_frames = tuple(no_frames)
@@ -335,7 +335,7 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnSilabaMuerta, sil, p ) )
+			frames[f].insert(0, (efecto.EnSilabaMuerta, sil, p ) )
 			no_frames[f] = False
 
 		#Silaba Dormida
@@ -348,7 +348,7 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnSilabaDorm, sil, p ) )
+			frames[f].insert(0, (efecto.EnSilabaDorm, sil, p ) )
 			no_frames[f]=False
 
 		#Silaba entra
@@ -361,7 +361,7 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnSilabaEntra, sil, p) )
+			frames[f].insert(0, (efecto.EnSilabaEntra, sil, p) )
 			no_frames[f]=False
 
 		#Silaba sale
@@ -374,7 +374,7 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnSilabaSale, sil, p ) )
+			frames[f].insert(0, (efecto.EnSilabaSale, sil, p ) )
 			no_frames[f]=False
 
 		#Silaba Animada
@@ -402,7 +402,7 @@ def __PreLoadSilabas(diag):
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				frames[f].append( (evento.EnSilaba, sil, p ) )
+				frames[f].insert(0, (evento.EnSilaba, sil, p ) )
 				no_frames[f]=False
 
 		if fx.dividir_letras:
@@ -435,7 +435,7 @@ def __PreLoadLetras(sil):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnLetraEntra, letra, p) )
+			frames[f].insert(0, (efecto.EnLetraEntra, letra, p) )
 			no_frames[f]=False
 
 		#letra sale
@@ -448,7 +448,7 @@ def __PreLoadLetras(sil):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnLetraSale, letra, p ) )
+			frames[f].insert(0, (efecto.EnLetraSale, letra, p ) )
 			no_frames[f] = False
 
 		#letra Animada
@@ -476,5 +476,5 @@ def __PreLoadLetras(sil):
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				frames[f].append( (evento.EnLetra, letra, p ) )
+				frames[f].insert(0, (evento.EnLetra, letra, p ) )
 				no_frames[f]=False

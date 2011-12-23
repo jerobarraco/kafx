@@ -153,11 +153,11 @@ if __name__ == '__main__':
 		'ffmpeg', '-r', str(conf.fps), '-pix_fmt', 'rgb32', '-s', str(w)+'x'+str(h), '-f', 'rawvideo', '-i', '-',
 		#output parameters
 		] + conf.out_parameters
+		# i leave the out parameters here to let ppl know that they could choose a personalized setting for your video
 
 	cuadro= conf.start_frame
 	texture = None
 
-	# i leave the out parameters here to let ppl know that they could choose a personalized setting for your video
 	#We pipe everything from the firsts subprocess, either way ffmpeg step on itself
 	#decode ffmpeg
 	in1=open('in_in.txt','w')

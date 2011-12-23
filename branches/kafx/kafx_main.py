@@ -247,7 +247,7 @@ def __PreLoad():
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnDialogo, diag, p))
+			frames[f].insert(0,(efecto.EnDialogo, diag, p))
 			no_frames[f]=False
 
 		#Eventos personalizados
@@ -262,7 +262,7 @@ def __PreLoad():
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				frames[f].append( (evento.EnDialogo, diag, p ) )
+				frames[f].insert(0,(evento.EnDialogo, diag, p ) )
 				no_frames[f]=False
 
 		#Prelodeamos las silabas :D
@@ -370,7 +370,7 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnSilaba, sil, p ))
+			frames[f].insert(0, (efecto.EnSilaba, sil, p ))
 			no_frames[f] = False
 
 			#Eventos personalizados
@@ -385,7 +385,7 @@ def __PreLoadSilabas(diag):
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				frames[f].append( (evento.EnSilaba, sil, p ) )
+				frames[f].insert(0, (evento.EnSilaba, sil, p ) )
 				no_frames[f]=False
 
 		if fx.dividir_letras:
@@ -444,7 +444,7 @@ def __PreLoadLetras(sil):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append( (efecto.EnLetra, letra, p ))
+			frames[f].insert(0, (efecto.EnLetra, letra, p ))
 			no_frames[f] = False
 
 		#Eventos personalizados
@@ -459,7 +459,7 @@ def __PreLoadLetras(sil):
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				frames[f].append( (evento.EnLetra, letra, p ) )
+				frames[f].insert(0, (evento.EnLetra, letra, p ) )
 				no_frames[f]=False
 
 #Esto es para profiling, como es algo lento, intentamos hacerlo mas rapido con este hack

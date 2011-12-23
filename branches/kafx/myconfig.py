@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 assfile = "fma.ass"
-fx = 'fxs.Abelkm.znt'
+fx = 'hanasaku'
 
 """
 #this one is actually for comparing
