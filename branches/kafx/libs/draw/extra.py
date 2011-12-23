@@ -680,6 +680,7 @@ class cVector():
 		@frecuencia = cantidad de puntos a los que irá
 		(requiere que los estilos se restauren)
 		"""
+		print amplitud, frecuencia
 		if self.puntosw == None:
 			self.puntosw = []
 			self.puntosw.append( (0, 0) )

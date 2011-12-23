@@ -33,3 +33,4 @@ class FxsGroup(comun.FxsGroup):
 		self.in_ms = 500
 		self.out_ms = 500
 		self.fxs = (FX1(), FX1())
+		self.reset_estilo = False

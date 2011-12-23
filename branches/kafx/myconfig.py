@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 assfile = "fma.ass"
-fx = 'hanasaku'
+fx = 'fxs.Tutoriales.t14_wiggle'
 
 """
 #this one is actually for comparing
