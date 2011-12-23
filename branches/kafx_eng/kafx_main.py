@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Kick Ass FX
-copyright Barraco Mármol Jerónimo, David Pineda Melendez y Colaboradores 2007
+copyright Barraco Mármol Jerónimo, David Pineda Melendez, Martín (Abelkm) y Colaboradores 2007
 GNU/GPL
 """
 
@@ -10,11 +10,11 @@ Nota IMPORTANTE por cuestion d tiempo NIGUNA libreria ni nada está programada c
 las cosas se van a ir implementando a medida q sean necesarias y en forma que sean necesarias, siempre y cuando no sea una cosa rebuscada que no sea extensible.
 asique veran que les faltan varias cosas a las librerias y muchisimas cosas por implementar
 """
-import traceback
-#lo dejamos por lo de kafx.py, hay que sacarlo de la dll
+import traceback, cProfile
+"""
 traceback.sys.stdout = open('stdout.txt', 'w', 0)
 traceback.sys.stderr = open('stderr.txt',  'w', 0)
-
+"""
 version_info = (1, 7, 8, 'newfinalrc2')
 print 'Python version', traceback.sys.version_info
 if traceback.sys.version_info[:3] < (2, 6, 6):
@@ -133,10 +133,14 @@ def OnFrame(pframe, stride, cuadro):
 		cf.sfc = cairo.ImageSurface.create_for_data(cuadro, vi.modo, vi.width, vi.height, stride)
 		cf.ctx = cairo.Context(cf.sfc)
 
+		cf.ctx.set_antialias(cairo.ANTIALIAS_GRAY)
+		#cairo.ANTIALIAS_SUBPIXEL
+		#cairo.ANTIALIAS_NONE
+		#cairo.ANTIALIAS_GRAY
 		cf.ctx.set_font_options(fop)
 		cf.ctx.set_line_join(cairo.LINE_JOIN_ROUND)
 		cf.ctx.set_line_cap(cairo.LINE_CAP_ROUND)
-		cf.ctx.set_antialias(cairo.ANTIALIAS_GRAY)
+		
 		#definitivamente nadie lo usa. lo deshabilite porque usa mucho CPU
 		#cf.tiempo = video.CuadroAMS(cf.framen)
 
@@ -149,7 +153,10 @@ def OnFrame(pframe, stride, cuadro):
 		print "e"
 		Error()
 
-def __CallFuncs():
+def __CallFuncsProfile():
+	cProfile.runctx('__CallFuncsNormal()', globals(), locals(), filename='profile')
+
+def __CallFuncsNormal():
 	"""Esta funcion llama a todos los eventos del efecto
 	Si agregan un evento no olvidar ponerlo en __PreLoad"""
 	global fx, frames, cf
@@ -165,6 +172,20 @@ def __CallFuncs():
 		evento(o)
 
 	fx.EnCuadroFin()
+
+#Esto es para profiling, como es algo lento, intentamos hacerlo mas rapido con este hack
+#En cualquier caso iniciamos la funcion __CallFuncs que se llama en OnFrame con el CallFuncsNormal
+__CallFuncs = __CallFuncsNormal
+def SetProfiling(do=False):
+	global __CallFuncs, __CallFuncsNormal, __CallFuncsProfile
+	#Si do es True (Y lo pongo en otra variable para que el dia de mañana pueda venir como parametro)
+	if do:
+		#CallFuncs ahora apunta al CallFuncs del Profile
+		print "Profiling active"
+		__CallFuncs = __CallFuncsProfile
+	else:
+		print "Profiling inactive"
+		__CallFuncs = __CallFuncsNormal
 
 def __PreLoad():
 	"""Esta función crea los arrays de no_frames y frames,

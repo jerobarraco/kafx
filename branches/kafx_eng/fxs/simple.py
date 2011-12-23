@@ -5,12 +5,12 @@ from libs import comun
 class EfectoGenerico(comun.Fx):
 	def EnDialogo(self, diag):
 		#Cuando el dialogo sea mostrado
-		diag.Pintar()#Lo pintamos en la pantalla
+		diag.Paint()#Lo pintamos en la pantalla
 
 	def EnSilaba(self, diag):
 		#Cuando la silaba sea cantada (activada)
-		diag.actual.color1.CopiarDe(diag.actual.color2) #Copiamos el color secundario al color primario,
-		diag.Pintar()# Pintamos la silaba en la pantalla
+		diag.actual.color1.CopyFrom(diag.actual.color2) #Copiamos el color secundario al color primario,
+		diag.Paint()# Pintamos la silaba en la pantalla
 
 
 #Esta es la clase principal de donde kafx tomara toda la info, tiene que tener este nombre
