@@ -10,7 +10,7 @@ Nota IMPORTANTE por cuestion d tiempo NIGUNA libreria ni nada está programada c
 las cosas se van a ir implementando a medida q sean necesarias y en forma que sean necesarias, siempre y cuando no sea una cosa rebuscada que no sea extensible.
 asique veran que les faltan varias cosas a las librerias y muchisimas cosas por implementar
 """
-import traceback
+import traceback, cProfile
 """
 #lo dejamos por lo de kafx.py, hay que sacarlo de la dll
 traceback.sys.stdout = open('stdout.txt', 'w', 0)
@@ -49,6 +49,7 @@ no_frames = [] #cache the wantframes, wich seems to be a very slow and important
 fop = None
 m = None
 ass = None
+
 
 def DBug(msg):
 	#Esta funcion es llamada desde la dll, imprime el error actual
@@ -150,7 +151,10 @@ def OnFrame(pframe, stride, cuadro):
 		print "e"
 		Error()
 
-def __CallFuncs():
+def __CallFuncsProfile():
+	cProfile.runctx('__CallFuncsNormal()', globals(), locals(), filename='profile')
+	
+def __CallFuncsNormal():
 	"""Esta funcion llama a todos los eventos del efecto
 	Si agregan un evento no olvidar ponerlo en __PreLoad"""
 	global fx, frames, cf
@@ -458,3 +462,20 @@ def __PreLoadLetras(sil):
 				p = i/diff
 				frames[f].append( (evento.EnLetra, letra, p ) )
 				no_frames[f]=False
+
+#Esto es para profiling, como es algo lento, intentamos hacerlo mas rapido con este hack
+#En cualquier caso iniciamos la funcion __CallFuncs que se llama en OnFrame con el CallFuncsNormal
+__CallFuncs = __CallFuncsNormal
+def SetProfiling(do=False):
+	global __CallFuncs, __CallFuncsNormal, __CallFuncsProfile
+	#Si do es True (Y lo pongo en otra variable para que el dia de mañana pueda venir como parametro)
+	if do:
+		#CallFuncs ahora apunta al CallFuncs del Profile
+		print "Profiling active"
+		__CallFuncs = __CallFuncsProfile
+	else:
+		print "Profiling inactive"
+		__CallFuncs = __CallFuncsNormal
+		
+#Esto podria venir por parametro luego
+SetProfiling(False)

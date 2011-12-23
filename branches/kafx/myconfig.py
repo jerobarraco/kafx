@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 assfile = "fma.ass"
-fx = 'fxs.Tutoriales.t14_wiggle'
+fx = 'fxs.Abelkm.znt'
 
 """
 #this one is actually for comparing

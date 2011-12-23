@@ -120,10 +120,15 @@ if __name__ == '__main__':
 			os.sys.path.insert(0,  cwd)
 
 		module = 'myconfig'
+		
 		if len(os.sys.argv) > 1:
 			module = os.sys.argv[1]
 			module = os.path.split(module)[-1]
 			module = module.split('.')[0]
+		
+		if len(os.sys.argv)>2:
+			profiling = bool(os.sys.argv[2])
+			kf.SetProfiling(profiling)
 
 		conf = __import__(module)
 		print "importado el modulo", module, conf
@@ -157,7 +162,7 @@ if __name__ == '__main__':
 	# i leave the out parameters here to let ppl know that they could choose a personalized setting for your video
 	#We pipe everything from the firsts subprocess, either way ffmpeg step on itself
 	#decode ffmpeg
-	in1=open('in_in.txt','w')
+	in1 = open('in_in.txt','w')
 	err1 = open('in_err.txt','w')
 	#decode ffmpeg
 	p=s.Popen(args, bufsize=framesize, stdout=s.PIPE, stderr=err1)
@@ -165,9 +170,8 @@ if __name__ == '__main__':
 	p2=s.Popen(args2, bufsize=framesize, stdin=s.PIPE)#, stdout=s.PIPE)
 	#out, err = p.communicate()#Note: The data read is buffered in memory, so do not use this method if the data size is large or unlimited. #so, we wont use this
 	#import array
-
-
-
+	
+	#And now: do the work
 	try:
 		GLMain()
 	finally:
@@ -175,7 +179,7 @@ if __name__ == '__main__':
 		running = False
 		p.terminate()
 		p2.terminate()
-	"""c= self.coords
-		glPixelStorei(GL_PACK_ALIGNMENT, 1)
-		return  glReadPixels(c[0], c[1], c[2], c[3],GL_RGB,GL_UNSIGNED_BYTE)
-	"""
+		"""c= self.coords
+			glPixelStorei(GL_PACK_ALIGNMENT, 1)
+			return  glReadPixels(c[0], c[1], c[2], c[3],GL_RGB,GL_UNSIGNED_BYTE)
+		"""

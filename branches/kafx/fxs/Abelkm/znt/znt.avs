@@ -1,0 +1,10 @@
+loadplugin("KAFX.dll")
+#DirectShowSource("[Yousei-raws] Zero no Tsukaima (Creditless OP) [BDrip 1280x720 x264 FLAC].mkv", audio = false)
+#KillAudio(ColorBars(1280,720))
+Trim(0,1700)
+#Lanczos4Resize(960, 540)
+
+converttorgb32()
+FlipVertical()
+KAFX("znt_p_op1", "test.ass")
+FlipVertical()
