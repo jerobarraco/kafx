@@ -2,7 +2,7 @@
 import codecs
 from draw import extra
 import comun
-"""Este mÃ³dulo define las cosas necesarias para cargar un archivo ASS, y los objetos que permiten el pintado de texto con cairo"""
+"""Este módulo define las cosas necesarias para cargar un archivo ASS, y los objetos que permiten el pintado de texto con cairo"""
 
 #Constantes, no cambien nada si no quieren que el programa se rompa
 #Del Estilo
@@ -94,7 +94,7 @@ class cPropiedades():
 			self.shad_x = 0
 			self.shad_y = 0
 			#modes de pintado
-			self.mode_padding = 0
+			self.mode_fill = 0
 			self.mode_border = 0
 			self.mode_shadow = 0
 			self.mode_particula = 0
@@ -181,7 +181,7 @@ class cPropiedades():
 		self.color2.CopyFrom(other.color2)
 		self.border = other.border
 		self.shadow = other.shadow
-		self.mode_padding = other.mode_padding
+		self.mode_fill = other.mode_fill
 		self.mode_border = other.mode_border
 		self.mode_shadow = other.mode_shadow
 		self.mode_particula = other.mode_particula
