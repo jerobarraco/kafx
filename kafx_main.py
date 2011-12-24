@@ -117,7 +117,7 @@ def OnInit(filename, assfile, pixel_type, image_type, width, height, fpsn, fpsd,
 		__PreLoad()
 		DBug("Todo se cargo aparentemente bien\n")
 	except:
-		print "e"
+		print "Something bad happened and we don't know what it is. It is really bad. Seriously, it is really bad. Really."
 		Error()
 
 def OnFrame(pframe, stride, cuadro):
