@@ -11,10 +11,10 @@ las cosas se van a ir implementando a medida q sean necesarias y en forma que se
 asique veran que les faltan varias cosas a las librerias y muchisimas cosas por implementar
 """
 import traceback, cProfile
-"""
+
 traceback.sys.stdout = open('stdout.txt', 'w', 0)
 traceback.sys.stderr = open('stderr.txt', 'w', 0)
-"""
+
 
 version_info = (1, 7, 8, 'newfinalrc2')
 print 'Python version', traceback.sys.version_info
