@@ -7,7 +7,18 @@ import math
 import random
 
 from libs import video
+def ClampB(x):
+	"Recorta un número (entero) al rango entre 0 y 255"
+	if x > 255: x = 255
+	if x < 0: x = 0
+	return x
 
+def Clamp(num):
+	"Recorta un número flotante al rango entre 0.0 y 1.0"
+	if num < 0.0 : return 0.0
+	if num > 1.0 : return 1.0
+	return num
+	
 def ElegirPorCuadro(cuadro_ini, cuadro_fin, active, inactive=None ):
 	"""frame_ini tiene el cuadro en que inicia
 	frame_Fin el cuadro donde termina

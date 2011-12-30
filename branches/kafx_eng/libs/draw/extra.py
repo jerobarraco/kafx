@@ -784,18 +784,6 @@ def DemultiplicarAlpha(b,g,r,a):
 	b = Demult(b, a)
 	return b, g, r, a
 
-def ClampB(x):
-	"Recorta un número (entero) al rango entre 0 y 255"
-	if x > 255: x = 255
-	if x < 0: x = 0
-	return x
-
-def Clamp(num):
-	"Recorta un número flotante al rango entre 0.0 y 1.0"
-	if num < 0.0 : return 0.0
-	if num > 1.0 : return 1.0
-	return num
-
 def D1(x):
 	return x/255.0
 
@@ -803,6 +791,7 @@ def D2(x):
 	return (x+0.5)/256.0
 
 def Demult(x, a):
+	from libs.comun import ClampB
 	return ClampB( int( ((x*a)-1) /254 ) )
 
 def DuplicarSurface(surface):
