@@ -444,9 +444,9 @@ class cVector():
 	def Deformar(self, func):
 		"""Deforma el vector del objeto,
 		@func debe ser una funcion que sera llamada por cada grupo de de points del vector, debe recibir los siguientes parametros
-			self : el dialogo sobre el que se efectua el deformar
-			tipo : entero especificando el tipo de punto (0=mover, 1=linea, 2=curva, 3=cerrar path (esto sale de unas constantes de cairo que no recuerdo como se llaman))
-			points : un array con points de longitud: 2 para mover, 2 para linea, 6 para curva, 0 para cerrar
+		self : el dialogo sobre el que se efectua el deformar
+		tipo : entero especificando el tipo de punto (0=mover, 1=linea, 2=curva, 3=cerrar path (esto sale de unas constantes de cairo que no recuerdo como se llaman))
+		points : un array con points de longitud: 2 para mover, 2 para linea, 6 para curva, 0 para cerrar
 		debe devolver un array con los points (o sea, lo mismo q recibio pero modificado)
 		"""
 		ctx = video.cf.ctx
@@ -726,7 +726,7 @@ class cVector():
 		@escala=1.0 -> escala con la que se inicializarán todas las texturas
 		@alpha_min=40 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
 		@barrido_vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
-				las partículas en el array, por lo tanto la forma en que se recorre
+		las partículas en el array, por lo tanto la forma en que se recorre
 		@mode=0 -> el mode de las particulas
 		"""
 		if not textura:

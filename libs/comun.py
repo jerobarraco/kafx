@@ -24,7 +24,6 @@ def ElegirPorCuadro(cuadro_ini, cuadro_fin, active, inactive=None ):
 	frame_Fin el cuadro donde termina
 	inactive es lo que devuelve cuando el cuadro actual no esta entre frame_ini ni frame_fin
 	active es lo que te devuelve si estas dentro del frame
-
 	ejemplo
 	d.actual.pos_x = ElegirPorFrame(100, 200, 0, 20)
 	esto hara que la posicion_x del dialogo sea 20 SOLAMENTE entre el frame 100 y el 200, y luego vuelva a 0
@@ -97,7 +96,6 @@ def i_b_boing(p):
 def Interpolate(progress, de, hasta, function=i_lineal):
 	"""
 	devuelve un número flotante entre 2 valores, el número devuelto corresponde a una cantidad indicada por el primer valor
-
 	@progress indicador de que tan cerca del inico o fin debe estar el valor devuelto, debe ser un número entre 0 y 1 (aunque otros valores funcionan)
 	@de valor inicial, o comienzo del rango
 	@hasta valor final, o final del rango
@@ -110,7 +108,6 @@ def Interpolate(progress, de, hasta, function=i_lineal):
 def LERP(progress, de, hasta):
 	"""
 	devuelve un número flotante entre 2 valores, el número devuelto corresponde a una cantidad indicada por el primer valor
-
 	@progress indicador de que tan cerca del inico o fin debe estar el valor devuelto, debe ser un número entre 0 y 1 (aunque otros valores funcionan)
 	@de valor inicial, o comienzo del rango
 	@hasta valor final, o final del rango
@@ -125,7 +122,6 @@ def RanmaBezier(progress, points):
 	Admite curvas biezer de cualquier orden
 	@progress como en interpolar, normalmente un numero entre 0 y 1 indicando el avance de sobre la curva
 	@points : array de points -> [ [0, 0], [1, 1], [2, 2] ]
-
 	es como PointBezier pero permite curvas de cualquier cantidad de points de control (de 1 a (teoricamente) infinito))
 	es algo mas lento que PointBezier para curvas de la misma cantidad de points
 	escrito por Ranma42 @ irc.freenode.net/#cairo
@@ -149,12 +145,11 @@ def PointBezier(progress, x_ini, y_ini,  x_int1, y_int1, x_int2, y_int2, x_fin, 
 	@x_int2, y_int2 : 2º punto de control de la curva
 	@x_fin, y_fin : punto final de la curva
 	@progress : avance sobre la curva (0 a 1)
-
 	Esta funcion es igual que Bezier pero es algo más rápida, además,
 	Está limitada a:
-					1 Punto de inicio
-					2 points de control
-					1 Punto final
+	1 Punto de inicio
+	2 points de control
+	1 Punto final
 	y todos los points son pasados por parámetro secuencialmente.
 	#with help of ranma42!
 	"""
