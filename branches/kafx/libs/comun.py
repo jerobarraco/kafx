@@ -7,6 +7,7 @@ import math
 import random
 
 from libs import video
+from libs.draw import Clamp
 
 def ElegirPorCuadro(cuadro_ini, cuadro_fin, activo, inactivo=None ):
 	"""frame_ini tiene el cuadro en que inicia
@@ -24,7 +25,8 @@ def ElegirPorCuadro(cuadro_ini, cuadro_fin, activo, inactivo=None ):
 	if cuadro_ini <= video.cf.framen  <= cuadro_fin:
 		return activo
 	else:
-		return inactivo #el else no es necesario pero es para que entiendas
+		return inactivo 
+	#el else no es necesario pero es para que entiendas
 	#tambien podria usar esto perque quedaria muy criptico, lo dejo para el lulz
 	#return ( (cuadro_ini <= video.cf.framen) and activo) or inactivo
 
