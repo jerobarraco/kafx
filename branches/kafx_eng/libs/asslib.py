@@ -59,9 +59,9 @@ def TimeToMS(tiempo):
 class cPropiedades():
 	def __init__(self, other=None, dicc=None):
 		"""Hay 3 formas de crear un estilo:
-			sin nada, se crea con valores default.
-			cPropiedades(other=otroacopiar) o cPropiedades(otroacopiar) copia los valores de otro
-			cPropiedades(dicc=diccionario) lo inicializa con los valores de un diccionario ass"""
+		sin nada, se crea con valores default.
+		cPropiedades(other=otroacopiar) o cPropiedades(otroacopiar) copia los valores de otro
+		cPropiedades(dicc=diccionario) lo inicializa con los valores de un diccionario ass"""
 
 		#Estos necesitan estar afuera porque si no estan inicializados, en el caso q se cree directamente una  instancia cPropiedades dara error!!
 		self.color1 = extra.cCairoColor(numero=0xFFFF2020) #Notar q el 0x hace q sea un numero de verdad, y no un string. color primario
@@ -262,8 +262,8 @@ class cSilaba(extra.cVector):
 		o activen la opcion en FxsGroup
 		@funcion funcion a llamar con cada silaba y el progress
 		@duracion=None duracion de la animacion de cada caracter,
-			Si no se especifica, se usarÃ¡ una duraciÃ³n tal que
-			se anime solo un caracter por vez.
+		Si no se especifica, se usarÃ¡ una duraciÃ³n tal que
+		se anime solo un caracter por vez.
 		(Nota: no cambien el _texto si no quieren inconsistencias)
 		"""
 		comun.Encadenar(self._dur, self.progress, self._letras, funcion, duracion)
@@ -409,13 +409,13 @@ class cDialogo(extra.cVector):
 		"""Permite encadenar las silabas a una animacion
 		@funcion funcion a llamar con cada silaba y el progress
 		@duracion=None duracion de la animacion de cada silaba
-			Si no se especifica, se usarÃ¡ una duraciÃ³n tal que
-			se anime solo una silaba por vez.
+		Si no se especifica, se usarÃ¡ una duraciÃ³n tal que
+		se anime solo una silaba por vez.
 		"""
 		comun.Encadenar(self._dur, self.progress, self._silabas, funcion, duracion)
 
 	def FullWiggle(self, amplitud=4, frecuencia=2):
-		#el wiggle que queria AbelKM
+		"""el wiggle que queria AbelKM"""
 		dx, dy = self.Wiggle(amplitud, frecuencia)
 		for sil in self._silabas:
 			o = sil.original
