@@ -14,14 +14,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     fxsgroup.cpp \
     effect.cpp \
-    event.cpp
+    event.cpp \
+    dialog.cpp
 
 HEADERS  += mainwindow.h \
     fxsgroup.h \
     effect.h \
-    event.h
+    event.h \
+    dialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    dialog.ui
 
 
 

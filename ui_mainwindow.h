@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Thu 29. Dec 04:40:23 2011
+** Created: Sat 31. Dec 00:18:35 2011
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -35,6 +35,7 @@ public:
     QAction *actionAdd_Event;
     QAction *actionRemove_Effect;
     QAction *actionGenerate;
+    QAction *actionCheckCard;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
@@ -65,6 +66,8 @@ public:
         actionRemove_Effect->setObjectName(QString::fromUtf8("actionRemove_Effect"));
         actionGenerate = new QAction(MainWindow);
         actionGenerate->setObjectName(QString::fromUtf8("actionGenerate"));
+        actionCheckCard = new QAction(MainWindow);
+        actionCheckCard->setObjectName(QString::fromUtf8("actionCheckCard"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -147,6 +150,8 @@ public:
         mainToolBar->addAction(actionAdd_Event);
         mainToolBar->addSeparator();
         mainToolBar->addAction(actionGenerate);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionCheckCard);
 
         retranslateUi(MainWindow);
 
@@ -163,6 +168,7 @@ public:
         actionAdd_Event->setText(QApplication::translate("MainWindow", "Add Event", 0, QApplication::UnicodeUTF8));
         actionRemove_Effect->setText(QApplication::translate("MainWindow", "Remove Effect", 0, QApplication::UnicodeUTF8));
         actionGenerate->setText(QApplication::translate("MainWindow", "Generate", 0, QApplication::UnicodeUTF8));
+        actionCheckCard->setText(QApplication::translate("MainWindow", "Check if your credit card has funds", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "Effects", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "Events", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "Preset", 0, QApplication::UnicodeUTF8));

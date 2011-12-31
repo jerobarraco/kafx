@@ -18,14 +18,10 @@ public:
 
 private slots:
     void on_actionAdd_Effect_triggered();
-
-    void on_pushButton_clicked();
-
     void on_actionRemove_Effect_triggered();
-
     void on_actionGenerate_triggered();
-
     void on_actionAdd_Event_triggered();
+    void on_actionCheckCard_triggered();
 
 private:
 
