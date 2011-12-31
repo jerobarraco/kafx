@@ -108,6 +108,8 @@
    <addaction name="actionAdd_Event"/>
    <addaction name="separator"/>
    <addaction name="actionGenerate"/>
+   <addaction name="separator"/>
+   <addaction name="actionCheckCard"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAdd_Effect">
@@ -128,6 +130,11 @@
   <action name="actionGenerate">
    <property name="text">
     <string>Generate</string>
+   </property>
+  </action>
+  <action name="actionCheckCard">
+   <property name="text">
+    <string>Check if your credit card has funds</string>
    </property>
   </action>
  </widget>
