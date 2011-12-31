@@ -33,7 +33,7 @@ class Capa:
 		self.ctx.set_operator(cairo.OPERATOR_CLEAR)
 		self.ctx.paint()
 		self.ctx.set_operator(cairo.OPERATOR_OVER)"""
-		self.ctx = cairo.Context(cairo.ImageSurface(vi.mode, vi.width, vi.height))
+		self.ctx = cairo.Context(cairo.ImageSurface(vi.modo, vi.width, vi.height))#habia cambiado modo por mode, pero me tiro error para las capas asi que lo deje como estaba :D
 		if mode not in OPERATORS :
 			mode = 'over'
 
