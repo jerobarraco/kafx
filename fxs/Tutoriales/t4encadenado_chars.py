@@ -11,11 +11,11 @@ class Fx1(comun.Fx):
 
 		#Como esta funcion es llamada por Encadenar, el progreso es un parametro
 		#lo copiamos al progreso (no es necesario para este efecto pero tenganlo en cuenta)
-		c.progreso = prog
+		c.progress = prog
 		#interpolamos los colores
 		#Esto anima el color de relleno con el color secundario
-		c.actual.color1.Interpolar(prog, c.original.color2)
-		c.Pintar()
+		c.actual.color1.Interpolate(prog, c.original.color2)
+		c.Paint()
 
 	def EnSilaba(self, s):
 		#Cuando la silaba está activa animamos sus caracteres con la
@@ -24,7 +24,7 @@ class Fx1(comun.Fx):
 		#Esa duracion la podria obviar
 		s.Encadenar(self.Char, 6)
 		#Esta es la mejor forma de animar por caracteres (para principiantes)
-		
+
 	def EnDialogoInicia(self, d):
 		#Cuando el dialogo inicia hacemos una lista con todos los caracteres de
 		#todas las silabas
@@ -40,11 +40,11 @@ class Fx1(comun.Fx):
 		#Esta animacion se llama cuando el DIALOGO entra
 		#como es llamada por el Encadenar, nos pasa el caracter y el progreso
 		#Al progreso lo copiamos aunque no es necesario
-		c.progreso = prog
+		c.progress = prog
 		#hacemos un scale_y de -cos de 0 a 180º (vean la grafica para saber los valores :B)
 		c.actual.scale_y = -cos(pi*prog)
-		c.Pintar()
-		
+		c.Paint()
+
 	def EnDialogoEntra(self, d):
 		#Cuando el dialogo entra
 		"""
@@ -59,23 +59,23 @@ class Fx1(comun.Fx):
 		luego el tiempo de animacion de cada objeto (caracter)
 		como el tiempo total está en ms la duracion de cada caracter tamb la puse en ms
 		"""
-		comun.Encadenar(500, d.progreso, d.chars, self.AnimacionEntrada, 100)
+		comun.Encadenar(500, d.progress, d.chars, self.AnimacionEntrada, 100)
 
 	def AnimacionSalida(self, c, prog):
 		#Esta animacion se llama cuando el DIALOGO sale
-		c.progreso = prog
+		c.progress = prog
 		c.actual.pos_y += sin(pi*prog)*30
 		#Notar que para que el desvanecer (y demás funciones del c.) funcione bien
 		#hay que copiar el progreso a c.progreso
 		c.Desvanecer(1, 0)
-		c.Pintar()
+		c.Paint()
 
 	def EnDialogoSale(self, d):
 		#lo mismo q la otra
-		comun.Encadenar(500, d.progreso, d.chars, self.AnimacionSalida, 100)
+		comun.Encadenar(500, d.progress, d.chars, self.AnimacionSalida, 100)
 
 	def EnDialogo(self, d):
-		d.Pintar()
+		d.Paint()
 
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
