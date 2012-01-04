@@ -10,8 +10,9 @@ class AcOneValue : public Action
 {
     DAOneValue *diag;
     QString to, name , fname;
+    bool func;
 public:
-    AcOneValue(QString name, QString fname);
+    AcOneValue(QString name, QString fname, bool function);
     ~AcOneValue();
     bool configure();
     QString toString();

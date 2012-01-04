@@ -1,14 +1,14 @@
 #include "event.h"
 #include "action.h"
-#include "acpaint.h"
 #include "acmove.h"
 #include "acchangecolor.h"
 #include "acsettexture.h"
 #include "actwovalues.h"
 #include "aconevalue.h"
+#include "acwiggle.h"
+#include "acfunction.h"
 #include "main.cpp"
 #include <QString>
-//todo usar translate
 Event::Event(int type)
 {
     if (type <0 || type > Event::nameCount) type = 0;
@@ -54,20 +54,20 @@ QString Event::names[] = {
 };
 
 QString Event::publicNames[] = {
-    myTrans.tr("Dialog is created"),
-    myTrans.tr("Dialog is active"),
-    myTrans.tr("Dialog dissapears"),
-    myTrans.tr("Dialog appears"),
-    myTrans.tr("Syllable is created"),
-    myTrans.tr("Syllable is active"),
-    myTrans.tr("Syllable dissapears"),
-    myTrans.tr("Syllable appears"),
-    myTrans.tr("Syllable is dead (after activation)"),
-    myTrans.tr("Syllable is sleep (before activation)"),
-    myTrans.tr("Letter is created"),
-    myTrans.tr("Letter is active"),
-    myTrans.tr("Letter dissapears"),
-    myTrans.tr("Letter appears")
+		Tr.tr("Dialog is created"),
+		Tr.tr("Dialog is active"),
+		Tr.tr("Dialog dissapears"),
+		Tr.tr("Dialog appears"),
+		Tr.tr("Syllable is created"),
+		Tr.tr("Syllable is active"),
+		Tr.tr("Syllable dissapears"),
+		Tr.tr("Syllable appears"),
+		Tr.tr("Syllable is dead (after activation)"),
+		Tr.tr("Syllable is sleep (before activation)"),
+		Tr.tr("Letter is created"),
+		Tr.tr("Letter is active"),
+		Tr.tr("Letter dissapears"),
+		Tr.tr("Letter appears")
 };
 
 int Event::nameCount = 14;
@@ -92,18 +92,25 @@ QString Event::addAction(int type)
     Action *ac;
 
     switch(type){
-        case 0: ac = new AcTwoValues("Scale", "Scale"); break;//scale
-        case 1: ac = new AcTwoValues("Rotate", "Rotate"); break;//rotate
-        case 2: ac = new AcMove(); break; //move
-        case 3: ac = new AcTwoValues("Move From", "MoveFrom"); break; //move from
-        case 4: ac = new AcTwoValues("Move To", "MoveTo"); break; //move to
-        case 5: ac = new AcTwoValues("Fade", "Fade"); break; //fade
-        case 6: ac = new AcPaint(); break;//paint
-        case 7: ac = new AcChangeColor(); break; //chage color
-        case 8: ac = new AcOneValue("Shadow Size", "actual.shadow"); break;//shadow size
-        case 9: ac = new AcOneValue("Border Size", "actual.border"); break;//border size
-        case 10: ac = new AcSetTexture(); break; // set texture
-        default : ac = new Action();
+			case 0: ac = new AcTwoValues(Tr.tr("Scale"), "Scale"); break;//scale
+			case 1: ac = new AcTwoValues(Tr.tr("Rotate"), "Rotate"); break;//rotate
+			case 2: ac = new AcMove(); break; //move
+			case 3: ac = new AcTwoValues(Tr.tr("Move From"), "MoveFrom"); break; //move from
+			case 4: ac = new AcTwoValues(Tr.tr("Move To"), "MoveTo"); break; //move to
+			case 5: ac = new AcTwoValues(Tr.tr("Fade"), "Fade"); break; //fade
+			case 6: ac = new AcFunction(Tr.tr("Paint"), "obj.Paint", -1); break;//paint
+			case 7: ac = new AcChangeColor(); break; //chage color
+			case 8: ac = new AcOneValue(Tr.tr("Shadow Size"), "actual.shadow", false); break;//shadow size
+			case 9: ac = new AcOneValue(Tr.tr("Border Size"), "actual.border", false); break;//border size
+			case 10: ac = new AcSetTexture(); break; // set texture
+			case 11:
+				ac = new AcOneValue(Tr.tr("Shake Amplitude"), "Shake", true); break; // set texture
+			case 12: ac = new AcWiggle(); break; // set texture
+			case 13:
+				ac = new AcFunction(Tr.tr("Start Group"), "advanced.StartGroup", AVANZADO); break; // set texture
+			case 14:
+				ac = new AcFunction(Tr.tr("End Group"), "advanced.EndGroup", AVANZADO); break; // set texture
+			default : ac = new Action();
     }
 
 		this->actions.append(ac);

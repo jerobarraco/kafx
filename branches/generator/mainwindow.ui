@@ -146,6 +146,11 @@
           <string>Blur</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>Define Variable</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>

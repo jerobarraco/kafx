@@ -1,11 +1,13 @@
 #include "aconevalue.h"
 
-AcOneValue::AcOneValue(QString name, QString fname)
+AcOneValue::AcOneValue(QString name, QString fname, bool function)
 {
     diag = new DAOneValue();
     diag->setModal(true);
+    diag->setWindowTitle(name);
     this->name = name;
     this->fname = fname;
+    this->func = function;
     configure();
 }
 
@@ -31,6 +33,13 @@ QString AcOneValue::toString()
 QStringList AcOneValue::genStructure()
 {
     QStringList res ;
-    res << tab+ "obj." + fname + " = " + to;
+    QString line ;
+    line = tab+ "obj." + fname;
+    if (func){
+        line += "("+to +")";
+    }else{
+        line += " = " + to;
+    }
+    res << line;
     return res;
 }

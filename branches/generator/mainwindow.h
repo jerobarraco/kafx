@@ -42,6 +42,7 @@ private:
     Action * getCurrentAction();
     Ui::MainWindow *ui;
 };
-static QTranslator myTrans;
+
+static QTranslator Tr;
 
 #endif // MAINWINDOW_H

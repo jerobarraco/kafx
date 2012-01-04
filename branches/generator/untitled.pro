@@ -17,7 +17,6 @@ SOURCES += main.cpp\
     event.cpp \
     dialog.cpp \
     action.cpp \
-		acpaint.cpp \
     dachangecolor.cpp \
     acchangecolor.cpp \
     acsettexture.cpp \
@@ -28,7 +27,10 @@ SOURCES += main.cpp\
     acmove.cpp \
     damove.cpp \
     daonevalue.cpp \
-    aconevalue.cpp
+    aconevalue.cpp \
+    dawiggle.cpp \
+    acwiggle.cpp \
+    acfunction.cpp
 
 HEADERS  += mainwindow.h \
     fxsgroup.h \
@@ -36,7 +38,6 @@ HEADERS  += mainwindow.h \
     event.h \
     dialog.h \
     action.h \
-    acpaint.h \
     dachangecolor.h \
     acchangecolor.h \
     acsettexture.h \
@@ -47,7 +48,10 @@ HEADERS  += mainwindow.h \
     acmove.h \
     damove.h \
     daonevalue.h \
-    aconevalue.h
+    aconevalue.h \
+    dawiggle.h \
+    acwiggle.h \
+    acfunction.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \
@@ -56,4 +60,5 @@ FORMS    += mainwindow.ui \
     deffect.ui \
     datwovalues.ui \
     damove.ui \
-    daonevalue.ui
+    daonevalue.ui \
+    dawiggle.ui

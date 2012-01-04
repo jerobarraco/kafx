@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed 4. Jan 04:42:33 2012
+** Created: Wed 4. Jan 17:26:32 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -232,6 +232,7 @@ public:
          << QApplication::translate("MainWindow", "End Group", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Glow", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Blur", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "Define Variable", 0, QApplication::UnicodeUTF8)
         );
         menuEffects->setTitle(QApplication::translate("MainWindow", "Effects", 0, QApplication::UnicodeUTF8));
         menuEvents->setTitle(QApplication::translate("MainWindow", "Events", 0, QApplication::UnicodeUTF8));
