@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     aconevalue.cpp \
     dawiggle.cpp \
     acwiggle.cpp \
-    acfunction.cpp
+    acfunction.cpp \
+    acinterpolate.cpp
 
 HEADERS  += mainwindow.h \
     fxsgroup.h \
@@ -51,7 +52,8 @@ HEADERS  += mainwindow.h \
     aconevalue.h \
     dawiggle.h \
     acwiggle.h \
-    acfunction.h
+    acfunction.h \
+    acinterpolate.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \

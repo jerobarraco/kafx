@@ -24,7 +24,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+      <widget class="QDoubleSpinBox" name="doubleSpinBox">
+       <property name="minimum">
+        <double>-999999.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>999999.989999999990687</double>
+       </property>
+       <property name="singleStep">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
