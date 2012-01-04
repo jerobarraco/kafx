@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dasettexture.ui'
 **
-** Created: Tue 3. Jan 21:57:03 2012
+** Created: Wed 4. Jan 03:37:22 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

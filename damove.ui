@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DAscale</class>
- <widget class="QDialog" name="DAscale">
+ <class>DAMove</class>
+ <widget class="QDialog" name="DAMove">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>155</height>
+    <height>147</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,17 +19,27 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>From</string>
+        <string>From (x, y)</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="doubleSpinBox">
+      <widget class="QSpinBox" name="spinBox">
        <property name="minimum">
-        <double>-99.000000000000000</double>
+        <number>-999999</number>
        </property>
-       <property name="singleStep">
-        <double>0.010000000000000</double>
+       <property name="maximum">
+        <number>999999</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="spinBox_2">
+       <property name="minimum">
+        <number>-999999</number>
+       </property>
+       <property name="maximum">
+        <number>999999</number>
        </property>
       </widget>
      </item>
@@ -40,20 +50,27 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>To</string>
+        <string>To (x, y)</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+      <widget class="QSpinBox" name="spinBox_3">
        <property name="minimum">
-        <double>-99.000000000000000</double>
+        <number>-999999</number>
        </property>
        <property name="maximum">
-        <double>99.989999999999995</double>
+        <number>999999</number>
        </property>
-       <property name="singleStep">
-        <double>0.010000000000000</double>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="spinBox_4">
+       <property name="minimum">
+        <number>-999999</number>
+       </property>
+       <property name="maximum">
+        <number>999999</number>
        </property>
       </widget>
      </item>
@@ -64,7 +81,7 @@
      <item>
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Interpolation</string>
+        <string>Interpolator</string>
        </property>
       </widget>
      </item>
@@ -90,7 +107,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DAscale</receiver>
+   <receiver>DAMove</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -106,7 +123,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DAscale</receiver>
+   <receiver>DAMove</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

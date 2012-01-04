@@ -1,6 +1,9 @@
 #include "fxsgroup.h"
 #include <QTextStream>
 #include <QStringList>
+#include "mainwindow.h"
+
+
 FxsGroup::FxsGroup()
 {
 	//esto es cohino pero bueno, no se me ocurrio otra forma mas rapida
@@ -159,12 +162,13 @@ QString FxsGroup::interNames [] = {//que boludo estos son los actions.. igual ne
 };*/
 
 QString FxsGroup::interNames [] = {
-	QString("Lineal"),QString("Sinus"),QString("Cosinus"),
-	QString("Full Sinus"),QString("Full Cosinus"),QString("Accelerate"),
-	QString("Deccelerate"),QString("Random"),
-	QString("Logarithmic"),QString("Ease in"),QString("Ease Out")
-	,QString("Ease In Out"),QString("Cubic"),QString("BackStart"),QString("Boing")
+    myTrans.tr("Lineal"),myTrans.tr("Sinus"),myTrans.tr("Cosinus"),
+    myTrans.tr("Full Sinus"),myTrans.tr("Full Cosinus"),myTrans.tr("Accelerate"),
+    myTrans.tr("Deccelerate"),myTrans.tr("Random"),
+    myTrans.tr("Logarithmic"),myTrans.tr("Ease in"),myTrans.tr("Ease Out")
+    ,myTrans.tr("Ease In Out"),myTrans.tr("Cubic"),myTrans.tr("BackStart"),myTrans.tr("Boing")
 };
+
 QString FxsGroup::interUrls [] = {
 	QString("comun.i_lineal"),
 	QString("comun.i_sin"),QString("comun.i_cos"),
@@ -177,9 +181,9 @@ QString FxsGroup::interUrls [] = {
 };
 
 /*TODOS
-    al hacer doble click en un action que llame a configure
     agregar mas actions
-    agregar mas eventos
-    agregar configuracion del efecto
+    al hacer doble click en un action que llame a configure
     permitir reordenar actions
+    poner las acciones como static en action.h y usar translate
+    arreglar translate
 */

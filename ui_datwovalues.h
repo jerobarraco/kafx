@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading UI file 'dafade.ui'
+** Form generated from reading UI file 'datwovalues.ui'
 **
-** Created: Wed 4. Jan 03:37:22 2012
+** Created: Wed 4. Jan 03:41:00 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_DAFADE_H
-#define UI_DAFADE_H
+#ifndef UI_DATWOVALUES_H
+#define UI_DATWOVALUES_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -25,7 +25,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_DAFade
+class Ui_DATwoValues
 {
 public:
     QVBoxLayout *verticalLayout;
@@ -40,21 +40,21 @@ public:
     QComboBox *comboBox;
     QDialogButtonBox *buttonBox;
 
-    void setupUi(QDialog *DAFade)
+    void setupUi(QDialog *DATwoValues)
     {
-        if (DAFade->objectName().isEmpty())
-            DAFade->setObjectName(QString::fromUtf8("DAFade"));
-        DAFade->resize(402, 182);
-        verticalLayout = new QVBoxLayout(DAFade);
+        if (DATwoValues->objectName().isEmpty())
+            DATwoValues->setObjectName(QString::fromUtf8("DATwoValues"));
+        DATwoValues->resize(400, 173);
+        verticalLayout = new QVBoxLayout(DATwoValues);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        label = new QLabel(DAFade);
+        label = new QLabel(DATwoValues);
         label->setObjectName(QString::fromUtf8("label"));
 
         horizontalLayout->addWidget(label);
 
-        doubleSpinBox = new QDoubleSpinBox(DAFade);
+        doubleSpinBox = new QDoubleSpinBox(DATwoValues);
         doubleSpinBox->setObjectName(QString::fromUtf8("doubleSpinBox"));
 
         horizontalLayout->addWidget(doubleSpinBox);
@@ -64,13 +64,16 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        label_2 = new QLabel(DAFade);
+        label_2 = new QLabel(DATwoValues);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
         horizontalLayout_2->addWidget(label_2);
 
-        doubleSpinBox_2 = new QDoubleSpinBox(DAFade);
+        doubleSpinBox_2 = new QDoubleSpinBox(DATwoValues);
         doubleSpinBox_2->setObjectName(QString::fromUtf8("doubleSpinBox_2"));
+        doubleSpinBox_2->setMinimum(-99999);
+        doubleSpinBox_2->setMaximum(100000);
+        doubleSpinBox_2->setSingleStep(0.01);
 
         horizontalLayout_2->addWidget(doubleSpinBox_2);
 
@@ -79,12 +82,12 @@ public:
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        label_3 = new QLabel(DAFade);
+        label_3 = new QLabel(DATwoValues);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
         horizontalLayout_3->addWidget(label_3);
 
-        comboBox = new QComboBox(DAFade);
+        comboBox = new QComboBox(DATwoValues);
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
 
         horizontalLayout_3->addWidget(comboBox);
@@ -92,7 +95,7 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_3);
 
-        buttonBox = new QDialogButtonBox(DAFade);
+        buttonBox = new QDialogButtonBox(DATwoValues);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
@@ -100,27 +103,27 @@ public:
         verticalLayout->addWidget(buttonBox);
 
 
-        retranslateUi(DAFade);
-        QObject::connect(buttonBox, SIGNAL(accepted()), DAFade, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), DAFade, SLOT(reject()));
+        retranslateUi(DATwoValues);
+        QObject::connect(buttonBox, SIGNAL(accepted()), DATwoValues, SLOT(accept()));
+        QObject::connect(buttonBox, SIGNAL(rejected()), DATwoValues, SLOT(reject()));
 
-        QMetaObject::connectSlotsByName(DAFade);
+        QMetaObject::connectSlotsByName(DATwoValues);
     } // setupUi
 
-    void retranslateUi(QDialog *DAFade)
+    void retranslateUi(QDialog *DATwoValues)
     {
-        DAFade->setWindowTitle(QApplication::translate("DAFade", "Dialog", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("DAFade", "From", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("DAFade", "To", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("DAFade", "Interpolator", 0, QApplication::UnicodeUTF8));
+        DATwoValues->setWindowTitle(QApplication::translate("DATwoValues", "Dialog", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("DATwoValues", "From", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("DATwoValues", "To", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("DATwoValues", "Interpolator", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class DAFade: public Ui_DAFade {};
+    class DATwoValues: public Ui_DATwoValues {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_DAFADE_H
+#endif // UI_DATWOVALUES_H
