@@ -65,13 +65,15 @@ def CapasCrear(capa, opacidad=1.0, mode='over'):
 	global _capas
 	_capas[capa] = Capa(opacidad, mode)
 
-def CapasActivar(capa=0):
+def CapasActivar(capa=0, opacity=1.0, mode='over'):
 	"""Activa una capa.
 	todo lo que se pinte luego de esto se pintará sobre la capa activada.
 	@capa Nombre de la capa a activar, igual que se uso en CapasCrear
 		la capa de nombre "base" es una capa especial, la capa del video, sobre la que se pinta todo.
 	"""
 	global _capas
+	if not capa in _capasa:
+		_capas[capa] = Capa(opacidad, mode)
 	video.cf.ctx = _capas[capa].ctx
 
 def CapasFin():
