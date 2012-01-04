@@ -669,19 +669,16 @@ class cVector():
 		"""
 		Anima la posición como un shake
 		@amplitud = cantidad de pixels que se moverá
-		(requiere que los estilos se restauren)"""
-		#todo cambiar para que use original, asi no necesita el restore.
-		self.actual.pos_x += comun.Interpolate(self.progress, -amplitud, amplitud, comun.i_rand)
-		self.actual.pos_y += comun.Interpolate(self.progress, -amplitud, amplitud, comun.i_rand)
+		"""
+		self.actual.pos_x = self.original.pos_x + comun.Interpolate(self.progress, -amplitud, amplitud, comun.i_rand)
+		self.actual.pos_y = self.original.pos_y +comun.Interpolate(self.progress, -amplitud, amplitud, comun.i_rand)
 
 	def Wiggle(self, amplitud=4, frecuencia=2):
 		"""
 		Anima la posición como un movimiento entre points aleatorios
 		@amplitud = cantidad de pixels que se moverá
 		@frecuencia = cantidad de points a los que irá
-		(requiere que los estilos se restauren)
 		"""
-		#todo cambiar para que no requiera restore
 		if self.pointsw == None:
 			self.pointsw = []
 			self.pointsw.append( (0, 0) )
@@ -691,8 +688,8 @@ class cVector():
 				self.pointsw.append( (randomx, randomy) )
 				self.pointsw.append( (0, 0) )
 		x, y = comun.RanmaBezier(self.progress, self.pointsw)
-		self.actual.pos_x += x
-		self.actual.pos_y += y
+		self.actual.pos_x = self.original.pos_x +x
+		self.actual.pos_y = self.original.pos_y +y
 		return x, y
 
 	def CargarTextura(self, archivo, part=PART_BORDER, extend=cairo.EXTEND_REPEAT):
