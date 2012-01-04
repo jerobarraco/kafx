@@ -3,31 +3,30 @@
 #include <QStringList>
 #include "mainwindow.h"
 
-
 FxsGroup::FxsGroup()
 {
 	//esto es cohino pero bueno, no se me ocurrio otra forma mas rapida
 	//debe coincidir con el enum MODULES
-    //todo hacer static
+	//todo hacer static
 	moduleUrls << "from random import random";
 	moduleUrls << "from random import randint";
-	moduleUrls << "from libs import comun";
+	moduleUrls << "from libs import common";
 	moduleUrls << "from libs import asslib";
 	moduleUrls << "from libs import audio";
-	moduleUrls << "from libs import formas";
+	moduleUrls << "from libs import shapes";
 	moduleUrls << "from libs import video";
-	moduleUrls << "from libs.draw import avanzado";
-	moduleUrls << "from libs.draw import basico";
+	moduleUrls << "from libs.draw import advanced";
+	moduleUrls << "from libs.draw import basic";
 	moduleUrls << "from libs.draw import extra";
-    diag_in = 200;
-    diag_out = 200;
-    sil_in = 200;
-    sil_out = 200;
-    let_in = 200;
-    let_out = 200;
-    splitlet = false;
-    skipframes = false;
-    reset_style = false;
+	diag_in = 200;
+	diag_out = 200;
+	sil_in = 200;
+	sil_out = 200;
+	let_in = 200;
+	let_out = 200;
+	splitlet = false;
+	skipframes = false;
+	reset_style = false;
 }
 FxsGroup::~FxsGroup(){
     Effect * ef;
@@ -112,7 +111,7 @@ QStringList FxsGroup::genStructure()
     ret << "\t\t#Funciones (grupo de efectos) que provee";
     ret << "";
 
-    QString fxs = "\t\tself.fxs = (";
+		QString fxs = tab+"self.fxs = (";
     for (int i = 0; i<effects.count(); i++){
         fxs.append(effects[i]->toString());//toString casualmetne da el name.. ojo con esto
         fxs += "(), ";
@@ -162,11 +161,11 @@ QString FxsGroup::interNames [] = {//que boludo estos son los actions.. igual ne
 };*/
 
 QString FxsGroup::interNames [] = {
-    myTrans.tr("Lineal"),myTrans.tr("Sinus"),myTrans.tr("Cosinus"),
-    myTrans.tr("Full Sinus"),myTrans.tr("Full Cosinus"),myTrans.tr("Accelerate"),
-    myTrans.tr("Deccelerate"),myTrans.tr("Random"),
-    myTrans.tr("Logarithmic"),myTrans.tr("Ease in"),myTrans.tr("Ease Out")
-    ,myTrans.tr("Ease In Out"),myTrans.tr("Cubic"),myTrans.tr("BackStart"),myTrans.tr("Boing")
+		Tr.tr("Lineal"),Tr.tr("Sinus"),Tr.tr("Cosinus"),
+		Tr.tr("Full Sinus"),Tr.tr("Full Cosinus"),Tr.tr("Accelerate"),
+		Tr.tr("Deccelerate"),Tr.tr("Random"),
+		Tr.tr("Logarithmic"),Tr.tr("Ease in"),Tr.tr("Ease Out")
+		,Tr.tr("Ease In Out"),Tr.tr("Cubic"),Tr.tr("BackStart"),Tr.tr("Boing")
 };
 
 QString FxsGroup::interUrls [] = {
@@ -186,4 +185,9 @@ QString FxsGroup::interUrls [] = {
     permitir reordenar actions
     poner las acciones como static en action.h y usar translate
     arreglar translate
+		hacer un dialogo que permita varios valores,
+			cambiar los labels
+			usar float e int
+			poner interpoladores
+			diferenciar function y variable
 */

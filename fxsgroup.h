@@ -27,6 +27,7 @@ public:
     static const int interCant = 15;
     static QString interNames[];//el name es para el combo
     static QString interUrls[];//las urls para cargar
+		static QString modules[];//las urls para cargar
     //me da paja ponerlas privadas
     int diag_in, diag_out, sil_in, sil_out, let_in, let_out;
     bool splitlet, skipframes, reset_style;

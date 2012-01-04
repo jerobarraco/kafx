@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
      QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     app.installTranslator(&qtTranslator);
 
-    myTrans.load("kafx_" + QLocale::system().name());
-    app.installTranslator(&myTrans);
+		Tr.load("kafx_" + QLocale::system().name());
+		app.installTranslator(&Tr);
 
     //importnate para que los flotantes usen "." como separador decimal
    //esto sobreescribe las traducciones, todo: ver como hacer para que no lo haga

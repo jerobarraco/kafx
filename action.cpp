@@ -13,7 +13,7 @@ QString Action::toString()
 
 bool Action::configure()
 {
-		return false;//devuelve truesi cambio algo, creo que es al pedo
+		return false;//devuelve true si cambio algo, creo que es al pedo
 }
 
 QList<int> Action::getModules()

@@ -67,6 +67,19 @@
     </message>
 </context>
 <context>
+    <name>DAOneValue</name>
+    <message>
+        <location filename="daonevalue.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="daonevalue.ui" line="22"/>
+        <source>To</source>
+        <translation type="unfinished">Hasta</translation>
+    </message>
+</context>
+<context>
     <name>DASetTexture</name>
     <message>
         <location filename="dasettexture.ui" line="14"/>
@@ -125,6 +138,24 @@
         <location filename="datwovalues.ui" line="60"/>
         <source>Interpolator</source>
         <translation type="unfinished">Interpolador</translation>
+    </message>
+</context>
+<context>
+    <name>DAWiggle</name>
+    <message>
+        <location filename="dawiggle.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dawiggle.ui" line="22"/>
+        <source>Amplitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dawiggle.ui" line="36"/>
+        <source>Frequency</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -246,150 +277,205 @@ Use with care, only if needed.</source>
 <context>
     <name>Event</name>
     <message>
-        <location filename="event.cpp" line="55"/>
+        <location filename="event.cpp" line="57"/>
         <source>Dialog is created</source>
         <translation>Dialogo es Creado</translation>
     </message>
     <message>
-        <location filename="event.cpp" line="56"/>
+        <location filename="event.cpp" line="58"/>
         <source>Dialog is active</source>
         <translation>Dialogo es activado</translation>
     </message>
     <message>
-        <location filename="event.cpp" line="57"/>
+        <location filename="event.cpp" line="59"/>
         <source>Dialog dissapears</source>
         <translation>Dialogo desaparece</translation>
     </message>
     <message>
-        <location filename="event.cpp" line="58"/>
+        <location filename="event.cpp" line="60"/>
         <source>Dialog appears</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="59"/>
+        <location filename="event.cpp" line="61"/>
         <source>Syllable is created</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="60"/>
+        <location filename="event.cpp" line="62"/>
         <source>Syllable is active</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="61"/>
+        <location filename="event.cpp" line="63"/>
         <source>Syllable dissapears</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="62"/>
+        <location filename="event.cpp" line="64"/>
         <source>Syllable appears</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="63"/>
+        <location filename="event.cpp" line="65"/>
         <source>Syllable is dead (after activation)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="64"/>
+        <location filename="event.cpp" line="66"/>
         <source>Syllable is sleep (before activation)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="65"/>
+        <location filename="event.cpp" line="67"/>
         <source>Letter is created</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="66"/>
+        <location filename="event.cpp" line="68"/>
         <source>Letter is active</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="67"/>
+        <location filename="event.cpp" line="69"/>
         <source>Letter dissapears</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="68"/>
+        <location filename="event.cpp" line="70"/>
         <source>Letter appears</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="95"/>
+        <source>Scale</source>
+        <translation type="unfinished">Escalar</translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="96"/>
+        <source>Rotate</source>
+        <translation type="unfinished">Rotar</translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="98"/>
+        <source>Move From</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="99"/>
+        <source>Move To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="100"/>
+        <source>Fade</source>
+        <translation type="unfinished">Desvanecer</translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="101"/>
+        <source>Paint</source>
+        <translation type="unfinished">Pintar</translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="103"/>
+        <source>Shadow Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="104"/>
+        <source>Border Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="107"/>
+        <source>Shake Amplitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="110"/>
+        <source>Start Group</source>
+        <translation type="unfinished">Iniciar Grupo</translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="112"/>
+        <source>End Group</source>
+        <translation type="unfinished">Cerrar Grupo</translation>
     </message>
 </context>
 <context>
     <name>FxsGroup</name>
     <message>
-        <location filename="fxsgroup.cpp" line="165"/>
+        <location filename="fxsgroup.cpp" line="164"/>
         <source>Lineal</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="165"/>
+        <location filename="fxsgroup.cpp" line="164"/>
         <source>Sinus</source>
         <translation>Seno</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="165"/>
+        <location filename="fxsgroup.cpp" line="164"/>
         <source>Cosinus</source>
         <translation>Coseno</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="166"/>
+        <location filename="fxsgroup.cpp" line="165"/>
         <source>Full Sinus</source>
         <translation>Seno completo</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="166"/>
+        <location filename="fxsgroup.cpp" line="165"/>
         <source>Full Cosinus</source>
         <translation>Coseno completo</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="166"/>
+        <location filename="fxsgroup.cpp" line="165"/>
         <source>Accelerate</source>
         <translation>Acelerar</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="167"/>
+        <location filename="fxsgroup.cpp" line="166"/>
         <source>Deccelerate</source>
         <translation>Desacelerar</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="167"/>
+        <location filename="fxsgroup.cpp" line="166"/>
         <source>Random</source>
         <translation>Aleatorio</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="168"/>
+        <location filename="fxsgroup.cpp" line="167"/>
         <source>Logarithmic</source>
         <translation>Logarítmico</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="168"/>
+        <location filename="fxsgroup.cpp" line="167"/>
         <source>Ease in</source>
         <translation>Entrada suave</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="168"/>
+        <location filename="fxsgroup.cpp" line="167"/>
         <source>Ease Out</source>
         <translation>Salida suave</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="169"/>
+        <location filename="fxsgroup.cpp" line="168"/>
         <source>Ease In Out</source>
         <translation>Entrada y salida suave</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="169"/>
+        <location filename="fxsgroup.cpp" line="168"/>
         <source>Cubic</source>
         <translation>Cúbica</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="169"/>
+        <location filename="fxsgroup.cpp" line="168"/>
         <source>BackStart</source>
         <translation>Impulso</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="169"/>
+        <location filename="fxsgroup.cpp" line="168"/>
         <source>Boing</source>
         <translation>Rebote</translation>
     </message>
@@ -397,25 +483,24 @@ Use with care, only if needed.</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="14"/>
         <source>MainWindow</source>
-        <translation>Kafx Generator</translation>
+        <translation type="obsolete">Kafx Generator</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="23"/>
-        <location filename="mainwindow.ui" line="169"/>
+        <location filename="mainwindow.ui" line="174"/>
         <source>Effects</source>
         <translation>Efectos</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="41"/>
-        <location filename="mainwindow.ui" line="177"/>
+        <location filename="mainwindow.ui" line="182"/>
         <source>Events</source>
         <translation>Eventos</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="58"/>
-        <location filename="mainwindow.ui" line="184"/>
+        <location filename="mainwindow.ui" line="189"/>
         <source>Actions</source>
         <translation>Acciones</translation>
     </message>
@@ -500,52 +585,62 @@ Use with care, only if needed.</source>
         <translation>Iniciar Grupo</translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="14"/>
+        <source>Kafx FX Generator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow.ui" line="136"/>
         <source>End Group</source>
         <translation>Cerrar Grupo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="217"/>
+        <location filename="mainwindow.ui" line="151"/>
+        <source>Define Variable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="222"/>
         <source>Add Effect</source>
         <translation>Agregar Efecto</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="222"/>
+        <location filename="mainwindow.ui" line="227"/>
         <source>Add Event</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="227"/>
+        <location filename="mainwindow.ui" line="232"/>
         <source>Remove Effect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="232"/>
+        <location filename="mainwindow.ui" line="237"/>
         <source>Generate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="237"/>
+        <location filename="mainwindow.ui" line="242"/>
         <source>Check if your credit card has funds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="242"/>
+        <location filename="mainwindow.ui" line="247"/>
         <source>Add Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="247"/>
+        <location filename="mainwindow.ui" line="252"/>
         <source>Remove Event</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="252"/>
+        <location filename="mainwindow.ui" line="257"/>
         <source>Remove Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="257"/>
+        <location filename="mainwindow.ui" line="262"/>
         <source>Edit Effect</source>
         <translation type="unfinished"></translation>
     </message>
