@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFile>
 #include <QModelIndex>
+#include <QTranslator>
 #include "fxsgroup.h"
 #include "deffect.h"
 
@@ -41,5 +42,6 @@ private:
     Action * getCurrentAction();
     Ui::MainWindow *ui;
 };
+static QTranslator myTrans;
 
 #endif // MAINWINDOW_H

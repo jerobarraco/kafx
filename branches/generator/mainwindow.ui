@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Kafx FX Generator</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -78,6 +78,16 @@
         </item>
         <item>
          <property name="text">
+          <string>Move From</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Move To</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Fade</string>
          </property>
         </item>
@@ -118,22 +128,22 @@
         </item>
         <item>
          <property name="text">
-          <string>Glow</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Blur</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string>Start Group</string>
          </property>
         </item>
         <item>
          <property name="text">
           <string>End Group</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Glow</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Blur</string>
          </property>
         </item>
        </widget>

@@ -19,10 +19,10 @@ AcChangeColor::~AcChangeColor()
 bool AcChangeColor::configure()
 {
 	if (diag->exec()==diag->Accepted){
-			from = diag->getFrom();
-			to = diag->getTo();
-			interpolator = diag->getInterpolator();
-			return true;
+        from = diag->getFrom();
+        to = diag->getTo();
+        interpolator = diag->getInterpolator();
+        return true;
 	}else{return false;}
 }
 
@@ -30,7 +30,7 @@ QString AcChangeColor::toString()
 {
 	QString res ="ChangeColor("+QString::number(from)
 			+", "+QString::number(to);//todo, usar los nombres en los combos con diag->getFromText y getToText
-	if (interpolator >1){
+    if (interpolator >0){
 		res+=", "+FxsGroup::interNames[interpolator];
 	}
 	res +=")";

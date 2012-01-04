@@ -6,9 +6,9 @@
 
 QT       += core gui
 
-TARGET = untitled
+TARGET = kafx_generator
 TEMPLATE = app
-
+TRANSLATIONS = kafx_es.tr
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -17,16 +17,18 @@ SOURCES += main.cpp\
     event.cpp \
     dialog.cpp \
     action.cpp \
-    acpaint.cpp \
-    dascale.cpp \
-    acscale.cpp \
-    acfade.cpp \
-    dafade.cpp \
+		acpaint.cpp \
     dachangecolor.cpp \
     acchangecolor.cpp \
     acsettexture.cpp \
     dasettexture.cpp \
-    deffect.cpp
+    deffect.cpp \
+    actwovalues.cpp \
+    datwovalues.cpp \
+    acmove.cpp \
+    damove.cpp \
+    daonevalue.cpp \
+    aconevalue.cpp
 
 HEADERS  += mainwindow.h \
     fxsgroup.h \
@@ -35,26 +37,23 @@ HEADERS  += mainwindow.h \
     dialog.h \
     action.h \
     acpaint.h \
-    dascale.h \
-    acscale.h \
-    acfade.h \
-    dafade.h \
     dachangecolor.h \
     acchangecolor.h \
     acsettexture.h \
     dasettexture.h \
-    deffect.h
+    deffect.h \
+    actwovalues.h \
+    datwovalues.h \
+    acmove.h \
+    damove.h \
+    daonevalue.h \
+    aconevalue.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \
-    dascale.ui \
-    dafade.ui \
     dachangecolor.ui \
     dasettexture.ui \
-    deffect.ui
-
-
-
-
-
-
+    deffect.ui \
+    datwovalues.ui \
+    damove.ui \
+    daonevalue.ui

@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="es_ES">
+<context>
+    <name>DAChangeColor</name>
+    <message>
+        <location filename="dachangecolor.ui" line="14"/>
+        <source>Dialog</source>
+        <translation>Cambiar Color</translation>
+    </message>
+    <message>
+        <location filename="dachangecolor.ui" line="22"/>
+        <source>Change Wich Color</source>
+        <translation>Cambiar color</translation>
+    </message>
+    <message>
+        <location filename="dachangecolor.ui" line="36"/>
+        <source>To which color</source>
+        <translation>A que color</translation>
+    </message>
+    <message>
+        <location filename="dachangecolor.ui" line="50"/>
+        <source>Interpolator</source>
+        <translation>Interpolador</translation>
+    </message>
+</context>
+<context>
+    <name>DAFade</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="obsolete">Desvanecer</translation>
+    </message>
+    <message>
+        <source>From</source>
+        <translation type="obsolete">Desde</translation>
+    </message>
+    <message>
+        <source>To</source>
+        <translation type="obsolete">Hasta</translation>
+    </message>
+    <message>
+        <source>Interpolator</source>
+        <translation type="obsolete">Interpolador</translation>
+    </message>
+</context>
+<context>
+    <name>DAMove</name>
+    <message>
+        <location filename="damove.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="damove.ui" line="22"/>
+        <source>From (x, y)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="damove.ui" line="53"/>
+        <source>To (x, y)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="damove.ui" line="84"/>
+        <source>Interpolator</source>
+        <translation type="unfinished">Interpolador</translation>
+    </message>
+</context>
+<context>
+    <name>DASetTexture</name>
+    <message>
+        <location filename="dasettexture.ui" line="14"/>
+        <source>Dialog</source>
+        <translation>Elegir Textura</translation>
+    </message>
+    <message>
+        <location filename="dasettexture.ui" line="22"/>
+        <source>Part</source>
+        <translation>Parte</translation>
+    </message>
+    <message>
+        <location filename="dasettexture.ui" line="30"/>
+        <source>Fill</source>
+        <translation>Relleno</translation>
+    </message>
+    <message>
+        <location filename="dasettexture.ui" line="35"/>
+        <source>Border</source>
+        <translation>Borde</translation>
+    </message>
+    <message>
+        <location filename="dasettexture.ui" line="40"/>
+        <source>Shadow</source>
+        <translation>Sombra</translation>
+    </message>
+    <message>
+        <location filename="dasettexture.ui" line="52"/>
+        <source>Texture</source>
+        <translation>Textura</translation>
+    </message>
+    <message>
+        <location filename="dasettexture.ui" line="66"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>DATwoValues</name>
+    <message>
+        <location filename="datwovalues.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="datwovalues.ui" line="22"/>
+        <source>From</source>
+        <translation type="unfinished">Desde</translation>
+    </message>
+    <message>
+        <location filename="datwovalues.ui" line="36"/>
+        <source>To</source>
+        <translation type="unfinished">Hasta</translation>
+    </message>
+    <message>
+        <location filename="datwovalues.ui" line="60"/>
+        <source>Interpolator</source>
+        <translation type="unfinished">Interpolador</translation>
+    </message>
+</context>
+<context>
+    <name>DAscale</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="obsolete">Cambiar Escala</translation>
+    </message>
+    <message>
+        <source>From</source>
+        <translation type="obsolete">Desde</translation>
+    </message>
+    <message>
+        <source>To</source>
+        <translation type="obsolete">Hasta</translation>
+    </message>
+    <message>
+        <source>Interpolation</source>
+        <translation type="obsolete">Interpolador</translation>
+    </message>
+</context>
+<context>
+    <name>DEffect</name>
+    <message>
+        <location filename="deffect.ui" line="14"/>
+        <source>Dialog</source>
+        <translation>Propiedades del efecto</translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="22"/>
+        <source>Dialog In Millisecs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="43"/>
+        <source>Dialog Out Millisecs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="64"/>
+        <source>Sillabe In Millisecs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="85"/>
+        <source>Sillabe Out Millisecs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="104"/>
+        <source>This will make loading slow, use it only if needed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="107"/>
+        <source>Split Letters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="116"/>
+        <source>Letter In Millisecs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="140"/>
+        <source>Letter Out Millisecs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="162"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;This can introduce errors on some effects.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;But can speed up kafx a little, use only if needed.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="170"/>
+        <source>Reset Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="177"/>
+        <source>This can introduce errors on some effects using particles, audio and other things similar.
+Use with care, only if needed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="deffect.ui" line="181"/>
+        <source>Skip Frames</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Dialog</name>
+    <message>
+        <location filename="dialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialog.ui" line="20"/>
+        <source>Check if your credit card has founds.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialog.ui" line="32"/>
+        <source>Credit card number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialog.ui" line="46"/>
+        <source>Expiration date</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Event</name>
+    <message>
+        <location filename="event.cpp" line="55"/>
+        <source>Dialog is created</source>
+        <translation>Dialogo es Creado</translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="56"/>
+        <source>Dialog is active</source>
+        <translation>Dialogo es activado</translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="57"/>
+        <source>Dialog dissapears</source>
+        <translation>Dialogo desaparece</translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="58"/>
+        <source>Dialog appears</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="59"/>
+        <source>Syllable is created</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="60"/>
+        <source>Syllable is active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="61"/>
+        <source>Syllable dissapears</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="62"/>
+        <source>Syllable appears</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="63"/>
+        <source>Syllable is dead (after activation)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="64"/>
+        <source>Syllable is sleep (before activation)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="65"/>
+        <source>Letter is created</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="66"/>
+        <source>Letter is active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="67"/>
+        <source>Letter dissapears</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event.cpp" line="68"/>
+        <source>Letter appears</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FxsGroup</name>
+    <message>
+        <location filename="fxsgroup.cpp" line="165"/>
+        <source>Lineal</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="165"/>
+        <source>Sinus</source>
+        <translation>Seno</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="165"/>
+        <source>Cosinus</source>
+        <translation>Coseno</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="166"/>
+        <source>Full Sinus</source>
+        <translation>Seno completo</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="166"/>
+        <source>Full Cosinus</source>
+        <translation>Coseno completo</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="166"/>
+        <source>Accelerate</source>
+        <translation>Acelerar</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="167"/>
+        <source>Deccelerate</source>
+        <translation>Desacelerar</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="167"/>
+        <source>Random</source>
+        <translation>Aleatorio</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="168"/>
+        <source>Logarithmic</source>
+        <translation>Logarítmico</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="168"/>
+        <source>Ease in</source>
+        <translation>Entrada suave</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="168"/>
+        <source>Ease Out</source>
+        <translation>Salida suave</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="169"/>
+        <source>Ease In Out</source>
+        <translation>Entrada y salida suave</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="169"/>
+        <source>Cubic</source>
+        <translation>Cúbica</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="169"/>
+        <source>BackStart</source>
+        <translation>Impulso</translation>
+    </message>
+    <message>
+        <location filename="fxsgroup.cpp" line="169"/>
+        <source>Boing</source>
+        <translation>Rebote</translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="mainwindow.ui" line="14"/>
+        <source>MainWindow</source>
+        <translation>Kafx Generator</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="23"/>
+        <location filename="mainwindow.ui" line="169"/>
+        <source>Effects</source>
+        <translation>Efectos</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="41"/>
+        <location filename="mainwindow.ui" line="177"/>
+        <source>Events</source>
+        <translation>Eventos</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="58"/>
+        <location filename="mainwindow.ui" line="184"/>
+        <source>Actions</source>
+        <translation>Acciones</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="66"/>
+        <source>Scale</source>
+        <translation>Escalar</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="71"/>
+        <source>Rotate</source>
+        <translation>Rotar</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="76"/>
+        <source>Move</source>
+        <translation>Mover</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="81"/>
+        <source>Move From</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="86"/>
+        <source>Move To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="91"/>
+        <source>Fade</source>
+        <translation>Desvanecer</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="96"/>
+        <source>Paint</source>
+        <translation>Pintar</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="101"/>
+        <source>Change Color</source>
+        <translation>Cambiar color</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="106"/>
+        <source>Change Shadow Size</source>
+        <translation>Cambiar tamaño de Sombra</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="111"/>
+        <source>Change Border Size</source>
+        <translation>Cambiar tamaño de Borde</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="116"/>
+        <source>Set Texture</source>
+        <translation>Elegir Textura</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="121"/>
+        <source>Shake</source>
+        <translation>Sacudir</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="126"/>
+        <source>Wiggle</source>
+        <translation>Batir</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="141"/>
+        <source>Glow</source>
+        <translation>Brillar</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="146"/>
+        <source>Blur</source>
+        <translation>Desenfoque</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="131"/>
+        <source>Start Group</source>
+        <translation>Iniciar Grupo</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="136"/>
+        <source>End Group</source>
+        <translation>Cerrar Grupo</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="217"/>
+        <source>Add Effect</source>
+        <translation>Agregar Efecto</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="222"/>
+        <source>Add Event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="227"/>
+        <source>Remove Effect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="232"/>
+        <source>Generate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="237"/>
+        <source>Check if your credit card has funds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="242"/>
+        <source>Add Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="247"/>
+        <source>Remove Event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="252"/>
+        <source>Remove Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="257"/>
+        <source>Edit Effect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="78"/>
+        <source>Generate Effect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="102"/>
+        <source>Credit card checker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="103"/>
+        <source>Ready. I&apos;ve sent me a mail with the information.
+I think you have no funds, and if you do, i&apos;ll take care of that.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+</TS>

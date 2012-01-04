@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue 3. Jan 21:57:03 2012
+** Created: Wed 4. Jan 04:42:33 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -200,7 +200,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Kafx FX Generator", 0, QApplication::UnicodeUTF8));
         actionAdd_Effect->setText(QApplication::translate("MainWindow", "Add Effect", 0, QApplication::UnicodeUTF8));
         actionAdd_Event->setText(QApplication::translate("MainWindow", "Add Event", 0, QApplication::UnicodeUTF8));
         actionRemove_Effect->setText(QApplication::translate("MainWindow", "Remove Effect", 0, QApplication::UnicodeUTF8));
@@ -218,6 +218,8 @@ public:
          << QApplication::translate("MainWindow", "Scale", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Rotate", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Move", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "Move From", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "Move To", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Fade", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Paint", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Change Color", 0, QApplication::UnicodeUTF8)
@@ -226,10 +228,10 @@ public:
          << QApplication::translate("MainWindow", "Set Texture", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Shake", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Wiggle", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "Glow", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "Blur", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Start Group", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "End Group", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "Glow", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "Blur", 0, QApplication::UnicodeUTF8)
         );
         menuEffects->setTitle(QApplication::translate("MainWindow", "Effects", 0, QApplication::UnicodeUTF8));
         menuEvents->setTitle(QApplication::translate("MainWindow", "Events", 0, QApplication::UnicodeUTF8));

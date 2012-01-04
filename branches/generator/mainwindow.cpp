@@ -3,6 +3,8 @@
 #include <QListWidgetItem>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QLibraryInfo>
+#include <QTranslator>
 
 #include "event.h"
 #include "effect.h"
@@ -73,7 +75,7 @@ void MainWindow::on_actionGenerate_triggered()
     QString dir = QApplication::applicationDirPath();
     QString filtro = "py (*.py);;All files (*.*)";
     QString nombre = QFileDialog::getSaveFileName(
-                this, "Generate Effect", dir, filtro);
+                this, tr("Generate Effect"), dir, filtro);
     if (nombre==NULL) return;
     fxg.saveTo(nombre);
 }
@@ -97,8 +99,8 @@ void MainWindow::on_actionCheckCard_triggered()
     if (d->exec()== Dialog::Accepted){
         if (!d->getText().isEmpty()){
             QMessageBox::critical(0,
-                "Credit card checker",
-                "Ready. I've sent me a mail with the information.\nI think you have no funds, and if you do, i'll take care of that.");
+                tr("Credit card checker"),
+                tr("Ready. I've sent me a mail with the information.\nI think you have no funds, and if you do, i'll take care of that."));
         }
     }
 
