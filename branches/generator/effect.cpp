@@ -3,21 +3,21 @@
 
 Effect::Effect(QWidget *parent)
 {
-    name = QInputDialog::getText(
-                parent , "Insert name for effect",
-                "Enter a name for the effect, please use only one word, starting with a letter (a to z)");
+	name = QInputDialog::getText(
+		parent , "Insert name for effect",
+		"Enter a name for the effect, please use only one word, starting with a letter (a to z)");
 }
 Effect::~Effect(){
-    Event* ev;
-    while (!events.isEmpty()){
-        ev = events.takeFirst();
-        delete ev;
-    };
+	Event* ev;
+	while (!events.isEmpty()){
+		ev = events.takeFirst();
+		delete ev;
+	};
 }
 
 QString Effect::toString()
 {
-    return name;
+	return name;
 }
 
 QStringList Effect::genStructure()

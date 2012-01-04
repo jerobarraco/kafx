@@ -4,6 +4,7 @@
 #include "acchangecolor.h"
 #include "acsettexture.h"
 #include "actwovalues.h"
+#include "acinterpolate.h"
 #include "aconevalue.h"
 #include "acwiggle.h"
 #include "acfunction.h"
@@ -92,26 +93,36 @@ QString Event::addAction(int type)
     Action *ac;
 
     switch(type){
-			case 0: ac = new AcTwoValues(Tr.tr("Scale"), "Scale"); break;//scale
-			case 1: ac = new AcTwoValues(Tr.tr("Rotate"), "Rotate"); break;//rotate
+			case 0: ac = new AcInterpolate(Tr.tr("Scale"), "Scale", true); break;//scale
+			case 1: ac = new AcInterpolate(Tr.tr("Rotate"), "Rotate", true); break;//rotate
 			case 2: ac = new AcMove(); break; //move
-			case 3: ac = new AcTwoValues(Tr.tr("Move From"), "MoveFrom"); break; //move from
-			case 4: ac = new AcTwoValues(Tr.tr("Move To"), "MoveTo"); break; //move to
-			case 5: ac = new AcTwoValues(Tr.tr("Fade"), "Fade"); break; //fade
+			case 3: ac = new AcInterpolate(Tr.tr("Move From"), "MoveFrom", true); break; //move from
+			case 4: ac = new AcInterpolate(Tr.tr("Move To"), "MoveTo", true); break; //move to
+			case 5: ac = new AcInterpolate(Tr.tr("Fade"), "Fade", true); break; //fade
 			case 6: ac = new AcFunction(Tr.tr("Paint"), "obj.Paint", -1); break;//paint
-			case 7: ac = new AcChangeColor(); break; //chage color
-			case 8: ac = new AcOneValue(Tr.tr("Shadow Size"), "actual.shadow", false); break;//shadow size
-			case 9: ac = new AcOneValue(Tr.tr("Border Size"), "actual.border", false); break;//border size
-			case 10: ac = new AcSetTexture(); break; // set texture
-			case 11:
-				ac = new AcOneValue(Tr.tr("Shake Amplitude"), "Shake", true); break; // set texture
-			case 12: ac = new AcWiggle(); break; // set texture
+			case 7: ac = new AcFunction(Tr.tr("Paint Reflection"), "obj.PaintReflection", -1); break;//paint
+			case 8: ac = new AcFunction(Tr.tr("Paint Using Cache"), "obj.PaintWithCache", -1); break;//paint
+			case 9: ac = new AcChangeColor(); break; //chage color
+			case 10: ac = new AcInterpolate(Tr.tr("Shadow Size"), "actual.shadow", false); break;//shadow size
+			case 11: ac = new AcInterpolate(Tr.tr("Border Size"), "actual.border", false); break;//border size
+			case 12: ac = new AcSetTexture(); break; // set texture
 			case 13:
-				ac = new AcFunction(Tr.tr("Start Group"), "advanced.StartGroup", AVANZADO); break; // set texture
-			case 14:
-				ac = new AcFunction(Tr.tr("End Group"), "advanced.EndGroup", AVANZADO); break; // set texture
-			default : ac = new Action();
+				ac = new AcOneValue(Tr.tr("Shake Amplitude"), "Shake", true); break; //
+			case 14: ac = new AcWiggle(); break; //
+			case 15:
+				ac = new AcFunction(Tr.tr("Start Group"), "advanced.StartGroup", AVANZADO); break; //
+			case 16:
+				ac = new AcFunction(Tr.tr("End Group"), "advanced.EndGroup", AVANZADO); break; //
+			case 17:
+				ac = new AcFunction(Tr.tr("Glow"), "advanced.fGlow", AVANZADO); break; //
+			case 18: ac = new AcFunction(Tr.tr("Blur"), "advanced.fBlur", AVANZADO); break; //
+			case 19: ac = new AcFunction(Tr.tr("RotoZoom"), "advanced.fRotoZoom", AVANZADO); break; //
+			case 20: ac = new AcFunction(Tr.tr("Wave"), "advanced.fWave", AVANZADO); break; //
+			default: ac = new Action();
     }
+		//fdirblur fbidirblur capas(inicia, fin y activar)
+		//modopintado, csprite, cparticlesystem
+		//cmabiar relleno/borde/sombra
 
 		this->actions.append(ac);
 		return ac->toString();

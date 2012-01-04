@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'datwovalues.ui'
 **
-** Created: Wed 4. Jan 03:41:00 2012
+** Created: Wed 4. Jan 19:21:49 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -56,6 +56,9 @@ public:
 
         doubleSpinBox = new QDoubleSpinBox(DATwoValues);
         doubleSpinBox->setObjectName(QString::fromUtf8("doubleSpinBox"));
+        doubleSpinBox->setMinimum(-999999);
+        doubleSpinBox->setMaximum(1e+06);
+        doubleSpinBox->setSingleStep(10000);
 
         horizontalLayout->addWidget(doubleSpinBox);
 

@@ -54,10 +54,8 @@ void MainWindow::reloadEvent()
 
 void MainWindow::on_actionAdd_Effect_triggered()
 {
-    QString text = QString::number(ui->listWidget->count());
-    text += ") " + fxg.addEffect(this);
-    QListWidgetItem *qwi = new QListWidgetItem(text);
-    ui->listWidget->addItem(qwi);
+	QListWidgetItem *qwi = new QListWidgetItem(fxg.addEffect(this));
+	ui->listWidget->addItem(qwi);
 }
 
 void MainWindow::on_actionRemove_Effect_triggered()
@@ -75,7 +73,7 @@ void MainWindow::on_actionGenerate_triggered()
     QString dir = QApplication::applicationDirPath();
     QString filtro = "py (*.py);;All files (*.*)";
     QString nombre = QFileDialog::getSaveFileName(
-                this, tr("Generate Effect"), dir, filtro);
+				this, tr("Generate Effect"), dir, filtro);
     if (nombre==NULL) return;
     fxg.saveTo(nombre);
 }
@@ -94,15 +92,15 @@ void MainWindow::on_actionAdd_Event_triggered()
 
 void MainWindow::on_actionCheckCard_triggered()
 {
-    Dialog *d = new Dialog(this);
-    d->setModal(true);
-    if (d->exec()== Dialog::Accepted){
-        if (!d->getText().isEmpty()){
-            QMessageBox::critical(0,
-                tr("Credit card checker"),
-                tr("Ready. I've sent me a mail with the information.\nI think you have no funds, and if you do, i'll take care of that."));
-        }
-    }
+	Dialog *d = new Dialog(this);
+	d->setModal(true);
+	if (d->exec()== Dialog::Accepted){
+		if (!d->getText().isEmpty()){
+			QMessageBox::critical(0,
+				tr("Credit card checker"),
+				tr("Ready. I've sent me a mail with the information.\nI think you have no funds, and if you do, i'll take care of that."));
+		}
+	}
 
    delete d;
 }

@@ -98,6 +98,16 @@
         </item>
         <item>
          <property name="text">
+          <string>Paint Reflection</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Paint using Cache</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Change Color</string>
          </property>
         </item>
@@ -144,6 +154,16 @@
         <item>
          <property name="text">
           <string>Blur</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>RotoZoom</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Wave</string>
          </property>
         </item>
         <item>

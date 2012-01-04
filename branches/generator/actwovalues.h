@@ -9,7 +9,6 @@
 
 class AcTwoValues : public Action
 {
-
     QString from, to, name, fname;
     int interpolator;
     DATwoValues *diag;

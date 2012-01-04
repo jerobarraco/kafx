@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed 4. Jan 17:26:32 2012
+** Created: Wed 4. Jan 18:43:30 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -222,6 +222,8 @@ public:
          << QApplication::translate("MainWindow", "Move To", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Fade", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Paint", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "Paint Reflection", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "Paint using Cache", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Change Color", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Change Shadow Size", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Change Border Size", 0, QApplication::UnicodeUTF8)
@@ -232,6 +234,8 @@ public:
          << QApplication::translate("MainWindow", "End Group", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Glow", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Blur", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "RotoZoom", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "Wave", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Define Variable", 0, QApplication::UnicodeUTF8)
         );
         menuEffects->setTitle(QApplication::translate("MainWindow", "Effects", 0, QApplication::UnicodeUTF8));
