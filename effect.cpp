@@ -27,7 +27,7 @@ QStringList Effect::genStructure()
     //todo estructura de los eventos
      for (int i = 0; i< events.count(); i++){
             res += events[i]->genStructure();//todo alguna forma de cambiar la tabulacion
-        }
+		 }
 
     return res;
 }
@@ -36,7 +36,33 @@ QString Effect::addEvent(int type)
 {
     Event *ev = new Event(type);//todo check que no hayan 2 eventos iguales
     this->events.append(ev);
-    return ev->toString();
+		return ev->toString();
+}
+
+Event *Effect::getEvent(int i)
+{
+    return events.at(i);
+}
+
+int Effect::getEventCount()
+{
+    return events.size();
+}
+
+void Effect::deleteEvent(int i)
+{
+	Event* ev = events.takeAt(i);
+	delete ev;
+}
+
+QList<int> Effect::getModules()
+{
+		QList<int> res;
+		for (int i = 0; i< events.count(); i++){
+				QList<int> evmods = events.at(i)->getModules();
+				res.append(evmods);//teoricamente si pasamos una lista a res, agrega cada uno de los elementos
+		}
+		return res;
 }
 
 QString Effect::getName()
