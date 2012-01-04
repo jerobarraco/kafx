@@ -620,7 +620,7 @@ class cVector():
 
 	def MoverA(self, x, y, inter=comun.i_lineal):
 		"""Anima el movimiento de un vector desde el punto indicado hasta su posicion original
-		@x, y coordenada de punto inical
+		@x, y coordenada de punto inical relative to the original position
 		"""
 		org = self.original
 		px = org.pos_x
@@ -670,6 +670,7 @@ class cVector():
 		Anima la posición como un shake
 		@amplitud = cantidad de pixels que se moverá
 		(requiere que los estilos se restauren)"""
+		#todo cambiar para que use original, asi no necesita el restore.
 		self.actual.pos_x += comun.Interpolate(self.progress, -amplitud, amplitud, comun.i_rand)
 		self.actual.pos_y += comun.Interpolate(self.progress, -amplitud, amplitud, comun.i_rand)
 
@@ -680,6 +681,7 @@ class cVector():
 		@frecuencia = cantidad de points a los que irá
 		(requiere que los estilos se restauren)
 		"""
+		#todo cambiar para que no requiera restore
 		if self.pointsw == None:
 			self.pointsw = []
 			self.pointsw.append( (0, 0) )
