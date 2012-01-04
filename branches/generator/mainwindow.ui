@@ -46,7 +46,7 @@
        <widget class="QComboBox" name="comboBox"/>
       </item>
       <item>
-       <widget class="QListWidget" name="listWidget_3"/>
+       <widget class="QListWidget" name="listWidget_2"/>
       </item>
      </layout>
     </item>
@@ -55,7 +55,7 @@
       <item>
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Preset</string>
+         <string>Actions</string>
         </property>
        </widget>
       </item>
@@ -63,7 +63,57 @@
        <widget class="QComboBox" name="comboBox_2">
         <item>
          <property name="text">
+          <string>Scale</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Rotate</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Move</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Fade</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Paint</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Change Color</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Change Shadow Size</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Change Border Size</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Set Texture</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Shake</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Wiggle</string>
          </property>
         </item>
         <item>
@@ -73,13 +123,23 @@
         </item>
         <item>
          <property name="text">
-          <string>Paint</string>
+          <string>Blur</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Start Group</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>End Group</string>
          </property>
         </item>
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="listWidget_2"/>
+       <widget class="QListWidget" name="listWidget_3"/>
       </item>
      </layout>
     </item>
@@ -94,6 +154,31 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuEffects">
+    <property name="title">
+     <string>Effects</string>
+    </property>
+    <addaction name="actionAdd_Effect"/>
+    <addaction name="actionRemove_Effect"/>
+    <addaction name="actionEdit_Effect"/>
+   </widget>
+   <widget class="QMenu" name="menuEvents">
+    <property name="title">
+     <string>Events</string>
+    </property>
+    <addaction name="actionAdd_Event"/>
+    <addaction name="actionRemove_Event"/>
+   </widget>
+   <widget class="QMenu" name="menuActions">
+    <property name="title">
+     <string>Actions</string>
+    </property>
+    <addaction name="actionAdd_Action"/>
+    <addaction name="actionRemove_Action"/>
+   </widget>
+   <addaction name="menuEffects"/>
+   <addaction name="menuEvents"/>
+   <addaction name="menuActions"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -106,10 +191,15 @@
    <addaction name="actionRemove_Effect"/>
    <addaction name="separator"/>
    <addaction name="actionAdd_Event"/>
+   <addaction name="actionRemove_Event"/>
+   <addaction name="separator"/>
+   <addaction name="actionAdd_Action"/>
+   <addaction name="actionRemove_Action"/>
    <addaction name="separator"/>
    <addaction name="actionGenerate"/>
    <addaction name="separator"/>
    <addaction name="actionCheckCard"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAdd_Effect">
@@ -135,6 +225,26 @@
   <action name="actionCheckCard">
    <property name="text">
     <string>Check if your credit card has funds</string>
+   </property>
+  </action>
+  <action name="actionAdd_Action">
+   <property name="text">
+    <string>Add Action</string>
+   </property>
+  </action>
+  <action name="actionRemove_Event">
+   <property name="text">
+    <string>Remove Event</string>
+   </property>
+  </action>
+  <action name="actionRemove_Action">
+   <property name="text">
+    <string>Remove Action</string>
+   </property>
+  </action>
+  <action name="actionEdit_Effect">
+   <property name="text">
+    <string>Edit Effect</string>
    </property>
   </action>
  </widget>

@@ -10,7 +10,7 @@ class Effect
 {
     QString name;
     QString publicName;
-    QList<Event*> events;
+		QList<Event*> events;
 public:
     Effect(QWidget *parent);
     ~Effect();
@@ -18,6 +18,10 @@ public:
     QString getName();
     QStringList genStructure();
     QString addEvent(int type);
+    Event * getEvent(int i);
+    int getEventCount();
+    void deleteEvent(int i);
+    QList<int> getModules();
 };
 
 #endif // EFFECT_H
