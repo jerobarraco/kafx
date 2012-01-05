@@ -6,8 +6,8 @@ GNU/GPL
 """
 
 """
-Nota IMPORTANTE por cuestion de tiempo
-las cosas se van a ir implementando a medida q sean necesarias y en forma que sean necesarias, 
+Nota IMPORTANTE 
+por cuestion de tiempo las cosas se van a ir implementando a medida q sean necesarias y en forma que sean necesarias, 
 siempre y cuando no sea una cosa rebuscada que no sea extensible.
 """
 import traceback, cProfile
@@ -227,10 +227,15 @@ def __PreLoad():
 
 		#Llamamos a la función de cuando se inicia el dialogo
 		#No es necsaria una iteracion especial para esto, ya que no deberia pintarse nada aca
-		efecto.EnDialogoInicia(diag)
+		inicio = getattr(efecto, "EnDialogoInicia", None)
+		if inicio: inicio(diag)
 		
 		#Dialogo Sale
-		evento = efecto.EnDialogoSale
+		#nos fijamos si definio la funcion EnDialogoSale
+		evento = getattr(efecto, "EnDialogoSale", None)
+		#Si no la definio entonces no la quiere, y no la cargamos y con continue vamos al siguiente dialogo
+		if not evento: continue
+
 		ini = diag._end
 		end = diag._end + fx.out_ms
 		dif = end - ini
@@ -247,8 +252,9 @@ def __PreLoad():
 	
 	#Dialogo Entra
 	for diag in dialogos:
-		evento = fs[diag.efecto].EnDialogoEntra
-		#Dialogo Entra
+		evento = getattr(fs[diag.efecto], "EnDialogoEntra", None)
+		if not evento: continue
+	
 		ini = diag._start - fx.in_ms
 		end = diag._start
 		dif = end - ini
@@ -262,7 +268,9 @@ def __PreLoad():
 			
 	#Dialogo Animado o Activo	
 	for diag in dialogos:
-		evento = fs[diag.efecto].EnDialogo
+		evento = getattr(fs[diag.efecto], "EnDialogo", None)
+		if not evento: continue
+	
 		ini = diag._start
 		end = diag._end
 		dif = end - ini
@@ -277,10 +285,15 @@ def __PreLoad():
 			
 	#Eventos personalizados	
 	for diag in dialogos:
-		eventos = fs[diag.efecto].eventos
+		eventos = getattr(fs[diag.efecto], "eventos", None)
+		if not eventos: continue
+	
 		for evento in eventos:
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios eventos extras en cada efecto
+			enDialogo = getattr(evento, "EnDialogo", None)
+			if not enDialogo: continue
+		
 			ini, end = evento.TiempoDialogo(diag)
 			dif = end - ini
 
@@ -289,8 +302,9 @@ def __PreLoad():
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				frames[f].append((evento.EnDialogo, diag, p ) )#pongo los eventos personalizados en fentra
+				frames[f].append((enDialogo, diag, p ) )#pongo los eventos personalizados en fentra
 				no_frames[f]=False
+				
 	#Prelodeamos las silabas :D	
 	for diag in dialogos:
 		__PreLoadSilabas(diag)
@@ -344,10 +358,13 @@ def __PreLoadSilabas(diag):
 	for sil in silabas:
 		sil.progress = 0.0
 		efecto = fs[sil.efecto]
-		#1º la inicializamos		
-		efecto.EnSilabaInicia(sil)
+		#1º la inicializamos
+		inicio = getattr(efecto, "EnSilabaInicia", None)
+		if inicio: inicio(sil)
 		
-		evento = efecto.EnSilabaMuerta
+		evento = getattr(efecto, "EnSilabaMuerta", None)
+		if not evento: continue
+	
 		ini = sil._end
 		end = diag._end
 		dif = end - ini
@@ -362,8 +379,9 @@ def __PreLoadSilabas(diag):
 	
 	#Silaba Dormida	
 	for sil in silabas:
-		evento = fs[sil.efecto].EnSilabaDorm
-		
+		evento = getattr(fs[sil.efecto], "EnSilabaDorm", None)
+		if not evento: continue
+	
 		ini = diag._start
 		end = sil._start
 		dif = end - ini
@@ -378,8 +396,9 @@ def __PreLoadSilabas(diag):
 	
 	#Silaba entra
 	for sil in silabas:
-		evento = fs[sil.efecto].EnSilabaEntra
-		
+		evento = getattr(fs[sil.efecto], "EnSilabaEntra", None)
+		if not evento: continue
+	
 		ini = sil._start - fx.sil_in_ms
 		end = sil._start
 		dif = end-ini
@@ -394,7 +413,8 @@ def __PreLoadSilabas(diag):
 			
 	#Silaba sale	
 	for sil in silabas:
-		evento = fs[sil.efecto].EnSilabaSale
+		evento = getattr(fs[sil.efecto], "EnSilabaSale", None)
+		if not evento: continue
 
 		ini = sil._end
 		end = sil._end + fx.sil_out_ms
@@ -410,7 +430,9 @@ def __PreLoadSilabas(diag):
 			
 	#Silaba Animada
 	for sil in silabas:
-		evento = fs[sil.efecto].EnSilaba
+		evento = getattr(fs[sil.efecto], "EnSilaba", None)
+		if not evento: continue
+		
 		ini = sil._start
 		end = sil._end
 		dif = end-ini
@@ -425,8 +447,12 @@ def __PreLoadSilabas(diag):
 			
 	#Eventos personalizados		
 	for sil in silabas:	
-		eventos = fs[sil.efecto].eventos
+		eventos = getattr(fs[sil.efecto], "eventos", None)
+		if not eventos: continue
+	
 		for evento in eventos:
+			enSilaba = getattr(evento, "EnSilaba", None)
+			if not enSilaba: continue
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios eventos extras en cada efecto
 			ini, end = evento.TiempoSilaba(sil)
@@ -437,7 +463,7 @@ def __PreLoadSilabas(diag):
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				frames[f].append((evento.EnSilaba, sil, p ) )
+				frames[f].append((enSilaba, sil, p ) )
 				no_frames[f]=False
 
 
@@ -459,11 +485,14 @@ def __PreLoadLetras(sil):
 	for letra in letras:
 		letra.progress = 0.0
 		
-		efecto = fs[letra.efecto]		
-		efecto.EnLetraInicia(letra)
+		efecto = fs[letra.efecto]
 		
-		evento = efecto.EnLetraEntra 
+		inicio = getattr(efecto, "EnLetraInicia", None)
+		if inicio: inicio(letra)
 		
+		evento = getattr(efecto, "EnLetraEntra", None)
+		if not evento: continue
+	
 		ini = letra._start - fx.letra_in_ms
 		end = letra._start
 		dif = end-ini
@@ -478,7 +507,9 @@ def __PreLoadLetras(sil):
 
 	#letra sale
 	for letra in letras:
-		evento = fs[letra.efecto].EnLetraSale
+		evento = getattr(fs[letra.efecto], "EnLetraSale", None)
+		if not evento: continue
+	
 		ini = letra._end
 		end = letra._end + fx.letra_out_ms
 		dif = end - ini
@@ -493,7 +524,9 @@ def __PreLoadLetras(sil):
 
 	#letra Animada
 	for letra in letras:
-		evento = fs[letra.efecto].EnLetra
+		evento = getattr(fs[letra.efecto], "EnLetra", None)
+		if not evento: continue
+	
 		ini = letra._start
 		end = letra._end
 		dif = end-ini
@@ -508,8 +541,12 @@ def __PreLoadLetras(sil):
 
 	#Eventos personalizados
 	for letra in letras:
-		eventos = fs[letra.efecto].eventos
+		eventos = getattr(fs[letra.efecto], "eventos", None)
+		if not eventos: continue
+	
 		for evento in eventos:
+			enLetra = getattr(evento, "EnLetra", None)
+			if not enLetra: continue
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios eventos extras en cada efecto
 			ini, end = evento.TiempoLetra(letra)
@@ -520,6 +557,6 @@ def __PreLoadLetras(sil):
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				frames[f].append((evento.EnLetra, letra, p ) )
+				frames[f].append((enLetra, letra, p))
 				no_frames[f]=False
 
