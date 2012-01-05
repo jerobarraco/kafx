@@ -33,7 +33,17 @@ class Capa:
 		self.ctx.set_operator(cairo.OPERATOR_CLEAR)
 		self.ctx.paint()
 		self.ctx.set_operator(cairo.OPERATOR_OVER)"""
-		self.ctx = cairo.Context(cairo.ImageSurface(vi.modo, vi.width, vi.height))#habia cambiado modo por mode, pero me tiro error para las capas asi que lo deje como estaba :D
+		self.ctx = cairo.Context(cairo.ImageSurface(vi.modo, vi.width, vi.height))#habia cambiado modo por mode, pero me tiro error para las capas asi que lo deje como estaba :D		
+		self.ctx.set_antialias(cairo.ANTIALIAS_SUBPIXEL)
+		#cairo.ANTIALIAS_SUBPIXEL
+		#cairo.ANTIALIAS_NONE
+		#cairo.ANTIALIAS_GRAY
+		fop = cairo.FontOptions()
+		fop.set_antialias(cairo.ANTIALIAS_SUBPIXEL)
+		self.ctx.set_font_options(fop)
+		self.ctx.set_line_join(cairo.LINE_JOIN_ROUND)
+		self.ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+		
 		if mode not in OPERATORS :
 			mode = 'over'
 
@@ -50,9 +60,16 @@ def CapasInicia():
 		base.ctx = video.cf.ctx
 		_capas['base'] = base
 
-def CapasCrear(capa, opacidad=1.0, mode='over'):
-	"""Crea una capa.
-	Usar CapasActivar para activarla luego.
+#TODO antialias
+#TODO problema de stride
+#TODO Orden en eventos
+def CapasActivar(capa=0, opacity=1.0, mode='over'):
+	"""Activa una capa.
+	todo lo que se pinte luego de esto se pintará sobre la capa activada.
+	@capa Nombre de la capa a activar, igual que se uso en CapasCrear
+		la capa de nombre "base" es una capa especial, la capa del video, sobre la que se pinta todo.
+		
+	Si no existe la crea, y ahi se usan los parametros adicionales
 	@capa
 		nombre de la capa. Puede ser un numero o un texto, Esto define el orden en que se pintan
 		las capas. Siempre se pintaran segun el orden de su nombre (1,2,3) ('a','b','c') etc
@@ -63,17 +80,8 @@ def CapasCrear(capa, opacidad=1.0, mode='over'):
 		(Ver valores posibles en avanzado.OPERATORS)
 	"""
 	global _capas
-	_capas[capa] = Capa(opacidad, mode)
-
-def CapasActivar(capa=0, opacity=1.0, mode='over'):
-	"""Activa una capa.
-	todo lo que se pinte luego de esto se pintará sobre la capa activada.
-	@capa Nombre de la capa a activar, igual que se uso en CapasCrear
-		la capa de nombre "base" es una capa especial, la capa del video, sobre la que se pinta todo.
-	"""
-	global _capas
-	if not capa in _capasa:
-		_capas[capa] = Capa(opacidad, mode)
+	if not capa in _capas:
+		_capas[capa] = Capa(opacity, mode)
 	video.cf.ctx = _capas[capa].ctx
 
 def CapasFin():
