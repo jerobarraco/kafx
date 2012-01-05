@@ -6,9 +6,9 @@ GNU/GPL
 """
 
 """
-Nota IMPORTANTE por cuestion d tiempo NIGUNA libreria ni nada está programada completa ni mucho menos
-las cosas se van a ir implementando a medida q sean necesarias y en forma que sean necesarias, siempre y cuando no sea una cosa rebuscada que no sea extensible.
-asique veran que les faltan varias cosas a las librerias y muchisimas cosas por implementar
+Nota IMPORTANTE por cuestion de tiempo
+las cosas se van a ir implementando a medida q sean necesarias y en forma que sean necesarias, 
+siempre y cuando no sea una cosa rebuscada que no sea extensible.
 """
 import traceback, cProfile
 
@@ -16,10 +16,10 @@ traceback.sys.stdout = open('stdout.txt', 'w', 0)
 traceback.sys.stderr = open('stderr.txt', 'w', 0)
 
 
-version_info = (1, 7, 8, 'newfinalrc2')
+version_info = (1, 7, 9, 'newfinalrc3')
 print 'Python version', traceback.sys.version_info
 if traceback.sys.version_info[:3] < (2, 6, 6):
-	"""
+	print """
 	La versión de python que esta usando es menor a 2.6.6, esto puede traer problema con cairo.
 	Por favor intente usar la versión 2.6.6 de python, o la última versión de python 2.6 (pero no 2.7 ni 3.2)
 	"""
@@ -199,48 +199,41 @@ def __PreLoad():
 	fs = fx.fxs #la lista de efectos
 	avanzado.fBlur = avanzado.fBlurs[fx.tipo_blur] #elegimos el tipo de blur segun la configuración
 
-	#frames = [ [] for i in range(num_frames+1) ] #creamos el objeto frames q contiene todos los objetos de dialogos
-	"""Nota:
-		lamentablemente no tengo otra forma de hacerlo
-		es importante que en cada frame vayan quedando en orden los objetos
-		el primero en ingresar es el primero en ser pintado.
-		El orden implicitamente indica su orden de pintado.
-		Como analizo evento por evento, no encuentro por ahora una forma directa de hacer esto.
-		(frames se crea antes de cargar las silabas, usando varias listas
-	"""
-	#frames = [[]]*(num_frames+1) #no hagan esto, porque [] es la misma instancia, o sea, todos los frames referencian al mismo = desastre
-	#no_frames = [True for i in xrange(num_frames+1)]
+	#no_frames = [True for i in xrange(num_frames+1)] #this way is slower
 	no_frames = [True, ]*(num_frames+1)#el objeto no_frames es una lista con los cuadros que no quieren ser procesados
-
+	#frames = [[]]*(num_frames+1) #no hagan esto, porque [] es la misma instancia, o sea, todos los frames referencian al mismo = desastre
+	frames = [ [] for i in range(num_frames+1) ] #creamos el objeto frames q contiene todos los objetos de dialogos
+	
 	"""
 	Nota: si bien el array frame es una referencia directa a cada frame,
 	los tiempos en las silabas/dialogos están guardados en milisegundos,
-	con la esperanza de darle mayor presicion.
+	con la esperanza de darle mayor presición.
 	"""
-
-	fsale = [ [] for i in range(num_frames+1) ]
-	fentra = [ [] for i in range(num_frames+1) ]
-	factivo = [ [] for i in range(num_frames+1) ]
-
-	#cacheo las funciones porque soy raton
+	
+	#cacheo las funciones porque soy raton #this actually speed things up
 	ms2f = video.MSACuadro
 	cfn = video.ClampFrameNum
-
+	dialogos = ass.dialogos
+	
+	#Para poder hacer que las cosas se pinten en un orden predeterminado es necesario
+	#iterar varias veces cada objeto, una por cada evento. caso contrario, se pisan.
+	
 	#los tiempos van siempre en ms para tener presición
-	for diag in ass.dialogos:
+	for diag in dialogos:
 		diag.progress = 0.0
 		#efecto se usa más abajo en eventos extras y las silabas lo cambian
 		#notar que cada dialogo y silaba puede tener un efecto individual (sobre todo con el inline fx >.>;)
 		efecto = fs[diag.efecto]
 
 		#Llamamos a la función de cuando se inicia el dialogo
+		#No es necsaria una iteracion especial para esto, ya que no deberia pintarse nada aca
 		efecto.EnDialogoInicia(diag)
-
+		
 		#Dialogo Sale
+		evento = efecto.EnDialogoSale
 		ini = diag._end
 		end = diag._end + fx.out_ms
 		dif = end - ini
-
 		inif = cfn(ms2f(ini))
 		endf = cfn(ms2f(end))
 		diff = float(ms2f(dif)) or 1.0 #division por zero
@@ -248,23 +241,27 @@ def __PreLoad():
 			p = i/diff #el +1 va en gusto, con +1 se aseguran de que llegue a 1.0, aunque puede pasarse, sin el +1 empieza siempre en 0, y quizas no llegue a 1.0
 			#primero se van a dibujar todos los dialogos que salgan de todos los frames
 			#frame[f] es el frame numero f, y es un array (array de dialogos con su progress y evento)
-			fsale[f].append((efecto.EnDialogoSale, diag, p) )
+			frames[f].append((evento, diag, p) )
 			#y marcamos el cuadro f como cuadro que no se puede saltear
 			no_frames[f] = False
-
+	
+	#Dialogo Entra
+	for diag in dialogos:
+		evento = fs[diag.efecto].EnDialogoEntra
 		#Dialogo Entra
 		ini = diag._start - fx.in_ms
 		end = diag._start
 		dif = end - ini
-
 		inif = cfn(ms2f(ini))
 		endf = cfn(ms2f(end))
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(range(inif, endf)):
 			p = i/diff
-			fentra[f].append((efecto.EnDialogoEntra, diag, p))
+			frames[f].append((evento, diag, p))
 			no_frames[f] = False
-
+			
+	for diag in dialogos:
+		evento = fs[diag.efecto].EnDialogo
 		#Dialogo Animado o Activo
 		ini = diag._start
 		end = diag._end
@@ -275,10 +272,12 @@ def __PreLoad():
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			factivo[f].append((efecto.EnDialogo, diag, p))
+			frames[f].append((evento, diag, p))
 			no_frames[f]=False
-
+			
+	for diag in dialogos:
 		#Eventos personalizados
+		efecto = fs[diag.efecto]
 		for evento in efecto.eventos:
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios eventos extras en cada efecto
@@ -290,18 +289,21 @@ def __PreLoad():
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				factivo[f].append((evento.EnDialogo, diag, p ) )#pongo los eventos personalizados en fentra
+				frames[f].append((evento.EnDialogo, diag, p ) )#pongo los eventos personalizados en fentra
 				no_frames[f]=False
-
-
+				
+	for diag in dialogos:#sep, una vez mas, no queda otra
 		#Prelodeamos las silabas :D
 		#ojo con la indentación acá, notar que está dentro del for de los dialogos
 		__PreLoadSilabas(diag)
-
-	#ahora hacemos magia para pegar los diferentes frames
-	#notar frames, porque silabas lo escribe, se pone al final porque van arriba
-	frames = [ i+j+l+k for i,j,l,k in zip(fsale,fentra,factivo,frames)]
-	#esto tiene que ir al final de toda la iteracion porque se supone que tienen que cargar todos los diag, silabas y letras PRIMERO
+		
+	#Necesario poner esto aca para que las maldetas silabas no pisen las letras
+	if fx.dividir_letras:
+		for diag in dialogos:
+			silabas = diag._silabas
+			for sil in silabas:
+				__PreLoadLetras(sil)
+				
 	#primero ordenamos los dialogos/silabas/letras en cada frame segun sus layers
 	#(aun asi quedan dialogos bajo silabas bajo letras (en el mismo layer en el mismo frame))
 	def keyfunc(item):
@@ -326,30 +328,26 @@ def __PreLoad():
 	no_frames = tuple(no_frames)
 
 def __PreLoadSilabas(diag):
+	"""
+		Carga las silabas
+	"""
 	#notar que esto se ejecuta por cada dialogo
-	"""
-
-	"""
-	global frames, vi, fx, no_frames
+	global frames, fx, no_frames
 	#cacheos varios
 	fs = fx.fxs
 	ms2f = video.MSACuadro
 	cfn = video.ClampFrameNum
-	num_frames = vi.num_frames
-
-	#pongo silaba sale y dormida en la misma para no tener tantas listas
-	fsale = [ [] for i in range(num_frames+1) ]
-	#entra y dormida
-	fentra = [ [] for i in range(num_frames+1) ]
-	#y las activas con los eventos personalizados
-	factivo = [ [] for i in range(num_frames+1) ]
-
+	
 	#Ahora las Silabas!!! (T^T)
-	for sil in diag._silabas:
+	silabas = diag._silabas
+	
+	for sil in silabas:
 		sil.progress = 0.0
 		efecto = fs[sil.efecto]
+		evento = efecto.EnSilabaMuerta
+		#1º la inicializamos		
 		efecto.EnSilabaInicia(sil)
-
+		
 		#Zilaba Muerta
 		ini = sil._end
 		end = diag._end
@@ -360,9 +358,11 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			fsale[f].append((efecto.EnSilabaMuerta, sil, p ) )
+			frames[f].append((efecto.EnSilabaMuerta, sil, p ) )
 			no_frames[f] = False
-
+			
+	for sil in silabas:
+		evento = fs[sil.efecto].EnSilabaDorm
 		#Silaba Dormida
 		ini = diag._start
 		end = sil._start
@@ -373,10 +373,13 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			fentra[f].append((efecto.EnSilabaDorm, sil, p ) )
+			frames[f].append((evento, sil, p ) )
 			no_frames[f]=False
-
-		#Silaba entra
+	
+	#Silaba entra
+	for sil in silabas:
+		evento = fs[sil.efecto].EnSilabaEntra
+		
 		ini = sil._start - fx.sil_in_ms
 		end = sil._start
 		dif = end-ini
@@ -386,10 +389,13 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			fentra[f].append((efecto.EnSilabaEntra, sil, p))
+			frames[f].append((evento, sil, p))
 			no_frames[f]=False
+			
+	#Silaba sale	
+	for sil in silabas:
+		evento = fs[sil.efecto].EnSilabaSale
 
-		#Silaba sale
 		ini = sil._end
 		end = sil._end + fx.sil_out_ms
 		dif = end - ini
@@ -399,10 +405,12 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			fsale[f].insert(0, (efecto.EnSilabaSale, sil, p ) )
+			frames[f].insert(0, (evento, sil, p ) )
 			no_frames[f]=False
-
-		#Silaba Animada
+			
+	#Silaba Animada
+	for sil in silabas:
+		evento = fs[sil.efecto].EnSilaba
 		ini = sil._start
 		end = sil._end
 		dif = end-ini
@@ -412,11 +420,13 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			factivo[f].append( (efecto.EnSilaba, sil, p ))
+			frames[f].append((evento, sil, p ))
 			no_frames[f] = False
-
-		#Eventos personalizados
-		for evento in efecto.eventos:
+			
+	#Eventos personalizados		
+	for sil in silabas:	
+		eventos = fs[sil.efecto].eventos
+		for evento in eventos:
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios eventos extras en cada efecto
 			ini, end = evento.TiempoSilaba(sil)
@@ -427,43 +437,33 @@ def __PreLoadSilabas(diag):
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				factivo[f].append( (evento.EnSilaba, sil, p ) )
+				frames[f].append( (evento.EnSilaba, sil, p ) )
 				no_frames[f]=False
 
-
-		if fx.dividir_letras:
-			__PreLoadLetras(sil)
-	#de igual manera las silabas se pintaran arriba de los dialogos
-	#order matters (dejamos frame al final , porque las letras escriben ahi
-	#notar que usamos frames en zip
-	if frames:
-		frames = [ i+j+l+k for i,j,l,k in zip(fsale,fentra,factivo,frames)]
-	else:
-		frames = [ i+j+l for i,j,l in zip(fsale,fentra,factivo)]
 
 def __PreLoadLetras(sil):
 	#ahora las letras T_T
 	#esto ya me parece una locura.
 	#si quieren dividir un efecto por letras, por favor usen el aegisub
-	global frames, vi, fx, no_frames
+	global frames, fx, no_frames
 	#cacheos varios
 	fs = fx.fxs
 	ms2f = video.MSACuadro
 	cfn = video.ClampFrameNum
-	num_frames = vi.num_frames
-
-	fsale = [ [] for i in range(num_frames+1) ]
-	fentra = [ [] for i in range(num_frames+1) ]
-	factivo = [ [] for i in range(num_frames+1) ]
 
 	#Creamos las letras (ya que sino no se crean en memoria)
 	sil.DividirLetras()
-	for letra in sil._letras:
-		#letra entra
+	letras = sil._letras
+	
+	#inicio y letra entra
+	for letra in letras:
 		letra.progress = 0.0
-		efecto = fs[letra.efecto]
+		
+		efecto = fs[letra.efecto]		
 		efecto.EnLetraInicia(letra)
-
+		
+		evento = efecto.EnLetraEntra 
+		
 		ini = letra._start - fx.letra_in_ms
 		end = letra._start
 		dif = end-ini
@@ -473,10 +473,12 @@ def __PreLoadLetras(sil):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			fentra[f].append((efecto.EnLetraEntra, letra, p) )
+			frames[f].append((evento, letra, p) )
 			no_frames[f]=False
 
-		#letra sale
+	#letra sale
+	for letra in letras:
+		evento = fs[letra.efecto].EnLetraSale
 		ini = letra._end
 		end = letra._end + fx.letra_out_ms
 		dif = end - ini
@@ -486,10 +488,12 @@ def __PreLoadLetras(sil):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			fsale[f].append((efecto.EnLetraSale, letra, p ) )
+			frames[f].append((evento, letra, p ) )
 			no_frames[f] = False
 
-		#letra Animada
+	#letra Animada
+	for letra in letras:
+		evento = fs[letra.efecto].EnLetra
 		ini = letra._start
 		end = letra._end
 		dif = end-ini
@@ -499,11 +503,13 @@ def __PreLoadLetras(sil):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			factivo[f].append((efecto.EnLetra, letra, p ))
+			frames[f].append((evento, letra, p ))
 			no_frames[f] = False
 
-		#Eventos personalizados
-		for evento in efecto.eventos:
+	#Eventos personalizados
+	for letra in letras:
+		eventos = fs[letra.efecto].eventos
+		for evento in eventos:
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios eventos extras en cada efecto
 			ini, end = evento.TiempoLetra(letra)
@@ -514,9 +520,7 @@ def __PreLoadLetras(sil):
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				factivo[f].append((evento.EnLetra, letra, p ) )
+				frames[f].append((evento.EnLetra, letra, p ) )
 				no_frames[f]=False
-
-	#Ojo que quitamos el frame . es porque al estar las silabas encima
-	#lo mas probable es que no haya nada en frames aun
-	frames = [ i+j+l for i,j,l in zip(fsale,fentra,factivo)]
+				
+				
