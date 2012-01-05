@@ -11,13 +11,14 @@ class AcOneValue : public Action
     DAOneValue *diag;
     QString to, name , fname;
     bool func;
+		int module;
 public:
-    AcOneValue(QString name, QString fname, bool function);
+		AcOneValue(QString name, QString fname, bool function, bool integer, int module=-1);
     ~AcOneValue();
     bool configure();
     QString toString();
     QStringList genStructure();
-    QList<int> getModules(){return QList<int>();}
+		QList<int> getModules();
 };
 
 #endif // ACONEVALUE_H

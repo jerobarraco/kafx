@@ -8,6 +8,8 @@ AcInterpolate::AcInterpolate(QString name, QString fname, bool function)
 	this->name= name;
 	this->fname = fname;
 	this->func = function;
+	this->inter = false;
+
 	diag = new DATwoValues();
 	diag->setModal(true);
 	diag->setWindowTitle(name);

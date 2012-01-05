@@ -14,7 +14,8 @@ class DAOneValue : public QDialog
 public:
     explicit DAOneValue(QWidget *parent = 0);
     ~DAOneValue();
-    QString getTo();
+		void setFloat();
+		QString getTo();
 private:
     Ui::DAOneValue *ui;
 };
