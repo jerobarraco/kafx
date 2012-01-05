@@ -2,6 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="es_ES">
 <context>
+    <name>Action</name>
+    <message>
+        <location filename="action.cpp" line="38"/>
+        <source>Fill</source>
+        <translation type="unfinished">Relleno</translation>
+    </message>
+    <message>
+        <location filename="action.cpp" line="38"/>
+        <source>Border</source>
+        <translation type="unfinished">Borde</translation>
+    </message>
+    <message>
+        <location filename="action.cpp" line="38"/>
+        <source>Shadow</source>
+        <translation type="unfinished">Sombra</translation>
+    </message>
+</context>
+<context>
     <name>DAChangeColor</name>
     <message>
         <location filename="dachangecolor.ui" line="14"/>
@@ -19,7 +37,12 @@
         <translation>A que color</translation>
     </message>
     <message>
-        <location filename="dachangecolor.ui" line="50"/>
+        <location filename="dachangecolor.ui" line="48"/>
+        <source>Interpolate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dachangecolor.ui" line="57"/>
         <source>Interpolator</source>
         <translation>Interpolador</translation>
     </message>
@@ -41,6 +64,69 @@
     <message>
         <source>Interpolator</source>
         <translation type="obsolete">Interpolador</translation>
+    </message>
+</context>
+<context>
+    <name>DAFillMode</name>
+    <message>
+        <location filename="dafillmode.ui" line="17"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dafillmode.ui" line="25"/>
+        <source>Part</source>
+        <translation type="unfinished">Parte</translation>
+    </message>
+    <message>
+        <location filename="dafillmode.ui" line="39"/>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dafillmode.ui" line="47"/>
+        <source>Solid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dafillmode.ui" line="52"/>
+        <source>Texture</source>
+        <translation type="unfinished">Textura</translation>
+    </message>
+    <message>
+        <location filename="dafillmode.ui" line="57"/>
+        <source>Vertical Gradient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dafillmode.ui" line="62"/>
+        <source>Horizontal Gradient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dafillmode.ui" line="67"/>
+        <source>Diagonal Gradient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dafillmode.ui" line="72"/>
+        <source>Radial Gradient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dafillmode.ui" line="77"/>
+        <source>Animated Lineal Gradient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dafillmode.ui" line="82"/>
+        <source>Animated Radial Gradient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dafillmode.ui" line="87"/>
+        <source>Colored Pattern</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -92,27 +178,24 @@
         <translation>Parte</translation>
     </message>
     <message>
-        <location filename="dasettexture.ui" line="30"/>
         <source>Fill</source>
-        <translation>Relleno</translation>
+        <translation type="obsolete">Relleno</translation>
     </message>
     <message>
-        <location filename="dasettexture.ui" line="35"/>
         <source>Border</source>
-        <translation>Borde</translation>
+        <translation type="obsolete">Borde</translation>
     </message>
     <message>
-        <location filename="dasettexture.ui" line="40"/>
         <source>Shadow</source>
-        <translation>Sombra</translation>
+        <translation type="obsolete">Sombra</translation>
     </message>
     <message>
-        <location filename="dasettexture.ui" line="52"/>
+        <location filename="dasettexture.ui" line="36"/>
         <source>Texture</source>
         <translation>Textura</translation>
     </message>
     <message>
-        <location filename="dasettexture.ui" line="66"/>
+        <location filename="dasettexture.ui" line="50"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -387,47 +470,47 @@ Use with care, only if needed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="106"/>
+        <location filename="event.cpp" line="107"/>
         <source>Shadow Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="107"/>
+        <location filename="event.cpp" line="108"/>
         <source>Border Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="110"/>
+        <location filename="event.cpp" line="111"/>
         <source>Shake Amplitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="113"/>
+        <location filename="event.cpp" line="114"/>
         <source>Start Group</source>
         <translation type="unfinished">Iniciar Grupo</translation>
     </message>
     <message>
-        <location filename="event.cpp" line="115"/>
+        <location filename="event.cpp" line="116"/>
         <source>End Group</source>
         <translation type="unfinished">Cerrar Grupo</translation>
     </message>
     <message>
-        <location filename="event.cpp" line="117"/>
+        <location filename="event.cpp" line="118"/>
         <source>Glow</source>
         <translation type="unfinished">Brillar</translation>
     </message>
     <message>
-        <location filename="event.cpp" line="118"/>
+        <location filename="event.cpp" line="119"/>
         <source>Blur</source>
         <translation type="unfinished">Desenfoque</translation>
     </message>
     <message>
-        <location filename="event.cpp" line="119"/>
+        <location filename="event.cpp" line="120"/>
         <source>RotoZoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="event.cpp" line="120"/>
+        <location filename="event.cpp" line="121"/>
         <source>Wave</source>
         <translation type="unfinished"></translation>
     </message>
@@ -435,77 +518,77 @@ Use with care, only if needed.</source>
 <context>
     <name>FxsGroup</name>
     <message>
-        <location filename="fxsgroup.cpp" line="164"/>
+        <location filename="fxsgroup.cpp" line="163"/>
         <source>Lineal</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="164"/>
+        <location filename="fxsgroup.cpp" line="163"/>
         <source>Sinus</source>
         <translation>Seno</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="164"/>
+        <location filename="fxsgroup.cpp" line="163"/>
         <source>Cosinus</source>
         <translation>Coseno</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="165"/>
+        <location filename="fxsgroup.cpp" line="164"/>
         <source>Full Sinus</source>
         <translation>Seno completo</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="165"/>
+        <location filename="fxsgroup.cpp" line="164"/>
         <source>Full Cosinus</source>
         <translation>Coseno completo</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="165"/>
+        <location filename="fxsgroup.cpp" line="164"/>
         <source>Accelerate</source>
         <translation>Acelerar</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="166"/>
+        <location filename="fxsgroup.cpp" line="165"/>
         <source>Deccelerate</source>
         <translation>Desacelerar</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="166"/>
+        <location filename="fxsgroup.cpp" line="165"/>
         <source>Random</source>
         <translation>Aleatorio</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="167"/>
+        <location filename="fxsgroup.cpp" line="166"/>
         <source>Logarithmic</source>
         <translation>Logarítmico</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="167"/>
+        <location filename="fxsgroup.cpp" line="166"/>
         <source>Ease in</source>
         <translation>Entrada suave</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="167"/>
+        <location filename="fxsgroup.cpp" line="166"/>
         <source>Ease Out</source>
         <translation>Salida suave</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="168"/>
+        <location filename="fxsgroup.cpp" line="167"/>
         <source>Ease In Out</source>
         <translation>Entrada y salida suave</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="168"/>
+        <location filename="fxsgroup.cpp" line="167"/>
         <source>Cubic</source>
         <translation>Cúbica</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="168"/>
+        <location filename="fxsgroup.cpp" line="167"/>
         <source>BackStart</source>
         <translation>Impulso</translation>
     </message>
     <message>
-        <location filename="fxsgroup.cpp" line="168"/>
+        <location filename="fxsgroup.cpp" line="167"/>
         <source>Boing</source>
         <translation>Rebote</translation>
     </message>
@@ -518,19 +601,19 @@ Use with care, only if needed.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="23"/>
-        <location filename="mainwindow.ui" line="194"/>
+        <location filename="mainwindow.ui" line="199"/>
         <source>Effects</source>
         <translation>Efectos</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="41"/>
-        <location filename="mainwindow.ui" line="202"/>
+        <location filename="mainwindow.ui" line="207"/>
         <source>Events</source>
         <translation>Eventos</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="58"/>
-        <location filename="mainwindow.ui" line="209"/>
+        <location filename="mainwindow.ui" line="214"/>
         <source>Actions</source>
         <translation>Acciones</translation>
     </message>
@@ -586,41 +669,51 @@ Use with care, only if needed.</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="116"/>
+        <source>Fill Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="121"/>
         <source>Change Shadow Size</source>
         <translation>Cambiar tamaño de Sombra</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="121"/>
+        <location filename="mainwindow.ui" line="126"/>
         <source>Change Border Size</source>
         <translation>Cambiar tamaño de Borde</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="126"/>
+        <location filename="mainwindow.ui" line="131"/>
         <source>Set Texture</source>
         <translation>Elegir Textura</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="131"/>
+        <location filename="mainwindow.ui" line="136"/>
         <source>Shake</source>
         <translation>Sacudir</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="136"/>
+        <location filename="mainwindow.ui" line="141"/>
         <source>Wiggle</source>
         <translation>Batir</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="151"/>
+        <location filename="mainwindow.ui" line="156"/>
         <source>Glow</source>
         <translation>Brillar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="156"/>
+        <location filename="mainwindow.ui" line="161"/>
         <source>Blur</source>
         <translation>Desenfoque</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="141"/>
+        <location filename="mainwindow.ui" line="292"/>
+        <source>Modify Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="146"/>
         <source>Start Group</source>
         <translation>Iniciar Grupo</translation>
     </message>
@@ -630,67 +723,67 @@ Use with care, only if needed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="146"/>
+        <location filename="mainwindow.ui" line="151"/>
         <source>End Group</source>
         <translation>Cerrar Grupo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="161"/>
+        <location filename="mainwindow.ui" line="166"/>
         <source>RotoZoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="166"/>
+        <location filename="mainwindow.ui" line="171"/>
         <source>Wave</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="171"/>
+        <location filename="mainwindow.ui" line="176"/>
         <source>Define Variable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="242"/>
+        <location filename="mainwindow.ui" line="247"/>
         <source>Add Effect</source>
         <translation>Agregar Efecto</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="247"/>
+        <location filename="mainwindow.ui" line="252"/>
         <source>Add Event</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="252"/>
+        <location filename="mainwindow.ui" line="257"/>
         <source>Remove Effect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="257"/>
+        <location filename="mainwindow.ui" line="262"/>
         <source>Generate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="262"/>
+        <location filename="mainwindow.ui" line="267"/>
         <source>Check if your credit card has funds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="267"/>
+        <location filename="mainwindow.ui" line="272"/>
         <source>Add Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="272"/>
+        <location filename="mainwindow.ui" line="277"/>
         <source>Remove Event</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="277"/>
+        <location filename="mainwindow.ui" line="282"/>
         <source>Remove Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="282"/>
+        <location filename="mainwindow.ui" line="287"/>
         <source>Edit Effect</source>
         <translation type="unfinished"></translation>
     </message>

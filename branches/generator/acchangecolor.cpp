@@ -22,6 +22,7 @@ bool AcChangeColor::configure()
         from = diag->getFrom();
         to = diag->getTo();
         interpolator = diag->getInterpolator();
+				interpolate = diag->getInterpolate();
         return true;
 	}else{return false;}
 }
@@ -30,7 +31,7 @@ QString AcChangeColor::toString()
 {
 	QString res ="ChangeColor("+QString::number(from)
 			+", "+QString::number(to);//todo, usar los nombres en los combos con diag->getFromText y getToText
-    if (interpolator >0){
+	if (interpolate && (interpolator>0)){
 		res+=", "+FxsGroup::interNames[interpolator];
 	}
 	res +=")";
@@ -39,31 +40,39 @@ QString AcChangeColor::toString()
 
 QStringList AcChangeColor::genStructure()
 {
-	QStringList res ;
-	QString str ;
-	str = tab+ "obj.actual.color";
+	QString str, colorA, colorB;
+	colorA = "obj.actual.color";
 	switch(from){
-		case 0: str.append("1");break;
-		case 1: str.append("2");break;
-		case 2: str.append("3");break;
-		case 3: str.append("4");break;
+		case 0: colorA.append("1");break;
+		case 1: colorA.append("2");break;
+		case 2: colorA.append("3");break;
+		case 3: colorA.append("4");break;
 	}
-	str.append(".Interpolate(obj.progress, obj.original.color");
+
+	colorB = "obj.original.color";
 	switch(to){
-		case 0: str.append("1");break;
-		case 1: str.append("2");break;
-		case 2: str.append("3");break;
-		case 3: str.append("4");break;
+		case 0: colorB.append("1");break;
+		case 1: colorB.append("2");break;
+		case 2: colorB.append("3");break;
+		case 3: colorB.append("4");break;
 	}
 
-	if (interpolator >0){
-			str.append(", inter=");
-			str.append(FxsGroup::interUrls[interpolator]);
+	str = tab+ colorA;
+	if (interpolate){
+		str.append(".Interpolate(obj.progress, ");
+		str.append(colorB);
+		if (interpolator >0){
+				str.append(", inter=");
+				str.append(FxsGroup::interUrls[interpolator]);
+		}
+		str.append(")");
+	}else{
+		str.append(".CopyFrom(");
+		str.append(colorB);
+		str.append(")");
 	}
-	str.append(")");
-	res << str;
 
-	return res;
+	return QStringList(str);
 }
 
 QList<int> AcChangeColor::getModules()

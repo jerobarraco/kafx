@@ -1,4 +1,5 @@
 #include "action.h"
+#include "mainwindow.h"
 
 Action::Action()
 {
@@ -26,7 +27,14 @@ QList<int> Action::getModules()
 
 QStringList Action::genStructure()
 {
-		QStringList res;
-		res << tab + "pass";
-		return res;
+		return QStringList(tab+"pass");
 }
+
+QString Action::parts[]= {
+	"PART_FILL", "PART_BORDER", "PART_SHADOW"
+};
+
+QString Action::partNames[]= {
+	Tr.tr("Fill"),Tr.tr("Border"),Tr.tr("Shadow")
+};
+

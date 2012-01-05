@@ -22,7 +22,6 @@ SOURCES += main.cpp\
     acsettexture.cpp \
     dasettexture.cpp \
     deffect.cpp \
-    actwovalues.cpp \
     datwovalues.cpp \
     acmove.cpp \
     damove.cpp \
@@ -31,7 +30,9 @@ SOURCES += main.cpp\
     dawiggle.cpp \
     acwiggle.cpp \
     acfunction.cpp \
-    acinterpolate.cpp
+    acinterpolate.cpp \
+    dafillmode.cpp \
+    acfillmode.cpp
 
 HEADERS  += mainwindow.h \
     fxsgroup.h \
@@ -44,7 +45,6 @@ HEADERS  += mainwindow.h \
     acsettexture.h \
     dasettexture.h \
     deffect.h \
-    actwovalues.h \
     datwovalues.h \
     acmove.h \
     damove.h \
@@ -53,7 +53,9 @@ HEADERS  += mainwindow.h \
     dawiggle.h \
     acwiggle.h \
     acfunction.h \
-    acinterpolate.h
+    acinterpolate.h \
+    dafillmode.h \
+    acfillmode.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \
@@ -63,4 +65,5 @@ FORMS    += mainwindow.ui \
     datwovalues.ui \
     damove.ui \
     daonevalue.ui \
-    dawiggle.ui
+    dawiggle.ui \
+    dafillmode.ui

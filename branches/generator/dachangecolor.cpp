@@ -17,7 +17,6 @@ DAChangeColor::DAChangeColor(QWidget *parent) :
 		ui->comboBox_3->addItem(FxsGroup::interNames[i]);
 	}
 
-
 }
 
 DAChangeColor::~DAChangeColor()
@@ -38,5 +37,10 @@ int DAChangeColor::getTo()
 int DAChangeColor::getInterpolator()
 {
 	return ui->comboBox_3->currentIndex();
+}
+
+bool DAChangeColor::getInterpolate()
+{
+	return ui->checkBox->isChecked();
 }
 

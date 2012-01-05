@@ -36,7 +36,11 @@ private slots:
     void on_listWidget_2_currentRowChanged(int currentRow);
     void on_actionEdit_Effect_triggered();
 
-private:
+		void on_listWidget_3_doubleClicked(const QModelIndex &index);
+
+		void on_actionEdit_Action_triggered();
+
+	private:
     Effect * getCurrentEffect();
     Event * getCurrentEvent();
     Action * getCurrentAction();

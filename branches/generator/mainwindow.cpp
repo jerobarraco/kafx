@@ -179,15 +179,29 @@ void MainWindow::on_listWidget_2_currentRowChanged(int currentRow)
 
 void MainWindow::on_actionEdit_Effect_triggered()
 {
-    if (diag->exec()== diag->Accepted){
-        fxg.diag_in = diag->getDiagIn();
-        fxg.diag_out = diag->getDiagOut();
-        fxg.sil_in = diag->getSilIn();
-        fxg.sil_out = diag->getSilOut();
-        fxg.let_in = diag->getLetIn();
-        fxg.let_out = diag->getLetOut();
-        fxg.splitlet = diag->getSplitLet();
-        fxg.skipframes = diag->getSkipFrames();
-        fxg.reset_style = diag->getResetStyle();
-    }
+	if (diag->exec()== diag->Accepted){
+		fxg.diag_in = diag->getDiagIn();
+		fxg.diag_out = diag->getDiagOut();
+		fxg.sil_in = diag->getSilIn();
+		fxg.sil_out = diag->getSilOut();
+		fxg.let_in = diag->getLetIn();
+		fxg.let_out = diag->getLetOut();
+		fxg.splitlet = diag->getSplitLet();
+		fxg.skipframes = diag->getSkipFrames();
+		fxg.reset_style = diag->getResetStyle();
+	}
+}
+
+void MainWindow::on_listWidget_3_doubleClicked(const QModelIndex &index)
+{
+	Action *ac = getCurrentAction();
+	if (ac == NULL) return;
+	if (ac->configure()){
+		ui->listWidget_3->item(index.row())->setText(ac->toString());
+	}
+}
+
+void MainWindow::on_actionEdit_Action_triggered()
+{
+		on_listWidget_3_doubleClicked(ui->listWidget_3->currentIndex());
 }

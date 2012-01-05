@@ -7,12 +7,12 @@
 
 class AcSetTexture : public Action
 {
-        DASetTexture *diag;
+		DASetTexture *diag;
 		int part;
 		QString image;
 	public:
 		AcSetTexture();
-        ~AcSetTexture();
+		~AcSetTexture();
 		bool configure();
 		QString toString();
 		QStringList genStructure();
