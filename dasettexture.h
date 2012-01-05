@@ -1,10 +1,9 @@
 
-#include <QDialog>
-#include <QString>
-
 #ifndef DASETTEXTURE_H
 #define DASETTEXTURE_H
-
+#include <QDialog>
+#include <QString>
+#include "action.h"
 
 namespace Ui {
 	class DASetTexture;

@@ -113,6 +113,11 @@
         </item>
         <item>
          <property name="text">
+          <string>Fill Mode</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Change Shadow Size</string>
          </property>
         </item>
@@ -209,6 +214,7 @@
      <string>Actions</string>
     </property>
     <addaction name="actionAdd_Action"/>
+    <addaction name="actionEdit_Action"/>
     <addaction name="actionRemove_Action"/>
    </widget>
    <addaction name="menuEffects"/>
@@ -229,6 +235,7 @@
    <addaction name="actionRemove_Event"/>
    <addaction name="separator"/>
    <addaction name="actionAdd_Action"/>
+   <addaction name="actionEdit_Action"/>
    <addaction name="actionRemove_Action"/>
    <addaction name="separator"/>
    <addaction name="actionGenerate"/>
@@ -280,6 +287,11 @@
   <action name="actionEdit_Effect">
    <property name="text">
     <string>Edit Effect</string>
+   </property>
+  </action>
+  <action name="actionEdit_Action">
+   <property name="text">
+    <string>Modify Action</string>
    </property>
   </action>
  </widget>

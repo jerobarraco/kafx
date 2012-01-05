@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dasettexture.ui'
 **
-** Created: Wed 4. Jan 03:37:22 2012
+** Created: Wed 4. Jan 20:32:16 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -101,12 +101,6 @@ public:
     {
         DASetTexture->setWindowTitle(QApplication::translate("DASetTexture", "Dialog", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("DASetTexture", "Part", 0, QApplication::UnicodeUTF8));
-        comboBox->clear();
-        comboBox->insertItems(0, QStringList()
-         << QApplication::translate("DASetTexture", "Fill", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("DASetTexture", "Border", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("DASetTexture", "Shadow", 0, QApplication::UnicodeUTF8)
-        );
         label_2->setText(QApplication::translate("DASetTexture", "Texture", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("DASetTexture", "...", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

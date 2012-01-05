@@ -12,6 +12,7 @@ class AcChangeColor : public Action
 	private:
 		DAChangeColor *diag;
 		int from, to, interpolator;
+		bool interpolate;
 	public:
 		AcChangeColor();
 		~AcChangeColor();

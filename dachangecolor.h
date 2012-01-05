@@ -17,6 +17,7 @@ class DAChangeColor : public QDialog
 		 int getFrom();
 		 int getTo();
 		 int getInterpolator();
+		 bool getInterpolate();
 
 	private:
 		Ui::DAChangeColor *ui;

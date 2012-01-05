@@ -10,10 +10,14 @@ protected:
 		QString tab;
 public:
     Action();
+		virtual bool configure();
     virtual QString toString();
     virtual QStringList genStructure();
-    virtual bool configure();
     virtual QList<int> getModules();
+
+		static QString parts[];
+		static QString partNames[];
+		static const int partCount=3;
 };
 
 #endif // ACTION_H

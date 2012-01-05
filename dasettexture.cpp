@@ -7,6 +7,9 @@ DASetTexture::DASetTexture(QWidget *parent) :
 	ui(new Ui::DASetTexture)
 {
 	ui->setupUi(this);
+	for (int i = 0; i< Action::partCount; i++){
+		ui->comboBox->addItem(Action::partNames[i]);
+	}
 }
 
 DASetTexture::~DASetTexture()

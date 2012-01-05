@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DASetTexture</class>
- <widget class="QDialog" name="DASetTexture">
+ <class>DAFillMode</class>
+ <widget class="QDialog" name="DAFillMode">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>132</height>
+    <height>120</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,22 +36,57 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Texture</string>
+        <string>Type</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit">
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>...</string>
-       </property>
+      <widget class="QComboBox" name="comboBox_2">
+       <item>
+        <property name="text">
+         <string>Solid</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Texture</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Vertical Gradient</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Horizontal Gradient</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Diagonal Gradient</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Radial Gradient</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Animated Lineal Gradient</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Animated Radial Gradient</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Colored Pattern</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>
@@ -70,7 +108,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DASetTexture</receiver>
+   <receiver>DAFillMode</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -86,7 +124,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DASetTexture</receiver>
+   <receiver>DAFillMode</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

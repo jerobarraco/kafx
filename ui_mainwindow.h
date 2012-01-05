@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed 4. Jan 18:43:30 2012
+** Created: Wed 4. Jan 21:22:08 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -41,6 +41,7 @@ public:
     QAction *actionRemove_Event;
     QAction *actionRemove_Action;
     QAction *actionEdit_Effect;
+    QAction *actionEdit_Action;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
@@ -84,6 +85,8 @@ public:
         actionRemove_Action->setObjectName(QString::fromUtf8("actionRemove_Action"));
         actionEdit_Effect = new QAction(MainWindow);
         actionEdit_Effect->setObjectName(QString::fromUtf8("actionEdit_Effect"));
+        actionEdit_Action = new QAction(MainWindow);
+        actionEdit_Action->setObjectName(QString::fromUtf8("actionEdit_Action"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -175,6 +178,7 @@ public:
         menuEvents->addAction(actionAdd_Event);
         menuEvents->addAction(actionRemove_Event);
         menuActions->addAction(actionAdd_Action);
+        menuActions->addAction(actionEdit_Action);
         menuActions->addAction(actionRemove_Action);
         mainToolBar->addAction(actionAdd_Effect);
         mainToolBar->addAction(actionRemove_Effect);
@@ -183,6 +187,7 @@ public:
         mainToolBar->addAction(actionRemove_Event);
         mainToolBar->addSeparator();
         mainToolBar->addAction(actionAdd_Action);
+        mainToolBar->addAction(actionEdit_Action);
         mainToolBar->addAction(actionRemove_Action);
         mainToolBar->addSeparator();
         mainToolBar->addAction(actionGenerate);
@@ -210,6 +215,7 @@ public:
         actionRemove_Event->setText(QApplication::translate("MainWindow", "Remove Event", 0, QApplication::UnicodeUTF8));
         actionRemove_Action->setText(QApplication::translate("MainWindow", "Remove Action", 0, QApplication::UnicodeUTF8));
         actionEdit_Effect->setText(QApplication::translate("MainWindow", "Edit Effect", 0, QApplication::UnicodeUTF8));
+        actionEdit_Action->setText(QApplication::translate("MainWindow", "Modify Action", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "Effects", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "Events", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "Actions", 0, QApplication::UnicodeUTF8));
@@ -225,6 +231,7 @@ public:
          << QApplication::translate("MainWindow", "Paint Reflection", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Paint using Cache", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Change Color", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "Fill Mode", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Change Shadow Size", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Change Border Size", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindow", "Set Texture", 0, QApplication::UnicodeUTF8)

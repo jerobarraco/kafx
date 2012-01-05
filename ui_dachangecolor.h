@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dachangecolor.ui'
 **
-** Created: Wed 4. Jan 03:37:22 2012
+** Created: Wed 4. Jan 19:56:36 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QCheckBox>
 #include <QtGui/QComboBox>
 #include <QtGui/QDialog>
 #include <QtGui/QDialogButtonBox>
@@ -34,6 +35,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
     QComboBox *comboBox_2;
+    QCheckBox *checkBox;
     QHBoxLayout *horizontalLayout;
     QLabel *label_3;
     QComboBox *comboBox_3;
@@ -76,6 +78,11 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
+        checkBox = new QCheckBox(DAChangeColor);
+        checkBox->setObjectName(QString::fromUtf8("checkBox"));
+
+        verticalLayout->addWidget(checkBox);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         label_3 = new QLabel(DAChangeColor);
@@ -85,6 +92,7 @@ public:
 
         comboBox_3 = new QComboBox(DAChangeColor);
         comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
+        comboBox_3->setEnabled(false);
 
         horizontalLayout->addWidget(comboBox_3);
 
@@ -102,6 +110,7 @@ public:
         retranslateUi(DAChangeColor);
         QObject::connect(buttonBox, SIGNAL(accepted()), DAChangeColor, SLOT(accept()));
         QObject::connect(buttonBox, SIGNAL(rejected()), DAChangeColor, SLOT(reject()));
+        QObject::connect(checkBox, SIGNAL(toggled(bool)), comboBox_3, SLOT(setEnabled(bool)));
 
         QMetaObject::connectSlotsByName(DAChangeColor);
     } // setupUi
@@ -111,6 +120,7 @@ public:
         DAChangeColor->setWindowTitle(QApplication::translate("DAChangeColor", "Dialog", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("DAChangeColor", "Change Wich Color", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("DAChangeColor", "To which color", 0, QApplication::UnicodeUTF8));
+        checkBox->setText(QApplication::translate("DAChangeColor", "Interpolate", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("DAChangeColor", "Interpolator", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

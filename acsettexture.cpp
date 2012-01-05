@@ -4,30 +4,29 @@ AcSetTexture::AcSetTexture()
 {
 	part = 0;
 	image = "";
-    diag = new DASetTexture();
-    diag->setModal(true);
-    configure();
+	diag = new DASetTexture();
+	diag->setModal(true);
+	configure();
 }
 
 AcSetTexture::~AcSetTexture()
-
 {
     delete diag;
 }
 bool AcSetTexture::configure()
 {
-    if (diag->exec()==diag->Accepted){
-        part = diag->getPart();
-        image = diag->getImage();
-        return true;
-	}else{return false;}
+	if (diag->exec()==diag->Accepted){
+		part = diag->getPart();
+		image = diag->getImage();
+		return true;
+	}else
+		return false;
 }
 
 QString AcSetTexture::toString()
 {
 	return "Set Texture("+QString::number(part)//todo, usar los nombres en los combos con diag->getFromText y getToText
 			+", "+image.split("/").last() + ")";
-
 }
 
 QStringList AcSetTexture::genStructure()

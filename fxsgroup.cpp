@@ -51,19 +51,18 @@ void FxsGroup::deleteEffect(int index)
 
 bool FxsGroup::saveTo(QString filename)
 {
-    archivo.setFileName(filename);
-    if (archivo.open(QIODevice::Text | QIODevice::WriteOnly)){
-        QTextStream txt(&archivo);
-        QStringList structure  = genStructure();
-        for (int i = 0; i< structure.count(); i++ ){
-            txt << structure.at(i) << endl;
-        }
-        archivo.close();
-        return true;
-    } else{
-        return false;
-    }
-
+	archivo.setFileName(filename);
+	if (archivo.open(QIODevice::Text | QIODevice::WriteOnly)){
+		QTextStream txt(&archivo);
+		QStringList structure  = genStructure();
+		for (int i = 0; i< structure.count(); i++ ){
+			txt << structure.at(i) << endl;
+		}
+		archivo.close();
+		return true;
+	} else{
+		return false;
+	}
 }
 
 QStringList FxsGroup::genStructure()
