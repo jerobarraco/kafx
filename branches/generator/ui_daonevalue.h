@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'daonevalue.ui'
 **
-** Created: Wed 4. Jan 04:39:32 2012
+** Created: Wed 4. Jan 22:39:42 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -16,10 +16,10 @@
 #include <QtGui/QButtonGroup>
 #include <QtGui/QDialog>
 #include <QtGui/QDialogButtonBox>
+#include <QtGui/QDoubleSpinBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
-#include <QtGui/QSpinBox>
 #include <QtGui/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
@@ -30,7 +30,7 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
-    QSpinBox *spinBox;
+    QDoubleSpinBox *doubleSpinBox;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DAOneValue)
@@ -47,10 +47,14 @@ public:
 
         horizontalLayout->addWidget(label);
 
-        spinBox = new QSpinBox(DAOneValue);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
+        doubleSpinBox = new QDoubleSpinBox(DAOneValue);
+        doubleSpinBox->setObjectName(QString::fromUtf8("doubleSpinBox"));
+        doubleSpinBox->setDecimals(0);
+        doubleSpinBox->setMinimum(-999999);
+        doubleSpinBox->setMaximum(999999);
+        doubleSpinBox->setSingleStep(1);
 
-        horizontalLayout->addWidget(spinBox);
+        horizontalLayout->addWidget(doubleSpinBox);
 
 
         verticalLayout->addLayout(horizontalLayout);

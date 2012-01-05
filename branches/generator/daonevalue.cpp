@@ -10,10 +10,18 @@ DAOneValue::DAOneValue(QWidget *parent) :
 
 DAOneValue::~DAOneValue()
 {
-    delete ui;
+	delete ui;
+}
+
+void DAOneValue::setFloat()
+{
+	ui->doubleSpinBox->setDecimals(2);
+	ui->doubleSpinBox->setSingleStep(0.01);
 }
 
 QString DAOneValue::getTo()
 {
-    return this->ui->spinBox->text();
+	return this->ui->doubleSpinBox->text();
 }
+
+

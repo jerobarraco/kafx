@@ -108,12 +108,15 @@ QString Event::addAction(int type)
 			case 12: ac = new AcInterpolate(Tr.tr("Border Size"), "actual.border", false); break;//border size
 			case 13: ac = new AcSetTexture(); break; // set texture
 			case 14:
-				ac = new AcOneValue(Tr.tr("Shake Amplitude"), "Shake", true); break; //
+				ac = new AcOneValue(
+							Tr.tr("Shake Amplitude"), "obj.Shake", true, true, -1); break; //
 			case 15: ac = new AcWiggle(); break; //
 			case 16:
 				ac = new AcFunction(Tr.tr("Start Group"), "advanced.StartGroup", AVANZADO); break; //
 			case 17:
-				ac = new AcFunction(Tr.tr("End Group"), "advanced.EndGroup", AVANZADO); break; //
+				ac = new AcOneValue(
+							Tr.tr("End Group"), "advanced.EndGroup", true,
+							false, AVANZADO); break; //
 			case 18:
 				ac = new AcFunction(Tr.tr("Glow"), "advanced.fGlow", AVANZADO); break; //
 			case 19: ac = new AcFunction(Tr.tr("Blur"), "advanced.fBlur", AVANZADO); break; //
@@ -123,7 +126,6 @@ QString Event::addAction(int type)
     }
 		//fdirblur fbidirblur capas(inicia, fin y activar)
 		//modopintado, csprite, cparticlesystem
-		//cmabiar relleno/borde/sombra
 		this->actions.append(ac);
 		return ac->toString();
 }
