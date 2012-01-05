@@ -260,9 +260,9 @@ def __PreLoad():
 			frames[f].append((evento, diag, p))
 			no_frames[f] = False
 			
+	#Dialogo Animado o Activo	
 	for diag in dialogos:
 		evento = fs[diag.efecto].EnDialogo
-		#Dialogo Animado o Activo
 		ini = diag._start
 		end = diag._end
 		dif = end - ini
@@ -275,10 +275,10 @@ def __PreLoad():
 			frames[f].append((evento, diag, p))
 			no_frames[f]=False
 			
+	#Eventos personalizados	
 	for diag in dialogos:
-		#Eventos personalizados
-		efecto = fs[diag.efecto]
-		for evento in efecto.eventos:
+		eventos = fs[diag.efecto].eventos
+		for evento in eventos:
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios eventos extras en cada efecto
 			ini, end = evento.TiempoDialogo(diag)
@@ -291,13 +291,12 @@ def __PreLoad():
 				p = i/diff
 				frames[f].append((evento.EnDialogo, diag, p ) )#pongo los eventos personalizados en fentra
 				no_frames[f]=False
-				
-	for diag in dialogos:#sep, una vez mas, no queda otra
-		#Prelodeamos las silabas :D
-		#ojo con la indentación acá, notar que está dentro del for de los dialogos
+	#Prelodeamos las silabas :D	
+	for diag in dialogos:
 		__PreLoadSilabas(diag)
 		
 	#Necesario poner esto aca para que las maldetas silabas no pisen las letras
+	#sep, una vez mas, no queda otra
 	if fx.dividir_letras:
 		for diag in dialogos:
 			silabas = diag._silabas
@@ -341,14 +340,14 @@ def __PreLoadSilabas(diag):
 	#Ahora las Silabas!!! (T^T)
 	silabas = diag._silabas
 	
+	#Zilaba Muerta
 	for sil in silabas:
 		sil.progress = 0.0
 		efecto = fs[sil.efecto]
-		evento = efecto.EnSilabaMuerta
 		#1º la inicializamos		
 		efecto.EnSilabaInicia(sil)
 		
-		#Zilaba Muerta
+		evento = efecto.EnSilabaMuerta
 		ini = sil._end
 		end = diag._end
 		dif = end - ini
@@ -358,12 +357,13 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].append((efecto.EnSilabaMuerta, sil, p ) )
+			frames[f].append((evento, sil, p ) )
 			no_frames[f] = False
-			
+	
+	#Silaba Dormida	
 	for sil in silabas:
 		evento = fs[sil.efecto].EnSilabaDorm
-		#Silaba Dormida
+		
 		ini = diag._start
 		end = sil._start
 		dif = end - ini
@@ -405,7 +405,7 @@ def __PreLoadSilabas(diag):
 		diff = float(ms2f(dif)) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
-			frames[f].insert(0, (evento, sil, p ) )
+			frames[f].append((evento, sil, p ) )
 			no_frames[f]=False
 			
 	#Silaba Animada
@@ -437,7 +437,7 @@ def __PreLoadSilabas(diag):
 			diff = float(ms2f(dif)) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
-				frames[f].append( (evento.EnSilaba, sil, p ) )
+				frames[f].append((evento.EnSilaba, sil, p ) )
 				no_frames[f]=False
 
 
@@ -522,5 +522,4 @@ def __PreLoadLetras(sil):
 				p = i/diff
 				frames[f].append((evento.EnLetra, letra, p ) )
 				no_frames[f]=False
-				
-				
+
