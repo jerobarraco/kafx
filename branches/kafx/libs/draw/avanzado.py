@@ -19,27 +19,39 @@ del todo bien, y que probablemente hay otra forma correcta
 de hacerlo y que probablemente no buscaste como hacerlo.
 recuerden que pueden preguntar en el irc.
 """
-_capas = {} 
+_capas = {}
 class Capa:
 	"""Clase interna para cada capa, no tocar :D"""
 	def __init__(self,  opacidad=1.0, modo='over'):
 		#todo copiar capa
 		#Esto me suena a que va a ser super costoso... pero bueno, me lo han pedido taaaaaaaaaaaaaaanto...
 		global OPERATORS
-		
+
 		vi = video.vi
 		"""sfc = video.cf.ctx.get_target().create_similar(cairo.CONTENT_COLOR_ALPHA,  vi.width,  vi.height)
 		self.ctx = cairo.Context(sfc)
 		self.ctx.set_operator(cairo.OPERATOR_CLEAR)
 		self.ctx.paint()
 		self.ctx.set_operator(cairo.OPERATOR_OVER)"""
+		
 		self.ctx = cairo.Context(cairo.ImageSurface(vi.modo, vi.width, vi.height))
+		
+		self.ctx.set_antialias(cairo.ANTIALIAS_SUBPIXEL)
+		#cairo.ANTIALIAS_SUBPIXEL
+		#cairo.ANTIALIAS_NONE
+		#cairo.ANTIALIAS_GRAY
+		fop = cairo.FontOptions()
+		fop.set_antialias(cairo.ANTIALIAS_SUBPIXEL)
+		self.ctx.set_font_options(fop)
+		self.ctx.set_line_join(cairo.LINE_JOIN_ROUND)
+		self.ctx.set_line_cap(cairo.LINE_CAP_ROUND)
+		
 		if modo not in OPERATORS :
 			modo = 'over'
-			
+
 		self.modo = OPERATORS.index(modo)
 		self.alpha = opacidad
-		
+
 def CapasInicia():
 	"""Llamar en cada EnCuadroInicia"""
 	global _capas
@@ -65,13 +77,15 @@ def CapasCrear(capa, opacidad=1.0, modo='over'):
 	global _capas
 	_capas[capa] = Capa(opacidad, modo)
 
-def CapasActivar(capa=0):
+def CapasActivar(capa=0, opacidad=1.0, modo='over'):
 	"""Activa una capa.
 	todo lo que se pinte luego de esto se pintará sobre la capa activada.
 	@capa Nombre de la capa a activar, igual que se uso en CapasCrear
 		la capa de nombre "base" es una capa especial, la capa del video, sobre la que se pinta todo.
 	"""
 	global _capas
+	if not (capa in _capas):
+		_capas[capa] = Capa(opacidad, modo)
 	video.cf.ctx = _capas[capa].ctx
 
 def CapasFin():
@@ -79,7 +93,7 @@ def CapasFin():
 	global _capas
 	video.cf.ctx = _capas['base'].ctx
 	ctx = video.cf.ctx
-	
+
 	nombres = _capas.keys()
 	nombres.sort()
 	nombres.remove('base')
@@ -90,7 +104,7 @@ def CapasFin():
 		ctx.set_operator(capa.modo)
 		ctx.paint_with_alpha(capa.alpha)
 	_capas = {}
-	
+
 """Notes
 set_source toma un pattern
 set_source_surface toma un surface

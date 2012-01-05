@@ -88,7 +88,7 @@ def OnInit(filename, assfile, pixel_type, image_type, width, height, fpsn, fpsd,
 
 		#Ponemos las opciones de fuentes
 		fop = cairo.FontOptions()
-		fop.set_antialias(cairo.ANTIALIAS_GRAY)
+		fop.set_antialias(cairo.ANTIALIAS_SUBPIXEL)
 
 		#Cargamos la información del video
 		cf = video.cf
