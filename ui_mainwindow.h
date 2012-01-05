@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed 4. Jan 21:22:08 2012
+** Created: Wed 4. Jan 21:30:33 2012
 **      by: Qt User Interface Compiler version 4.7.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -67,6 +67,9 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(728, 365);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/img/icono"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
         actionAdd_Effect = new QAction(MainWindow);
         actionAdd_Effect->setObjectName(QString::fromUtf8("actionAdd_Effect"));
         actionAdd_Event = new QAction(MainWindow);
@@ -205,7 +208,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Kafx FX Generator", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "KaFX D-Generator", 0, QApplication::UnicodeUTF8));
         actionAdd_Effect->setText(QApplication::translate("MainWindow", "Add Effect", 0, QApplication::UnicodeUTF8));
         actionAdd_Event->setText(QApplication::translate("MainWindow", "Add Event", 0, QApplication::UnicodeUTF8));
         actionRemove_Effect->setText(QApplication::translate("MainWindow", "Remove Effect", 0, QApplication::UnicodeUTF8));
