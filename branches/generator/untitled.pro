@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-TARGET = kafx_generator
+TARGET = kafx_d_generator
 TEMPLATE = app
 TRANSLATIONS = kafx_es.tr
 
@@ -67,3 +67,8 @@ FORMS    += mainwindow.ui \
     daonevalue.ui \
     dawiggle.ui \
     dafillmode.ui
+
+RESOURCES += \
+		resources.qrc
+
+win32:RC_FILE = icono.rc
