@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 from libs import comun, physics
 
-objs = []
 class Efecto():
+	def __init__(self):
+		self.world  = physics.World()
+		self.objs = []
+		
 	def EnSilabaInicia(self, sil):
 		sil.moving = False
 
 	def EnSilaba(self, sil):
 		if not sil.moving:
-			physics.CreateVector(sil)
+			self.world.CreateVector(sil)
 			sil.moving = True
-			objs.append(sil)
+			self.objs.append(sil)
 			
 	def EnDialogo(self, diag):
 		diag.PaintWithCache()
@@ -26,18 +29,16 @@ class Efecto2():
 
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
-		physics.Create()
-		self.fxs = (Efecto(), Efecto(), Efecto2())
+		self.fxs = (Efecto(), Efecto2(), Efecto2())
+		#no puedo crear dos efecto() porque intentaria crear dos mundos
 		self.saltar_cuadros = False
 		
 	def EnCuadroInicia(self):
-		physics.Update()
+		self.fxs[0].world.Update(True)
 		
 	def EnCuadroFin(self):
-		global objs
-		for o in objs:
+		for o in self.fxs[0].objs:
 			o.actual.color1.CopyFrom(o.actual.color2)
-			physics.UpdateVector(o)
 			o.Paint()
 			"""if o.body.IsSleeping():
 				physics.Destroy(o)
