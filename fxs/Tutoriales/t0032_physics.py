@@ -13,16 +13,16 @@ class Efecto():
 		self.objs = []
 		
 	def EnSilabaInicia(self, sil):
-		parts = sil.CrearParticulas(t1)#, escala=0.3 ) 
-		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 40) ] #tomamos 1 cada 100 parts
+		parts = sil.CrearParticulas(t1, escala=0.3 ) 
+		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 4) ] #tomamos 1 cada 100 parts
 		sil.moving = False
 
 	def EnSilabaDorm(self, sil):
 		sil.PaintWithCache()
 		
 	def EnSilaba(self, sil):
-		sil.Desvanecer(0.5, 0)
-		sil.Paint()
+		#sil.Desvanecer(0.5, 0)
+		#sil.Paint()
 		if not sil.moving:
 			sil.moving = True
 			for p in sil.parts:
@@ -49,6 +49,7 @@ class FxsGroup(comun.FxsGroup):
 		
 	def EnCuadroInicia(self):
 		self.fxs[0].world.Update(True)
+		#self.fxs[0].world.Update(False)
 		
 	def EnCuadroFin(self):
 		objs=self.fxs[0].objs
@@ -58,6 +59,5 @@ class FxsGroup(comun.FxsGroup):
 			o.Paint()
 			o.color.a -= 0.005
 			if o.color.a <0.0:
-			#if o.body.IsSleeping():
 				world.Destroy(o)
 				objs.remove(o)

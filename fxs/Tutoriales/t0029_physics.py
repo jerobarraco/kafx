@@ -5,15 +5,15 @@ from libs.draw import avanzado
 
 t = extra.CargarTextura("texturas/snowflake2.png")
 parts = []
+world = None
 class Efecto():
 	def EnSilabaInicia(self, sil):
 		global parts
 		sil.parts = []
 		sil.creadas  = False
 		
-			
 	def EnSilaba(self, sil):
-		global t, parts
+		global t, parts,world
 		if not sil.creadas:
 			sil.parts = []
 			sil.creadas = True
@@ -22,10 +22,9 @@ class Efecto():
 				ny = sil.actual.pos_y + sil.actual.org_y
 				np = avanzado.cSprite(t, x = nx, y= ny)
 				sil.parts.append(np)
-				physics.CreateSprite(np)
+				world.CreateSprite(np)
 				
 		for part in sil.parts[:]: 
-			physics.StartMoving(part)
 			parts.append(part)
 			sil.parts.remove(part)		
 			
@@ -43,16 +42,15 @@ class Efecto2():
 
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
-		global t
-		physics.Create()
+		global world
+		world.Create()
 		self.fxs = (Efecto(), Efecto2())
 		self.saltar_cuadros = False
 		
 	def EnCuadroInicia(self):
-		physics.Update()
+		physics.Update(True)
 		
 	def EnCuadroFin(self):
 		global parts
 		for part in parts:
-			physics.UpdateSprite(part)
 			part.Paint()

@@ -1,58 +1,64 @@
 # -*- coding: utf-8 -*-
 from libs import comun, physics
 from libs.draw import extra
-from libs.draw import avanzado
-
-t = extra.CargarTextura("texturas/snowflake2.png")
-parts = []
-class Efecto():
-	def EnSilabaInicia(self, sil):
-		global parts
-		sil.parts = []
-		sil.creadas  = False
-		
-			
-	def EnSilaba(self, sil):
-		global t, parts
-		if not sil.creadas:
-			sil.parts = []
-			sil.creadas = True
-			for i in range(5):
-				nx = comun.LERP(i/5.0, sil.actual.pos_x, sil.actual.pos_x + sil.original._ancho)
-				ny = sil.actual.pos_y + sil.actual.org_y
-				np = avanzado.cSprite(t, x = nx, y= ny)
-				sil.parts.append(np)
-				physics.CreateSprite(np)
 				
-		for part in sil.parts: 
-			physics.StartMoving(part)
-			physics.UpdateSprite(part)
-			part.Paint()
-			
-	def EnSilabaSale(self, sil):
-		for part in sil.parts:
-			physics.Destroy(part)
-			
-		sil.parts = []
-			
-	def EnDialogo(self, diag):
-		diag.PaintWithCache()				
-					
+t1 = extra.CargarTextura("texturas/T_Negro2.png")				
+world = None #globales on son buena idea, alentan todo y es mas dificil saber que estas haciendo
+objs = []
+class Efecto():		
+	def EnSilabaInicia(self, sil):
+		parts = sil.CrearParticulas(t1, escala=0.5 ) 
+		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 5) ] #tomamos 1 cada 100 parts
+		sil.moving = False
 
+	def EnSilabaDorm(self, sil):
+		sil.PaintWithCache()
+		
+	def EnSilaba(self, sil):
+		global world, objs
+		if not sil.moving:
+			sil.moving = True
+			for p in sil.parts:
+				world.CreateSprite(p)
+				objs.append(p)
+				
 class Efecto2():
+	def EnSilabaInicia(self, s):
+		s.nueva= True
 	def EnDialogo(self, d):
 		d.PaintWithCache()
 		
 	def EnSilaba(self, s):
+		global world	
+		if s.nueva:			
+			s.nueva= False
+			world.CreateVector(s)
+			
 		s.actual.color1.CopyFrom(s.actual.color2)
-		s.PaintWithCache()
-
+		s.Paint()
+		
+	def EnSilabaSale(self, s):
+		if not s.nueva:
+			s.nueva = True
+			world.Destroy(s)
+			
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
-		global t
-		physics.Create()
-		self.fxs = (Efecto(), Efecto2())
+		global world
+		self.fxs = (Efecto(), Efecto2(), Efecto2())
+		#no puedo crear dos efecto() porque intentaria crear dos mundos
 		self.saltar_cuadros = False
+		world = physics.World()
 		
 	def EnCuadroInicia(self):
-		physics.Update()
+		global world
+		world.Update(True)
+		
+	def EnCuadroFin(self):
+		global world, objs		
+		for o in objs[:]:#[:]es para poder hacer remove
+			o.Paint()
+			o.color.a -= 0.005
+			if o.color.a <0.0:
+				world.Destroy(o)
+				objs.remove(o)
