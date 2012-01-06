@@ -267,7 +267,27 @@ class cSilaba(extra.cVector):
 		(Nota: no cambien el _texto si no quieren inconsistencias)
 		"""
 		comun.Encadenar(self._dur, self.progress, self._letras, funcion, duracion)
-
+		
+	def FullWiggle(self, amplitud=4, frecuencia=2, dx=None, dy=None):
+		"""el wiggle que queria AbelKM, parte 2"""
+		if dx is None:
+			dx, dy = self.Wiggle(amplitud, frecuencia)
+		
+		o = self.original
+		if not hasattr(o, 'old_x'):
+			o.old_x = o.pos_x
+			o.old_y = o.pos_y
+		o.pos_x = o.old_x + dx
+		o.pos_y = o.old_y + dy
+		
+		for let in self._letras:
+			o = let.original
+			if not hasattr(o, 'old_x'):
+				o.old_x = o.pos_x
+				o.old_y = o.pos_y
+			o.pos_x = o.old_x + dx
+			o.pos_y = o.old_y + dy
+			
 class cDialogo(extra.cVector):
 	"""Un Dialogo representa una linea de texto,
 	Posee herramientas para tomar el texto, cada una de las silabas del texto y sus tiempos de karaoke.
@@ -418,12 +438,7 @@ class cDialogo(extra.cVector):
 		"""el wiggle que queria AbelKM"""
 		dx, dy = self.Wiggle(amplitud, frecuencia)
 		for sil in self._silabas:
-			o = sil.original
-			if not hasattr(o, 'old_x'):
-				o.old_x = o.pos_x
-				o.old_y = o.pos_y
-			o.pos_x = o.old_x + dx
-			o.pos_y = o.old_y + dy
+			sil.FullWiggle(amplitud, frecuencia , dx, dy)
 
 class Ass():
 	#Esta es la clase que parsea el archivo .ass con suerte no van a necesitar usarlo
