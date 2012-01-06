@@ -2,7 +2,7 @@
 """Este efecto muestra lo mas simple, lo basico"""
 from libs import comun
 
-class EfectoGenerico(comun.Fx):
+class EfectoGenerico():
 	def EnDialogo(self, diag):
 		#Cuando el dialogo sea mostrado
 		diag.Paint()#Lo pintamos en la pantalla
