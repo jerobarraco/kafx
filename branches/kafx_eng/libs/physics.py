@@ -6,7 +6,7 @@ Created on Thu Jan 05 17:29:45 2012
 """
 import pymunk as pm
 from libs import video
-
+from math import isnan, isinf
 	  
 class World():
 	def __init__(self, grav_x=0, grav_y=500.0, ground=True):
@@ -45,30 +45,30 @@ class World():
 		del obj.shape
 		
 	def CreateBody(self, pos_x, pos_y, width, height, dynamic = True, square=False):
-		mass = 1
-		radius = width
+		mass = 1.0			
 		if dynamic:
 			if square:
 				inertia = pm.moment_for_box(mass, width*2, height*2)
 			else:
-				inertia = pm.moment_for_circle(mass, 0, radius) # 1
+				inertia = pm.moment_for_circle(mass, 0, width) # 1
 			body = pm.Body(mass, inertia) # 2
 		else:
 			body = pm.Body()
-		body.position = pos_x, pos_y
+			
 		if square:
 			verts= ( (-height, -width), (-height, width), (height, width), (height, -width))
-			shape = pm.Poly(body,verts )
-		else:
-			shape = pm.Circle(body, radius) # 4
+			shape = pm.Poly(body, verts )
+		else:			
+			shape = pm.Circle(body, width) # 4
 			
+		body.position = pos_x, pos_y
+			
+		self.space.add(shape)
 		if dynamic:
-			self.space.add(body, shape) # 5
-		else:
-			self.space.add(shape)
+			self.space.add(body) # 5
 		return shape
 		
-	def CreateVector(self, vector, dynamic = True, square=True):
+	def CreateVector(self, vector, dynamic = True, square=False):
 		vector._dynamic = dynamic
 		a = vector.actual
 		
@@ -96,22 +96,15 @@ def UpdateVector(vector):
 	a.angle = body.angle
 	a.pos_x = pos.x - a.org_x
 	a.pos_y = pos.y + a.org_y
-	#if isnan(a.angle) : a.angle =0.0
-	
-def Wake(obj):
-	body = obj.body
-	if body.isSleeping:
-		body.WakeUp()
-		
-def Sleep(obj):
-	obj.body.PutToSleep()#que nombre de mierda si me permiten
+	#pongo el isinf 1º porque le pymunk me tira ese
+	if isinf(a.angle) or isnan(a.angle) : a.angle = 0.0
 	
 def UpdateSprite(sprite):
-	
 	body = sprite.shape.body
 	pos = body.position
 	sprite.x = pos.x - sprite.org_x
 	sprite.y = pos.y - sprite.org_y
 	sprite.angle = body.angle
-	#if isnan(sprite.angle) : sprite.angle =0.0
+	
+	if isinf(sprite.angle) or  isnan(sprite.angle) : sprite.angle =0.0
 	
