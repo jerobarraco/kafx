@@ -11,7 +11,7 @@ class Efecto():
 		global parts
 		sil.parts = []
 		sil.creadas  = False
-		
+
 	def EnSilaba(self, sil):
 		global t, parts,world
 		if not sil.creadas:
@@ -23,19 +23,19 @@ class Efecto():
 				np = avanzado.cSprite(t, x = nx, y= ny)
 				sil.parts.append(np)
 				world.CreateSprite(np)
-				
-		for part in sil.parts[:]: 
+
+		for part in sil.parts[:]:
 			parts.append(part)
-			sil.parts.remove(part)		
-			
+			sil.parts.remove(part)
+
 	def EnDialogo(self, diag):
-		diag.PaintWithCache()				
-					
+		diag.PaintWithCache()
+
 
 class Efecto2():
 	def EnDialogo(self, d):
 		d.PaintWithCache()
-		
+
 	def EnSilaba(self, s):
 		s.actual.color1.CopyFrom(s.actual.color2)
 		s.PaintWithCache()
@@ -46,10 +46,10 @@ class FxsGroup(comun.FxsGroup):
 		world.Create()
 		self.fxs = (Efecto(), Efecto2())
 		self.saltar_cuadros = False
-		
+
 	def EnCuadroInicia(self):
 		physics.Update(True)
-		
+
 	def EnCuadroFin(self):
 		global parts
 		for part in parts:

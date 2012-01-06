@@ -6,8 +6,8 @@ GNU/GPL
 """
 
 """
-Nota IMPORTANTE 
-por cuestion de tiempo las cosas se van a ir implementando a medida q sean necesarias y en forma que sean necesarias, 
+Nota IMPORTANTE
+por cuestion de tiempo las cosas se van a ir implementando a medida q sean necesarias y en forma que sean necesarias,
 siempre y cuando no sea una cosa rebuscada que no sea extensible.
 """
 import traceback, cProfile
@@ -203,21 +203,21 @@ def __PreLoad():
 	no_frames = [True, ]*(num_frames+1)#el objeto no_frames es una lista con los cuadros que no quieren ser procesados
 	#frames = [[]]*(num_frames+1) #no hagan esto, porque [] es la misma instancia, o sea, todos los frames referencian al mismo = desastre
 	frames = [ [] for i in range(num_frames+1) ] #creamos el objeto frames q contiene todos los objetos de dialogos
-	
+
 	"""
 	Nota: si bien el array frame es una referencia directa a cada frame,
 	los tiempos en las silabas/dialogos están guardados en milisegundos,
 	con la esperanza de darle mayor presición.
 	"""
-	
+
 	#cacheo las funciones porque soy raton #this actually speed things up
 	ms2f = video.MSACuadro
 	cfn = video.ClampFrameNum
 	dialogos = ass.dialogos
-	
+
 	#Para poder hacer que las cosas se pinten en un orden predeterminado es necesario
 	#iterar varias veces cada objeto, una por cada evento. caso contrario, se pisan.
-	
+
 	#los tiempos van siempre en ms para tener presición
 	for diag in dialogos:
 		diag.progress = 0.0
@@ -229,7 +229,7 @@ def __PreLoad():
 		#No es necsaria una iteracion especial para esto, ya que no deberia pintarse nada aca
 		inicio = getattr(efecto, "EnDialogoInicia", None)
 		if inicio: inicio(diag)
-		
+
 		#Dialogo Sale
 		#nos fijamos si definio la funcion EnDialogoSale
 		evento = getattr(efecto, "EnDialogoSale", None)
@@ -249,12 +249,12 @@ def __PreLoad():
 			frames[f].append((evento, diag, p) )
 			#y marcamos el cuadro f como cuadro que no se puede saltear
 			no_frames[f] = False
-	
+
 	#Dialogo Entra
 	for diag in dialogos:
 		evento = getattr(fs[diag.efecto], "EnDialogoEntra", None)
 		if not evento: continue
-	
+
 		ini = diag._start - fx.in_ms
 		end = diag._start
 		dif = end - ini
@@ -265,12 +265,12 @@ def __PreLoad():
 			p = i/diff
 			frames[f].append((evento, diag, p))
 			no_frames[f] = False
-			
-	#Dialogo Animado o Activo	
+
+	#Dialogo Animado o Activo
 	for diag in dialogos:
 		evento = getattr(fs[diag.efecto], "EnDialogo", None)
 		if not evento: continue
-	
+
 		ini = diag._start
 		end = diag._end
 		dif = end - ini
@@ -282,18 +282,18 @@ def __PreLoad():
 			p = i/diff
 			frames[f].append((evento, diag, p))
 			no_frames[f]=False
-			
-	#Eventos personalizados	
+
+	#Eventos personalizados
 	for diag in dialogos:
 		eventos = getattr(fs[diag.efecto], "eventos", None)
 		if not eventos: continue
-	
+
 		for evento in eventos:
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios eventos extras en cada efecto
 			enDialogo = getattr(evento, "EnDialogo", None)
 			if not enDialogo: continue
-		
+
 			ini, end = evento.TiempoDialogo(diag)
 			dif = end - ini
 
@@ -304,11 +304,11 @@ def __PreLoad():
 				p = i/diff
 				frames[f].append((enDialogo, diag, p ) )#pongo los eventos personalizados en fentra
 				no_frames[f]=False
-				
-	#Prelodeamos las silabas :D	
+
+	#Prelodeamos las silabas :D
 	for diag in dialogos:
 		__PreLoadSilabas(diag)
-		
+
 	#Necesario poner esto aca para que las maldetas silabas no pisen las letras
 	#sep, una vez mas, no queda otra
 	if fx.dividir_letras:
@@ -316,7 +316,7 @@ def __PreLoad():
 			silabas = diag._silabas
 			for sil in silabas:
 				__PreLoadLetras(sil)
-				
+
 	#primero ordenamos los dialogos/silabas/letras en cada frame segun sus layers
 	#(aun asi quedan dialogos bajo silabas bajo letras (en el mismo layer en el mismo frame))
 	def keyfunc(item):
@@ -350,21 +350,22 @@ def __PreLoadSilabas(diag):
 	fs = fx.fxs
 	ms2f = video.MSACuadro
 	cfn = video.ClampFrameNum
-	
+
 	#Ahora las Silabas!!! (T^T)
 	silabas = diag._silabas
-	
-	#Zilaba Muerta
+
+	#Inicio
 	for sil in silabas:
 		sil.progress = 0.0
-		efecto = fs[sil.efecto]
 		#1º la inicializamos
-		inicio = getattr(efecto, "EnSilabaInicia", None)
+		inicio = getattr(fs[sil.efecto], "EnSilabaInicia", None)
 		if inicio: inicio(sil)
-		
-		evento = getattr(efecto, "EnSilabaMuerta", None)
+
+	#Zilaba Muerta
+	for sil in silabas:
+		evento = getattr(fs[sil.efecto], "EnSilabaMuerta", None)
 		if not evento: continue
-	
+
 		ini = sil._end
 		end = diag._end
 		dif = end - ini
@@ -376,12 +377,12 @@ def __PreLoadSilabas(diag):
 			p = i/diff
 			frames[f].append((evento, sil, p ) )
 			no_frames[f] = False
-	
-	#Silaba Dormida	
+
+	#Silaba Dormida
 	for sil in silabas:
 		evento = getattr(fs[sil.efecto], "EnSilabaDorm", None)
 		if not evento: continue
-	
+
 		ini = diag._start
 		end = sil._start
 		dif = end - ini
@@ -393,25 +394,9 @@ def __PreLoadSilabas(diag):
 			p = i/diff
 			frames[f].append((evento, sil, p ) )
 			no_frames[f]=False
-	
-	#Silaba entra
-	for sil in silabas:
-		evento = getattr(fs[sil.efecto], "EnSilabaEntra", None)
-		if not evento: continue
-	
-		ini = sil._start - fx.sil_in_ms
-		end = sil._start
-		dif = end-ini
 
-		inif = cfn(ms2f(ini))
-		endf = cfn(ms2f(end))
-		diff = float(ms2f(dif)) or 1.0
-		for i, f in enumerate(xrange(inif, endf)):
-			p = i/diff
-			frames[f].append((evento, sil, p))
-			no_frames[f]=False
-			
-	#Silaba sale	
+
+	#Silaba sale
 	for sil in silabas:
 		evento = getattr(fs[sil.efecto], "EnSilabaSale", None)
 		if not evento: continue
@@ -427,12 +412,29 @@ def __PreLoadSilabas(diag):
 			p = i/diff
 			frames[f].append((evento, sil, p ) )
 			no_frames[f]=False
-			
+
+	#Silaba entra
+	for sil in silabas:
+		evento = getattr(fs[sil.efecto], "EnSilabaEntra", None)
+		if not evento: continue
+
+		ini = sil._start - fx.sil_in_ms
+		end = sil._start
+		dif = end-ini
+
+		inif = cfn(ms2f(ini))
+		endf = cfn(ms2f(end))
+		diff = float(ms2f(dif)) or 1.0
+		for i, f in enumerate(xrange(inif, endf)):
+			p = i/diff
+			frames[f].append((evento, sil, p))
+			no_frames[f]=False
+
 	#Silaba Animada
 	for sil in silabas:
 		evento = getattr(fs[sil.efecto], "EnSilaba", None)
 		if not evento: continue
-		
+
 		ini = sil._start
 		end = sil._end
 		dif = end-ini
@@ -444,12 +446,12 @@ def __PreLoadSilabas(diag):
 			p = i/diff
 			frames[f].append((evento, sil, p ))
 			no_frames[f] = False
-			
-	#Eventos personalizados		
-	for sil in silabas:	
+
+	#Eventos personalizados
+	for sil in silabas:
 		eventos = getattr(fs[sil.efecto], "eventos", None)
 		if not eventos: continue
-	
+
 		for evento in eventos:
 			enSilaba = getattr(evento, "EnSilaba", None)
 			if not enSilaba: continue
@@ -480,19 +482,19 @@ def __PreLoadLetras(sil):
 	#Creamos las letras (ya que sino no se crean en memoria)
 	sil.DividirLetras()
 	letras = sil._letras
-	
+
 	#inicio y letra entra
 	for letra in letras:
 		letra.progress = 0.0
-		
+
 		efecto = fs[letra.efecto]
-		
+
 		inicio = getattr(efecto, "EnLetraInicia", None)
 		if inicio: inicio(letra)
-		
+
 		evento = getattr(efecto, "EnLetraEntra", None)
 		if not evento: continue
-	
+
 		ini = letra._start - fx.letra_in_ms
 		end = letra._start
 		dif = end-ini
@@ -509,7 +511,7 @@ def __PreLoadLetras(sil):
 	for letra in letras:
 		evento = getattr(fs[letra.efecto], "EnLetraSale", None)
 		if not evento: continue
-	
+
 		ini = letra._end
 		end = letra._end + fx.letra_out_ms
 		dif = end - ini
@@ -526,7 +528,7 @@ def __PreLoadLetras(sil):
 	for letra in letras:
 		evento = getattr(fs[letra.efecto], "EnLetra", None)
 		if not evento: continue
-	
+
 		ini = letra._start
 		end = letra._end
 		dif = end-ini
@@ -543,7 +545,7 @@ def __PreLoadLetras(sil):
 	for letra in letras:
 		eventos = getattr(fs[letra.efecto], "eventos", None)
 		if not eventos: continue
-	
+
 		for evento in eventos:
 			enLetra = getattr(evento, "EnLetra", None)
 			if not enLetra: continue
