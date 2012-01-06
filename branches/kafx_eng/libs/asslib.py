@@ -84,7 +84,7 @@ class cPropiedades():
 			#tamaÃ±o de la shadow en pixels
 			self.shadow = 0
 			self.angle = 0
-			#posiciÃ³n del vector (del punto de inicio del vector)
+			#posición del vector (del punto de inicio del vector)
 			self.pos_x = 30
 			self.pos_y = 30
 			#origen de las transformaciones (y de algunos pintados)

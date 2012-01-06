@@ -24,10 +24,16 @@ class Efecto():
 				sil.parts.append(np)
 				physics.CreateSprite(np)
 				
-		for part in sil.parts[:]: 
+		for part in sil.parts: 
 			physics.StartMoving(part)
-			parts.append(part)
-			sil.parts.remove(part)		
+			physics.UpdateSprite(part)
+			part.Paint()
+			
+	def EnSilabaSale(self, sil):
+		for part in sil.parts:
+			physics.Destroy(part)
+			
+		sil.parts = []
 			
 	def EnDialogo(self, diag):
 		diag.PaintWithCache()				
@@ -50,9 +56,3 @@ class FxsGroup(comun.FxsGroup):
 		
 	def EnCuadroInicia(self):
 		physics.Update()
-		
-	def EnCuadroFin(self):
-		global parts
-		for part in parts:
-			physics.UpdateSprite(part)
-			part.Paint()
