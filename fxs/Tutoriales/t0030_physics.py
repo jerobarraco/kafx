@@ -5,9 +5,10 @@ from libs.draw import extra
 t1 = extra.CargarTextura("texturas/T_Negro2.png")				
 world = None #globales on son buena idea, alentan todo y es mas dificil saber que estas haciendo
 objs = []
+objs2 = []
 class Efecto():		
 	def EnSilabaInicia(self, sil):
-		parts = sil.CrearParticulas(t1, escala=0.5 ) 
+		parts = sil.CrearParticulas(t1, escala=0.4 ) 
 		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 5) ] #tomamos 1 cada 100 parts
 		sil.moving = False
 
@@ -29,18 +30,14 @@ class Efecto2():
 		d.PaintWithCache()
 		
 	def EnSilaba(self, s):
-		global world	
+		global world,objs2
 		if s.nueva:			
 			s.nueva= False
 			world.CreateVector(s)
-			
-		s.actual.color1.CopyFrom(s.actual.color2)
-		s.Paint()
+			objs2.append(s)
+			s.original.color1.CopyFrom(s.original.color2)
+	
 		
-	def EnSilabaSale(self, s):
-		if not s.nueva:
-			s.nueva = True
-			world.Destroy(s)
 			
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
@@ -49,16 +46,20 @@ class FxsGroup(comun.FxsGroup):
 		#no puedo crear dos efecto() porque intentaria crear dos mundos
 		self.saltar_cuadros = False
 		world = physics.World()
-		
-	def EnCuadroInicia(self):
-		global world
-		world.Update(True)
-		
+				
 	def EnCuadroFin(self):
-		global world, objs		
+		global world, objs,objs2
+		world.Update(True)
 		for o in objs[:]:#[:]es para poder hacer remove
 			o.Paint()
-			o.color.a -= 0.005
+			o.color.a -= 0.01
 			if o.color.a <0.0:
 				world.Destroy(o)
 				objs.remove(o)
+				
+		for o in objs2[:]:#[:]es para poder hacer remove
+			o.Paint()
+			o.original.color1.a -= 0.01
+			if o.original.color1.a <0.0:
+				world.Destroy(o)
+				objs2.remove(o)
