@@ -44,16 +44,15 @@ class World():
 
 	def Destroy(self, obj):
 		#Slower but easier to use
-		if obj in self.vectors:
-			self.DestroyVector(obj)
-		elif obj in self.sprites:
-			self.DestroySprite(obj)
-		else:
-			try:
+		try:
+			if obj._type ==0:
+				self.DestroyVector(obj)
+			elif obj._type ==1:
+				self.DestroySprite(obj)
+			else:
 				self.__Destroy(obj)
-			except:
-				print "quieren destruir un objeto que no existe"
-
+		except:
+			print "quieren destruir algo mal"
 
 	def DestroySprite(self, obj):
 		self.sprites.remove(obj)
@@ -75,22 +74,26 @@ class World():
 			body = pm.Body()
 
 		body.angle = angle #the angle can only be set before adding to space
+		body.position = pos_x, pos_y
 
-		if square:
+		shape = self.__createShape(body, width, height, square)
+		shape._dynamic = dynamic
+		"""if square:
 			verts = ( (-height, -width), (-height, width), (height, width), (height, -width))
 			shape = pm.Poly(body, verts )
+			shape._stype = 1
 		else:
 			shape = pm.Circle(body, width) # 4
-
-		body.position = pos_x, pos_y
+			shape._stype = 0"""
 
 		self.space.add(shape)
 		if dynamic:
 			self.space.add(body) # 5
+
 		return shape
 
 	def CreateVector(self, vector, dynamic = True, square=False):
-		vector._dynamic = dynamic
+		vector._type = 0
 		a = vector.actual
 
 		x = a.pos_x+a.org_x
@@ -98,19 +101,79 @@ class World():
 		w = vector.original._ancho /2.0
 		h = vector.original._alto /2.0
 		vector.shape = self.CreateBody( x, y, w, h, a.angle, dynamic, square)
-
 		self.vectors.append(vector)
 
 	def CreateSprite(self, sprite, dynamic = True, square=False):
-		sprite._dynamic = dynamic
+		sprite._type = 1
 		x= sprite.x+sprite.org_x
 		y= sprite.y+sprite.org_y
-		w=sprite._ancho*(1.0/sprite.scale_x) /2.0
+		w= sprite._ancho*(1.0/sprite.scale_x) /2.0
 		h= sprite._alto*(1.0/sprite.scale_y) /2.0
 
 		sprite.shape = self.CreateBody(x, y, w, h, sprite.angle, dynamic, square)
+		sprite.shape.shape_type = 0
 		self.sprites.append(sprite)
 
+	def __createShape(self, body, w, h, square):
+		if square:
+			verts = ( (-h, -w), (-h, w), (h, w), (h, -w))
+			shape = pm.Poly(body, verts)
+			shape._stype = 1
+		else:
+			shape = pm.Circle(body, w) # 4
+			shape._stype = 0
+		return shape
+
+	def Resize(self, obj, scale):
+		"""Resizes an object"""
+		#conservamos los datos importantes de sahpe antes de borrarlos
+		body = obj.shape.body
+		#check if it was a square
+		square = (obj.shape._stype == 0)
+
+		#quitamos y borramos la shape
+		self.space.remove(obj.shape)
+		del obj.shape
+		#recreate the shape
+		if obj._type == 0: #si es un vector
+			obj.actual.scale_x = obj.actual.scale_y = scale
+			w = obj.original._ancho * scale
+			h = obj.original._alto * scale
+		else:
+			obj.Escalar(scale, scale)
+			w=h= (obj._ancho*scale)/2.0
+
+		obj.shape = self.__createShape(body, w, h, square)
+
+		self.space.add(obj.shape)
+
+	def setDynamic(self, obj):
+		#Untested and unfinished, maybe its better to use Sleep and Wake
+		if not obj._dynamic:
+			obj.shape._dynamic = True
+			#TODOponer masa e inercia al body..
+			"""
+			if obj.shape._stype == 1:
+				inertia = pm.moment_for_box(mass, width*2, height*2)
+			else:
+				inertia = pm.moment_for_circle(mass, 0, width) # 1
+			body = pm.Body(mass, inertia) # 2"""
+			self.space.add(obj.shape.body)
+
+	def setStatic(self, obj):
+		if obj._dynamic:
+			obj.shape._dynamic = False
+			#todo remove mass and inertia from body
+			self.space.remove(obj.shape.body)
+
+	def Sleep(self, obj):
+		obj.shape.body.sleep()
+
+	def Wake(self, obj):
+		obj.shape.body.activate()
+
+	def Reindex(self, obj):
+		self.space.reindex_shape(obj.shape)
 def UpdateVector(vector):
 	body = vector.shape.body
 	pos = body.position
