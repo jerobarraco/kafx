@@ -192,7 +192,7 @@ def __PreLoad():
 		y también inicializa las cosas del efecto
 	"""
 
-	global frames, vi, fx, ass, no_frames
+	global frames, fx, ass, no_frames
 	from libs.draw import avanzado
 
 	num_frames = vi.num_frames #la cantidad de frames totales
@@ -211,8 +211,8 @@ def __PreLoad():
 	"""
 
 	#cacheo las funciones porque soy raton #this actually speed things up
-	ms2f = video.MSACuadro
-	cfn = video.ClampFrameNum
+	ms2f = video.vi.MSToFrame
+	cfn = video.vi.ClampFrameNum
 	dialogos = ass.dialogos
 
 	#Para poder hacer que las cosas se pinten en un orden predeterminado es necesario
@@ -261,7 +261,7 @@ def __PreLoad():
 		inif = cfn(ms2f(ini))
 		endf = cfn(ms2f(end))
 		diff = float(ms2f(dif)) or 1.0
-		for i, f in enumerate(range(inif, endf)):
+		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
 			frames[f].append((evento, diag, p))
 			no_frames[f] = False
@@ -348,7 +348,7 @@ def __PreLoadSilabas(diag):
 	global frames, fx, no_frames
 	#cacheos varios
 	fs = fx.fxs
-	ms2f = video.MSACuadro
+	ms2f = video.vi.MSToFrame
 	cfn = video.ClampFrameNum
 
 	#Ahora las Silabas!!! (T^T)
@@ -476,8 +476,8 @@ def __PreLoadLetras(sil):
 	global frames, fx, no_frames
 	#cacheos varios
 	fs = fx.fxs
-	ms2f = video.MSACuadro
-	cfn = video.ClampFrameNum
+	ms2f = video.vi.MSToFrame
+	cfn = video.vi.ClampFrameNum
 
 	#Creamos las letras (ya que sino no se crean en memoria)
 	sil.DividirLetras()

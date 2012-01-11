@@ -28,11 +28,28 @@ class cVideoInfo:
 	num_frames=0 #cantidad total de cuadros (corresponde a avisynth)
 	fps_numerator=1 #numerador del FPS
 	fps_denominator=1 #denominador del FPS
-	fps=30.0 #Fps en float	
+	fps=30.0 #Fps en float
 	fpscof1 = 30.0/1000.0 #fpscof1 = fps /1000.0 #coeficientes precalculados para el calculo de milisegundos y frames
 	fpscof2 = 1000/30.0 #fpscof2 = 1000.0 / fps
 	fake_stride = 0 #un stride precalculado para cuando se necesite hacer width*4
-	
+
+	def MSToFrame(self, ms):
+		"""Convierte de milisegundos a pnumero de cuadro"""
+		#return int(round(ms*vi.fpscof1))
+		#return int(ms*vi.fpscof1)
+		return int(math.ceil(ms*self.fpscof1))
+		#return int(ms*vi.fpscof1)
+
+	def FrameToMS(self, frame):
+		"""Convierte de numero de cuadro a milisegundos"""
+		return (frame*self.vi.fpscof2)
+
+	def ClampFrameNum(self, frame):
+		"Recorta un número (entero) al rango entre 0 y el máximo numero de frames (+ o - 1)"
+		if frame < 0: return 0
+		if frame > self.num_frames : return self.num_frames
+		return frame
+
 class cCurrentFrame:
 	"""
 	Contiene información del cuadro actual
@@ -45,26 +62,28 @@ class cCurrentFrame:
 	#sfc = None #Surface del cuadro actual NO USAR!!
 	framen=-1 #numero de cuadro actual.. creo que empieza desde 0
 	#tiempo=-1 #tiempo actual en milisegundos (deshabilitado desde el kafx_main) (definitivamente no debe ser usado)
-	
+
 
 cf = cCurrentFrame()
 vi = cVideoInfo() #Global, la setea kafx_main para que  cualquiera pueda accederla
 #Instancia global con la informacion del cuadro actual, y la información del video
 
 def CuadroAMS(frame):
-	"""Convierte de numero de cuadro a milisegundos"""
+	"""NO USEN ESTA COSA LENTA! usen vi.FrameToMS"""
 	global vi
 	return (frame*vi.fpscof2)
 
 def MSACuadro(ms):
-	"""Convierte de milisegundos a pnumero de cuadro"""
+	"""NO USEN ESTA COSA LENTA! usen vi.MSToFrame"""
+
 	global vi
 	#return int(round(ms*vi.fpscof1))
 	#return int(ms*vi.fpscof1)
 	return int(math.ceil(ms*vi.fpscof1))
+	#return int(ms*vi.fpscof1)
 
 def ClampFrameNum(frame):
-	"Recorta un número (entero) al rango entre 0 y el máximo numero de frames (+ o - 1)"
+	"""NO USEN ESTA COSA LENTA! usen vi.ClampFrameNum"""
 	if frame < 0: return 0
 	if frame > vi.num_frames : return vi.num_frames
 	return frame
