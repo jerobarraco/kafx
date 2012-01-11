@@ -8,12 +8,11 @@ parts = []
 world = None
 class Efecto():
 	def EnSilabaInicia(self, sil):
-		global parts
 		sil.parts = []
 		sil.creadas  = False
 
 	def EnSilaba(self, sil):
-		global t, parts,world
+		global t
 		if not sil.creadas:
 			sil.parts = []
 			sil.creadas = True
@@ -43,14 +42,18 @@ class Efecto2():
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		global world
-		world.Create()
+		world = physics.World()
 		self.fxs = (Efecto(), Efecto2())
-		self.saltar_cuadros = False
+		self.saltar_cuadros = False #very important with physics
 
 	def EnCuadroInicia(self):
-		physics.Update(True)
+		world.Update(True)
 
 	def EnCuadroFin(self):
 		global parts
-		for part in parts:
+		for part in parts[:]: #[:] is important
 			part.Paint()
+			part.color.a -= 0.01
+			if part.color.a <0:
+				parts.remove(part)
+				world.Destroy(part)#es importante destruir las particulas, para eso vamos bajando el alpha hasta llegar a 0 y ahi las borramos
