@@ -33,9 +33,9 @@ class World():
 		self.space.step(self.__dt)
 		if updateObjs:
 			for sp in self.sprites:
-				UpdateSprite(sp)
+				self.UpdateSprite(sp)
 			for vec in self.vectors:
-				UpdateVector(vec)
+				self.UpdateVector(vec)
 
 	def __Destroy(self, obj):
 		if obj.shape._dynamic:
@@ -167,23 +167,23 @@ class World():
 	def Reindex(self, obj):
 		self.space.reindex_shape(obj.shape)
 
-def UpdateVector(vector):
-	body = vector.shape.body
-	pos = body.position
+	def UpdateVector(self, vector):
+		body = vector.shape.body
+		pos = body.position
 
-	a = vector.actual
-	a.angle = body.angle #+ vector.original.angle #hasta que pymunk me tome bien el ángulo
-	a.pos_x = pos.x - a.org_x
-	a.pos_y = pos.y - a.org_y
-	#pongo el isinf 1º porque le pymunk me tira ese
-	if isinf(a.angle) or isnan(a.angle) : a.angle = 0.0
+		a = vector.actual
+		a.angle = body.angle #+ vector.original.angle #hasta que pymunk me tome bien el ángulo
+		a.pos_x = pos.x - a.org_x
+		a.pos_y = pos.y - a.org_y
+		#pongo el isinf 1º porque le pymunk me tira ese
+		if isinf(a.angle) or isnan(a.angle) : a.angle = 0.0
 
-def UpdateSprite(sprite):
-	body = sprite.shape.body
-	pos = body.position
-	sprite.x = pos.x - sprite.org_x
-	sprite.y = pos.y - sprite.org_y
-	sprite.angle = body.angle
+	def UpdateSprite(self, sprite):
+		body = sprite.shape.body
+		pos = body.position
+		sprite.x = pos.x - sprite.org_x
+		sprite.y = pos.y - sprite.org_y
+		sprite.angle = body.angle
 
-	if isinf(sprite.angle) or  isnan(sprite.angle) : sprite.angle =0.0
+		if isinf(sprite.angle) or  isnan(sprite.angle) : sprite.angle =0.0
 

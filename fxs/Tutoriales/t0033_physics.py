@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from libs import comun, physics
-from libs.draw import extra
+from libs.draw import extra, avanzado
 
 def chunker(seq, size):
     return (seq[pos:pos + size] for pos in xrange(0, len(seq), size))
 
-t1 = extra.CargarTextura("texturas/spark3.png")
+t1 = extra.CargarTextura("texturas/uq7.png")
 
 class Efecto():
 	def __init__(self):
@@ -13,7 +13,7 @@ class Efecto():
 		self.objs = []
 
 	def EnSilabaInicia(self, sil):
-		parts = sil.CrearParticulas(t1, escala=0.01 )
+		parts = sil.CrearParticulas(t1, escala=0.03 )
 		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 4) ] #tomamos 1 cada 100 parts
 		sil.moving = False
 
@@ -49,14 +49,13 @@ class FxsGroup(comun.FxsGroup):
 
 	def EnCuadroInicia(self):
 		self.fxs[0].world.Update(True)
-		#self.fxs[0].world.Update(False)
 
 	def EnCuadroFin(self):
 		objs=self.fxs[0].objs
 		world = self.fxs[0].world
 
 		for o in objs[:]:#[:]es para poder hacer remove
-			world.Resize(o, comun.Interpolate(o.color.a, 0.3, 0.01, comun.i_sin ))
+			world.Resize(o, comun.Interpolate(o.color.a, 0.03, 0.5, comun.i_sin ))
 			o.Paint()
 			o.color.a -= 0.025
 			if o.color.a <= 0.0:
