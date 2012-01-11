@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from libs import comun, physics
 from libs.draw import extra, avanzado
-from random import randint
+from random import randint, random
 t = extra.CargarTextura("texturas/uq7.png")
 #If you use physics in only one effect you can assign to "self" in that effect, that would make it slightly faster
+world = None
 class Efecto():
 	def __init__(self):
 		self.eventos = [Evento1()]
@@ -14,7 +15,7 @@ class Efecto():
 		sil.crear = True
 		x = sil.actual.pos_x+ sil.actual.org_x
 		y = sil.actual.pos_y + sil.actual.org_y
-		sil.bull = [avanzado.cSprite(t, x +randint(-50, 50), y+randint(-50, 50) ) for i in range(50)]#para que desordenen, pero no las vamos a pintar
+		sil.bull = [avanzado.cSprite(t, x +randint(-50, 50), y+randint(-50, 50), escala=random()*0.5 +0.5) for i in range(50)]#para que desordenen, pero no las vamos a pintar
 
 	def EnSilabaDorm(self, sil):
 		sil.PaintWithCache()
@@ -30,15 +31,19 @@ class Evento1():
 				for b in sil.bull:
 					world.CreateSprite(b, False)
 				sil.matar=True
-
-			for part in sil.parts[:]:
-				part.Paint()
-				world.Resize(part, comun.Interpolate(sil.progress, 0.1, 0.2))
-				part.color.a = comun.Interpolate(sil.progress, 1, 0.00)
-				#part.color.a -=0.07
-				if part.color.a <0.0:
-					world.DestroySprite(part)
-					sil.parts.remove(part)
+			alpha = comun.Interpolate(sil.progress, 1, -0.5)
+			if alpha < 0.0:
+				for part in sil.parts:
+						world.DestroySprite(part)
+				sil.parts = [] #borramos las parts
+				for b in sil.bull:
+					world.DestroySprite(b)
+				sil.bull = []
+			else:
+				for part in sil.parts[:]:
+					part.color.a = alpha
+					part.Paint()
+					world.Resize(part, comun.Interpolate(sil.progress, 0.1, 0.2))
 
 		def TiempoSilaba(self, sil):
                         return (sil._start, sil._end+500)
