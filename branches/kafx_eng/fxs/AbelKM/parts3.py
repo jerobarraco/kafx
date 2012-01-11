@@ -2,7 +2,7 @@
 from libs import comun, physics
 from libs.draw import extra, avanzado
 from random import randint
-t = extra.CargarTextura("texturas/pixel.png")
+t = extra.CargarTextura("texturas/uq7.png")
 #If you use physics in only one effect you can assign to "self" in that effect, that would make it slightly faster
 class Efecto():
 	def __init__(self):
@@ -10,11 +10,11 @@ class Efecto():
 	def EnSilabaInicia(self, sil):
 		global t
 		sil.actual.color1.CopyFrom(sil.actual.color2)
-		sil.parts = sil.CrearParticulas(t, escala=1)
+		sil.parts = sil.CrearParticulas(t, escala=0.1)
 		sil.crear = True
 		x = sil.actual.pos_x+ sil.actual.org_x
 		y = sil.actual.pos_y + sil.actual.org_y
-		sil.bull = [avanzado.cSprite(t, x +randint(-100, 100), y+randint(-100,100) ) for i in range(40)] #para que desordenen, pero no las vamos a pintar
+		sil.bull = [avanzado.cSprite(t, x +randint(-50, 50), y+randint(-50, 50) ) for i in range(50)]#para que desordenen, pero no las vamos a pintar
 
 	def EnSilabaDorm(self, sil):
 		sil.PaintWithCache()
@@ -33,8 +33,9 @@ class Evento1():
 
 			for part in sil.parts[:]:
 				part.Paint()
-
-				part.color.a -=0.05
+				world.Resize(part, comun.Interpolate(sil.progress, 0.1, 0.2))
+				part.color.a = comun.Interpolate(sil.progress, 1, 0.00)
+				#part.color.a -=0.07
 				if part.color.a <0.0:
 					world.DestroySprite(part)
 					sil.parts.remove(part)
@@ -59,4 +60,4 @@ class FxsGroup(comun.FxsGroup):
 
 	def EnCuadroInicia(self):
 		global world
-		world.Update()
+		world.Update(True)
