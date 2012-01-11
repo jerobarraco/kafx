@@ -3,13 +3,13 @@ from libs import comun, physics
 from libs.draw import extra
 
 t1 = extra.CargarTextura("texturas/T_Negro2.png")
-world = None #globales on son buena idea, alentan todo y es mas dificil saber que estas haciendo
+world = None #globales no son buena idea, alentan todo y es mas dificil saber que estas haciendo
 objs = []
 objs2 = []
 class Efecto():
 	def EnSilabaInicia(self, sil):
 		parts = sil.CrearParticulas(t1, escala=0.5 )
-		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 10) ] #tomamos 1 cada 100 parts
+		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 5) ] #tomamos 1 cada 5 parts
 		sil.moving = False
 
 	def EnSilabaDorm(self, sil):
@@ -49,6 +49,7 @@ class Efecto3():
 			d.nueva = False
 			world.CreateVector(d, False, True)
 			d.creada = True
+
 		d.PaintWithCache()
 
 	def EnDialogoSale(self, d):
@@ -72,12 +73,12 @@ class FxsGroup(comun.FxsGroup):
 			o.Paint()
 			o.color.a -= 0.01
 			if o.color.a <0.0:
-				world.DestroySprite(o)
+				world.Destroy(o)
 				objs.remove(o)
 
 		for o in objs2[:]:#[:]es para poder hacer remove
 			o.Paint()
 			o.original.color1.a -= 0.01
 			if o.original.color1.a <0.0:
-				world.DestroyVector(o)
+				world.Destroy(o)
 				objs2.remove(o)
