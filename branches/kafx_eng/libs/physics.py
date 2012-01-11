@@ -38,22 +38,19 @@ class World():
 				UpdateVector(vec)
 
 	def __Destroy(self, obj):
-		if obj._dynamic:
+		if obj.shape._dynamic:
 			self.space.remove(obj.shape.body)
 		self.space.remove(obj.shape)
 		del obj.shape
 
 	def Destroy(self, obj):
 		#Slower but easier to use
-		try:
-			if obj._type ==0:
-				self.DestroyVector(obj)
-			elif obj._type ==1:
-				self.DestroySprite(obj)
-			else:
-				self.__Destroy(obj)
-		except:
-			print "quieren destruir algo mal"
+		if obj._type ==0:
+			self.DestroyVector(obj)
+		elif obj._type ==1:
+			self.DestroySprite(obj)
+		else:
+			self.__Destroy(obj)
 
 	def DestroySprite(self, obj):
 		self.sprites.remove(obj)
@@ -79,17 +76,10 @@ class World():
 
 		shape = self.__createShape(body, width, height, square)
 		shape._dynamic = dynamic
-		"""if square:
-			verts = ( (-height, -width), (-height, width), (height, width), (height, -width))
-			shape = pm.Poly(body, verts )
-			shape._stype = 1
-		else:
-			shape = pm.Circle(body, width) # 4
-			shape._stype = 0"""
 
 		self.space.add(shape)
 		if dynamic:
-			self.space.add(body) # 5
+			self.space.add(body)
 
 		return shape
 
@@ -117,7 +107,7 @@ class World():
 
 	def __createShape(self, body, w, h, square):
 		if square:
-			verts = ( (-h, -w), (-h, w), (h, w), (h, -w))
+			verts = ( (-w, -h), (-w, h), (w, h), (w, -h))
 			shape = pm.Poly(body, verts)
 			shape._stype = 1
 		else:
@@ -131,6 +121,7 @@ class World():
 		body = obj.shape.body
 		#check if it was a square
 		square = (obj.shape._stype == 0)
+		dynamic = obj.shape._dynamic
 
 		#quitamos y borramos la shape
 		self.space.remove(obj.shape)
@@ -145,12 +136,12 @@ class World():
 			w=h= (obj._ancho*scale)/2.0
 
 		obj.shape = self.__createShape(body, w, h, square)
-
+		obj.shape._dynamic = dynamic
 		self.space.add(obj.shape)
 
 	def setDynamic(self, obj):
 		#Untested and unfinished, maybe its better to use Sleep and Wake
-		if not obj._dynamic:
+		if not obj.shape._dynamic:
 			obj.shape._dynamic = True
 			#TODOponer masa e inercia al body..
 			"""
@@ -162,7 +153,7 @@ class World():
 			self.space.add(obj.shape.body)
 
 	def setStatic(self, obj):
-		if obj._dynamic:
+		if obj.shape._dynamic:
 			obj.shape._dynamic = False
 			#todo remove mass and inertia from body
 			self.space.remove(obj.shape.body)
@@ -175,6 +166,7 @@ class World():
 
 	def Reindex(self, obj):
 		self.space.reindex_shape(obj.shape)
+
 def UpdateVector(vector):
 	body = vector.shape.body
 	pos = body.position

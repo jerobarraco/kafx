@@ -2,9 +2,6 @@
 from libs import comun, physics
 from libs.draw import extra
 
-def chunker(seq, size):
-    return (seq[pos:pos + size] for pos in xrange(0, len(seq), size))
-
 t1 = extra.CargarTextura("texturas/spark3.png")
 
 class Efecto():
@@ -13,25 +10,33 @@ class Efecto():
 		self.objs = []
 
 	def EnSilabaInicia(self, sil):
-		parts = sil.CrearParticulas(t1, escala=0.01 )
-		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 4) ] #tomamos 1 cada 100 parts
+		parts = sil.CrearParticulas(t1, escala=0.001 )
+		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 3) ] #tomamos 1 cada 100 parts
 		sil.moving = False
 
 	def EnSilabaDorm(self, sil):
 		sil.PaintWithCache()
 
 	def EnSilaba(self, sil):
-		#sil.Desvanecer(0.5, 0)
-		#sil.Paint()
+		sil.PaintWithCache()
+		for p in sil.parts:
+			p.Paint()
+
+	def EnSilabaSale(self, sil):
 		if not sil.moving:
 			sil.moving = True
 			for p in sil.parts:
 				self.world.CreateSprite(p)
 				self.objs.append(p)
 
-	#def EnDialogo(self, diag):
-	#	diag.PaintWithCache()
-
+		for p in sil.parts [:]: #[:] para el remove
+			p.Paint()
+			#pintamos primero, porque hasta que no hagamos world.update no tomara los cambios
+			p.color.a = comun.Interpolate(sil.progress, 1, 0.00)
+			self.world.Resize(p, comun.Interpolate(sil.progress, 0.3, 0.001 ))
+			if p.color.a <= 0.1:
+				self.world.Destroy(p)
+				sil.parts.remove(p)
 
 class Efecto2():
 	def EnDialogo(self, d):
@@ -46,19 +51,7 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = (Efecto(), Efecto2(), Efecto2())
 		#no puedo crear dos efecto() porque intentaria crear dos mundos
 		self.saltar_cuadros = False
+		self.sil_out_ms = 500
 
 	def EnCuadroInicia(self):
-		self.fxs[0].world.Update(True)
-		#self.fxs[0].world.Update(False)
-
-	def EnCuadroFin(self):
-		objs=self.fxs[0].objs
-		world = self.fxs[0].world
-
-		for o in objs[:]:#[:]es para poder hacer remove
-			world.Resize(o, comun.Interpolate(o.color.a, 0.3, 0.01, comun.i_sin ))
-			o.Paint()
-			o.color.a -= 0.025
-			if o.color.a <= 0.0:
-				world.Destroy(o)
-				objs.remove(o)
+		self.fxs[0].world.Update(True) #esto actualiza las posiciones y rotaciones de losobjetos YA CREADOS
