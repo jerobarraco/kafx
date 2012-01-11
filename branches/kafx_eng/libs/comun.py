@@ -7,6 +7,10 @@ import math
 import random
 
 from libs import video
+
+def chunker(seq, size):
+    return (seq[pos:pos + size] for pos in xrange(0, len(seq), size))
+
 def ClampB(x):
 	"Recorta un número (entero) al rango entre 0 y 255"
 	if x > 255: x = 255
@@ -18,7 +22,7 @@ def Clamp(num):
 	if num < 0.0 : return 0.0
 	if num > 1.0 : return 1.0
 	return num
-	
+
 def ElegirPorCuadro(cuadro_ini, cuadro_fin, active, inactive=None ):
 	"""frame_ini tiene el cuadro en que inicia
 	frame_Fin el cuadro donde termina
