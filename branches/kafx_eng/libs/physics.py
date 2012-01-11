@@ -6,7 +6,7 @@ Created on Thu Jan 05 17:29:45 2012
 """
 import pymunk as pm
 from libs import video
-from math import isnan, isinf, pi
+from math import isnan, isinf
 
 class World():
 	def __init__(self, grav_x=0, grav_y=500.0, ground=True):
@@ -38,7 +38,8 @@ class World():
 				UpdateVector(vec)
 
 	def __Destroy(self, obj):
-		if obj._dynamic: self.space.remove(obj.shape.body)
+		if obj._dynamic:
+			self.space.remove(obj.shape.body)
 		self.space.remove(obj.shape)
 		del obj.shape
 
