@@ -11,7 +11,7 @@ import sys
 try:
 	import distribute_setup
 	distribute_setup.use_setuptools()
-	from setuptools import setup#, find_packages
+	from setuptools import setup , find_packages
 except ImportError, e:
 	print e
 	print """
@@ -23,7 +23,7 @@ except ImportError, e:
 
 setup(
 	name = "kafx",
-	version = "1.6.12",
+	version = "1.6.2",
 	author = "Jerónimo Barraco Mármol",
  	author_email = "jerobarraco@yahoo.com.ar",
   url = "http://kafx.com.ar",
@@ -36,9 +36,14 @@ setup(
   provides = ['kafx'],#importante para poder poner "import kafx"
   include_package_data=True,
 	#namespace_packages=['kafx'],
-	#packages = ["kafx"],
-	package_dir = {'':'kafx'},#NO! esto hace que construya adentro de kafx/
- 	#package_data = {
+	package_dir = {'kafx':'kafx_eng'},
+	#packages = find_packages(exclude=["kafx"]),
+
+	packages = ['kafx_eng', 'kafx_eng.libs', 'kafx_eng.libs.draw',
+					'kafx_eng.fxs', 'kafx_eng.fxs.Tutoriales', 'kafx_eng.texturas'],
+ 	package_data = {
+		'kafx':['*.ass', 'texturas/*.png']#nunca funciona!
+		},
 	#		'':['*.ass'],
 	#		'texturas':['*.png'],
 	#		'bpm':'*.bpm',
@@ -52,7 +57,7 @@ setup(
 	#		]
 	#},
 	zip_safe=False,
-  
+
   keywords = "kafx cairo python video audio text karaoke .ass",
   classifiers = [
 	"Operating System :: OS Independent",

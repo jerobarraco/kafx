@@ -1,0 +1,3 @@
+recursive-include kafx_eng/texturas *
+recursive-include kafx_eng *.ass
+include kafx_eng/*.dll

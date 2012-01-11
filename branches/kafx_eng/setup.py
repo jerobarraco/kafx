@@ -1,71 +1,36 @@
-#!/urs/bin/env python
-# -*- coding: utf-8 -*-
-"""setup
+#!/usr/bin/env python
 
-Package installer for kafx.
+from distutils.core import setup
 
-"""
-
-try:
-
-	from distribute_setup import use_setuptools
-	use_setuptools()
-	from setuptools import setup, find_packages
-
-
-except ImportError, e:
-	print e
-	print """
-	You don't have distribute installed, run:
-  $ curl -O http://python-distribute.org/distribute_setup.py
-	$ python distribute_setup.py"""
-	exit(1)
-#no puedo hacer que haga lo que yo quiero, automáticamente incluye las cosas del svn, asi que lo dejo asi
-import kafx_main
-setup(
-	name = "kafx",
-	version = ','.join(map(str, kafx_main.version_info)),
-	author = "Jerónimo Barraco Mármol",
- 	author_email = "jerobarraco@yahoo.com.ar",
-	url = "http://kafx.com.ar",
-	download_url="http://kafx.com.ar",
-	description = "A software for creating Karaoke Effects (vector graphics animation on video)",
-	install_requires = ['pygtk', 'pycairo', 'pyopengl'],
-	long_description = """A software for creating Karaoke Effects (vector graphics animation on video)""",
-	license = "GNU LGPL",
-	platforms = "Platform Independent",
-	provides = ['kafx'],#importante para poder poner "import kafx"
-	include_package_data=True,
-	packages=find_packages(),
-	#namespace_packages=['kafx'],
-	#package_dir = {'':'kafx'},#NO! esto hace que construya adentro de kafx/
- 	#package_data = {
-	#		'':['*.ass'],
-	#		'texturas':['*.png'],
-	#		'bpm':'*.bpm',
-	#		'':[
-	#			'kafx_main.py',
-	#			'kafx.py',
-	#			'myconfig.py'
-	#		],
-	#		'':[
-	#			'kafx.dll'
-	#		]
-	#},
-	zip_safe=False,
-  keywords = "kafx cairo python video audio text karaoke .ass",
-  classifiers = [
-	"Operating System :: OS Independent",
-    "Programming Language :: Python",
-	"Programming Language :: Python :: 2",
-	"Natural Language :: Spanish",
- 	#"License :: GNU Library or Lesser General Public License (LGPL)",
-  	"Development Status :: 5 - Production/Stable",
-	"Intended Audience :: Developers",
- 	"Topic :: Multimedia",
- 	]
-#,
- #dependency_links = [
- #	'http://ftp.gnome.org/pub/GNOME/binaries/win32/pygtk/2.24/pygtk-all-in-one-2.24.0.win32-py2.6.msi'
- #]
- )
+from sys import version
+if version < '2.2.3':
+    from distutils.dist import DistributionMetadata
+    DistributionMetadata.classifiers = None
+    DistributionMetadata.download_url = None
+setup(name = 'kafx',
+        version = '1.6.2',
+        description = 'laskd',
+        author = 'nande',
+        author_email = 'lol@nande.com.ar',
+        url = 'kafx.com.ar',
+        classifiers = [
+              'Development Status :: 4 - Beta',
+              'Development Status :: 5 - Production/Stable',
+              'Development Status :: 6 - Mature',
+              'Environment :: MacOS X :: Aqua',
+              'Environment :: MacOS X :: Carbon',
+              'Environment :: MacOS X :: Cocoa',
+              'Environment :: Win32 (MS Windows)',
+              'Environment :: X11 Applications :: GTK',
+              'Intended Audience :: End Users/Desktop',
+              'Intended Audience :: Information Technology',
+              'Intended Audience :: Other Audience',
+              'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
+              'Natural Language :: English',
+              'Natural Language :: Spanish',
+              'Programming Language :: Python :: 2',
+           ],
+        packages = ['.', '.\\extras', '.\\fxs', '.\\fxs\\AbelKM', '.\\fxs\\Tutoriales', '.\\fxs\\Usados', '.\\fxs\\gg', '.\\fxs\\pruebas', '.\\fxs\\timh', '.\\libs', '.\\libs\\draw'],
+        package_dir = {'.\\fxs\\pruebas': 'fxs\\pruebas', '.\\libs\\draw': 'libs\\draw', '.\\fxs\\Usados': 'fxs\\Usados', '.\\fxs\\timh': 'fxs\\timh', '.\\fxs': 'fxs', '.': '', '.\\fxs\\Tutoriales': 'fxs\\Tutoriales', '.\\libs': 'libs', '.\\fxs\\AbelKM': 'fxs\\AbelKM', '.\\extras': 'extras', '.\\fxs\\gg': 'fxs\\gg'},
+        #scripts = ['path/to/script']
+        )
