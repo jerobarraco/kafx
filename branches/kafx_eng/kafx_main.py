@@ -277,7 +277,7 @@ def __PreLoad():
 
 		inif = cfn(ms2f(ini))
 		endf = cfn(ms2f(end))
-		diff = float(ms2f(dif)) or 1.0
+		diff = float(ms2f(dif)-1) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
 			frames[f].append((evento, diag, p))
