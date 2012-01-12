@@ -69,6 +69,10 @@ def CargarTextura(archivo, extend=cairo.EXTEND_REPEAT):
 		print "No se pudo cargar la textura en el archivo:", archivo
 	return t"""
 
+def MoveTexture(pattern, x, y, org_x=0.0, org_y=0.0, angle=0.0, scale_x=1.0, scale_y=1.0):
+	"""Moves, rotates and scale a texture loaded with CargarTextura, or any other cairo patter"""
+	pattern.set_matrix(CrearMatriz(x, y, org_x, org_y, angle, scale_x, scale_y, True))
+
 def SetEstilo(estilo):
 	"""Prepara cairo con los estilos
 	Antes de dibujar un texto, se puede llamar a esta funcion para que ponga las cosas basicas
