@@ -36,14 +36,16 @@ setup(
   provides = ['kafx'],#importante para poder poner "import kafx"
   include_package_data=True,
 	#namespace_packages=['kafx'],
-	package_dir = {'kafx':'kafx_eng'},
+	
 	#packages = find_packages(exclude=["kafx"]),
 
 	packages = ['kafx_eng', 'kafx_eng.libs', 'kafx_eng.libs.draw',
 					'kafx_eng.fxs', 'kafx_eng.fxs.Tutoriales', 'kafx_eng.texturas'],
+        package_dir = {'kafx':'kafx_eng'},
  	package_data = {
 		'kafx':['*.ass', 'texturas/*.png']#nunca funciona!
 		},
+        data_files = [('texturas', ['texturas/*.png']), ('ass', ['*.ass'])],
 	#		'':['*.ass'],
 	#		'texturas':['*.png'],
 	#		'bpm':'*.bpm',

@@ -1,0 +1,1 @@
+que el kafx tome la info del video usando ffmpeg
