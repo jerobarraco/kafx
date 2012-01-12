@@ -1,0 +1,2985 @@
+Content-Type: multipart/related; start=<op.mhtml.1326269938818.888e2300312057d3@192.168.1.98>; boundary=----------xpeOdCDOsZn44apXgGWkDP
+Content-Location: http://wiki.python.org/moin/Distutils/Tutorial
+Subject: =?utf-8?Q?Distutils/Tutorial=20-=20PythonInfo=20Wiki?=
+MIME-Version: 1.0
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline; filename=Tutorial.htm
+Content-Type: text/html; charset=utf-8; name=Tutorial.htm
+Content-ID: <op.mhtml.1326269938818.888e2300312057d3@192.168.1.98>
+Content-Location: http://wiki.python.org/moin/Distutils/Tutorial
+Content-Transfer-Encoding: Quoted-Printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/=
+html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html;charset=3Dutf-8">=
+
+<meta name=3D"robots" content=3D"index,nofollow">
+
+<title>Distutils/Tutorial - PythonInfo Wiki</title>
+<script type=3D"text/javascript" src=3D"/moin/moin_static193/common/js/c=
+ommon.js"></script>
+
+<script type=3D"text/javascript">
+<!--
+var search_hint =3D "B=C3=BAsqueda";
+//-->
+</script>
+
+<script type=3D"text/javascript">
+<!-- // GUI edit link and i18n
+var gui_editor_link_href =3D "/moin/Distutils/Tutorial?action=3Dedit&edi=
+tor=3Dgui";
+var gui_editor_link_text =3D "Edici=C3=B3n (GUI)";
+//-->
+</script>
+
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"al=
+l" href=3D"/moin/moin_static193/europython/css/common.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"sc=
+reen" href=3D"/moin/moin_static193/europython/css/screen.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"pr=
+int" href=3D"/moin/moin_static193/europython/css/print.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"pr=
+ojection" href=3D"/moin/moin_static193/europython/css/projection.css">
+
+<!-- css only for MS IE6/IE7 browsers -->
+<!--[if lt IE 8]>
+   <link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D=
+"all" href=3D"/moin/moin_static193/europython/css/msie.css">
+<![endif]-->
+
+
+
+<link rel=3D"alternate" type=3D"application/wiki" title=3D"Editar" href=3D=
+"/moin/Distutils/Tutorial?action=3Dedit">
+
+<link rel=3D"Start" href=3D"/moin/FrontPage">
+<link rel=3D"Alternate" title=3D"Formato Wiki" href=3D"/moin/Distutils/T=
+utorial?action=3Draw">
+<link rel=3D"Alternate" media=3D"print" title=3D"Vista de impresi=C3=B3n=
+" href=3D"/moin/Distutils/Tutorial?action=3Dprint">
+<link rel=3D"Up" href=3D"/moin/Distutils">
+<link rel=3D"Search" href=3D"/moin/FindPage">
+<link rel=3D"Index" href=3D"/moin/TitleIndex">
+<link rel=3D"Glossary" href=3D"/moin/WordIndex">
+<link rel=3D"Help" href=3D"/moin/HelpOnFormatting">
+</head>
+
+<body  lang=3D"es" dir=3D"ltr">
+
+<div id=3D"header">
+
+<form id=3D"searchform" method=3D"get" action=3D"/moin/Distutils/Tutoria=
+l">
+<div>
+<input type=3D"hidden" name=3D"action" value=3D"fullsearch">
+<input type=3D"hidden" name=3D"context" value=3D"180">
+<label for=3D"searchinput">Buscar:</label>
+<input id=3D"searchinput" type=3D"text" name=3D"value" value=3D"" size=3D=
+"20"
+    onfocus=3D"searchFocus(this)" onblur=3D"searchBlur(this)"
+    onkeyup=3D"searchChange(this)" onchange=3D"searchChange(this)" alt=3D=
+"Search">
+<input id=3D"titlesearch" name=3D"titlesearch" type=3D"submit"
+    value=3D"T=C3=ADtulos" alt=3D"Search Titles">
+<input id=3D"fullsearch" name=3D"fullsearch" type=3D"submit"
+    value=3D"Texto" alt=3D"Search Full Text">
+</div>
+</form>
+<script type=3D"text/javascript">
+<!--// Initialize search form
+var f =3D document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display =3D 'none';
+var e =3D document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<div id=3D"logo"><a href=3D"/moin/FrontPage"></a><a href=3D"http://pytho=
+n.org"><img src=3D"http://www.python.org/images/python-logo.gif" alt=3D"=
+Python" ></a><a name=3D"logo"></a></div>
+<div id=3D"locationline">
+
+
+<ul id=3D"pagelocation">
+<li><a href=3D"/moin/Distutils">Distutils</a></li><li><a class=3D"backli=
+nk" href=3D"/moin/Distutils/Tutorial?action=3Dfullsearch&amp;context=3D1=
+80&amp;value=3Dlinkto%3A%22Distutils%2FTutorial%22" rel=3D"nofollow" tit=
+le=3D"Efectuar una b=C3=BAsqueda por p=C3=A1ginas que tienen este t=C3=AD=
+tulo en contenidos">Tutorial</a></li>
+</ul>
+
+</div>
+
+<ul id=3D"pagetrail">
+<li><a href=3D"/moin/Distutils/Tutorial">Distutils/Tutorial</a></li>
+</ul>
+</div>
+
+<div id=3D"sidebar">
+<div id=3D"star">
+
+</div>
+<div class=3D"sidepanel">
+
+<ul id=3D"navibar">
+<li class=3D"wikilink"><a href=3D"/moin/FrontPage">FrontPage</a></li><li=
+ class=3D"wikilink"><a href=3D"/moin/RecentChanges">RecentChanges</a></l=
+i><li class=3D"wikilink"><a href=3D"/moin/FindPage">FindPage</a></li><li=
+ class=3D"wikilink"><a href=3D"/moin/HelpContents">HelpContents</a></li>=
+<li class=3D"current"><a href=3D"/moin/Distutils/Tutorial">Distutils/Tut=
+orial</a></li>
+</ul>
+
+</div>
+<div class=3D"sidepanel">
+<h1>P=C3=A1gina</h1>
+<ul class=3D"editbar"><li><a href=3D"/moin/Distutils/Tutorial?action=3De=
+dit&amp;editor=3Dtext" name=3D"texteditlink" rel=3D"nofollow">Edici=C3=B3=
+n (Texto)</a></li><li class=3D"toggleCommentsButton" style=3D"display:no=
+ne;"><a href=3D"#" class=3D"nbcomment" onClick=3D"toggleComments();retur=
+n false;">Comentarios</a></li><li><a class=3D"nbinfo" href=3D"/moin/Dist=
+utils/Tutorial?action=3Dinfo" rel=3D"nofollow">Informaci=C3=B3n</a></li>=
+<li><a class=3D"nbattachments" href=3D"/moin/Distutils/Tutorial?action=3D=
+AttachFile" rel=3D"nofollow">Adjuntos</a></li><li>
+<form class=3D"actionsmenu" method=3D"GET" action=3D"/moin/Distutils/Tut=
+orial">
+<div>
+    <label>M=C3=A1s Acciones</label>
+    <select name=3D"action"
+        onchange=3D"if ((this.selectedIndex !=3D 0) &&
+                      (this.options[this.selectedIndex].disabled =3D=3D =
+false)) {
+                this.form.submit();
+            }
+            this.selectedIndex =3D 0;">
+        <option value=3D"raw">Texto sin formato</option>
+<option value=3D"print">Vista de impresi=C3=B3n</option>
+<option value=3D"refresh">Eliminar cach=C3=A9</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"SpellCheck">Revisar ortograf=C3=ADa</option>
+<option value=3D"LikePages">P=C3=A1ginas similares</option>
+<option value=3D"LocalSiteMap">Mapa del sitio</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"RenamePage" disabled class=3D"disabled">Renombrar P=C3=A1=
+gina</option>
+<option value=3D"DeletePage" disabled class=3D"disabled">Eliminar p=C3=A1=
+gina</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"show" disabled class=3D"disabled">Eliminar Spam</option=
+>
+<option value=3D"show" disabled class=3D"disabled">Revertir a esta revis=
+i=C3=B3n</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"Load">Subir</option>
+<option value=3D"SlideShow">SlideShow</option>
+    </select>
+    <input type=3D"submit" value=3D"Hacer">
+    =
+
+</div>
+<script type=3D"text/javascript">
+<!--// Init menu
+actionsMenuInit('M=C3=A1s Acciones');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+<div class=3D"sidepanel">
+<h1>Usuario</h1>
+<ul id=3D"username"><li><a href=3D"/moin/Distutils/Tutorial?action=3Dlog=
+in" id=3D"login" rel=3D"nofollow">Ingresar</a></li></ul>
+</div>
+</div>
+
+<div id=3D"page" lang=3D"en" dir=3D"ltr">
+<div dir=3D"ltr" id=3D"content" lang=3D"en"><span class=3D"anchor" id=3D=
+"top"></span>
+<span class=3D"anchor" id=3D"line-1"></span><span class=3D"anchor" id=3D=
+"line-2"></span><p class=3D"line867">
+<h1 id=3D"Introduction_to_distutils">Introduction to distutils</h1>
+<span class=3D"anchor" id=3D"line-3"></span><p class=3D"line874">I have =
+recently used distutils for the first time and thought I would share wha=
+t I have learned. <span class=3D"anchor" id=3D"line-4"></span><span clas=
+s=3D"anchor" id=3D"line-5"></span><p class=3D"line867"><strong>Please no=
+te:</strong> <em>I am not a pro. All this is based on my own hacking and=
+ struggling to get things to work. I am sure there will be alternative w=
+ays to do things and that I will make mistakes. Caveat Emptor.</em> <spa=
+n class=3D"anchor" id=3D"line-6"></span><span class=3D"anchor" id=3D"lin=
+e-7"></span><p class=3D"line874">(Based on GNU/Linux) <span class=3D"anc=
+hor" id=3D"line-8"></span><span class=3D"anchor" id=3D"line-9"></span><p=
+ class=3D"line867">
+<h2 id=3D"The_layout_of_folders">The layout of folders</h2>
+<span class=3D"anchor" id=3D"line-10"></span><p class=3D"line874">A prop=
+er layout of your files and folders can really save you trouble later on=
+. I use this layout: <span class=3D"anchor" id=3D"line-11"></span><span =
+class=3D"anchor" id=3D"line-12"></span><span class=3D"anchor" id=3D"line=
+-13"></span><span class=3D"anchor" id=3D"line-14"></span><span class=3D"=
+anchor" id=3D"line-15"></span><span class=3D"anchor" id=3D"line-16"></sp=
+an><span class=3D"anchor" id=3D"line-17"></span><span class=3D"anchor" i=
+d=3D"line-18"></span><span class=3D"anchor" id=3D"line-19"></span><span =
+class=3D"anchor" id=3D"line-20"></span><span class=3D"anchor" id=3D"line=
+-21"></span><span class=3D"anchor" id=3D"line-22"></span><span class=3D"=
+anchor" id=3D"line-23"></span><span class=3D"anchor" id=3D"line-24"></sp=
+an><pre><span class=3D"anchor" id=3D"line-1"></span>top
+<span class=3D"anchor" id=3D"line-2"></span>|-- package
+<span class=3D"anchor" id=3D"line-3"></span>|   |-- __init__.py
+<span class=3D"anchor" id=3D"line-4"></span>|   |-- module.py
+<span class=3D"anchor" id=3D"line-5"></span>|   `-- things
+<span class=3D"anchor" id=3D"line-6"></span>|       |-- cross.png
+<span class=3D"anchor" id=3D"line-7"></span>|       |-- fplogo.png
+<span class=3D"anchor" id=3D"line-8"></span>|       `-- tick.png
+<span class=3D"anchor" id=3D"line-9"></span>|-- runner
+<span class=3D"anchor" id=3D"line-10"></span>|-- MANIFEST.in
+<span class=3D"anchor" id=3D"line-11"></span>|-- README
+<span class=3D"anchor" id=3D"line-12"></span>`-- setup.py</pre><span cla=
+ss=3D"anchor" id=3D"line-25"></span><span class=3D"anchor" id=3D"line-26=
+"></span><ul><li>top - This is called the "Distribution Root". The very =
+top of the tree is some arbitrary folder, perhaps in your home directory=
+ under pythondev. It doesn't matter. <span class=3D"anchor" id=3D"line-2=
+7"></span></li><li>package - I call it this to indicate that it's where =
+I am developing my package(s). <span class=3D"anchor" id=3D"line-28"></s=
+pan><p class=3D"line891"><em>(Packages are simply folders with modules (=
+py files) in them. They also have a special file called <tt class=3D"bac=
+ktick">__init__.py</tt> so that Python will know that this folder is a p=
+ackage.)</em> <span class=3D"anchor" id=3D"line-29"></span></li><li>pack=
+age/things - This is where I will keep all my things. Here I have some i=
+mage files, but you can put anything your module may need here. Naturall=
+y you can use any folder name you like. <span class=3D"anchor" id=3D"lin=
+e-30"></span></li><li>The other files are all in the root and will be de=
+scribed soon. <span class=3D"anchor" id=3D"line-31"></span><span class=3D=
+"anchor" id=3D"line-32"></span></li></ul><p class=3D"line867">
+<h2 id=3D"UPDATE:_How_to_add_other_files.2C_other_data_and_directories">=
+UPDATE: How to add other files, other data and directories</h2>
+<span class=3D"anchor" id=3D"line-33"></span><p class=3D"line874">I have=
+ a tentative solution for when you need extra files and folders in your =
+distributed tarball. This is surprisingly tricky to do. Please see the s=
+ection at the end titled "Other Files" <span class=3D"anchor" id=3D"line=
+-34"></span><span class=3D"anchor" id=3D"line-35"></span><span class=3D"=
+anchor" id=3D"line-36"></span><p class=3D"line867">
+<h2 id=3D"The_files">The files</h2>
+<span class=3D"anchor" id=3D"line-37"></span><p class=3D"line867">
+<h3 id=3D"runner">runner</h3>
+<span class=3D"anchor" id=3D"line-38"></span><p class=3D"line874">I assu=
+me that there will be a single script file that you will use to start yo=
+ur Python app. I call it 'runner' (without the .py) in this example. It =
+will import the actual package. Here is the code: <span class=3D"anchor"=
+ id=3D"line-39"></span><span class=3D"anchor" id=3D"line-40"></span><p c=
+lass=3D"line867"><em>runner</em> <span class=3D"anchor" id=3D"line-41"><=
+/span><span class=3D"anchor" id=3D"line-42"></span><span class=3D"anchor=
+" id=3D"line-43"></span><span class=3D"anchor" id=3D"line-44"></span><sp=
+an class=3D"anchor" id=3D"line-45"></span><span class=3D"anchor" id=3D"l=
+ine-46"></span><span class=3D"anchor" id=3D"line-47"></span><span class=3D=
+"anchor" id=3D"line-48"></span><span class=3D"anchor" id=3D"line-49"></s=
+pan><span class=3D"anchor" id=3D"line-50"></span><span class=3D"anchor" =
+id=3D"line-51"></span><span class=3D"anchor" id=3D"line-52"></span><span=
+ class=3D"anchor" id=3D"line-53"></span><pre><span class=3D"anchor" id=3D=
+"line-1-1"></span>##This will work in development on a relative folder b=
+asis
+<span class=3D"anchor" id=3D"line-2-1"></span>##It will then work when i=
+nstalled in site-packages on a target system
+<span class=3D"anchor" id=3D"line-3-1"></span>##where the runner script =
+is in /usr/bin (or wherever)
+<span class=3D"anchor" id=3D"line-4-1"></span>##
+<span class=3D"anchor" id=3D"line-5-1"></span>##So, you don't need anyth=
+ing special - no fancy path tricks.
+<span class=3D"anchor" id=3D"line-6-1"></span>
+<span class=3D"anchor" id=3D"line-7-1"></span>import package.module
+<span class=3D"anchor" id=3D"line-8-1"></span>
+<span class=3D"anchor" id=3D"line-9-1"></span>package.module.start ()</p=
+re><span class=3D"anchor" id=3D"line-54"></span><span class=3D"anchor" i=
+d=3D"line-55"></span><p class=3D"line867">
+<h3 id=3D"module.py">module.py</h3>
+<span class=3D"anchor" id=3D"line-56"></span><span class=3D"anchor" id=3D=
+"line-57"></span><p class=3D"line874">Next is the package. In this case =
+there is only one module in the package (import package.module), so here=
+ is the module: <span class=3D"anchor" id=3D"line-58"></span><span class=
+=3D"anchor" id=3D"line-59"></span><p class=3D"line867"><em>module.py</em=
+> <span class=3D"anchor" id=3D"line-60"></span><span class=3D"anchor" id=
+=3D"line-61"></span><span class=3D"anchor" id=3D"line-62"></span><span c=
+lass=3D"anchor" id=3D"line-63"></span><span class=3D"anchor" id=3D"line-=
+64"></span><span class=3D"anchor" id=3D"line-65"></span><span class=3D"a=
+nchor" id=3D"line-66"></span><span class=3D"anchor" id=3D"line-67"></spa=
+n><span class=3D"anchor" id=3D"line-68"></span><span class=3D"anchor" id=
+=3D"line-69"></span><span class=3D"anchor" id=3D"line-70"></span><span c=
+lass=3D"anchor" id=3D"line-71"></span><span class=3D"anchor" id=3D"line-=
+72"></span><span class=3D"anchor" id=3D"line-73"></span><span class=3D"a=
+nchor" id=3D"line-74"></span><span class=3D"anchor" id=3D"line-75"></spa=
+n><span class=3D"anchor" id=3D"line-76"></span><span class=3D"anchor" id=
+=3D"line-77"></span><span class=3D"anchor" id=3D"line-78"></span><span c=
+lass=3D"anchor" id=3D"line-79"></span><span class=3D"anchor" id=3D"line-=
+80"></span><span class=3D"anchor" id=3D"line-81"></span><span class=3D"a=
+nchor" id=3D"line-82"></span><span class=3D"anchor" id=3D"line-83"></spa=
+n><span class=3D"anchor" id=3D"line-84"></span><span class=3D"anchor" id=
+=3D"line-85"></span><span class=3D"anchor" id=3D"line-86"></span><pre><s=
+pan class=3D"anchor" id=3D"line-1-2"></span>import os, sys
+<span class=3D"anchor" id=3D"line-2-2"></span>
+<span class=3D"anchor" id=3D"line-3-2"></span>def determine_path ():
+<span class=3D"anchor" id=3D"line-4-2"></span>    """Borrowed from wxgla=
+de.py"""
+<span class=3D"anchor" id=3D"line-5-2"></span>    try:
+<span class=3D"anchor" id=3D"line-6-2"></span>        root =3D __file__
+<span class=3D"anchor" id=3D"line-7-2"></span>        if os.path.islink =
+(root):
+<span class=3D"anchor" id=3D"line-8-2"></span>            root =3D os.pa=
+th.realpath (root)
+<span class=3D"anchor" id=3D"line-9-2"></span>        return os.path.dir=
+name (os.path.abspath (root))
+<span class=3D"anchor" id=3D"line-10-1"></span>    except:
+<span class=3D"anchor" id=3D"line-11-1"></span>        print "I'm sorry,=
+ but something is wrong."
+<span class=3D"anchor" id=3D"line-12-1"></span>        print "There is n=
+o __file__ variable. Please contact the author."
+<span class=3D"anchor" id=3D"line-13"></span>        sys.exit ()
+<span class=3D"anchor" id=3D"line-14"></span>        =
+
+<span class=3D"anchor" id=3D"line-15"></span>def start ():
+<span class=3D"anchor" id=3D"line-16"></span>    print "module is runnin=
+g"
+<span class=3D"anchor" id=3D"line-17"></span>    print determine_path ()=
+
+<span class=3D"anchor" id=3D"line-18"></span>    print "My various data =
+files and so on are:"
+<span class=3D"anchor" id=3D"line-19"></span>    files =3D [f for f in o=
+s.listdir(determine_path () + "/things")]
+<span class=3D"anchor" id=3D"line-20"></span>    print files
+<span class=3D"anchor" id=3D"line-21"></span>    =
+
+<span class=3D"anchor" id=3D"line-22"></span>if __name__ =3D=3D "__main_=
+_":
+<span class=3D"anchor" id=3D"line-23"></span>    print "Decide what to d=
+o"</pre><span class=3D"anchor" id=3D"line-87"></span><span class=3D"anch=
+or" id=3D"line-88"></span><span class=3D"anchor" id=3D"line-89"></span><=
+p class=3D"line862">This uses the magic variable <tt class=3D"backtick">=
+__file__</tt> that will return the path and name of the module. Without =
+it you would have to jump through some hoops to locate the module on any=
+ given distro or O/S. <span class=3D"anchor" id=3D"line-90"></span><ul><=
+li style=3D"list-style-type:none"><p class=3D"line891"><em>(If you can f=
+ind this in the Python docs, then your grep-foo is better than mine. I f=
+ound it by pouring through other Python apps in the site-packages folder=
+ of python2.4)</em> <span class=3D"anchor" id=3D"line-91"></span><span c=
+lass=3D"anchor" id=3D"line-92"></span></li></ul><p class=3D"line874">It =
+shows that it can find the data files in the things folder. <span class=3D=
+"anchor" id=3D"line-93"></span><span class=3D"anchor" id=3D"line-94"></s=
+pan><p class=3D"line867">
+<h3 id=3D"A.60__init__.py.60">`__init__.py`</h3>
+<span class=3D"anchor" id=3D"line-95"></span><p class=3D"line862">The <t=
+t class=3D"backtick">__init__.py</tt> file is empty. <span class=3D"anch=
+or" id=3D"line-96"></span><span class=3D"anchor" id=3D"line-97"></span><=
+p class=3D"line867">
+<h3 id=3D"README">README</h3>
+<span class=3D"anchor" id=3D"line-98"></span><span class=3D"anchor" id=3D=
+"line-99"></span><p class=3D"line874">The README file is named that way =
+because it's one of the ways that distutils automatically looks for it. =
+ <span class=3D"anchor" id=3D"line-100"></span>You should put details ab=
+out your app into it. It's not a required file. <span class=3D"anchor" i=
+d=3D"line-101"></span><span class=3D"anchor" id=3D"line-102"></span><p c=
+lass=3D"line867">
+<h3 id=3D"MANIFEST.in">MANIFEST.in</h3>
+<span class=3D"anchor" id=3D"line-103"></span><p class=3D"line862">The M=
+ANIFEST.in file took me a while to understand. It's the file that distut=
+ils uses to collect <em>all</em> the files in your project that will go =
+into the final installer tarball (the file that gets distributed). <span=
+ class=3D"anchor" id=3D"line-104"></span><span class=3D"anchor" id=3D"li=
+ne-105"></span><p class=3D"line867"><strong>NB:</strong> whatever is in =
+MANIFEST.in will be in your installer. Whatever is <strong>not</strong> =
+in there, will <strong>not</strong> be in your installer. <span class=3D=
+"anchor" id=3D"line-106"></span><span class=3D"anchor" id=3D"line-107"><=
+/span><p class=3D"line862">Shortly, in your setup.py file, you will see =
+other references to the various files in your project. It seems redundan=
+t to refer to all the files you want twice, but this is a fact: MANIFEST=
+.in =3D=3D what will go <strong>into</strong> your installer. <span clas=
+s=3D"anchor" id=3D"line-108"></span><span class=3D"anchor" id=3D"line-10=
+9"></span><p class=3D"line874">Here is the file: <span class=3D"anchor" =
+id=3D"line-110"></span><span class=3D"anchor" id=3D"line-111"></span><p =
+class=3D"line867"><em>MANIFEST.in</em> <span class=3D"anchor" id=3D"line=
+-112"></span><span class=3D"anchor" id=3D"line-113"></span><span class=3D=
+"anchor" id=3D"line-114"></span><span class=3D"anchor" id=3D"line-115"><=
+/span><pre><span class=3D"anchor" id=3D"line-1-3"></span>include runner =
+README
+<span class=3D"anchor" id=3D"line-2-3"></span>recursive-include package/=
+things *</pre><span class=3D"anchor" id=3D"line-116"></span><p class=3D"=
+line874">It has a limited syntax (see the docs),but basically: <span cla=
+ss=3D"anchor" id=3D"line-117"></span><ul><li><p class=3D"line891"><em>in=
+clude</em> - pick up files (by glob or name) relative to the root. <span=
+ class=3D"anchor" id=3D"line-118"></span></li><li><p class=3D"line891"><=
+em>recursive-include path file</em> - pick up files (by name or glob) re=
+cursively under the given path. <span class=3D"anchor" id=3D"line-119"><=
+/span><span class=3D"anchor" id=3D"line-120"></span></li></ul><p class=3D=
+"line874">You do not have to include any .py files in your package-root =
+folder. You do have to include the runner script because it has no .py e=
+xtension. <span class=3D"anchor" id=3D"line-121"></span>(I am not sure i=
+f it would pick up .py files in the root.) <span class=3D"anchor" id=3D"=
+line-122"></span><span class=3D"anchor" id=3D"line-123"></span><p class=3D=
+"line867">
+<h3 id=3D"setup.py">setup.py</h3>
+<span class=3D"anchor" id=3D"line-124"></span><p class=3D"line874">Final=
+ly we get to the setup.py file: <span class=3D"anchor" id=3D"line-125"><=
+/span><span class=3D"anchor" id=3D"line-126"></span><p class=3D"line867"=
+><em>setup.py</em> <span class=3D"anchor" id=3D"line-127"></span><span c=
+lass=3D"anchor" id=3D"line-128"></span><span class=3D"anchor" id=3D"line=
+-129"></span><span class=3D"anchor" id=3D"line-130"></span><span class=3D=
+"anchor" id=3D"line-131"></span><span class=3D"anchor" id=3D"line-132"><=
+/span><span class=3D"anchor" id=3D"line-133"></span><span class=3D"ancho=
+r" id=3D"line-134"></span><span class=3D"anchor" id=3D"line-135"></span>=
+<span class=3D"anchor" id=3D"line-136"></span><span class=3D"anchor" id=3D=
+"line-137"></span><span class=3D"anchor" id=3D"line-138"></span><span cl=
+ass=3D"anchor" id=3D"line-139"></span><span class=3D"anchor" id=3D"line-=
+140"></span><span class=3D"anchor" id=3D"line-141"></span><span class=3D=
+"anchor" id=3D"line-142"></span><span class=3D"anchor" id=3D"line-143"><=
+/span><span class=3D"anchor" id=3D"line-144"></span><span class=3D"ancho=
+r" id=3D"line-145"></span><span class=3D"anchor" id=3D"line-146"></span>=
+<span class=3D"anchor" id=3D"line-147"></span><span class=3D"anchor" id=3D=
+"line-148"></span><span class=3D"anchor" id=3D"line-149"></span><span cl=
+ass=3D"anchor" id=3D"line-150"></span><span class=3D"anchor" id=3D"line-=
+151"></span><span class=3D"anchor" id=3D"line-152"></span><span class=3D=
+"anchor" id=3D"line-153"></span><span class=3D"anchor" id=3D"line-154"><=
+/span><span class=3D"anchor" id=3D"line-155"></span><span class=3D"ancho=
+r" id=3D"line-156"></span><span class=3D"anchor" id=3D"line-157"></span>=
+<span class=3D"anchor" id=3D"line-158"></span><span class=3D"anchor" id=3D=
+"line-159"></span><span class=3D"anchor" id=3D"line-160"></span><span cl=
+ass=3D"anchor" id=3D"line-161"></span><pre><span class=3D"anchor" id=3D"=
+line-1-4"></span>from distutils.core import setup
+<span class=3D"anchor" id=3D"line-2-4"></span>
+<span class=3D"anchor" id=3D"line-3-3"></span>#This is a list of files t=
+o install, and where
+<span class=3D"anchor" id=3D"line-4-3"></span>#(relative to the 'root' d=
+ir, where setup.py is)
+<span class=3D"anchor" id=3D"line-5-3"></span>#You could be more specifi=
+c.
+<span class=3D"anchor" id=3D"line-6-3"></span>files =3D ["things/*"]
+<span class=3D"anchor" id=3D"line-7-3"></span>
+<span class=3D"anchor" id=3D"line-8-3"></span>setup(name =3D "appname",
+<span class=3D"anchor" id=3D"line-9-3"></span>    version =3D "100",
+<span class=3D"anchor" id=3D"line-10-2"></span>    description =3D "yadd=
+a yadda",
+<span class=3D"anchor" id=3D"line-11-2"></span>    author =3D "myself an=
+d I",
+<span class=3D"anchor" id=3D"line-12-2"></span>    author_email =3D "ema=
+il@someplace.com",
+<span class=3D"anchor" id=3D"line-13-1"></span>    url =3D "whatever",
+<span class=3D"anchor" id=3D"line-14-1"></span>    #Name the folder wher=
+e your packages live:
+<span class=3D"anchor" id=3D"line-15-1"></span>    #(If you have other p=
+ackages (dirs) or modules (py files) then
+<span class=3D"anchor" id=3D"line-16-1"></span>    #put them into the pa=
+ckage directory - they will be found =
+
+<span class=3D"anchor" id=3D"line-17-1"></span>    #recursively.)
+<span class=3D"anchor" id=3D"line-18-1"></span>    packages =3D ['packag=
+e'],
+<span class=3D"anchor" id=3D"line-19-1"></span>    #'package' package mu=
+st contain files (see list above)
+<span class=3D"anchor" id=3D"line-20-1"></span>    #I called the package=
+ 'package' thus cleverly confusing the whole issue...
+<span class=3D"anchor" id=3D"line-21-1"></span>    #This dict maps the p=
+ackage name =3Dto=3D&gt; directories
+<span class=3D"anchor" id=3D"line-22-1"></span>    #It says, package *ne=
+eds* these files.
+<span class=3D"anchor" id=3D"line-23-1"></span>    package_data =3D {'pa=
+ckage' : files },
+<span class=3D"anchor" id=3D"line-24"></span>    #'runner' is in the roo=
+t.
+<span class=3D"anchor" id=3D"line-25"></span>    scripts =3D ["runner"],=
+
+<span class=3D"anchor" id=3D"line-26"></span>    long_description =3D ""=
+"Really long text here.""" =
+
+<span class=3D"anchor" id=3D"line-27"></span>    #
+<span class=3D"anchor" id=3D"line-28"></span>    #This next part it for =
+the Cheese Shop, look a little down the page.
+<span class=3D"anchor" id=3D"line-29"></span>    #classifiers =3D []    =
+ =
+
+<span class=3D"anchor" id=3D"line-30"></span>) </pre><span class=3D"anch=
+or" id=3D"line-162"></span><ul><li><p class=3D"line891"><em>name</em> be=
+comes the name of the installation tarball. <span class=3D"anchor" id=3D=
+"line-163"></span></li><li><p class=3D"line891"><em>version</em> gets ap=
+pended to the end of the tarball name. <span class=3D"anchor" id=3D"line=
+-164"></span></li><li><p class=3D"line862">packages =3D [ ] A list namin=
+g <strong>all</strong> the packages you want to include. <span class=3D"=
+anchor" id=3D"line-165"></span><em>(I am unsure about how to create mult=
+iple packages. The docs are a little too concise and I read too fast.)</=
+em> <span class=3D"anchor" id=3D"line-166"></span></li><li>package_data =
+=3D { } A dictionary where the key ('package') is related to the list of=
+ files (in things/). I read this as saying "The package named 'package' =
+needs the files in [list]" <span class=3D"anchor" id=3D"line-167"></span=
+></li><li>scripts =3D [ ] A script(s) to be installed into standard loca=
+tions like /usr/bin. If you include a path, you can control where they g=
+o. in this case I want /usr/bin/runner to be available on the user's sys=
+tem. <span class=3D"anchor" id=3D"line-168"></span></li><li><p class=3D"=
+line862">"long_description" may be valid <a href=3D"/moin/ReStructuredTe=
+xt">ReStructuredText</a> which will be turned into HTML when displayed a=
+t the Cheese Shop. <span class=3D"anchor" id=3D"line-169"></span><span c=
+lass=3D"anchor" id=3D"line-170"></span></li></ul><p class=3D"line867">
+<h2 id=3D"Making_the_installation_tarball">Making the installation tarba=
+ll</h2>
+<span class=3D"anchor" id=3D"line-171"></span><p class=3D"line874">Well,=
+ that's the lot. It's quite simple really, as long as you keep to the pa=
+ttern. If you want extra folders and sub-packages and so forth, it gets =
+a little hairy. But, I suppose, if you want all that then you will have =
+no trouble extending it from this tutorial. <span class=3D"anchor" id=3D=
+"line-172"></span><span class=3D"anchor" id=3D"line-173"></span><p class=
+=3D"line874">To make the installation tarball, you simply run: <span cla=
+ss=3D"anchor" id=3D"line-174"></span><span class=3D"anchor" id=3D"line-1=
+75"></span><pre><span class=3D"anchor" id=3D"line-1-5"></span>python set=
+up.py sdist</pre><span class=3D"anchor" id=3D"line-176"></span><p class=3D=
+"line874">That will crank through all the files in your MANIFEST.in and =
+build the tar.gz file in a folder called dist off your root. <span class=
+=3D"anchor" id=3D"line-177"></span><span class=3D"anchor" id=3D"line-178=
+"></span><p class=3D"line874">Look for errors. You might have to fix lin=
+es in your MANIFEST.in file. <span class=3D"anchor" id=3D"line-179"></sp=
+an><span class=3D"anchor" id=3D"line-180"></span><p class=3D"line874">He=
+re is what I see: <span class=3D"anchor" id=3D"line-181"></span><span cl=
+ass=3D"anchor" id=3D"line-182"></span><p class=3D"line867"><em>output</e=
+m> <span class=3D"anchor" id=3D"line-183"></span><span class=3D"anchor" =
+id=3D"line-184"></span><span class=3D"anchor" id=3D"line-185"></span><sp=
+an class=3D"anchor" id=3D"line-186"></span><span class=3D"anchor" id=3D"=
+line-187"></span><span class=3D"anchor" id=3D"line-188"></span><span cla=
+ss=3D"anchor" id=3D"line-189"></span><span class=3D"anchor" id=3D"line-1=
+90"></span><span class=3D"anchor" id=3D"line-191"></span><span class=3D"=
+anchor" id=3D"line-192"></span><span class=3D"anchor" id=3D"line-193"></=
+span><span class=3D"anchor" id=3D"line-194"></span><span class=3D"anchor=
+" id=3D"line-195"></span><span class=3D"anchor" id=3D"line-196"></span><=
+span class=3D"anchor" id=3D"line-197"></span><span class=3D"anchor" id=3D=
+"line-198"></span><span class=3D"anchor" id=3D"line-199"></span><span cl=
+ass=3D"anchor" id=3D"line-200"></span><span class=3D"anchor" id=3D"line-=
+201"></span><span class=3D"anchor" id=3D"line-202"></span><pre><span cla=
+ss=3D"anchor" id=3D"line-1-6"></span>distutils:$ python setup.py sdist
+<span class=3D"anchor" id=3D"line-2-5"></span>running sdist
+<span class=3D"anchor" id=3D"line-3-4"></span>reading manifest file 'MAN=
+IFEST'
+<span class=3D"anchor" id=3D"line-4-4"></span>creating appname-100
+<span class=3D"anchor" id=3D"line-5-4"></span>creating appname-100/packa=
+ge
+<span class=3D"anchor" id=3D"line-6-4"></span>creating appname-100/packa=
+ge/things
+<span class=3D"anchor" id=3D"line-7-4"></span>making hard links in appna=
+me-100...
+<span class=3D"anchor" id=3D"line-8-4"></span>hard linking README -&gt; =
+appname-100
+<span class=3D"anchor" id=3D"line-9-4"></span>hard linking runner -&gt; =
+appname-100
+<span class=3D"anchor" id=3D"line-10-3"></span>hard linking setup.py -&g=
+t; appname-100
+<span class=3D"anchor" id=3D"line-11-3"></span>hard linking package/__in=
+it__.py -&gt; appname-100/package
+<span class=3D"anchor" id=3D"line-12-3"></span>hard linking package/modu=
+le.py -&gt; appname-100/package
+<span class=3D"anchor" id=3D"line-13-2"></span>hard linking package/thin=
+gs/cross.png -&gt; appname-100/package/things
+<span class=3D"anchor" id=3D"line-14-2"></span>hard linking package/thin=
+gs/fplogo.png -&gt; appname-100/package/things
+<span class=3D"anchor" id=3D"line-15-2"></span>hard linking package/thin=
+gs/tick.png -&gt; appname-100/package/things
+<span class=3D"anchor" id=3D"line-16-2"></span>tar -cf dist/appname-100.=
+tar appname-100
+<span class=3D"anchor" id=3D"line-17-2"></span>gzip -f9 dist/appname-100=
+.tar
+<span class=3D"anchor" id=3D"line-18-2"></span>removing 'appname-100' (a=
+nd everything under it)</pre><span class=3D"anchor" id=3D"line-203"></sp=
+an><span class=3D"anchor" id=3D"line-204"></span><p class=3D"line867">
+<h2 id=3D"Testing_the_tarball">Testing the tarball</h2>
+<span class=3D"anchor" id=3D"line-205"></span><p class=3D"line874">I per=
+form these steps: <span class=3D"anchor" id=3D"line-206"></span><span cl=
+ass=3D"anchor" id=3D"line-207"></span><span class=3D"anchor" id=3D"line-=
+208"></span><span class=3D"anchor" id=3D"line-209"></span><span class=3D=
+"anchor" id=3D"line-210"></span><span class=3D"anchor" id=3D"line-211"><=
+/span><span class=3D"anchor" id=3D"line-212"></span><span class=3D"ancho=
+r" id=3D"line-213"></span><span class=3D"anchor" id=3D"line-214"></span>=
+<span class=3D"anchor" id=3D"line-215"></span><span class=3D"anchor" id=3D=
+"line-216"></span><span class=3D"anchor" id=3D"line-217"></span><span cl=
+ass=3D"anchor" id=3D"line-218"></span><span class=3D"anchor" id=3D"line-=
+219"></span><pre><span class=3D"anchor" id=3D"line-1-7"></span>cd dist
+<span class=3D"anchor" id=3D"line-2-6"></span>tar xzf appname-100.tar.gz=
+ =
+
+<span class=3D"anchor" id=3D"line-3-5"></span>cd appname-100
+<span class=3D"anchor" id=3D"line-4-5"></span>sudo python setup.py insta=
+ll
+<span class=3D"anchor" id=3D"line-5-5"></span>password:######
+<span class=3D"anchor" id=3D"line-6-5"></span>running install
+<span class=3D"anchor" id=3D"line-7-5"></span>running build
+<span class=3D"anchor" id=3D"line-8-5"></span>running build_py
+<span class=3D"anchor" id=3D"line-9-5"></span>running build_scripts
+<span class=3D"anchor" id=3D"line-10-4"></span>running install_lib
+<span class=3D"anchor" id=3D"line-11-4"></span>running install_scripts
+<span class=3D"anchor" id=3D"line-12-4"></span>changing mode of /usr/bin=
+/runner to 755</pre><span class=3D"anchor" id=3D"line-220"></span><p cla=
+ss=3D"line874">Then I cd over to /usr/lib/python2.4/site-packages and ha=
+ve a look for a folder named 'package'. <span class=3D"anchor" id=3D"lin=
+e-221"></span>I also try to run 'runner' and see what ensues. <span clas=
+s=3D"anchor" id=3D"line-222"></span><span class=3D"anchor" id=3D"line-22=
+3"></span><p class=3D"line874">It should look (something) like this: <sp=
+an class=3D"anchor" id=3D"line-224"></span><span class=3D"anchor" id=3D"=
+line-225"></span><span class=3D"anchor" id=3D"line-226"></span><span cla=
+ss=3D"anchor" id=3D"line-227"></span><span class=3D"anchor" id=3D"line-2=
+28"></span><span class=3D"anchor" id=3D"line-229"></span><span class=3D"=
+anchor" id=3D"line-230"></span><pre><span class=3D"anchor" id=3D"line-1-=
+8"></span>distutils:$ runner
+<span class=3D"anchor" id=3D"line-2-7"></span>module is running
+<span class=3D"anchor" id=3D"line-3-6"></span>/usr/lib/python2.4/site-pa=
+ckages/package
+<span class=3D"anchor" id=3D"line-4-6"></span>My various data files and =
+so on are:
+<span class=3D"anchor" id=3D"line-5-6"></span>['cross.png', 'fplogo.png'=
+, 'tick.png']</pre><span class=3D"anchor" id=3D"line-231"></span><span c=
+lass=3D"anchor" id=3D"line-232"></span><p class=3D"line867">
+<h2 id=3D"Registering_with_the_Cheese_Shop_.28PyPI.29">Registering with =
+the Cheese Shop (PyPI)</h2>
+<span class=3D"anchor" id=3D"line-233"></span><p class=3D"line874">The C=
+heese Shop is a repository of Python apps. You can add your app to it qu=
+ite easily, I was surprised how quickly this worked. <span class=3D"anch=
+or" id=3D"line-234"></span>( Requires Python 2.3 or later ) <span class=3D=
+"anchor" id=3D"line-235"></span><span class=3D"anchor" id=3D"line-236"><=
+/span><p class=3D"line874">Make sure you have the right meta-data in you=
+r setup.py file. <span class=3D"anchor" id=3D"line-237"></span>Please co=
+nsult the Python Docs for this info. Here is a sample of what you should=
+ include: <span class=3D"anchor" id=3D"line-238"></span><span class=3D"a=
+nchor" id=3D"line-239"></span><span class=3D"anchor" id=3D"line-240"></s=
+pan><span class=3D"anchor" id=3D"line-241"></span><span class=3D"anchor"=
+ id=3D"line-242"></span><span class=3D"anchor" id=3D"line-243"></span><s=
+pan class=3D"anchor" id=3D"line-244"></span><span class=3D"anchor" id=3D=
+"line-245"></span><span class=3D"anchor" id=3D"line-246"></span><span cl=
+ass=3D"anchor" id=3D"line-247"></span><span class=3D"anchor" id=3D"line-=
+248"></span><span class=3D"anchor" id=3D"line-249"></span><span class=3D=
+"anchor" id=3D"line-250"></span><pre><span class=3D"anchor" id=3D"line-1=
+-9"></span>    classifiers=3D[
+<span class=3D"anchor" id=3D"line-2-8"></span>      'Development Status =
+:: 4 - Beta',
+<span class=3D"anchor" id=3D"line-3-7"></span>      'Environment :: X11 =
+Applications :: GTK',
+<span class=3D"anchor" id=3D"line-4-7"></span>      'Intended Audience :=
+: End Users/Desktop',
+<span class=3D"anchor" id=3D"line-5-7"></span>      'Intended Audience :=
+: Developers',
+<span class=3D"anchor" id=3D"line-6-6"></span>      'License :: OSI Appr=
+oved :: GNU General Public License (GPL)',
+<span class=3D"anchor" id=3D"line-7-6"></span>      'Operating System ::=
+ POSIX :: Linux',
+<span class=3D"anchor" id=3D"line-8-6"></span>      'Programming Languag=
+e :: Python',
+<span class=3D"anchor" id=3D"line-9-6"></span>      'Topic :: Desktop En=
+vironment',
+<span class=3D"anchor" id=3D"line-10-5"></span>      'Topic :: Text Proc=
+essing :: Fonts'
+<span class=3D"anchor" id=3D"line-11-5"></span>      ]</pre><span class=3D=
+"anchor" id=3D"line-251"></span><p class=3D"line874">Then you type: <spa=
+n class=3D"anchor" id=3D"line-252"></span><span class=3D"anchor" id=3D"l=
+ine-253"></span><span class=3D"anchor" id=3D"line-254"></span><span clas=
+s=3D"anchor" id=3D"line-255"></span><span class=3D"anchor" id=3D"line-25=
+6"></span><span class=3D"anchor" id=3D"line-257"></span><span class=3D"a=
+nchor" id=3D"line-258"></span><span class=3D"anchor" id=3D"line-259"></s=
+pan><span class=3D"anchor" id=3D"line-260"></span><span class=3D"anchor"=
+ id=3D"line-261"></span><span class=3D"anchor" id=3D"line-262"></span><s=
+pan class=3D"anchor" id=3D"line-263"></span><span class=3D"anchor" id=3D=
+"line-264"></span><span class=3D"anchor" id=3D"line-265"></span><span cl=
+ass=3D"anchor" id=3D"line-266"></span><span class=3D"anchor" id=3D"line-=
+267"></span><pre><span class=3D"anchor" id=3D"line-1-10"></span>$ python=
+ setup.py register
+<span class=3D"anchor" id=3D"line-2-9"></span>running register
+<span class=3D"anchor" id=3D"line-3-8"></span>We need to know who you ar=
+e, so please choose either:
+<span class=3D"anchor" id=3D"line-4-8"></span> 1. use your existing logi=
+n,
+<span class=3D"anchor" id=3D"line-5-8"></span> 2. register as a new user=
+,
+<span class=3D"anchor" id=3D"line-6-7"></span> 3. have the server genera=
+te a new password for you (and email it to you), or
+<span class=3D"anchor" id=3D"line-7-7"></span> 4. quit
+<span class=3D"anchor" id=3D"line-8-7"></span>Your selection [default 1]=
+:  2
+<span class=3D"anchor" id=3D"line-9-7"></span>Username: putyournamehere
+<span class=3D"anchor" id=3D"line-10-6"></span>Password:
+<span class=3D"anchor" id=3D"line-11-6"></span> Confirm:
+<span class=3D"anchor" id=3D"line-12-5"></span>   EMail: youremailhere
+<span class=3D"anchor" id=3D"line-13-3"></span>You will receive an email=
+ shortly.
+<span class=3D"anchor" id=3D"line-14-3"></span>Follow the instructions i=
+n it to complete registration.</pre><span class=3D"anchor" id=3D"line-26=
+8"></span><ul><li>If you have an account, obv, choose 1. <span class=3D"=
+anchor" id=3D"line-269"></span></li><li>If you chose 2, you will get an =
+email; read and do. <span class=3D"anchor" id=3D"line-270"></span></li><=
+li>I then re-did the register command, and logged-in via option 1. Not s=
+ure if this was needed. <span class=3D"anchor" id=3D"line-271"></span><s=
+pan class=3D"anchor" id=3D"line-272"></span></li></ul><p class=3D"line87=
+4">After all that, you can quickly find you app in the Cheese Shop via y=
+our browser, or sign up for their RSS feed. <span class=3D"anchor" id=3D=
+"line-273"></span><span class=3D"anchor" id=3D"line-274"></span><p class=
+=3D"line867">
+<h2 id=3D"Submittting_to_the_Cheese_Shop_.28PyPI.29">Submittting to the =
+Cheese Shop (PyPI)</h2>
+<span class=3D"anchor" id=3D"line-275"></span><span class=3D"anchor" id=3D=
+"line-276"></span><p class=3D"line874">Requires Python 2.5 or later: <sp=
+an class=3D"anchor" id=3D"line-277"></span><span class=3D"anchor" id=3D"=
+line-278"></span><p class=3D"line867"><span class=3D"anchor" id=3D"line-=
+279"></span><span class=3D"anchor" id=3D"line-280"></span><pre><span cla=
+ss=3D"anchor" id=3D"line-1-11"></span>distutils:$ python setup.py sdist =
+upload</pre><span class=3D"anchor" id=3D"line-281"></span><span class=3D=
+"anchor" id=3D"line-282"></span><p class=3D"line874">TODO: need a sample=
+ output here <span class=3D"anchor" id=3D"line-283"></span><span class=3D=
+"anchor" id=3D"line-284"></span><p class=3D"line874">To GPG-sign the upl=
+oad, use: <span class=3D"anchor" id=3D"line-285"></span><span class=3D"a=
+nchor" id=3D"line-286"></span><p class=3D"line867"><span class=3D"anchor=
+" id=3D"line-287"></span><span class=3D"anchor" id=3D"line-288"></span><=
+pre><span class=3D"anchor" id=3D"line-1-12"></span>distutils:$ python se=
+tup.py sdist upload --sign</pre><span class=3D"anchor" id=3D"line-289"><=
+/span><span class=3D"anchor" id=3D"line-290"></span><p class=3D"line874"=
+>TODO: need a sample output here <span class=3D"anchor" id=3D"line-291">=
+</span><span class=3D"anchor" id=3D"line-292"></span><p class=3D"line867=
+">
+<h2 id=3D"Other_Files">Other Files</h2>
+<span class=3D"anchor" id=3D"line-293"></span><p class=3D"line867"><stro=
+ng>WARNING</strong> <span class=3D"anchor" id=3D"line-294"></span>I have=
+ found a problem with this approach that causes all the data directories=
+ to be installed to the /usr/ directory. I have no idea why and not much=
+ help seems forthcoming. I will update when I get a clue. <span class=3D=
+"anchor" id=3D"line-295"></span><strong>UPDATE TO WARNING</strong> <span=
+ class=3D"anchor" id=3D"line-296"></span>Okay, I think I have fixed the =
+problem, new code has been added to the example below. <span class=3D"an=
+chor" id=3D"line-297"></span><span class=3D"anchor" id=3D"line-298"></sp=
+an><p class=3D"line874">Jan 4 2008. <span class=3D"anchor" id=3D"line-29=
+9"></span>When you need <em>other</em> stuff in your tarball (.py files =
+included) and distutils is causing your brain to segfault, this may help=
+ you. Robin Dunn (he of wxPython fame) pointed me at his source code and=
+ I spent a little time hacking it.  <span class=3D"anchor" id=3D"line-30=
+0"></span><span class=3D"anchor" id=3D"line-301"></span><p class=3D"line=
+874">I'll use Fonty Python as the example - I'll show you the tree and e=
+xplain it a little, then I'll follow that with the code that does the jo=
+b. <span class=3D"anchor" id=3D"line-302"></span><span class=3D"anchor" =
+id=3D"line-303"></span><p class=3D"line867">
+<h3 id=3D"The_tree">The tree</h3>
+<span class=3D"anchor" id=3D"line-304"></span><p class=3D"line862">Here'=
+s the Fonty Python tree (as it stands, leaning wildly, right now). 'trun=
+k' is the <strong>distribution root</strong>. I have trimmed it somewhat=
+. <span class=3D"anchor" id=3D"line-305"></span><span class=3D"anchor" i=
+d=3D"line-306"></span><span class=3D"anchor" id=3D"line-307"></span><spa=
+n class=3D"anchor" id=3D"line-308"></span><span class=3D"anchor" id=3D"l=
+ine-309"></span><span class=3D"anchor" id=3D"line-310"></span><span clas=
+s=3D"anchor" id=3D"line-311"></span><span class=3D"anchor" id=3D"line-31=
+2"></span><span class=3D"anchor" id=3D"line-313"></span><span class=3D"a=
+nchor" id=3D"line-314"></span><span class=3D"anchor" id=3D"line-315"></s=
+pan><span class=3D"anchor" id=3D"line-316"></span><span class=3D"anchor"=
+ id=3D"line-317"></span><span class=3D"anchor" id=3D"line-318"></span><s=
+pan class=3D"anchor" id=3D"line-319"></span><span class=3D"anchor" id=3D=
+"line-320"></span><span class=3D"anchor" id=3D"line-321"></span><span cl=
+ass=3D"anchor" id=3D"line-322"></span><span class=3D"anchor" id=3D"line-=
+323"></span><span class=3D"anchor" id=3D"line-324"></span><span class=3D=
+"anchor" id=3D"line-325"></span><span class=3D"anchor" id=3D"line-326"><=
+/span><span class=3D"anchor" id=3D"line-327"></span><span class=3D"ancho=
+r" id=3D"line-328"></span><span class=3D"anchor" id=3D"line-329"></span>=
+<span class=3D"anchor" id=3D"line-330"></span><span class=3D"anchor" id=3D=
+"line-331"></span><span class=3D"anchor" id=3D"line-332"></span><span cl=
+ass=3D"anchor" id=3D"line-333"></span><span class=3D"anchor" id=3D"line-=
+334"></span><span class=3D"anchor" id=3D"line-335"></span><span class=3D=
+"anchor" id=3D"line-336"></span><span class=3D"anchor" id=3D"line-337"><=
+/span><span class=3D"anchor" id=3D"line-338"></span><span class=3D"ancho=
+r" id=3D"line-339"></span><span class=3D"anchor" id=3D"line-340"></span>=
+<span class=3D"anchor" id=3D"line-341"></span><span class=3D"anchor" id=3D=
+"line-342"></span><span class=3D"anchor" id=3D"line-343"></span><span cl=
+ass=3D"anchor" id=3D"line-344"></span><span class=3D"anchor" id=3D"line-=
+345"></span><span class=3D"anchor" id=3D"line-346"></span><span class=3D=
+"anchor" id=3D"line-347"></span><pre><span class=3D"anchor" id=3D"line-1=
+-13"></span>trunk:$ tree
+<span class=3D"anchor" id=3D"line-2-10"></span>|-- COPYING
+<span class=3D"anchor" id=3D"line-3-9"></span>|-- README
+<span class=3D"anchor" id=3D"line-4-9"></span>|-- fontypython
+<span class=3D"anchor" id=3D"line-5-9"></span>|-- fontypythonmodules
+<span class=3D"anchor" id=3D"line-6-8"></span>|   |-- __init__.py
+<span class=3D"anchor" id=3D"line-7-8"></span>|   |-- cli.py
+<span class=3D"anchor" id=3D"line-8-8"></span>|   |-- help
+<span class=3D"anchor" id=3D"line-9-8"></span>|   |   |-- README
+<span class=3D"anchor" id=3D"line-10-7"></span>|   |   |-- common
+<span class=3D"anchor" id=3D"line-11-7"></span>|   |   |   |-- README
+<span class=3D"anchor" id=3D"line-12-6"></span>|   |   |   |-- fp_tickin=
+g.png
+<span class=3D"anchor" id=3D"line-13-4"></span>|   |   |   `-- logo_dec_=
+2007.png
+<span class=3D"anchor" id=3D"line-14-4"></span>|   |   |-- en
+<span class=3D"anchor" id=3D"line-15-3"></span>|   |   |   |-- README
+<span class=3D"anchor" id=3D"line-16-3"></span>|   |   |   |-- fp_1to8.p=
+ng
+<span class=3D"anchor" id=3D"line-17-3"></span>|   |   |   `-- help.html=
+
+<span class=3D"anchor" id=3D"line-18-3"></span>|   |   `-- fr
+<span class=3D"anchor" id=3D"line-19-2"></span>|   |       |-- README
+<span class=3D"anchor" id=3D"line-20-2"></span>|   |       |-- fp_1to8.p=
+ng
+<span class=3D"anchor" id=3D"line-21-2"></span>|   |       `-- help.html=
+
+<span class=3D"anchor" id=3D"line-22-2"></span>|   |-- i18n.py
+<span class=3D"anchor" id=3D"line-23-2"></span>|   |-- locale
+<span class=3D"anchor" id=3D"line-24-1"></span>|   |   |-- fr
+<span class=3D"anchor" id=3D"line-25-1"></span>|   |   |   `-- LC_MESSAG=
+ES
+<span class=3D"anchor" id=3D"line-26-1"></span>|   |   |       `-- all.m=
+o
+<span class=3D"anchor" id=3D"line-27-1"></span>|   |   `-- it
+<span class=3D"anchor" id=3D"line-28-1"></span>|   |       `-- LC_MESSAG=
+ES
+<span class=3D"anchor" id=3D"line-29-1"></span>|   |           `-- all.m=
+o
+<span class=3D"anchor" id=3D"line-30-1"></span>|   |-- pofiles
+<span class=3D"anchor" id=3D"line-31"></span>|   |   |-- README
+<span class=3D"anchor" id=3D"line-32"></span>|   |   |-- fp_all.po
+<span class=3D"anchor" id=3D"line-33"></span>|   |   |-- fr_all.merged.p=
+o
+<span class=3D"anchor" id=3D"line-34"></span>|   |   |-- it_all.merged.p=
+o
+<span class=3D"anchor" id=3D"line-35"></span>|   |   `-- who_did_what
+<span class=3D"anchor" id=3D"line-36"></span>|   |-- things
+<span class=3D"anchor" id=3D"line-37"></span>|   |   |-- README
+<span class=3D"anchor" id=3D"line-38"></span>|   |   `-- tick.png
+<span class=3D"anchor" id=3D"line-39"></span>|   `-- wxgui.py
+<span class=3D"anchor" id=3D"line-40"></span>|-- fp
+<span class=3D"anchor" id=3D"line-41"></span>`-- setup.py</pre><span cla=
+ss=3D"anchor" id=3D"line-348"></span><p class=3D"line862">So, there are =
+.py files, text files, locale files, images and html files. I want them =
+<strong>all</strong> in the tarball in the right order. <span class=3D"a=
+nchor" id=3D"line-349"></span><span class=3D"anchor" id=3D"line-350"></s=
+pan><p class=3D"line867">
+<h3 id=3D"The_MANIFEST.in_file">The MANIFEST.in file</h3>
+<span class=3D"anchor" id=3D"line-351"></span><p class=3D"line867"><span=
+ class=3D"anchor" id=3D"line-352"></span><span class=3D"anchor" id=3D"li=
+ne-353"></span><span class=3D"anchor" id=3D"line-354"></span><span class=
+=3D"anchor" id=3D"line-355"></span><span class=3D"anchor" id=3D"line-356=
+"></span><span class=3D"anchor" id=3D"line-357"></span><pre><span class=3D=
+"anchor" id=3D"line-1-14"></span>include fontypython fp README COPYING
+<span class=3D"anchor" id=3D"line-2-11"></span>recursive-include fontypy=
+thonmodules/pofiles *
+<span class=3D"anchor" id=3D"line-3-10"></span>recursive-include fontypy=
+thonmodules/things *
+<span class=3D"anchor" id=3D"line-4-10"></span>recursive-include fontypy=
+thonmodules/locale *
+<span class=3D"anchor" id=3D"line-5-10"></span>recursive-include fontypy=
+thonmodules/help *</pre><span class=3D"anchor" id=3D"line-358"></span><p=
+ class=3D"line874">I tell it to recurse all those subfolders. I include =
+'fp', 'fontypython', 'README' and 'COPYING' because they are in the root=
+ - perhaps there's a better way to do it, but this works. <span class=3D=
+"anchor" id=3D"line-359"></span><span class=3D"anchor" id=3D"line-360"><=
+/span><p class=3D"line867">
+<h3 id=3D"The_Magic_Code">The Magic Code</h3>
+<span class=3D"anchor" id=3D"line-361"></span><p class=3D"line862">The m=
+agic stuff is in the two functions called <strong>opj</strong> and <stro=
+ng>find_data_files</strong> that you put in your <strong>setup.py</stron=
+g> file. They work together to build a list of all the files in a given =
+path. This list is in the right shape for distutils to swallow. You pass=
+ it in via the data_files variable in the setup() call. <span class=3D"a=
+nchor" id=3D"line-362"></span><span class=3D"anchor" id=3D"line-363"></s=
+pan><p class=3D"line874">(Ignore all my fontypythonmodules dot stuff - t=
+hat's just to get strings from another module.) <span class=3D"anchor" i=
+d=3D"line-364"></span><span class=3D"anchor" id=3D"line-365"></span><p c=
+lass=3D"line862">After making these changes, a normal <strong>python set=
+up.py sdist</strong> works without oddball errors and the tarball has al=
+l the files you'd expect it to. <span class=3D"anchor" id=3D"line-366"><=
+/span><span class=3D"anchor" id=3D"line-367"></span><span class=3D"ancho=
+r" id=3D"line-368"></span><span class=3D"anchor" id=3D"line-369"></span>=
+<span class=3D"anchor" id=3D"line-370"></span><span class=3D"anchor" id=3D=
+"line-371"></span><span class=3D"anchor" id=3D"line-372"></span><span cl=
+ass=3D"anchor" id=3D"line-373"></span><span class=3D"anchor" id=3D"line-=
+374"></span><span class=3D"anchor" id=3D"line-375"></span><span class=3D=
+"anchor" id=3D"line-376"></span><span class=3D"anchor" id=3D"line-377"><=
+/span><span class=3D"anchor" id=3D"line-378"></span><span class=3D"ancho=
+r" id=3D"line-379"></span><span class=3D"anchor" id=3D"line-380"></span>=
+<span class=3D"anchor" id=3D"line-381"></span><span class=3D"anchor" id=3D=
+"line-382"></span><span class=3D"anchor" id=3D"line-383"></span><span cl=
+ass=3D"anchor" id=3D"line-384"></span><span class=3D"anchor" id=3D"line-=
+385"></span><span class=3D"anchor" id=3D"line-386"></span><span class=3D=
+"anchor" id=3D"line-387"></span><span class=3D"anchor" id=3D"line-388"><=
+/span><span class=3D"anchor" id=3D"line-389"></span><span class=3D"ancho=
+r" id=3D"line-390"></span><span class=3D"anchor" id=3D"line-391"></span>=
+<span class=3D"anchor" id=3D"line-392"></span><span class=3D"anchor" id=3D=
+"line-393"></span><span class=3D"anchor" id=3D"line-394"></span><span cl=
+ass=3D"anchor" id=3D"line-395"></span><span class=3D"anchor" id=3D"line-=
+396"></span><span class=3D"anchor" id=3D"line-397"></span><span class=3D=
+"anchor" id=3D"line-398"></span><span class=3D"anchor" id=3D"line-399"><=
+/span><span class=3D"anchor" id=3D"line-400"></span><span class=3D"ancho=
+r" id=3D"line-401"></span><span class=3D"anchor" id=3D"line-402"></span>=
+<span class=3D"anchor" id=3D"line-403"></span><span class=3D"anchor" id=3D=
+"line-404"></span><span class=3D"anchor" id=3D"line-405"></span><span cl=
+ass=3D"anchor" id=3D"line-406"></span><span class=3D"anchor" id=3D"line-=
+407"></span><span class=3D"anchor" id=3D"line-408"></span><span class=3D=
+"anchor" id=3D"line-409"></span><span class=3D"anchor" id=3D"line-410"><=
+/span><span class=3D"anchor" id=3D"line-411"></span><span class=3D"ancho=
+r" id=3D"line-412"></span><span class=3D"anchor" id=3D"line-413"></span>=
+<span class=3D"anchor" id=3D"line-414"></span><span class=3D"anchor" id=3D=
+"line-415"></span><span class=3D"anchor" id=3D"line-416"></span><span cl=
+ass=3D"anchor" id=3D"line-417"></span><span class=3D"anchor" id=3D"line-=
+418"></span><span class=3D"anchor" id=3D"line-419"></span><span class=3D=
+"anchor" id=3D"line-420"></span><span class=3D"anchor" id=3D"line-421"><=
+/span><span class=3D"anchor" id=3D"line-422"></span><span class=3D"ancho=
+r" id=3D"line-423"></span><span class=3D"anchor" id=3D"line-424"></span>=
+<span class=3D"anchor" id=3D"line-425"></span><span class=3D"anchor" id=3D=
+"line-426"></span><span class=3D"anchor" id=3D"line-427"></span><span cl=
+ass=3D"anchor" id=3D"line-428"></span><span class=3D"anchor" id=3D"line-=
+429"></span><span class=3D"anchor" id=3D"line-430"></span><span class=3D=
+"anchor" id=3D"line-431"></span><span class=3D"anchor" id=3D"line-432"><=
+/span><span class=3D"anchor" id=3D"line-433"></span><span class=3D"ancho=
+r" id=3D"line-434"></span><span class=3D"anchor" id=3D"line-435"></span>=
+<span class=3D"anchor" id=3D"line-436"></span><span class=3D"anchor" id=3D=
+"line-437"></span><span class=3D"anchor" id=3D"line-438"></span><span cl=
+ass=3D"anchor" id=3D"line-439"></span><span class=3D"anchor" id=3D"line-=
+440"></span><span class=3D"anchor" id=3D"line-441"></span><span class=3D=
+"anchor" id=3D"line-442"></span><span class=3D"anchor" id=3D"line-443"><=
+/span><span class=3D"anchor" id=3D"line-444"></span><span class=3D"ancho=
+r" id=3D"line-445"></span><span class=3D"anchor" id=3D"line-446"></span>=
+<span class=3D"anchor" id=3D"line-447"></span><span class=3D"anchor" id=3D=
+"line-448"></span><span class=3D"anchor" id=3D"line-449"></span><span cl=
+ass=3D"anchor" id=3D"line-450"></span><span class=3D"anchor" id=3D"line-=
+451"></span><span class=3D"anchor" id=3D"line-452"></span><span class=3D=
+"anchor" id=3D"line-453"></span><span class=3D"anchor" id=3D"line-454"><=
+/span><span class=3D"anchor" id=3D"line-455"></span><pre><span class=3D"=
+anchor" id=3D"line-1-15"></span>import os, sys, glob, fnmatch
+<span class=3D"anchor" id=3D"line-2-12"></span>
+<span class=3D"anchor" id=3D"line-3-11"></span>## Added 10 Jan 2008
+<span class=3D"anchor" id=3D"line-4-11"></span>from distutils.core impor=
+t setup, Extension
+<span class=3D"anchor" id=3D"line-5-11"></span>import distutils.command.=
+install_data
+<span class=3D"anchor" id=3D"line-6-9"></span>
+<span class=3D"anchor" id=3D"line-7-9"></span>## Code borrowed from wxPy=
+thon's setup and config files
+<span class=3D"anchor" id=3D"line-8-9"></span>## Thanks to Robin Dunn fo=
+r the suggestion.
+<span class=3D"anchor" id=3D"line-9-9"></span>## I am not 100% sure what=
+'s going on, but it works!
+<span class=3D"anchor" id=3D"line-10-8"></span>def opj(*args):
+<span class=3D"anchor" id=3D"line-11-8"></span>    path =3D os.path.join=
+(*args)
+<span class=3D"anchor" id=3D"line-12-7"></span>    return os.path.normpa=
+th(path)
+<span class=3D"anchor" id=3D"line-13-5"></span>
+<span class=3D"anchor" id=3D"line-14-5"></span>## Added 10 Jan 2008
+<span class=3D"anchor" id=3D"line-15-4"></span># Specializations of some=
+ distutils command classes
+<span class=3D"anchor" id=3D"line-16-4"></span>class wx_smart_install_da=
+ta(distutils.command.install_data.install_data):
+<span class=3D"anchor" id=3D"line-17-4"></span>    """need to change sel=
+f.install_dir to the actual library dir"""
+<span class=3D"anchor" id=3D"line-18-4"></span>    def run(self):
+<span class=3D"anchor" id=3D"line-19-3"></span>        install_cmd =3D s=
+elf.get_finalized_command('install')
+<span class=3D"anchor" id=3D"line-20-3"></span>        self.install_dir =
+=3D getattr(install_cmd, 'install_lib')
+<span class=3D"anchor" id=3D"line-21-3"></span>        return distutils.=
+command.install_data.install_data.run(self)
+<span class=3D"anchor" id=3D"line-22-3"></span>
+<span class=3D"anchor" id=3D"line-23-3"></span>def find_data_files(srcdi=
+r, *wildcards, **kw):
+<span class=3D"anchor" id=3D"line-24-2"></span>    # get a list of all f=
+iles under the srcdir matching wildcards,
+<span class=3D"anchor" id=3D"line-25-2"></span>    # returned in a forma=
+t to be used for install_data
+<span class=3D"anchor" id=3D"line-26-2"></span>    def walk_helper(arg, =
+dirname, files):
+<span class=3D"anchor" id=3D"line-27-2"></span>        if '.svn' in dirn=
+ame:
+<span class=3D"anchor" id=3D"line-28-2"></span>            return
+<span class=3D"anchor" id=3D"line-29-2"></span>        names =3D []
+<span class=3D"anchor" id=3D"line-30-2"></span>        lst, wildcards =3D=
+ arg
+<span class=3D"anchor" id=3D"line-31-1"></span>        for wc in wildcar=
+ds:
+<span class=3D"anchor" id=3D"line-32-1"></span>            wc_name =3D o=
+pj(dirname, wc)
+<span class=3D"anchor" id=3D"line-33-1"></span>            for f in file=
+s:
+<span class=3D"anchor" id=3D"line-34-1"></span>                filename =
+=3D opj(dirname, f)
+<span class=3D"anchor" id=3D"line-35-1"></span>
+<span class=3D"anchor" id=3D"line-36-1"></span>                if fnmatc=
+h.fnmatch(filename, wc_name) and not os.path.isdir(filename):
+<span class=3D"anchor" id=3D"line-37-1"></span>                    names=
+.append(filename)
+<span class=3D"anchor" id=3D"line-38-1"></span>        if names:
+<span class=3D"anchor" id=3D"line-39-1"></span>            lst.append( (=
+dirname, names ) )
+<span class=3D"anchor" id=3D"line-40-1"></span>
+<span class=3D"anchor" id=3D"line-41-1"></span>    file_list =3D []
+<span class=3D"anchor" id=3D"line-42"></span>    recursive =3D kw.get('r=
+ecursive', True)
+<span class=3D"anchor" id=3D"line-43"></span>    if recursive:
+<span class=3D"anchor" id=3D"line-44"></span>        os.path.walk(srcdir=
+, walk_helper, (file_list, wildcards))
+<span class=3D"anchor" id=3D"line-45"></span>    else:
+<span class=3D"anchor" id=3D"line-46"></span>        walk_helper((file_l=
+ist, wildcards),
+<span class=3D"anchor" id=3D"line-47"></span>                    srcdir,=
+
+<span class=3D"anchor" id=3D"line-48"></span>                    [os.pat=
+h.basename(f) for f in glob.glob(opj(srcdir, '*'))])
+<span class=3D"anchor" id=3D"line-49"></span>    return file_list
+<span class=3D"anchor" id=3D"line-50"></span>
+<span class=3D"anchor" id=3D"line-51"></span>## This is a list of files =
+to install, and where:
+<span class=3D"anchor" id=3D"line-52"></span>## Make sure the MANIFEST.i=
+n file points to all the right =
+
+<span class=3D"anchor" id=3D"line-53"></span>## directories too.
+<span class=3D"anchor" id=3D"line-54"></span>files =3D find_data_files('=
+fontypythonmodules/', '*.*')
+<span class=3D"anchor" id=3D"line-55"></span>
+<span class=3D"anchor" id=3D"line-56"></span>from distutils.core import =
+setup
+<span class=3D"anchor" id=3D"line-57"></span>
+<span class=3D"anchor" id=3D"line-58"></span>setup(name =3D "fontypython=
+",
+<span class=3D"anchor" id=3D"line-59"></span>    version =3D fontypython=
+modules.fpversion.version,
+<span class=3D"anchor" id=3D"line-60"></span>    description =3D fontypy=
+thonmodules.strings.description,
+<span class=3D"anchor" id=3D"line-61"></span>    author =3D "Donn.C.Ingl=
+e",
+<span class=3D"anchor" id=3D"line-62"></span>    author_email =3D fontyp=
+ythonmodules.strings.contact,
+<span class=3D"anchor" id=3D"line-63"></span>    license =3D "GNU GPLv3"=
+,
+<span class=3D"anchor" id=3D"line-64"></span>    url =3D "https://savann=
+ah.nongnu.org/projects/fontypython/",
+<span class=3D"anchor" id=3D"line-65"></span>    packages =3D ['fontypyt=
+honmodules'],
+<span class=3D"anchor" id=3D"line-66"></span>    =
+
+<span class=3D"anchor" id=3D"line-67"></span>    data_files =3D files,
+<span class=3D"anchor" id=3D"line-68"></span>    =
+
+<span class=3D"anchor" id=3D"line-69"></span>    ## Borrowed from wxPyth=
+on too:
+<span class=3D"anchor" id=3D"line-70"></span>    ## Causes the data_file=
+s to be installed into the modules directory.
+<span class=3D"anchor" id=3D"line-71"></span>    ## Override some of the=
+ default distutils command classes with my own.
+<span class=3D"anchor" id=3D"line-72"></span>    cmdclass =3D { 'install=
+_data':    wx_smart_install_data },
+<span class=3D"anchor" id=3D"line-73"></span>    =
+
+<span class=3D"anchor" id=3D"line-74"></span>    #'fontypython' and 'fp'=
+ are in the root.
+<span class=3D"anchor" id=3D"line-75"></span>    scripts =3D ["fontypyth=
+on", "fp"],
+<span class=3D"anchor" id=3D"line-76"></span>    long_description =3D fo=
+ntypythonmodules.strings.long_description,
+<span class=3D"anchor" id=3D"line-77"></span>    classifiers=3D[
+<span class=3D"anchor" id=3D"line-78"></span>      'Development Status :=
+: 4 - Beta',
+<span class=3D"anchor" id=3D"line-79"></span>      'Environment :: X11 A=
+pplications :: GTK',
+<span class=3D"anchor" id=3D"line-80"></span>      'Intended Audience ::=
+ End Users/Desktop',
+<span class=3D"anchor" id=3D"line-81"></span>      'Intended Audience ::=
+ Developers',
+<span class=3D"anchor" id=3D"line-82"></span>      'License :: OSI Appro=
+ved :: GNU General Public License (GPL)',
+<span class=3D"anchor" id=3D"line-83"></span>      'Operating System :: =
+POSIX :: Linux',
+<span class=3D"anchor" id=3D"line-84"></span>      'Programming Language=
+ :: Python',
+<span class=3D"anchor" id=3D"line-85"></span>      'Topic :: Desktop Env=
+ironment',
+<span class=3D"anchor" id=3D"line-86"></span>      'Topic :: Text Proces=
+sing :: Fonts'
+<span class=3D"anchor" id=3D"line-87"></span>      ]
+<span class=3D"anchor" id=3D"line-88"></span>)</pre><span class=3D"ancho=
+r" id=3D"line-456"></span><span class=3D"anchor" id=3D"line-457"></span>=
+<p class=3D"line867">
+<h2 id=3D"NEW_VERSION_OF_def_walk_helper.28.29">NEW VERSION OF def walk_=
+helper()</h2>
+<span class=3D"anchor" id=3D"line-458"></span><p class=3D"line862">Given=
+ that you may want to exclude files that contain <em>more</em> than just=
+ .pyc in them, we need something handy. Replace the def in the code abov=
+e with this code. <span class=3D"anchor" id=3D"line-459"></span><span cl=
+ass=3D"anchor" id=3D"line-460"></span><span class=3D"anchor" id=3D"line-=
+461"></span><span class=3D"anchor" id=3D"line-462"></span><span class=3D=
+"anchor" id=3D"line-463"></span><span class=3D"anchor" id=3D"line-464"><=
+/span><span class=3D"anchor" id=3D"line-465"></span><span class=3D"ancho=
+r" id=3D"line-466"></span><span class=3D"anchor" id=3D"line-467"></span>=
+<span class=3D"anchor" id=3D"line-468"></span><span class=3D"anchor" id=3D=
+"line-469"></span><span class=3D"anchor" id=3D"line-470"></span><span cl=
+ass=3D"anchor" id=3D"line-471"></span><span class=3D"anchor" id=3D"line-=
+472"></span><span class=3D"anchor" id=3D"line-473"></span><span class=3D=
+"anchor" id=3D"line-474"></span><span class=3D"anchor" id=3D"line-475"><=
+/span><span class=3D"anchor" id=3D"line-476"></span><span class=3D"ancho=
+r" id=3D"line-477"></span><span class=3D"anchor" id=3D"line-478"></span>=
+<span class=3D"anchor" id=3D"line-479"></span><span class=3D"anchor" id=3D=
+"line-480"></span><pre><span class=3D"anchor" id=3D"line-1-16"></span>##=
+ A list of partials within a filename that would disqualify it
+<span class=3D"anchor" id=3D"line-2-13"></span>## from appearing in the =
+tarball.
+<span class=3D"anchor" id=3D"line-3-12"></span>badnames=3D[".pyc","~","n=
+o_"]
+<span class=3D"anchor" id=3D"line-4-12"></span>def walk_helper(arg, dirn=
+ame, files):
+<span class=3D"anchor" id=3D"line-5-12"></span>    if 'CVS' in dirname: =
+## ADD/CHANGE as you need here too.
+<span class=3D"anchor" id=3D"line-6-10"></span>        return
+<span class=3D"anchor" id=3D"line-7-10"></span>    names =3D []
+<span class=3D"anchor" id=3D"line-8-10"></span>    lst, wildcards =3D ar=
+g
+<span class=3D"anchor" id=3D"line-9-10"></span>    for wc in wildcards:
+<span class=3D"anchor" id=3D"line-10-9"></span>        wc_name =3D opj(d=
+irname, wc)
+<span class=3D"anchor" id=3D"line-11-9"></span>        for f in files:
+<span class=3D"anchor" id=3D"line-12-8"></span>            filename =3D =
+opj(dirname, f)
+<span class=3D"anchor" id=3D"line-13-6"></span>            #if ".pyc" no=
+t in filename:
+<span class=3D"anchor" id=3D"line-14-6"></span>            ## This hairy=
+ looking line excludes the filename
+<span class=3D"anchor" id=3D"line-15-5"></span>            ## if any par=
+t of one of  badnames is in it:
+<span class=3D"anchor" id=3D"line-16-5"></span>            if not any(ba=
+d in filename for bad in badnames):
+<span class=3D"anchor" id=3D"line-17-5"></span>                if fnmatc=
+h.fnmatch(filename, wc_name) and not os.path.isdir(filename):
+<span class=3D"anchor" id=3D"line-18-5"></span>                    names=
+.append(filename)
+<span class=3D"anchor" id=3D"line-19-4"></span>    if names:
+<span class=3D"anchor" id=3D"line-20-4"></span>        lst.append( (dirn=
+ame, names ) )</pre><span class=3D"anchor" id=3D"line-481"></span><span =
+class=3D"anchor" id=3D"line-482"></span><p class=3D"line862">The secret =
+is the list <strong>badnames</strong> which you can fill as you please. =
+<span class=3D"anchor" id=3D"line-483"></span><span class=3D"anchor" id=3D=
+"line-484"></span><p class=3D"line867">
+<h2 id=3D"Fin">Fin</h2>
+<span class=3D"anchor" id=3D"line-485"></span><p class=3D"line874">I hop=
+e this helps someone. <span class=3D"anchor" id=3D"line-486"></span>Happ=
+y coding. <span class=3D"anchor" id=3D"line-487"></span><span class=3D"a=
+nchor" id=3D"line-488"></span><p class=3D"line867"><a class=3D"mailto" h=
+ref=3D"mailto:donn.ingle@gmail.com">DonnIngle</a> <span class=3D"anchor"=
+ id=3D"line-489"></span><hr /><p class=3D"line874"> <span class=3D"ancho=
+r" id=3D"line-490"></span><a href=3D"/moin/CategoryFaq">CategoryFaq</a> =
+<a href=3D"/moin/CategoryDistutilsCookbook">CategoryDistutilsCookbook</a=
+> <span class=3D"anchor" id=3D"line-491"></span><span class=3D"anchor" i=
+d=3D"bottom"></span></div><p id=3D"pageinfo" class=3D"info" lang=3D"es" =
+dir=3D"ltr">Distutils/Tutorial  (=C3=BAltima edici=C3=B3n 2010-04-30 00:=
+06:27 efectuada por <span title=3D"??? @ eth595.vic.adsl.internode.on.ne=
+t[150.101.214.82]">eth595</span>)</p>
+
+<div id=3D"pagebottom"></div>
+</div>
+
+
+<div id=3D"footer">
+<ul id=3D"credits">
+<li><a href=3D"http://moinmo.in/" title=3D"This site uses the MoinMoin W=
+iki software.">MoinMoin Powered</a></li><li><a href=3D"http://moinmo.in/=
+Python" title=3D"MoinMoin is written in Python.">Python Powered</a></li>=
+<li><a href=3D"http://moinmo.in/GPL" title=3D"MoinMoin is GPL licensed."=
+>GPL licensed</a></li><li><a href=3D"http://validator.w3.org/check?uri=3D=
+referer" title=3D"Click here to validate this page.">Valid HTML 4.01</a>=
+</li>
+</ul>
+
+
+</div>
+</body>
+</html>
+
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline; filename=common.js
+Content-Type: application/x-javascript; charset=utf-8; name=common.js
+Content-Location: http://wiki.python.org/moin/moin_static193/common/js/common.js
+Content-Transfer-Encoding: Base64
+
+Ly8KLy8gTW9pbk1vaW4gY29tbW9ubHkgdXNlZCBKYXZhU2NyaXB0IGZ1bmN0aW9u
+cwovLwoKLy8gV2Uga2VlcCBoZXJlIHRoZSBzdGF0ZSBvZiB0aGUgc2VhcmNoIGJv
+eApzZWFyY2hJc0Rpc2FibGVkID0gZmFsc2U7CgpmdW5jdGlvbiBzZWFyY2hDaGFu
+Z2UoZSkgewogICAgLy8gVXBkYXRlIHNlYXJjaCBidXR0b25zIHN0YXR1cyBhY2Nv
+cmRpbmcgdG8gc2VhcmNoIGJveCBjb250ZW50LgogICAgLy8gSWdub3JlIGVtcHR5
+IG9yIHdoaXRlc3BhY2Ugc2VhcmNoIHRlcm0uCiAgICB2YXIgdmFsdWUgPSBlLnZh
+bHVlLnJlcGxhY2UoL1xzKy8sICcnKTsKICAgIGlmICh2YWx1ZSA9PSAnJyB8fCBz
+ZWFyY2hJc0Rpc2FibGVkKSB7IAogICAgICAgIHNlYXJjaFNldERpc2FibGVkKHRy
+dWUpOwogICAgfSBlbHNlIHsKICAgICAgICBzZWFyY2hTZXREaXNhYmxlZChmYWxz
+ZSk7CiAgICB9Cn0KCmZ1bmN0aW9uIHNlYXJjaFNldERpc2FibGVkKGZsYWcpIHsK
+ICAgIC8vIEVuYWJsZSBvciBkaXNhYmxlIHNlYXJjaAogICAgZG9jdW1lbnQuZ2V0
+RWxlbWVudEJ5SWQoJ2Z1bGxzZWFyY2gnKS5kaXNhYmxlZCA9IGZsYWc7CiAgICBk
+b2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGl0bGVzZWFyY2gnKS5kaXNhYmxlZCA9
+IGZsYWc7Cn0KCmZ1bmN0aW9uIHNlYXJjaEZvY3VzKGUpIHsKICAgIC8vIFVwZGF0
+ZSBzZWFyY2ggaW5wdXQgY29udGVudCBvbiBmb2N1cwogICAgaWYgKGUudmFsdWUg
+PT0gc2VhcmNoX2hpbnQpIHsKICAgICAgICBlLnZhbHVlID0gJyc7CiAgICAgICAg
+ZS5jbGFzc05hbWUgPSAnJzsKICAgICAgICBzZWFyY2hJc0Rpc2FibGVkID0gZmFs
+c2U7CiAgICB9Cn0KCmZ1bmN0aW9uIHNlYXJjaEJsdXIoZSkgewogICAgLy8gVXBk
+YXRlIHNlYXJjaCBpbnB1dCBjb250ZW50IG9uIGJsdXIKICAgIGlmIChlLnZhbHVl
+ID09ICcnKSB7CiAgICAgICAgZS52YWx1ZSA9IHNlYXJjaF9oaW50OwogICAgICAg
+IGUuY2xhc3NOYW1lID0gJ2Rpc2FibGVkJzsKICAgICAgICBzZWFyY2hJc0Rpc2Fi
+bGVkID0gdHJ1ZTsKICAgIH0KfQoKZnVuY3Rpb24gYWN0aW9uc01lbnVJbml0KHRp
+dGxlKSB7CiAgICAvLyBJbml0aWFsaXplIGFjdGlvbiBtZW51CiAgICBmb3IgKGkg
+PSAwOyBpIDwgZG9jdW1lbnQuZm9ybXMubGVuZ3RoOyBpKyspIHsKICAgICAgICB2
+YXIgZm9ybSA9IGRvY3VtZW50LmZvcm1zW2ldOwogICAgICAgIGlmIChmb3JtLmNs
+YXNzTmFtZSA9PSAnYWN0aW9uc21lbnUnKSB7CiAgICAgICAgICAgIC8vIENoZWNr
+IGlmIHRoaXMgZm9ybSBuZWVkcyB1cGRhdGUKICAgICAgICAgICAgdmFyIGRpdiA9
+IGZvcm0uZ2V0RWxlbWVudHNCeVRhZ05hbWUoJ2RpdicpWzBdOwogICAgICAgICAg
+ICB2YXIgbGFiZWwgPSBkaXYuZ2V0RWxlbWVudHNCeVRhZ05hbWUoJ2xhYmVsJylb
+MF07CiAgICAgICAgICAgIGlmIChsYWJlbCkgewogICAgICAgICAgICAgICAgLy8g
+VGhpcyBpcyB0aGUgZmlyc3QgdGltZTogcmVtb3ZlIGxhYmVsIGFuZCBkbyBidXRv
+bi4KICAgICAgICAgICAgICAgIGRpdi5yZW1vdmVDaGlsZChsYWJlbCk7CiAgICAg
+ICAgICAgICAgICB2YXIgZG9idXR0b24gPSBkaXYuZ2V0RWxlbWVudHNCeVRhZ05h
+bWUoJ2lucHV0JylbMF07CiAgICAgICAgICAgICAgICBkaXYucmVtb3ZlQ2hpbGQo
+ZG9idXR0b24pOwogICAgICAgICAgICAgICAgLy8gYW5kIGFkZCBtZW51IHRpdGxl
+CiAgICAgICAgICAgICAgICB2YXIgc2VsZWN0ID0gZGl2LmdldEVsZW1lbnRzQnlU
+YWdOYW1lKCdzZWxlY3QnKVswXTsKICAgICAgICAgICAgICAgIHZhciBpdGVtID0g
+ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnb3B0aW9uJyk7CiAgICAgICAgICAgICAg
+ICBpdGVtLmFwcGVuZENoaWxkKGRvY3VtZW50LmNyZWF0ZVRleHROb2RlKHRpdGxl
+KSk7CiAgICAgICAgICAgICAgICBpdGVtLnZhbHVlID0gJ3Nob3cnOwogICAgICAg
+ICAgICAgICAgc2VsZWN0Lmluc2VydEJlZm9yZShpdGVtLCBzZWxlY3Qub3B0aW9u
+c1swXSk7CiAgICAgICAgICAgICAgICBzZWxlY3Quc2VsZWN0ZWRJbmRleCA9IDA7
+CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9Cn0KCi8vIHVzZSB0aGlzIGlu
+c3RlYWQgb2YgYXNzaWduaW5nIHRvIHdpbmRvdy5vbmxvYWQgZGlyZWN0bHk6CmZ1
+bmN0aW9uIGFkZExvYWRFdmVudChmdW5jKSB7CiAgICAvLyBhbGVydCgiYWRkTG9h
+ZEV2ZW50ICIgKyBmdW5jKQogICAgdmFyIG9sZG9ubG9hZCA9IHdpbmRvdy5vbmxv
+YWQ7CiAgICBpZiAodHlwZW9mIHdpbmRvdy5vbmxvYWQgIT0gJ2Z1bmN0aW9uJykg
+ewogICAgICAgIHdpbmRvdy5vbmxvYWQgPSBmdW5jOwogICAgfSBlbHNlIHsKICAg
+ICAgICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICAgICAgICAgIG9s
+ZG9ubG9hZCgpOwogICAgICAgICAgICBmdW5jKCk7CiAgICAgICAgfQogICAgfQp9
+CgovLyBjb3B5IGZyb20gZmNrZWRpdG9yIGJyb3dzZXIgY2hlY2sgY29kZSAoZmNr
+ZWRpdG9yLmpzOjI5OCwgZnVuY3Rpb24gOiBGQ0tlZGl0b3JfSXNDb21wYXRpYmxl
+QnJvd3NlcikKZnVuY3Rpb24gY2FuX3VzZV9ndWlfZWRpdG9yKCkgewogICAgdmFy
+IHNBZ2VudCA9IG5hdmlnYXRvci51c2VyQWdlbnQudG9Mb3dlckNhc2UoKSA7Cgog
+ICAgLy8gSW50ZXJuZXQgRXhwbG9yZXIgNS41KwogICAgaWYgKCAvKkBjY19vbiFA
+Ki9mYWxzZSAmJiBzQWdlbnQuaW5kZXhPZigibWFjIikgPT0gLTEgKQogICAgewog
+ICAgICAgIHZhciBzQnJvd3NlclZlcnNpb24gPSBuYXZpZ2F0b3IuYXBwVmVyc2lv
+bi5tYXRjaCgvTVNJRSAoLlwuLikvKVsxXSA7CiAgICAgICAgcmV0dXJuICggc0Jy
+b3dzZXJWZXJzaW9uID49IDUuNSApIDsKICAgIH0KCiAgICAvLyBHZWNrbyAoT3Bl
+cmEgOSB0cmllcyB0byBiZWhhdmUgbGlrZSBHZWNrbyBhdCB0aGlzIHBvaW50KS4K
+ICAgIGlmICggbmF2aWdhdG9yLnByb2R1Y3QgPT0gIkdlY2tvIiAmJiBuYXZpZ2F0
+b3IucHJvZHVjdFN1YiA+PSAyMDAzMDIxMCAmJiAhKCB0eXBlb2Yob3BlcmEpID09
+ICdvYmplY3QnICYmIG9wZXJhLnBvc3RFcnJvciApICkKICAgICAgICByZXR1cm4g
+dHJ1ZSA7CgogICAgLy8gT3BlcmEgOS41MCsKICAgIGlmICggd2luZG93Lm9wZXJh
+ICYmIHdpbmRvdy5vcGVyYS52ZXJzaW9uICYmIHBhcnNlRmxvYXQoIHdpbmRvdy5v
+cGVyYS52ZXJzaW9uKCkgKSA+PSA5LjUgKQogICAgICAgIHJldHVybiB0cnVlIDsK
+Ci8qCiAgLy8gZGlzYWJsZSBzYWZhcmkgOiB1bnRpbCBmY2sgZGV2dGVhbSBmaXgg
+aHR0cDovL2Rldi5mY2tlZGl0b3IubmV0L3RpY2tldC8yMzMzCiAgCiAgICAvLyBB
+ZG9iZSBBSVIKICAgIC8vIENoZWNrZWQgYmVmb3JlIFNhZmFyaSBiZWNhdXNlIEFJ
+UiBoYXZlIHRoZSBXZWJLaXQgcmljaCB0ZXh0IGVkaXRvcgogICAgLy8gZmVhdHVy
+ZXMgZnJvbSBTYWZhcmkgMy4wLjQsIGJ1dCB0aGUgdmVyc2lvbiByZXBvcnRlZCBp
+cyA0MjAuCiAgICBpZiAoIHNBZ2VudC5pbmRleE9mKCAnIGFkb2JlYWlyLycgKSAh
+PSAtMSApCiAgICAgICAgcmV0dXJuICggc0FnZW50Lm1hdGNoKCAvIGFkb2JlYWly
+XC8oXGQrKS8gKVsxXSA+PSAxICkgOyAvLyBCdWlsZCBtdXN0IGJlIGF0IGxlYXN0
+IHYxCgogICAgLy8gU2FmYXJpIDMrCiAgICBpZiAoIHNBZ2VudC5pbmRleE9mKCAn
+IGFwcGxld2Via2l0LycgKSAhPSAtMSApCiAgICAgICAgcmV0dXJuICggc0FnZW50
+Lm1hdGNoKCAvIGFwcGxld2Via2l0XC8oXGQrKS8gKVsxXSA+PSA1MjIgKSA7ICAg
+IC8vIEJ1aWxkIG11c3QgYmUgYXQgbGVhc3QgNTIyICh2MykKKi8KICAgIHJldHVy
+biBmYWxzZSA7Cgp9CgoKZnVuY3Rpb24gdXBkYXRlX2VkaXRfbGlua3MoKSB7CiAg
+ICAvLyBVcGRhdGUgZWRpdGxpbmsgYWNjb3JkaW5nIGlmIGlmIHRoZSBicm93c2Vy
+IGlzIGNvbXBhdGlibGUKICAgIGlmIChjYW5fdXNlX2d1aV9lZGl0b3IoKSA9PSBm
+YWxzZSl7CiAgICAgICAgLy9hbGVydCgidXBkYXRlX2VkaXRfbGlua3M6IGNhbid0
+IHVzZSBndWkgZWRpdG9yIik7CiAgICAgICAgcmV0dXJuOwogICAgfQogICAgdmFy
+IGVkaXRsaW5rcyA9IGRvY3VtZW50LmdldEVsZW1lbnRzQnlOYW1lKCJlZGl0bGlu
+ayIpOwogICAgZm9yIChpID0gMDsgaSA8IGVkaXRsaW5rcy5sZW5ndGg7IGkrKykg
+ewogICAgICAgIHZhciBsaW5rID0gZWRpdGxpbmtzW2ldOwogICAgICAgIGhyZWYg
+PSBsaW5rLmhyZWYucmVwbGFjZSgnZWRpdG9yPXRleHRvbmx5JywnZWRpdG9yPWd1
+aXBvc3NpYmxlJyk7CiAgICAgICAgbGluay5ocmVmID0gaHJlZjsKICAgICAgICAv
+L2FsZXJ0KCJ1cGRhdGVfZWRpdF9saW5rczogbW9kaWZpZWQgdG8gZ3VpcG9zc2li
+bGUiKTsKICAgIH0KfQoKCmZ1bmN0aW9uIGFkZF9ndWlfZWRpdG9yX2xpbmtzKCkg
+ewogICAgLy8gQWRkIGd1aSBlZGl0b3IgbGluayBhZnRlciB0aGUgdGV4dCBlZGl0
+b3IgbGluawogICAgCiAgICAvLyBJZiB0aGUgdmFyaWFibGUgaXMgbm90IHNldCBv
+ciBicm93c2VyIGlzIG5vdCBjb21wYXRpYmxlLCBleGl0CiAgICB0cnkge2d1aV9l
+ZGl0b3JfbGlua19ocmVmfQogICAgY2F0Y2ggKGUpIHsKICAgICAgICAvL2FsZXJ0
+KCJhZGRfZ3VpX2VkaXRvcl9saW5rczogZ3VpX2VkaXRvcl9saW5rX2hyZWYgbm90
+IGhlcmUiKTsKICAgICAgICByZXR1cm4KICAgIH0KICAgIGlmIChjYW5fdXNlX2d1
+aV9lZGl0b3IoKSA9PSBmYWxzZSl7CiAgICAgICAgLy9hbGVydCgiYWRkX2d1aV9l
+ZGl0b3JfbGlua3M6IGNhbid0IHVzZSBndWlfZWRpdG9yIik7CiAgICAgICAgcmV0
+dXJuOwogICAgfQogICAgdmFyIGFsbCA9IGRvY3VtZW50LmdldEVsZW1lbnRzQnlO
+YW1lKCd0ZXh0ZWRpdGxpbmsnKTsKICAgIGZvciAoaSA9IDA7IGkgPCBhbGwubGVu
+Z3RoOyBpKyspIHsKICAgICAgICB2YXIgdGV4dEVkaXRvckxpbmsgPSBhbGxbaV07
+CiAgICAgICAgLy8gQ3JlYXRlIGEgbGlzdCBpdGVtIHdpdGggYSBsaW5rCiAgICAg
+ICAgdmFyIGd1aUVkaXRvckxpbmsgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdh
+Jyk7CiAgICAgICAgZ3VpRWRpdG9yTGluay5ocmVmID0gZ3VpX2VkaXRvcl9saW5r
+X2hyZWY7CiAgICAgICAgdmFyIHRleHQgPSBkb2N1bWVudC5jcmVhdGVUZXh0Tm9k
+ZShndWlfZWRpdG9yX2xpbmtfdGV4dCk7CiAgICAgICAgZ3VpRWRpdG9yTGluay5h
+cHBlbmRDaGlsZCh0ZXh0KTsKICAgICAgICB2YXIgbGlzdEl0ZW0gPSBkb2N1bWVu
+dC5jcmVhdGVFbGVtZW50KCdsaScpCiAgICAgICAgbGlzdEl0ZW0uYXBwZW5kQ2hp
+bGQoZ3VpRWRpdG9yTGluayk7CiAgICAgICAgLy8gSW5zZXJ0IGluIHRoZSBlZGl0
+YmFyCiAgICAgICAgdmFyIGVkaXRiYXIgPSB0ZXh0RWRpdG9yTGluay5wYXJlbnRO
+b2RlLnBhcmVudE5vZGUKICAgICAgICB2YXIgbmV4dExpc3RJdGVtID0gdGV4dEVk
+aXRvckxpbmsucGFyZW50Tm9kZS5uZXh0U2libGluZzsKICAgICAgICBlZGl0YmFy
+Lmluc2VydEJlZm9yZShsaXN0SXRlbSwgbmV4dExpc3RJdGVtKTsKICAgICAgICAv
+L2FsZXJ0KCJhZGRfZ3VpX2VkaXRvcl9saW5rczogYWRkZWQgZ3VpIGVkaXRvciBs
+aW5rIik7CiAgICB9Cn0KIAoKZnVuY3Rpb24gc2hvd19zd2l0Y2gyZ3VpKCkgewog
+ICAgLy8gU2hvdyBzd2l0Y2ggdG8gZ3VpIGVkaXRvciBsaW5rIGlmIHRoZSBicm93
+c2VyIGlzIGNvbXBhdGlibGUKICAgIGlmIChjYW5fdXNlX2d1aV9lZGl0b3IoKSA9
+PSBmYWxzZSkgcmV0dXJuOwogICAgCiAgICB2YXIgc3dpdGNoMmd1aSA9IGRvY3Vt
+ZW50LmdldEVsZW1lbnRCeUlkKCdzd2l0Y2gyZ3VpJykKICAgIGlmIChzd2l0Y2gy
+Z3VpKSB7CiAgICAgICAgc3dpdGNoMmd1aS5zdHlsZS5kaXNwbGF5ID0gJ2lubGlu
+ZSc7CiAgICB9Cn0KCi8vIGZvciBsb25nIGRvY3VtZW50cyB3aXRoIG1hbnkgY29t
+bWVudHMgdGhpcyBpcyBleHBlbnNpdmUgdG8gY2FsY3VsYXRlLAovLyB0aHVzIHdl
+IGtlZXAgaXQgaGVyZToKY29tbWVudHMgPSBudWxsOwoKZnVuY3Rpb24gdG9nZ2xl
+Q29tbWVudHMoKSB7CiAgICAvLyBUb2dnbGUgdmlzaWJpbGl0eSBvZiBldmVyeSB0
+YWcgd2l0aCBjbGFzcyAiY29tbWVudCIKICAgIGZvciAoaSA9IDA7IGkgPCBjb21t
+ZW50cy5sZW5ndGg7IGkrKyl7CiAgICAgICAgZWwgPSBjb21tZW50c1tpXTsKICAg
+ICAgICBpZiAoIGVsLnN0eWxlLmRpc3BsYXkgIT0gJ25vbmUnICkgewogICAgICAg
+ICAgICBlbC5zdHlsZS5kaXNwbGF5ID0gJ25vbmUnOwogICAgICAgIH0gZWxzZSB7
+CiAgICAgICAgICAgIGVsLnN0eWxlLmRpc3BsYXkgPSAnJzsKICAgICAgICB9CiAg
+ICB9Cn0KCmZ1bmN0aW9uIHNob3dfdG9nZ2xlQ29tbWVudHMoKSB7CiAgICAvLyBT
+aG93IGVkaXQgYmFyIGl0ZW0gZm9yIHRvZ2dsaW5nIGlubGluZSBjb21tZW50cyBv
+bi9vZmYgb25seSBpZiBpbmxpbmUgY29tbWVudHMgZXhpc3Qgb24gdGhlIHBhZ2UK
+ICAgIGNvbW1lbnRzID0gZ2V0RWxlbWVudHNCeUNsYXNzTmFtZSgnY29tbWVudCcs
+IG51bGwsIGRvY3VtZW50KTsKICAgIGlmIChjb21tZW50cy5sZW5ndGggPiAwKSB7
+CiAgICAgICAgdmFyIGJ1dHRvbnMgPSBnZXRFbGVtZW50c0J5Q2xhc3NOYW1lKCd0
+b2dnbGVDb21tZW50c0J1dHRvbicsIG51bGwsIGRvY3VtZW50KTsKICAgICAgICBm
+b3IgKGkgPSAwOyBpIDwgYnV0dG9ucy5sZW5ndGg7IGkrKyl7CiAgICAgICAgICAg
+IGVsID0gYnV0dG9uc1tpXTsKICAgICAgICAgICAgZWwuc3R5bGUuZGlzcGxheSA9
+ICcnOwogICAgICAgIH0KICAgIH0KfQoKCmZ1bmN0aW9uIGxvYWQoKSB7CiAgICAv
+LyBEbyBub3QgbmFtZSB0aGlzICJvbmxvYWQiLCBpdCBkb2VzIG5vdCB3b3JrIHdp
+dGggSUUgOi0pCiAgICAvLyBUT0RPOiBjcmVhdGUgc2VwYXJhdGUgb25sb2FkIGZv
+ciBlYWNoIHR5cGUgb2YgdmlldyBhbmQgc2V0IHRoZQogICAgLy8gY29ycmVjdCBm
+dW5jdGlvbiBuYW1lIGluIHRoZSBodG1sLiAKICAgIC8vIGUuZyA8Ym9keSBvbmxv
+ZD0nZWRpdG9yX29ubG9hZCgpJz4KCiAgICAvLyBsb2dpbiBmb2N1cwogICAgaWYg
+KGRvY3VtZW50LmZvcm1zWydsb2dpbmZvcm0nXSkgewogICAgICAgIGRvY3VtZW50
+LmZvcm1zWydsb2dpbmZvcm0nXS5lbGVtZW50c1snbmFtZSddLmZvY3VzKCk7CiAg
+ICB9CiAgICAKICAgIC8vIFBhZ2UgdmlldyBzdHVmZgogICAgdXBkYXRlX2VkaXRf
+bGlua3MoKTsKICAgIGFkZF9ndWlfZWRpdG9yX2xpbmtzKCk7CiAgICAKICAgIC8v
+IEVkaXRvciBzdHVmZgogICAgc2hvd19zd2l0Y2gyZ3VpKCk7CgogICAgLy8gRW5h
+YmxlIG1lbnUgaXRlbSAiVG9nZ2xlQ29tbWVudHMiIGlmIGlubGluZSBjb21tZW50
+cyBleGlzdAogICAgc2hvd190b2dnbGVDb21tZW50cygpOwogCiAgICAvLyBkYXRh
+IGJyb3dzZXIgd2lkZ2V0CiAgICBkYndfaGlkZV9idXR0b25zKCk7Cn0KCgpmdW5j
+dGlvbiBiZWZvcmVfdW5sb2FkKGV2dCkgewogICAgLy8gVE9ETzogQmV0dGVyIHRv
+IHNldCB0aGlzIGluIHRoZSBlZGl0b3IgaHRtbCwgYXMgaXQgZG9lcyBub3QgbWFr
+ZQogICAgLy8gc2Vuc2UgZWxzZWh3ZXJlLgogICAgLy8gY29uZmlybWxlYXZpbmcg
+aXMgYXZhaWxhYmxlIHdoZW4gZWRpdGluZwogICAgdHJ5IHtyZXR1cm4gY29uZmly
+bWxlYXZpbmcoKTt9CiAgICBjYXRjaCAoZSkge30KfQoKLy8gSW5pdGlhbGl6ZSBh
+ZnRlciBsb2FkaW5nIHRoZSBwYWdlCmFkZExvYWRFdmVudChsb2FkKQoKLy8gQ2F0
+Y2ggYmVmb3JlIHVubG9hZGluZyB0aGUgcGFnZQp3aW5kb3cub25iZWZvcmV1bmxv
+YWQgPSBiZWZvcmVfdW5sb2FkCgpmdW5jdGlvbiBkYndfdXBkYXRlX3NlYXJjaChk
+YndfaWQpCnsKICAgIHZhciB0YWJsZSA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlk
+KGRid19pZCsndGFibGUnKTsKICAgIHZhciBjZWxsOwogICAgdmFyIHNob3duOwog
+ICAgdmFyIGkKICAgIHZhciBjb2xzID0gdGFibGUucm93c1swXS5jZWxscy5sZW5n
+dGg7CiAgICB2YXIgZmlsdGVyID0gbmV3IEFycmF5KCk7CiAgICB2YXIgZG9maWx0
+ZXIgPSBuZXcgQXJyYXkoKTsKICAgIHZhciBmb3JtID0gZG9jdW1lbnQuZm9ybXNb
+ZGJ3X2lkKydmb3JtJ107CgogICAgZm9yIChpID0gMDsgaSA8IGNvbHM7IGkrKykg
+ewogICAgICAgIGRvZmlsdGVyW2ldID0gZmFsc2U7CiAgICAgICAgaWYgKGZvcm1b
+ZGJ3X2lkKydmaWx0ZXInK2ldKSB7CiAgICAgICAgICAgIGRvZmlsdGVyW2ldID0g
+dHJ1ZTsKICAgICAgICAgICAgZmlsdGVyW2ldID0gZm9ybVtkYndfaWQrJ2ZpbHRl
+cicraV0udmFsdWU7CiAgICAgICAgICAgIGlmIChmaWx0ZXJbaV0gPT0gJ1thbGxd
+JykKICAgICAgICAgICAgICAgIGRvZmlsdGVyW2ldID0gZmFsc2U7CiAgICAgICAg
+ICAgIGlmIChmaWx0ZXJbaV0gPT0gJ1tlbXB0eV0nKQogICAgICAgICAgICAgICAg
+ZmlsdGVyW2ldID0gJyc7CiAgICAgICAgfQogICAgfQoKICAgIGZvciAoaSA9IDE7
+IGkgPCB0YWJsZS5yb3dzLmxlbmd0aDsgaSsrKSB7CiAgICAgICAgdmFyIHNob3cg
+PSB0cnVlOwogICAgICAgIGZvciAoY29sID0gMDsgY29sIDwgY29sczsgY29sKysp
+IHsKICAgICAgICAgICAgaWYgKCFkb2ZpbHRlcltjb2xdKQogICAgICAgICAgICAg
+ICAgY29udGludWU7CgogICAgICAgICAgICBjZWxsID0gdGFibGUucm93c1tpXS5j
+ZWxsc1tjb2xdOwoKICAgICAgICAgICAgaWYgKGZpbHRlcltjb2xdID09ICdbbm90
+ZW1wdHldJykgewogICAgICAgICAgICAgICAgaWYgKGNlbGwuYWJiciA9PSAnJykg
+ewogICAgICAgICAgICAgICAgICAgIHNob3cgPSBmYWxzZTsKICAgICAgICAgICAg
+ICAgICAgICBicmVhazsKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfSBl
+bHNlIGlmIChmaWx0ZXJbY29sXSAhPSBjZWxsLmFiYnIpIHsKICAgICAgICAgICAg
+ICAgIHNob3cgPSBmYWxzZTsKICAgICAgICAgICAgICAgIGJyZWFrOwogICAgICAg
+ICAgICB9CiAgICAgICAgfQogICAgICAgIGlmIChzaG93KQogICAgICAgICAgICB0
+YWJsZS5yb3dzW2ldLnN0eWxlLmRpc3BsYXkgPSAnJzsKICAgICAgICBlbHNlCiAg
+ICAgICAgICAgIHRhYmxlLnJvd3NbaV0uc3R5bGUuZGlzcGxheSA9ICdub25lJzsK
+ICAgIH0KfQoKZnVuY3Rpb24gZGJ3X2hpZGVfYnV0dG9ucygpIHsKICAgIHZhciBm
+b3JtOwogICAgdmFyIGVsZW07CiAgICB2YXIgbmFtZTsKCiAgICBmb3IgKHZhciBm
+aWR4ID0gMDsgZmlkeCA8IGRvY3VtZW50LmZvcm1zLmxlbmd0aDsgZmlkeCsrKSB7
+CiAgICAgICAgZm9ybSA9IGRvY3VtZW50LmZvcm1zW2ZpZHhdOwogICAgICAgIGZv
+ciAodmFyIGVpZHggPSAwOyBlaWR4IDwgZm9ybS5lbGVtZW50cy5sZW5ndGg7IGVp
+ZHgrKykgewogICAgICAgICAgICBlbGVtID0gZm9ybS5lbGVtZW50c1tlaWR4XTsK
+ICAgICAgICAgICAgbmFtZSA9IGVsZW0ubmFtZTsKICAgICAgICAgICAgaWYgKG5h
+bWUpIHsKICAgICAgICAgICAgICAgIGlmIChuYW1lLmluZGV4T2YoJ2Ridy4nKSA+
+PSAwICYmIG5hbWUuc3Vic3RyKC03KSA9PSAnLnN1Ym1pdCcpCiAgICAgICAgICAg
+ICAgICAgICAgZWxlbS5zdHlsZS5kaXNwbGF5ID0gJ25vbmUnOwogICAgICAgICAg
+ICB9CiAgICAgICAgfQogICAgfQp9CgovKiAgZ2V0RWxlbWVudHNCeUNsYXNzTmFt
+ZQogICAgRGV2ZWxvcGVkIGJ5IFJvYmVydCBOeW1hbiwgaHR0cDovL3d3dy5yb2Jl
+cnRueW1hbi5jb20KICAgIENvZGUvbGljZW5zaW5nOiBodHRwOi8vY29kZS5nb29n
+bGUuY29tL3AvZ2V0ZWxlbWVudHNieWNsYXNzbmFtZS8gKE1JVCBsaWNlbnNlKQog
+ICAgVmVyc2lvbjogMS4wLjEKKi8gIAp2YXIgZ2V0RWxlbWVudHNCeUNsYXNzTmFt
+ZSA9IGZ1bmN0aW9uIChjbGFzc05hbWUsIHRhZywgZWxtKXsKICAgIGlmIChkb2N1
+bWVudC5nZXRFbGVtZW50c0J5Q2xhc3NOYW1lKSB7CiAgICAgICAgZ2V0RWxlbWVu
+dHNCeUNsYXNzTmFtZSA9IGZ1bmN0aW9uIChjbGFzc05hbWUsIHRhZywgZWxtKSB7
+CiAgICAgICAgICAgIGVsbSA9IGVsbSB8fCBkb2N1bWVudDsKICAgICAgICAgICAg
+dmFyIGVsZW1lbnRzID0gZWxtLmdldEVsZW1lbnRzQnlDbGFzc05hbWUoY2xhc3NO
+YW1lKSwKICAgICAgICAgICAgICAgIG5vZGVOYW1lID0gKHRhZyk/IG5ldyBSZWdF
+eHAoIlxcYiIgKyB0YWcgKyAiXFxiIiwgImkiKSA6IG51bGwsCiAgICAgICAgICAg
+ICAgICByZXR1cm5FbGVtZW50cyA9IFtdLAogICAgICAgICAgICAgICAgY3VycmVu
+dDsKICAgICAgICAgICAgZm9yKHZhciBpPTAsIGlsPWVsZW1lbnRzLmxlbmd0aDsg
+aTxpbDsgaSs9MSl7CiAgICAgICAgICAgICAgICBjdXJyZW50ID0gZWxlbWVudHNb
+aV07CiAgICAgICAgICAgICAgICBpZighbm9kZU5hbWUgfHwgbm9kZU5hbWUudGVz
+dChjdXJyZW50Lm5vZGVOYW1lKSkgewogICAgICAgICAgICAgICAgICAgIHJldHVy
+bkVsZW1lbnRzLnB1c2goY3VycmVudCk7CiAgICAgICAgICAgICAgICB9CiAgICAg
+ICAgICAgIH0KICAgICAgICAgICAgcmV0dXJuIHJldHVybkVsZW1lbnRzOwogICAg
+ICAgIH07CiAgICB9CiAgICBlbHNlIGlmIChkb2N1bWVudC5ldmFsdWF0ZSkgewog
+ICAgICAgIGdldEVsZW1lbnRzQnlDbGFzc05hbWUgPSBmdW5jdGlvbiAoY2xhc3NO
+YW1lLCB0YWcsIGVsbSkgewogICAgICAgICAgICB0YWcgPSB0YWcgfHwgIioiOwog
+ICAgICAgICAgICBlbG0gPSBlbG0gfHwgZG9jdW1lbnQ7CiAgICAgICAgICAgIHZh
+ciBjbGFzc2VzID0gY2xhc3NOYW1lLnNwbGl0KCIgIiksCiAgICAgICAgICAgICAg
+ICBjbGFzc2VzVG9DaGVjayA9ICIiLAogICAgICAgICAgICAgICAgeGh0bWxOYW1l
+c3BhY2UgPSAiaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIsCiAgICAgICAg
+ICAgICAgICBuYW1lc3BhY2VSZXNvbHZlciA9IChkb2N1bWVudC5kb2N1bWVudEVs
+ZW1lbnQubmFtZXNwYWNlVVJJID09PSB4aHRtbE5hbWVzcGFjZSk/IHhodG1sTmFt
+ZXNwYWNlIDogbnVsbCwKICAgICAgICAgICAgICAgIHJldHVybkVsZW1lbnRzID0g
+W10sCiAgICAgICAgICAgICAgICBlbGVtZW50cywKICAgICAgICAgICAgICAgIG5v
+ZGU7CiAgICAgICAgICAgIGZvcih2YXIgaj0wLCBqbD1jbGFzc2VzLmxlbmd0aDsg
+ajxqbDsgais9MSl7CiAgICAgICAgICAgICAgICBjbGFzc2VzVG9DaGVjayArPSAi
+W2NvbnRhaW5zKGNvbmNhdCgnICcsIEBjbGFzcywgJyAnKSwgJyAiICsgY2xhc3Nl
+c1tqXSArICIgJyldIjsKICAgICAgICAgICAgfQogICAgICAgICAgICB0cnkgewog
+ICAgICAgICAgICAgICAgZWxlbWVudHMgPSBkb2N1bWVudC5ldmFsdWF0ZSgiLi8v
+IiArIHRhZyArIGNsYXNzZXNUb0NoZWNrLCBlbG0sIG5hbWVzcGFjZVJlc29sdmVy
+LCAwLCBudWxsKTsKICAgICAgICAgICAgfQogICAgICAgICAgICBjYXRjaCAoZSkg
+ewogICAgICAgICAgICAgICAgZWxlbWVudHMgPSBkb2N1bWVudC5ldmFsdWF0ZSgi
+Li8vIiArIHRhZyArIGNsYXNzZXNUb0NoZWNrLCBlbG0sIG51bGwsIDAsIG51bGwp
+OwogICAgICAgICAgICB9CiAgICAgICAgICAgIHdoaWxlICgobm9kZSA9IGVsZW1l
+bnRzLml0ZXJhdGVOZXh0KCkpKSB7CiAgICAgICAgICAgICAgICByZXR1cm5FbGVt
+ZW50cy5wdXNoKG5vZGUpOwogICAgICAgICAgICB9CiAgICAgICAgICAgIHJldHVy
+biByZXR1cm5FbGVtZW50czsKICAgICAgICB9OwogICAgfQogICAgZWxzZSB7CiAg
+ICAgICAgZ2V0RWxlbWVudHNCeUNsYXNzTmFtZSA9IGZ1bmN0aW9uIChjbGFzc05h
+bWUsIHRhZywgZWxtKSB7CiAgICAgICAgICAgIHRhZyA9IHRhZyB8fCAiKiI7CiAg
+ICAgICAgICAgIGVsbSA9IGVsbSB8fCBkb2N1bWVudDsKICAgICAgICAgICAgdmFy
+IGNsYXNzZXMgPSBjbGFzc05hbWUuc3BsaXQoIiAiKSwKICAgICAgICAgICAgICAg
+IGNsYXNzZXNUb0NoZWNrID0gW10sCiAgICAgICAgICAgICAgICBlbGVtZW50cyA9
+ICh0YWcgPT09ICIqIiAmJiBlbG0uYWxsKT8gZWxtLmFsbCA6IGVsbS5nZXRFbGVt
+ZW50c0J5VGFnTmFtZSh0YWcpLAogICAgICAgICAgICAgICAgY3VycmVudCwKICAg
+ICAgICAgICAgICAgIHJldHVybkVsZW1lbnRzID0gW10sCiAgICAgICAgICAgICAg
+ICBtYXRjaDsKICAgICAgICAgICAgZm9yKHZhciBrPTAsIGtsPWNsYXNzZXMubGVu
+Z3RoOyBrPGtsOyBrKz0xKXsKICAgICAgICAgICAgICAgIGNsYXNzZXNUb0NoZWNr
+LnB1c2gobmV3IFJlZ0V4cCgiKF58XFxzKSIgKyBjbGFzc2VzW2tdICsgIihcXHN8
+JCkiKSk7CiAgICAgICAgICAgIH0KICAgICAgICAgICAgZm9yKHZhciBsPTAsIGxs
+PWVsZW1lbnRzLmxlbmd0aDsgbDxsbDsgbCs9MSl7CiAgICAgICAgICAgICAgICBj
+dXJyZW50ID0gZWxlbWVudHNbbF07CiAgICAgICAgICAgICAgICBtYXRjaCA9IGZh
+bHNlOwogICAgICAgICAgICAgICAgZm9yKHZhciBtPTAsIG1sPWNsYXNzZXNUb0No
+ZWNrLmxlbmd0aDsgbTxtbDsgbSs9MSl7CiAgICAgICAgICAgICAgICAgICAgbWF0
+Y2ggPSBjbGFzc2VzVG9DaGVja1ttXS50ZXN0KGN1cnJlbnQuY2xhc3NOYW1lKTsK
+ICAgICAgICAgICAgICAgICAgICBpZiAoIW1hdGNoKSB7CiAgICAgICAgICAgICAg
+ICAgICAgICAgIGJyZWFrOwogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAg
+ICAgICAgIH0KICAgICAgICAgICAgICAgIGlmIChtYXRjaCkgewogICAgICAgICAg
+ICAgICAgICAgIHJldHVybkVsZW1lbnRzLnB1c2goY3VycmVudCk7CiAgICAgICAg
+ICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICAgICAgcmV0dXJuIHJldHVy
+bkVsZW1lbnRzOwogICAgICAgIH07CiAgICB9CiAgICByZXR1cm4gZ2V0RWxlbWVu
+dHNCeUNsYXNzTmFtZShjbGFzc05hbWUsIHRhZywgZWxtKTsKfTsKCgovLyA9PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT0KLy8gVGhlIGZvbGxvd2luZyBmdW5jdGlv
+bnMgYXJlIHBhcnQgb2Ygc2Nyb2xsIGVkaXQgdGV4dGFyZWEgb24gZG91YmxlLWNs
+aWNrCi8vCi8vIFRoaXMgY29kZSBpcyBwdWJsaWMgZG9tYWluIChvciBwcmltYXJp
+bHkgcHVibGljIGRvbWFpbikuCi8vIERvIHdoYXRldmVyIHlvdSB3YW50IHdpdGgg
+aXQuICBJbiBwYXJ0aWN1bGFyLCB5b3UgbWF5IHJlbGVhc2UgaXQgdW5kZXIKLy8g
+R1BMIDIuMCBvciBpbmNvcnBvcmF0ZSBpdCBpbnRvIHByb2plY3RzIHRoYXQgdXNl
+IEdQTCAyLjAuCi8vIC0tIFJhZG9taXIgRG9waWVyYWxza2kgYW5kIFJvZ2VyIEQu
+IEhhYXNlCgovLyBEZWJ1Z2dpbmcgaGVscGVycwovLyAgc2F2ZSBkZWJ1Z2dpbmcg
+c3RhdGUgaW4gY29va2llIC0gcHJlc2VuY2Ugb2YgYSBjb29raWUgbWVhbnMgZGVi
+dWdnaW5nIG1vZGUgaXMgb24KY29va2llUGF0aCA9ICcvJzsKZnVuY3Rpb24gYXV0
+b1Njcm9sbFNldENvb2tpZSAoKXsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICdhdXRv
+c2Nyb2xsZGVidWc9b247IHBhdGg9JyArIGNvb2tpZVBhdGggKyAnOyAnOwp9CmZ1
+bmN0aW9uIGF1dG9TY3JvbGxEZWxldGVDb29raWUgKCl7CiAgICB2YXIgY29va2ll
+X2RhdGUgPSBuZXcgRGF0ZSAoICk7ICAvLyBjdXJyZW50IGRhdGUgJiB0aW1lCiAg
+ICBjb29raWVfZGF0ZS5zZXRUaW1lICggY29va2llX2RhdGUuZ2V0VGltZSgpIC0g
+MSApOwogICAgZG9jdW1lbnQuY29va2llID0gJ2F1dG9zY3JvbGxkZWJ1Zz07IGV4
+cGlyZXM9JyArIGNvb2tpZV9kYXRlLnRvR01UU3RyaW5nKCkgKyAnOyBwYXRoPScg
+KyBjb29raWVQYXRoICsgJzsgJzsKfQpmdW5jdGlvbiBhdXRvU2Nyb2xsR2V0Q29v
+a2llICgpewogICAgdmFyIHJlc3VsdHMgPSBkb2N1bWVudC5jb29raWUubWF0Y2gg
+KCAnKF58OykgPycgKyAiYXV0b3Njcm9sbGRlYnVnIiArICc9KFteO10qKSg7fCQp
+JyApOwogICAgaWYgKCByZXN1bHRzICkgewogICAgICAgIHJldHVybiAoIHVuZXNj
+YXBlICggcmVzdWx0c1syXSApICk7CiAgICB9IGVsc2UgewogICAgICAgIHJldHVy
+biBudWxsOwogICAgfQp9Ci8vIHR1cm4gb24gZGVidWdnaW5nIG1vZGUgYnkgcHJl
+dmlld2luZywgc2F2aW5nIG9yIHJlYWRpbmcgYSBwYWdlIHdpdGggImF1dG8gc2Ny
+b2xsIGRlYnVnIG9uIiB3aXRoaW4gYW4gaDEgaGVhZGVyCi8vID0gTXkgUGFnZSBh
+dXRvIHNjcm9sbCBkZWJ1ZyBvbiA9Ci8vIG9uY2Ugc2V0IG9uLGRlYnVnIG1vZGUg
+c2F5cyBvbiBmb3IgY3VycmVudCBzZXNzaW9uIG9yIHVudGlsIHR1cm5lZCBvZmYg
+d2l0aAovLyA9IE15IFBhZ2UgYXV0byBzY3JvbGwgZGVidWcgb2ZmID0KYXV0b1Nj
+cm9sbERlYnVnT24gPSAwOwovLyB0aGlzIGZ1bmN0aW9uIGV4ZWN1dGVkIG9uIHBh
+Z2UgbG9hZApmdW5jdGlvbiB0dXJuRGVidWdPbk9yT2ZmICgpIHsKICAgIC8vIHNl
+dCBnbG9iYWwgdmFyaWFibGUgZm9yIHVzZSBieSBjb29raWUgZnVuY3Rpb25zCiAg
+ICBjb29raWVQYXRoID0gZG9jdW1lbnQuZ2V0RWxlbWVudHNCeU5hbWUoJ2VkaXRf
+b25fZG91YmxlY2xpY2snKVswXS5jb250ZW50OwogICAgdmFyIGhPbmVzID0gZG9j
+dW1lbnQuZ2V0RWxlbWVudHNCeVRhZ05hbWUoJ0gxJyk7CiAgICBmb3IgKHZhciBp
+ID0gMDsgaSA8IGhPbmVzLmxlbmd0aDsgKytpKSB7CiAgICAgICAgdmFyIGhlYWRl
+ciA9IGhPbmVzW2ldLnRleHRDb250ZW50IHx8IGhPbmVzW2ldLmlubmVyVGV4dDsK
+ICAgICAgICBpZiAoaGVhZGVyLm1hdGNoICgnYXV0byBzY3JvbGwgZGVidWcgb24n
+KSkgewogICAgICAgICAgICBhdXRvU2Nyb2xsU2V0Q29va2llICgpOwogICAgICAg
+IH0KICAgICAgICBpZiAoaGVhZGVyLm1hdGNoICgnYXV0byBzY3JvbGwgZGVidWcg
+b2ZmJykpIHsKICAgICAgICAgICAgYXV0b1Njcm9sbERlbGV0ZUNvb2tpZSAoKTsK
+ICAgICAgICB9CiAgICB9CiAgICBpZiAoYXV0b1Njcm9sbEdldENvb2tpZSAoKSkg
+ewogICAgICAgIGF1dG9TY3JvbGxEZWJ1Z09uID0gMTsKICAgIH0gZWxzZSB7CiAg
+ICAgICAgYXV0b1Njcm9sbERlYnVnT24gPSAwOwogICAgfQp9CgovLyBmdW5jdGlv
+bnMgdXNlZCBmb3IgdGVzdGluZyAtIG1vdXNlb3ZlciB0b29sdGlwIHdpdGggdGFn
+TmFtZSBhbmQgc2Nyb2xsIGxpbmUgbnVtYmVyCmZ1bmN0aW9uIGRvTW91c2VPdmVy
+KGUpIHsKICAgIHZhciB0YXJnID0gZ2V0Tm9kZShlKTsKICAgIHRhcmcudGl0bGUg
+PSAndGFnTmFtZT0nK3RhcmcudGFnTmFtZSsnICBsaW5lPScrdGFyZy5zY3JvbGxM
+aW5lOwp9CmZ1bmN0aW9uIGRvTW91c2VPdXQoZSkgewogICAgdmFyIHRhcmcgPSBn
+ZXROb2RlKGUpOwogICAgdGFyZy5yZW1vdmVBdHRyaWJ1dGUoJ3RpdGxlJyk7Cn0K
+Ly8gYWRkIGxlYWRpbmcgemVyb3MgdG8gaG91cnMsIG1pbnV0ZXMsIHNlY29uZHMs
+IG1pbGxpc2Vjb25kcwpmdW5jdGlvbiBsZWFkaW5nWmVyb3MgKG5icixjb3VudCkg
+eyAKICAgIHZhciBzdHJOYnIgPSBuYnIgKyAnJzsKICAgIHdoaWxlIChzdHJOYnIu
+bGVuZ3RoIDwgY291bnQpIHsKICAgICAgICBzdHJOYnIgPSAiMCIgKyBzdHJOYnI7
+IAogICAgfQogICAgcmV0dXJuIHN0ck5icjsKfQovLyBmb3JtYXQgaG91cnMsIG1p
+bnV0ZXMsIHNlY29uZHMsIGFuZCBtcwpmdW5jdGlvbiBmb3JtYXRUaW1lICh0KSB7
+CiAgICB2YXIgc0hvdXJzID0gbGVhZGluZ1plcm9zICh0LmdldEhvdXJzKCksIDIp
+OwogICAgdmFyIHNNaW51dGVzID0gbGVhZGluZ1plcm9zICh0LmdldE1pbnV0ZXMg
+KCksIDIpOwogICAgdmFyIHNTZWNvbmRzID0gbGVhZGluZ1plcm9zICh0LmdldFNl
+Y29uZHMgKCksIDIpOwogICAgdmFyIHNNaWxsaXNlY29uZHMgPSBsZWFkaW5nWmVy
+b3MgKHQuZ2V0TWlsbGlzZWNvbmRzICgpLCAzKTsKICAgIHJldHVybiBzSG91cnMg
+KyAnOicgKyBzTWludXRlcyArICc6JyArIHNTZWNvbmRzICsgJzonICsgc01pbGxp
+c2Vjb25kczsKfQoKLy8gdGhpcyB2YXJpYWJsZSBpcyBhdmFpbGFibGUgYXMgZWFz
+eSB3YXkgdG8gZGlzcGxheSB0cmFjZSBpbmZvCmF1dG9EZWJ1Z1RyYWNlID0gJyc7
+CmZ1bmN0aW9uIHNob3dTdGFydFN0b3BUaW1lcyAoc3RhcnRUaW1lKSB7CiAgICAv
+LyBkaXNwbGF5IGEgbWVzc2FnZSB3aXRoIHN0YXJ0IGFuZCBlbmQgdGltZXMgYXQg
+dG9wIG9mIHBhZ2UKICAgIHZhciBlbmRUaW1lID0gbmV3IERhdGUoKTsKICAgIHZh
+ciB0U3RhcnQgPSdhdXRvIHNjcm9sbCBkZWJ1ZyBvbiAtLSBJbml0aWFsaXphdGlv
+biBzdGFydCBIOk06Uzptcz0nICsgZm9ybWF0VGltZSAoc3RhcnRUaW1lKTsKICAg
+IHZhciB0RW5kID0gJyAgZW5kIEg6TTpTOm1zPScgKyBmb3JtYXRUaW1lIChlbmRU
+aW1lKTsKICAgIHZhciB0aW1pbmdNc2cgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50
+ICgnUCcpOwogICAgdGltaW5nTXNnLmlubmVySFRNTCA9IHRTdGFydCArIHRFbmQ7
+CiAgICB0aW1pbmdNc2cuc3R5bGUuIGNvbG9yID0gInJlZCI7CiAgICB2YXIgY29u
+dGVudERpdjsKICAgIGlmIChkb2N1bWVudC5nZXRFbGVtZW50QnlJZCAoJ3ByZXZp
+ZXcnKSkgewogICAgICAgIGNvbnRlbnREaXYgPSBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCAoJ3ByZXZpZXcnKTsKICAgIH0gZWxzZSB7CiAgICAgICAgY29udGVudERp
+diA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkICgnY29udGVudCcpOwogICAgfQog
+ICAgY29udGVudERpdi5pbnNlcnRCZWZvcmUgKHRpbWluZ01zZywgY29udGVudERp
+di5maXJzdENoaWxkKTsKICAgIC8vIGRpc3BsYXkgdHJhY2UgaW5mbyBpcyB0aGVy
+ZSBpcyBhbnkKICAgIGlmIChhdXRvRGVidWdUcmFjZSkgewogICAgICAgIGFsZXJ0
+KGF1dG9EZWJ1Z1RyYWNlKTsKICAgIH0KfQovLyBlbmQgb2YgZGVidWdnaW5nIGhl
+bHBlcnMKCi8vIHRoaXMgc2Nyb2xscyB0aGUgdGV4dGFyZWEgYWZ0ZXIgYSBkb3Vi
+bGVjbGljayAtIGp1bXBMaW5lIGlzIHNjcm9sbC10byBsaW5lCmZ1bmN0aW9uIHNj
+cm9sbFRleHRhcmVhKGp1bXBMaW5lKSB7CiAgICB2YXIgdHh0Qm94ID0gZG9jdW1l
+bnQuZ2V0RWxlbWVudEJ5SWQoJ2VkaXRvci10ZXh0YXJlYScpOwogICAgc2Nyb2xs
+KDAsMCk7IAogICAgaWYgKHR4dEJveCkgewogICAgICAgIC8vIENhbGN1bGF0ZSB0
+aGUgY3Vyc29yIHBvc2l0aW9uIC0gSUUgc3VwcG9ydHMgaW5uZXJUZXh0LCBub3Qg
+dGV4dENvbnRlbnQKICAgICAgICB2YXIgdGV4dExpbmVzID0gdHh0Qm94LnRleHRD
+b250ZW50IHx8IHR4dEJveC5pbm5lclRleHQ7CiAgICAgICAgdGV4dExpbmVzID0g
+dGV4dExpbmVzLm1hdGNoKC8oLipcbikvZyk7CiAgICAgICAgdmFyIHNjcm9sbGVk
+VGV4dCA9ICcnOwogICAgICAgIGZvciAodmFyIGkgPSAwOyBpIDwgdGV4dExpbmVz
+Lmxlbmd0aCAmJiBpIDwganVtcExpbmU7ICsraSkgewogICAgICAgICAgICBzY3Jv
+bGxlZFRleHQgKz0gdGV4dExpbmVzW2ldOwogICAgICAgIH0KICAgICAgICB0eHRC
+b3guZm9jdXMoKTsKICAgICAgICBpZiAodHh0Qm94LnNldFNlbGVjdGlvblJhbmdl
+KSB7CiAgICAgICAgICAgIC8vIFN0YW5kYXJkLWNvbXBsaWFudCBicm93c2Vycwog
+ICAgICAgICAgICAvLyBNb3ZlIHRoZSBjdXJzb3IKICAgICAgICAgICAgdHh0Qm94
+LnNldFNlbGVjdGlvblJhbmdlKHNjcm9sbGVkVGV4dC5sZW5ndGgsIHNjcm9sbGVk
+VGV4dC5sZW5ndGgpOwogICAgICAgICAgICAvLyBDYWxjdWxhdGUgaG93IGZhciB0
+byBzY3JvbGwsIGJ5IHB1dHRpbmcgdGhlIHRleHQgdGhhdCBpcyB0byBiZQogICAg
+ICAgICAgICAvLyBhYm92ZSB0aGUgZm9sZCBpbiBhIERJViwgYW5kIGNoZWNraW5n
+IHRoZSBESVYncyBoZWlnaHQuCiAgICAgICAgICAgIHZhciBzY3JvbGxQcmUgPSBk
+b2N1bWVudC5jcmVhdGVFbGVtZW50KCdwcmUnKTsKICAgICAgICAgICAgdHh0Qm94
+LnBhcmVudE5vZGUuYXBwZW5kQ2hpbGQoc2Nyb2xsUHJlKTsKICAgICAgICAgICAg
+dmFyIHN0eWxlID0gd2luZG93LmdldENvbXB1dGVkU3R5bGUodHh0Qm94LCAnJyk7
+CiAgICAgICAgICAgIHNjcm9sbFByZS5zdHlsZS5saW5lSGVpZ2h0ID0gc3R5bGUu
+bGluZUhlaWdodDsKICAgICAgICAgICAgc2Nyb2xsUHJlLnN0eWxlLmZvbnRGYW1p
+bHkgPSBzdHlsZS5mb250RmFtaWx5OwogICAgICAgICAgICBzY3JvbGxQcmUuc3R5
+bGUuZm9udFNpemUgPSBzdHlsZS5mb250U2l6ZTsKICAgICAgICAgICAgc2Nyb2xs
+UHJlLnN0eWxlLnBhZGRpbmcgPSAwOwogICAgICAgICAgICBzY3JvbGxQcmUuc3R5
+bGUubGV0dGVyU3BhY2luZyA9IHN0eWxlLmxldHRlclNwYWNpbmc7CiAgICAgICAg
+ICAgIC8vIERpZmZlcmVudCBicm93c2VycyBjYWxsIHRoaXMgdmFsdWUgZGlmZmVy
+ZW50bHk6CiAgICAgICAgICAgIHRyeSB7IHNjcm9sbFByZS5zdHlsZS53aGl0ZVNw
+YWNlID0gIi1tb3otcHJlLXdyYXAiOyB9IGNhdGNoKGUpIHt9CiAgICAgICAgICAg
+IHRyeSB7IHNjcm9sbFByZS5zdHlsZS53aGl0ZVNwYWNlID0gIi1vLXByZS13cmFw
+IjsgfSBjYXRjaChlKSB7fQogICAgICAgICAgICB0cnkgeyBzY3JvbGxQcmUuc3R5
+bGUud2hpdGVTcGFjZSA9ICItcHJlLXdyYXAiOyB9IGNhdGNoKGUpIHt9CiAgICAg
+ICAgICAgIHRyeSB7IHNjcm9sbFByZS5zdHlsZS53aGl0ZVNwYWNlID0gInByZS13
+cmFwIjsgfSBjYXRjaChlKSB7fQogICAgICAgICAgICBzY3JvbGxQcmUudGV4dENv
+bnRlbnQgPSBzY3JvbGxlZFRleHQ7CiAgICAgICAgICAgIHR4dEJveC5zY3JvbGxU
+b3AgPSBzY3JvbGxQcmUuc2Nyb2xsSGVpZ2h0LTEwMDsKICAgICAgICAgICAgc2Ny
+b2xsUHJlLnBhcmVudE5vZGUucmVtb3ZlQ2hpbGQoc2Nyb2xsUHJlKTsKICAgICAg
+ICB9IGVsc2UgaWYgKHR4dEJveC5jcmVhdGVUZXh0UmFuZ2UpIHsKICAgICAgICAg
+ICAgLy8gTWljcm9zb2Z0IEludGVybmV0IEV4cGxvcmVyCiAgICAgICAgICAgIC8v
+IFdlIGRvbid0IG5lZWQgdG8gc2Nyb2xsLCBpdCB3aWxsIGRvIGl0IGF1dG9tYXRp
+Y2FsbHksIGp1c3QgbW92ZQogICAgICAgICAgICAvLyB0aGUgY3Vyc29yLgogICAg
+ICAgICAgICB2YXIgcmFuZ2UgPSB0eHRCb3guY3JlYXRlVGV4dFJhbmdlKCk7CiAg
+ICAgICAgICAgIHJhbmdlLmNvbGxhcHNlKHRydWUpOwogICAgICAgICAgICByYW5n
+ZS5tb3ZlRW5kKCdjaGFyYWN0ZXInLCBzY3JvbGxlZFRleHQubGVuZ3RoKTsKICAg
+ICAgICAgICAgcmFuZ2UubW92ZVN0YXJ0KCdjaGFyYWN0ZXInLCBzY3JvbGxlZFRl
+eHQubGVuZ3RoKTsKICAgICAgICAgICAgcmFuZ2Uuc2VsZWN0KCk7CiAgICAgICAg
+ICAgIHR4dEJveC5fX2NvbHVtbiA9IDE7CiAgICAgICAgfQogICAgfSAKfQoKLy8g
+c3RvcCBldmVudCBidWJibGluZwpmdW5jdGlvbiBzdG9wQnViYmxpbmcoZSkgewog
+ICAgaWYgKGUuc3RvcFByb3BhZ2F0aW9uKSB7CiAgICAgICAgZS5zdG9wUHJvcGFn
+YXRpb24oKTsgCiAgICB9CiAgICBlLmNhbmNlbEJ1YmJsZSA9IHRydWU7Cn0KCi8v
+IHN0b3AgYnViYmxpbmcgYW5kIHJldHVybiBldmVudCBub2RlIApmdW5jdGlvbiBn
+ZXROb2RlKGUpIHsKICAgIC8vIHdpbmRvdy5ldmVudCBhbmQgZS5zcmNFbGVtZW50
+IGFyZSBJRQogICAgdmFyIGUgPSBlIHx8IHdpbmRvdy5ldmVudDsKICAgIHZhciB0
+YXJnID0gZS50YXJnZXQgfHwgZS5zcmNFbGVtZW50OwogICAgaWYgKHRhcmcubm9k
+ZVR5cGUgPT0gMykgewogICAgICAgIC8vIHdvcmthcm91bmQgc2FmYXJpCiAgICAg
+ICAgdGFyZyA9IHRhcmcucGFyZW50Tm9kZTsKICAgIH0KICAgIHN0b3BCdWJibGlu
+ZyhlKTsKICAgIHJldHVybiB0YXJnOwp9CgovLyBhZGQgYWN0aW9uPWVkaXQgYW5k
+IHNjcm9sbExpbmUgdG8gZG9jdW1lbnQubG9jYXRpb24KZnVuY3Rpb24gZG9BY3Rp
+b25FZGl0KGUpIHsKICAgIHZhciB0YXJnID0gZ2V0Tm9kZShlKTsKICAgIC8vIE1v
+aW5Nb2luIGNvdW50cyBzdGFydGluZyB3aXRoIDEsIHNjcm9sbFRleHRhcmVhIHN0
+YXJ0cyB3aXRoIDAKICAgIGRvY3VtZW50LmxvY2F0aW9uLnNlYXJjaCA9ICc/YWN0
+aW9uPWVkaXQmbGluZT0nKyh0YXJnLnNjcm9sbExpbmUtMSk7Cn0KCi8vIHNjcm9s
+bCB0ZXh0YXJlYSBvbiB0aGlzIHBhZ2UKZnVuY3Rpb24gZG9UZXh0YXJlYVNjcm9s
+bChlKSB7CiAgICB2YXIgdGFyZyA9IGdldE5vZGUoZSk7CiAgICBzY3JvbGxUZXh0
+YXJlYSh0YXJnLnNjcm9sbExpbmUtMSk7Cn0KCi8vIFRoaXMgaXMgdGhlIGZ1bmN0
+aW9uIHRoYXQgcmVnaXN0ZXJzIGRvdWJsZSBjbGlja3MuCi8vIGlzUHJldmlldyBp
+cyB0cnVlIGlmIHRoZSBjdXJyZW50IHBhZ2UgaXMgYW4gZWRpdCBkcmFmdCBwcmV2
+aWV3CmZ1bmN0aW9uIHNldENhbGxiYWNrKG5vZGUsIGxpbmUsIGlzUHJldmlldykg
+ewogICAgaWYgKG5vZGUuc2Nyb2xsTGluZSkgewogICAgICAgIC8vIHRoaXMgbm9k
+ZSBhbHJlYWR5IHByb2Nlc3NlZAogICAgICAgIHJldHVybjsKICAgIH0gZWxzZSB7
+CiAgICAgICAgbm9kZS5zY3JvbGxMaW5lID0gbGluZTsKICAgICAgICBpZih3aW5k
+b3cuYWRkRXZlbnRMaXN0ZW5lcil7IAogICAgICAgICAgICBpZiAoaXNQcmV2aWV3
+KSB7CiAgICAgICAgICAgICAgICBub2RlLmFkZEV2ZW50TGlzdGVuZXIoJ2RibGNs
+aWNrJyxkb1RleHRhcmVhU2Nyb2xsLGZhbHNlKTsKICAgICAgICAgICAgfSBlbHNl
+IHsKICAgICAgICAgICAgICAgIG5vZGUuYWRkRXZlbnRMaXN0ZW5lcignZGJsY2xp
+Y2snLGRvQWN0aW9uRWRpdCxmYWxzZSk7CiAgICAgICAgICAgIH0KICAgICAgICAg
+ICAgaWYgKGF1dG9TY3JvbGxEZWJ1Z09uKSB7CiAgICAgICAgICAgICAgICBub2Rl
+LmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNlb3ZlcicsIGRvTW91c2VPdmVyLGZhbHNl
+KTsgCiAgICAgICAgICAgICAgICBub2RlLmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNl
+b3V0Jyxkb01vdXNlT3V0LGZhbHNlKTsgCiAgICAgICAgICAgIH0KICAgICAgICB9
+IGVsc2UgewogICAgICAgICAgICAvLyBJRQogICAgICAgICAgICBpZiAoaXNQcmV2
+aWV3KSB7CiAgICAgICAgICAgICAgICBub2RlLmF0dGFjaEV2ZW50KCdvbmRibGNs
+aWNrJyxkb1RleHRhcmVhU2Nyb2xsKTsKICAgICAgICAgICAgfSBlbHNlIHsKICAg
+ICAgICAgICAgICAgIG5vZGUuYXR0YWNoRXZlbnQoJ29uZGJsY2xpY2snLGRvQWN0
+aW9uRWRpdCk7CiAgICAgICAgICAgIH0KICAgICAgICAgICAgaWYgKGF1dG9TY3Jv
+bGxEZWJ1Z09uKSB7CiAgICAgICAgICAgICAgICBub2RlLmF0dGFjaEV2ZW50KCdv
+bm1vdXNlb3ZlcicsIGRvTW91c2VPdmVyLGZhbHNlKTsgCiAgICAgICAgICAgICAg
+ICBub2RlLmF0dGFjaEV2ZW50KCdvbm1vdXNlb3V0Jyxkb01vdXNlT3V0LGZhbHNl
+KTsKICAgICAgICAgICAgfQogICAgICAgIH0KICAgIH0KfQoKLy8gd2FsayBwYXJ0
+IG9mIERPTSBhbmQgYWRkIGRvdWJsZWNsaWNrIGZ1bmN0aW9uIHRvIGFsbCBub2Rl
+cyB3aXRoIHRhZ05hbWVzCmZ1bmN0aW9uIHdhbGtEb20gKHNvbWVOb2RlLCBsaW5l
+TmJyLCBpc1ByZXZpZXcsIG5leHRJZCwgdG9wSWQpIHsKCiAgICAvL34gLy8gaGFu
+ZGxlIHNwZWNpYWwgY2FzZXMgb2YgcGFyYWdyYXBoIG9uIGxpbmUgYWZ0ZXIgPDxU
+T0M+PiBhbmQgLS0tLSAoaG9yaXpvbnRhbCBydWxlKQogICAgLy9+IC8vICAgQnV0
+IHRoaXMgZWZmZWN0cyBwYXJhZ3JhcGhzIG9uIG11bHRpcGxlIGxpbmVzOiBkb3Vi
+bGVjbGljayBnb2VzIHRvIHBhcmFncmFwaCBib3R0b20gcmF0aGVyIHRoYW4gdG9w
+LgogICAgLy9+IC8vICAgU2VlbXMgYmVzdCB0byBsaXZlIHdpdGggVE9DIGFuZCBI
+UiBwcm9ibGVtIGFuZCB3YWl0IGZvciBNb2luMi4KICAgIC8vfiB2YXIgbmV4dDEs
+IG5leHQyLCBuZXh0MzsKICAgIC8vfiB2YXIgbmV4dE5iciA9ICdsaW5lLScgKyAo
+bGluZU5ici0wKzEpOwogICAgLy9+IGlmIChzb21lTm9kZS5wYXJlbnROb2RlLnRh
+Z05hbWUgPT0gJ1AnICYmIHNvbWVOb2RlLnBhcmVudE5vZGUuc2Nyb2xsTGluZSkg
+ewogICAgICAgIC8vfiBuZXh0MSA9IHNvbWVOb2RlLm5leHRTaWJsaW5nOwogICAg
+ICAgIC8vfiBpZiAobmV4dDEgJiYgbmV4dDEudGFnTmFtZSAhPSAnU1BBTicpIHsK
+ICAgICAgICAgICAgLy9+IG5leHQyID0gbmV4dDEubmV4dFNpYmxpbmc7CiAgICAg
+ICAgLy9+IH0KICAgICAgICAvL34gaWYgKG5leHQyICYmIG5leHQyLmlkID09IG5l
+eHROYnIpIHsKICAgICAgICAgICAgLy9+IGFsZXJ0KCdDb3JyZWN0aW5nIHNjcm9s
+bExpbmU9JytsaW5lTmJyKTsKICAgICAgICAgICAgLy9+IHNvbWVOb2RlLnBhcmVu
+dE5vZGUuc2Nyb2xsTGluZSA9IGxpbmVOYnI7CiAgICAgICAgICAgIC8vfiByZXR1
+cm47CiAgICAgICAgLy9+IH0KICAgIC8vfiB9CgogICAgdmFyIGRvQ2hpbGQgPSB0
+cnVlOwogICAgd2hpbGUgKCEoc29tZU5vZGUuaWQgPT0gbmV4dElkKSAmJiAhKHNv
+bWVOb2RlLmlkID09IHRvcElkKSkgewogICAgICAgIC8vIGFkZCBjaGlsZHJlbiwg
+YWRkIHNpYmxpbmdzLCBhZGQgcGFyZW50CiAgICAgICAgaWYgKGRvQ2hpbGQgJiYg
+c29tZU5vZGUuZmlyc3RDaGlsZCkgewogICAgICAgICAgICBzb21lTm9kZSA9IHNv
+bWVOb2RlLmZpcnN0Q2hpbGQ7CiAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAg
+ZG9DaGlsZCA9IHRydWU7CiAgICAgICAgICAgIGlmIChzb21lTm9kZS5uZXh0U2li
+bGluZykgewogICAgICAgICAgICAgICAgc29tZU5vZGUgPSBzb21lTm9kZS5uZXh0
+U2libGluZzsKICAgICAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgICAgIGlm
+IChzb21lTm9kZS5wYXJlbnROb2RlLm5leHRTaWJsaW5nKSB7CiAgICAgICAgICAg
+ICAgICBzb21lTm9kZSA9IHNvbWVOb2RlLnBhcmVudE5vZGUubmV4dFNpYmxpbmc7
+CiAgICAgICAgICAgICAgICB9IGVsc2UgewogICAgICAgICAgICAgICAgICAgIGRv
+Q2hpbGQgPSBmYWxzZTsKICAgICAgICAgICAgICAgICAgICBzb21lTm9kZSA9IHNv
+bWVOb2RlLnBhcmVudE5vZGUucGFyZW50Tm9kZTsKICAgICAgICAgICAgICAgIH0K
+ICAgICAgICAgICAgfQogICAgICAgIH0KICAgICAgICBpZiAoZG9DaGlsZCAmJiBz
+b21lTm9kZS50YWdOYW1lICYmICEoc29tZU5vZGUuaWQgPT0gbmV4dElkKSAmJiAh
+KHNvbWVOb2RlLmlkID09IHRvcElkKSkgewogICAgICAgICAgICBzZXRDYWxsYmFj
+ayhzb21lTm9kZSwgbGluZU5iciwgaXNQcmV2aWV3KTsKICAgICAgICB9CiAgICB9
+Cn0KCi8vIHJ1biBkdXJpbmcgcGFnZSBsb2FkIHdoZW4gdXNlciBtYXkgZWRpdCBj
+dXJyZW50IHBhZ2UgT1IgaXMgdmlld2luZyBkcmFmdCBwcmV2aWV3CmZ1bmN0aW9u
+IHNldFNwYW5UYWdzKGlzUHJldmlldykgewogICAgLy8gZmluZCBhbGwgdGhlIFNQ
+QU4gdGFncyB3aXRoIGFuIElEIGJlZ2lubmluZyB3aXRoICJsaW5lLSIKICAgIHZh
+ciBzcGFuVGFncyA9IGRvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCdzcGFu
+Jyk7CiAgICB2YXIgbWFya3MgPSBbXTsKICAgIGZvciAodmFyIGkgPSAwOyBpIDwg
+c3BhblRhZ3MubGVuZ3RoOyArK2kpIHsKICAgICAgICBpZiAoc3BhblRhZ3NbaV0u
+aWQgJiYgc3BhblRhZ3NbaV0uaWQuc3Vic3RyaW5nKDAsIDUpID09ICdsaW5lLScp
+IHsKICAgICAgICAgICAgbWFya3MucHVzaChzcGFuVGFnc1tpXSk7CiAgICAgICAg
+fQogICAgfQogICAgdmFyIHRvcCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdj
+b250ZW50Jyk7CiAgICB2YXIgYm90dG9tID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5
+SWQoJ2JvdHRvbScpOwogICAgLy8gYWRkIGV4cGVjdGVkIHN0b3BwaW5nIHBvaW50
+IHRvIGVuZCBvZiBhcnJheSBmb3IgY29udmVuaWVuY2UKICAgIGlmIChib3R0b20p
+IHsKICAgICAgICBtYXJrcy5wdXNoKGJvdHRvbSk7IAogICAgfSBlbHNlIHsKICAg
+ICAgICBpZiAoYXV0b1Njcm9sbERlYnVnT24pIHsKICAgICAgICAgICAgYWxlcnQo
+ImF1dG8gc2Nyb2xsIGRlYnVnIDE6IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdi
+b3R0b20nKSBmYWlsZWQiKTsKICAgICAgICB9CiAgICB9CiAgICB2YXIgc2tpcFRv
+ID0gLTE7IAogICAgLy8gbG9vcCB0aHJvdWdoIHNwYW4gdGFncyBhbmQgYXBwbHkg
+ZG91YmxlLWNsaWNrIGV2ZW50cyB0byBhcHByb3ByaWF0ZSBub2RlKHMpIAogICAg
+Zm9yIChpID0gMDsgaSA8IG1hcmtzLmxlbmd0aC0xOyArK2kpIHsKICAgICAgICB2
+YXIgbWFyayA9IG1hcmtzW2ldOwogICAgICAgIC8vIHNraXAgc3BhbiB0YWdzIGdl
+bmVyYXRlZCBieSBlbWJlZGRlZCBwYXJzZXJzCiAgICAgICAgaWYgKGkgPiBza2lw
+VG8pIHsKICAgICAgICAgICAgLy8gc3BsaXQgdGhlIElEIGludG8gcGFydHM6IGxv
+b2tzIGxpbmUgImxpbmUtMjIiIG9yICJsaW5lLTIyLTEiCiAgICAgICAgICAgIHZh
+ciBsaW5lUGFydHMgPSBtYXJrLmlkLnNwbGl0KCctJyk7CiAgICAgICAgICAgIHZh
+ciBsaW5lID0gbGluZVBhcnRzWzFdOwogICAgICAgICAgICBpZiAobGluZVBhcnRz
+Lmxlbmd0aCA9PSAzKSB7CiAgICAgICAgICAgICAgICAvLyBoYXZlIGZvdW5kIG91
+dHB1dCBmcm9tIGVtYmVkZGVkIHBhcnNlcgogICAgICAgICAgICAgICAgLy8gZmlu
+ZCBuZXh0IHNwYW4gaWQgdGhhdCBsb29rcyBsaWtlICJsaW5lLW4iIGFuZCB0aGUg
+ImxpbmUtbi1uIiBqdXN0IGJlZm9yZSBpdAogICAgICAgICAgICAgICAgdmFyIGog
+PSBpIC0gMDsKICAgICAgICAgICAgICAgIHdoaWxlIChsaW5lUGFydHMubGVuZ3Ro
+ID09IDMpIHsKICAgICAgICAgICAgICAgICAgICBqKys7CiAgICAgICAgICAgICAg
+ICAgICAgbGluZVBhcnRzID0gbWFya3Nbal0uaWQuc3BsaXQoJy0nKTsKICAgICAg
+ICAgICAgICAgIH0KICAgICAgICAgICAgICAgIC8vIGRldGVybWluZSBob3cgbWFu
+eSBsaW5lcywgc3RhcnRpbmcgbGluZSBudW1iZXIsIGFuZCBhZGQgZG91YmxlLWNs
+aWNrIGV2ZW50cwogICAgICAgICAgICAgICAgdmFyIG5iclBhcnNlZExpbmVzID0g
+aiAtIGk7CiAgICAgICAgICAgICAgICB2YXIgcGFyc2VkTGluZU5iciA9IGxpbmVQ
+YXJ0c1sxXSAtIG5iclBhcnNlZExpbmVzIC0gMTsKICAgICAgICAgICAgICAgIGZv
+ciAodmFyIGsgPSAwOyBrIDwgbmJyUGFyc2VkTGluZXM7ICsraykgeyAKICAgICAg
+ICAgICAgICAgICAgICBpZiAobWFya3NbaStrXSAmJiBtYXJrc1tpK2srMV0gJiYg
+bWFya3NbaStrKzFdLmlkKSB7CiAgICAgICAgICAgICAgICAgICAgICAgIHdhbGtE
+b20gKG1hcmtzW2kra10sIHBhcnNlZExpbmVOYnIraywgaXNQcmV2aWV3LCBtYXJr
+c1tpK2srMV0uaWQsIHRvcC5pZCk7CiAgICAgICAgICAgICAgICAgICAgfSBlbHNl
+IHsKICAgICAgICAgICAgICAgICAgICAgICAgaWYgKGF1dG9TY3JvbGxEZWJ1Z09u
+KSB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICBhbGVydCgnYXV0byBzY3Jv
+bGwgZGVidWcgMjogc2tpcHBpbmcgd2Fsa0RvbSwgaT0nICsgaSArICcgaz0nICsg
+ayArICcgbWFya3NbaV0uaWQ9JyArIG1hcmtzW2ldLmlkKTsKICAgICAgICAgICAg
+ICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAg
+ICAgIH0KICAgICAgICAgICAgICAgIC8vIGRvbmUgd2l0aCBlbWJlZGRlZCBwYXJz
+ZXIgbGluZXMsIHRlbGwgbWFpbiBsb29wIHRvIHNraXAgdGhlc2UKICAgICAgICAg
+ICAgICAgIHNraXBUbyA9IGogLSAxOyAKICAgICAgICAgICAgfSBlbHNlIHsKICAg
+ICAgICAgICAgICAgIC8vIHdhbGsgcGFydCBvZiBET00gYW5kIGFwcGx5IGRvdWJs
+ZWNsaWNrIGZ1bmN0aW9uIHRvIGV2ZXJ5IG5vZGUgd2l0aCBhIHRhZ25hbWUKICAg
+ICAgICAgICAgICAgIGlmIChtYXJrc1tpKzFdICYmIG1hcmtzW2krMV0uaWQpIHsK
+ICAgICAgICAgICAgICAgICAgICB3YWxrRG9tIChtYXJrLCBsaW5lLCBpc1ByZXZp
+ZXcsIG1hcmtzW2krMV0uaWQsIHRvcC5pZCk7CiAgICAgICAgICAgICAgICB9IGVs
+c2UgewogICAgICAgICAgICAgICAgICAgIGlmIChhdXRvU2Nyb2xsRGVidWdPbikg
+ewogICAgICAgICAgICAgICAgICAgICAgICBhbGVydCgnYXV0byBzY3JvbGwgZGVi
+dWcgMzogc2tpcHBpbmcgd2Fsa0RvbSwgaT0nICsgaSArICcgbWFya3NbaV0uaWQ9
+JyArIG1hcmtzW2ldLmlkKTsKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAg
+ICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9CiAgICBpZiAo
+YXV0b1Njcm9sbERlYnVnT24pICB7CiAgICAgICAgZm9yIChpID0gMDsgaSA8IG1h
+cmtzLmxlbmd0aC0xOyArK2kpIHsKICAgICAgICAgICAgbWFya3NbaV0uaW5uZXJI
+VE1MID0gJyAnICsgbWFya3NbaV0uaWQgKyAnICc7CiAgICAgICAgICAgIG1hcmtz
+W2ldLnN0eWxlLiBjb2xvciA9ICJyZWQiOwogICAgICAgIH0KICAgIH0KfQoKLy8g
+dGVzdCB0byBzZWUgaWYgdGhpcyB1c2VyIGhhcyBzZWxlY3RlZCBvciBkZWZhdWx0
+ZWQgdG8gZWRpdF9vbl9kb3VibGVjbGljayBBTkQKLy8gd2hldGhlciB3ZSBhcmUg
+dmlld2luZyBhIHBhZ2UsIGVkaXRpbmcgYSBwYWdlLCBvciBwcmV2aWV3aW5nIGFu
+IGVkaXQgZHJhZnQgCmZ1bmN0aW9uIHNjcm9sbFRleHRhcmVhSW5pdCgpIHsKICAg
+IC8vIGxvb2sgZm9yIG1ldGEgdGFnIC0tIGlzIGVkaXRfb25fZG91YmxlY2xpY2sg
+cHJlc2VudD8KICAgIGlmICghZG9jdW1lbnQuZ2V0RWxlbWVudHNCeU5hbWUoJ2Vk
+aXRfb25fZG91YmxlY2xpY2snKS5sZW5ndGgpIHsKICAgICAgICByZXR1cm47CiAg
+ICB9CiAgICB0dXJuRGVidWdPbk9yT2ZmICgpOwogICAgLy8gYXJlIHdlIHZpZXdp
+bmcgYSBwYWdlIC0gYm90aCBndWkgYW5kIHRleHQgZWRpdG9ycyB3aWxsIGhhdmUg
+YnV0dG9uIG5hbWVkIGJ1dHRvbl9zYXZlCiAgICBpZiAoIWRvY3VtZW50LmdldEVs
+ZW1lbnRzQnlOYW1lKCdidXR0b25fc2F2ZScpLmxlbmd0aCkgewogICAgICAgIHNl
+dFNwYW5UYWdzKDApOwogICAgICAgIHJldHVybjsKICAgIH0KICAgIC8vIHdlIGFy
+ZSBpbiBlZGl0b3IgLS0gaXMgdGhlcmUgYSBsaW5lIG51bWJlciBzcGVjaWZpZWQg
+aW4gVVJMPwogICAgdmFyIGxpbmVNYXRjaCA9IGRvY3VtZW50LmxvY2F0aW9uLnNl
+YXJjaC5tYXRjaCgvbGluZT0oXGQqKS8pOwogICAgaWYgKGxpbmVNYXRjaCkgewog
+ICAgICAgIHNjcm9sbFRleHRhcmVhKGxpbmVNYXRjaFsxXSk7CiAgICAgICAgcmV0
+dXJuOwogICAgfSAKICAgIGlmIChkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncHJl
+dmlldycpKSB7CiAgICAgICAgLy8gaXMgYW4gZWRpdG9yIHByZXZpZXcKICAgICAg
+ICBzZXRTcGFuVGFncygxKTsKICAgIH0KfQoKLy8gTm93IHRvIHJlc29sdmUgdGhl
+IHByb2JsZW0gb2YgaG93IHRvIGJlc3QgZXhlY3V0ZSBzY3JvbGxUZXh0YXJlYUlu
+aXQKLy8gLS0gV2Ugd2FudCB0byBydW4gYXMgc29vbiBhcyBET00gaXMgbG9hZGVk
+LCBwZXJoYXBzIG1hbnkgc2Vjb25kcyBiZWZvcmUgbGFzdCBiaWcgaW1hZ2UgaXMg
+bG9hZGVkCi8vIC0tIElmIHdlIHdhaXQgZm9yIGJvZHkub25sb2FkLCB0aGUgdXNl
+ciBtYXkgc2VlIGFuZCBkb3VibGVjbGljayBvbiB0ZXh0IGJlZm9yZSB3ZSBhcmUg
+cmVhZHkgCi8vIC0tIElmIGV2ZXJ5IGJyb3dzZXIgc3VwcG9ydGVkIERPTUNvbnRl
+bnRMb2FkZWQsIHdlIGNvdWxkIGRvOgovLyAgICAgICAgIGRvY3VtZW50LmFkZEV2
+ZW50TGlzdGVuZXIoIkRPTUNvbnRlbnRMb2FkZWQiLCBzY3JvbGxUZXh0YXJlYUlu
+aXQsIGZhbHNlKTsKLy8gLS0gSWYgd2UgaGFkIGpRdWVyeSwgd2UgY291bGQgZG86
+Ci8vICAgICAgICAgalF1ZXJ5KHNjcm9sbFRleHRhcmVhSW5pdCk7Ci8vIC0tIEFu
+b3RoZXIgcG9zc2liaWxpdHkgaXMgdG8gYWRkIGEgYml0IG9mIHNjcmlwdCBuZWFy
+IHRoZSBlbmQgb2YgdGhlIG15cGFnZS5IVE1MLCBob3BpbmcgdGhlIERPTSBpcyBy
+ZWFkeQovLyAgICAgICAgICc8c2NyaXB0IHR5cGU9InRleHQvamF2YXNjcmlwdCIg
+bGFuZ3VhZ2U9ImphdmFzY3JpcHQiPnNjcm9sbFRleHRhcmVhSW5pdCgpPC9zY3Jp
+cHQ+JwovLyAtLSBPdXIgY2hvaWNlIGlzIHRvIHNwZWVkIHVwIG1vc3QgY3VycmVu
+dCBicm93c2VycyBhbmQgZG8gc2xvdyBidXQgc3VyZSBmb3IgdGhlIHJlc3Q6Cgov
+LyBydW4gc2Nyb2xsVGV4dGFyZWFJbml0IG9uZSB0aW1lOyAgdGhpcyBmdW5jdGlv
+biB3aWxsIGJlIGNhbGxlZCB0d2ljZSBmb3IgYWxtb3N0IGFsbCBicm93c2VycywK
+c2Nyb2xsVGV4dGFyZWFJbml0Q29tcGxldGUgPSAwOwpmdW5jdGlvbiBydW5TY3Jv
+bGxUZXh0YXJlYUluaXRPbmNlKCkgewogICAgLy8gdW5jb21tZW50IG5leHQgbGlu
+ZSB0byB0ZXN0IC0gbW9zdCBicm93c2VycyB3aWxsIGRpc3BsYXkgdGhpcyBhbGVy
+dCB0d2ljZSAKICAgIC8vfiBhbGVydCgnc2Nyb2xsVGV4dGFyZWFJbml0Q29tcGxl
+dGU9JyArIHNjcm9sbFRleHRhcmVhSW5pdENvbXBsZXRlKTsKICAgIGlmIChzY3Jv
+bGxUZXh0YXJlYUluaXRDb21wbGV0ZSkgewogICAgICAgIHJldHVybjsKICAgIH0K
+ICAgIHNjcm9sbFRleHRhcmVhSW5pdENvbXBsZXRlID0gMTsKICAgIHZhciBzdGFy
+dFRpbWUgPSBuZXcgRGF0ZSgpOwogICAgc2Nyb2xsVGV4dGFyZWFJbml0KCk7CiAg
+ICBpZiAoYXV0b1Njcm9sbERlYnVnT24gJiYgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5
+SWQoJ2NvbnRlbnQnKSkgewogICAgICAgIHNob3dTdGFydFN0b3BUaW1lcyhzdGFy
+dFRpbWUpOwogICAgfQp9CgovLyBzcGVlZCB1cCBtb3N0IGJyb3dzZXJzIC0tIHJ1
+biBteSBmdW5jdGlvbiBBcyBTb29uIEFzIFBvc3NpYmxlCmZ1bmN0aW9uIHJ1bkFT
+QVAoZnVuYykgewogICAgaWYgKGRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIpIHsg
+CiAgICAgICAgLy8gRmlyZWZveCAzLjYsIENocm9tZSA0LjAuMjQ5Ljg5LCBTYWZh
+cmkgZm9yIFdpbmRvd3MgNC4wNCwgT3BlcmEgMTAuNWJldGEsIGFuZCBtYXliZSBv
+bGRlciB2ZXJzaW9ucwogICAgICAgIC8vIHNjaGVkdWxlIGZ1bmMgdG8gYmUgcnVu
+IHdoZW4gRE9NIGNvbXBsZXRlCiAgICAgICAgZG9jdW1lbnQuYWRkRXZlbnRMaXN0
+ZW5lcigiRE9NQ29udGVudExvYWRlZCIsIGZ1bmMsIGZhbHNlKTsKICAgIH0gZWxz
+ZSB7CiAgICAgICAgLy8gdHJpY2sgZGlzY292ZXJlZCBieSBEaWVnbyBQZXJpbmkg
+dG8gdGVzdCBmb3IgSUUgRE9NIGNvbXBsZXRlCiAgICAgICAgaWYgKGRvY3VtZW50
+LmRvY3VtZW50RWxlbWVudC5kb1Njcm9sbCAmJiB3aW5kb3cgPT0gd2luZG93LnRv
+cCkgewogICAgICAgICAgICB0cnkgewogICAgICAgICAgICAgICAgZG9jdW1lbnQu
+ZG9jdW1lbnRFbGVtZW50LmRvU2Nyb2xsKCJsZWZ0Iik7CiAgICAgICAgICAgICAg
+ICAvLyBET00gaXMgY29tcGxldGU7IHJ1biBmdW5jIG5vdwogICAgICAgICAgICAg
+ICAgZnVuYygpOwogICAgICAgICAgICB9IGNhdGNoKGUpIHsKICAgICAgICAgICAg
+ICAgIC8vIHdhaXQgYW5kIHRyeSBhZ2FpbgogICAgICAgICAgICAgICAgc2V0VGlt
+ZW91dChhcmd1bWVudHMuY2FsbGVlLCAxKTsKICAgICAgICAgICAgfQogICAgICAg
+IH0KICAgIH0KfQpydW5BU0FQKHJ1blNjcm9sbFRleHRhcmVhSW5pdE9uY2UpOwov
+LyBlbnN1cmUgaW5pdCB3aWxsIGJlIHJ1biBieSBvYnNvbGV0ZSBicm93c2Vycwph
+ZGRMb2FkRXZlbnQocnVuU2Nyb2xsVGV4dGFyZWFJbml0T25jZSk7Cgo=
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/moin-email.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QAAAAAAAD5
+Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAAB3RJTUUH1QYGDBc25y9lKwAAAbNJ
+REFUOMvFk0FIFGEYhp9ZRvd3cBfXsa2Dp+pYaBfd8NSShoaBBkEZZmFEROBFizxv
+bNtBEQSRkE526CCIHeqmyd5s2w4J5tU0WKs/Yv4dc2c8qIODoxAIfsf3+97nf38+
+Pjju0oLEdCZVD+QCWheeDgx+PpSYzqTq05mUG1TpTMrdgQcn2H35Sf8zlhbz/JaS
+YtHm5/ov/vyVdN+5z4uXz31JtIPMuXyeePwUVVUxNC2EUjaqWCSZTPog+p4Audu3
+uvnwfobl5W+0tFwlVl1NRYWBYRgAZLNZpqfecq+nl4nXr3KAtheAadZgWTY9dx94
+pt0qFAqYpokI60QiUU/3AYQQNDY28G5mmkvJywBYloVSCqUUi1+/0H6tAyFEMADg
+RDxO4mKCN5OTnD1zGoDysM7Kyg86r3eih/yb14NWGY1EMWOVNF9p9rTRkSHKdQ3b
+thFUenpon9t1mZub5cbNLk9ySps8fPSYj/PzKGX5xvcBPi0s0NrWxuaGjes4lP5t
+oKHhlBzqzp/j++rawV+QUtKQaNpu6GHfYBkgjAg1J2uRUgYChsfGR/v+446Gj+Qa
+twD8/axkTrjYqAAAAABJRU5ErkJggg==
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline
+Content-Type: image/gif
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/bullet.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhCQAJAIAAAP///wsnSiH5BAUUAAAALAAAAAAJAAkAAAINhI+ZYbytnINg
+VqqyKgA7
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline; filename=common.css
+Content-Type: text/css; name=common.css
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/css/common.css
+Content-Transfer-Encoding: 8bit
+
+/*  common.css - MoinMoin Default Styles
+
+Copyright (c) 2001, 2002, 2003 by Juergen Hermann
+*/
+
+/* content styles */
+
+html {
+	background-color: white;
+	color: black;
+	font-family: sans-serif;
+	font-size: 1em;
+}
+
+body {
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Links */
+
+
+a:link {color: #00E;}
+a:visited {color: #551A8B;}
+a {color: #00E;}
+
+#content a {
+    text-decoration: none;
+    border-bottom: 1px dashed #ddd;
+}
+a:hover, a:visited:hover {
+    color: #000;
+}
+
+a.nonexistent:visited, a.nonexistent, 
+a.badinterwiki:visited, a.badinterwiki {color: gray;}
+
+a.www:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
+a.http:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
+a.https:before {content: url(../img/moin-www.png); margin: 0 0.2em;}
+a.file:before {content: url(../img/moin-ftp.png); margin: 0 0.2em;}
+a.ftp:before {content: url(../img/moin-ftp.png); margin: 0 0.2em;}
+a.nntp:before {content: url(../img/moin-news.png); margin: 0 0.2em;}
+a.news:before {content: url(../img/moin-news.png); margin: 0 0.2em;}
+a.telnet:before, a.ssh:before {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
+a.irc:before, a.ircs:before  {content: url(../img/moin-telnet.png); margin: 0 0.2em;}
+a.mailto:before {content: url(../img/moin-email.png); margin: 0 0.2em;}
+a.attachment:before {content: url(../img/moin-attach.png); margin: 0 0.2em;}
+a.badinterwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
+a.interwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
+
+li p {
+	margin: .25em 0;
+}
+
+li.gap {
+    margin-top: 0.5em;
+}
+
+dt {
+    margin-top: 0.5em;
+    font-weight: bold;
+}
+
+dd {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+dd p {
+    margin: 0.25em 0;
+}
+   
+a, img, img.drawing {
+	border: 0;
+}
+
+pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+	white-space: pre;
+	/* begin css 3 or browser specific rules - do not remove!
+	see: http://forums.techguy.org/archive/index.php/t-249849.html */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    /* end css 3 or browser specific rules */
+}
+
+pre.comment {
+    background-color: #CCCCCC;
+    color: red;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+pre.comment:before {
+    content: url(../img/attention.png);
+}
+
+
+/* .comment css definition must be top of .red/.green/.blue or it won't work */
+.comment { color: #555555; background-color: #DDDDFF; }
+
+.red { background-color: #FFCCCC; border: 1px solid #daa; padding: 0 1em;  }
+.green { background-color: #CCFFCC; border: 1px solid #ada; padding: 0 1em;  }
+.blue { background-color: #CCCCFF; border: 1px solid #aad; padding: 0 1em;  }
+.yellow { background-color: #FFF29F; border: 1px solid #dd7; padding: 0 1em; }
+.orange { background-color: #FFD59B; border: 1px solid #dc7; padding: 0 1em;  }
+
+.solid { border: 2px solid #000000; padding: 2px; }
+.dashed { border: 2px dashed #000000; padding: 2px; }
+.dotted { border: 2px dotted #000000; padding: 2px; }
+
+.left { text-align: left; }
+.center { text-align: center; }
+.right { text-align: right; }
+.justify { text-align: justify; }
+
+table
+{
+	margin: 0.5em 0 0 0.5em;
+	border-collapse: collapse;
+}
+
+th, td
+{
+	padding: 0.25em 0.5em 0.25em 0.5em;
+	border: 1pt solid #ADB9CC;
+}
+
+td p {
+	margin: 0;
+	padding: 0;
+}
+/* TableOfContents macro */
+div.table-of-contents {
+    border: 1px solid #b7becc;
+    color: black;
+    background-color: #f7f6f0;
+    font-size: 80%;
+    text-align: left;
+    margin: 0.5em 0 0.5em 1em;
+    padding: 0.5em 0.75em 1em 0.5em;
+    max-width: 50%;
+    display: inline-table;
+    -moz-border-radius: 9px 0 9px 0; 
+    overflow: hidden;
+}
+div.table-of-contents ol {
+    margin: 0;
+    padding: 0 0 0 2em;
+}
+div.table-of-contents ul {
+    margin: 0;
+    list-style:none;
+}
+div.table-of-contents li {
+    margin:0;
+    padding: 0;
+}
+p.table-of-contents-heading {
+    font-weight:bold;
+    padding:0;
+    margin: 0 0 0.5em 0;
+    letter-spacing: 0.075em;
+    color: #fff;
+    background: #376a94;
+    border-bottom: 3px solid #ffbc29;
+    padding: 0.25em 0.25em 0.25em 1em;
+    margin: -0.5em -0.75em 1em -0.5em;
+    -moz-border-radius: 7px 0 0px 0; 
+}
+
+/* Navigation macro */
+table.navigation {
+    background: #fff;
+    margin: 0;
+}
+
+.footnotes div {
+	width: 5em;
+	border-top: 1pt solid gray;
+}
+
+.footnotes ol {
+	padding: 0 2em;
+	margin: 0 0 1em;
+}
+
+.footnotes li {
+}
+
+.info {
+    float: right;
+    font-size: 0.7em;
+    color: gray;
+}
+
+#pageinfo {
+    margin-top: 2em;
+}
+
+.seperator {
+    color: gray;
+}
+
+#pagebottom {clear: both;}
+
+/* standard rule ---- */
+hr {
+    height: 1pt;
+    background-color: #9C9C9C;
+    border: 0;
+}
+
+/* custom rules ----- to ---------- */
+.hr1 {height: 2pt;}
+.hr2 {height: 3pt;}
+.hr3 {height: 4pt;}
+.hr4 {height: 5pt;}
+.hr5 {height: 6pt;}
+.hr6 {height: 7pt;}
+
+/* Replacement for deprecated html 3 <u> element and html 4 <strike> */
+.u {text-decoration: underline;}
+.strike {text-decoration: line-through;}
+
+/* eye catchers */
+.warning 
+{
+	color: red;
+}
+
+.error 
+{
+	color: red;
+}
+
+strong.highlight 
+{
+	background-color: #CCE0FF;
+	padding: 1pt;
+}
+
+
+/* Recent changes */
+
+.rcrss {
+	float: right;
+	margin: 0 7px 0 14px;
+        height: 0;
+        position: relative;
+        top: 9px;
+}
+*[div="rtl"] .rcrss {
+    float: left;
+}
+.recentchanges[dir="rtl"] .rcrss {
+	float: left;
+}
+
+.recentchanges table {
+    clear: right;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.recentchanges td {
+    vertical-align: top;
+    border: none;
+    background: #fff;
+}
+
+
+.recentchanges .rcdaybreak td {
+    background: #eee;
+    border: none;
+    border: 1px solid #ddd;
+}
+
+.rcdaybreak td a {
+	font-size: 0.88em;
+}
+
+.rcicon1, .rcicon2 {
+	text-align: center;
+}
+
+.rcpagelink {
+	width: 33%;
+}
+
+.rctime {
+	font-size: 0.88em;
+	white-space: nowrap;
+}
+
+.rceditor {
+	white-space: nowrap;
+	font-size: 0.88em;
+}
+
+.rccomment {
+	width: 50%;
+	color: gray;
+	font-size: 0.88em;
+}
+
+
+/* User Preferences */
+
+.userpref table, .userpref td {
+	border: none;
+}
+
+/* CSS for new code_area markup used by Colorizer and ParserBase */
+
+div.codearea { /* the div makes the border */
+	margin: 0.5em 0;
+	padding: 0;
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	color: black;
+}
+
+div.codearea pre { /* the pre has no border and is inside the div */
+	margin: 0;
+	padding: 10pt;
+	border: none;
+}
+
+a.codenumbers { /* format of the line numbering link */
+	margin: 0 10pt;
+	font-size: 0.85em;
+	color: gray;
+}
+
+/* format of certain syntax spans */
+div.codearea pre span.LineNumber {color: gray;}
+div.codearea pre span.ID         {color: #000000;}
+div.codearea pre span.Operator   {color: #0000C0;}
+div.codearea pre span.Char       {color: #004080;}
+div.codearea pre span.Comment    {color: #008000;}
+div.codearea pre span.Number     {color: #0080C0;}
+div.codearea pre span.String     {color: #004080;}
+div.codearea pre span.SPChar     {color: #0000C0;}
+div.codearea pre span.ResWord    {color: #A00000;}
+div.codearea pre span.ConsWord   {color: #008080; font-weight: bold;}
+div.codearea pre span.Error      {color: #FF8080; border: solid 1.5pt #FF0000;}
+div.codearea pre span.ResWord2   {color: #0080ff; font-weight: bold;}
+div.codearea pre span.Special    {color: #0000ff;}
+div.codearea pre span.Preprc     {color: #803999;}
+
+/* for diff parser */
+table.diff .diff-added span,
+div.codearea pre span.DiffAdded   {background: #b4ddff; font-weight: bold}
+table.diff .diff-removed span,
+div.codearea pre span.DiffRemoved {background: #ffeca1; font-weight: bold;}
+table.diff .diff-changed span,
+div.codearea pre span.DiffChanged {background: #bcde9e; font-weight: bold}
+table.diff .diff-header,
+div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
+
+/* Search results */
+.advancedsearch {
+    border: 1pt solid #ADB9CC;
+}
+
+.advancedsearch td {
+    vertical-align: top;
+    background-color: #E7E7E7;    
+    border: 0px;
+}
+
+.advancedsearch td.searchfor {
+    font-weight: bold;
+}
+
+.advancedsearch input {
+    border: 1px solid #ADB9CC;
+    background-color: #fff;
+}
+
+.advancedsearch input[disabled] {
+    background-color: #eee;
+}
+
+.advancedsearch td.submit {
+    border-top: 1px solid #ADB9CC;
+    background-color: #fff;
+    text-align: right;
+}
+
+.advancedsearch optioni, 
+.advancedsearch select {
+    border: 1px solid #ADB9CC;
+    background-color: #fff;
+}
+
+
+.searchresults dt {
+    margin-top: 1em;
+    font-weight: normal;
+}
+
+.searchresults dd, .searchresults p {
+    font-size: 0.85em;
+}
+
+.searchresults .searchhitinfobar {
+    color: #008000;
+    margin-left: 15px;
+    margin-top: 0;
+}
+
+p.searchstats {
+    font-size: 0.8em;
+    text-align: right;
+    width: 100%;
+    background-color: #E6EAF0;
+    border-top: 1px solid #9088DC;
+    padding: 2px;
+}
+
+p.searchhint {
+    background-color: #E6EAF0;
+    border: 1px solid #9088DC;
+    padding: 2px;
+}
+
+.searchpages {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.searchpages tr, .searchpages td {
+    border: 0;
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+    vertical-align: middle;
+    color: #b93a58;
+    font-weight: bold;
+    font-size: 1.05em;
+}
+
+.searchpages td a, .searchpages td a:link {
+    text-decoration: underline;
+}
+
+/* MonthCalendar css */
+
+/* days without and with pages linked to them */
+a.cal-emptyday {
+    color: #777777;
+    text-align: center;
+}
+a.cal-usedday {
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+}
+/* general stuff: workdays, weekend, today */
+td.cal-workday {
+    background-color: #DDDDFF;
+    text-align: center;
+}
+td.cal-weekend {
+    background-color: #FFDDDD;
+    text-align: center;
+}
+td.cal-today {
+    background-color: #CCFFCC;
+    border-style: solid;
+    border-width: 2pt;
+    text-align: center;
+}
+/* invalid places on the monthly calendar sheet */
+td.cal-invalidday {
+    background-color: #CCCCCC;
+}
+/* links to prev/next month/year */
+a.cal-link {
+    color: #000000;
+    text-decoration: none;
+}
+th.cal-header {
+    background-color: #DDBBFF;
+    text-align: center;
+}
+
+/* for MonthCalendar mouseover info boxes */
+TABLE.tip {
+    color: black;
+    background-color: #FF8888;
+    font-size: small;
+    font-weight: normal;
+    border-style: solid;
+    border-width: 1px;
+}
+
+TH.tip {
+    background-color: #FF4444;
+    font-weight: bold;
+    text-align: center;
+}
+
+TD.tip {
+    text-align: left;
+}
+*[dir="rtl"] TD.tip {
+    text-align: right;
+}
+
+/* end MonthCalendar stuff */
+
+#message .hint {font-style: italic;}
+#message .info {
+    float: none;
+    font-size: 1em;
+    color: black;
+}
+#message .info:before {content: url('../img/icon-info.png'); margin: 0 0.2em;}
+#message .warning:before {content: url('../img/alert.png'); margin: 0 0.2em;}
+#message .error:before {content: url('../img/icon-error.png'); margin: 0 0.2em;}
+
+
+/* admonition start */
+#content div.caution, 
+#content div.important, 
+#content div.note, 
+#content div.tip, 
+#content div.warning {
+    border: 1pt solid #E5E5E5;
+    background-color: #F9F9FF;
+    color: black;
+    
+    margin: 10pt 30pt 10pt 30pt;
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
+    min-height: 64px; /*64=48+8+8 but doesn't work with IE*/
+    padding-left: 64px;
+}
+ 
+#content div.caution p, 
+#content div.important p, 
+#content div.note p, 
+#content div.tip p, 
+#content div.warning p {
+    margin-top: 8px; /*to align text with bg graphic*/
+}
+
+#content div.tip { background-image: url("../img/admon-tip.png"); }
+#content div.note { background-image: url("../img/admon-note.png"); }
+#content div.important { background-image: url("../img/admon-important.png"); }
+#content div.caution { background-image: url("../img/admon-caution.png"); }
+#content div.warning { background-image: url("../img/admon-warning.png"); }
+
+/* admonition end */
+
+h1, h2, h3, h4, h5 {
+    font-family: serif;
+    font-weight: normal;
+    letter-spacing: 0.05em;
+}
+h1 {
+    color: #234764;
+    font-size: 150%;
+}
+h2 {
+    color: #366d9c;
+    font-size: 125%;
+}
+
+ul li {
+    list-style: url(../img/bullet.gif);
+}
+ol li {
+    list-style: decimal;
+}
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/button-on-bg.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAIwAAAARCAIAAACAWtP0AAAAA3NCSVQICAjb4U/g
+AAAACXBIWXMAAAsSAAALEgHS3X78AAAAIHRFWHRTb2Z0d2FyZQBNYWNyb21lZGlh
+IEZpcmV3b3JrcyBNWLuRKiQAAAAWdEVYdENyZWF0aW9uIFRpbWUAMTIvMDYvMDRn
+7m0SAAAAW0lEQVR4nO3V0QkAQQgD0bhs/4XahNeBv3sD8yoIhGjNTPRvN0l3v46h
+zU1SVa9jaHOTnHNex9DGJQFYEoAlAfiTAFwSgCUBeO4AXBKAJQF47gBcEoAlAVgS
+wAdacQY2hOtlkAAAAABJRU5ErkJggg==
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/header-bg2.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAAYAAABSCAIAAAD4sTL+AAAAA3NCSVQICAjb4U/g
+AAAACXBIWXMAAAsSAAALEgHS3X78AAAAIHRFWHRTb2Z0d2FyZQBNYWNyb21lZGlh
+IEZpcmV3b3JrcyBNWLuRKiQAAAAWdEVYdENyZWF0aW9uIFRpbWUAMTIvMDUvMDR1
+W8L8AAAATElEQVR4nGN8+fIlAypgYsAAWIRYGDGFGBjRBYkzi1gbaWw8phCtPURT
+G7EYj03V0LGROOPJtpHGxg8hDw1WG6lpPP1tHAAPkVtiAgC3dwPAjN8N6wAAAABJ
+RU5ErkJggg==
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/nav-off-bg.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAPoAAAARCAYAAAD0b7F8AAAABHNCSVQICAgIfAhk
+iAAAAAlwSFlzAAAK8AAACvABQqw0mAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRp
+YSBGaXJld29ya3MgTVi7kSokAAAAFnRFWHRDcmVhdGlvbiBUaW1lADEyLzA2LzA0
+Z+5tEgAAAIpJREFUeJzt2jEOwyAQRcF15NtyHo4KLalSBCmRXVjWmpnud9s80bCN
+MUYAj7b33u++AbjY6+4DgOsJHRYgdFiA0CGhWuvfPRM6JFRK+Yp73jOhQ1JnYhc6
+JHY0dqFDYrXWKKX83B9Ch6SORh4hdEjpTOQREVtrzV93eDgvOixA6LAAocMChA4L
+eANRljJd8nyitAAAAABJRU5ErkJggg==
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/img/nav-on-bg.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAPoAAAARCAYAAAD0b7F8AAAABHNCSVQICAgIfAhk
+iAAAAAlwSFlzAAAK8AAACvABQqw0mAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRp
+YSBGaXJld29ya3MgTVi7kSokAAAAFnRFWHRDcmVhdGlvbiBUaW1lADEyLzA2LzA0
+Z+5tEgAAALtJREFUeJzt2TsOQFAQheEZsVSCsByCsEKN0CivSiKSKUXG/b/udNOc
+zH1oCCEIgF9Ll2X5egYAL0tV9esZALwsTZLk6xkAvIyNDkSAogMOzfMsWZaZ+UnX
+deXVHXBomibJ89zMd7ptG0UHnBrHUYqiMPNF932n6IBjwzBIWZZmFuGODrjW971U
+VWXmC99rgFNd10ld12a+Y6MDDrVtK03TmPlJj+Pgjg78HEd3IAIc3YEIUHQgAhQd
+iMAJsnlAcYTBdPsAAAAASUVORK5CYII=
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline; filename=screen.css
+Content-Type: text/css; name=screen.css
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/css/screen.css
+Content-Transfer-Encoding: 8bit
+
+html {
+    height: 100%;
+    font-size: 103%;
+    font-family: Arial,Verdana,Geneva,"Bitstream Vera Sans",Helvetica,sans-serif;
+}
+body {
+    position: relative;
+    min-height: 100%;
+    line-height: 1.4;
+}
+form#searchform {
+    float: right;
+    margin: 16px 4% 0 0;
+}
+form#searchform input#searchinput {
+    border: 1px solid #c4cccc;
+    font-size: 88%;
+    vertical-align: middle;
+}
+form#searchform input#fullsearch,
+form#searchform input#titlesearch {
+    border-top: 1px solid #c4cccc;
+    border-left: 1px solid #c4cccc;
+    border-bottom: 1px solid #6f7777;
+    border-right: 1px solid #6f7777;
+    background: #f8f7f7 url(../img/button-on-bg.png) no-repeat;
+    font-weight: bold;
+    color: #223344;
+    font-size: 90%;
+    text-transform: lowercase;
+    vertical-align: middle;
+}
+div#header {
+    background: #f7f7f7 url(../img/header-bg2.png) repeat-x;
+    border-bottom: 1px solid #999;
+    height: 84px;
+    padding: 1px 0;
+    position: relative;
+}
+div#logo {
+    float: left;
+    margin: 10px 0 0 3%;
+    height: 71px;
+    width: 211px;
+    text-align: center;
+}
+div#logo a {
+    outline: none;
+}
+div#sidebar {
+    float: left;
+    width: 13.2em;
+    padding: 0 0.4em 0 1.4em; 
+    margin: 19px 0 0 3%;
+    color: #4b5a6a;
+    font-size: 75%;
+}
+div#sidebar h1 {
+    font-weight: bold;
+    font-size: 103%;
+    color: #4b5a6a;
+    font-family: sans-serif;
+    margin: 0.5em;
+}
+div#sidebar div.sidepanel:first-child h1 {
+    display: none;
+}
+div#sidebar ul#navibar {
+    padding: 0;
+    margin: 0;
+}
+div#sidebar ul#navibar li {
+    margin: 0;
+    padding: 0;
+    border: none;
+    list-style: none;
+    display: block;
+    font-variant: small-caps;
+}
+div#sidebar ul#navibar li a {
+    display: block;
+    border: 1px solid #dadada;
+    margin: 4px 0 0 0;
+    background: #f4f4f4 url(../img/nav-off-bg.png) 100% 0 no-repeat;
+    color: #4b5a6a;
+    font-family: Verdana,Geneva,"Bitstream Vera Sans",Helvetica,sans-serif;
+    padding: 2px 4px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+div#sidebar ul#navibar li.current a {
+    background: #f4f4f4 url(../img/nav-on-bg.png) 100% 0 no-repeat;
+    border-left: 3px solid #ffdb4c;
+    color: #000;
+}
+div#sidebar ul {
+    margin: 0;
+    padding: 0;
+}
+div#sidebar ul li {
+    list-style: url(../img/bullet.gif);
+    margin: 2px 0 2px 2em;
+    padding: 0;
+}
+div#sidebar ul li a {
+    color: #3c4b7b;
+    text-decoration: none;
+}
+div#sidebar ul li a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+div#sidebar select {
+    width: 100%;
+    font-size: 12px;
+}
+div#content {
+    margin: 0 1.5em 0 3%;
+    padding: 12px 0 0 16.5em;
+    font-size: 86%;
+    line-height: 1.5;
+}
+div#footer {
+    clear: both;
+    margin: 1em 1.5em 0 242px;
+    border-top: 1px solid #ddd;
+    padding: 0.5em 0;
+}
+ul#credits {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
+ul#credits a {
+    color: #666;
+    text-decoration: none;
+}
+ul#credits a:hover {
+    text-decoration: underline;
+}
+ul#credits li {
+    display: inline;
+    list-style: none;
+    margin: 1em;
+}
+#locationline {
+    font-size: 86%;
+    position: absolute;
+    bottom: 4px;
+    left: 3%;
+    margin-left: 16.5em;
+    background: url(../img/bullet.gif) no-repeat 0 50%;
+    padding: 0 0 0 12px;
+}
+ul#pagetrail,
+#locationline ul {
+    margin: 0;
+    padding: 0;
+}
+ul#pagetrail li,
+#locationline ul li {
+    margin: 0 1em 0 0;
+    padding: 0;
+    display: inline;
+    list-style: none;
+    font-size: 110%;
+}
+ul#pagetrail li a,
+#locationline ul li a {
+    color: #3A4969;
+    text-decoration: none;
+}
+ul#pagetrail li a:hover,
+#locationline ul li a:hover {
+    text-decoration: underline;
+}
+#locationline ul li a.backlink {
+    font-weight: bold;
+}
+ul#pagetrail {
+    position: absolute;
+    bottom: -1.5em;
+    left: 3%;
+    margin-left: 16.5em;
+    font-size: 86%;
+}
+ul#pagetrail li {
+    font-size: 90%;
+    padding: 0 0 0 12px;
+    margin: 0;
+    background: url(../img/bullet.gif) 1px 50% no-repeat;
+}
+#message {
+    position: absolute;
+    top: 0.5em;
+    left: 242px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0.5em;
+    z-index: 10000;
+    font-size: 12px;
+    margin: 0 0.75em 0 0;
+}
+#message table {
+    max-width: 100%;
+    border: none;
+}
+#message table td {
+    border: none;
+}
+#message p {
+    margin: 0;
+}
+
+#message input {
+    width: 100%;
+}
+#message .buttons input {
+    width: auto;
+}
+#editor {
+    padding: 6em 0 0 0;
+    margin: 0.5em;
+} 
+#editor textarea {
+    display: block;
+    font-size: 100%;
+    width: 100%;
+}
+#editor-comment {
+    display: block;
+    width: 100%;
+}
+div#textcha {
+    padding: 0.25em 1em;
+    background: #fff29f;
+    border: 1px solid #eee18e;
+    margin: 0.25em 0;
+    color: #630;
+}
+
+#pageinfo {
+    margin: 2em 2em 0.25em 0;
+}
+
+#star a {
+    display: block;
+    overflow: hidden;
+    width: 16px;
+    height: 16px;
+    text-indent: 16px;
+    background: url('../img/star_off.png') no-repeat 50% 50%;
+    position: absolute;
+    top: 64px;
+    left: 3%;
+    margin-left: 17.5em;
+    margin-top: -0.2em;
+}
+#star a.unsubscribe {
+    background-image: url('../img/star_on.png');
+}
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline; filename=print.css
+Content-Type: text/css; name=print.css
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/css/print.css
+Content-Transfer-Encoding: 8bit
+
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline; filename=python-logo.gif
+Content-Type: image/gif; name=python-logo.gif
+Content-Location: http://www.python.org/images/python-logo.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlh0wBHAPcAAP/////78vf3///35fb19fPy8u/v7//tyPHs2uvq6urq6vXo
+xv/tYObm5vHlw//krP/rXvXmpvXjmP/mWf/gl9zh5/bfoP/jVN7e3vfekvjhbt3d
+3friYv/gUtfe483f7vbYl/XZjfXagv/We//Wg//bTNbW1vfUe//YSf/TdvjVaPfS
+hPnWW/vVT//VRP/PasbU4P/QQP/NV/fNdMLR3vvOR/jNV//MO8zMzPjHYvvIQPzF
+Of/FMsXFxfnCRLDH2fnAScLCwvvAN/q+QP2+Lv+8Kb29vf+4Lf+1Mf+1IZu/3Zu9
+2qG6z5260bW1taysrJCvyYKv1KioqIKt0aOjo3+oyqGgoICmxn6lxoCjwH2hv3+e
+uJmZmXKgxZGRkXCWtZCPj2SVvWSRtVqRv2SOsoaGhlKNvX5+fkmIu0SJwFCFsEmF
+tkOFuziFw0ODtjiCvkl/rFB8oUN/snV1dTh/ukJ9rjh8tUN5pzd5r2xsbDd2q0Jz
+pTxynjdzpWZmZjZtnDdqlP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAACH5BAUUAIEALAAAAADTAEcAAAj/AAMJHEiwoMGDCBMqXMiw
+ocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEmzps2b
+OHPq3Mmzp8+fQIMKjYiDSx4cQ2fSwBJmjRs5UOWoEaPFQ1KEZfz4QXrVZRM2b8La
+GYunrJ6zesh0LZh161qWTcLSmTuWLNo+ePe8FdiW616UaN6k+SBgCtmyZfEq/hLU
+L8G+N6VIlhxIioFACqTEBKsEAAACdhDfVdyHj88GVub4OQgZp2aBUoJsCPL6Zdgo
+nj+ExjMa75/fPnFoXW2wdeSBUjIbqO0y7JspS9wgTqz4N/CewrWy1uq4Zu3vMeke
+/0ZM2vp1ntmJs+WeEzzs8HVFn61u/k/w4dvdukbOP6cY+tYBshEORjzxBA4NKGQC
+BkThVxx7EzWAg4FGmPAQgQYi2BMNY4DlXHzTlRcgIIAYwAADE6SoQURGnDHci1wk
+WJATqnVHkIOBPPHii08M1JcBGFjholZ5WCGjQRhwsaMfcxiRUANODLljjDpV4dyH
+41Hn24gkGgABBBNcICYLDvWgmlZzlFGGlGccyReEB+Go45J+9PimHz0oSWebBvWQ
+x3Bq/qkVlTMKmiYXZQjqB583NdHGo2/MRZd8eoj4G4ldpijmBSWUIAJDRhD5BIMD
+4SBoGevpF6d2BKWXH5FWIP+FwZx+oEqQCYIaOZARgnJBUANtleFYA3r64etNaUAq
+aV2h9daHeZh2uSmnndbAUFs9HJRetj7CaRCOArn6oFa6EuTEcBYK1MCZThiEq1bt
+hgvuY/PK9EMbV74BInkA/hGttNR26oILDixkXKpn0Kvqt6yWWm8gbTl5kKB25ogm
+QnPmIaO4fT4MUxeQijVeb/X9G8cCHXQg8MAxhGCwt+YORyrEMN/YsLw3d7swQWCQ
+OxC7CDUwnMQcM6weTWbIJZ5d8/X7LyA0qNBpCQO7EEMMNry8s8NaSUzz1gPNW7TO
+Ngo0p60mDFe2QEOCgfPRBXn8koci78bvlpf+uwUCU1f/HcMNN+ig9dqBDFfxwXHn
+PPada58tUA9yB6JnwoEsHnbOMklKx75aPssliXHQgEALK/8N+A07DJ7QcMd+TbjY
+DyM+kOMWY04QrW+vbjtMWNqdWBYwGCD88MQbsIAKKCTP8uk8NK86QoCSrTvclstu
+tla24p6Q9pYLFHlLy+57RwUScHDi+SdqGjDVVjPfPA/Pr1qr9NArHnvN188fCOS7
+509594Xrn0vcsLks4aECGkDf+VI0gZSpjH3tA9z7eCCE+BntcPjznv1sZ73a2So9
+6TpIz/QHwO+xZAycw0MWIqDA9KXIgSuzmukmWAQfWLBVw4mX66ZXkOplkHYB9IPX
+/wwyJDuVUIAtucLIzlIB8ylQfQHzmwRpWIQZ3HAg59JKCCPGQxxy8IfY01nrCiI0
+LeaufnCTCQzigxY9FGACTwyTmPoWwRtMkAdFyCMCriiQM1HuTmNMHPXuBzYP7opI
+bppdGM8oP5zUYTp4wEsB4rgpOprOju/LYx6HcC2tVCxmWuGWQKiAroPwD25p00oC
+xtW4RQISSYLyyxHTKBMomOUuk1ygHKfGvktSMY9JAEEn0eQEUiWAVl4oSAIElYcn
+rDIQCTBCWzB3pk8yDmOuDAQGevXMyhXRi7TUYDhjIobe5JKBMISgLzOpySQAoSFt
+OROaXnSGbg7kXXTakbuGM/+HWNHPIEAUiAnOlAc1SYkKPZSbCV3CBDjc4aF3CMSX
+XpgygdXgojrIqEaFwNGOWhGe3MGBF3bUzIQkaUlecEICHmaCkXrynwUJqECOqSit
+eMFGswwKFPumAo/0pQBAxYFQCUeQBAwVA0AFauSEOrOMmGCo9vzLQqZlSfe9r4IU
+6WBFFirVl8yxqlNsXh6xOhGtTmSl+utqTipautPZUQYUGIEmK2JWiWQnkGqtCR3r
++L4BeCYFSSACXTNIET0NMa81aYHyZBhWHgTAMyRIAlklUleIhMoPeYgqYmeSASli
+MpMvOMADjpCEFQy2kBE5aSg3mxMWrJOdSYhtEnJgkcrSJsQET+CClOZAVNbCxAI1
++CwegRlbJAjTInrqrUKKxSRn+pYnCzgBEIRABE0OYQYFcyoVQiiRHpSBCk7g7nPH
+S97ymve86E2vetfLXoYQIKnwja9829ve98oXqMUT3n2TSt/yEsC+Sc2vgPN73/6y
+FsD4LV4CFszgBieAwPE1cF7/C18FM7gBGM5wAxpcvPlKuKsILkB+HUxiCMP3wxMO
+8YBXrF8PozjFFN6vjJP63/++2L81zrGOd3zjHvv4x0AOspCHTOQiG/nISE6ykpfc
+44AAADs=
+
+------------xpeOdCDOsZn44apXgGWkDP
+Content-Disposition: inline; filename=projection.htm
+Content-Type: text/html; charset=utf-8; name=projection.htm
+Content-Location: http://wiki.python.org/moin/moin_static193/europython/css/projection.css
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="robots" content="index,nofollow">
+
+<title>moin_static193/europython/css/projection.css - PythonInfo Wiki</title>
+<script type="text/javascript" src="/moin/moin_static193/common/js/common.js"></script>
+
+<script type="text/javascript">
+<!--
+var search_hint = "Búsqueda";
+//-->
+</script>
+
+<script type="text/javascript">
+<!-- // GUI edit link and i18n
+var gui_editor_link_href = "/moin/moin_static193/europython/css/projection.css?action=edit&editor=gui";
+var gui_editor_link_text = "Edición (GUI)";
+//-->
+</script>
+
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="/moin/moin_static193/europython/css/common.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="screen" href="/moin/moin_static193/europython/css/screen.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="print" href="/moin/moin_static193/europython/css/print.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="projection" href="/moin/moin_static193/europython/css/projection.css">
+
+<!-- css only for MS IE6/IE7 browsers -->
+<!--[if lt IE 8]>
+   <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="/moin/moin_static193/europython/css/msie.css">
+<![endif]-->
+
+
+
+<link rel="alternate" type="application/wiki" title="Editar" href="/moin/moin_static193/europython/css/projection.css?action=edit">
+
+<link rel="Start" href="/moin/FrontPage">
+<link rel="Alternate" title="Formato Wiki" href="/moin/moin_static193/europython/css/projection.css?action=raw">
+<link rel="Alternate" media="print" title="Vista de impresión" href="/moin/moin_static193/europython/css/projection.css?action=print">
+<link rel="Search" href="/moin/FindPage">
+<link rel="Index" href="/moin/TitleIndex">
+<link rel="Glossary" href="/moin/WordIndex">
+<link rel="Help" href="/moin/HelpOnFormatting">
+</head>
+
+<body  lang="es" dir="ltr">
+
+<div id="header">
+
+<form id="searchform" method="get" action="/moin/moin_static193/europython/css/projection.css">
+<div>
+<input type="hidden" name="action" value="fullsearch">
+<input type="hidden" name="context" value="180">
+<label for="searchinput">Buscar:</label>
+<input id="searchinput" type="text" name="value" value="" size="20"
+    onfocus="searchFocus(this)" onblur="searchBlur(this)"
+    onkeyup="searchChange(this)" onchange="searchChange(this)" alt="Search">
+<input id="titlesearch" name="titlesearch" type="submit"
+    value="Títulos" alt="Search Titles">
+<input id="fullsearch" name="fullsearch" type="submit"
+    value="Texto" alt="Search Full Text">
+</div>
+</form>
+<script type="text/javascript">
+<!--// Initialize search form
+var f = document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display = 'none';
+var e = document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+<div id="logo"><a href="/moin/FrontPage"></a><a href="http://python.org"><img src="http://www.python.org/images/python-logo.gif" alt="Python" ></a><a name="logo"></a></div>
+<div id="locationline">
+
+
+<ul id="pagelocation">
+<li><a class="nonexistent" href="/moin/moin_static193">moin_static193</a></li><li><a class="nonexistent" href="/moin/moin_static193/europython">europython</a></li><li><a class="nonexistent" href="/moin/moin_static193/europython/css">css</a></li><li><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css?action=fullsearch&amp;context=180&amp;value=linkto%3A%22moin_static193%2Feuropython%2Fcss%2Fprojection.css%22" rel="nofollow" title="Efectuar una búsqueda por páginas que tienen este título en contenidos">projection.css</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="sidebar">
+<div id="star">
+
+</div>
+<div class="sidepanel">
+
+<ul id="navibar">
+<li class="wikilink"><a href="/moin/FrontPage">FrontPage</a></li><li class="wikilink"><a href="/moin/RecentChanges">RecentChanges</a></li><li class="wikilink"><a href="/moin/FindPage">FindPage</a></li><li class="wikilink"><a href="/moin/HelpContents">HelpContents</a></li><li class="current"><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css">projection.css</a></li>
+</ul>
+
+</div>
+<div class="sidepanel">
+<h1>Página</h1>
+<ul class="editbar"><li><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css?action=edit&amp;editor=text" name="texteditlink" rel="nofollow">Edición (Texto)</a></li><li class="toggleCommentsButton" style="display:none;"><a href="#" class="nbcomment" onClick="toggleComments();return false;">Comentarios</a></li><li><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css?action=info" rel="nofollow">Información</a></li><li><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css?action=AttachFile" rel="nofollow">Adjuntos</a></li><li>
+<form class="actionsmenu" method="GET" action="/moin/moin_static193/europython/css/projection.css">
+<div>
+    <label>Más Acciones</label>
+    <select name="action"
+        onchange="if ((this.selectedIndex != 0) &&
+                      (this.options[this.selectedIndex].disabled == false)) {
+                this.form.submit();
+            }
+            this.selectedIndex = 0;">
+        <option value="raw">Texto sin formato</option>
+<option value="print">Vista de impresión</option>
+<option value="refresh">Eliminar caché</option>
+<option value="show" disabled class="disabled">------------------------</option>
+<option value="SpellCheck">Revisar ortografía</option>
+<option value="LikePages">Páginas similares</option>
+<option value="LocalSiteMap">Mapa del sitio</option>
+<option value="show" disabled class="disabled">------------------------</option>
+<option value="RenamePage" disabled class="disabled">Renombrar Página</option>
+<option value="DeletePage" disabled class="disabled">Eliminar página</option>
+<option value="show" disabled class="disabled">------------------------</option>
+<option value="show" disabled class="disabled">------------------------</option>
+<option value="show" disabled class="disabled">Eliminar Spam</option>
+<option value="show" disabled class="disabled">Revertir a esta revisión</option>
+<option value="show" disabled class="disabled">------------------------</option>
+<option value="Load">Subir</option>
+<option value="SlideShow">SlideShow</option>
+    </select>
+    <input type="submit" value="Hacer">
+    
+</div>
+<script type="text/javascript">
+<!--// Init menu
+actionsMenuInit('Más Acciones');
+//-->
+</script>
+</form>
+</li></ul>
+
+</div>
+<div class="sidepanel">
+<h1>Usuario</h1>
+<ul id="username"><li><a class="nonexistent" href="/moin/moin_static193/europython/css/projection.css?action=login" id="login" rel="nofollow">Ingresar</a></li></ul>
+</div>
+</div>
+
+<div id="page" lang="en" dir="ltr">
+<div dir="ltr" id="content" lang="en"><span class="anchor" id="top"></span>
+<span class="anchor" id="line-1"></span><span class="anchor" id="line-2"></span><span class="anchor" id="line-3"></span><span class="anchor" id="line-4"></span><span class="anchor" id="line-5"></span><span class="anchor" id="line-6"></span><p class="line867"><strong>This page does not exist yet. You can create a new empty page, or use one of the page templates. Before creating the page, please check if a similar page already exists.</strong> <span class="anchor" id="line-7"></span><span class="anchor" id="line-8"></span><p class="line867"><a class="action" href="/moin/moin_static193/europython/css/projection.css?action=edit">Create new empty page</a> <span class="anchor" id="line-9"></span><span class="anchor" id="line-10"></span><span class="anchor" id="bottom"></span></div>
+<div id="pagebottom"></div>
+</div>
+
+
+<div id="footer">
+<ul id="credits">
+<li><a href="http://moinmo.in/" title="This site uses the MoinMoin Wiki software.">MoinMoin Powered</a></li><li><a href="http://moinmo.in/Python" title="MoinMoin is written in Python.">Python Powered</a></li><li><a href="http://moinmo.in/GPL" title="MoinMoin is GPL licensed.">GPL licensed</a></li><li><a href="http://validator.w3.org/check?uri=referer" title="Click here to validate this page.">Valid HTML 4.01</a></li>
+</ul>
+
+
+</div>
+</body>
+</html>
+
+
+------------xpeOdCDOsZn44apXgGWkDP--
