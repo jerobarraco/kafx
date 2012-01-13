@@ -45,7 +45,7 @@ setup(
  	package_data = {
 		'kafx':['*.ass', 'texturas/*.png']#nunca funciona!
 		},
-	data_files = [('texturas', ['texturas/*.png']), ('ass', ['*.ass'])],
+	#data_files = [('texturas', ['texturas/*.png']), ('ass', ['*.ass'])],
 	#		'':['*.ass'],
 	#		'texturas':['*.png'],
 	#		'bpm':'*.bpm',

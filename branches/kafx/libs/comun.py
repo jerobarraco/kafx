@@ -7,7 +7,12 @@ import math
 import random
 
 from libs import video
-from libs.draw import Clamp
+
+def Clamp(num):
+	"Recorta un número flotante al rango entre 0.0 y 1.0"
+	if num < 0.0 : return 0.0
+	if num > 1.0 : return 1.0
+	return num
 
 def ElegirPorCuadro(cuadro_ini, cuadro_fin, activo, inactivo=None ):
 	"""frame_ini tiene el cuadro en que inicia
