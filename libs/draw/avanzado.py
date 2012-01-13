@@ -502,7 +502,7 @@ def fOnda( inicio,  delta=0.1,  amplitud = 10,  vertical=True,  borrar=True):
 class cSprite():
 	#Implementación basica de una imagen estática
 	#Para animar cambien las propiedades
-	def __init__(self, text=None, x = 0, y = 0, angle=0, color=None, mode=1, escala=1.0, center=False):
+	def __init__(self, text=None, x = 0, y = 0, angle=0, color=None, mode=1, escala=1.0):
 		"""
 		@text : pattern que se usará como textura
 			(se puede cargar con extra.CargarTextura("archivo.png") o simplemente pasar el nombre de archivo "archivo.png")
@@ -524,9 +524,6 @@ class cSprite():
 		self.mode = mode
 		self.x = x
 		self.y = y
-		if center:
-			self.x += self.org_x*escala
-			self.y += self.org_y*escala
 		self.Escalar(escala, escala)
 
 	def Escalar(self, x, y):
@@ -545,6 +542,7 @@ class cSprite():
 		mat.scale(self.sx, self.sy)
 		mat.translate(-self.x, -self.y)
 		self.pat.set_matrix(mat)"""
+
 		self._pat.set_matrix(extra.CrearMatriz(self.x, self.y, self.org_x, self.org_y, self.angle, self.scale_x, self.scale_y, True))
 		ctx = video.cf.ctx
 		if self.mode:
@@ -832,7 +830,7 @@ def CrearParticulas(box, textura, escala=1.0, alpha_min=0.1, barrido_vertical=Tr
 					c.g = g
 					c.b = b
 					#y creamos una "particula"
-					parts.append(cSprite(text= textura, x=x, y=y, escala=escala, color=c, mode=mode, center=True))
+					parts.append(cSprite(text= textura, x=x, y=y, escala=escala, color=c, mode=mode))
 				except:
 					import traceback
 					print "Error al crear las particulas", traceback.print_exc()
