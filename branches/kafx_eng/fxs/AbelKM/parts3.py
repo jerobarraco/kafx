@@ -1,8 +1,17 @@
 # -*- coding: utf-8 -*-
-from libs import comun, physics
+from libs import comun, physics, video
 from libs.draw import extra, avanzado
+
 from random import randint, random
+
+import cairo
+
+
+
 t = extra.CargarTextura("texturas/uq7.png")
+
+t3 = extra.CargarTextura('texturas/barra_gc.png') #entrada
+
 #If you use physics in only one effect you can assign to "self" in that effect, that would make it slightly faster
 world = None
 class Efecto():
@@ -10,7 +19,7 @@ class Efecto():
 		self.eventos = [Evento1()]
 	def EnSilabaInicia(self, sil):
 		global t
-		sil.actual.color1.CopyFrom(sil.actual.color2)
+		#sil.actual.color1.CopyFrom(sil.actual.color2)
 		sil.parts = sil.CrearParticulas(t, escala=0.1)
 		sil.crear = True
 		x = sil.actual.pos_x+ sil.actual.org_x
@@ -19,7 +28,16 @@ class Efecto():
 
 	def EnSilabaDorm(self, sil):
 		sil.PaintWithCache()
-
+	def EnDialogoEntra(self, d):
+		global t3
+		#d.MoverDe((0+(comun.Interpolate(d.progress, -40,0, comun.i_b_backstart))) ,(0))
+		mov = comun.Interpolate(d.progress,1380, 3480)#el fx parece dar toda la vuelta... o ya no?
+		extra.MoveTexture(t3, mov, 50)
+		avanzado.GrupoInicio()
+		d.Paint()
+		texto = avanzado.GrupoFin(0)
+		video.cf.ctx.set_source(texto)
+		video.cf.ctx.mask(t3)
 
 class Evento1():
 		def EnSilaba(self, sil):
@@ -48,19 +66,14 @@ class Evento1():
 		def TiempoSilaba(self, sil):
                         return (sil._start, sil._end+500)
 
-class Efecto2():
-	def EnDialogo(self, d):
-		d.PaintWithCache()
 
-	def EnSilaba(self, s):
-		s.Paint()
 
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		global world
-		self.fxs = (Efecto(), Efecto2())
+		self.fxs = (Efecto(),Efecto())
 		world = physics.World(grav_y = 0)
-		#self.sil_out_ms = 1200
+		self.in_ms = 500
 
 
 	def EnCuadroInicia(self):
