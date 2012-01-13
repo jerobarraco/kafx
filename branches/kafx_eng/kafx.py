@@ -124,7 +124,7 @@ if __name__ == '__main__':
 			module = os.sys.argv[1]
 			module = os.path.split(module)[-1]
 			module = module.split('.')[0]
-			
+
 		if len(os.sys.argv)>2:
 			profiling = bool(os.sys.argv[2])
 			kf.SetProfiling(profiling)
@@ -134,7 +134,7 @@ if __name__ == '__main__':
 	except Exception, e:
 		print e
 		print "No pude importar el archivo "+module+"(.py) asegurate que exista, que este bien el nombre y que no tenga errores"
-		exit()
+		die()
 
 	w = conf.width
 	h = conf.height
@@ -178,7 +178,7 @@ if __name__ == '__main__':
 		running = False
 		p.terminate()
 		p2.terminate()
-	"""c= self.coords
+		"""c= self.coords
 		glPixelStorei(GL_PACK_ALIGNMENT, 1)
 		return  glReadPixels(c[0], c[1], c[2], c[3],GL_RGB,GL_UNSIGNED_BYTE)
-	"""
+		"""

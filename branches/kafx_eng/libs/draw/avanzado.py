@@ -33,7 +33,7 @@ class Capa:
 		self.ctx.set_operator(cairo.OPERATOR_CLEAR)
 		self.ctx.paint()
 		self.ctx.set_operator(cairo.OPERATOR_OVER)"""
-		self.ctx = cairo.Context(cairo.ImageSurface(vi.modo, vi.width, vi.height))#habia cambiado modo por mode, pero me tiro error para las capas asi que lo deje como estaba :D		
+		self.ctx = cairo.Context(cairo.ImageSurface(vi.modo, vi.width, vi.height))#habia cambiado modo por mode, pero me tiro error para las capas asi que lo deje como estaba :D
 		self.ctx.set_antialias(cairo.ANTIALIAS_SUBPIXEL)
 		#cairo.ANTIALIAS_SUBPIXEL
 		#cairo.ANTIALIAS_NONE
@@ -43,7 +43,7 @@ class Capa:
 		self.ctx.set_font_options(fop)
 		self.ctx.set_line_join(cairo.LINE_JOIN_ROUND)
 		self.ctx.set_line_cap(cairo.LINE_CAP_ROUND)
-		
+
 		if mode not in OPERATORS :
 			mode = 'over'
 
@@ -68,7 +68,7 @@ def CapasActivar(capa=0, opacity=1.0, mode='over'):
 	todo lo que se pinte luego de esto se pintará sobre la capa activada.
 	@capa Nombre de la capa a activar, igual que se uso en CapasCrear
 		la capa de nombre "base" es una capa especial, la capa del video, sobre la que se pinta todo.
-		
+
 	Si no existe la crea, y ahi se usan los parametros adicionales
 	@capa
 		nombre de la capa. Puede ser un numero o un texto, Esto define el orden en que se pintan
@@ -502,11 +502,12 @@ def fOnda( inicio,  delta=0.1,  amplitud = 10,  vertical=True,  borrar=True):
 class cSprite():
 	#Implementación basica de una imagen estática
 	#Para animar cambien las propiedades
-	def __init__(self, text=None, x = 0, y = 0, angle=0, color=None, mode=1, escala=1.0):
+	def __init__(self, text=None, x = 0, y = 0, angle=0, color=None, mode=1, escala=1.0, center=False):
 		"""
 		@text : pattern que se usará como textura
 			(se puede cargar con extra.CargarTextura("archivo.png") o simplemente pasar el nombre de archivo "archivo.png")
 		@mode =1: 1-> textura solida, 0-> un solo color y mascara
+		@center =False: If true, then the sprite will be moved to be centered at the x/y (works better with squared textures)
 		"""
 		if text == None:
 			text = cairo.SurfacePattern(cairo.ImageSurface.create_from_png("texturas/sakura.png"))
@@ -523,6 +524,9 @@ class cSprite():
 		self.mode = mode
 		self.x = x
 		self.y = y
+		if center:
+			self.x += self.org_x*escala
+			self.y += self.org_y*escala
 		self.Escalar(escala, escala)
 
 	def Escalar(self, x, y):
@@ -828,7 +832,7 @@ def CrearParticulas(box, textura, escala=1.0, alpha_min=0.1, barrido_vertical=Tr
 					c.g = g
 					c.b = b
 					#y creamos una "particula"
-					parts.append(cSprite(text= textura, x=x, y=y, escala=escala, color=c, mode=mode))
+					parts.append(cSprite(text= textura, x=x, y=y, escala=escala, color=c, mode=mode, center=True))
 				except:
 					import traceback
 					print "Error al crear las particulas", traceback.print_exc()
