@@ -517,8 +517,8 @@ class cSprite():
 
 		self._ancho = (self._s.get_width())
 		self._alto = (self._s.get_height())
-		self.org_x = (self._ancho/2)
-		self.org_y = (self._alto/2)
+		self.org_x = (self._ancho/2.0)
+		self.org_y = (self._alto/2.0)
 		self.angle = angle
 		self.color = color or extra.cCairoColor()
 		self.mode = mode
