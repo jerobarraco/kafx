@@ -727,7 +727,7 @@ class cVector():
 		@textura -> pattern con la textura a usar
 		opcionales:
 		@escala=1.0 -> escala con la que se inicializarán todas las texturas
-		@alpha_min=40 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
+		@alpha_min=0.2 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
 		@barrido_vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
 		las partículas en el array, por lo tanto la forma en que se recorre
 		@mode=0 -> el mode de las particulas
