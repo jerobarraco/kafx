@@ -23,7 +23,7 @@ width = 640
 height = 358
 frames = 100000
 start_frame = 0
-#Parameters for output video. "As seen in" ffmpeg 
+#Parameters for output video. "As seen in" ffmpeg
 #this is the simpliest case
 #out_parameters = ['-target', 'ntsc-dvd', '-y' , video_out]#using target solves REALLY a LLLOOOOOOOOOOOOT of problems.
 

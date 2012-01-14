@@ -26,11 +26,9 @@ class cVideoInfo:
 	width=640 # width=0 means no video; ancho
 	height=480 #alto
 	num_frames=0 #cantidad total de cuadros (corresponde a avisynth)
-	fps_numerator=1 #numerador del FPS
-	fps_denominator=1 #denominador del FPS
 	fps=30.0 #Fps en float
 	fpscof1 = 30.0/1000.0 #fpscof1 = fps /1000.0 #coeficientes precalculados para el calculo de milisegundos y frames
-	fpscof2 = 1000/30.0 #fpscof2 = 1000.0 / fps
+	fpscof2 = 1000.0/30.0 #fpscof2 = 1000.0 / fps
 	fake_stride = 0 #un stride precalculado para cuando se necesite hacer width*4
 
 	def MSToFrame(self, ms):
