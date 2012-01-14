@@ -760,14 +760,14 @@ class cParticleSystem():
 				#Este es el animador de la particula, puede ser uno personalizado
 				self.Animar(p)
 
-def CrearParticulas(box, textura, escala=1.0, alpha_min=0.1, barrido_vertical=True, mode=0 ):
+def CrearParticulas(box, textura, escala=1.0, alpha_min=0.2, barrido_vertical=True, mode=0 ):
 		"""Super Lento
 		parametros:
 		@box -> tupla con las coordenadas de donde buscar (x0, y0, ancho, alto) (todos los items DEBEN ser enteros (int)))
 		@textura -> pattern que se usará como textura
 		opcionales:
 		@escala=1.0 -> escala con la que se inicializarán todas las texturas
-		@alpha_min=40 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
+		@alpha_min=0.2 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
 		@barrido_vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
 				las partículas en el array, por lo tanto la forma en que se recorre
 		@mode=0 -> el mode de las particulas
@@ -780,10 +780,12 @@ def CrearParticulas(box, textura, escala=1.0, alpha_min=0.1, barrido_vertical=Tr
 		im = video.cf.ctx.get_group_target()
 
 		#estos no los necesito
-		#width = im.get_width()
-		#h = im.get_height()
+		width = im.get_width()
+		height = im.get_height()
 		if hasattr(im, 'get_stride'):
 			stride = im.get_stride() #Normalmente es w*4 (4 bytes por pixels)
+			#esto esta mas que nada para soportar el raro caso en que el stride sea
+			#mayor al w*4 , porque si usaramos 3 bytes por pixel, fallaria horriblemente
 		else:
 			stride = video.vi.width* 4
 
@@ -800,6 +802,7 @@ def CrearParticulas(box, textura, escala=1.0, alpha_min=0.1, barrido_vertical=Tr
 		else:
 			i1, i2 = y1, y2
 			j1, j2 = x1, x2
+
 		#recorremos lo pixels
 		for i in xrange(i1, i2):
 			for j in xrange(j1, j2):
@@ -809,8 +812,15 @@ def CrearParticulas(box, textura, escala=1.0, alpha_min=0.1, barrido_vertical=Tr
 				else:
 					y = i
 					x = j
+				#si el stdout dice que faltan mas valores para unpack, entonces hay que cambiar el > por >=
+				if x <0 or x>=width:
+					continue
+				if y <0 or y>=height:
+					continue
+
 				pos = (y*stride) + (x*4)
-				try:#la posicion puede estar fuera d rango.
+
+				try:#la posicion puede estar fuera de rango.
 					#obtenemos el pixel
 					#OJO, me entere que si el micro es BigEnding o SmallEnding (byte shit) el orden cambia
 
@@ -830,7 +840,7 @@ def CrearParticulas(box, textura, escala=1.0, alpha_min=0.1, barrido_vertical=Tr
 					c.g = g
 					c.b = b
 					#y creamos una "particula"
-					parts.append(cSprite(text= textura, x=x, y=y, escala=escala, color=c, mode=mode))
+					parts.append(cSprite(text= textura, x=x+0.5, y=y+0.5, escala=escala, color=c, mode=mode))
 				except:
 					import traceback
 					print "Error al crear las particulas", traceback.print_exc()
