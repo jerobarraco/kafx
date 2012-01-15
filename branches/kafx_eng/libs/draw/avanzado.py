@@ -51,7 +51,7 @@ class Capa:
 		self.alpha = opacidad
 
 def CapasInicia():
-	"""Llamar en cada EnCuadroInicia"""
+	"""Llamar en cada OnFrameStarts"""
 	global _capas
 	_capas = {}
 
@@ -85,7 +85,7 @@ def CapasActivar(capa=0, opacity=1.0, mode='over'):
 	video.cf.ctx = _capas[capa].ctx
 
 def CapasFin():
-	"""Llamar en cada EnCuadroFin"""
+	"""Llamar en cada OnFrameEnds"""
 	global _capas
 	video.cf.ctx = _capas['base'].ctx
 	ctx = video.cf.ctx
