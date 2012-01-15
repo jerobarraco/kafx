@@ -136,7 +136,7 @@ class Encoder():
 		from libs import asslib
 		infop =s.Popen(['ffmpeg', '-i', self.conf.video_in], stdout=s.PIPE, stderr=s.PIPE)
 		out, err = infop.communicate()
-		self.durations = "01:00:00"
+		self.durations = "01:00:00.00"
 		self.fps = 29.97
 		self.w = 640
 		self.h = 480
@@ -147,6 +147,7 @@ class Encoder():
 				a +=2
 				b = l.find(",")
 				self.durations = l[a:b]
+				print self.durations
 			elif ("stream #" in low) and ("video: " in low):
 				parts = low.split(",") #esperemos que no haya ningun codec con una "," en el medio...
 				self.w, self.h = map(int, parts[2].strip().split(" ")[0].split("x"))

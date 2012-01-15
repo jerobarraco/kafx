@@ -487,6 +487,45 @@ class cVector():
 				ctx.close_path()
 		self.path = ctx.copy_path()
 
+	def __CreateDifPath(self, other):
+		#dado que cairo tiene unos vectores mas complicados necesito formatear ambos,
+		#reducirlos al minimo comun generaria perdida, asi que tengo que expandirlos al mas grande
+		import itertools
+		def group(path):
+			gpath = []
+			thispath = []
+			for i in path:
+				if i[0]==3:
+					if thispath:#notar que evitamos el close porque me molesta
+						gpath.append(thispath)
+						thispath = []
+				else:
+					thispath.append(i)
+			return gpath
+
+		self.__from_path = group(self._old_path)
+		self.__to_path = group(other.path)
+		#primero normalizar los grupos, tiene que haber igual cantidad de grupos
+		lastf = self.__from_path[0][:] #el primer grupo
+		lastt = self.__to_path[0][:] #el primer grupo
+		for fg, tg in itertools.izip_longest(self.__from_path, self.__to_path, fillvalue=None):
+			#si no tiene un punto tomamos el ultimo
+			if not fg :
+				fg = lastf[:]
+				self.__from_path.append(lastf)
+
+			if not tg :
+				tg = lastt[:]
+				self.__from_path.append(lastf)
+
+			lastf=fg[:]
+			lastt=tg[:]
+
+	def Morph(self, other):
+		if not hasattr(self, "__from_path"):
+			self.__CreateDifPath(other)
+
+
 	def Restore(self):
 		"""Restaura el estilo de un vector"""
 		self.actual.CopyFrom(self.original)
