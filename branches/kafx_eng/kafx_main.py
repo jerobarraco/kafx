@@ -60,7 +60,7 @@ def PintarEnPantalla(msg):
 	global error_obj
 	lasty = 15
 	for n in msg.split('\n'):
-		lasty = error_obj.CambiarTexto(n, (15, lasty))[1] + error_obj.original._alto_linea
+		lasty = error_obj.ChangeText(n, (15, lasty))[1] + error_obj.original._alto_linea
 		error_obj.Paint()
 
 def Error(msg=""):
@@ -227,12 +227,12 @@ def __PreLoad():
 
 		#Llamamos a la función de cuando se inicia el dialogo
 		#No es necsaria una iteracion especial para esto, ya que no deberia pintarse nada aca
-		inicio = getattr(efecto, "EnDialogoInicia", None)
+		inicio = getattr(efecto, "OnDialogueStarts", None)
 		if inicio: inicio(diag)
 
 		#Dialogo Sale
 		#nos fijamos si definio la funcion EnDialogoSale
-		evento = getattr(efecto, "EnDialogoSale", None)
+		evento = getattr(efecto, "OnDialogueOut", None)
 		#Si no la definio entonces no la quiere, y no la cargamos y con continue vamos al siguiente dialogo
 		if not evento: continue
 
@@ -252,7 +252,7 @@ def __PreLoad():
 
 	#Dialogo Entra
 	for diag in dialogos:
-		evento = getattr(fs[diag.efecto], "EnDialogoEntra", None)
+		evento = getattr(fs[diag.efecto], "OnDialogueIn", None)
 		if not evento: continue
 
 		ini = diag._start - fx.in_ms
@@ -268,7 +268,7 @@ def __PreLoad():
 
 	#Dialogo Animado o Activo
 	for diag in dialogos:
-		evento = getattr(fs[diag.efecto], "EnDialogo", None)
+		evento = getattr(fs[diag.efecto], "OnDialogue", None)
 		if not evento: continue
 
 		ini = diag._start
@@ -291,7 +291,7 @@ def __PreLoad():
 		for evento in eventos:
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios eventos extras en cada efecto
-			enDialogo = getattr(evento, "EnDialogo", None)
+			enDialogo = getattr(evento, "OnDialogue", None)
 			if not enDialogo: continue
 
 			ini, end = evento.TiempoDialogo(diag)
@@ -358,12 +358,12 @@ def __PreLoadSilabas(diag):
 	for sil in silabas:
 		sil.progress = 0.0
 		#1º la inicializamos
-		inicio = getattr(fs[sil.efecto], "EnSilabaInicia", None)
+		inicio = getattr(fs[sil.efecto], "OnSyllableStarts", None)
 		if inicio: inicio(sil)
 
 	#Zilaba Muerta
 	for sil in silabas:
-		evento = getattr(fs[sil.efecto], "EnSilabaMuerta", None)
+		evento = getattr(fs[sil.efecto], "OnSyllableDead", None)
 		if not evento: continue
 
 		ini = sil._end
@@ -380,7 +380,7 @@ def __PreLoadSilabas(diag):
 
 	#Silaba Dormida
 	for sil in silabas:
-		evento = getattr(fs[sil.efecto], "EnSilabaDorm", None)
+		evento = getattr(fs[sil.efecto], "OnSyllableSleep", None)
 		if not evento: continue
 
 		ini = diag._start
@@ -398,7 +398,7 @@ def __PreLoadSilabas(diag):
 
 	#Silaba sale
 	for sil in silabas:
-		evento = getattr(fs[sil.efecto], "EnSilabaSale", None)
+		evento = getattr(fs[sil.efecto], "OnSyllableOut", None)
 		if not evento: continue
 
 		ini = sil._end
@@ -415,7 +415,7 @@ def __PreLoadSilabas(diag):
 
 	#Silaba entra
 	for sil in silabas:
-		evento = getattr(fs[sil.efecto], "EnSilabaEntra", None)
+		evento = getattr(fs[sil.efecto], "OnSyllableIn", None)
 		if not evento: continue
 
 		ini = sil._start - fx.sil_in_ms
@@ -432,7 +432,7 @@ def __PreLoadSilabas(diag):
 
 	#Silaba Animada
 	for sil in silabas:
-		evento = getattr(fs[sil.efecto], "EnSilaba", None)
+		evento = getattr(fs[sil.efecto], "OnSyllable", None)
 		if not evento: continue
 
 		ini = sil._start
@@ -453,7 +453,7 @@ def __PreLoadSilabas(diag):
 		if not eventos: continue
 
 		for evento in eventos:
-			enSilaba = getattr(evento, "EnSilaba", None)
+			enSilaba = getattr(evento, "OnSyllable", None)
 			if not enSilaba: continue
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios eventos extras en cada efecto
@@ -489,10 +489,10 @@ def __PreLoadLetras(sil):
 
 		efecto = fs[letra.efecto]
 
-		inicio = getattr(efecto, "EnLetraInicia", None)
+		inicio = getattr(efecto, "OnLetterStarts", None)
 		if inicio: inicio(letra)
 
-		evento = getattr(efecto, "EnLetraEntra", None)
+		evento = getattr(efecto, "OnLetterIn", None)
 		if not evento: continue
 
 		ini = letra._start - fx.letra_in_ms
@@ -509,7 +509,7 @@ def __PreLoadLetras(sil):
 
 	#letra sale
 	for letra in letras:
-		evento = getattr(fs[letra.efecto], "EnLetraSale", None)
+		evento = getattr(fs[letra.efecto], "OnLetterOut", None)
 		if not evento: continue
 
 		ini = letra._end
@@ -526,7 +526,7 @@ def __PreLoadLetras(sil):
 
 	#letra Animada
 	for letra in letras:
-		evento = getattr(fs[letra.efecto], "EnLetra", None)
+		evento = getattr(fs[letra.efecto], "OnLetter", None)
 		if not evento: continue
 
 		ini = letra._start
@@ -547,7 +547,7 @@ def __PreLoadLetras(sil):
 		if not eventos: continue
 
 		for evento in eventos:
-			enLetra = getattr(evento, "EnLetra", None)
+			enLetra = getattr(evento, "OnLetter", None)
 			if not enLetra: continue
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios eventos extras en cada efecto
