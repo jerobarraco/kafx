@@ -56,14 +56,14 @@ def TimeToMS(tiempo):
 	return result #y si no hay ningun caracter raro por ahi todo OK
 
 
-class cPropiedades():
+class cProperties():
 	def __init__(self, other=None, dicc=None):
 		"""Hay 3 formas de crear un estilo:
 		sin nada, se crea con valores default.
-		cPropiedades(other=otroacopiar) o cPropiedades(otroacopiar) copia los valores de otro
-		cPropiedades(dicc=diccionario) lo inicializa con los valores de un diccionario ass"""
+		cProperties(other=otroacopiar) o cProperties(otroacopiar) copia los valores de otro
+		cProperties(dicc=diccionario) lo inicializa con los valores de un diccionario ass"""
 
-		#Estos necesitan estar afuera porque si no estan inicializados, en el caso q se cree directamente una  instancia cPropiedades dara error!!
+		#Estos necesitan estar afuera porque si no estan inicializados, en el caso q se cree directamente una  instancia cProperties dara error!!
 		self.color1 = extra.cCairoColor(numero=0xFFFF2020) #Notar q el 0x hace q sea un numero de verdad, y no un string. color primario
 		self.color2 = extra.cCairoColor(numero=0xFF808080) #color secundario
 		self.color3 = extra.cCairoColor(numero=0xFF101010) #border
@@ -162,7 +162,7 @@ class cPropiedades():
 
 	def CopyFrom(self,  other):
 		"""Copia los datos de other objeto del mismo tipo
-		@other es un objeto del tipo cPropiedades
+		@other es un objeto del tipo cProperties
 
 		copia solo los datos animables para hacerlo mÃ¡s rapido.
 		"""
@@ -218,7 +218,7 @@ class cSilaba(extra.cVector):
 		"""
 		Una silaba, es mejor dejar que las cree el dialogo porque necesitan una inicializacion especial
 		@texto texto de la silaba
-		@estilo objeto del tipo cPropiedades
+		@estilo objeto del tipo cProperties
 		@parent objeto padre
 
 		para que la silaba se pueda usar luego hay que llamar a CambiarTexto(texto, preposicion)
@@ -227,11 +227,11 @@ class cSilaba(extra.cVector):
 		self._texto = texto
 		self._letras = None
 
-	def DividirLetras(self):
+	def DivideLetters(self):
 		"""Computa los caracteres de la sÃ­laba...
 		Usar si cambian el _texto
 		es muy lento y consume mas ram
-		para acceder a las silabas luego usen _letras
+		para acceder a las Syllables luego usen _letras
 		tambien activar la opcion en FxsGroup.
 		"""
 		#creamos el array y obtenemos valores comunes
@@ -256,30 +256,30 @@ class cSilaba(extra.cVector):
 			last = char.CambiarTexto(tchar, last)
 			self._letras.append(char)
 
-	def Encadenar(self, funcion, duracion=None):
-		"""Permite encadenar los caracteres a una animacion.
-		Antes de llamar a esta funciÃ³n llamen a DividirLetras
+	def Chain(self, function, duration=None):
+		"""Permite Chain los caracteres a una animacion.
+		Antes de llamar a esta funciÃ³n llamen a DivideLetters
 		o activen la opcion en FxsGroup
-		@funcion funcion a llamar con cada silaba y el progress
-		@duracion=None duracion de la animacion de cada caracter,
+		@function funcion a llamar con cada silaba y el progress
+		@duration=None duracion de la animacion de cada caracter,
 		Si no se especifica, se usarÃ¡ una duraciÃ³n tal que
 		se anime solo un caracter por vez.
 		(Nota: no cambien el _texto si no quieren inconsistencias)
 		"""
-		comun.Encadenar(self._dur, self.progress, self._letras, funcion, duracion)
-		
+		comun.Chain(self._dur, self.progress, self._letras, function, duration)
+
 	def FullWiggle(self, amplitud=4, frecuencia=2, dx=None, dy=None):
 		"""el wiggle que queria AbelKM, parte 2"""
 		if dx is None:
 			dx, dy = self.Wiggle(amplitud, frecuencia)
-		
+
 		o = self.original
 		if not hasattr(o, 'old_x'):
 			o.old_x = o.pos_x
 			o.old_y = o.pos_y
 		o.pos_x = o.old_x + dx
 		o.pos_y = o.old_y + dy
-		
+
 		for let in self._letras:
 			o = let.original
 			if not hasattr(o, 'old_x'):
@@ -287,53 +287,53 @@ class cSilaba(extra.cVector):
 				o.old_y = o.pos_y
 			o.pos_x = o.old_x + dx
 			o.pos_y = o.old_y + dy
-			
-class cDialogo(extra.cVector):
+
+class cDialogue(extra.cVector):
 	"""Un Dialogo representa una linea de texto,
-	Posee herramientas para tomar el texto, cada una de las silabas del texto y sus tiempos de karaoke.
+	Posee herramientas para tomar el texto, cada una de las Syllables del texto y sus tiempos de karaoke.
 	Este objeto es el mas complejo, casi imposible que lo crees vos, mejor usar cSilaba o directamente extra.cVector
 	"""
 
-	def __init__(self, dialogo, estilos, max_effect = 0):
+	def __init__(self, dialogue, estilos, max_effect = 0):
 		"""
-		@dialogo es la linea de dialogo en forma ass (interno)
+		@dialogue es la linea de dialogo en forma ass (interno)
 		@estilos es el array con estilos
 		opcionales
 		@max_effect numero mÃ¡ximo que puede tomar como efecto
 		"""
-		t_estilo = dialogo[E_STYLE]
+		t_estilo = dialogue[E_STYLE]
 		est = estilos[0]
 		for i in estilos:
 			if t_estilo == i._name:
 				est = i
 				break
 
-		estilo = cPropiedades(est)
+		estilo = cProperties(est)
 		#odio lo asqueroso que se pone ass
 		#el or es porque el asqueroso de ass indica el margen por cada linea. PEEEEEEEEEERO si es 0 toma el del estilo ~_~
-		estilo._capa = comun.SafeGetFloat(dialogo, E_LAYER)	or estilo._capa
-		estilo._marginv = comun.SafeGetFloat(dialogo, S_MARGINV) or estilo._marginv
-		estilo._marginr = comun.SafeGetFloat(dialogo, S_MARGINR) or estilo._marginr
-		estilo._marginl = comun.SafeGetFloat(dialogo, S_MARGINL) or estilo._marginl
+		estilo._capa = comun.SafeGetFloat(dialogue, E_LAYER)	or estilo._capa
+		estilo._marginv = comun.SafeGetFloat(dialogue, S_MARGINV) or estilo._marginv
+		estilo._marginr = comun.SafeGetFloat(dialogue, S_MARGINR) or estilo._marginr
+		estilo._marginl = comun.SafeGetFloat(dialogue, S_MARGINL) or estilo._marginl
 
 		extra.cVector.__init__(self, estilo)
 
 		#Seteamos los tiempos, traducimos todo a frames
 		#guardamos los tiempos como ms para tener mas precisiÃ³n
-		self._start = TimeToMS(dialogo[E_START])
-		self._end = TimeToMS(dialogo[E_END])
+		self._start = TimeToMS(dialogue[E_START])
+		self._end = TimeToMS(dialogue[E_END])
 		self._dur = self._end - self._start
 
 		#Ponemos que efecto debe usar
-		self.efecto = min(max_effect, int(comun.SafeGetFloat(dialogo, E_EFFECT)))
+		self.efecto = min(max_effect, int(comun.SafeGetFloat(dialogue, E_EFFECT)))
 
-		#Cargamos las silabas (esta funciÃ³n setea el _texto)
-		self.__SetSilabas( dialogo[E_TEXT] )
-		#El texto lo sabemos luego de parsear las silabas
+		#Cargamos las Syllables (esta funciÃ³n setea el _texto)
+		self.__SetSyllables( dialogue[E_TEXT] )
+		#El texto lo sabemos luego de parsear las Syllables
 		self.CambiarTexto(self._texto)
 
 		#Como la pos depende de la alineacion y por ende del tamaÃ±o del texto, solo lo podemos
-		#hacer despues de parsear las silabas
+		#hacer despues de parsear las Syllables
 		o = self.original
 		px= o.pos_x
 		py= o.pos_y
@@ -360,17 +360,17 @@ class cDialogo(extra.cVector):
 		else:
 			pre = px, py
 
-		for sil in self._silabas:
+		for sil in self._syllables:
 			pre = sil.CambiarTexto(sil._texto, pre)
 
-	def __SetSilabas(self, texto):
-		"""crea los objetos silabas de un dialogo,
+	def __SetSyllables(self, texto):
+		"""crea los objetos Syllables de un dialogo,
 		codigo tomado del proyecto hermano ZheoFX (C)
 
 		Zheo y Alchemist, grax chicos, son grosos! :D"""
 		import re
 		self._texto = ''
-		self._silabas = []
+		self._syllables = []
 		tiempo = self._start
 		i = 0
 		"""
@@ -418,26 +418,26 @@ class cDialogo(extra.cVector):
 				ifx = None
 			#Ponemos ifx a none para permitir efectos = 0
 			syl.efecto = ifx or self.efecto
-			self._silabas.append(syl)
+			self._syllables.append(syl)
 			self._texto += tx
 			i += 1
 
 		if not self._texto: #no se porque hace esto, quizás si no hay {\k} el re no devuelve nada.
 			self._texto = re.sub(r'{.*}', '', texto) # lineas (quitando las tags)
 
-	def Encadenar(self, funcion, duracion=None):
-		"""Permite encadenar las silabas a una animacion
-		@funcion funcion a llamar con cada silaba y el progress
-		@duracion=None duracion de la animacion de cada silaba
-		Si no se especifica, se usarÃ¡ una duraciÃ³n tal que
+	def Chain(self, function, duration=None):
+		"""Permite encadenar las syllables a una animacion
+		@function funcion a llamar con cada silaba y el progress
+		@duration=None duracion de la animacion de cada silaba
+		Si no se especifica, se usara¡ una duracion tal que
 		se anime solo una silaba por vez.
 		"""
-		comun.Encadenar(self._dur, self.progress, self._silabas, funcion, duracion)
+		comun.Chain(self._dur, self.progress, self._syllables, function, duration)
 
 	def FullWiggle(self, amplitud=4, frecuencia=2):
 		"""el wiggle que queria AbelKM"""
 		dx, dy = self.Wiggle(amplitud, frecuencia)
-		for sil in self._silabas:
+		for sil in self._syllables:
 			sil.FullWiggle(amplitud, frecuencia , dx, dy)
 
 class Ass():
@@ -467,7 +467,7 @@ class Ass():
 			self.formato = [v.strip().lower() for v in valor.split(',')] # si que me gusta hacer codigo complicado, no?
 		else: # esto no c hace, asumimos q si no es format es style, pero uno nunca sabe
 			valores = [v.strip().lower() for v in valor.split(',')]
-			self.estilos.append( cPropiedades(dicc=dict(zip(self.formato,  valores))))
+			self.estilos.append( cProperties(dicc=dict(zip(self.formato,  valores))))
 
 	def __Events(self,  texto):
 		#parseador de eventos
@@ -482,7 +482,7 @@ class Ass():
 
 			nuevo_d = dict(zip(self.eformato,  valores))
 			nuevo_d[E_EFFECT] = int(comun.SafeGetFloat(nuevo_d, E_EFFECT))
-			d = cDialogo(nuevo_d, self.estilos, self.max_effect)
+			d = cDialogue(nuevo_d, self.estilos, self.max_effect)
 			d.indice = self.indice
 			self.dialogos.append(d)
 			self.indice += 1

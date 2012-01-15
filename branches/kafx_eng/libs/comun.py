@@ -23,16 +23,16 @@ def Clamp(num):
 	if num > 1.0 : return 1.0
 	return num
 
-def ElegirPorCuadro(cuadro_ini, cuadro_fin, active, inactive=None ):
+def ChooseByFrame(cuadro_ini, cuadro_fin, active, inactive=None ):
 	"""frame_ini tiene el cuadro en que inicia
 	frame_Fin el cuadro donde termina
 	inactive es lo que devuelve cuando el cuadro actual no esta entre frame_ini ni frame_fin
 	active es lo que te devuelve si estas dentro del frame
 	ejemplo
-	d.actual.pos_x = ElegirPorFrame(100, 200, 0, 20)
+	d.actual.pos_x = ChooseByFrame(100, 200, 0, 20)
 	esto hara que la posicion_x del dialogo sea 20 SOLAMENTE entre el frame 100 y el 200, y luego vuelva a 0
 	tambien pueden usarse otros objetos como:
-	d.actual.color1.CopyFrom(ElegirPorFrame(100, 400, d.actual.color2, d.actual.color3)
+	d.actual.color1.CopyFrom(ChooseByFrame(100, 400, d.actual.color2, d.actual.color3)
 	"""
 
 	if cuadro_ini <= video.cf.framen  <= cuadro_fin:
@@ -42,7 +42,7 @@ def ElegirPorCuadro(cuadro_ini, cuadro_fin, active, inactive=None ):
 	#tambien podria usar esto perque quedaria muy criptico, lo dejo para el lulz
 	#return ( (cuadro_ini <= video.cf.framen) and active) or inactive
 
-def Elegir(progress, vector):
+def Choose(progress, vector):
 	#Segun un progress (de 0.0 a 1.0) devuelve un item de un vector (array o lista) de elementos
 	progress = Clamp(progress)#el clamp es importante sino dara access error
 	l = len(vector)
@@ -177,7 +177,7 @@ def PointBezier(progress, x_ini, y_ini,  x_int1, y_int1, x_int2, y_int2, x_fin, 
 	curvy6 = LERP(progress, curvy4, curvy5)
 	return curvx6, curvy6
 
-def Encadenar(duracion, progress, objetos, function, tiempo=None):
+def Chain(duration, progress, objetos, function, tiempo=None):
 	"""Realiza una animación en cadena.
 	dado una duración maestra y un progress maestro aplicados a
 	un array de objetos y un tiempo de animacion por objeto
@@ -202,10 +202,10 @@ def Encadenar(duracion, progress, objetos, function, tiempo=None):
 		una atrás de la otra, o sea el tiempo es = duración/len(objetos)
 		si es menor no sé.
 	"""
-	duracion = float(duracion)
+	duration = float(duration)
 	slen = len(objetos)
 	if slen == 0 : return
-	tsil = duracion/slen#Tiempo por sílaba en progress constante
+	tsil = duration/slen#Tiempo por sílaba en progress constante
 
 	if not tiempo:
 		tiempo = tsil
@@ -216,7 +216,7 @@ def Encadenar(duracion, progress, objetos, function, tiempo=None):
 	#a cada sílaba
 	#Para eso el calculo de las sílabas debe ser secuencial y en orden
 	finacum = tsil#Acumula los tiempos d fin (en que finaliza cada sílaba(respecto del diálogo))
-	tactualdiag=(progress*duracion)
+	tactualdiag=(progress*duration)
 	for obj in objetos:
 		tini = finacum - tiempo
 		tactualsilaba = (tactualdiag - tini)
@@ -265,15 +265,15 @@ class FxsGroup():
 	#ms para la animación de entrada de cada sílaba sin animar (en el diálogo actual)
 	sil_out_ms = 0
 	#ms para la animación de cada sílaba muerta (en el diálogo actual)
-	letra_in_ms = 0
+	letter_in_ms = 0
 	#ms para la animación de cada letra dormida (en la silaba actual)
-	letra_out_ms = 0
+	letter_out_ms = 0
 	#ms para la animación de cada letra muerta (en la silaba actual)
 	saltar_cuadros = True
 	#Indica si vas a usar todos los cuadros del video, incluso aquellos en que no aparecen diálogos o sílabas.
 	reset_estilo = True
 	#esto indica si se resetea el estilo (se vuelve al original) tras cada cuadro para cada sílaba.
-	dividir_letras = False
+	divide_letters = False
 	#Esto indica si se van a dividir las letras de las silabas al cargar
 
 	fxs = []
@@ -284,11 +284,11 @@ class FxsGroup():
 	tipo_blur = 0
 	#Esto es para elegir el tipo de blur, es experimental y avanzado (y poco útil)
 
-	def EnCuadroInicia(self):
+	def OnFrameStarts(self):
 		#Esto se ejecuta justo cuando empieza el cuadro. Antes que cualquier diálogo.
 		pass
 
-	def EnCuadroFin(self):
+	def OnFrameEnds(self):
 		#Esto se ejecuta al terminar el cuadro. Luego de todos los diálogos.
 		pass
 
@@ -297,55 +297,55 @@ class Fx():
 	eventos = []
 	#Un array con eventos personalizados, debe contener instancias de la clase Evento
 
-	def EnDialogo(self, *args):
+	def OnDialogue(self, *args):
 		pass
-	def EnSilaba(self, *args):
+	def OnSyllable(self, *args):
 		pass
-	def EnLetra(self, *args):
+	def OnLetter(self, *args):
 		pass
 
 
-	def EnSilabaMuerta(self, *args):
+	def OnSyllableDead(self, *args):
 		pass
-	def EnSilabaDorm(self, *args):
+	def OnSyllableSleep(self, *args):
 		#Sílaba dormida común (el progress es igual para todas las sílabas dormidas del mismo diálogo)
 		pass
 
 	#Hasta aca son las animaciones normales
-	def EnDialogoEntra(self, *args):
+	def OnDialogueIn(self, *args):
 		pass
-	def EnSilabaEntra(self, *args):
+	def OnSyllableIn(self, *args):
 		pass
-	def EnLetraEntra(self, *args):
-		pass
-
-	def EnDialogoSale(self, *args):
-		pass
-	def EnSilabaSale(self, *args):
-		pass
-	def EnLetraSale(self, *args):
+	def OnLetterIn(self, *args):
 		pass
 
-	def EnDialogoInicia(self, *args):
+	def OnDialogueOut(self, *args):
 		pass
-	def EnSilabaInicia(self, *args):
+	def OnSyllableOut(self, *args):
 		pass
-	def EnLetraInicia(self, *args):
+	def OnLetterOut(self, *args):
+		pass
+
+	def OnDialogueStarts(self, *args):
+		pass
+	def OnSyllableStarts(self, *args):
+		pass
+	def OnLetterStarts(self, *args):
 		pass
 
 class Evento():
-	def EnSilaba(self, sil):
+	def OnSyllable(self, sil):
 		pass
-	def EnDialogo(self, diag):
+	def OnDialogue(self, diag):
 		pass
-	def EnLetra(self, let):
+	def OnLetter(self, let):
 		pass
 
-	def TiempoSilaba(self, sil):
+	def TiempoSyllable(self, sil):
 		return (0, 0)
-	def TiempoDialogo(self, diag):
+	def TiempoDialogue(self, diag):
 		return (0, 0)
-	def TiempoLetra(self, let):
+	def TiempoLetter(self, let):
 		return (0, 0)
 
 

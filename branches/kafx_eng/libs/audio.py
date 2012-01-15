@@ -5,7 +5,7 @@
 Notas:
 Al igual que con las particulas, la clase Datos requiere ciertas cosas para mantener sincronia con el video.
 
-1) Debe llamarse al metodo "leer" una y solo una vez por cada cuadro, ni mas ni menos
+1) Debe llamarse al metodo "read" una y solo una vez por cada cuadro, ni mas ni menos
 2) Los cuadros deben accesarse en orden
 3) No deben saltarse cuadros
 
@@ -22,9 +22,9 @@ class BPM():
 		self.bpm = -1
 		self.fpb = -1 #frames per beat
 		if fname != None:
-			self.AbrirBPM(fname)
+			self.OpenBPM(fname)
 
-	def AbrirBPM(self, arch):
+	def OpenBPM(self, arch):
 		"""Abre un archivo especificando el BPM
 		el archivo debe contener 2 numeros separados por una coma, el comienzo en milisegundos del beat y el BPM o sea beats per minute"""
 		f = open(arch,"r")
@@ -77,26 +77,26 @@ class Datos():
 			self.args, bufsize=self.bufSize, stdout=subprocess.PIPE,
 			stdin=open("audiofakein.txt", 'w'),  stderr=open('audioerr.txt', 'w')
 		)
-		
+
 	def __del__(self):
 		if self.proc:
 			self.proc.terminate()
-			
-	def leer(self):
+
+	def read(self):
 		"""Lee una linea de datos, lo equivalente a un cuadro de video.
 		Es necesario llamar a esta funcion por cada cuadro de video, para lograr sincronia
 		(pej EnCuadroInicia)"""
-		if self.proc : 
+		if self.proc :
 			self.frames = self.proc.stdout.read(self.bufSize)
 		else:
 			self.frames = []
 		return self.frames
-	
+
 	def rms(self):
 		"""Devuelve el RMS para los datos actuales (Es como el poder del sonido)"""
 		return audioop.rms(self.frames, self.sampWidth)/self.maxint
 
-	def muestra(self, cuadro):
+	def sample(self, cuadro):
 		"""Devuelve el valor de uno de los datos,
 		@cuadro : el numero de cuadro del cual se requiere el valor
 		(debe ser menor a frameSize)"""
