@@ -76,7 +76,7 @@ def MoveTexture(pattern, x, y, org_x=0.0, org_y=0.0, angle=0.0, scale_x=1.0, sca
 def SetEstilo(estilo):
 	"""Prepara cairo con los estilos
 	Antes de dibujar un texto, se puede llamar a esta funcion para que ponga las cosas basicas
-	el estilo tiene que ser del tipo asslib.cPropiedades
+	el estilo tiene que ser del tipo asslib.cProperties
 	(y debe ser el original ya que requiere propiedades no animables)
 	"""
 	ctx = video.cf.ctx
@@ -200,7 +200,7 @@ class cVector():
 	Incluye las cosas basicas de pintado de cairo
 	basicamente puede ser instanciada,
 	pasandole @texto o @figura al instanciarlo o llamando luego a
-	CambiarTexto o CrearDesdeFigura respectivamente
+	ChangeText o CreateFromFigure respectivamente
 	"""
 	#Tipos de pintado
 	#Esto ha de corresponderse con basico.sources, definido acá para comodidad del user.
@@ -220,7 +220,7 @@ class cVector():
 
 	def __init__(self, estilo=None, texto='', figura=None, parent=None):
 		"""Parametros
-		@estilo objeto del tipo cPropiedades del cual heredar
+		@estilo objeto del tipo cProperties del cual heredar
 		@texto crea un objeto desde un texto
 		@figura lo crea desde una figura ass
 		@parent el objeto padre
@@ -237,15 +237,15 @@ class cVector():
 		#Es la matriz de transformación del vector
 		self.matrix = cairo.Matrix()
 
-		self.original = asslib.cPropiedades(estilo)
-		self.actual = asslib.cPropiedades(estilo)
+		self.original = asslib.cProperties(estilo)
+		self.actual = asslib.cProperties(estilo)
 		self._texto = ""
 		self.pointsw = None
 
 		if figura :
-			self.CrearDesdeFigura(figura)
+			self.CreateFromFigure(figura)
 		elif texto:
-			self.CambiarTexto(texto)
+			self.ChangeText(texto)
 		else:
 			self._old_path = self.path = None
 
@@ -342,14 +342,14 @@ class cVector():
 		o.org_y = -(o._alto/2.0)
 		self.actual.CopyAllFrom(o)
 
-	def ObtenerForma(self):
+	def GetShape(self):
 		"""
 		A partir del path activo, genera uno de esos strings de ass con una "forma"
 		Algo asi 'm 13 13 13 31 b 31 31 13 31'
 		esto es para zheo, saben que odio ass asi que no usen esto para nada util,
 		lo dejo como ejemplo para que entiendan mas de ass y cairo
 		"""
-		#para entender un poco mas podes ver el Deformar que lo que hace es un FOR a traves de los points del path
+		#para entender un poco mas podes ver el Deform que lo que hace es un FOR a traves de los points del path
 		#Para saber como obtener un "path" fijate en UpdateTextPath, que hace un ctx.copy_path
 		figura = ''
 		lp = '' # ultimo punto, porque el vsfilter se mea en la cama.
@@ -385,7 +385,7 @@ class cVector():
 		return figura
 
 
-	def CrearDesdeFigura(self, ass):
+	def CreateFromFigure(self, ass):
 		"""LENTO
 		Crea el vector desde una figura del tipo ASS"""
 		arr = ass.lower().split(' ')
@@ -417,7 +417,7 @@ class cVector():
 				ctx_funcs[3]()
 			if t == 'm':
 				ctx_funcs[3]()
-		self._old_path = self.path = ctx.copy_path() #el setPropiedades resetea
+		self._old_path = self.path = ctx.copy_path() #el setProperties resetea
 		self._SetPathProps()
 
 	def _UpdateMatrix(self):
@@ -433,7 +433,7 @@ class cVector():
 		ctx.text_path(self._texto)
 		self._old_path = self.path = ctx.copy_path()
 
-	def CambiarTexto(self, texto, last_pos=None):
+	def ChangeText(self, texto, last_pos=None):
 		"""LENTO
 		Cambia el texto de un vector
 		@texto es el texto a usar
@@ -445,10 +445,10 @@ class cVector():
 		self._UpdateTextPath()
 		return last #por las dudas si a algun tarado se le ocurre cambiar silabas, proveemos esto tamb.
 
-	def Deformar(self, func):
+	def Deform(self, func):
 		"""Deforma el vector del objeto,
 		@func debe ser una funcion que sera llamada por cada grupo de de points del vector, debe recibir los siguientes parametros
-		self : el dialogo sobre el que se efectua el deformar
+		self : el dialogo sobre el que se efectua el Deform
 		tipo : entero especificando el tipo de punto (0=mover, 1=linea, 2=curva, 3=cerrar path (esto sale de unas constantes de cairo que no recuerdo como se llaman))
 		points : un array con points de longitud: 2 para mover, 2 para linea, 6 para curva, 0 para cerrar
 		debe devolver un array con los points (o sea, lo mismo q recibio pero modificado)
@@ -468,8 +468,8 @@ class cVector():
 				ctx.close_path()
 		self.path = ctx.copy_path()
 
-	def DeformarCompleto(self, func):
-		"""Igual que deformar pero recibe un solo objeto, con un array de tuplas como las recibiria deformar, y se espera que devuelva un solo array de tuplas
+	def DeformCompleto(self, func):
+		"""Igual que Deform pero recibe un solo objeto, con un array de tuplas como las recibiria Deform, y se espera que devuelva un solo array de tuplas
 		Esto te permite mayor control sobre los points, pudiendo quitar o agregar points a placer.
 		"""
 		ctx = video.cf.ctx
