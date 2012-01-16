@@ -241,7 +241,7 @@ def __PreLoad():
 		dif = end - ini
 		inif = cfn(ms2f(ini))
 		endf = cfn(ms2f(end))
-		diff = float(ms2f(dif)) or 1.0 #division por zero
+		diff = float(ms2f(dif)-1) or 1.0 #division por zero
 		for i, f in enumerate(xrange(inif, endf)): #El range es por frames
 			p = i/diff #el +1 va en gusto, con +1 se aseguran de que llegue a 1.0, aunque puede pasarse, sin el +1 empieza siempre en 0, y quizas no llegue a 1.0
 			#primero se van a dibujar todos los dialogos que salgan de todos los frames
@@ -260,7 +260,7 @@ def __PreLoad():
 		dif = end - ini
 		inif = cfn(ms2f(ini))
 		endf = cfn(ms2f(end))
-		diff = float(ms2f(dif)) or 1.0
+		diff = float(ms2f(dif)-1) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
 			frames[f].append((evento, diag, p))
@@ -299,7 +299,7 @@ def __PreLoad():
 
 			inif = cfn(ms2f(ini))
 			endf = cfn(ms2f(end))
-			diff = float(ms2f(dif)) or 1.0
+			diff = float(ms2f(dif)-1) or 1.0
 			for i, f in enumerate(xrange(inif, endf)):
 				p = i/diff
 				frames[f].append((enDialogo, diag, p ) )#pongo los eventos personalizados en fentra
@@ -372,7 +372,7 @@ def __PreLoadSyllables(diag):
 
 		inif = cfn(ms2f(ini))
 		endf = cfn(ms2f(end))
-		diff = float(ms2f(dif)) or 1.0
+		diff = float(ms2f(dif)-1) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
 			frames[f].append((evento, sil, p ) )
@@ -389,7 +389,7 @@ def __PreLoadSyllables(diag):
 
 		inif = cfn(ms2f(ini))
 		endf = cfn(ms2f(end))
-		diff = float(ms2f(dif)) or 1.0
+		diff = float(ms2f(dif)-1) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
 			frames[f].append((evento, sil, p ) )
@@ -407,7 +407,7 @@ def __PreLoadSyllables(diag):
 
 		inif = cfn(ms2f(ini))
 		endf = cfn(ms2f(end))
-		diff = float(ms2f(dif)) or 1.0
+		diff = float(ms2f(dif)-1) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
 			frames[f].append((evento, sil, p ) )
@@ -424,7 +424,7 @@ def __PreLoadSyllables(diag):
 
 		inif = cfn(ms2f(ini))
 		endf = cfn(ms2f(end))
-		diff = float(ms2f(dif)) or 1.0
+		diff = float(ms2f(dif)-1) or 1.0
 		for i, f in enumerate(xrange(inif, endf)):
 			p = i/diff
 			frames[f].append((evento, sil, p))
@@ -492,6 +492,42 @@ def __PreLoadLetras(sil):
 		inicio = getattr(efecto, "OnLetterStarts", None)
 		if inicio: inicio(letra)
 
+	for sil in syllables:
+		evento = getattr(fs[sil.efecto], "OnSyllableDead", None)
+		if not evento: continue
+
+		ini = sil._end
+		end = diag._end
+		dif = end - ini
+
+		inif = cfn(ms2f(ini))
+		endf = cfn(ms2f(end))
+		diff = float(ms2f(dif)-1) or 1.0
+		for i, f in enumerate(xrange(inif, endf)):
+			p = i/diff
+			frames[f].append((evento, sil, p ) )
+			no_frames[f] = False
+
+	#Silaba Dormida
+	for sil in syllables:
+		evento = getattr(fs[sil.efecto], "OnSyllableSleep", None)
+		if not evento: continue
+
+		ini = diag._start
+		end = sil._start
+		dif = end - ini
+
+		inif = cfn(ms2f(ini))
+		endf = cfn(ms2f(end))
+		diff = float(ms2f(dif)-1) or 1.0
+		for i, f in enumerate(xrange(inif, endf)):
+			p = i/diff
+			frames[f].append((evento, sil, p ) )
+			no_frames[f]=False
+
+	for letra in letras:
+		letra.progress = 0.0
+		efecto = fs[letra.efecto]
 		evento = getattr(efecto, "OnLetterIn", None)
 		if not evento: continue
 
