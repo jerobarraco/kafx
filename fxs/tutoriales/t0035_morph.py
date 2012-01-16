@@ -31,5 +31,5 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = (Efecto(), comun.Fx(),comun.Fx())
 		#no puedo crear dos efecto() porque intentaria crear dos mundos
 		self.saltar_cuadros = False
-		self.dividir_letras = True
+		self.split_letters = True
 		self.sil_out_ms = 200
