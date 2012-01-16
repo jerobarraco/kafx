@@ -273,7 +273,7 @@ class FxsGroup():
 	#Indica si vas a usar todos los cuadros del video, incluso aquellos en que no aparecen diálogos o sílabas.
 	reset_estilo = True
 	#esto indica si se resetea el estilo (se vuelve al original) tras cada cuadro para cada sílaba.
-	divide_letters = False
+	split_letters = False
 	#Esto indica si se van a dividir las letras de las silabas al cargar
 
 	fxs = []
