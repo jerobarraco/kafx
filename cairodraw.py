@@ -11,28 +11,20 @@ import math
 DEFAULT_BUFFER = """\
 # This is a Python script to quickly test Cairo stuff!
 #Modified for use with KAFX
-from libs import comun
-from libs import video
-from libs import asslib
-from libs.draw import basico
-from libs.draw import extra
+from libs import comun, video, asslib, formas
+from libs.draw import basico, extra, avanzado
 
 video.vi.width = w
 video.vi.height = h
 video.cf.ctx = c
 
-#Prueba de un bezier
-r=10.0
-
-c.set_line_width(5)
-c.set_source_rgb(0.3, 0.3, 0.3)
-c.move_to(0, h)
-
-for i in range(r):
-	p = i/r
-	y = comun.i_b_ease_in_out(p)
-	c.line_to(p*w, h-(y*h))
-c.stroke()
+#para cargar de un ass
+ass = asslib.Ass("test.ass", 3)
+d = ass.dialogos[5]
+d.Paint()
+s = d._silabas[2]
+s.actual.color1.CopyFrom(s.actual.color2)
+s.Paint()
 
 ##Para crear un texto a mano
 ##creamos un estilo #no es indispensable
@@ -44,15 +36,6 @@ c.stroke()
 ##creamos un vector
 #d = extra.cVector(texto="Hihi!", estilo=estilo)
 #d.Pintar()
-
-#para cargar de un ass
-ass = asslib.Ass("test.ass", 3)
-d = ass.dialogos[5]
-d.Pintar()
-s = d._silabas[2]
-s.actual.color1.CopiarDe(s.actual.color2)
-s.Pintar()
-s.PintarReflejo()
 """
 
 CAIRODRAW_LIBRARY_ROUTINES        = {}
@@ -62,7 +45,7 @@ CAIRODRAW_LIBRARY_GLOBAL_CALLBACK = lambda *a, **k: None
 
 def CairoDrawLibrarySetGlobal(g, val):
 	global CAIRODRAW_LIBRARY_GLOBALS
-	
+
 	CAIRODRAW_LIBRARY_GLOBALS[g] = val
 
 	CAIRODRAW_LIBRARY_GLOBAL_CALLBACK()
@@ -94,7 +77,7 @@ def CairoDrawLibraryRoutine(function):
 def drawLinePath(cr, x, y, xx, yy, seg):
 	"""Draws a segmented line path using the given segment distance, starting
 	at the coords x, y and ending at the coords xx, yy."""
-	
+
 	pass
 
 @CairoDrawLibraryRoutine
@@ -238,7 +221,7 @@ class CairoDrawingArea(gtk.DrawingArea):
 		self.__win    = win
 
 		self.set_size_request(width, height)
-		
+
 		self.connect("expose-event", self.__render)
 
 	def __render(self, widget, event):
@@ -271,7 +254,7 @@ class CairoDrawingArea(gtk.DrawingArea):
 
 	def WriteToPNG(self, path):
 		w, h = self.allocation.width, self.allocation.height
-		
+
 		surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, w, h)
 		context = cairo.Context(surface)
 
@@ -317,7 +300,7 @@ class TextView(gtk.TextView):
 
 	def GetText(self):
 		buf = self.get_buffer()
-		
+
 		return buf.get_text(buf.get_start_iter(), buf.get_end_iter())
 
 class NotebookTab(gtk.HBox):
@@ -383,7 +366,7 @@ class ColorBox(gtk.VBox):
 
 		evbox.connect("enter-notify-event", self.__callbackMouseOver, True)
 		evbox.connect_after("enter-notify-event", self.__callbackChildOver, child, onover)
-		
+
 		evbox.connect("leave-notify-event", self.__callbackMouseOver, False)
 		evbox.connect_after("leave-notify-event", self.__callbackChildOver, child, onout)
 
@@ -402,7 +385,7 @@ class LibraryRoutine(gtk.Alignment):
 
 		nameLabel = gtk.Label()
 		argsLabel = gtk.Label()
-	
+
 		nameLabel.set_markup("<b>%s</b>" % name)
 		nameLabel.set_alignment(0.0, 0.5)
 
@@ -410,7 +393,7 @@ class LibraryRoutine(gtk.Alignment):
 			argsLabel.set_markup("(<i>%s</i>)" % ", ".join(args.split()))
 			argsLabel.set_alignment(0.0, 0.5)
 			argsLabel.set_padding(5, 0)
-		
+
 		self.SetHelp(help)
 		self.__help.set_alignment(0.0, 0.0)
 
@@ -456,9 +439,9 @@ class CairoWindow(gtk.Window):
 		scroll2.add(viewp)
 
 		global CAIRODRAW_LIBRARY_GLOBAL_CALLBACK
-		
+
 		CAIRODRAW_LIBRARY_GLOBAL_CALLBACK = self.__updateGlobals
-		
+
 		self.__help.Pack(self.__glbls)
 		self.__help.pack_start(gtk.HSeparator(), False, True)
 
@@ -466,7 +449,7 @@ class CairoWindow(gtk.Window):
 
 		for lrn, lrd in CAIRODRAW_LIBRARY_ROUTINE_DATA.iteritems():
 			self.__help.Pack(LibraryRoutine(lrn, *lrd))
-		
+
 			# This is a clever trick that lets us remove the last
 			# one added, since there's still a reference around.
 			hsep = gtk.HSeparator()
@@ -515,7 +498,7 @@ class CairoWindow(gtk.Window):
 			button.set_image(image)
 			button.set_tooltip_text(tt)
 			button.connect("clicked", cb)
-			
+
 			tool.pack_start(button, False, False)
 
 		fontSizeLabel = gtk.Label("Font Size:")
@@ -601,7 +584,7 @@ class CairoWindow(gtk.Window):
 
 	def __parseCode(self, *args):
 		self.__draw.Parse(self.__text.GetText())
-	
+
 	def __setFont(self, cb):
 		self.__text.SetFontSize(int(cb.get_active_text()))
 
@@ -615,7 +598,7 @@ if __name__ == "__main__":
 		f = sys.argv[1]
 
 	cw = CairoWindow(640, 480, f)
-	
+
 	cw.connect("destroy", gtk.main_quit)
 	cw.show_all()
 
