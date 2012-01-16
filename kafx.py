@@ -253,7 +253,7 @@ class Encoder():
 if __name__ == '__main__':
 	module = "myconfig"
 	profile = False
-	d3 = True
+	d3 = False
 	argv = os.sys.argv
 	if len(argv) > 1:
 		module = argv[1]
