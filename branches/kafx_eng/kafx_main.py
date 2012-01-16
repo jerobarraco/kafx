@@ -126,7 +126,7 @@ def OnFrame(pframe, stride, cuadro):
 	"""
 	try:
 		global fx, no_frames
-		if fx.saltar_cuadros: #Verificamos si se desea procesar el cuadro o si lo devolvemos tal cual
+		if fx.skip_frames: #Verificamos si se desea procesar el cuadro o si lo devolvemos tal cual
 			if pframe > len(no_frames): return
 			if no_frames[pframe]: return
 
@@ -451,7 +451,7 @@ def __PreLoadLetters(sil):
 		evento = getattr(efecto, "OnLetterIn", None)
 		if not evento: continue
 
-		ini = letra._start - fx.letra_in_ms
+		ini = letra._start - fx.letter_in_ms
 		end = letra._start
 		dif = end-ini
 		__AddEvent(ini, end, dif, evento, letra)
@@ -462,7 +462,7 @@ def __PreLoadLetters(sil):
 		if not evento: continue
 
 		ini = letra._end
-		end = letra._end + fx.letra_out_ms
+		end = letra._end + fx.letter_out_ms
 		dif = end - ini
 		__AddEvent(ini, end, dif, evento, letra)
 
