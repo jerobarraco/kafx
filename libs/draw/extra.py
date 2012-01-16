@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-import cairo
 from math import ceil
 from random import random
+import itertools
 
+import cairo
 from libs import video, comun
 import basico, avanzado
 
@@ -12,7 +13,7 @@ Sino que son ayuda o comandos basicos para las demas funciones.
 """
 global debugi
 debugi=-1
-#TODO: eliminar los __S* de cvetor y modificar el resto de los scripts
+
 def DebugCairo(carpeta="caps/"):
 	global debugi
 	debugi+=1
@@ -61,13 +62,6 @@ def CargarTextura(archivo, extend=cairo.EXTEND_REPEAT):
 	t = cairo.SurfacePattern(cairo.ImageSurface.create_from_png(archivo))
 	t.set_extend(extend)
 	return t
-	"""
-	try:
-		t = cairo.SurfacePattern(cairo.ImageSurface.create_from_png(archivo))
-		t.set_extend(extend)
-	except:
-		print "No se pudo cargar la textura en el archivo:", archivo
-	return t"""
 
 def MoveTexture(pattern, x, y, org_x=0.0, org_y=0.0, angle=0.0, scale_x=1.0, scale_y=1.0):
 	"""Moves, rotates and scale a texture loaded with CargarTextura, or any other cairo patter"""
@@ -415,8 +409,11 @@ class cVector():
 				ctx_funcs[2](*get(arr , 6))
 			elif t == 'c':
 				ctx_funcs[3]()
-			if t == 'm':
-				ctx_funcs[3]()
+
+		if t!='c':
+			print "Warning la forma que esta usando no termina en close"
+			ctx_funcs[3]()
+
 		self._old_path = self.path = ctx.copy_path() #el setProperties resetea
 		self._SetPathProps()
 
@@ -487,44 +484,120 @@ class cVector():
 				ctx.close_path()
 		self.path = ctx.copy_path()
 
-	def __CreateDifPath(self, other):
-		#dado que cairo tiene unos vectores mas complicados necesito formatear ambos,
-		#reducirlos al minimo comun generaria perdida, asi que tengo que expandirlos al mas grande
-		import itertools
-		def group(path):
-			gpath = []
-			thispath = []
-			for i in path:
-				if i[0]==3:
-					if thispath:#notar que evitamos el close porque me molesta
-						gpath.append(thispath)
-						thispath = []
-				else:
-					thispath.append(i)
-			return gpath
+	def __GroupPath(self, path):
+		#todo ver que hacer cuando es un path vacio
+		gpath = []
+		thispath = []
+		if not path: return [ [(1, (0.0, 0.0))] ]
+		for i in path:
+			if i[0]==3:
+				if thispath:#notar que evitamos el close porque me molesta
+					gpath.append(thispath)
+					thispath = []
+			else:
+				thispath.append(i)
+		if thispath:
+			#para las que no terminan con un close
+			gpath.append(thispath)
 
-		self.__from_path = group(self._old_path)
-		self.__to_path = group(other.path)
-		#primero normalizar los grupos, tiene que haber igual cantidad de grupos
-		lastf = self.__from_path[0][:] #el primer grupo
-		lastt = self.__to_path[0][:] #el primer grupo
-		for fg, tg in itertools.izip_longest(self.__from_path, self.__to_path, fillvalue=None):
+		return gpath
+
+	def __NormalizePath(self, fg, tg):
+		lastfp = fg[0]
+		lasttp = tg[0]
+		fromg = []
+		tog = []
+		for fp , tp in itertools.izip_longest(fg, tg, fillvalue=None):
+			#i could use the fact that lists are mutable, but that would make my code obscure
+			if not fp :
+				fp = lastfp[:]
+			if not tp :
+				tp = lasttp[:]
+
+			#el tipo
+			tfp, ttp = fp[0], tp[0]
+			if (tfp ==2) or (ttp==2):
+				#si uno de los dos es bezier tenemos que mover el otro a bezier tamb, lo malo es q cada bezier recibe 3 puntos, o sea 6 ints
+				#lo que hacemos es q el punto de control y el punto final del bezier sean el mismo q el otro punto
+				#el problema es que un line_to en realidad depende de los dos puntos anteriores...
+				#y un move_to no deberia generar lineas aunque el move_to teoricamente es solo valido despues de un close... por ende no lo manejamos
+				if tfp<2:
+					fpp = fp[1]
+					#we recreate thepoint, the first coord (two values) is the last coord of the last point (cna be bezier or line_to)
+					fp = (2, (lastfp[1][-2], lastfp[1][-1],fpp[0], fpp[1], fpp[0], fpp[1]))
+				else:
+					#if tfp<2:
+					tpp = tp[1]
+					#we recreate thepoint, the first coord (two values) is the last coord of the last point (cna be bezier or line_to)
+					tp = (2, (lasttp[1][-2], lasttp[1][-1], tpp[0], tpp[1], tpp[0], tpp[1]))
+
+			fromg.append(fp)
+			tog.append(tp)
+
+			lastfp = fp
+			lasttp = tp
+		return fromg, tog
+
+	def __NormalizePathGroups(self, a, b):
+		lastf = a[0][:] #el primer grupo
+		lastt = b[0][:] #el primer grupo
+		frompg= []
+		topg = []
+		for fg, tg in itertools.izip_longest(a, b, fillvalue=None):
 			#si no tiene un punto tomamos el ultimo
 			if not fg :
 				fg = lastf[:]
-				self.__from_path.append(lastf)
+				a.append(lastf)#ojo que esto abusa de la mutabilidad
 
 			if not tg :
 				tg = lastt[:]
-				self.__from_path.append(lastf)
+				b.append(lastf)
 
-			lastf=fg[:]
-			lastt=tg[:]
+			lastf, lastt = self.__NormalizePath(fg, tg)
+			frompg.append(lastf)
+			topg.append(lastt)
+		return frompg, topg
+
+
+	def __FlattenPathGroup(self, path):
+		for g in path:
+			g.append((3, ()))#agregamos un close a cada group
+		return tuple(itertools.chain.from_iterable(path))
+
+	def __CreateDiffPath(self, other):
+		#dado que cairo tiene unos vectores mas complicados necesito formatear ambos,
+		#reducirlos al minimo comun generaria perdida, asi que tengo que expandirlos al mas grande
+		fgp = self.__GroupPath(self._old_path)
+		tgp = self.__GroupPath(other.path)
+		#primero normalizar los grupos, tiene que haber igual cantidad de grupos
+		fgp, tgp = self.__NormalizePathGroups(fgp, tgp)
+
+		self.__from_path = self.__FlattenPathGroup( fgp)
+
+		self.__to_path = self.__FlattenPathGroup( tgp)
 
 	def Morph(self, other):
+		if not self._texto : return
 		if not hasattr(self, "__from_path"):
-			self.__CreateDifPath(other)
+			self.__CreateDiffPath(other)
 
+		ctx = video.cf.ctx
+		ctx_funcs = (
+			ctx.move_to,
+			ctx.line_to,
+			ctx.curve_to
+		)
+		ctx.new_path()
+		for fcom, tcom, x in zip(self.__from_path, self.__to_path, itertools.count(1)):
+			t = fcom[0]
+			fpoints = fcom[1]
+			tpoints = tcom[1]
+			if t<3:
+				p = [comun.LERP(self.progress, i, j) for i, j in zip(fpoints, tpoints)]
+				ctx_funcs[t](*p)
+			else:
+				ctx.close_path()
+		self.path = ctx.copy_path()
 
 	def Restore(self):
 		"""Restaura el estilo de un vector"""
@@ -580,12 +653,10 @@ class cVector():
 			#Ponemos el source usando la funcion para sources
 			#asignada al border y lo mismo haremos para el resto de las partes
 			basico.sources[a.mode_border](self, a.color3, 0)
-			#self.__SBorder(self, a.color3, 0)
 			ctx.stroke_preserve()
 
 		#fill
 		basico.sources[a.mode_fill](self, a.color1, 1)
-		#self.__SFill(self, a.color1, 1)
 		ctx.fill()
 
 		#finalizamos el grupo y aplicamos la 2º matriz
@@ -596,7 +667,6 @@ class cVector():
 		#shadow. notar que la cargamos antes de restaurar la matriz identidad,
 		#para q sea concordante en caso de no ser solida, y que los points de control no sean un caso y sean iguales en todos los casos (border/fill)
 		basico.sources[a.mode_shadow](self, a.color4, 2)
-		#self.__SShadow(self, a.color4, 2)
 
 		#Devolvemos el patron con la shadow integrada
 		pat =  avanzado.Shadow(pat, a.shadow, a.shad_x, a.shad_y)
