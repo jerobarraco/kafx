@@ -415,7 +415,7 @@ def __PreLoadLetters(sil):
 	fs = fx.fxs
 
 	#Creamos las letras (ya que sino no se crean en memoria)
-	sil.DividirLetras()
+	sil.SplitLetters()
 	letras = sil._letras
 
 	#inicio y letra entra

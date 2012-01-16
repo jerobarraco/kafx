@@ -227,7 +227,7 @@ class cSilaba(extra.cVector):
 		self._texto = texto
 		self._letras = None
 
-	def DivideLetters(self):
+	def SplitLetters(self):
 		"""Computa los caracteres de la sÃ­laba...
 		Usar si cambian el _texto
 		es muy lento y consume mas ram
