@@ -253,7 +253,7 @@ class cSilaba(extra.cVector):
 			char._dur = cdur
 			char._end = time = (time + cdur)
 			char.efecto = self.efecto #no sirve de nada pero bueno
-			last = char.CambiarTexto(tchar, last)
+			last = char.ChangeText(tchar, last)
 			self._letras.append(char)
 
 	def Chain(self, function, duration=None):
@@ -330,7 +330,7 @@ class cDialogue(extra.cVector):
 		#Cargamos las Syllables (esta funciÃ³n setea el _texto)
 		self.__SetSyllables( dialogue[E_TEXT] )
 		#El texto lo sabemos luego de parsear las Syllables
-		self.CambiarTexto(self._texto)
+		self.ChangeText(self._texto)
 
 		#Como la pos depende de la alineacion y por ende del tamaÃ±o del texto, solo lo podemos
 		#hacer despues de parsear las Syllables
@@ -361,7 +361,7 @@ class cDialogue(extra.cVector):
 			pre = px, py
 
 		for sil in self._syllables:
-			pre = sil.CambiarTexto(sil._texto, pre)
+			pre = sil.ChangeText(sil._texto, pre)
 
 	def __SetSyllables(self, texto):
 		"""crea los objetos Syllables de un dialogo,
