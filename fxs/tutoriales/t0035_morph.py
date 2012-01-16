@@ -9,13 +9,14 @@ class Efecto():
 
 	def OnSyllableStarts(self, l):
 		#creamos la forma aca apra copiar el estilo
+		#notar que lo guardamos en self. por eso hay UNa SOLA FORMA POR EFECTO (self es de efecto)
+		#por eso nos fijamos si ya la crearon
 		if not self.forma :
 			l.actual.color1.CopyFrom(l.actual.color2)
-			self.forma = extra.cVector(l.actual, figura= formas.SKULL1)
+			self.forma = extra.cVector(l.actual, figura= formas.APPLE)
 
 	def OnSyllableSleep(self, l):
 		l.PaintWithCache()
-
 	def OnSyllable(self, l):
 		l.actual.color1.Interpolate(l.progress, l.actual.color2)
 		l.Morph(self.forma)
@@ -30,6 +31,8 @@ class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		self.fxs = (Efecto(), comun.Fx(),comun.Fx())
 		#no puedo crear dos efecto() porque intentaria crear dos mundos
-		self.saltar_cuadros = False
+		self.skip_frames= False
 		self.split_letters = True
 		self.sil_out_ms = 200
+		self.letter_in_ms = 200
+		self.letter_out_ms= 200

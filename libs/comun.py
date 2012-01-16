@@ -5,11 +5,16 @@ teóricamente no dependen de nada raro como cairo o ass
 """
 import math
 import random
-
+import itertools
 from libs import video
 
 def chunker(seq, size):
     return (seq[pos:pos + size] for pos in xrange(0, len(seq), size))
+
+def grouper(n, iterable, fillvalue=None):
+	"grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
+	args = [iter(iterable)] * n
+	return itertools.izip_longest(fillvalue=fillvalue, *args)
 
 def ClampB(x):
 	"Recorta un número (entero) al rango entre 0 y 255"
@@ -269,7 +274,7 @@ class FxsGroup():
 	#ms para la animación de cada letra dormida (en la silaba actual)
 	letter_out_ms = 0
 	#ms para la animación de cada letra muerta (en la silaba actual)
-	saltar_cuadros = True
+	skip_frames = True
 	#Indica si vas a usar todos los cuadros del video, incluso aquellos en que no aparecen diálogos o sílabas.
 	reset_estilo = True
 	#esto indica si se resetea el estilo (se vuelve al original) tras cada cuadro para cada sílaba.

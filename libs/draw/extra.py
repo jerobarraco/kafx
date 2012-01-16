@@ -219,7 +219,8 @@ class cVector():
 		@figura lo crea desde una figura ass
 		@parent el objeto padre
 		"""
-		from libs import asslib
+		from libs import asslib #si no lo pongo aca no puede cargarlo,
+		# todo mover estas cosas donde corresponda
 		self.progress = 0.0
 		self._end = 0
 		self._start = 0
@@ -397,22 +398,20 @@ class cVector():
 
 		ctx.new_path()
 		t='m'
-
 		while arr:
 			if arr[0] in 'mnlbsc':
 				t = arr.pop(0)
 			if (t =='m') or (t=='n'):
+				ctx_funcs[3]()
 				ctx_funcs[0](*get(arr , 2))
 			elif t == 'l':
 				ctx_funcs[1](*get(arr , 2))
 			elif (t=='b') or (t=='s'):
 				ctx_funcs[2](*get(arr , 6))
+			"""Manejo mas real del close
 			elif t == 'c':
-				ctx_funcs[3]()
-
-		if t!='c':
-			print "Warning la forma que esta usando no termina en close"
-			ctx_funcs[3]()
+				ctx_funcs[3]()"""
+		ctx_funcs[3]()
 
 		self._old_path = self.path = ctx.copy_path() #el setProperties resetea
 		self._SetPathProps()
@@ -484,7 +483,7 @@ class cVector():
 				ctx.close_path()
 		self.path = ctx.copy_path()
 
-	def __GroupPath(self, path):
+	def __GroupPath(self, path): #check ok
 		#todo ver que hacer cuando es un path vacio
 		gpath = []
 		thispath = []
@@ -525,12 +524,11 @@ class cVector():
 					fpp = fp[1]
 					#we recreate thepoint, the first coord (two values) is the last coord of the last point (cna be bezier or line_to)
 					fp = (2, (lastfp[1][-2], lastfp[1][-1],fpp[0], fpp[1], fpp[0], fpp[1]))
-				else:
-					#if tfp<2:
+				elif ttp<2:
 					tpp = tp[1]
 					#we recreate thepoint, the first coord (two values) is the last coord of the last point (cna be bezier or line_to)
 					tp = (2, (lasttp[1][-2], lasttp[1][-1], tpp[0], tpp[1], tpp[0], tpp[1]))
-
+				#else los dos son = 2
 			fromg.append(fp)
 			tog.append(tp)
 
@@ -538,7 +536,7 @@ class cVector():
 			lasttp = tp
 		return fromg, tog
 
-	def __NormalizePathGroups(self, a, b):
+	def __NormalizePathGroups(self, a, b): #check ok
 		lastf = a[0][:] #el primer grupo
 		lastt = b[0][:] #el primer grupo
 		frompg= []
@@ -559,12 +557,14 @@ class cVector():
 		return frompg, topg
 
 
-	def __FlattenPathGroup(self, path):
+	def __FlattenPathGroup(self, path): #check ok
 		for g in path:
 			g.append((3, ()))#agregamos un close a cada group
+			# #esto hace uso de la mutabilidad de las listas
+			#asi que mucho ojo con pasarle un path que sea una tuple
 		return tuple(itertools.chain.from_iterable(path))
 
-	def __CreateDiffPath(self, other):
+	def __CreateDiffPath(self, other): #Check ok
 		#dado que cairo tiene unos vectores mas complicados necesito formatear ambos,
 		#reducirlos al minimo comun generaria perdida, asi que tengo que expandirlos al mas grande
 		fgp = self.__GroupPath(self._old_path)
