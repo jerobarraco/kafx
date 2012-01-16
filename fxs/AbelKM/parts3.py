@@ -17,16 +17,16 @@ world = None
 class Efecto():
 	def __init__(self):
 		self.eventos = [Evento1()]
-	def EnSilabaInicia(self, sil):
+	def OnSyllableStarts(self, sil):
 		global t
 		#sil.actual.color1.CopyFrom(sil.actual.color2)
-		sil.parts = sil.CrearParticulas(t, escala=0.1)
+  		sil.parts = sil.CrearParticulas(t, escala=0.1,alpha_min=0.4)
 		sil.crear = True
 		x = sil.actual.pos_x+ sil.actual.org_x
 		y = sil.actual.pos_y + sil.actual.org_y
 		sil.bull = [avanzado.cSprite(t, x +randint(-50, 50), y+randint(-50, 50), escala=random()*0.5 +0.5) for i in range(50)]#para que desordenen, pero no las vamos a pintar
 
-	def EnSilabaDorm(self, sil):
+	def OnSyllableSleep(self, sil):
 		sil.PaintWithCache()
 	def EnDialogoEntra(self, d):
 		global t3
@@ -40,7 +40,7 @@ class Efecto():
 		video.cf.ctx.mask(t3)
 
 class Evento1():
-		def EnSilaba(self, sil):
+		def OnSyllable(self, sil):
 			global world
 			if sil.crear:
 				sil.crear  = False
