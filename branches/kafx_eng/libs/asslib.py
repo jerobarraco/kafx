@@ -483,7 +483,7 @@ class Ass():
 			nuevo_d = dict(zip(self.eformato,  valores))
 			nuevo_d[E_EFFECT] = int(comun.SafeGetFloat(nuevo_d, E_EFFECT))
 			d = cDialogue(nuevo_d, self.estilos, self.max_effect)
-			d.indice = self.indice
+			d._indice = self.indice
 			self.dialogos.append(d)
 			self.indice += 1
 
