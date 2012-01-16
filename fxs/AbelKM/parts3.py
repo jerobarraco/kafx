@@ -4,10 +4,6 @@ from libs.draw import extra, avanzado
 
 from random import randint, random
 
-import cairo
-
-
-
 t = extra.CargarTextura("texturas/uq7.png")
 
 t3 = extra.CargarTextura('texturas/barra_gc.png') #entrada
@@ -75,7 +71,6 @@ class FxsGroup(comun.FxsGroup):
 		world = physics.World(grav_y = 0)
 		self.in_ms = 500
 
-
-	def EnCuadroInicia(self):
+	def OnFrameStarts(self):
 		global world
 		world.Update(True)
