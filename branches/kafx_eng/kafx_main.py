@@ -16,7 +16,7 @@ traceback.sys.stdout = open('stdout.txt', 'w', 0)
 traceback.sys.stderr = open('stderr.txt', 'w', 0)
 
 
-version_info = (1, 7, 9, 'newfinalrc3')
+version_info = (1, 8, 0, 'newfinalrc4')
 print 'Python version', traceback.sys.version_info
 if traceback.sys.version_info[:3] < (2, 6, 6):
 	print """
@@ -43,7 +43,7 @@ print "Yay! se han cargado todas las librerias."
 #cf y vi es una gran chanchada, son los mismos objetos que en video (y deben ser los mismos)
 cf = None
 vi = None
-error_obj = asslib.cSilaba(asslib.cPropiedades())
+error_obj = asslib.cSilaba(asslib.cProperties())
 fx = None
 frames = []
 no_frames = [] #cache the wantframes, wich seems to be a very slow and important for optimization.
@@ -162,7 +162,7 @@ def __CallFuncsNormal():
 	global fx, frames, cf
 
 	frame = frames[cf.framen]
-	fx.EnCuadroInicia()
+	fx.OnFrameStarts()
 
 	#Nueva forma de llamar, por eventos
 	for (evento, o, prog) in frame:
@@ -171,7 +171,7 @@ def __CallFuncsNormal():
 			o.Restore()
 		evento(o)
 
-	fx.EnCuadroFin()
+	fx.OnFrameEnds()
 
 #Esto es para profiling, como es algo lento, intentamos hacerlo mas rapido con este hack
 #En cualquier caso iniciamos la funcion __CallFuncs que se llama en OnFrame con el CallFuncsNormal
@@ -206,7 +206,7 @@ def __PreLoad():
 
 	"""
 	Nota: si bien el array frame es una referencia directa a cada frame,
-	los tiempos en las silabas/dialogos están guardados en milisegundos,
+	los tiempos en las syllables/dialogos están guardados en milisegundos,
 	con la esperanza de darle mayor presición.
 	"""
 
@@ -221,7 +221,7 @@ def __PreLoad():
 	#los tiempos van siempre en ms para tener presición
 	for diag in dialogos:
 		diag.progress = 0.0
-		#efecto se usa más abajo en eventos extras y las silabas lo cambian
+		#efecto se usa más abajo en eventos extras y las syllables lo cambian
 		#notar que cada dialogo y silaba puede tener un efecto individual (sobre todo con el inline fx >.>;)
 		efecto = fs[diag.efecto]
 
@@ -305,20 +305,20 @@ def __PreLoad():
 				frames[f].append((enDialogo, diag, p ) )#pongo los eventos personalizados en fentra
 				no_frames[f]=False
 
-	#Prelodeamos las silabas :D
+	#Prelodeamos las syllables :D
 	for diag in dialogos:
-		__PreLoadSilabas(diag)
+		__PreLoadSyllables(diag)
 
-	#Necesario poner esto aca para que las maldetas silabas no pisen las letras
+	#Necesario poner esto aca para que las maldetas syllables no pisen las letras
 	#sep, una vez mas, no queda otra
-	if fx.dividir_letras:
+	if fx.divide_letters:
 		for diag in dialogos:
-			silabas = diag._silabas
-			for sil in silabas:
-				__PreLoadLetras(sil)
+			syllables = diag._syllables
+			for sil in syllables:
+				__PreLoadLetters(sil)
 
-	#primero ordenamos los dialogos/silabas/letras en cada frame segun sus layers
-	#(aun asi quedan dialogos bajo silabas bajo letras (en el mismo layer en el mismo frame))
+	#primero ordenamos los dialogos/syllables/letras en cada frame segun sus layers
+	#(aun asi quedan dialogos bajo syllables bajo letras (en el mismo layer en el mismo frame))
 	def keyfunc(item):
 		"""una funcion que por cada item en cada frame, devuelve el valor con que comparar
 		explicado es:
@@ -340,9 +340,9 @@ def __PreLoad():
 	#y a este
 	no_frames = tuple(no_frames)
 
-def __PreLoadSilabas(diag):
+def __PreLoadSyllables(diag):
 	"""
-		Carga las silabas
+		Carga las syllables
 	"""
 	#notar que esto se ejecuta por cada dialogo
 	global frames, fx, no_frames
@@ -351,18 +351,18 @@ def __PreLoadSilabas(diag):
 	ms2f = video.vi.MSToFrame
 	cfn = video.ClampFrameNum
 
-	#Ahora las Silabas!!! (T^T)
-	silabas = diag._silabas
+	#Ahora las syllables!!! (T^T)
+	syllables = diag._syllables
 
 	#Inicio
-	for sil in silabas:
+	for sil in syllables:
 		sil.progress = 0.0
 		#1º la inicializamos
 		inicio = getattr(fs[sil.efecto], "OnSyllableStarts", None)
 		if inicio: inicio(sil)
 
 	#Zilaba Muerta
-	for sil in silabas:
+	for sil in syllables:
 		evento = getattr(fs[sil.efecto], "OnSyllableDead", None)
 		if not evento: continue
 
@@ -379,7 +379,7 @@ def __PreLoadSilabas(diag):
 			no_frames[f] = False
 
 	#Silaba Dormida
-	for sil in silabas:
+	for sil in syllables:
 		evento = getattr(fs[sil.efecto], "OnSyllableSleep", None)
 		if not evento: continue
 
@@ -397,7 +397,7 @@ def __PreLoadSilabas(diag):
 
 
 	#Silaba sale
-	for sil in silabas:
+	for sil in syllables:
 		evento = getattr(fs[sil.efecto], "OnSyllableOut", None)
 		if not evento: continue
 
@@ -414,7 +414,7 @@ def __PreLoadSilabas(diag):
 			no_frames[f]=False
 
 	#Silaba entra
-	for sil in silabas:
+	for sil in syllables:
 		evento = getattr(fs[sil.efecto], "OnSyllableIn", None)
 		if not evento: continue
 
@@ -431,7 +431,7 @@ def __PreLoadSilabas(diag):
 			no_frames[f]=False
 
 	#Silaba Animada
-	for sil in silabas:
+	for sil in syllables:
 		evento = getattr(fs[sil.efecto], "OnSyllable", None)
 		if not evento: continue
 
@@ -448,7 +448,7 @@ def __PreLoadSilabas(diag):
 			no_frames[f] = False
 
 	#Eventos personalizados
-	for sil in silabas:
+	for sil in syllables:
 		eventos = getattr(fs[sil.efecto], "eventos", None)
 		if not eventos: continue
 
