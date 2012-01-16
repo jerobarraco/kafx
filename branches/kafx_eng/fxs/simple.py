@@ -3,11 +3,11 @@
 from libs import comun
 
 class EfectoGenerico():
-	def EnDialogo(self, diag):
+	def OnDialogue(self, diag):
 		#Cuando el dialogo sea mostrado
 		diag.Paint()#Lo pintamos en la pantalla
 
-	def EnSilaba(self, diag):
+	def OnSyllable(self, diag):
 		#Cuando la silaba sea cantada (activada)
 		diag.actual.color1.CopyFrom(diag.actual.color2) #Copiamos el color secundario al color primario,
 		diag.Paint()# Pintamos la silaba en la pantalla
