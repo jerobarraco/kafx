@@ -5,10 +5,6 @@ from OpenGL.GLUT import *
 from OpenGL.GL import *
 from random import randint, random
 
-import cairo
-
-
-
 t = extra.CargarTextura("texturas/uq7.png")
 
 t3 = extra.CargarTextura('texturas/barra_gc.png') #entrada
@@ -18,7 +14,7 @@ world = None
 class Efecto():
 	def __init__(self):
 		self.eventos = [Evento1()]
-	def EnSilabaInicia(self, sil):
+	def OnSyllableStarts(self, sil):
 		global t
 		#sil.actual.color1.CopyFrom(sil.actual.color2)
 		sil.parts = sil.CrearParticulas(t, escala=0.1,alpha_min=0.4)
@@ -27,9 +23,9 @@ class Efecto():
 		y = sil.actual.pos_y + sil.actual.org_y
 		sil.bull = [avanzado.cSprite(t, x +randint(-50, 50), y+randint(-50, 50), escala=random()*0.5 +0.5) for i in range(50)]#para que desordenen, pero no las vamos a pintar
 
-	def EnSilabaDorm(self, sil):
+	def OnSyllableSleep(self, sil):
 		sil.PaintWithCache()
-	def EnDialogoEntra(self, d):
+	def OnDialogueIn(self, d):
 		global t3
 		#d.MoverDe((0+(comun.Interpolate(d.progress, -40,0, comun.i_b_backstart))) ,(0))
 		mov = comun.Interpolate(d.progress,1380, 3480)#el fx parece dar toda la vuelta... o ya no?
@@ -39,7 +35,7 @@ class Efecto():
 		texto = avanzado.GrupoFin(0)
 		video.cf.ctx.set_source(texto)
 		video.cf.ctx.mask(t3)
-	def EnSilaba(self, sil):
+	def OnSyllable(self, sil):
 		xa = comun.LERP(sil.progress, sil.actual.pos_x, sil.actual.pos_x+sil.original._ancho)
 		x = (xa/(video.vi.width/2.0))-1.0
 		ya = comun.Interpolate(sil.progress, sil.actual.pos_y, sil.actual.pos_y+sil.original._alto,comun.i_full_sin)
@@ -53,7 +49,7 @@ class Efecto():
 		glPopMatrix()
 
 class Evento1():
-		def EnSilaba(self, sil):
+		def OnSyllable(self, sil):
 			global world
 			if sil.crear:
 				sil.crear  = False
@@ -91,6 +87,6 @@ class FxsGroup(comun.FxsGroup):
 		self.in_ms = 500
 
 
-	def EnCuadroInicia(self):
+	def OnFrameStarts(self):
 		global world
 		world.Update(True)
