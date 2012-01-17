@@ -28,11 +28,11 @@ def Clamp(num):
 	if num > 1.0 : return 1.0
 	return num
 
-def ChooseByFrame(cuadro_ini, cuadro_fin, active, inactive=None ):
+def ChooseByFrame(start_frame, end_frame, active, inactive=None ):
 	"""frame_ini tiene el cuadro en que inicia
 	frame_Fin el cuadro donde termina
+	active es lo que te devuelve si estas dentro del rango
 	inactive es lo que devuelve cuando el cuadro actual no esta entre frame_ini ni frame_fin
-	active es lo que te devuelve si estas dentro del frame
 	ejemplo
 	d.actual.pos_x = ChooseByFrame(100, 200, 0, 20)
 	esto hara que la posicion_x del dialogo sea 20 SOLAMENTE entre el frame 100 y el 200, y luego vuelva a 0
@@ -40,12 +40,12 @@ def ChooseByFrame(cuadro_ini, cuadro_fin, active, inactive=None ):
 	d.actual.color1.CopyFrom(ChooseByFrame(100, 400, d.actual.color2, d.actual.color3)
 	"""
 
-	if cuadro_ini <= video.cf.framen  <= cuadro_fin:
+	if start_frame <= video.cf.framen  <= end_frame:
 		return active
 	else:
 		return inactive #el else no es necesario pero es para que entiendas
 	#tambien podria usar esto perque quedaria muy criptico, lo dejo para el lulz
-	#return ( (cuadro_ini <= video.cf.framen) and active) or inactive
+	#return ( (start_frame <= video.cf.framen) and active) or inactive
 
 def Choose(progress, vector):
 	#Segun un progress (de 0.0 a 1.0) devuelve un item de un vector (array o lista) de elementos
@@ -102,28 +102,28 @@ def i_b_boing(p):
 	1, 1
 	)[1]
 
-def Interpolate(progress, de, hasta, function=i_lineal):
+def Interpolate(progress, fom_val, to_val, function=i_lineal):
 	"""
 	devuelve un número flotante entre 2 valores, el número devuelto corresponde a una cantidad indicada por el primer valor
 	@progress indicador de que tan cerca del inico o fin debe estar el valor devuelto, debe ser un número entre 0 y 1 (aunque otros valores funcionan)
 	@de valor inicial, o comienzo del rango
-	@hasta valor final, o final del rango
+	@to_val valor final, o final del rango
 	@funcion funcion personal que devuelva un valor entre 0 y 1 (siempre float) dado un valor de progress entre 0 y 1
 	(puede usar las funciones que comienzan por i_)
 	"""
 	#http://es.wikipedia.org/wiki/Interpolación
-	return (function(progress) * (hasta-de))+de
+	return (function(progress) * (to_val-fom_val))+fom_val
 
-def LERP(progress, de, hasta):
+def LERP(progress, from_val, to_val):
 	"""
 	devuelve un número flotante entre 2 valores, el número devuelto corresponde a una cantidad indicada por el primer valor
 	@progress indicador de que tan cerca del inico o fin debe estar el valor devuelto, debe ser un número entre 0 y 1 (aunque otros valores funcionan)
-	@de valor inicial, o comienzo del rango
-	@hasta valor final, o final del rango
+	@from_val valor inicial, o comienzo del rango
+	@to_val valor final, o final del rango
 	Esta funcion es lo mismo que interpolar lineal, pero un poco mas rapida,
 	solo para funciones que requieran unicamente interpolacion lineal
 	"""
-	return de+(float(progress)*(hasta-de))
+	return from_val+(float(progress)*(to_val-from_val))
 
 def RanmaBezier(progress, points):
 	"""
@@ -141,18 +141,18 @@ def RanmaBezier(progress, points):
 		for i in range(len(points) - 1):
 			px0,py0 = points[i]
 			px1,py1 = points[i+1]
-			p = (Interpolate(progress, px0, px1), LERP(progress, py0, py1))
+			p = (LERP(progress, px0, px1), LERP(progress, py0, py1))
 			points2.append(p)
 		points = points2
 	return points[0]
 
-def PointBezier(progress, x_ini, y_ini,  x_int1, y_int1, x_int2, y_int2, x_fin, y_fin):
+def PointBezier(progress, x_start, y_start,  x1, y1, x2, y2, x_end, y_end):
 	"""
 	Devuelve un punto (x, y) sobre una curva bezier dado el avance en la misma
-	@x_ini, y_ini : punto inicial de la curva
-	@x_int1, y_int1 : 1º punto de control de la curva
-	@x_int2, y_int2 : 2º punto de control de la curva
-	@x_fin, y_fin : punto final de la curva
+	@x_start, y_start : punto inicial de la curva
+	@x1, y1 : 1º punto de control de la curva
+	@x2, y2 : 2º punto de control de la curva
+	@x_end, y_end : punto final de la curva
 	@progress : avance sobre la curva (0 a 1)
 	Esta funcion es igual que Bezier pero es algo más rápida, además,
 	Está limitada a:
@@ -163,18 +163,18 @@ def PointBezier(progress, x_ini, y_ini,  x_int1, y_int1, x_int2, y_int2, x_fin, 
 	#with help of ranma42!
 	"""
 
-	curvx1 = LERP(progress, x_ini, x_int1)
-	curvx2 = LERP(progress, x_int1, x_int2)
-	curvx3 = LERP(progress, x_int2, x_fin)
+	curvx1 = LERP(progress, x_start, x1)
+	curvx2 = LERP(progress, x1, x2)
+	curvx3 = LERP(progress, x2, x_end)
 
 	curvx4 = LERP(progress, curvx1, curvx2)
 	curvx5 = LERP(progress, curvx2, curvx3)
 
 	curvx6 = LERP(progress, curvx4, curvx5)
 
-	curvy1 = LERP(progress, y_ini, y_int1)
-	curvy2 = LERP(progress, y_int1, y_int2)
-	curvy3 = LERP(progress, y_int2, y_fin)
+	curvy1 = LERP(progress, y_start, y1)
+	curvy2 = LERP(progress, y1, y2)
+	curvy3 = LERP(progress, y2, y_end)
 
 	curvy4 = LERP(progress, curvy1, curvy2)
 	curvy5 = LERP(progress, curvy2, curvy3)
