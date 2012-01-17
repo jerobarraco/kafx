@@ -33,12 +33,12 @@ class EventoExtra(comun.Evento):
 class UnEfecto(comun.Fx):
 	def __init__(self):
 		#con esto le decimos que vamos a usar un evento extra inventado por nosotros mas arriba,
-		self.eventos = [EventoExtra()]
-		#podemos usar mas eventos asi,
-		#self.eventos = [EventoExtra(), OtroEventoExtra()] etc
+		self.events = [EventoExtra()]
+		#podemos usar mas events asi,
+		#self.events = [EventoExtra(), OtroEventoExtra()] etc
 		#obviamente tenemos que definir la clase OtroEventoExtra asi como hicimos con la otra
 
-	#Aun despues de definir un evento extra, podemos seguir usando los eventos normales del kafx como siempre :D
+	#Aun despues de definir un evento extra, podemos seguir usando los events normales del kafx como siempre :D
 	#obviamente no es necesario usarlos si no los querÃ©s
 	def EnSilaba(self, sil):
 		#evento normal de silaba
@@ -51,7 +51,7 @@ class UnEfecto(comun.Fx):
 
 class OtroEfecto(comun.Fx):
 	def __init__(self):
-		self.eventos = [EventoExtra()] # al crear otra instancia podes compartir el mismo evento en varios efectos
+		self.events = [EventoExtra()] # al crear otra instancia podes compartir el mismo evento en varios efectos
 
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):

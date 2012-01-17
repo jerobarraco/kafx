@@ -27,7 +27,7 @@ S_ANGLE = 'angle'
 S_SCALE_X = 'scalex'
 S_SCALE_Y = 'scaley'
 
-#De los eventos (Dialogos)
+#De los events (Dialogos)
 E_FORMAT ='format'
 E_DIALOG = 'dialogue'
 E_START = 'start'
@@ -368,7 +368,7 @@ class cDialogue(extra.cVector):
 		([\\\-a-zA-Z_0-9]*)} = para el inline_fx ({\k20\-0} karaoke)
 		(\s*)([^{]*)(\s*) = espacio - cualkier caracter alfanumerico y signos-espacio"""
 		#TODO probar con el nuevo regex de alch
-		#TODO pensar si conviene que cree un cVector en vez de una silaba (si no trae problemas en los eventos)
+		#TODO pensar si conviene que cree un cVector en vez de una silaba (si no trae problemas en los events)
 		#si el anterior es cierto : TODO cuando encuentre la sintaxis de una forma en el dialogo que en vez de crear un dialogo lo cree usando la forma
 
 		"""KARA = re.compile(
@@ -461,7 +461,7 @@ class Ass():
 			self.styles.append( cProperties(dicc=dict(zip(self.formato,  valores))))
 
 	def __Events(self,  texto):
-		#parseador de eventos
+		#parseador de events
 		titulo, valor = texto.split(':', 1)
 		titulo = titulo.strip().lower()
 		if titulo == E_FORMAT :
@@ -491,7 +491,7 @@ class Ass():
 			s = line.strip().lower()
 			if (s=="") or (s[0] ==";"): #poniendo el s="" al principio nos evitamos error por q sea una linea vacia
 				pass # me la soban los comentarios y las lineas en blanco ^_^
-			elif s==F_EVENTS: #Pongo los eventos aca por cuestion d eficiencia, porque gralmente es lo q mas va a haber
+			elif s==F_EVENTS: #Pongo los events aca por cuestion d eficiencia, porque gralmente es lo q mas va a haber
 				parser = self.__Events
 			elif s == F_SINFO:
 				parser = self.__pHeader

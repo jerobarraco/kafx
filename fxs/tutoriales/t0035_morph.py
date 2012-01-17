@@ -33,6 +33,6 @@ class FxsGroup(comun.FxsGroup):
 		#no puedo crear dos effect() porque intentaria crear dos mundos
 		self.skip_frames= False
 		self.split_letters = True
-		self.sil_out_ms = 200
+		self.syl_out_ms = 200
 		self.letter_in_ms = 200
 		self.letter_out_ms= 200

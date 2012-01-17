@@ -13,8 +13,8 @@ class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		self.fxs = [Fxpart(), comun.Fx()]
 		self.saltar_cuadros = False
-		self.sil_in_ms = 400
-		self.sil_out_ms = 400
+		self.syl_in_ms = 400
+		self.syl_out_ms = 400
 		self.psys =  avanzado.cParticleSystem(png="texturas/star2.png",
 		max_life=2, max_parts=2000, emitir_parts=1, escala_de= 0.4, escala_a=1, modo=1, rotacion=0)
 		self.psys.DarAngulo(2*pi, 0.5, 2*pi)

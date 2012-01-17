@@ -113,7 +113,7 @@ def OnInit(filename, assfile, pixel_type, image_type, width, height, fpsn, fpsd,
 		DBug("Cargando los subtitulos\n")
 		fx = m.FxsGroup()
 		ass = asslib.Ass(assfile, len(fx.fxs) -1)
-		DBug("Precalculando los eventos\n")
+		DBug("Precalculando los events\n")
 		__PreLoad()
 		DBug("Todo se cargo aparentemente bien\n")
 	except:
@@ -146,7 +146,7 @@ def OnFrame(pframe, stride, cuadro):
 		#definitivamente nadie lo usa. lo deshabilite porque usa mucho CPU
 		#cf.tiempo = video.CuadroAMS(cf.framen)
 
-		#Llamamos a los eventos
+		#Llamamos a los events
 		__CallFuncs()
 		cf.sfc.flush()
 	except:
@@ -157,14 +157,14 @@ def __CallFuncsProfile():
 	cProfile.runctx('__CallFuncsNormal()', globals(), locals(), filename='profile')
 
 def __CallFuncsNormal():
-	"""Esta funcion llama a todos los eventos del efecto
+	"""Esta funcion llama a todos los events del efecto
 	Si agregan un evento no olvidar ponerlo en __PreLoad"""
 	global fx, frames, cf
 
 	frame = frames[cf.framen]
 	fx.OnFrameStarts()
 
-	#Nueva forma de llamar, por eventos
+	#Nueva forma de llamar, por events
 	for (evento, o, prog) in frame:
 		o.progress = prog
 		if fx.reset_estilo:
@@ -231,7 +231,7 @@ def __PreLoad():
 	#los tiempos van siempre en ms para tener presición
 	for diag in dialogos:
 		diag.progress = 0.0
-		#effect se usa más abajo en eventos extras y las syllables lo cambian
+		#effect se usa más abajo en events extras y las syllables lo cambian
 		#notar que cada dialogo y silaba puede tener un effect individual (sobre todo con el inline fx >.>;)
 		efecto = fs[diag.effect]
 
@@ -273,12 +273,12 @@ def __PreLoad():
 
 	#Eventos personalizados
 	for diag in dialogos:
-		eventos = getattr(fs[diag.effect], "eventos", None)
+		eventos = getattr(fs[diag.effect], "events", None)
 		if not eventos: continue
 
 		for evento in eventos:
 			#Calculamos la duracion de cada evento extra
-			#Notar que puede haber varios eventos extras en cada effect
+			#Notar que puede haber varios events extras en cada effect
 			enDialogo = getattr(evento, "OnDialogue", None)
 			if not enDialogo: continue
 
@@ -393,14 +393,14 @@ def __PreLoadSyllables(diag):
 
 	#Eventos personalizados
 	for sil in syllables:
-		eventos = getattr(fs[sil.effect], "eventos", None)
+		eventos = getattr(fs[sil.effect], "events", None)
 		if not eventos: continue
 
 		for evento in eventos:
 			enSilaba = getattr(evento, "OnSyllable", None)
 			if not enSilaba: continue
 			#Calculamos la duracion de cada evento extra
-			#Notar que puede haber varios eventos extras en cada effect
+			#Notar que puede haber varios events extras en cada effect
 			ini, end = evento.TiempoSilaba(sil)
 			dif = end - ini
 			__AddEvent(ini, end, dif, enSilaba, sil)
@@ -478,14 +478,14 @@ def __PreLoadLetters(sil):
 
 	#Eventos personalizados
 	for letra in letras:
-		eventos = getattr(fs[letra.effect], "eventos", None)
+		eventos = getattr(fs[letra.effect], "events", None)
 		if not eventos: continue
 
 		for evento in eventos:
 			enLetra = getattr(evento, "OnLetter", None)
 			if not enLetra: continue
 			#Calculamos la duracion de cada evento extra
-			#Notar que puede haber varios eventos extras en cada effect
+			#Notar que puede haber varios events extras en cada effect
 			ini, end = evento.TiempoLetra(letra)
 			dif = end - ini
 			__AddEvent(ini, end, dif, enLetra, letra)

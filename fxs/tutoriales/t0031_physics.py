@@ -47,8 +47,8 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = (Efecto(), Efecto2(), Efecto2())
 		#no puedo crear dos effect() porque intentaria crear dos mundos
 		self.saltar_cuadros = False
-		self.sil_out_ms = 1200
-		self.reset_estilo = False #requerido para el world.Update(True)
+		self.syl_out_ms = 1200
+		self.reset_style = False #requerido para el world.Update(True)
 
 	def EnCuadroInicia(self):
 		self.fxs[0].world.Update(False)#le ponemos false porque vamos a updatear los elementos a mano

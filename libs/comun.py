@@ -182,7 +182,7 @@ def PointBezier(progress, x_start, y_start,  x1, y1, x2, y2, x_end, y_end):
 	curvy6 = LERP(progress, curvy4, curvy5)
 	return curvx6, curvy6
 
-def Chain(duration, progress, objetos, function, tiempo=None):
+def Chain(duration, progress, objects, function, time=None):
 	"""Realiza una animación en cadena.
 	dado una duración maestra y un progress maestro aplicados a
 	un array de objetos y un tiempo de animacion por objeto
@@ -193,27 +193,27 @@ def Chain(duration, progress, objetos, function, tiempo=None):
 
 	@duración Duración del tiempo maestro
 	@progress float de rango 0 a 1 que dice el progress maestro
-	@objetos array de objetos a ser animados en cadena.
+	@objects array de objetos a ser animados en cadena.
 		serán pasados a la función func. (sólo debe implementar len y ser iterables (string y array funcionan))
 
 	@función debe ser una funcion
 	será llamada progresivamente vez por cada objeto en orden de aparición con los siguientes parámetros:
 		objeto, progress
 
-	@tiempo define el tiempo que dura la animación de cada objeto
-		si el tiempo es mayor a la duración/len(objetos)
+	@time define el tiempo que dura la animación de cada objeto
+		si el time es mayor a la duración/len(objects)
 		entonces las aniamciones se superpondran.
-		si el tiempo es None (o no se especifica) las animaciones se dan
-		una atrás de la otra, o sea el tiempo es = duración/len(objetos)
+		si el time es None (o no se especifica) las animaciones se dan
+		una atrás de la otra, o sea el time es = duración/len(objects)
 		si es menor no sé.
 	"""
 	duration = float(duration)
-	slen = len(objetos)
+	slen = len(objects)
 	if slen == 0 : return
 	tsil = duration/slen#Tiempo por sílaba en progress constante
 
-	if not tiempo:
-		tiempo = tsil
+	if not time:
+		time = tsil
 	#El progress va a ser calculado de atrás para adelante. o sea, que terminen cuando les corresponda.
 	#Pero van a empezar cuando convenga para ajustarse al tiempo de animación.
 
@@ -222,15 +222,15 @@ def Chain(duration, progress, objetos, function, tiempo=None):
 	#Para eso el calculo de las sílabas debe ser secuencial y en orden
 	finacum = tsil#Acumula los tiempos d fin (en que finaliza cada sílaba(respecto del diálogo))
 	tactualdiag=(progress*duration)
-	for obj in objetos:
-		tini = finacum - tiempo
+	for obj in objects:
+		tini = finacum - time
 		tactualsilaba = (tactualdiag - tini)
 		if tactualsilaba <= 0:# No se anima aún (si es menor a 0 entonces tini es mayor que tactual)
 			prog = 0.0
-		elif tactualsilaba >= tiempo:#Si el tiempo en la sílaba es mayor al tiempo que tiene que estar
+		elif tactualsilaba >= time:#Si el tiempo en la sílaba es mayor al tiempo que tiene que estar
 			prog = 1.0
 		else:
-			prog = tactualsilaba/tiempo
+			prog = tactualsilaba/time
 
 		function(obj, prog)#This is magic!
 		finacum += tsil
@@ -266,9 +266,9 @@ class FxsGroup():
 	#Milisegundos para la animación de entrada
 	out_ms = 0
 	#MS para animación d salida
-	sil_in_ms = 0
+	syl_in_ms = 0
 	#ms para la animación de entrada de cada sílaba sin animar (en el diálogo actual)
-	sil_out_ms = 0
+	syl_out_ms = 0
 	#ms para la animación de cada sílaba muerta (en el diálogo actual)
 	letter_in_ms = 0
 	#ms para la animación de cada letra dormida (en la silaba actual)
@@ -276,7 +276,7 @@ class FxsGroup():
 	#ms para la animación de cada letra muerta (en la silaba actual)
 	skip_frames = True
 	#Indica si vas a usar todos los cuadros del video, incluso aquellos en que no aparecen diálogos o sílabas.
-	reset_estilo = True
+	reset_style = True
 	#esto indica si se resetea el estilo (se vuelve al original) tras cada cuadro para cada sílaba.
 	split_letters = False
 	#Esto indica si se van a dividir las letras de las silabas al cargar
@@ -286,7 +286,7 @@ class FxsGroup():
 	#Esta propiedad contiene los diferentes efectos que harás. Por ejemplo, para un video si tenes una línea de kanjis,
 	#una con la traducción y una con la letra; podés crear un effect para cada tipo.
 
-	tipo_blur = 0
+	blur_type = 0
 	#Esto es para elegir el tipo de blur, es experimental y avanzado (y poco útil)
 
 	def OnFrameStarts(self):
@@ -299,8 +299,8 @@ class FxsGroup():
 
 class Fx():
 	"""Clase de la que desciende un effect"""
-	eventos = []
-	#Un array con eventos personalizados, debe contener instancias de la clase Evento
+	events = []
+	#Un array con events personalizados, debe contener instancias de la clase Evento
 
 	def OnDialogue(self, *args):
 		pass
@@ -314,6 +314,10 @@ class Fx():
 		pass
 	def OnSyllableSleep(self, *args):
 		#Sílaba dormida común (el progress es igual para todas las sílabas dormidas del mismo diálogo)
+		pass
+	def OnLetterDead(self, *args):
+		pass
+	def OnLetterSleep(self, *args):
 		pass
 
 	#Hasta aca son las animaciones normales
@@ -346,11 +350,11 @@ class Evento():
 	def OnLetter(self, let):
 		pass
 
-	def TiempoSyllable(self, sil):
+	def SyllableTime(self, sil):
 		return (0, 0)
-	def TiempoDialogue(self, diag):
+	def DialogueTime(self, diag):
 		return (0, 0)
-	def TiempoLetter(self, let):
+	def LetterTime(self, let):
 		return (0, 0)
 
 

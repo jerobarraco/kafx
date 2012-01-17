@@ -122,8 +122,8 @@ class FxsGroup(comun.FxsGroup):
 		self.saltar_cuadros = False
 		self.in_ms = 250
 		self.out_ms = 250
-		self.sil_in_ms = 500
-		self.sil_out_ms = 200
+		self.syl_in_ms = 500
+		self.syl_out_ms = 200
 		self.fxs = (FX1(), FX2(), traduANDkanji(),)
 	def EnCuadroInicia(self):
 		avanzado.GrupoInicio()

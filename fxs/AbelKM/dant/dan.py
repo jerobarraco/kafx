@@ -12,7 +12,7 @@ t3 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nue
 class FX1(comun.Fx):
 
 	def __init__(self):
-		self.eventos = [Evento1(), Evento2(), Evento3()]
+		self.events = [Evento1(), Evento2(), Evento3()]
 
 	def EnDialogo(self, d):
 		global t1, t2

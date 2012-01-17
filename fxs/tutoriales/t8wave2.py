@@ -31,7 +31,7 @@ class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		self.in_ms = 250
 		self.out_ms = 250
-		self.sil_in_ms = 200
-		self.sil_out_ms = 200
-		self.tipo_blur = 0
+		self.syl_in_ms = 200
+		self.syl_out_ms = 200
+		self.blur_type = 0
 		self.fxs = (FX1(),FX1() )

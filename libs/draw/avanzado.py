@@ -62,7 +62,7 @@ def CapasInicia():
 
 #TODO antialias
 #TODO problema de stride
-#TODO Orden en eventos
+#TODO Orden en events
 def CapasActivar(capa=0, opacity=1.0, mode='over'):
 	"""Activa una capa.
 	todo lo que se pinte luego de esto se pintará sobre la capa activada.
@@ -298,7 +298,7 @@ def fBlur4(pasos=0, opacidad=0):
 fBlurs = [fBlur1, fBlur1b, fBlur2, fBlur3, fBlur4]
 #esta variable es el tipo de blur usado, default el primero
 fBlur = fBlurs[0]
-"""Si se desea cambiar el tipo de blur pueden hacerlo seteando la variable tipo_blur en tu clase FxsGroup
+"""Si se desea cambiar el tipo de blur pueden hacerlo seteando la variable blur_type en tu clase FxsGroup
 o de la misma manera que acá arriba desde el script de effect obvio, no modifiquen este archivo por un effect.
 """
 

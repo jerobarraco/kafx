@@ -27,8 +27,8 @@ class FxsGroup(comun.FxsGroup):
 		#Un effect si o si tiene q definir lo siguiente, si o si con esos nombres
 		self.in_ms = 100 #Milisegundos para la animacion de entrada
 		self.out_ms = 200 #MS para animacion d salida
-		self.sil_in_ms = 100 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
-		self.sil_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
+		self.syl_in_ms = 100 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
+		self.syl_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
 		
 		#Funciones (grupo de efectos) que se provee
 		self.funcs =[ef1,  ef2]
@@ -37,7 +37,7 @@ class FxsGroup(comun.FxsGroup):
 		#En caso que los CUADROS sean accedidos en forma secuencial, puede ayudar a hacer ciertos efectos.
 		#En caso que se accedan como quieren, entonces puede provocar errores.
 		#Se ha comprobado que VirtualDub al comprimir, accede de cualquier forma, y genera cosas raras.		
-		self.reset_estilo = True
+		self.reset_style = True
 
 		##Como se definen los efectos?
 		"""Basicamente contamos con una variable llamada funcs, esta tiene q llamarse asi porque la usara directamente el kafx_main

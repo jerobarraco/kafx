@@ -33,7 +33,7 @@ class Evento2(comun.Evento):
 class Fxpart (comun.Fx):
 
         def __init__(self):
-			self.eventos = [Evento1(), Evento2()]
+			self.events = [Evento1(), Evento2()]
 			self.t = extra.CargarTextura("texturas/star1.png")
 
         def EnSilabaInicia(self, sil):

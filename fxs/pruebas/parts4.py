@@ -38,5 +38,5 @@ class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		self.fxs = [Fxpart()]
 		self.saltar_cuadros = False
-		self.sil_in_ms = 400
-		self.sil_out_ms = 400
+		self.syl_in_ms = 400
+		self.syl_out_ms = 400
