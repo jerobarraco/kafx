@@ -57,34 +57,13 @@ class cCurrentFrame:
 	"""
 	#Contiene la información del cuadro actual
 	ctx = None #Contexto actual
-	#sfc = None #Surface del cuadro actual NO USAR!!
-	framen=-1 #numero de cuadro actual.. creo que empieza desde 0
+	framen = -1 #numero de cuadro actual.. creo que empieza desde 0
 	#tiempo=-1 #tiempo actual en milisegundos (deshabilitado desde el kafx_main) (definitivamente no debe ser usado)
 
 
 cf = cCurrentFrame()
 vi = cVideoInfo() #Global, la setea kafx_main para que  cualquiera pueda accederla
 #Instancia global con la informacion del cuadro actual, y la información del video
-
-def CuadroAMS(frame):
-	"""NO USEN ESTA COSA LENTA! usen vi.FrameToMS"""
-	global vi
-	return (frame*vi.fpscof2)
-
-def MSACuadro(ms):
-	"""NO USEN ESTA COSA LENTA! usen vi.MSToFrame"""
-
-	global vi
-	#return int(round(ms*vi.fpscof1))
-	#return int(ms*vi.fpscof1)
-	return int(math.ceil(ms*vi.fpscof1))
-	#return int(ms*vi.fpscof1)
-
-def ClampFrameNum(frame):
-	"""NO USEN ESTA COSA LENTA! usen vi.ClampFrameNum"""
-	if frame < 0: return 0
-	if frame > vi.num_frames : return vi.num_frames
-	return frame
 
 # Raster types used by VirtualDub & Avisynth
 """typedef unsigned long	Pixel;    # this will break on 64-bit machines!
@@ -119,7 +98,7 @@ CS_INTERLEAVED = 1073741824 # 1<<30
 CS_PLANAR = 2147483648L #1<<31
 
 
-  # Specific colorformats
+# Specific colorformats
 CS_UNKNOWN = 0
 CS_BGR24 = 1<<0 | CS_BGR | CS_INTERLEAVED
 CS_BGR32 = 1<<1 | CS_BGR | CS_INTERLEAVED
