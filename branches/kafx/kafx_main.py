@@ -167,7 +167,7 @@ def __CallFuncsNormal():
 	#Nueva forma de llamar, por events
 	for (evento, o, prog) in frame:
 		o.progress = prog
-		if fx.reset_estilo:
+		if fx.reset_style:
 			o.Restore()
 		evento(o)
 
@@ -209,7 +209,7 @@ def __PreLoad():
 
 	num_frames = vi.num_frames #la cantidad de frames totales
 	fs = fx.fxs #la lista de efectos
-	avanzado.fBlur = avanzado.fBlurs[fx.tipo_blur] #elegimos el tipo de blur segun la configuración
+	avanzado.fBlur = avanzado.fBlurs[fx.blur_type] #elegimos el tipo de blur segun la configuración
 
 	#no_frames = [True for i in xrange(num_frames+1)] #this way is slower
 	no_frames = [True, ]*(num_frames+1)#el objeto no_frames es una lista con los cuadros que no quieren ser procesados
