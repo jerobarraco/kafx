@@ -13,7 +13,7 @@ textura3 = extra.CargarTextura('C:/Users/Anibal/Documents/Everything is here/Sof
 
 class FX1(comun.Fx):
 	def __init__(self):
-		self.eventos = [Evento1()]
+		self.events = [Evento1()]
 	def EnDialogoInicia(self, d):
 		d.mov2 = 0
 	def EnDialogo(self, d):

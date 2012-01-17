@@ -116,8 +116,8 @@ class FxsGroup(comun.FxsGroup):
 
 		self.in_ms = 100 #Milisegundos para la animacion de entrada
 		self.out_ms = 350 #MS para animacion d salida
-		self.sil_in_ms = 100 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
-		self.sil_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
+		self.syl_in_ms = 100 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
+		self.syl_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
 				
 		#Funciones (grupo de efectos) que se provee
 		self.fxs = (ef1(),  ef2())

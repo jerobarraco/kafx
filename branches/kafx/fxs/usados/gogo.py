@@ -80,7 +80,7 @@ class FX3(comun.Fx):
 		angulo = 2*pi*diag.progreso
 		avanzado.GrupoInicio()
 		diag.Alpha(sin(angulo))
-		diag.actual.pos_x += (cos(angulo)*120)# Esto depende de reset_estilo
+		diag.actual.pos_x += (cos(angulo)*120)# Esto depende de reset_style
 		#diag.MoverA(diag.actual.pos_x+, 0)
 		diag.Pintar()
 		avanzado.fGlow(opacidad=0.025)
@@ -92,8 +92,8 @@ class FxsGroup(comun.FxsGroup):
 		self.saltar_cuadros = False
 		self.in_ms = 300 #Milisegundos para la animacion de entrada
 		self.out_ms = 300 #MS para animacion d salida
-		self.sil_in_ms = 500 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
-		self.sil_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
+		self.syl_in_ms = 500 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
+		self.syl_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
 		#~~~~~
 		self.fxs = (FX1(), FX2(), FX3())
 

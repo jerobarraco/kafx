@@ -81,7 +81,7 @@ class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		self.in_ms = 300 #Milisegundos para la animacion de entrada
 		self.out_ms = 300 #MS para animacion d salida
-		self.sil_in_ms = 150 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
-		self.sil_out_ms = 250 #ms para la animacion de cada silaba muerta (en el dialogo actual)
+		self.syl_in_ms = 150 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
+		self.syl_out_ms = 250 #ms para la animacion de cada silaba muerta (en el dialogo actual)
 		#El segundo effect es una instancia de comun.Fx q como está vacia no va a mostrar el otro effect
 		self.fxs = (Fx1(), comun.Fx())

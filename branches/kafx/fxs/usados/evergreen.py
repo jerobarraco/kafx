@@ -90,10 +90,10 @@ class FxsGroup(comun.FxsGroup):
 		#Un effect si o si tiene q definir lo siguiente, si o si con esos nombres
 		self.in_ms = 350 #Milisegundos para la animacion de entrada
 		self.out_ms = 300 #MS para animacion d salida
-		self.sil_in_ms = 5 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
+		self.syl_in_ms = 5 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
 		#le puse 5 ms porque como no uso animaciones de silabas, queria probar si con un numero bajo iba mas rapido
 		#la conclusion es... nidea.
-		self.sil_out_ms = 2 #ms para la animacion de cada silaba muerta (en el dialogo actual)
+		self.syl_out_ms = 2 #ms para la animacion de cada silaba muerta (en el dialogo actual)
 		#same
 		
 		self.fxs = (Romanji(), Kanji(), Creditos())

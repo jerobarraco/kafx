@@ -11,8 +11,8 @@ class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		self.fxs = [Fxpart(), ]
 		self.saltar_cuadros = False
-		self.sil_in_ms = 400
-		self.sil_out_ms = 400
+		self.syl_in_ms = 400
+		self.syl_out_ms = 400
 		self.psys =  avanzado.cParticleSystem( png="texturas/T_Negro2.png",
 			max_life=1, max_parts=2000, emitir_parts=4, escala_de= 0.6, escala_a=1, modo=1, rotacion=0,
 			color=extra.cCairoColor(numero=0xFFA060F0))

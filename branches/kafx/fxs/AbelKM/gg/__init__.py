@@ -42,7 +42,7 @@ class FX1(comun.Fx):
 class FxsGroup(comun.FxsGroup):
     def __init__(self):
         self.fxs = [ FX1() ]
-        self.sil_in_ms = 300
-        self.sil_out_ms = 300
+        self.syl_in_ms = 300
+        self.syl_out_ms = 300
         self.out_ms = 300
         self.in_ms = 500
