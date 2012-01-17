@@ -33,9 +33,9 @@ EL USO DE SHAPES DENTRO DE LOS SCRIPT´S.
 
 CUALQUIER DUDA O ACLARACION   http://my.opera.com/karafx/members/
 """
-PIXEL="m 0 0 l 0 1 l 1 1 l 1 0"
+PIXEL="m 0 0 l 0 1 l 1 1 l 1 0 c"
 #definitivamente NO usen esto.... si lo necesitan hay otras formas, varias
-RECTANGLE="m 0 0 l 0 0 l 60 0 l 60 -30 l 0 -30 l 0 0 "
+RECTANGLE="m 0 0 l 0 0 l 60 0 l 60 -30 l 0 -30 l 0 0 c"
 #y existiendo la funcion rectangle de cairo creo q mucho menos este...
 
 CIRCLE1="m 10 0 b 16 0 20 -4 20 -10 b 20 -16 16 -20 10 -20 b 2 -20 0 -14 0 -10 b 0 -4 4 0 10 0"
