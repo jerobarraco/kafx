@@ -53,8 +53,8 @@ class FX1(comun.Fx):
 
 class Evento1(comun.Evento):
 		def __init__(self):
-			p = avanzado.cParticleSystem(png="texturas/win3.png", emitir_parts=40,
-				modo = 0, max_parts=80, rotacion= 0.1, escala_de=0.05, escala_a= 0.05,max_life=1)
+			p = avanzado.cParticleSystem(png="texturas/win3.png", emit_parts=40,
+				modo = 0, max_parts=80, rotation= 0.1, scale_from=0.05, scale_to= 0.05,max_life=1)
 			p.DarAngulo(10, 2, 10)
 			p.DarGravedad(0, 1)
 			self.parts = p

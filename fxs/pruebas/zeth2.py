@@ -45,7 +45,7 @@ class FX1(comun.Fx):
 
 class FX2(comun.Fx):
 	def __init__(self):
-		self.parts = avanzado.cParticleSystem(png="texturas/spark.png", color = extra.cCairoColor(0xFFAFAFAF), max_life=3, emitir_parts=2, escala_de= 0.4, escala_a=0.1, modo=1)
+		self.parts = avanzado.cParticleSystem(png="texturas/spark.png", color = extra.cCairoColor(0xFFAFAFAF), max_life=3, emit_parts=2, scale_from= 0.4, scale_to=0.1, modo=1)
 		self.parts.DarVentana(6, 2)
 		self.parts.DarAngulo(pi, 5, pi/4.2)
 		self.posx= 0

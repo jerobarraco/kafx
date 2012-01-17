@@ -23,11 +23,11 @@ class FX1(comun.Fx):
 			if (s._dur <= 0 ) or (s._texto.strip() == ""):
 				s.parts = []
 				return
-			#usamos una variable con escala porque luego lo usamos en varios lados
+			#usamos una variable con scale porque luego lo usamos en varios lados
 
 			escala = 0.05
 			#Creamos las particulas con una funcion especial.
-			#escala sera la escala inicial
+			#scale sera la scale inicial
 			#0.2 es la opacidad mínima, el resto de particulas no seran mostradas.
 			s.parts = s.CrearParticulas(self.t,	escala, 0.1, False, modo=0)
 			print len(s.parts)
@@ -46,8 +46,8 @@ class FX1(comun.Fx):
 				p.aa = comun.Interpolar(random.random(), 0.01, 0.05)
 				#almacenamos la opacidad original
 				p.oa = p.color.a
-				#y una escala inicial
-				p.s = escala
+				#y una scale inicial
+				p.s = scale
 			#Y las mezclamos para que exploten desordenadamente
 			random.shuffle(s.parts)
 			#Y creamos una variable que dice cuantas particulas animaremos por frame
@@ -188,9 +188,9 @@ class FxsGroup(comun.FxsGroup):
 		for p in self.fxs[0].parts:
 			#decrementamos su alpha
 			p.color.a -= p.aa
-			#incrementamos su escala
+			#incrementamos su scale
 			p.s += 0.01
-			#es mastriz inversa hay que dividir 1 por la escala
+			#es mastriz inversa hay que dividir 1 por la scale
 			p.scale_x = p.scale_y = 1.0/p.s
 
 			#incrementamos las posiciones (movemos)

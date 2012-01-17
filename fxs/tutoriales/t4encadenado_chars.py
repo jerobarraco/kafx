@@ -6,7 +6,7 @@ from math import cos, pi, sin
 #Definimos un effect
 class Fx1(comun.Fx):
 	def Char(self, c, prog):
-		#Esta es la función que se llamará por cada silaba activa
+		#Esta es la función que se llamará por cada silaba active
 		#ver EnSilaba
 
 		#Como esta funcion es llamada por Encadenar, el progreso es un parametro
@@ -18,7 +18,7 @@ class Fx1(comun.Fx):
 		c.Paint()
 
 	def EnSilaba(self, s):
-		#Cuando la silaba está activa animamos sus caracteres con la
+		#Cuando la silaba está active animamos sus caracteres con la
 		#funcion self.Char (de ahi arriba),
 		#como s._dur son frames, la duracion por char la pongo en cuadros (el 6 ese)
 		#Esa duracion la podria obviar

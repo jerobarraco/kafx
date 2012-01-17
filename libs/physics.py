@@ -132,7 +132,7 @@ class World():
 			w = obj.original._ancho * scale
 			h = obj.original._alto * scale
 		else:
-			obj.Escalar(scale, scale)
+			obj.Scale(scale, scale)
 			w=h= (obj._ancho*scale)/2.0
 
 		obj.shape = self.__createShape(body, w, h, square)

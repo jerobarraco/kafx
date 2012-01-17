@@ -26,7 +26,7 @@ class FXPart (comun.Fx):
 			p.angulo = comun.Interpolar(sil.progreso, 0, 6.28, comun.i_b_boing)
 			p.color.a -= 0.1
 			p.esc += 0.05
-			p.Escalar(p.esc, p.esc)
+			p.Scale(p.esc, p.esc)
 			p.Pintar()
 
 	def EnDialogo(self, d):

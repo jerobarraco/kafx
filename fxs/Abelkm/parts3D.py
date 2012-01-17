@@ -21,7 +21,7 @@ class Efecto():
 		sil.crear = True
 		x = sil.actual.pos_x+ sil.actual.org_x
 		y = sil.actual.pos_y + sil.actual.org_y
-		sil.bull = [avanzado.cSprite(t, x +randint(-50, 50), y+randint(-50, 50), escala=random()*0.5 +0.5) for i in range(50)]#para que desordenen, pero no las vamos a pintar
+		sil.bull = [avanzado.cSprite(t, x +randint(-50, 50), y+randint(-50, 50), scale=random()*0.5 +0.5) for i in range(50)]#para que desordenen, pero no las vamos a pintar
 
 	def OnSyllableSleep(self, sil):
 		sil.PaintWithCache()

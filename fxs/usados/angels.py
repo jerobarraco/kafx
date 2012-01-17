@@ -17,7 +17,7 @@ class Romanji(comun.Fx):
 		d.mov_y = sin(ang)*-dist
 		
 	def EnDialogoEntra(self, d):
-		#como el org modifica la transformacion del texto (posicion, escala, rotacion) 
+		#como el org modifica la transformacion del texto (posicion, scale, rotacion)
 		#le ponemos como parámetro que no transforme, es una limitacion actual
 		#porque como los degradados usan tambien el origen, solo podemos cambiar 
 		#o el degradado o la transformacion. (aunque en realidad solo afecta cuando realizamos escalado y/o rotacion)
@@ -29,7 +29,7 @@ class Romanji(comun.Fx):
 		d.Pintar()
 				
 	def EnSilaba(self, diag):
-		#Cuando la silaba esta activa
+		#Cuando la silaba esta active
 		#(cacheamos diag.actual)
 		a = diag.actual
 		#Copiamos el color del borde al color primario

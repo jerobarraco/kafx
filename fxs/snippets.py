@@ -46,7 +46,7 @@ class ParticulasConAnimadorPersonalizado(comun.Fx):
 		def EnSilaba(self, d):
 			d.Pintar()
 			a = d.actual
-			self.p.DarPosicion(comun.Interpolar(d.progreso, a.pos_x, a.pos_x+a.ancho), a.org_y) #Movemos el emisor
+			self.p.DarPosicion(comun.Interpolar(d.progreso, a.pos_x, a.pos_x+a.ancho), a.org_y) #Movemos el emitter
 			self.p.Emitir() #Damos la orden de emitir (luego en el EnCuadroInicia o EnCuadroFin hay que llamar al p.Pintar(), algo como self.fxs[0].p.Pintar()
 
 
@@ -83,7 +83,7 @@ class FX1(comun.Fx):
 			
 	def EnDialogoInicia(self, d):
 		"""Cuando cada dialogo inicie, creamos la lista de puntos en los que
-		#se movera el emisor de las partículas"""
+		#se movera el emitter de las partículas"""
 		d.ps = [ (random()*640, random()*480) for i in range(4)]
 
 	def EnDialogo(self, d):

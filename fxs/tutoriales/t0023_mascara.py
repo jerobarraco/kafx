@@ -7,7 +7,7 @@ from libs.draw import avanzado, extra
 textura = extra.CargarTextura('texturas/metal_pattern.png')
 class FX1(comun.Fx):
 	def EnDialogo(self, d):
-		patron = avanzado.cSprite(text =textura )
+		patron = avanzado.cSprite(texture=textura )
 		patron.x = d.actual.pos_x
 		#Notar que el cSprite pinta la textura sobre el video independientemente de la posicion del texto
 

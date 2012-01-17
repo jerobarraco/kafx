@@ -14,7 +14,7 @@ class FxsGroup(comun.FxsGroup):
 		self.syl_in_ms = 400
 		self.syl_out_ms = 400
 		self.psys =  avanzado.cParticleSystem( png="texturas/T_Negro2.png",
-			max_life=1, max_parts=2000, emitir_parts=4, escala_de= 0.6, escala_a=1, modo=1, rotacion=0,
+			max_life=1, max_parts=2000, emit_parts=4, scale_from= 0.6, scale_to=1, modo=1, rotation=0,
 			color=extra.cCairoColor(numero=0xFFA060F0))
 		self.psys.DarAngulo(pi, 0.0, pi/2.0)
 		self.psys.DarVentana(0, 0)

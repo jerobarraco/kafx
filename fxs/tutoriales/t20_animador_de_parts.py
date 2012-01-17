@@ -6,8 +6,8 @@ from math import pi, sin
 class Fx1(comun.Fx):
 	def __init__(self):
 		self.parts = avanzado.cParticleSystem( png="texturas/spark3.png", max_life=3,
-			emitir_parts=2, escala_de= 0.8, escala_a=0.3, modo=1,
-			animador = self.mianimador
+			emit_parts=2, scale_from= 0.8, scale_to=0.3, modo=1,
+			animator= self.mianimador
 		)
 		self.parts.DarVentana(6, 2)
 		self.parts.DarAngulo(pi, 3, pi/4.0)
@@ -18,9 +18,9 @@ class Fx1(comun.Fx):
 
 		"""#Que equivale a :
 		if part.life >1:
-			part.activa = False
+			part.active = False
 		else:
-			part.activa = True
+			part.active = True
 		"""
 
 		part.x += sin(part.angulo)*20
@@ -28,7 +28,7 @@ class Fx1(comun.Fx):
 		part.angulo += 1.0
 		
 		
-		#part.escala = comun.Interpolar(part.life, 0.8, 0.3, comun.i_rand)
+		#part.scale = comun.Interpolar(part.life, 0.8, 0.3, comun.i_rand)
 		part.escala += part.sci
 		part.color.a = comun.Interpolar(part.life , 1, 0)
 
@@ -37,9 +37,9 @@ class Fx1(comun.Fx):
 		part.angulo
 		part.y
 		part.x
-		part.escala
+		part.scale
 		part.color
-		part.activa
+		part.active
 		"""
 
 		"""
@@ -58,7 +58,7 @@ class Fx1(comun.Fx):
 		#incremento del angulo aka animacion de la rotacon
 		part.anguloi
 
-		#incremento de la escala.
+		#incremento de la scale.
 		part.sci
 
 		#gravedad
@@ -72,7 +72,7 @@ class Fx1(comun.Fx):
 		if diag._texto.strip() =="":
 			return
 
-		#cambiamos la posicion del emisor de particulas
+		#cambiamos la posicion del emitter de particulas
 		self.parts.DarPosicion(
 			diag.actual.pos_x + diag.progreso*diag.original._ancho,
 			diag.actual.pos_y - (diag.actual.org_y)

@@ -70,7 +70,7 @@ class FxsGroup(comun.FxsGroup):
 				p.x = comun.Interpolar(p.vida1, p.movx, p.inix)
 				p.y = comun.Interpolar(p.vida1, p.movy, p.iniy)
 				#p.esc -= 0.001
-				#p.Escalar(p.esc, p.esc)
+				#p.Scale(p.esc, p.esc)
 				p.Pintar()
 				p.vida1 += 0.1
 				if p.vida1>1:
@@ -82,7 +82,7 @@ class FxsGroup(comun.FxsGroup):
 				p.x = comun.Interpolar(p.vida2, p.inix, p.movx)
 				p.y = comun.Interpolar(p.vida2, p.iniy, p.movy)
 				#p.esc += 0.0005
-				#p.Escalar(p.esc, p.esc)
+				#p.Scale(p.esc, p.esc)
 				p.Pintar()
 				p.vida2 += 0.1
 				if p.vida2>1:
