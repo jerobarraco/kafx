@@ -3,14 +3,14 @@
 from libs import comun
 from math import cos, pi, sin
 
-#Definimos un efecto
+#Definimos un effect
 class Fx1(comun.Fx):
 	def Char(self, c, prog):
 		#Esta es la función que se llamará por cada silaba activa
 		#ver EnSilaba
 
 		#Como esta funcion es llamada por Encadenar, el progreso es un parametro
-		#lo copiamos al progreso (no es necesario para este efecto pero tenganlo en cuenta)
+		#lo copiamos al progreso (no es necesario para este effect pero tenganlo en cuenta)
 		c.progress = prog
 		#interpolamos los colores
 		#Esto anima el color de relleno con el color secundario
@@ -83,5 +83,5 @@ class FxsGroup(comun.FxsGroup):
 		self.out_ms = 300 #MS para animacion d salida
 		self.sil_in_ms = 150 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
 		self.sil_out_ms = 250 #ms para la animacion de cada silaba muerta (en el dialogo actual)
-		#El segundo efecto es una instancia de comun.Fx q como está vacia no va a mostrar el otro efecto
+		#El segundo effect es una instancia de comun.Fx q como está vacia no va a mostrar el otro effect
 		self.fxs = (Fx1(), comun.Fx())

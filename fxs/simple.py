@@ -22,7 +22,7 @@ class FxsGroup(comun.FxsGroup):
 		self.sil_in_ms = 500 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
 		self.sil_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
 
-		#Un efecto si o si tiene que definir lo siguiente, si o si con este nombre
+		#Un effect si o si tiene que definir lo siguiente, si o si con este nombre
 		#Funciones (grupo de efectos) que provee
 		self.fxs = (EfectoGenerico(), EfectoGenerico())
 
@@ -32,4 +32,4 @@ class FxsGroup(comun.FxsGroup):
 			fxs es un array, cada item representa un Efecto del archivo Ass,
 			que se define en cada linea de dialogo... (Columna Effect)
 			(generalmente ass lo usa para poner cosas como "karaoke" "scroll" acá usaremos un numero,
-			0 para el primer efecto, 1 para el siguiente y asi)"""
+			0 para el primer effect, 1 para el siguiente y asi)"""

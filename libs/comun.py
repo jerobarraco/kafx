@@ -284,7 +284,7 @@ class FxsGroup():
 	fxs = []
 	#A diferencia de los anteriores ésta es la única propiedad que hay que definir sí o sí.
 	#Esta propiedad contiene los diferentes efectos que harás. Por ejemplo, para un video si tenes una línea de kanjis,
-	#una con la traducción y una con la letra; podés crear un efecto para cada tipo.
+	#una con la traducción y una con la letra; podés crear un effect para cada tipo.
 
 	tipo_blur = 0
 	#Esto es para elegir el tipo de blur, es experimental y avanzado (y poco útil)
@@ -298,7 +298,7 @@ class FxsGroup():
 		pass
 
 class Fx():
-	"""Clase de la que desciende un efecto"""
+	"""Clase de la que desciende un effect"""
 	eventos = []
 	#Un array con eventos personalizados, debe contener instancias de la clase Evento
 

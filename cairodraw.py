@@ -20,7 +20,7 @@ video.cf.ctx = c
 
 #para cargar de un ass
 ass = asslib.Ass("test.ass", 3)
-d = ass.dialogos[5]
+d = ass.dialogues[5]
 d.Paint()
 s = d._silabas[2]
 s.actual.color1.CopyFrom(s.actual.color2)

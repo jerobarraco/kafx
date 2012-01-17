@@ -117,7 +117,7 @@ class cProperties():
 			#alineaciÃ³n segun ass (an creo)
 			self._align = 2
 
-			#path info #cargando de una figura esto no tiene mucho efecto asi que ni siquiera se crean las variables
+			#path info #cargando de una figura esto no tiene mucho effect asi que ni siquiera se crean las variables
 			self._x_bearing = 0
 			self._y_bearing = 0
 			self._x_advance = 0
@@ -134,10 +134,10 @@ class cProperties():
 		self.CopyFrom(other)
 		#No animables
 		self._name = other._name
-		self._font = other._fuente
+		self._font = other._font
 		self._size  = other._size
-		self._bold = other._negrita
-		self._italic = other._italica
+		self._bold = other._bold
+		self._italic = other._italic
 		self._marginv = other._marginv
 		self._marginr = other._marginr
 		self._marginl = other._marginl
@@ -168,7 +168,7 @@ class cProperties():
 		self.mode_fill = other.mode_fill
 		self.mode_border = other.mode_border
 		self.mode_shadow = other.mode_shadow
-		self.mode_particle = other.mode_particula
+		self.mode_particle = other.mode_particle
 
 	def FromDict(self, style):
 		"""Crea los valores desde un diccionario, para uso interno"""
@@ -238,7 +238,7 @@ class cSilaba(extra.cVector):
 			char._start = time
 			char._dur = cdur
 			char._end = time = (time + cdur)
-			char.efecto = self.efecto #no sirve de nada pero bueno
+			char.effect = self.effect #no sirve de nada pero bueno
 			last = char.ChangeText(tchar, last)
 			self._letters.append(char)
 
@@ -287,7 +287,7 @@ class cDialogue(extra.cVector):
 		@dialogue es la linea de dialogo en forma ass (interno)
 		@styles es el array con styles
 		opcionales:
-		@max_effect numero mÃ¡ximo que puede tomar como efecto
+		@max_effect numero mÃ¡ximo que puede tomar como effect
 		"""
 		t_estilo = dialogue[E_STYLE]
 		est = styles[0]
@@ -312,13 +312,13 @@ class cDialogue(extra.cVector):
 		self._end = TimeToMS(dialogue[E_END])
 		self._dur = self._end - self._start
 
-		#Ponemos que efecto debe usar
-		self.efecto = min(max_effect, int(comun.SafeGetFloat(dialogue, E_EFFECT)))
+		#Ponemos que effect debe usar
+		self.effect = min(max_effect, int(comun.SafeGetFloat(dialogue, E_EFFECT)))
 
 		#Cargamos las Syllables (esta funciÃ³n setea el _text)
 		self.__SetSyllables( dialogue[E_TEXT] )
 		#El texto lo sabemos luego de parsear las Syllables
-		self.ChangeText(self._texto)
+		self.ChangeText(self._text)
 
 		#Como la pos depende de la alineacion y por ende del tamaÃ±o del texto, solo lo podemos
 		#hacer despues de parsear las Syllables
@@ -357,18 +357,20 @@ class cDialogue(extra.cVector):
 
 		Zheo y Alchemist, grax chicos, son grosos! :D"""
 		import re
-		self._texto = ''
+		self._text = ''
 		self._syllables = []
 		tiempo = self._start
 		i = 0
 		"""
-		{(?:\\.)* = toma cualkier cosa, esto se hizo por si alguien ponian algun efecto y despeus el \k, pues toma el \k y bota el resto
+		{(?:\\.)* = toma cualkier cosa, esto se hizo por si alguien ponian algun effect y despeus el \k, pues toma el \k y bota el resto
 		\\(?:[kK]?[ko]?[kf])  = toma los \k, \kf, \ko y \K
 		(\d+) = cualkier digito, en este caso, el tiempo de las \k
 		([\\\-a-zA-Z_0-9]*)} = para el inline_fx ({\k20\-0} karaoke)
 		(\s*)([^{]*)(\s*) = espacio - cualkier caracter alfanumerico y signos-espacio"""
 		#TODO probar con el nuevo regex de alch
-		#TODO cuando encuentre la sintaxis de una forma en el dialogo que en vez de crear un dialogo lo cree usando la forma
+		#TODO pensar si conviene que cree un cVector en vez de una silaba (si no trae problemas en los eventos)
+		#si el anterior es cierto : TODO cuando encuentre la sintaxis de una forma en el dialogo que en vez de crear un dialogo lo cree usando la forma
+
 		"""KARA = re.compile(
     r'''
     (?:\\[\w\d]+)*              # ignore tags before k
@@ -405,13 +407,13 @@ class cDialogue(extra.cVector):
 			else:
 				ifx = None
 			#Ponemos ifx a none para permitir efectos = 0
-			syl.efecto = ifx or self.efecto
+			syl.effect = ifx or self.effect
 			self._syllables.append(syl)
-			self._texto += tx
+			self._text += tx
 			i += 1
 
-		if not self._texto: #no se porque hace esto, quizás si no hay {\k} el re no devuelve nada.
-			self._texto = re.sub(r'{.*}', '', texto) # lineas (quitando las tags)
+		if not self._text: #no se porque hace esto, quizás si no hay {\k} el re no devuelve nada.
+			self._text = re.sub(r'{.*}', '', texto) # lineas (quitando las tags)
 
 	def Chain(self, function, duration=None):
 		"""Permite encadenar las syllables a una animacion
@@ -424,6 +426,7 @@ class cDialogue(extra.cVector):
 
 	def FullWiggle(self, amplitud=4, frecuencia=2):
 		"""el wiggle que queria AbelKM"""
+		#TODO doc
 		dx, dy = self.Wiggle(amplitud, frecuencia)
 		for sil in self._syllables:
 			sil.FullWiggle(amplitud, frecuencia , dx, dy)
@@ -455,7 +458,7 @@ class Ass():
 			self.formato = [v.strip().lower() for v in valor.split(',')] # si que me gusta hacer codigo complicado, no?
 		else: # esto no c hace, asumimos q si no es format es style, pero uno nunca sabe
 			valores = [v.strip().lower() for v in valor.split(',')]
-			self.estilos.append( cProperties(dicc=dict(zip(self.formato,  valores))))
+			self.styles.append( cProperties(dicc=dict(zip(self.formato,  valores))))
 
 	def __Events(self,  texto):
 		#parseador de eventos
@@ -470,17 +473,17 @@ class Ass():
 
 			nuevo_d = dict(zip(self.eformato,  valores))
 			nuevo_d[E_EFFECT] = int(comun.SafeGetFloat(nuevo_d, E_EFFECT))
-			d = cDialogue(nuevo_d, self.estilos, self.max_effect)
-			d._indice = self.indice
-			self.dialogos.append(d)
-			self.indice += 1
+			d = cDialogue(nuevo_d, self.styles, self.max_effect)
+			d._indice = self.index
+			self.dialogues.append(d)
+			self.index += 1
 
 	def LoadFromFile(self, file, max):
 		#carga un archivo ass
 		self.info = {}
-		self.estilos = []
-		self.dialogos = []
-		self.indice = 0
+		self.styles = []
+		self.dialogues = []
+		self.index = 0
 		self.max_effect = max
 		f = codecs.open(file, mode='r', encoding='utf-8')
 		parser = self.__none

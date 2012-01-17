@@ -7,7 +7,7 @@ class EfectoComun(comun.Fx):#Imaginate que aca hay todo un codigo re largo que h
 				diag.Paint()
 
 
-class Efecto1(EfectoComun):#pero en este efecto queremos que ADEMAS pitne la letra
+class Efecto1(EfectoComun):#pero en este effect queremos que ADEMAS pitne la letra
         def EnLetra(self, let):
                 let.actual.color1.CopyFrom(let.actual.color2)
                 let.Paint()

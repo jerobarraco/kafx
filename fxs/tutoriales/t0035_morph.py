@@ -9,7 +9,7 @@ class Efecto():
 
 	def OnSyllableStarts(self, l):
 		#creamos la forma aca apra copiar el estilo
-		#notar que lo guardamos en self. por eso hay UNa SOLA FORMA POR EFECTO (self es de efecto)
+		#notar que lo guardamos en self. por eso hay UNa SOLA FORMA POR EFECTO (self es de effect)
 		#por eso nos fijamos si ya la crearon
 		if not self.forma :
 			l.actual.color1.CopyFrom(l.actual.color2)
@@ -30,7 +30,7 @@ class Efecto():
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		self.fxs = (Efecto(), comun.Fx(),comun.Fx())
-		#no puedo crear dos efecto() porque intentaria crear dos mundos
+		#no puedo crear dos effect() porque intentaria crear dos mundos
 		self.skip_frames= False
 		self.split_letters = True
 		self.sil_out_ms = 200

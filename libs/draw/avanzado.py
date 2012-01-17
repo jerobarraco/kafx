@@ -230,7 +230,7 @@ def fBlur2(pasos=3, opacidad=0.8):
 		opacidad-=acumop
 
 def fBlur3(pasos=3, opacidad=None):
-	"""Blur usando pil, verdadero blur gausiano.. el parametro de opacidad no hace efecto
+	"""Blur usando pil, verdadero blur gausiano.. el parametro de opacidad no hace effect
 	asquerosamente lento,
 
 	"""
@@ -299,7 +299,7 @@ fBlurs = [fBlur1, fBlur1b, fBlur2, fBlur3, fBlur4]
 #esta variable es el tipo de blur usado, default el primero
 fBlur = fBlurs[0]
 """Si se desea cambiar el tipo de blur pueden hacerlo seteando la variable tipo_blur en tu clase FxsGroup
-o de la misma manera que acá arriba desde el script de efecto obvio, no modifiquen este archivo por un efecto.
+o de la misma manera que acá arriba desde el script de effect obvio, no modifiquen este archivo por un effect.
 """
 
 def Shadow(pattern, size=5, offx=0, offy=0, paint=True):
@@ -374,7 +374,7 @@ def fBiDirBlur(angle=0, pasos=1, opacidad=0.25):
 
 def fGlow(pasos=3, opacidad=0.05):
 	"""
-	Hace un efecto de brillo
+	Hace un effect de brillo
 	opcionales:
 	@pasos cantidad de pasos
 	@opacidad opacidad de cada paso
@@ -432,7 +432,7 @@ def fTimeBlur(opacidad=0.15):
 """
 
 def fRotoZoom(pasos=4, opacidad=0.25, escala=1, angle=0, org_x=0, org_y=0):
-	"""Realiza un efecto de rotacion y zoom progresivos sobre todo el contenido del cuadro
+	"""Realiza un effect de rotacion y zoom progresivos sobre todo el contenido del cuadro
 	@pasos : cantidad de pasos
 	@opacidad : opacidad de cada paso
 	@escala : incremento de escala por paso
@@ -455,7 +455,7 @@ def fRotoZoom(pasos=4, opacidad=0.25, escala=1, angle=0, org_x=0, org_y=0):
 		ctx.paint_with_alpha(opacidad)
 
 def fOnda( inicio,  delta=0.1,  amplitud = 10,  vertical=True,  borrar=True):
-	"""Realiza un efecto de ondulacion sobre la imagen activa.
+	"""Realiza un effect de ondulacion sobre la imagen activa.
 	@inicio : un offset del angle de inicio (si se quiere animar esto se debe modificar)
 	@delta = 0.1 : el delta que indica cuanto cambiará la onda de pixel a pixel (es como el ancho de la onda (en vertical)) (mientras mas pequeño, la onda es mas ancha) (esto es lo mismo que frecuencia)
 	@amplitud = 10 : cuan fuerte es la deformacion (el alto de la onda (en vertical))
@@ -567,7 +567,7 @@ class cParticleSystem():
 			self.life = 0 #indica cuanta vida tiene (como el progress d 0 a 1) (1=muerta)
 			self.escala = sc1
 			self.fade = ((random()/10)+0.1) /life
-			#esto indica la velocidad con que muere, al tener /life ahi, el valor de esa variable, puede ser sumada a life y life pasa a funcionar como el progress de los dialogos..
+			#esto indica la velocidad con que muere, al tener /life ahi, el valor de esa variable, puede ser sumada a life y life pasa a funcionar como el progress de los dialogues..
 			#aumentando el valor de life aumenta la cantidad d animaciones requeridas para morir.
 			#considerable como "paso" de animacion (step)
 

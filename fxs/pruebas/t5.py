@@ -25,7 +25,7 @@ class FxsGroup(comun.FxsGroup):
 		self.sil_in_ms = 500 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
 		self.sil_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
 		self.saltar_cuadros = False
-		#Un efecto si o si tiene que definir lo siguiente, si o si con este nombre
+		#Un effect si o si tiene que definir lo siguiente, si o si con este nombre
 		#Funciones (grupo de efectos) que provee
 		self.fxs = (EfectoGenerico(), comun.Fx(), comun.Fx())
 		self.audiodata = audio.Datos("fma.avi")

@@ -7,7 +7,7 @@ from libs import comun, video
 
 class FX1(comun.Fx):
 		def __init__(self):
-			#Cuando inicia el efecto
+			#Cuando inicia el effect
 			#creamos un array para poner las particulas que iremos animando,
 			#esto es proque hay que hacer diferencia entre las particulas que se mueven y las que no
 			#y porque el movimiento de las particulas puede durar mas que el dialog en pantalla
@@ -96,7 +96,7 @@ class FX1(comun.Fx):
 			#las pasamos al self para q las pinte el fxsgroup
 
 			for p in s.parts[:s.partsporframe]:#Ponemos particulas a animar
-				#movemos una particula de la silaba al self (efecto)
+				#movemos una particula de la silaba al self (effect)
 				self.parts.append(p)
 				s.parts.remove(p)
 

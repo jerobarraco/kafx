@@ -5,7 +5,7 @@ from math import pi, sin, cos
 
 class FX1(comun.Fx):
 	def __init__(self):
-		#Cuando se cree el efecto
+		#Cuando se cree el effect
 		#Creamos las particulas
 		self.parts = avanzado.cParticleSystem(png="texturas/star3.png", max_life=3, emitir_parts=2, escala_de= 0.8, escala_a=0.3, modo=1)
 		#Configuramos la ventana y el angulo
@@ -42,7 +42,7 @@ class FX1(comun.Fx):
 	def EnSilabaDorm(self, diag):
 		diag.PintarConCache()
 
-#El otro efecto
+#El otro effect
 class FX2(comun.Fx):
 	def EnDialogoInicia(self, diag):
 		#abrimos el bpm

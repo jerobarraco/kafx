@@ -4,7 +4,7 @@ from libs.draw import avanzado
 from random import random
 
 class Romanji(comun.Fx):
-	#Este efecto se aplica al romanji o sea el karaoke
+	#Este effect se aplica al romanji o sea el karaoke
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(0, 1)
 		diag.Pintar()
@@ -41,16 +41,16 @@ class Romanji(comun.Fx):
 		#brillo
 		avanzado.GrupoFin()
 		#fin del grupo.
-		"""este efecto se podia hacer de 3 formas
+		"""este effect se podia hacer de 3 formas
 		variando el primer parametro del glow, la cantidad de pasos.
 		a menos pasos el encoding es mas rapido, pero la cantidad de pasos es siempre entera
-		asique se veria como entrecortado el efecto.
+		asique se veria como entrecortado el effect.
 		otra forma era cambiar el segundo parametro del glow, la fuerza.
 		esta hubiese funcionado bastante bien, y es lo que uso normalmente... aunque
 		el glow tiene el problema que valores muy bajos de fuerza no lo toma bien.
 		
 		y la forma que yo use, fue cambiar la opacidad de lo que pinto y el glow usa eso
-		esto logra un efecto igual a lo demás, con la ventaja que se forma un efecto raro
+		esto logra un effect igual a lo demás, con la ventaja que se forma un effect raro
 		que el texto se ve a travez del glow en ciertos casos.
 		"""
 
@@ -76,7 +76,7 @@ class Creditos(comun.Fx):
 		avanzado.GrupoInicio()
 		diag.Desvanecer(0, 1, comun.i_sin)
 		#diag.Alpha(sin(pi*diag.progreso))
-		#un efecto de alpha con la misma curva que antes, 0 a 1 a 0, con la forma de un seno...
+		#un effect de alpha con la misma curva que antes, 0 a 1 a 0, con la forma de un seno...
 		diag.Pintar()
 		avanzado.fGlow(10, 0.005 + (random()*0.005))
 		#hacemos un glow, con un minimo de fuerza de 0.005 y un maximo de .01 para q de esa senzacion de interferencia
@@ -87,7 +87,7 @@ class Creditos(comun.Fx):
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		#Opciones principales
-		#Un efecto si o si tiene q definir lo siguiente, si o si con esos nombres
+		#Un effect si o si tiene q definir lo siguiente, si o si con esos nombres
 		self.in_ms = 350 #Milisegundos para la animacion de entrada
 		self.out_ms = 300 #MS para animacion d salida
 		self.sil_in_ms = 5 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)

@@ -46,7 +46,7 @@ class Fx1(comun.Fx):
 		#Otras propiedades
 		part.life
 		part.fade
-		#esto indica la velocidad con que muere, al tener /life ahi, el valor de esa variable, puede ser sumada a life y life pasa a funcionar como el progreso de los dialogos..
+		#esto indica la velocidad con que muere, al tener /life ahi, el valor de esa variable, puede ser sumada a life y life pasa a funcionar como el progreso de los dialogues..
 		#aumentando el valor de life aumenta la cantidad d animaciones requeridas para morir.
 		#considerable como "paso" de animacion (step)
 

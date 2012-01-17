@@ -105,7 +105,7 @@ def SBevel(obj, color, part):
 	ctx.pop_group_to_source()
 
 """Este array define los posibles sources
-Podes implementar los tuyos en tu efecto, sólo agregalos al array al final,
+Podes implementar los tuyos en tu effect, sólo agregalos al array al final,
 tu función debe tener 3 parametros
 	obj -> el objeto (cDialogo, cSilaba o cVector)
 	color -> el color sugerido (color para relleno, ocolor para border, bcolor para sombra)
@@ -115,7 +115,7 @@ para usarla sólo debes agregar el nombre de tu función al final  (recomiendo u
 	basico.sources.append(xxxxx)
 desde tu script, nunca modifiques este archivo)
 
-y poner el indice que corresponda al usar ModeRelleno/Border/Shadow
+y poner el index que corresponda al usar ModeRelleno/Border/Shadow
 ej: diag.ModeShadow(8)
 """
 sources = [SSolido, STextura, SDegradadoVertical, SDegradadoHorizontal, SDegradadoDiagonal,

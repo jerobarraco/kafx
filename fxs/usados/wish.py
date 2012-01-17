@@ -5,7 +5,7 @@ from math import pi, sin
 
 class Kara2(comun.Fx):
 	def __init__(self):
-		#Creamos el sistema d particulas que usaremos en dos dialogos
+		#Creamos el sistema d particulas que usaremos en dos dialogues
 		self.parts = avanzado.cParticleSystem(png="texturas/snowflake1.png",
 			max_life=2, max_parts=30, emitir_parts=2, escala_de=0.2, escala_a=0.03,
 			color=extra.cCairoColor(0x88FFFFFF), modo=1)
