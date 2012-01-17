@@ -83,18 +83,18 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = ( Romanji(), tradu(), cred())
 		
 	def EnCuadroInicia(self): #Cuando el cuadro inicie
-		avanzado.GrupoInicio() #Empezamos un grupo de pintura
+		avanzado.StartGroup() #Empezamos un grupo de pintura
 		 
 	def EnCuadroFin(self):#Cuando termine el cuadro
 		#cerramos el grupo y guardamos lo que se pinto en un patron
-		pat = avanzado.GrupoFin()
+		pat = avanzado.EndGroup()
 		#Iniciamos otro grupo
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		#Ponemos el color a blanco
 		video.cf.ctx.set_source_rgba(1,1,1,1)
 		#Pintamos la sombra de lo que había en el patron
 		avanzado.Sombra(pat, 3)
 		avanzado.fGlow(2, 0.02)#Hacemos un glow a todo lo que se dibujó
-		avanzado.GrupoFin()#Y cerramos el grupo
+		avanzado.EndGroup()#Y cerramos el grupo
 
 		#De esta manera la sombra no se superpone por cada silaba

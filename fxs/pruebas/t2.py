@@ -54,7 +54,7 @@ class FxsGroup(comun.FxsGroup):
 
 		frames = audio.readframes(audioFrameSize)
 		p = audioop.rms(frames, sampwidth)/maxint
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 
 	def EnCuadroFin(self):
 		#con esto pintamos el wave
@@ -77,4 +77,4 @@ class FxsGroup(comun.FxsGroup):
 		avanzado.ModoPintado("atop")
 		c.stroke()
 		avanzado.ModoPintado("over")
-		avanzado.GrupoFin()
+		avanzado.EndGroup()

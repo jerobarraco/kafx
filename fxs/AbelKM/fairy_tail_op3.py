@@ -14,10 +14,10 @@ class FX1(comun.Fx):
 
 		d.CargarTextura('texturas/fire2.png', parte=d.PART_RELLENO)
 		d.MoverTextura( 60*d.progreso, 60*d.progreso, parte = d.PART_RELLENO)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(2, 0+((cos(pi*d.progreso))/4))
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaMuerta(self, d):
 
@@ -31,20 +31,20 @@ class FX1(comun.Fx):
 		d.MoverTextura( 70*d.progreso, 70*d.progreso, parte=d.PART_RELLENO)
 		d.Desvanecer(1, 0)
 		d.actual.scale_y  = 1+((d.progreso)/4.0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fBiDirBlur(pi/2.0, 7)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 	def EnDialogoEntra(self, d):
 		d.CargarTextura('texturas/stone2.png', parte=d.PART_RELLENO)
 		d.Desvanecer(0, 1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.actual.scale_y = (1)+(sin(pi*d.progreso))
 		d.Pintar()
 		avanzado.fBiDirBlur(pi/2.0, 7)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		d.CargarTextura('texturas/stone2.png', parte=d.PART_RELLENO)

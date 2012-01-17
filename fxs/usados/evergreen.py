@@ -33,13 +33,13 @@ class Romanji(comun.Fx):
 		diag.Desvanecer(0, 1, comun.i_sin)
 		#diag.Alpha(sin(pi*diag.progreso))
 		#le ponemos un alfa de el seno de pi por el progreso (la curva es la grafica de seno de 0 a 180, o sea, sube a 1, y baja a 0 de nuevo)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		#hacemos un grupo para el glow
 		diag.Pintar()
 		#pintamos
 		avanzado.fGlow(4, 0.1)
 		#brillo
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 		#fin del grupo.
 		"""este effect se podia hacer de 3 formas
 		variando el primer parametro del glow, la cantidad de pasos.
@@ -73,7 +73,7 @@ class Creditos(comun.Fx):
 	#los creditos
 	def EnDialogo(self, diag):
 		#durante el dialogo
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Desvanecer(0, 1, comun.i_sin)
 		#diag.Alpha(sin(pi*diag.progreso))
 		#un effect de alpha con la misma curva que antes, 0 a 1 a 0, con la forma de un seno...
@@ -82,7 +82,7 @@ class Creditos(comun.Fx):
 		#hacemos un glow, con un minimo de fuerza de 0.005 y un maximo de .01 para q de esa senzacion de interferencia
 		#el defecto de esta tecnica (random) es que no hay interpolacion entre los cuadros, o sea, el glow del cuadro 
 		#anterior es completamente individual del glow del cuadro siguiente, asique ciertos efectos asi no se hacen
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):

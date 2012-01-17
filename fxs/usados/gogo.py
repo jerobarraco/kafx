@@ -53,12 +53,12 @@ class FX2(comun.Fx):
 		#Calculamos un valor, que va a ser mayor a uno
 		#y en funcion de seno, desde el bpm
 		som = 1+sin(self.audio.RevBPM())*6
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.actual.sombra = som #y hacemos una sombra de ese tamaño
 		diag.Pintar()
 		#lo pintamos y le hacemos un glow con una opacidad que depende tamb del valor anterior
-		avanzado.fGlow(opacidad=som/200.0)
-		avanzado.GrupoFin()
+		avanzado.fGlow(opacity=som/200.0)
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
 		#Entra con una escala creciente, con una onda como seno
@@ -78,13 +78,13 @@ class FX3(comun.Fx):
 
 	def EnDialogo(self, diag):
 		angulo = 2*pi*diag.progreso
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Alpha(sin(angulo))
 		diag.actual.pos_x += (cos(angulo)*120)# Esto depende de reset_style
 		#diag.MoverA(diag.actual.pos_x+, 0)
 		diag.Pintar()
-		avanzado.fGlow(opacidad=0.025)
-		avanzado.GrupoFin()
+		avanzado.fGlow(opacity=0.025)
+		avanzado.EndGroup()
 
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):

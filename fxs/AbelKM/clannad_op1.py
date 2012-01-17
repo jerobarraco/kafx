@@ -16,10 +16,10 @@ class FX1(comun.Fx):
 		d.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/glass3.png', parte = d.PART_RELLENO)
 		d.MoverTextura( 60*d.progreso, 60*d.progreso, parte = d.PART_RELLENO)
 		d.actual.color1.a = 0.6
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(2, ((sin(pi*d.progreso))/6.0))
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 
@@ -27,10 +27,10 @@ class FX1(comun.Fx):
 	def EnSilabaMuerta(self, d):
 		d.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/glass3.png', parte=d.PART_RELLENO)
 		d.actual.color1.a = 0.6
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.ModoPintado('add')
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 	def EnDialogoSale(self, d):
@@ -38,31 +38,31 @@ class FX1(comun.Fx):
 		d.actual.color1.a = comun.Interpolar(d.progreso, 0.6, 0)
 		d.actual.color3.a = comun.Interpolar(d.progreso, 1, 0)
 		d.actual.borde = comun.Interpolar(d.progreso, 1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fBiDirBlur(pi, (sin(pi*d.progreso)*5.0))
 		avanzado.ModoPintado('add')
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, d):
 		d.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/glass1.png', parte=d.PART_RELLENO)
 		d.actual.color1.a = comun.Interpolar(d.progreso, 0, 0.6)
 		d.actual.color3.a = comun.Interpolar(d.progreso, 0, 1)
 		d.actual.borde = comun.Interpolar(d.progreso, 0, 1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fBiDirBlur(pi, (sin(pi*d.progreso)*5.0))
 		avanzado.ModoPintado('add')
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 	def EnSilabaDorm(self, d):
 		d.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/glass1.png', parte=d.PART_RELLENO)
 		d.actual.color1.a = 0.6
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.ModoPintado('add')
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 class FxsGroup(comun.FxsGroup):

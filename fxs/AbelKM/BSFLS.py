@@ -18,9 +18,9 @@ class FX1(comun.Fx):
 		d.MoverTextura(-d.actual.pos_x, -d.actual.pos_y+d.original._y_bearing, parte = d.PART_RELLENO)
 		avanzado.ModoPintado('color_burn')
 
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 		avanzado.ModoPintado('over')
 		d.Pintar()
 
@@ -43,10 +43,10 @@ class FX1(comun.Fx):
 
 	def EnSilaba(self, d):
 		d.Restore()
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/7.0))
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 		d.actual.color1.CopiarDe(d.actual.color4)
 		d.Pintar()
 
@@ -75,7 +75,7 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = (FX1(), FX2())
 
 	def EnCuadroInicia(self):
-		avanzado.GrupoInicio(True)
+		avanzado.StartGroup(True)
 		avanzado.fGlow(2, 0.15)
 		global pat
 		pat = video.cf.ctx.pop_group()

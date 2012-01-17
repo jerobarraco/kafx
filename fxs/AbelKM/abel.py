@@ -11,7 +11,7 @@ class FX1(comun.Fx):
 		def EnSilabaInicia(self, d):
 			d.CargarTextura('texturas/blast.png', parte=0)
 		def EnDialogo(self, d):
-			avanzado.GrupoInicio()
+			avanzado.StartGroup()
 			avanzado.ModoPintado('color_burn')
 			d.actual.color1.a = 0
 			d.actual.color3.a = 2.5
@@ -25,16 +25,16 @@ class FX1(comun.Fx):
 			d.actual.color3.a = 1.3
 			avanzado.fBlur(2)
 			d.Pintar()
-			avanzado.GrupoFin(1.0)
+			avanzado.EndGroup(1.0)
 
 		def EnSilaba(self, d):
-			avanzado.GrupoInicio()
+			avanzado.StartGroup()
 			d.Pintar()
 			avanzado.fGlow(2, 0+((sin(pi*d.progreso))/6))
-			avanzado.GrupoFin()
+			avanzado.EndGroup()
 
 		def EnDialogoEntra(self, d):
-			avanzado.GrupoInicio()
+			avanzado.StartGroup()
 			avanzado.ModoPintado('color_burn')
 			d.actual.color.a = 0
 			d.actual.color3.a = 2.5
@@ -51,10 +51,10 @@ class FX1(comun.Fx):
 			avanzado.fBlur(2)
 			d.MoverDe(30, 0, comun.i_b_backstart)
 			d.Pintar()
-			avanzado.GrupoFin(comun.Interpolar(d.progreso, 0, 1, comun.i_accel))
+			avanzado.EndGroup(comun.Interpolar(d.progreso, 0, 1, comun.i_accel))
 
 		def EnDialogoSale(self, d):
-			avanzado.GrupoInicio()
+			avanzado.StartGroup()
 			avanzado.ModoPintado('color_burn')
 			d.actual.color1.a = 0
 			d.actual.color3.a = 2.5
@@ -71,7 +71,7 @@ class FX1(comun.Fx):
 			avanzado.fBlur(2)
 			d.MoverA(30, 0, comun.i_b_backstart)
 			d.Pintar()
-			avanzado.GrupoFin(comun.Interpolar(d.progreso, 1, 0, comun.i_accel))
+			avanzado.EndGroup(comun.Interpolar(d.progreso, 1, 0, comun.i_accel))
 
 class FxsGroup(comun.FxsGroup):
         def __init__(self):

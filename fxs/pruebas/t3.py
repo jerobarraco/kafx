@@ -46,7 +46,7 @@ class FxsGroup(comun.FxsGroup):
 
 
 	def EnCuadroInicia(self):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		pass
 
 	def EnCuadroFin(self):
@@ -70,4 +70,4 @@ class FxsGroup(comun.FxsGroup):
 			c.rectangle(posx, 0, 1,  video.vi.height)
 			c.fill()
 			posx += self.paso
-		avanzado.GrupoFin()
+		avanzado.EndGroup()

@@ -13,26 +13,26 @@ class FX1(comun.Fx):
 	def EnDialogo(self, diag):
 		#Cuando se muestre el dialogo
 		#Comenzamos un grupo
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		#Pintamos el dialogo
 		diag.Pintar()
 		#Hacemos un glow a todo lo que esté en la pantalla
 		avanzado.fGlow(1, self.audio.RevBPM()/5.0)
 		#Cerramos el grupo
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
 		#Cuando el dialogo entre
 		#Hacemos un fade-in
 		diag.Desvanecer(0, 1)
 		#Creamos un grupo
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		#Pintamos el dialogo
 		diag.Pintar()
 		#Hacemos un glow que vaya creciendo con el progreso
 		avanzado.fBlur(5, 0.08*diag.progreso)
 		#Cerramos el dialogo
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
 		#Cuando el dialogo sale
@@ -41,20 +41,20 @@ class FX1(comun.Fx):
 		#Hacemos un fade-out
 		diag.Desvanecer(1, 0)
 		#Grupo-Pintamos-Blur-Cerramos
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilaba(self, diag):
 		#Cuando se muestre la silaba
 		#Hacemos un fade out
 		diag.Desvanecer(1, 0)
 		#Grupo-Pintamos-Glow-Cerramos
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 ## FX02 GLOW CON DEGRADO
 class FX2(comun.Fx):
@@ -63,35 +63,35 @@ class FX2(comun.Fx):
 		diag.original.modo_relleno = diag.P_DEG_VERT
 
 	def EnDialogo(self, diag):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(1,self.audio.RevBPM()/5.0)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(0,1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
 		diag.MoverA(-3,0)
 		diag.Desvanecer(1,0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilaba(self, diag):
 		diag.actual.color1.r = 0.8
 		diag.actual.color1.g = 0.6
 		diag.actual.color1.b = 0.5
 		diag.Desvanecer(1,0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 ## FX03  GLOW
 class FX3(comun.Fx):
@@ -99,60 +99,60 @@ class FX3(comun.Fx):
 		self.audio = audio.BPM('fxs/Usados/flash.bpm')
 
 	def EnDialogo(self, diag):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.PintarDegradadoL()
 		avanzado.fGlow(1, 0.08*diag.progreso)
 		avanzado.fBlur(2, self.audio.RevBPM()/5.0)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(1,0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
 		diag.MoverA(-3,0)
 		diag.Devanecer(1,0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilaba(self, diag):
 		diag.actual.color1.r = 0.9
 		diag.actual.color1.g = 0.7
 		diag.actual.color1.b = 0.5
 		diag.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 ## FX04 TRADU
 class FX4(comun.Fx):
 	def EnDialogo(self, diag):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.original.modo_relleno = diag.P_DEG_VERT
 		diag.Pintar()
 		avanzado.fGlow(2, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(0.0, 1.0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
 		diag.MoverA(-3, 0)
 		diag.Desvanecer(1.0, 0.0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 class FxsGroup(comun.FxsGroup):
@@ -167,9 +167,9 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = (FX1(), FX2(), FX3(), FX4())
 
 	def EnCuadroInicia(self):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 
 	def EnCuadroFin(self):
 		avanzado.fGlow(1, 0.04)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 

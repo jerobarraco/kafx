@@ -15,10 +15,10 @@ class FX1(comun.Fx):
 		global t3#, t2
 		#d.texturas[d.PART_FILL] = t2
 		#d.actual.modo_fill = d.P_TEXTURA
-#		avanzado.GrupoInicio()
+#		avanzado.StartGroup()
 #		d.Paint()
-#		texto = avanzado.GrupoFin(0)
-#		avanzado.GrupoInicio()
+#		texto = avanzado.EndGroup(0)
+#		avanzado.StartGroup()
 		d.texturas[d.PART_FILL] = t3
 		d.actual.mode_fill = d.P_TEXTURA
 		d.MoverTextura( comun.Interpolate(d.progress,-3480, 3480) , 50, part = d.PART_FILL)
@@ -26,7 +26,7 @@ class FX1(comun.Fx):
 		d.actual.mode_border = d.P_TEXTURA
 		d.MoverTextura( comun.Interpolate(d.progress,-3480, 3480) , 50, part = d.PART_BORDER)
 		d.Paint()
-#		mascara = avanzado.GrupoFin(0)
+#		mascara = avanzado.EndGroup(0)
 #		video.cf.ctx.set_source(mascara)
 #		video.cf.ctx.mask(texto)
 

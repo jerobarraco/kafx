@@ -42,8 +42,8 @@ class FxsGroup(comun.FxsGroup):
         self.reset_style = True
 
     def EnCuadroInicia(self):
-        avanzado.GrupoInicio()
+        avanzado.StartGroup()
 
     def EnCuadroFin(self):
         avanzado.fGlow()
-        avanzado.GrupoFin()
+        avanzado.EndGroup()

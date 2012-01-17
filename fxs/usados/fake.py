@@ -8,12 +8,12 @@ class FX1(comun.Fx):
 		#hacemos un borde que crezca hasta 6
 		diag.actual.borde += (6*diag.progreso)
 		#Comenzamos un grupo
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		#Lo pintamos
 		diag.Pintar()
 		#Y hacemos un glow que vaya creciendo con el progreso
 		avanzado.fGlow(3,  diag.progreso*0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaEntra(self, diag):
 		#cuando la silaba esta a punto de animarse, hacemos fade in
@@ -44,20 +44,20 @@ class FX2(comun.Fx):
 		a.pos_y = a.pos_y + comun.Interpolar(random(), -5, 5)
 		diag.Desvanecer(0.5, 0.5)
 
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		#Lo pintamos y le hacemos blur de 2 pasos
 		diag.Pintar()
 		avanzado.fBlur(2)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 		#Reestablecemos la informacion de estilo, porque recien lo cambiamos
 		diag.Restore()
 
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		#Lo volvemos a pintar como corresponde y le hacemos glow
 		diag.Pintar()
 		avanzado.fGlow(3, 0.06)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
 		diag.Desvanecer(1,0)

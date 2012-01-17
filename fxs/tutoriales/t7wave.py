@@ -9,19 +9,19 @@ class FX1(comun.Fx):
 	def EnDialogo(self,  d):
 		#Como Onda es un "f" modifica TODA la pantalla, para que modifique solamente
 		#el dialogo, creamos un grupo y lo pintamos ahi dentro
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		#Hacemos una onda de movimiento = a d.movimiento
 		#con una frecuencia en 0.01
 		#y con una amplitud de 4
 		#y le indicamos que es vertical con True
-		avanzado.fOnda( d.movimiento, 0.01, 4,  True)
+		avanzado.fWave( d.movimiento, 0.01, 4,  True)
 		#ahora hacemos otra onda, con desplazamiento d.movimiento
 		#con una frecuencia en 0.1
 		#con una amplitud de 4
 		#y le indicamos que no es vertical (o sea, es horizontal)
-		avanzado.fOnda( d.movimiento, 0.1, 3,  False)
-		avanzado.GrupoFin()
+		avanzado.fWave( d.movimiento, 0.1, 3,  False)
+		avanzado.EndGroup()
 		#y aumentamos el movimiento para que se vea animado.
 		d.movimiento += 1
 

@@ -83,22 +83,22 @@ class Evento7():
 						sil.texturas[sil.PART_FILL] = t3
 						sil.actual.mode_fill = sil.P_TEXTURA
 						avanzado.CapasActivar(12)
-						avanzado.GrupoInicio()
+						avanzado.StartGroup()
 
 						sil.Paint()
 						avanzado.fGlow(1, 0.15+(comun.Interpolate(sil.progress, 0, 0.15, comun.i_b_boing)))
-						avanzado.GrupoFin()
+						avanzado.EndGroup()
 						sil.actual.color3.a = 0
 						sil.actual.color1.a = 0.5
 						sil.texturas[sil.PART_FILL] = t3
 						sil.actual.mode_fill = sil.P_TEXTURA
 						sil.Escalar(1, 1.1, comun.i_accel)
 						avanzado.CapasActivar(13)
-						avanzado.GrupoInicio()
+						avanzado.StartGroup()
 
 						sil.Paint()
 						avanzado.fGlow(2, 0.12+(comun.Interpolate(sil.progress, 0, 0.14, comun.i_b_boing)))
-						avanzado.GrupoFin()
+						avanzado.EndGroup()
 
 
 		def TiempoSilaba(self, sil):
@@ -113,11 +113,11 @@ class Evento8():
 						sil.texturas[sil.PART_FILL] = t3
 						sil.actual.mode_fill = sil.P_TEXTURA
 						avanzado.CapasActivar(14)
-						avanzado.GrupoInicio()
+						avanzado.StartGroup()
 
 						sil.Paint()
 						avanzado.fGlow(2, 0.1)
-						avanzado.GrupoFin()
+						avanzado.EndGroup()
 						sil.actual.color3.a = 0
 						sil.actual.color1.a = comun.Interpolate(sil.progress, 0, 0.5)
 						avanzado.CapasActivar(15)
@@ -135,21 +135,21 @@ class Evento9():
 						sil.texturas[sil.PART_FILL] = t3
 						sil.actual.mode_fill = sil.P_TEXTURA
 						avanzado.CapasActivar(16)
-						avanzado.GrupoInicio()
+						avanzado.StartGroup()
 
 						sil.Paint()
 						avanzado.fGlow(1, 0.15+(comun.Interpolate(sil.progress, 0.15, 0, comun.i_accel)))
-						avanzado.GrupoFin()
+						avanzado.EndGroup()
 						sil.actual.color3.a = 0
 						sil.actual.color1.a = comun.Interpolate(sil.progress, 0.5, 0)
 						sil.texturas[sil.PART_FILL] = t3
 						sil.actual.mode_fill = sil.P_TEXTURA
 						sil.Escalar(1.1, 1, comun.i_accel)
 						avanzado.CapasActivar(17)
-						avanzado.GrupoInicio()
+						avanzado.StartGroup()
 						sil.Paint()
 						avanzado.fGlow(2, 0.12+(comun.Interpolate(sil.progress, 0.15, 0, comun.i_accel)))
-						avanzado.GrupoFin()
+						avanzado.EndGroup()
 
         def TiempoSilaba(self, sil):
                         return (sil._end, sil._end+150)
@@ -231,20 +231,20 @@ class Evento1():
 						letra.texturas[letra.PART_FILL] = t3
 						letra.actual.mode_fill = letra.P_TEXTURA
 						avanzado.CapasActivar(20)
-						avanzado.GrupoInicio()
+						avanzado.StartGroup()
 						letra.Paint()
 						avanzado.fGlow(1, 0.15+(comun.Interpolate(letra.progress, 0, 0.15, comun.i_b_boing)))
-						avanzado.GrupoFin()
+						avanzado.EndGroup()
 						letra.actual.color3.a = 0
 						letra.actual.color1.a = 0.5
 						letra.texturas[letra.PART_FILL] = t3
 						letra.actual.mode_fill = letra.P_TEXTURA
 						letra.Escalar(1, 1.1, comun.i_accel)
 						avanzado.CapasActivar(21)
-						avanzado.GrupoInicio()
+						avanzado.StartGroup()
 						letra.Paint()
 						avanzado.fGlow(2, 0.15+(comun.Interpolate(letra.progress, 0, 0.15, comun.i_b_boing)))
-						avanzado.GrupoFin()
+						avanzado.EndGroup()
 
 
                 def TiempoLetra(self, letra):
@@ -259,10 +259,10 @@ class Evento2():
 						letra.texturas[letra.PART_FILL] = t3
 						letra.actual.mode_fill = letra.P_TEXTURA
 						avanzado.CapasActivar(22)
-						avanzado.GrupoInicio()
+						avanzado.StartGroup()
 						letra.Paint()
 						avanzado.fGlow(2, 0.1)
-						avanzado.GrupoFin()
+						avanzado.EndGroup()
 						letra.actual.color3.a = 0
 						letra.actual.color1.a = comun.Interpolate(letra.progress, 0, 0.5,  comun.i_accel)
 						avanzado.CapasActivar(23)
@@ -280,19 +280,19 @@ class Evento3():
 						letra.texturas[letra.PART_FILL] = t3
 						letra.actual.mode_fill = letra.P_TEXTURA
 						avanzado.CapasActivar(24)
-						avanzado.GrupoInicio()
+						avanzado.StartGroup()
 						letra.Paint()
 						avanzado.fGlow(1, 0.15+(comun.Interpolate(letra.progress, 0.15, 0, comun.i_accel)))
-						avanzado.GrupoFin()
+						avanzado.EndGroup()
 						letra.actual.color3.a = 0
 						letra.actual.color1.a = comun.Interpolate(letra.progress, 0.5, 0, comun.i_accel)
 						letra.texturas[letra.PART_FILL] = t3
 						letra.actual.mode_fill = letra.P_TEXTURA
 						letra.Escalar(1.1, 1, comun.i_accel)
-						avanzado.GrupoInicio()
+						avanzado.StartGroup()
 						letra.Paint()
 						avanzado.fGlow(2, 0.15+(comun.Interpolate(letra.progress, 0.15, 0, comun.i_accel)))
-						avanzado.GrupoFin()
+						avanzado.EndGroup()
 
         def TiempoLetra(self, letra):
                         return (letra._end, letra._end+400)

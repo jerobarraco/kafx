@@ -29,9 +29,9 @@ class Efecto():
 		#d.MoverDe((0+(comun.Interpolate(d.progress, -40,0, comun.i_b_backstart))) ,(0))
 		mov = comun.Interpolate(d.progress,1380, 3480)#el fx parece dar toda la vuelta... o ya no?
 		extra.MoveTexture(t3, mov, 50)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Paint()
-		texto = avanzado.GrupoFin(0)
+		texto = avanzado.EndGroup(0)
 		video.cf.ctx.set_source(texto)
 		video.cf.ctx.mask(t3)
 

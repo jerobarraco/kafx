@@ -147,7 +147,7 @@ class FX1(comun.Fx):
 				#De esta forma intentamos evitar lo que pasa cuando el punto se mueve muy rapido y deja las particulas muy separadas
 
 		#Pintamos el dialogo con un blur direccional que se agranda y achica y que brilla porque usamos add
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 
 		d.Pintar()
 		#Configuramos el modo de pintado a aditivo
@@ -157,7 +157,7 @@ class FX1(comun.Fx):
 		#y lo restauramos al normal
 		avanzado.ModoPintado('over')
 
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 		
 
 class Tradu(comun.Fx):
@@ -192,7 +192,7 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = (FX1(), Tradu())
 
 	def EnCuadroInicia(self):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		
 	def EnCuadroFin(self):
 		#Al finalizar el cuadro
@@ -200,7 +200,7 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs[0].parts.Pintar()
 		#Le hacemos glow a todo (menos el video)
 		avanzado.fGlow()
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 		#Y listo
 		
 		

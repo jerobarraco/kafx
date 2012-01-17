@@ -12,17 +12,17 @@ class FX1(comun.Fx):
 		#Notar que el cSprite pinta la textura sobre el video independientemente de la posicion del texto
 
 		#Creamos un grupo para el texto
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		#Y lo guardamos en una variable
-		texto = avanzado.GrupoFin(0)
+		texto = avanzado.EndGroup(0)
 
 		#Creamos un grupo para la mascara
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		patron.Pintar()
 		#extra.DebugCairo()
 		#Y la guardamos
-		mascara = avanzado.GrupoFin(0)
+		mascara = avanzado.EndGroup(0)
 
 		#Asignamos el texto
 		video.cf.ctx.set_source(texto)

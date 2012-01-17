@@ -10,10 +10,10 @@ from math import pi, sin
 class FX1(comun.Fx):
 	def EnSilaba(self, diag):
 		diag.actual.scale_x = diag.actual.scale_y = 1+((sin(pi*diag.progreso))/10)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(6, 0.06)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaMuerta(self, d):
 		d.actual.modo_relleno = d.P_DEG_VERT
