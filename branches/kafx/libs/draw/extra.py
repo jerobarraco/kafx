@@ -607,8 +607,8 @@ class cVector():
 	def PaintWithCache(self, conFondo=False, matriz=None):
 		"""Pinta un vector utilizando cache... notar que solo se crea la pintura la primera vez que se llama, luego se pintara lo cacheado
 		opcionales:
-		@conFondo=False Booleano indica si se pasa el fondo al texto (GrupoInicio con fondo)
-		@matriz=None la matriz de transformacion para el GrupoFin
+		@conFondo=False Booleano indica si se pasa el fondo al texto (StartGroup con fondo)
+		@matriz=None la matriz de transformacion para el EndGroup
 		"""
 		if self._pat_cache :
 			ctx = video.cf.ctx
@@ -625,14 +625,14 @@ class cVector():
 	def Paint(self, conFondo=False, matriz=None, matriz2=None):
 		"""Pinta un vector utilizando el estilo actual
 		opcionales:
-		@conFondo=False Booleano indica si se pasa el fondo al texto (GrupoInicio con fondo)
+		@conFondo=False Booleano indica si se pasa el fondo al texto (StartGroup con fondo)
 		@matriz=None la matriz de transformacion del VECTOR
-		@matriz2=None la matriz de transformación del GrupoFin
+		@matriz2=None la matriz de transformación del EndGroup
 		"""
 		a = self.actual
 		ctx = video.cf.ctx
 		#empezamos un grupo por la shadow
-		avanzado.GrupoInicio(conFondo)
+		avanzado.StartGroup(conFondo)
 
 		if matriz:
 			#para permitir el uso de matrices personalizadas para hacer
@@ -662,7 +662,7 @@ class cVector():
 		#finalizamos el grupo y aplicamos la 2º matriz
 		#notar que la 2º matriz se afecta ya sobre el pattern, o sea,
 		#sobre el raster y no sobre el vector, eso trae consecuencias
-		pat = avanzado.GrupoFin(0.0, matriz2)
+		pat = avanzado.EndGroup(0.0, matriz2)
 
 		#shadow. notar que la cargamos antes de restaurar la matriz identidad,
 		#para q sea concordante en caso de no ser solida, y que los points de control no sean un caso y sean iguales en todos los casos (border/fill)
@@ -856,12 +856,12 @@ class cVector():
 		box = (x1, y1, x2, y2)
 
 		#Creamos un nuevo grupo para que no hayan cochinadas en el medio
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		#pintamos el vector/dialogo/silaba
 		self.Paint()
 		#creamos las particulas
 		parts = avanzado.CrearParticulas(box, textura, escala, alpha_min, barrido_vertical, mode)
-		avanzado.GrupoFin(opacidad=0.0)
+		avanzado.EndGroup(opacity=0.0)
 		return parts
 
 	def PaintReflection(self, alto = None):
@@ -873,11 +873,11 @@ class cVector():
 		descent = self.original._descent
 		alto = alto or self.original._alto
 
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		self.Paint()
 		avanzado.fBlur()
 		mt = CrearMatriz(org_y=posy-self.actual.org_y, pos_y=posy+alto_linea+descent, scale_y = -1)
-		pat = avanzado.GrupoFin(0.0, matriz = mt)
+		pat = avanzado.EndGroup(0.0, matrix= mt)
 
 		video.cf.ctx.set_source(pat)
 		lineal = cairo.LinearGradient(0, posy+alto, 0, posy+(alto*2.0))

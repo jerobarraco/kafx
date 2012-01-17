@@ -21,35 +21,35 @@ class FX1(comun.Fx):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 0.8, 1)
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 0.9, 1)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(1, self.audio.RevBPM()/5.0)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(0, 1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
 		diag.MoverA(-3, 0)
 		diag.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilaba(self, diag):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 1, 0.6)
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 1, 1)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
 		diag.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 class FX2(comun.Fx):
@@ -62,35 +62,35 @@ class FX2(comun.Fx):
 
 	def EnDialogo(self, diag):
 		diag.actual.color1.Interpolar(diag.progreso, diag.original.color2)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(2,0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
 		diag.MoverA(-3,0)
 		diag.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilaba(self, diag):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 1, 0.6)
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 1, 1)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
 		diag.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 class FX3(comun.Fx):
@@ -110,26 +110,26 @@ class FX3(comun.Fx):
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 0.9, 1)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
 		diag.Sacudir(2)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(1, 0.08*diag.progreso)
 		avanzado.fBlur(2, self.audio.RevBPM()/5.0)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(0, 1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
 		diag.MoverA(-3,0)
 		diag.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilaba(self, diag):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 1, 0.6)
@@ -137,10 +137,10 @@ class FX3(comun.Fx):
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
 		diag.Desvanecer(1, 0)
 		diag.Sacudir(2)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 ## FX04 GLOW Y PARTICULA
 class FX4(comun.Fx):
@@ -162,25 +162,25 @@ class FX4(comun.Fx):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 0.8, 1)
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 0.9, 1)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(1, self.audio.RevBPM()/5.0)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(0, 1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
 		diag.MoverA(-3, 0)
 		diag.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilaba(self, diag):
 		if diag._texto.strip() =="":
@@ -189,12 +189,12 @@ class FX4(comun.Fx):
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 1, 1)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
 		diag.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(1,self.audio.RevBPM()/5.0)
 		self.parts.DarPosicion(diag.actual.pos_x+diag.progreso*diag.original._ancho, diag.actual.pos_y)
 		self.parts.Emitir()
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 ## FX05 TRADUCCION
 class FX5(comun.Fx):
@@ -205,10 +205,10 @@ class FX5(comun.Fx):
 		sil.original.modo_relleno = sil.P_DEG_VERT
 
 	def EnDialogo(self, diag):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.PintarConCache()
 		avanzado.fGlow(2, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
 		diag.Desvanecer(1,0)
@@ -231,35 +231,35 @@ class FX6(comun.Fx):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 0.8, 1)
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 0.9, 1)
 		diag.actual.color1.b = 1
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(1,0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(0, 1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
 		diag.MoverA(-3, 0)
 		diag.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilaba(self, diag):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 1, 0.6)
 		diag.actual.color1.g = 1
 		diag.actual.color1.b = 1
 		diag.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 class FxsGroup(comun.FxsGroup):

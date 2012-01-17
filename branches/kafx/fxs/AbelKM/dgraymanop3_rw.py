@@ -47,11 +47,11 @@ class FX1(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -95,11 +95,11 @@ class FX2(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -142,11 +142,11 @@ class FX3(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -189,11 +189,11 @@ class FX4(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -237,11 +237,11 @@ class FX5(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -284,11 +284,11 @@ class FX6(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -331,11 +331,11 @@ class FX7(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -379,11 +379,11 @@ class FX8(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -427,11 +427,11 @@ class FX9(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -481,11 +481,11 @@ class FX10(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -532,11 +532,11 @@ class FX11(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -583,11 +583,11 @@ class FX11b(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -634,11 +634,11 @@ class FX12(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -684,11 +684,11 @@ class FX13(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -734,11 +734,11 @@ class FX13b(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -784,11 +784,11 @@ class FX14(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -834,11 +834,11 @@ class FX15(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -883,11 +883,11 @@ class FX15b(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -933,11 +933,11 @@ class FX15c(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -983,11 +983,11 @@ class FX16(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -1034,11 +1034,11 @@ class FX17(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -1085,11 +1085,11 @@ class FX18(comun.Fx):
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.borde = 0
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(1, 0.2+(sin(pi*d.progreso)/6.0))
 		avanzado.fBiDirBlur(random.randint(-4,4)/pi, 4*d.progreso, 0.25)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		global fondo
@@ -1383,9 +1383,9 @@ class FxsGroup(comun.FxsGroup):
                 self.fxs = (FX1(),FX2(),FX3(),FX4(),FX5(),FX6(),FX7(),FX8(),FX9(),FX10(),FX11(),FX12(),FX13(),FX13b(),FX11b(),FX14(),FX15(),FX15b(),FX16(),FX17(),FX18(),FX15c(),FX19(),FX20(),FX21(),FX22(),FX23(),FX24(),FX25(),FX26(),FX27())
 
         def EnCuadroInicia(self):
-                avanzado.GrupoInicio()
+                avanzado.StartGroup()
         def EnCuadroFin(self):
                 self.movimiento += 1
-                avanzado.fOnda(self.movimiento, 0.025, 2,  False)
-                avanzado.fOnda(self.movimiento, 0.02, 1,  True)
-                avanzado.GrupoFin()
+                avanzado.fWave(self.movimiento, 0.025, 2,  False)
+                avanzado.fWave(self.movimiento, 0.02, 1,  True)
+                avanzado.EndGroup()

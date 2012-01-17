@@ -8,11 +8,11 @@ class FX1(comun.Fx):
 	def EnDialogo(self, diag):
 		#Mientras el dialogo se muestre
 		#Hacemos un grupo (para que el glow no afecte el video)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		#Pintamos y hacemos un glow con una opacidad random
 		avanzado.fGlow(4, random.random()/30.0)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	#Hacemos que aparezca y desaparezca con fade
 	def EnDialogoEntra(self, diag):
@@ -28,10 +28,10 @@ class FX1(comun.Fx):
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 0.5, 0)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 0.5, 0)
 		#Y lo pintamos y le hacemos un glow que va a ir creciendo con el progreso
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 #Efecto 2
 class FX2(comun.Fx):

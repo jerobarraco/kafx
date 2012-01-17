@@ -20,11 +20,11 @@ class FX1(comun.Fx):
 	  freq = 0.1*bpm
 
 	  avanzado.ModoPintado('add')
-	  avanzado.GrupoInicio()
+	  avanzado.StartGroup()
 	  d.PintarConCache()
-	  avanzado.fOnda( amp, freq, amp)
+	  avanzado.fWave( amp, freq, amp)
 
-	  avanzado.GrupoFin()
+	  avanzado.EndGroup()
 	  avanzado.ModoPintado('over')
 
 class FxsGroup(comun.FxsGroup):

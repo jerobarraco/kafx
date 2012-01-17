@@ -135,8 +135,8 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = [ Kara(),Trad(), Kanji(), Cred()]
 
 	def EnCuadroInicia(self):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 
 	def EnCuadroFin(self):
 		avanzado.fGlow(3, 0.04)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()

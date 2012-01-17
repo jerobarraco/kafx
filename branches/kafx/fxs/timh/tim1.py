@@ -11,10 +11,10 @@ class fx1(comun.Fx):
         d.Pintar()
 
     def EnSilaba(self,s):
-        avanzado.GrupoInicio()
+        avanzado.StartGroup()
         s.Pintar()
         avanzado.fGlow(1, 0.1+(sin(pi*s.progreso)/6.0))
-        avanzado.GrupoFin()
+        avanzado.EndGroup()
 
 class FxsGroup(comun.FxsGroup):
 	fxs = [fx1(),]

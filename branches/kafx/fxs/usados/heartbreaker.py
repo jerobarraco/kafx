@@ -98,13 +98,13 @@ class FX1(comun.Fx):
 		#x = comun.Interpolar(random(), -20, 20)
 		#self.textura.set_matrix(extra.CrearMatriz( pos_x=x, pos_y=x))
 
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		#asignamos la textura en pat como source
 		video.cf.ctx.set_source(pat)
 		#llamamos a máscara usando la textura (ruidosa) como máscara
 		video.cf.ctx.mask(self.textura)
 		avanzado.fGlow(3,0.1)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 class FX2(comun.Fx):
 	def EnDialogoInicia(self,d):

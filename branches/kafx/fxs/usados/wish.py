@@ -92,19 +92,19 @@ class Trad(comun.Fx):
 		diag.Desvanecer(1, 0)
 		#una escala que va a ir de 1 a 2 (0<=progreso<=1)
 		diag.actual.scale_y  = 1+diag.progreso
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBiDirBlur(pi/2.0, 5)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(0, 1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		#una escala que va a ir de 2 a 1
 		diag.actual.scale_y = 2 -diag.progreso
 		diag.Pintar()
 		avanzado.fBiDirBlur(pi/2.0, 5)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 class Kanji(comun.Fx):
 	def EnDialogo(self, diag):
@@ -116,10 +116,10 @@ class Kanji(comun.Fx):
 
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(0, 1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBiDirBlur(pi/2.0, 5)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 			
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
@@ -133,9 +133,9 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = (Cred(), Kara1(), Trad(), Kanji(), Kara2())
 
 	def EnCuadroInicia(self):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 
 	def EnCuadroFin(self):
 		self.fxs[4].parts.Pintar()
 		avanzado.fGlow(3, 0.04)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()

@@ -30,10 +30,10 @@ class FX1(comun.Fx):
 		d.actual.modo_borde = d.P_TEXTURA
 		d.Desvanecer(1,0)
 		d.MoverA(random.randint(0, 30), 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fBlur1(3, comun.Interpolar(d.progreso, 0, 0.15, comun.i_b_ease_in))
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 	def EnDialogoEntra(self, d):
@@ -44,10 +44,10 @@ class FX1(comun.Fx):
 		d.actual.modo_borde = d.P_TEXTURA
 		d.Desvanecer(0,1)
 		d.MoverDe(random.randint(-30, 0), 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fBlur1(3, comun.Interpolar(d.progreso, 0.15, 0, comun.i_b_ease_in))
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 
@@ -65,10 +65,10 @@ class Evento1(comun.Evento):
 			letra.actual.color1.a = 0.5
 			letra.texturas[letra.PART_RELLENO] = t3
 			letra.actual.modo_relleno = letra.P_TEXTURA
-			avanzado.GrupoInicio()
+			avanzado.StartGroup()
 			letra.Pintar()
 			avanzado.fGlow(1, 0.1+(sin(pi*letra.progreso)/6.0))
-			avanzado.GrupoFin()
+			avanzado.EndGroup()
 			self.parts.DarVentana(letra.original._ancho+1, 1)
 			self.parts.DarPosicion(
 				letra.actual.pos_x+random.randint(-2,3)+(letra.original._ancho*(letra.progreso)/4),
@@ -88,10 +88,10 @@ class Evento2(comun.Evento):
 			letra.actual.color1.a = comun.Interpolar(letra.progreso, 0, 0.5,  comun.i_b_ease_in)
 			letra.texturas[letra.PART_RELLENO] = t3
 			letra.actual.modo_relleno = letra.P_TEXTURA
-			avanzado.GrupoInicio()
+			avanzado.StartGroup()
 			letra.Pintar()
 			avanzado.fGlow(2, 0.1)
-			avanzado.GrupoFin()
+			avanzado.EndGroup()
 			letra.actual.color3.a = 0
 			letra.actual.color1.a = comun.Interpolar(letra.progreso, 0, 0.5,  comun.i_b_ease_in)
 			letra.Pintar()
@@ -106,10 +106,10 @@ class Evento3(comun.Evento):
 			letra.actual.color1.a = comun.Interpolar(letra.progreso, 0.5, 0,  comun.i_b_ease_out)
 			letra.texturas[letra.PART_RELLENO] = t3
 			letra.actual.modo_relleno = letra.P_TEXTURA
-			avanzado.GrupoInicio()
+			avanzado.StartGroup()
 			letra.Pintar()
 			avanzado.fGlow(2, 0.1)
-			avanzado.GrupoFin()
+			avanzado.EndGroup()
 			letra.actual.color3.a = 0
 			letra.actual.color1.a = comun.Interpolar(letra.progreso, 0.5, 0,  comun.i_b_ease_out)
 			letra.Pintar()

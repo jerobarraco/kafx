@@ -14,12 +14,12 @@ class FX1(comun.Fx):
 		diag.actual.modo_relleno = diag.P_DEG_VERT
 		diag.actual.scale_x = diag.actual.scale_y = 1+((sin(pi*diag.progreso))/15)
 		diag.actual.color1.Interpolar(diag.progreso, diag.actual.color3)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.actual.pos_x += random.randint(-1, 1)
 		diag.actual.pos_y += random.randint(-1, 1)
 		diag.Pintar()
 		avanzado.fGlow(5, 0+((sin(pi*diag.progreso))/10))
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaMuerta(self, d):
 		d.actual.modo_relleno = d.P_DEG_VERT
@@ -30,21 +30,21 @@ class FX1(comun.Fx):
 	def EnDialogoEntra(self, di):
 		di.Desvanecer(0, 1)
 		di.actual.modo_relleno = di.P_DEG_VERT
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		di.actual.scale_y = (1.5)+(sin(pi*di.progreso))
 		di.Pintar()
 		avanzado.fBiDirBlur(pi/2.0, 7)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, di):
 		di.Desvanecer(1, 0)
 		di.actual.modo_relleno = di.P_DEG_VERT
 		di.actual.color1.CopiarDe(di.actual.color3)
 		di.actual.scale_y  = 1+di.progreso
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		di.Pintar()
 		avanzado.fBiDirBlur(pi/2.0, 7)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		d.actual.modo_relleno = d.P_DEG_VERT
@@ -55,12 +55,12 @@ class FX2(comun.Fx):
 		diag.actual.modo_relleno = diag.P_DEG_VERT
 		diag.actual.scale_x = diag.actual.scale_y = 1+((sin(pi*diag.progreso))/4)
 		diag.actual.color1.Interpolar(diag.progreso, diag.actual.color3)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		diag.actual.pos_x += random.randint(-2, 2)
 		diag.actual.pos_y += random.randint(-2, 2)
 		diag.Pintar()
 		avanzado.fGlow(5, 0+((sin(pi*diag.progreso))/10))
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaMuerta(self, d):
 		d.actual.modo_relleno = d.P_DEG_VERT
@@ -71,21 +71,21 @@ class FX2(comun.Fx):
 	def EnDialogoEntra(self, di):
 		di.Desvanecer(0, 1)
 		di.actual.modo_relleno = di.P_DEG_VERT
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		di.actual.scale_y = (1.5)+(sin(pi*di.progreso))
 		di.Pintar()
 		avanzado.fBiDirBlur(pi/2.0, 7)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, di):
 		di.Desvanecer(1, 0)
 		di.actual.modo_relleno = di.P_DEG_VERT
 		di.actual.color1.CopiarDe(di.actual.color3)
 		di.actual.scale_y  = 1+di.progreso
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		di.Pintar()
 		avanzado.fBiDirBlur(pi/2.0, 7)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
 		d.actual.modo_relleno = d.P_DEG_VERT

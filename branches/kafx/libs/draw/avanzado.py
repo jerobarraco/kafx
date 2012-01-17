@@ -164,12 +164,12 @@ def PaintMode(op=None):
 		paint_operator = OPERATORS.index(op)
 	ctx.set_operator(paint_operator)
 
-def fBlur1(pasos=4, opacidad=0.15):
+def fBlur1(steps=4, opacity=0.15):
 	"""
 		El blur por excelencia, el mas rápido, mas visible, sin errores (casi)
 		opcionales:
-		@pasos=4 cantidad de pasos del blur
-		@opacidad=0.15 opacidad de cada paso
+		@steps=4 cantidad de steps del blur
+		@opacity=0.15 opacity de cada paso
 	"""
 	ctx = video.cf.ctx
 	sfc = ctx.get_group_target()
@@ -177,7 +177,7 @@ def fBlur1(pasos=4, opacidad=0.15):
 	#creamos un pattern porque parece q tiene un minimo overhead menor al surface además no tenemos el dilema del "al pintar d nuevo cambia el source con la pintada anterior"
 	ctx.set_source(pat) #lo ponemos como source
 	m=cairo.Matrix()#creamos una matriz de transformación para el pat
-	for a in xrange(1, int(pasos+1)):
+	for a in xrange(1, int(steps+1)):
 		a1 = -a #optimizacion  (???)
 		a2 = a*2
 		for x in (a1, a2):
@@ -186,21 +186,21 @@ def fBlur1(pasos=4, opacidad=0.15):
 			for y in (a1, a2):
 				m.translate(0, y)
 				pat.set_matrix(m)
-				ctx.paint_with_alpha(opacidad)
+				ctx.paint_with_alpha(opacity)
 			m.translate(0,a1)#center
 		m.translate(a1,0)#center
 
-def fBlur1b(pasos=6,  opacidad=0.25):
+def fBlur1b(steps=6,  opacity=0.25):
 	"""El viejo blur..."""
 	ctx = video.cf.ctx
 	sfc=extra.CopiarTarget()
-	for a in xrange(1, int(pasos+1)):
+	for a in xrange(1, int(steps+1)):
 		for x in (-a, a):
 			for y in (-a, a):
 				ctx.set_source_surface(sfc, x, y)
-				ctx.paint_with_alpha(opacidad)
+				ctx.paint_with_alpha(opacity)
 
-def fBlur2(pasos=3, opacidad=0.8):
+def fBlur2(steps=3, opacity=0.8):
 	#This blur (seems to) have a decreasing opacity, it looks more "real" more round and more soft, but needs more opacity
 	#also doesnt seem to work well with big sizes
 	#por alguna razon se va abajo y el blur1 no
@@ -208,29 +208,29 @@ def fBlur2(pasos=3, opacidad=0.8):
 	sfc = ctx.get_group_target()
 	pat = cairo.SurfacePattern(sfc)
 	ctx.set_source(pat)
-	acumop = float(opacidad)/pasos
-	pasos+=1
-	for i in xrange(1, int(pasos)):
+	acumop = float(opacity)/steps
+	steps+=1
+	for i in xrange(1, int(steps)):
 		m=cairo.Matrix()
 		m.translate(0, -i)#0,-1 #up
 		pat.set_matrix(m)
-		ctx.paint_with_alpha(opacidad)
+		ctx.paint_with_alpha(opacity)
 
 		m.translate(-i, i)#-1,0 #left
 		pat.set_matrix(m)
-		ctx.paint_with_alpha(opacidad)
+		ctx.paint_with_alpha(opacity)
 
 		m.translate(i, i)#0,1 #down
 		pat.set_matrix(m)
-		ctx.paint_with_alpha(opacidad)
+		ctx.paint_with_alpha(opacity)
 
 		m.translate(i, -i)#1,0 #right
 		pat.set_matrix(m)
-		ctx.paint_with_alpha(opacidad)
-		opacidad-=acumop
+		ctx.paint_with_alpha(opacity)
+		opacity-=acumop
 
-def fBlur3(pasos=3, opacidad=None):
-	"""Blur usando pil, verdadero blur gausiano.. el parametro de opacidad no hace effect
+def fBlur3(steps=3, opacity=None):
+	"""Blur usando pil, verdadero blur gausiano.. el parametro de opacity no hace effect
 	asquerosamente lento,
 
 	"""
@@ -242,7 +242,7 @@ def fBlur3(pasos=3, opacidad=None):
 	h = im.get_height()
 	#Cuidado con esto, si no convirtieron el frame de avisynth a rgba (rgb32) es posible que de errores.... para eso habria que checkear video.cf y el tipo de datos, pero no da
 	im1 = Image.frombuffer("RGBA", (w,h ), im.get_data(), "raw", "RGBA", 0, 1)
-	for i in xrange(int(pasos)):
+	for i in xrange(int(steps)):
 		im1 = im1.filter(ImageFilter.BLUR)
 	#this will also allows to use convolution kernel filters if you didn't noticed :D
 	im1 = im1.filter(ImageFilter.SMOOTH_MORE)
@@ -256,7 +256,7 @@ def fBlur3(pasos=3, opacidad=None):
 	#ctx.fill()
 	ctx.paint()
 
-def fBlur4(pasos=0, opacidad=0):
+def fBlur4(steps=0, opacity=0):
 	"""Ejemplo de como implementar un filter kernel
 	es tambien un ejemplo de como pasar un surface de cairo a otras cosas como pil o ogl"""
 	import Image, ImageFilter, array
@@ -312,7 +312,7 @@ def Shadow(pattern, size=5, offx=0, offy=0, paint=True):
 	@return devuelve lo que se pinto como patron
 	"""
 	ctx = video.cf.ctx
-	GrupoInicio()
+	StartGroup()
 	if size > 0 :
 		#recordar de setear el source ANTES de llamar
 		ctx.set_matrix(extra.CrearMatriz(offx, offy))
@@ -324,15 +324,15 @@ def Shadow(pattern, size=5, offx=0, offy=0, paint=True):
 	op = 0.0
 	if paint : op = 1.0
 
-	return GrupoFin(opacidad=op)
+	return EndGroup(opacity=op)
 
-def fDirBlur(angle=0, pasos=1,  opacidad=0.25):
+def fDirBlur(angle=0, steps=1,  opacity=0.25):
 	"""
 		Blur Direccional
 	opcionales:
 	@angle=0 angulo en radianes de la dirección
-	@pasos=1 cantidad de pixels y pasos que tendrá el blur
-	@opacidad=0.25 opacidad de cada paso
+	@steps=1 cantidad de pixels y steps que tendrá el blur
+	@opacity=0.25 opacity de cada paso
 	"""
 	ctx = video.cf.ctx
 	sfc = ctx.get_group_target()
@@ -343,54 +343,54 @@ def fDirBlur(angle=0, pasos=1,  opacidad=0.25):
 	xi = cos(angle)
 	yi = sin(angle)
 
-	for a in range(1, int(pasos+1)):
+	for a in range(1, int(steps+1)):
 		m.translate(xi, yi)
 		pat.set_matrix(m)
-		ctx.paint_with_alpha(opacidad)
+		ctx.paint_with_alpha(opacity)
 
-def fDirBlurB(angle=0, pasos=1, opacidad=0.25):
+def fDirBlurB(angle=0, steps=1, opacity=0.25):
 	"""blur direccional usando surface"""
 	ctx = video.cf.ctx
 	sfc=ctx.get_group_target()
 	x= xi = cos(angle)
 	y= yi = sin(angle)
 
-	for a in range(1, pasos+1):
+	for a in range(1, steps+1):
 		ctx.set_source_surface(sfc,  x, y)
-		ctx.paint_with_alpha(opacidad)
+		ctx.paint_with_alpha(opacity)
 		x+=xi
 		y+=yi
 
-def fBiDirBlur(angle=0, pasos=1, opacidad=0.25):
+def fBiDirBlur(angle=0, steps=1, opacity=0.25):
 	"""Blur bidireccional
 	opcionales:
 	opcionales:
 	@angle=0 angulo en radianes de la dirección
-	@pasos=1 cantidad de pixels y pasos que tendrá el blur
-	@opacidad=0.25 opacidad de cada paso
+	@steps=1 cantidad de pixels y steps que tendrá el blur
+	@opacity=0.25 opacity de cada paso
 	"""
-	fDirBlur(angle, pasos, opacidad)
-	fDirBlur(angle+pi, pasos, opacidad)
+	fDirBlur(angle, steps, opacity)
+	fDirBlur(angle+pi, steps, opacity)
 
-def fGlow(pasos=3, opacidad=0.05):
+def fGlow(steps=3, opacity=0.05):
 	"""
 	Hace un effect de brillo
 	opcionales:
-	@pasos cantidad de pasos
-	@opacidad opacidad de cada paso
+	@steps cantidad de steps
+	@opacity opacity de cada paso
 	"""
 	video.cf.ctx.set_operator(cairo.OPERATOR_ADD)
-	fBlur(pasos, opacidad)
+	fBlur(steps, opacity)
 	ModePainted()
 
-def GrupoInicio(copiarFondo=False):
+def StartGroup(copy_background=False):
 	"""Comienza un grupo de pintado.
 	es como un encapsulamiento
 	todo lo que pintes dentro de un grupo no sera afectado por lo que tiene el de afuera.
 	opcional
-	@copiarFondo=False indica si el nuevo grupo contiene la informacion del grupo anterior
+	@copy_background=False indica si el nuevo grupo contiene la informacion del grupo anterior
 	"""
-	if copiarFondo:
+	if copy_background:
 		ctx = video.cf.ctx
 		#si esto da algun tipo de "error" (como cuando la textura se repite o si da error o algo raro)
 		#activar la siguiente linea y comentar la otra
@@ -402,21 +402,21 @@ def GrupoInicio(copiarFondo=False):
 	else:
 		video.cf.ctx.push_group()
 
-def GrupoFin(opacidad=1.0, matriz=None):
+def EndGroup(opacity=1.0, matrix=None):
 	"""
 	Finaliza un grupo,
 	opcionales:
 	@paint Indica si al finalizar el grupo se pinta el contenido
-	@matriz Matriz del tipo cairo.matrix con la transformacion sobre el grupo anterior
+	@matrix Matriz del tipo cairo.matrix con la transformacion sobre el grupo anterior
 	@return devuelve un pattern con el resultado del grupo
 	"""
 	ctx= video.cf.ctx
 	pat= ctx.pop_group()
-	if matriz:
-		pat.set_matrix(matriz)
-	#if opacidad>0:
+	if matrix:
+		pat.set_matrix(matrix)
+	#if opacity>0:
 	ctx.set_source(pat)
-	ctx.paint_with_alpha(opacidad)
+	ctx.paint_with_alpha(opacity)
 	return pat
 
 """
@@ -431,11 +431,11 @@ def fTimeBlur(opacidad=0.15):
 	_time_blur_pat = ctx.get_group_target()
 """
 
-def fRotoZoom(pasos=4, opacidad=0.25, escala=1, angle=0, org_x=0, org_y=0):
+def fRotoZoom(steps=4, opacity=0.25, scale=1, angle=0, org_x=0, org_y=0):
 	"""Realiza un effect de rotacion y zoom progresivos sobre todo el contenido del cuadro
-	@pasos : cantidad de pasos
-	@opacidad : opacidad de cada paso
-	@escala : incremento de escala por paso
+	@steps : cantidad de steps
+	@opacity : opacity de cada paso
+	@scale : incremento de scale por paso
 	@angle : incremento del ángulo por paso, en radianes
 	@org_x, org_y : el origen sobre el que se realizan las transformaciones
 	"""
@@ -446,28 +446,28 @@ def fRotoZoom(pasos=4, opacidad=0.25, escala=1, angle=0, org_x=0, org_y=0):
 	ctx.set_source(pat) #lo ponemos como source
 	fangle = angle
 
-	for a in xrange(int(pasos)):
-		fescala = 1.0/(1.0+(a*escala)) #1/a*2
+	for a in xrange(int(steps)):
+		fescala = 1.0/(1.0+(a*scale)) #1/a*2
 		fangle += angle
 		pat.set_matrix(
 			extra.CrearMatriz(org_x, org_y, org_x, org_y, fangle, fescala, fescala, inversa=True)
 		)
-		ctx.paint_with_alpha(opacidad)
+		ctx.paint_with_alpha(opacity)
 
-def fOnda( inicio,  delta=0.1,  amplitud = 10,  vertical=True,  borrar=True):
+def fWave( offset,  delta=0.1,  amplitude = 10,  vertical=True,  delete=True):
 	"""Realiza un effect de ondulacion sobre la imagen activa.
-	@inicio : un offset del angle de inicio (si se quiere animar esto se debe modificar)
+	@offset : un offset del angle de offset (si se quiere animar esto se debe modificar)
 	@delta = 0.1 : el delta que indica cuanto cambiará la onda de pixel a pixel (es como el ancho de la onda (en vertical)) (mientras mas pequeño, la onda es mas ancha) (esto es lo mismo que frecuencia)
-	@amplitud = 10 : cuan fuerte es la deformacion (el alto de la onda (en vertical))
+	@amplitude = 10 : cuan fuerte es la deformacion (el alto de la onda (en vertical))
 	@vertical = True : True si se quiere hacer una onda vertical, False si se la quiere horizontal
-	@borrar = True : True si se desea eliminar lo dibujado anteriormente, o False si se desea redibujar lo deformado encima de lo anterior
+	@delete = True : True si se desea eliminar lo dibujado anteriormente, o False si se desea redibujar lo deformado encima de lo anterior
 	"""
 	ctx = video.cf.ctx
 	vi = video.vi
 
 	sfc = extra.CopiarTarget()
 
-	if borrar:
+	if delete:
 		ctx.set_operator(cairo.OPERATOR_CLEAR)
 		ctx.paint()
 		ModePainted()
@@ -485,14 +485,14 @@ def fOnda( inicio,  delta=0.1,  amplitud = 10,  vertical=True,  borrar=True):
 		max = y2
 
 	for i in xrange(min,  max):
-		dif = delta*(i+inicio)
+		dif = delta*(i+offset)
 		if vertical:
 			x1 = i
 			mx = 0
-			my =  sin(pi*dif)*amplitud
+			my =  sin(pi*dif)*amplitude
 		else:
 			y1 = i
-			mx = sin(pi*dif)*amplitud
+			mx = sin(pi*dif)*amplitude
 			my = 0
 
 		ctx.set_source_surface(sfc,  mx,  my)

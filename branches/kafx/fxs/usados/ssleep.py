@@ -40,22 +40,22 @@ class Roman(comun.Fx):
 		c.r = 1
 
 		#Y lo pintamos haciendole un blur bi-direccional de 6 pasos con opacidad "P"
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		s.Pintar()
 		#recuerden lo pusimos para q ponga solo el relleno de un color solido, asi el blur queda como yo quiero
 		#lo pintamos con un glow q crece
 		avanzado.fBiDirBlur(r, 6, p)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 		#hacemos lo mismo pero con color "verde",
 		#y con una rotacion aumentada en 2.09 (radianes)
 		c.b = 0.2
 		c.g = 1
 		c.r = 0.2
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		s.Pintar()
 		avanzado.fBiDirBlur(r+2.09, 6, p)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 		#lo mismo con "azul"
 		# pero con rotacion aumentada en 4.18, de esa forma los tres colores quedan separados
@@ -63,10 +63,10 @@ class Roman(comun.Fx):
 		c.b = 1
 		c.g = 0.2
 		c.r = 0.2
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		s.Pintar()
 		avanzado.fBiDirBlur(r+4.18, 6, p)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 		#Restauramos el modo a over (importante)
 		avanzado.ModoPintado('over')
@@ -133,24 +133,24 @@ class tradu(comun.Fx):
 	def EnDialogoEntra(self, s):
 		s.Desvanecer(0,1)
 		s.MoverDe(10,0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		s.Pintar()
 		avanzado.fGlow()
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, s):
 		s.Desvanecer(1,0)
 		s.MoverA(-10,0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		s.Pintar()
 		avanzado.fGlow()
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogo(self, s):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		s.Pintar()
 		avanzado.fGlow()
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
@@ -160,7 +160,7 @@ class FxsGroup(comun.FxsGroup):
 
 	def EnCuadroInicia(self):
 		#Como vamos a usar el patron para la silaba y el dialogo lo mejor es capturar el fondo una vez y procesarlo una vez.
-		avanzado.GrupoInicio(True)
+		avanzado.StartGroup(True)
 		#El "True" es para que empiece el grupo y "deje" pintado lo que ya estaba (llamese cuadro de video)
 		#el valor default es False
 		#y a eso (o sea lo q veiamos (en este caso seria solo el video) le hacemos un glow de 2

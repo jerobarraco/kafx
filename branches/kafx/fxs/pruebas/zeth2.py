@@ -9,39 +9,39 @@ class FX1(comun.Fx):
 		self.movimiento=0
 
 	def EnDialogoEntra(self, d):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.original.modo_relleno = d.P_DEG_VERT
 		d.Desvanecer(0, 1)
 		d.Pintar()
-		avanzado.fOnda(self.movimiento, 0.030, 2, True)
-		avanzado.fOnda(self.movimiento, 0.040, 2, False)
-		avanzado.GrupoFin()
+		avanzado.fWave(self.movimiento, 0.030, 2, True)
+		avanzado.fWave(self.movimiento, 0.040, 2, False)
+		avanzado.EndGroup()
 
 	def EnDialogo(self,  d):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.original.modo_relleno = d.P_DEG_VERT
 		d.Pintar()
-		avanzado.fOnda(self.movimiento, 0.030, 2, True)
-		avanzado.fOnda(self.movimiento, 0.040, 2, False)
-		avanzado.GrupoFin()
+		avanzado.fWave(self.movimiento, 0.030, 2, True)
+		avanzado.fWave(self.movimiento, 0.040, 2, False)
+		avanzado.EndGroup()
 
 	def EnSilaba(self, d):
 		d.Desvanecer(1, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
-		avanzado.fOnda(self.movimiento, 0.030, 2, True)
-		avanzado.fOnda(self.movimiento, 0.040, 2, False)
+		avanzado.fWave(self.movimiento, 0.030, 2, True)
+		avanzado.fWave(self.movimiento, 0.040, 2, False)
 		avanzado.fGlow(3, d.progreso*0.15)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, d):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.original.modo_relleno = d.P_DEG_VERT
 		d.Desvanecer(1, 0)
 		d.Pintar()
-		avanzado.fOnda(self.movimiento, 0.030, 2,  True)
-		avanzado.fOnda(self.movimiento, 0.040, 2,  False)
-		avanzado.GrupoFin()
+		avanzado.fWave(self.movimiento, 0.030, 2,  True)
+		avanzado.fWave(self.movimiento, 0.040, 2,  False)
+		avanzado.EndGroup()
 
 class FX2(comun.Fx):
 	def __init__(self):
@@ -74,10 +74,10 @@ class FX2(comun.Fx):
 		s.Desvanecer(1, 0)
 		s.actual.pos_x += self.posx
 		s.actual.pos_y += self.posy
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		s.Pintar()
 		avanzado.fGlow(5, 0.08*s.progreso)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 		
 		valor= random.randint(0,1)
 		if valor == "1":
@@ -126,10 +126,10 @@ class FxsGroup(comun.FxsGroup):
 		self.syl_out_ms = 200
 		self.fxs = (FX1(), FX2(), traduANDkanji(),)
 	def EnCuadroInicia(self):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 	def EnCuadroFin(self):
 		avanzado.fGlow(2, 0.06)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 		avanzado.ModoPintado('add')
 		self.fxs[1].parts.Pintar()
 		avanzado.ModoPintado('over')

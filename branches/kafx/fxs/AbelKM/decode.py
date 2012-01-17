@@ -30,19 +30,19 @@ class FX1(comun.Fx):
 	def EnDialogoSale(self,  d):
 		d.actual.modo_relleno = d.P_DEG_VERT
 		d.Desvanecer(0.6,  0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fRotoZoom(6, 0.7*d.progreso,  0.01, 0, d.actual.pos_x+d.actual.org_x, d.actual.pos_y+d.actual.org_y)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilaba(self, d):
 		d.MoverTextura( 120*d.progreso, 120*d.progreso, parte = d.PART_RELLENO)
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.PintarConCache()
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(6, sin(pi*d.progreso)/11.0)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 
 class FxsGroup(comun.FxsGroup):

@@ -57,7 +57,7 @@ class FxsGroup(comun.FxsGroup):
 			posx += self.paso
 		#y pintamos la linea
 		c.stroke()
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		self.psys.Pintar()
 		avanzado.fGlow()
-		avanzado.GrupoFin()
+		avanzado.EndGroup()

@@ -131,8 +131,8 @@ class FX2(comun.Fx):
 		#Le asignamos una matriz a la textura (con los movimientos)
 		d.MoverTextura(pos_x = d.start_x, pos_y = d.start_y, parte = d.PART_RELLENO)
 
-		#Para poder dar una opacidad homogénea a un grupo de cosas usaremos el GrupoInicio
-		avanzado.GrupoInicio()
+		#Para poder dar una opacidad homogénea a un grupo de cosas usaremos el StartGroup
+		avanzado.StartGroup()
 		#Pintamos el texto
 		d.Pintar()
 		#Aca podriamos pintar muchas cosas, deformarlas y demás,
@@ -145,7 +145,7 @@ class FX2(comun.Fx):
 		#de esta manera todo se ve bien, la sombra el relleno y el borde y con la opacidad que le corresponde
 		#notar que de esta forma, al pintarse primero solido y luego aplicar opacidad, la sombra nunca se vera
 		#a traves del borde
-		avanzado.GrupoFin(d.op)
+		avanzado.EndGroup(d.op)
 		#Segun el ultimo cambio tambien podriamos haber puesto
 		"""
 		d.Alpha(d.op)
@@ -176,7 +176,7 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = (FX1(), FX2())
 
 	def EnCuadroInicia(self):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 
 	def EnCuadroFin(self):
 		#ahora animamos las particulas que hay que animar
@@ -201,4 +201,4 @@ class FxsGroup(comun.FxsGroup):
 			if p.color.a <=0.0: self.fxs[0].parts.remove(p)
 		#glow y chau
 		avanzado.fGlow()
-		avanzado.GrupoFin()
+		avanzado.EndGroup()

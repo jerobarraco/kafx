@@ -48,7 +48,7 @@ class ef1(comun.Fx):
 		d.Desvanecer(0, 1)
 
 		#creamos un grupo
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		#lo pintamos
 		d.Pintar()
 		#y le hacemos un glow
@@ -62,7 +62,7 @@ class ef1(comun.Fx):
 		d.Pintar()
 		#y un blur de 1 paso
 		avanzado.fBlur(1)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 		#cambiamos la ventana de las particulas por el ancho de la silaba
 		self.parts.DarVentana(d.original._ancho, 5)
 		#Ponemos una posicion al emisor que va pasando por toda la silaba
@@ -91,7 +91,7 @@ class ef2(comun.Fx):
 
 	def EnSilaba(self, d):
 		d.Desvanecer(0, 1)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 
 		d.actual.pos_x += random.randint(-3,3)
@@ -100,7 +100,7 @@ class ef2(comun.Fx):
 		
 		d.Pintar()
 		avanzado.fBlur( 1)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self, d):
 		d.Desvanecer(1, 0)

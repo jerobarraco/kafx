@@ -28,11 +28,11 @@ class EKanji(comun.Fx):
 	def EnDialogoEntra(self, d):
 		d.Desvanecer(0, 0.5)
 		d.MoverDe(-50, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		#Un blur direccional decreciente a medida que va avanzando
 		avanzado.fDirBlur(0, 10-int(10*d.progreso), 0.3)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogoSale(self,d):
 		d.Desvanecer(1, 0)
@@ -63,10 +63,10 @@ class ERoman(comun.Fx):
 	def EnDialogoEntra(self, d):
 		d.Desvanecer(0, 1)
 		d.MoverDe(-50, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fDirBlur(0, 10- int(10*d.progreso), 0.3)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnDialogo(s,d):
 		d.PintarConCache()
@@ -80,10 +80,10 @@ class ERo(comun.Fx):
 	def EnDialogoEntra(self, d):
 		d.Desvanecer(0, 1)
 		d.MoverDe(-50, 0)
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fDirBlur(0, 10-int(10*d.progreso), 0.3)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
 
 	def EnSilabaDorm(self,s):
 		s.PintarConCache()
@@ -103,8 +103,8 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = (EKanji(), ERo(), ERoman(), ECredits())
 
 	def EnCuadroInicia(self):
-		avanzado.GrupoInicio()
+		avanzado.StartGroup()
 
 	def EnCuadroFin(self):
 		avanzado.fGlow(3, 0.04)
-		avanzado.GrupoFin()
+		avanzado.EndGroup()
