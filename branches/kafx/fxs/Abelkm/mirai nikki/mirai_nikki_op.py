@@ -92,7 +92,7 @@ class Evento7():
 						sil.actual.color1.a = 0.5
 						sil.texturas[sil.PART_FILL] = t3
 						sil.actual.mode_fill = sil.P_TEXTURA
-						sil.Escalar(1, 1.1, comun.i_accel)
+						sil.Scale(1, 1.1, comun.i_accel)
 						avanzado.CapasActivar(13)
 						avanzado.StartGroup()
 
@@ -144,7 +144,7 @@ class Evento9():
 						sil.actual.color1.a = comun.Interpolate(sil.progress, 0.5, 0)
 						sil.texturas[sil.PART_FILL] = t3
 						sil.actual.mode_fill = sil.P_TEXTURA
-						sil.Escalar(1.1, 1, comun.i_accel)
+						sil.Scale(1.1, 1, comun.i_accel)
 						avanzado.CapasActivar(17)
 						avanzado.StartGroup()
 						sil.Paint()
@@ -239,7 +239,7 @@ class Evento1():
 						letra.actual.color1.a = 0.5
 						letra.texturas[letra.PART_FILL] = t3
 						letra.actual.mode_fill = letra.P_TEXTURA
-						letra.Escalar(1, 1.1, comun.i_accel)
+						letra.Scale(1, 1.1, comun.i_accel)
 						avanzado.CapasActivar(21)
 						avanzado.StartGroup()
 						letra.Paint()
@@ -288,7 +288,7 @@ class Evento3():
 						letra.actual.color1.a = comun.Interpolate(letra.progress, 0.5, 0, comun.i_accel)
 						letra.texturas[letra.PART_FILL] = t3
 						letra.actual.mode_fill = letra.P_TEXTURA
-						letra.Escalar(1.1, 1, comun.i_accel)
+						letra.Scale(1.1, 1, comun.i_accel)
 						avanzado.StartGroup()
 						letra.Paint()
 						avanzado.fGlow(2, 0.15+(comun.Interpolate(letra.progress, 0.15, 0, comun.i_accel)))

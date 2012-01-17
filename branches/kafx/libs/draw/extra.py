@@ -82,9 +82,9 @@ def CrearMatriz(pos_x=0, pos_y=0, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=
 	pos_x, pos_y posicion x/y final
 	org_x, org_y el punto de origen de la transformación
 	angle angulo en radianes
-	scale_x scale_y la escala
+	scale_x scale_y la scale
 	inversa = False indica si es una matriz inversa (para patrones (puede fallar)) o normal, para contexto
-	en caso de ser una matriz inversa, los scales deben estar invertidos o sea, 1.0/escala"""
+	en caso de ser una matriz inversa, los scales deben estar invertidos o sea, 1.0/scale"""
 	m = cairo.Matrix()
 
 	#Evitamos errores de matrices no invertibles a costo de velocidad
@@ -717,7 +717,7 @@ class cVector():
 	def Centro(self):
 		"""Devuelve el punto central de un vector relativo al punto de posicion"""
 		"""o = self.original
-		x = o._ancho/2.0
+		x = o._width/2.0
 		props.org_y = -(props._alto_linea/2.0) + props._descent"""
 		x = self.actual.pos_x +(self.original._ancho/2.0)
 		y = self.actual.pos_y -(self.original._alto/2.0)
@@ -772,8 +772,8 @@ class cVector():
 
 	def Escalar(self, desde, hasta, inter=comun.i_lineal):
 		"""Anima el escalado de un vector
-		@desde escala incial
-		@hasa escala final
+		@desde scale incial
+		@hasa scale final
 		ambos son float donde 1 es el valor normal >1 es mas grande y <1 es mas pequeño
 		"""
 		self.actual.scale_x = self.actual.scale_y = comun.Interpolate(self.progress, desde, hasta, inter)
@@ -835,7 +835,7 @@ class cVector():
 		parametros:
 		@textura -> pattern con la textura a usar
 		opcionales:
-		@escala=1.0 -> escala con la que se inicializarán todas las texturas
+		@scale=1.0 -> scale con la que se inicializarán todas las texturas
 		@alpha_min=0.2 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
 		@barrido_vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
 		las partículas en el array, por lo tanto la forma en que se recorre
@@ -860,7 +860,7 @@ class cVector():
 		#pintamos el vector/dialogo/silaba
 		self.Paint()
 		#creamos las particulas
-		parts = avanzado.CrearParticulas(box, textura, escala, alpha_min, barrido_vertical, mode)
+		parts = avanzado.CreateParticles(box, textura, escala, alpha_min, barrido_vertical, mode)
 		avanzado.EndGroup(opacity=0.0)
 		return parts
 

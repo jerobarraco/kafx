@@ -455,7 +455,7 @@ def fRotoZoom(steps=4, opacity=0.25, scale=1, angle=0, org_x=0, org_y=0):
 		ctx.paint_with_alpha(opacity)
 
 def fWave( offset,  delta=0.1,  amplitude = 10,  vertical=True,  delete=True):
-	"""Realiza un effect de ondulacion sobre la imagen activa.
+	"""Realiza un effect de ondulacion sobre la imagen active.
 	@offset : un offset del angle de offset (si se quiere animar esto se debe modificar)
 	@delta = 0.1 : el delta que indica cuanto cambiará la onda de pixel a pixel (es como el ancho de la onda (en vertical)) (mientras mas pequeño, la onda es mas ancha) (esto es lo mismo que frecuencia)
 	@amplitude = 10 : cuan fuerte es la deformacion (el alto de la onda (en vertical))
@@ -502,31 +502,29 @@ def fWave( offset,  delta=0.1,  amplitude = 10,  vertical=True,  delete=True):
 class cSprite():
 	#Implementación basica de una imagen estática
 	#Para animar cambien las propiedades
-	def __init__(self, text=None, x = 0, y = 0, angle=0, color=None, mode=1, escala=1.0):
+	def __init__(self, texture, x = 0, y = 0, angle=0, color=None, mode=1, scale=1.0):
 		"""
-		@text : pattern que se usará como textura
+		@texture : pattern que se usará como textura
 			(se puede cargar con extra.CargarTextura("archivo.png") o simplemente pasar el nombre de archivo "archivo.png")
 		@mode =1: 1-> textura solida, 0-> un solo color y mascara
 		@center =False: If true, then the sprite will be moved to be centered at the x/y (works better with squared textures)
 		"""
-		if text == None:
-			text = cairo.SurfacePattern(cairo.ImageSurface.create_from_png("texturas/sakura.png"))
-		text.set_extend(cairo.EXTEND_NONE)
-		self._pat = text
-		self._s = text.get_surface()
+		texture.set_extend(cairo.EXTEND_NONE)
+		self._pat = texture
+		self._s = texture.get_surface()
 
-		self._ancho = (self._s.get_width())
-		self._alto = (self._s.get_height())
-		self.org_x = (self._ancho/2.0)
-		self.org_y = (self._alto/2.0)
+		self._width = (self._s.get_width())
+		self._height = (self._s.get_height())
+		self.org_x = (self._width/2.0)
+		self.org_y = (self._height/2.0)
 		self.angle = angle
 		self.color = color or extra.cCairoColor()
 		self.mode = mode
 		self.x = x
 		self.y = y
-		self.Escalar(escala, escala)
+		self.Scale(scale, scale)
 
-	def Escalar(self, x, y):
+	def Scale(self, x, y):
 		"""se puede hacer directamente accediendo a scale_x y scale_y,
 		pero esta para facilitar el tema de la division,
 		si usás escalas predivididas, es más rápido asignarlas directamente a scale_x y scale_y"""
@@ -536,13 +534,6 @@ class cSprite():
 	def Paint(self):
 		"""Pinta la imagen sobre el cuadro según las propiedades
 		"""
-		"""mat = cairo.Matrix()
-		mat.translate(self.org_x, self.org_y)
-		mat.rotate(self.angle)
-		mat.scale(self.sx, self.sy)
-		mat.translate(-self.x, -self.y)
-		self.pat.set_matrix(mat)"""
-
 		self._pat.set_matrix(extra.CrearMatriz(self.x, self.y, self.org_x, self.org_y, self.angle, self.scale_x, self.scale_y, True))
 		ctx = video.cf.ctx
 		if self.mode:
@@ -553,19 +544,19 @@ class cSprite():
 			ctx.mask(self._pat)
 
 class cParticleSystem():
-	class cEmisor():
+	class cEmitter():
 		x = y = angle = vel = mapertura = xg = yg = mw = mh = 0.0
 
 	class cParticula():
 		def __init__(self, i=0):
-			self.indice = i
+			self.index = i
 			self.Reset()
 
-		def Reset(self, activa=False, x=300, y=300, life=1, color=None, xi=0, yi=0, sc1=1, sc2=1, xg=0, yg=0, rotacion=0.1):
+		def Reset(self, active=False, x=300, y=300, life=1, color=None, xi=0, yi=0, sc1=1, sc2=1, xg=0, yg=0, rotation=0.1):
 			"""Llamado por el sistema de particulas para "crear" una particula nueva"""
-			self.activa = activa #indica si la particula está activa o muerta
+			self.active = active #indica si la particula está active o muerta
 			self.life = 0 #indica cuanta vida tiene (como el progress d 0 a 1) (1=muerta)
-			self.escala = sc1
+			self.scale = sc1
 			self.fade = ((random()/10)+0.1) /life
 			#esto indica la velocidad con que muere, al tener /life ahi, el valor de esa variable, puede ser sumada a life y life pasa a funcionar como el progress de los dialogues..
 			#aumentando el valor de life aumenta la cantidad d animaciones requeridas para morir.
@@ -583,46 +574,46 @@ class cParticleSystem():
 			#angle
 			self.angle = random()*2*pi
 			#incremento del angle aka animacion de la rotacon
-			self.anglei = random()*rotacion
-			#incremento de la escala.
+			self.anglei = random()*rotation
+			#incremento de la scale.
 			self.sci = (sc2-sc1)*self.fade
 			#gravedad
 			self.xg = xg
 			self.yg = yg
 
-		def AnimadorBase(self):
+		def BaseAnimator(self):
 			"""Animador default
-			  puedes llamar a este animador para que haga las cosas normales, movimiento, rotacion, escala
+			  puedes llamar a este animador para que haga las cosas normales, movimiento, rotacion, scale
 			  tambien podes definir el tuyo y pasarlo por parametro al instanciar el sistema de particulas
-			  asegurate de modificar el valor de activa
+			  asegurate de modificar el valor de active
 			"""
 			self.angle += self.anglei
 			self.y += self.yi
 			self.x += self.xi
-			self.escala += self.sci
+			self.scale += self.sci
 			self.color.a -= self.fade
 			self.xi += self.xg
 			self.yi += self.yg
 			self.life += self.fade
-			self.activa = (self.life<1) #mas rapido (??) acuerdense que aca adentro estamos si p.active == True
+			self.active = (self.life<1) #mas rapido (??) acuerdense que aca adentro estamos si p.active == True
 
-	def __init__(self, png="texturas/blast.png", emitir_parts=5, max_parts=500, max_life=2, mode=None, color=None, escala_de=1.0, escala_a=2.0, rotacion= 0.1, animador=None):
+	def __init__(self, png="texturas/blast.png", emit_parts=5, max_parts=500, max_life=2, mode=None, color=None, scale_from=1.0, scale_to=2.0, rotation= 0.1, animator=None):
 		"""
 		todos los valores son opcionales
 
 		png archivo png usado como textura/mascara
 		max_parts total de particulas posibles en todo momento
-		emitir_parts maxima cantidad de particulas que se crearan por vez que se llama a Emitir
+		emit_parts maxima cantidad de particulas que se crearan por vez que se llama a Emitir
 		color = None -> Color random, o instancia de cCairoColor
 		max_life entero con el máximo de vida de cada particula
 		mode = 0-> textura, 1->mascara con color solido, 2-> mascara tomando el color del punto sobre el que cae
 			Para mejor funcionamiento, no especificar color si se usará el mode 0
-		escala_de valor de escala inical para cada particula
-		escala_a valor de escala final para cada particula
-		animador una función que se llama por cada particula, por cada cuadro, que recibe como parametro la particula en cuestion
+		scale_from valor de scale inical para cada particula
+		scale_to valor de scale final para cada particula
+		animator una función que se llama por cada particula, por cada cuadro, que recibe como parametro la particula en cuestion
 		"""
 		self.parts = [self.cParticula(i=i) for i in xrange(max_parts)]
-		self.ppc = emitir_parts
+		self.ppc = emit_parts
 		self.life = max_life or 1 #0 daría ZeroDivide en part.Reset
 		if mode == None:
 			if color == None:
@@ -635,27 +626,27 @@ class cParticleSystem():
 		self.sfc = cairo.ImageSurface.create_from_png(png)
 
 		#predividimos por 1.0 para mayor velocidad.
-		self.sc1 = 1.0/escala_de
-		self.sc2 = 1.0/escala_a
+		self.sc1 = 1.0/scale_from
+		self.sc2 = 1.0/scale_to
 		self.pat = cairo.SurfacePattern(self.sfc)
 		self.centx = (self.sfc.get_width()/2)
 		self.centy = (self.sfc.get_height()/2)
 		self.w = self.sfc.get_width()
 		self.h = self.sfc.get_height()
-		self.anglei = rotacion
-		self.emisor = self.cEmisor()
-		self.Animar = animador or self.cParticula.AnimadorBase
-		#notar q hacemos referencia a AnimadorBase de la CLASE cParticula, no de una INSTANCIA, por lo q hay q poner explicitamente el primer parámetro
-		#con esto y la liena self.Animar(p) solucionamos problemas del "self" (q psicoloco q suena)
+		self.anglei = rotation
+		self.emitter = self.cEmitter()
+		self.Animate = animator or self.cParticula.BaseAnimator
+		#notar q hacemos referencia a BaseAnimator de la CLASE cParticula, no de una INSTANCIA, por lo q hay q poner explicitamente el primer parámetro
+		#con esto y la liena self.Animate(p) solucionamos problemas del "self" (q psicoloco q suena)
 
 	def Emit(self):
 		"""Cuando se llama a esta función se le indica al sistema se emiten particulas
 		Cada vez que se llama, se crearán un máximo de "emitir_parts".
 		Se lo puede llamar varias veces en el mismo cuadro,
-		cambiando las propiedades del emisor entre las diferentes llamadas
+		cambiando las propiedades del emitter entre las diferentes llamadas
 		"""
 		newparts = 0
-		e=self.emisor
+		e=self.emitter
 		for p in self.parts:
 			if newparts > self.ppc: return
 			if not p.activa:
@@ -689,21 +680,21 @@ class cParticleSystem():
 				xi = -cos(e.angle+e.mapertura-(e.mapertura*2.0*random()))*e.vel
 				yi = sin(e.angle+e.mapertura-(e.mapertura*2.0*random()))*e.vel
 				p.Reset(True, x=x, y=y, life=self.life, color=c, xi=xi, yi=yi,
-					sc1=self.sc1, sc2=self.sc2, xg=e.xg, yg=e.yg, rotacion=self.anglei)
+					sc1=self.sc1, sc2=self.sc2, xg=e.xg, yg=e.yg, rotation=self.anglei)
 				newparts+=1
 
 	def SetPosition(self, x, y):
-		"""Para cambiar la posicion del emisor
+		"""Para cambiar la posicion del emitter
 		@x, y : Posición en pixels"""
-		self.emisor.x=x
-		self.emisor.y=y
+		self.emitter.x=x
+		self.emitter.y=y
 
 	def SetAngle(self, angle, velocidad, apertura=0):
 		"""Para cambiar el angle de emision
 		@angle : el ángulo en radianes de la emisión
 		@velocidad : la velocidad de la emisión, en pixels por cuadro
 		@apertura : angulo en radianes para el ángulo de apertura máxima de emisión"""
-		e = self.emisor
+		e = self.emitter
 		e.angle = angle
 		e.vel = velocidad
 		e.mapertura = apertura/2.0
@@ -713,20 +704,20 @@ class cParticleSystem():
 		@angle : angulo en radianes de la gravedad
 		@velocidad : la velocidad de ACELEARCION de la gravedad en pixels por cuadro
 		"""
-		self.emisor.xg = -cos(angle)*velocidad
-		self.emisor.yg = sin(angle)*velocidad
+		self.emitter.xg = -cos(angle)*velocidad
+		self.emitter.yg = sin(angle)*velocidad
 		#para la gravedad si lo guardamos como coordenada.
 		#porque no da para ir calculando el seno y eso cada cuadro,
 		#además como que la gravedad no cambia igual python es tan versatil ;)
-		#q si queres podes cambiarlo con part.emisor.xg=xxx
+		#q si queres podes cambiarlo con part.emitter.xg=xxx
 
 	def SetWindow(self, ancho, alto):
 		"""para cambiar la ventana de creacion de particulas
 		@ancho, alto : indican el tamaño de la ventana donde pueden aparecer
 		partículas
 		"""
-		self.emisor.mw = ancho/2.0
-		self.emisor.mh = alto/2.0
+		self.emitter.mw = ancho/2.0
+		self.emitter.mh = alto/2.0
 
 	def Paint(self):
 		"""Cada vez que se llama a esta funcion se pintan todas las particulas vivas, se calcula su nueva posicion, y si estan vivas
@@ -749,7 +740,7 @@ class cParticleSystem():
 				#Además para velocidad, x,y , xi, yi están premultiplicados por -1 (o sea, cambiados de signos)
 				#eso se hace una sola vez al crear la particula
 				self.pat.set_matrix(
-					extra.CrearMatriz( p.x, p.y, self.centx, self.centy, p.angle, p.escala, p.escala, True)
+					extra.CrearMatriz( p.x, p.y, self.centx, self.centy, p.angle, p.scale, p.scale, True)
 				)"""
 				if self.mode:
 					ctx.set_source_rgba(p.color.r, p.color.g, p.color.b, p.color.a)
@@ -758,17 +749,17 @@ class cParticleSystem():
 					ctx.set_source(self.pat)
 					ctx.paint_with_alpha(p.color.a)
 				#Este es el animador de la particula, puede ser uno personalizado
-				self.Animar(p)
+				self.Animate(p)
 
-def CrearParticulas(box, textura, escala=1.0, alpha_min=0.2, barrido_vertical=True, mode=0 ):
+def CreateParticles(box, textura, scale=1.0, alpha_min=0.2, vertical=True, mode=0 ):
 		"""Super Lento
 		parametros:
 		@box -> tupla con las coordenadas de donde buscar (x0, y0, ancho, alto) (todos los items DEBEN ser enteros (int)))
 		@textura -> pattern que se usará como textura
 		opcionales:
-		@escala=1.0 -> escala con la que se inicializarán todas las texturas
+		@scale=1.0 -> scale con la que se inicializarán todas las texturas
 		@alpha_min=0.2 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
-		@barrido_vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
+		@vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
 				las partículas en el array, por lo tanto la forma en que se recorre
 		@mode=0 -> el mode de las particulas
 		"""
@@ -796,7 +787,7 @@ def CrearParticulas(box, textura, escala=1.0, alpha_min=0.2, barrido_vertical=Tr
 		x1, y1, x2, y2 = box
 
 		#Haciendo esta cochinada evitamos usar una funcion extra, esperemos que sea mas rapido asi.
-		if barrido_vertical:
+		if vertical:
 			i1, i2 = x1, x2
 			j1, j2 = y1, y2
 		else:
@@ -806,7 +797,7 @@ def CrearParticulas(box, textura, escala=1.0, alpha_min=0.2, barrido_vertical=Tr
 		#recorremos lo pixels
 		for i in xrange(i1, i2):
 			for j in xrange(j1, j2):
-				if barrido_vertical:
+				if vertical:
 					x = i
 					y = j
 				else:
@@ -840,7 +831,7 @@ def CrearParticulas(box, textura, escala=1.0, alpha_min=0.2, barrido_vertical=Tr
 					c.g = g
 					c.b = b
 					#y creamos una "particula"
-					parts.append(cSprite(text= textura, x=x+0.5, y=y+0.5, escala=escala, color=c, mode=mode))
+					parts.append(cSprite(texture= textura, x=x+0.5, y=y+0.5, scale=scale, color=c, mode=mode))
 				except:
 					import traceback
 					print "Error al crear las particulas", traceback.print_exc()

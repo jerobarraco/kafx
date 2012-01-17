@@ -39,7 +39,7 @@ class FxsGroup(comun.FxsGroup):
 			p.x += p.movx
 			p.y += p.movy
 			p.esc += 0.01
-			p.Escalar(p.esc, p.esc)
+			p.Scale(p.esc, p.esc)
 			p.Pintar()
 
 			if p.color.a <= 0:

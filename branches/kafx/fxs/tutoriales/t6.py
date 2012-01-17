@@ -22,7 +22,7 @@ class FX1(comun.Fx):
         s.actual.modo_relleno = s.P_DEG_VERT
         s.Desvanecer(1, 0.5)
         s.Girar(0, -math.pi)
-        s.Escalar(1, 2)
+        s.Scale(1, 2)
         s.Pintar()
 
         s.Restore()

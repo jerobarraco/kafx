@@ -7,7 +7,7 @@ class FX1(comun.Fx):
 	def __init__(self):
 		#Cuando se cree el effect
 		#Creamos las particulas
-		self.parts = avanzado.cParticleSystem(png="texturas/star3.png", max_life=3, emitir_parts=2, escala_de= 0.8, escala_a=0.3, modo=1)
+		self.parts = avanzado.cParticleSystem(png="texturas/star3.png", max_life=3, emit_parts=2, scale_from= 0.8, scale_to=0.3, modo=1)
 		#Configuramos la ventana y el angulo
 		self.parts.DarVentana(6, 2)
 		self.parts.DarAngulo(pi, 3, pi/4.0)
@@ -29,7 +29,7 @@ class FX1(comun.Fx):
 		if diag._texto.strip() =="":
 			return
 
-		#cambiamos la posicion del emisor de particulas
+		#cambiamos la posicion del emitter de particulas
 		self.parts.DarPosicion(
 			diag.actual.pos_x + diag.progreso*diag.original._ancho,
 			diag.actual.pos_y - (diag.actual.org_y)
@@ -61,13 +61,13 @@ class FX2(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
-		#Entra con una escala creciente, con una onda como seno
+		#Entra con una scale creciente, con una onda como seno
 		sc = 1+0.25*sin(pi*diag.progreso/2.0)
-		diag.Escalar(sc, sc)
+		diag.Scale(sc, sc)
 		diag.Pintar()
 
 	def EnDialogoSale(self, diag):
-		#Sale con una escala decreciente
+		#Sale con una scale decreciente
 		diag.actual.scale_y  = 1.01-diag.progreso
 		diag.Desvanecer(1,0)
 		diag.Pintar()

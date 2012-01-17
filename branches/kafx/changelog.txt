@@ -40,7 +40,7 @@ Agregado
 		Manejos por vectores
 		Modos de pintura para borde, relleno y sombra
 		Funciones
-			PintarConCache, PintarReferencia, Deformar, Box, Escalar,
+			PintarConCache, PintarReferencia, Deformar, Box, Scale,
 			CargarTextura, MoverTextura, Crear Particulas
 		Deformacion
 		Propiedad indice

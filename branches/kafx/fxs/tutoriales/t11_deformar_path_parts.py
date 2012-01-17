@@ -9,7 +9,7 @@ class EfectoGenerico(comun.Fx):
 		#Cuando se cree el effect
 		#Creamos las particulas
 		self.parts = avanzado.cParticleSystem(png="texturas/spark5.png",
-		max_life=3, max_parts=10000, emitir_parts=10, escala_de= 0.05, escala_a=0.5, mode=1, rotacion=0)
+		max_life=3, max_parts=10000, emit_parts=10, scale_from= 0.05, scale_to=0.5, mode=1, rotation=0)
 		#Configuramos la ventana y el angulo
 		self.parts.SetWindow(0, 0)
 		#self.parts.DarGravedad(pi/2.0, 0.01)

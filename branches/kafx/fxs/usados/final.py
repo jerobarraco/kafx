@@ -9,7 +9,7 @@ class FX1(comun.Fx):
 		#Cuando inicia el effect (cuando se crea)
 		#Creamos el sistema de partículas
 		self.parts = avanzado.cParticleSystem(png="texturas/star3.png",
-			max_life=3, max_parts=300, emitir_parts=4, escala_de=0.2, escala_a=1,
+			max_life=3, max_parts=300, emit_parts=4, scale_from=0.2, scale_to=1,
 			color=extra.cCairoColor(0xFF7F7920),  modo=1)
 
 	def EnSilabaInicia(self, d):
@@ -126,7 +126,7 @@ class FX1(comun.Fx):
 
 		#x,y = comun.Bezier(d.progreso, p)
 
-		#Ponemos la posicion del emisor
+		#Ponemos la posicion del emitter
 		self.parts.DarPosicion(x, y)
 		#Emitimos en el punto
 		self.parts.Emitir()

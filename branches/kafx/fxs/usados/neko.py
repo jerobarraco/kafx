@@ -50,7 +50,7 @@ class Kara(comun.Fx):
 		if diag._texto.strip() == "":
 			return
 		#Si el dialogo no tiene texto nos la tomamos.
-		#Cambiamos la escala vertical
+		#Cambiamos la scale vertical
 		diag.actual.scale_y = abs(comun.Interpolar(diag.progreso, 0, 1, comun.i_cos))
 		diag.Pintar()
 

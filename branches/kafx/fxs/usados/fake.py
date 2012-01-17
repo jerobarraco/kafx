@@ -20,8 +20,8 @@ class FX1(comun.Fx):
 		diag.Desvanecer(0, 1)
 		#La movemos desde unos 40 pixels a la der y 20 arriba
 		diag.MoverDe(40, -20)
-		#Cambiamos la escala, de 0.5 a 1.0 (50% a 100%)
-		diag.Escalar(0.5, 1.0)
+		#Cambiamos la scale, de 0.5 a 1.0 (50% a 100%)
+		diag.Scale(0.5, 1.0)
 		#y finalmente la pintamos
 		diag.Pintar()
 
@@ -29,8 +29,8 @@ class FX1(comun.Fx):
 		#Luego que se anime la silaba
 		#Hacemos fadeout
 		diag.Desvanecer(1, 0)
-		#Reducimos la escala
-		diag.Escalar(1, 0.5)
+		#Reducimos la scale
+		diag.Scale(1, 0.5)
 		#La movemos unos 20 pixels a la izq y 20 arriba
 		diag.MoverA(-20, -20)
 		#Y la pintamos
@@ -62,13 +62,13 @@ class FX2(comun.Fx):
 	def EnDialogoSale(self, diag):
 		diag.Desvanecer(1,0)
 		diag.MoverA(0, 20)
-		diag.Escalar(1, 0.5)
+		diag.Scale(1, 0.5)
 		diag.Pintar()
 
 	def EnDialogoEntra(self, diag):
 		diag.Desvanecer(0, 1)
 		diag.MoverDe(40, -20)
-		diag.Escalar(0.5, 1.0)
+		diag.Scale(0.5, 1.0)
 		diag.Pintar()
 
 class FxsGroup(comun.FxsGroup):

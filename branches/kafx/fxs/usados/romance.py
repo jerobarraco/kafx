@@ -8,7 +8,7 @@ class ef1(comun.Fx):
 	def __init__(self):
 		#cuando inicie el effect
 		#creamos un sistema de particulas, con un color definido
-		p = avanzado.cParticleSystem(png="texturas/sakura.png", emitir_parts=3,
+		p = avanzado.cParticleSystem(png="texturas/sakura.png", emit_parts=3,
 			color=extra.cCairoColor(0xFFFF0000))
 		#Le ponemos un angulo para que salgan las particulas
 		p.DarAngulo(5, 2, 0)
@@ -43,7 +43,7 @@ class ef1(comun.Fx):
 		d.Pintar()
 
 	def EnSilaba(self, d):
-		#Cuando la silaba esta activa
+		#Cuando la silaba esta active
 		#fadeout
 		d.Desvanecer(0, 1)
 
@@ -65,7 +65,7 @@ class ef1(comun.Fx):
 		avanzado.EndGroup()
 		#cambiamos la ventana de las particulas por el ancho de la silaba
 		self.parts.DarVentana(d.original._ancho, 5)
-		#Ponemos una posicion al emisor que va pasando por toda la silaba
+		#Ponemos una posicion al emitter que va pasando por toda la silaba
 		self.parts.DarPosicion(
 			d.actual.pos_x+(d.original._ancho*d.progreso),
 			d.actual.pos_y-d.actual.org_y

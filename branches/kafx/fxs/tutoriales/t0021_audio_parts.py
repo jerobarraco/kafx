@@ -16,7 +16,7 @@ class FxsGroup(comun.FxsGroup):
 		self.syl_in_ms = 400
 		self.syl_out_ms = 400
 		self.psys =  avanzado.cParticleSystem(png="texturas/star2.png",
-		max_life=2, max_parts=2000, emitir_parts=1, escala_de= 0.4, escala_a=1, modo=1, rotacion=0)
+		max_life=2, max_parts=2000, emit_parts=1, scale_from= 0.4, scale_to=1, modo=1, rotation=0)
 		self.psys.DarAngulo(2*pi, 0.5, 2*pi)
 		self.psys.DarVentana(2, 2)
 		self.psys.DarGravedad(pi*1.5, 0)#1.5=3/2
