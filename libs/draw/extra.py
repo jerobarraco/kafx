@@ -464,7 +464,7 @@ class cVector():
 				ctx.close_path()
 		self.path = ctx.copy_path()
 
-	def DeformCompleto(self, func):
+	def CompleteDeform(self, func):
 		"""Igual que Deform pero recibe un solo objeto, con un array de tuplas como las recibiria Deform, y se espera que devuelva un solo array de tuplas
 		Esto te permite mayor control sobre los points, pudiendo quitar o agregar points a placer.
 		"""
