@@ -223,7 +223,7 @@ def __PreLoad():
 	"""
 
 	#cacheo las funciones porque soy raton #this actually speed things up
-	dialogos = ass.dialogos
+	dialogos = ass.dialogues
 
 	#Para poder hacer que las cosas se pinten en un orden predeterminado es necesario
 	#iterar varias veces cada objeto, una por cada evento. caso contrario, se pisan.
@@ -233,7 +233,7 @@ def __PreLoad():
 		diag.progress = 0.0
 		#effect se usa más abajo en eventos extras y las syllables lo cambian
 		#notar que cada dialogo y silaba puede tener un effect individual (sobre todo con el inline fx >.>;)
-		efecto = fs[diag.efecto]
+		efecto = fs[diag.effect]
 
 		#Llamamos a la función de cuando se inicia el dialogo
 		#No es necsaria una iteracion especial para esto, ya que no deberia pintarse nada aca
@@ -253,7 +253,7 @@ def __PreLoad():
 
 	#Dialogo Entra
 	for diag in dialogos:
-		evento = getattr(fs[diag.efecto], "OnDialogueIn", None)
+		evento = getattr(fs[diag.effect], "OnDialogueIn", None)
 		if not evento: continue
 
 		ini = diag._start - fx.in_ms
@@ -263,7 +263,7 @@ def __PreLoad():
 
 	#Dialogo Animado o Activo
 	for diag in dialogos:
-		evento = getattr(fs[diag.efecto], "OnDialogue", None)
+		evento = getattr(fs[diag.effect], "OnDialogue", None)
 		if not evento: continue
 
 		ini = diag._start
@@ -273,7 +273,7 @@ def __PreLoad():
 
 	#Eventos personalizados
 	for diag in dialogos:
-		eventos = getattr(fs[diag.efecto], "eventos", None)
+		eventos = getattr(fs[diag.effect], "eventos", None)
 		if not eventos: continue
 
 		for evento in eventos:
@@ -308,7 +308,7 @@ def __PreLoad():
 		tomamos el elemento 1 (el 2º) el dialogo.
 		del dialogo tomamos el estilo original, y de ahi el layer
 		"""
-		return item[1].original._capa
+		return item[1].original._layer
 		#pd: podría usar lambda, pero lo odio :D
 
 	for i in range(len(frames)):
@@ -337,12 +337,12 @@ def __PreLoadSyllables(diag):
 	for sil in syllables:
 		sil.progress = 0.0
 		#1º la inicializamos
-		inicio = getattr(fs[sil.efecto], "OnSyllableStarts", None)
+		inicio = getattr(fs[sil.effect], "OnSyllableStarts", None)
 		if inicio: inicio(sil)
 
 	#Zilaba Muerta
 	for sil in syllables:
-		evento = getattr(fs[sil.efecto], "OnSyllableDead", None)
+		evento = getattr(fs[sil.effect], "OnSyllableDead", None)
 		if not evento: continue
 
 		ini = sil._end
@@ -352,7 +352,7 @@ def __PreLoadSyllables(diag):
 
 	#Silaba Dormida
 	for sil in syllables:
-		evento = getattr(fs[sil.efecto], "OnSyllableSleep", None)
+		evento = getattr(fs[sil.effect], "OnSyllableSleep", None)
 		if not evento: continue
 
 		ini = diag._start
@@ -363,7 +363,7 @@ def __PreLoadSyllables(diag):
 
 	#Silaba sale
 	for sil in syllables:
-		evento = getattr(fs[sil.efecto], "OnSyllableOut", None)
+		evento = getattr(fs[sil.effect], "OnSyllableOut", None)
 		if not evento: continue
 
 		ini = sil._end
@@ -373,7 +373,7 @@ def __PreLoadSyllables(diag):
 
 	#Silaba entra
 	for sil in syllables:
-		evento = getattr(fs[sil.efecto], "OnSyllableIn", None)
+		evento = getattr(fs[sil.effect], "OnSyllableIn", None)
 		if not evento: continue
 
 		ini = sil._start - fx.sil_in_ms
@@ -383,7 +383,7 @@ def __PreLoadSyllables(diag):
 
 	#Silaba Animada
 	for sil in syllables:
-		evento = getattr(fs[sil.efecto], "OnSyllable", None)
+		evento = getattr(fs[sil.effect], "OnSyllable", None)
 		if not evento: continue
 
 		ini = sil._start
@@ -393,7 +393,7 @@ def __PreLoadSyllables(diag):
 
 	#Eventos personalizados
 	for sil in syllables:
-		eventos = getattr(fs[sil.efecto], "eventos", None)
+		eventos = getattr(fs[sil.effect], "eventos", None)
 		if not eventos: continue
 
 		for evento in eventos:
@@ -416,18 +416,18 @@ def __PreLoadLetters(sil):
 
 	#Creamos las letras (ya que sino no se crean en memoria)
 	sil.SplitLetters()
-	letras = sil._letras
+	letras = sil._letters
 
 	#inicio y letra entra
 	for letra in letras:
 		letra.progress = 0.0
 
-		efecto = fs[letra.efecto]
+		efecto = fs[letra.effect]
 
 		inicio = getattr(efecto, "OnLetterStarts", None)
 		if inicio: inicio(letra)
 
-		evento = getattr(fs[sil.efecto], "OnLetterDead", None)
+		evento = getattr(fs[sil.effect], "OnLetterDead", None)
 		if not evento: continue
 
 		ini = letra._end
@@ -437,7 +437,7 @@ def __PreLoadLetters(sil):
 
 
 	for letra in letras:
-		evento = getattr(fs[sil.efecto], "OnLetterSleep", None)
+		evento = getattr(fs[sil.effect], "OnLetterSleep", None)
 		if not evento: continue
 
 		ini = sil._start
@@ -447,7 +447,7 @@ def __PreLoadLetters(sil):
 
 	for letra in letras:
 		letra.progress = 0.0
-		efecto = fs[letra.efecto]
+		efecto = fs[letra.effect]
 		evento = getattr(efecto, "OnLetterIn", None)
 		if not evento: continue
 
@@ -458,7 +458,7 @@ def __PreLoadLetters(sil):
 
 	#letra sale
 	for letra in letras:
-		evento = getattr(fs[letra.efecto], "OnLetterOut", None)
+		evento = getattr(fs[letra.effect], "OnLetterOut", None)
 		if not evento: continue
 
 		ini = letra._end
@@ -468,7 +468,7 @@ def __PreLoadLetters(sil):
 
 	#letra Animada
 	for letra in letras:
-		evento = getattr(fs[letra.efecto], "OnLetter", None)
+		evento = getattr(fs[letra.effect], "OnLetter", None)
 		if not evento: continue
 
 		ini = letra._start
@@ -478,7 +478,7 @@ def __PreLoadLetters(sil):
 
 	#Eventos personalizados
 	for letra in letras:
-		eventos = getattr(fs[letra.efecto], "eventos", None)
+		eventos = getattr(fs[letra.effect], "eventos", None)
 		if not eventos: continue
 
 		for evento in eventos:

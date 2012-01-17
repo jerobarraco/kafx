@@ -74,7 +74,7 @@ def SetEstilo(estilo):
 	(y debe ser el original ya que requiere propiedades no animables)
 	"""
 	ctx = video.cf.ctx
-	ctx.select_font_face(estilo._fuente, int(estilo._italica),  int(estilo._negrita))
+	ctx.select_font_face(estilo._font, int(estilo._italic),  int(estilo._bold))
 	ctx.set_font_size(estilo._size)
 
 def CrearMatriz(pos_x=0, pos_y=0, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=1, inversa=False):

@@ -349,7 +349,7 @@ class cDialogue(extra.cVector):
 			pre = px, py
 
 		for sil in self._syllables:
-			pre = sil.ChangeText(sil._texto, pre)
+			pre = sil.ChangeText(sil._text, pre)
 
 	def __SetSyllables(self, texto):
 		"""crea los objetos Syllables de un dialogo,
