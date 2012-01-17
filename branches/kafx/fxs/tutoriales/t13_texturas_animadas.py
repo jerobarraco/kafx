@@ -11,8 +11,8 @@ from libs.draw import extra
 #la numeracion comienza desde 0
 
 #pongo las texturas acá afuera con el solo fin de mostrarles que pueden usarlas
-#en cualquier parte del script, pero si lo van a usar en un solo efecto,
-#entonces mejor declarenlo en el __init__ del efecto, como en neko.py
+#en cualquier parte del script, pero si lo van a usar en un solo effect,
+#entonces mejor declarenlo en el __init__ del effect, como en neko.py
 
 framecount = 42
 texturas = extra.CargarSecuencia('texturas/fuego/f', framecount, 4)

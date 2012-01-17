@@ -45,7 +45,7 @@ class Efecto2():
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		self.fxs = (Efecto(), Efecto2(), Efecto2())
-		#no puedo crear dos efecto() porque intentaria crear dos mundos
+		#no puedo crear dos effect() porque intentaria crear dos mundos
 		self.saltar_cuadros = False
 		self.sil_out_ms = 1200
 		self.reset_estilo = False #requerido para el world.Update(True)

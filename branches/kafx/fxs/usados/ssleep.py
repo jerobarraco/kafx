@@ -4,7 +4,7 @@ from libs.draw import avanzado
 import math
 global pat
 pat = None #en esta variable global pondremos la textura
-#no es lindo codigo, pero asi puedo usar la misma textura en dialogos y silabas de diferentes efectos.
+#no es lindo codigo, pero asi puedo usar la misma textura en dialogues y silabas de diferentes efectos.
 
 
 class Roman(comun.Fx):
@@ -26,9 +26,9 @@ class Roman(comun.Fx):
 		avanzado.ModoPintado('add')
 		#Calculamos el la opacidad de la animacion en funcion de seno
 		p = math.sin(math.pi*s.progreso)/4.0 #el rango sería d 0 a 0.25 (0.25 =1/4)
-		#calculamos el angulo, fijense que le sumo s.indice para q no sean todas las rotaciones iguales
+		#calculamos el angulo, fijense que le sumo s.index para q no sean todas las rotaciones iguales
 		r = math.pi*((s.progreso+s._indice)/2.0)
-		#s.indice es una nueva variable, es el indice de la silaba/dialogo, hace que la rotacion no se vea repetitiva.
+		#s.index es una nueva variable, es el index de la silaba/dialogo, hace que la rotacion no se vea repetitiva.
 
 		#le sacamos la sombra y el borde
 		a.sombra = 0
@@ -129,7 +129,7 @@ class tradu(comun.Fx):
 
 	#a partir de acá es tipico
 	#el glow lo hago por pintada, lo qu lo hace mas lento de lo normal, pero pasa q si uso un glow a nivel general
-	#haria glow sobre el romanji y el efecto se cagaria.
+	#haria glow sobre el romanji y el effect se cagaria.
 	def EnDialogoEntra(self, s):
 		s.Desvanecer(0,1)
 		s.MoverDe(10,0)

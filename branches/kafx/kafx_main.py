@@ -24,7 +24,7 @@ if traceback.sys.version_info[:3] < (2, 6, 6):
 	Por favor intente usar la versión 2.6.6 de python, o la última versión de python 2.6 (pero no 2.7 ni 3.2)
 	"""
 #TODO agregar verificacion de frame >=0 en carga de tiempos... porque me odias abel???
-#TODO agregar verificacion de que se haya cargado el efecto correctamente
+#TODO agregar verificacion de que se haya cargado el effect correctamente
 #TODO cambiar el preload para que organice las cosas como debe
 
 print "Cargando Cairo..." #si, el sistema de loggin rulea
@@ -214,11 +214,11 @@ def __PreLoad():
 	#no_frames = [True for i in xrange(num_frames+1)] #this way is slower
 	no_frames = [True, ]*(num_frames+1)#el objeto no_frames es una lista con los cuadros que no quieren ser procesados
 	#frames = [[]]*(num_frames+1) #no hagan esto, porque [] es la misma instancia, o sea, todos los frames referencian al mismo = desastre
-	frames = [ [] for i in range(num_frames+1) ] #creamos el objeto frames q contiene todos los objetos de dialogos
+	frames = [ [] for i in range(num_frames+1) ] #creamos el objeto frames q contiene todos los objetos de dialogues
 
 	"""
 	Nota: si bien el array frame es una referencia directa a cada frame,
-	los tiempos en las syllables/dialogos están guardados en milisegundos,
+	los tiempos en las syllables/dialogues están guardados en milisegundos,
 	con la esperanza de darle mayor presición.
 	"""
 
@@ -231,8 +231,8 @@ def __PreLoad():
 	#los tiempos van siempre en ms para tener presición
 	for diag in dialogos:
 		diag.progress = 0.0
-		#efecto se usa más abajo en eventos extras y las syllables lo cambian
-		#notar que cada dialogo y silaba puede tener un efecto individual (sobre todo con el inline fx >.>;)
+		#effect se usa más abajo en eventos extras y las syllables lo cambian
+		#notar que cada dialogo y silaba puede tener un effect individual (sobre todo con el inline fx >.>;)
 		efecto = fs[diag.efecto]
 
 		#Llamamos a la función de cuando se inicia el dialogo
@@ -278,7 +278,7 @@ def __PreLoad():
 
 		for evento in eventos:
 			#Calculamos la duracion de cada evento extra
-			#Notar que puede haber varios eventos extras en cada efecto
+			#Notar que puede haber varios eventos extras en cada effect
 			enDialogo = getattr(evento, "OnDialogue", None)
 			if not enDialogo: continue
 
@@ -298,8 +298,8 @@ def __PreLoad():
 			for sil in syllables:
 				__PreLoadLetters(sil)
 
-	#primero ordenamos los dialogos/syllables/letras en cada frame segun sus layers
-	#(aun asi quedan dialogos bajo syllables bajo letras (en el mismo layer en el mismo frame))
+	#primero ordenamos los dialogues/syllables/letras en cada frame segun sus layers
+	#(aun asi quedan dialogues bajo syllables bajo letras (en el mismo layer en el mismo frame))
 	def keyfunc(item):
 		"""una funcion que por cada item en cada frame, devuelve el valor con que comparar
 		explicado es:
@@ -400,7 +400,7 @@ def __PreLoadSyllables(diag):
 			enSilaba = getattr(evento, "OnSyllable", None)
 			if not enSilaba: continue
 			#Calculamos la duracion de cada evento extra
-			#Notar que puede haber varios eventos extras en cada efecto
+			#Notar que puede haber varios eventos extras en cada effect
 			ini, end = evento.TiempoSilaba(sil)
 			dif = end - ini
 			__AddEvent(ini, end, dif, enSilaba, sil)
@@ -409,7 +409,7 @@ def __PreLoadSyllables(diag):
 def __PreLoadLetters(sil):
 	#ahora las letras T_T
 	#esto ya me parece una locura.
-	#si quieren dividir un efecto por letras, por favor usen el aegisub
+	#si quieren dividir un effect por letras, por favor usen el aegisub
 	global  fx
 	#cacheos varios
 	fs = fx.fxs
@@ -485,7 +485,7 @@ def __PreLoadLetters(sil):
 			enLetra = getattr(evento, "OnLetter", None)
 			if not enLetra: continue
 			#Calculamos la duracion de cada evento extra
-			#Notar que puede haber varios eventos extras en cada efecto
+			#Notar que puede haber varios eventos extras en cada effect
 			ini, end = evento.TiempoLetra(letra)
 			dif = end - ini
 			__AddEvent(ini, end, dif, enLetra, letra)

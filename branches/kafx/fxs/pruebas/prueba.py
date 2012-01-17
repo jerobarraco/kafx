@@ -28,7 +28,7 @@ class FxsGroup(comun.FxsGroup):
 		self.sil_in_ms = 500 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
 		self.sil_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
 
-		#Un efecto si o si tiene que definir lo siguiente, si o si con este nombre
+		#Un effect si o si tiene que definir lo siguiente, si o si con este nombre
 		#Funciones (grupo de efectos) que provee
 		self.fxs = (EfectoGenerico(), EfectoGenerico())
 
@@ -39,7 +39,7 @@ class FxsGroup(comun.FxsGroup):
 		avanzado.StartGroup()
 
 	def EnCuadroFin1(self):
-		#Cuando termina el cuadro (luego de todas las sibalas y dialogos)
+		#Cuando termina el cuadro (luego de todas las sibalas y dialogues)
 		#Hacemos un glow con lo que habia
 		#avanzado.fGlow()
 		#Y cerramos el grupo

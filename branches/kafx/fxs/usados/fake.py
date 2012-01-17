@@ -73,7 +73,7 @@ class FX2(comun.Fx):
 
 class FxsGroup(comun.FxsGroup):
 	def __init__(self):
-		#Un efecto si o si tiene q definir lo siguiente, si o si con esos nombres
+		#Un effect si o si tiene q definir lo siguiente, si o si con esos nombres
 		self.in_ms = 150 #Milisegundos para la animacion de entrada
 		self.out_ms = 250 #MS para animacion d salida
 		self.sil_in_ms = 500 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)

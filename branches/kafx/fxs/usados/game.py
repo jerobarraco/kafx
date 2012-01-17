@@ -3,7 +3,7 @@ from libs import comun
 from libs.draw import avanzado
 import random
 
-#Primer efecto
+#Primer effect
 class FX1(comun.Fx):
 	def EnDialogo(self, diag):
 		#Mientras el dialogo se muestre

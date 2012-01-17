@@ -6,7 +6,7 @@ from math import pi, sin
 
 class FX1(comun.Fx):
 	def __init__(self):
-		#Cuando inicia el efecto (cuando se crea)
+		#Cuando inicia el effect (cuando se crea)
 		#Creamos el sistema de partículas
 		self.parts = avanzado.cParticleSystem(png="texturas/star3.png",
 			max_life=3, max_parts=300, emitir_parts=4, escala_de=0.2, escala_a=1,
@@ -196,7 +196,7 @@ class FxsGroup(comun.FxsGroup):
 		
 	def EnCuadroFin(self):
 		#Al finalizar el cuadro
-		#Pintamos las particulas que pertenecen al efecto 0
+		#Pintamos las particulas que pertenecen al effect 0
 		self.fxs[0].parts.Pintar()
 		#Le hacemos glow a todo (menos el video)
 		avanzado.fGlow()

@@ -6,7 +6,7 @@ from math import pi
 
 class EfectoGenerico(comun.Fx):
 	def __init__(self):
-		#Cuando se cree el efecto
+		#Cuando se cree el effect
 		#Creamos las particulas
 		self.parts = avanzado.cParticleSystem(png="texturas/spark5.png",
 		max_life=3, max_parts=10000, emitir_parts=10, escala_de= 0.05, escala_a=0.5, mode=1, rotacion=0)
@@ -81,7 +81,7 @@ class FxsGroup(comun.FxsGroup):
 		self.sil_in_ms = 500 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
 		self.sil_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
 		self.skip_frames = False
-		#Un efecto si o si tiene que definir lo siguiente, si o si con este nombre
+		#Un effect si o si tiene que definir lo siguiente, si o si con este nombre
 		#Funciones (grupo de efectos) que provee
 		self.fxs = (EfectoGenerico(), EfectoGenerico())
 

@@ -62,7 +62,7 @@ class FxsGroup(comun.FxsGroup):
 	def __init__(self):
 		global world
 		self.fxs = (Efecto(), Efecto2(), Efecto3())
-		#no puedo crear dos efecto() porque intentaria crear dos mundos
+		#no puedo crear dos effect() porque intentaria crear dos mundos
 		self.saltar_cuadros = False
 		world = physics.World()
 

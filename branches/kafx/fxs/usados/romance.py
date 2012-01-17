@@ -6,7 +6,7 @@ import random
 #--ACÁ SON LOS FX DEL KARAOKE--
 class ef1(comun.Fx):
 	def __init__(self):
-		#cuando inicie el efecto
+		#cuando inicie el effect
 		#creamos un sistema de particulas, con un color definido
 		p = avanzado.cParticleSystem(png="texturas/sakura.png", emitir_parts=3,
 			color=extra.cCairoColor(0xFFFF0000))
@@ -16,7 +16,7 @@ class ef1(comun.Fx):
 		#y una gravedad
 		p.DarGravedad(90, 3)
 		#90 grados y una velocidad de 3 pixels
-		#y lo guardamos en self (el efecto)
+		#y lo guardamos en self (el effect)
 		self.parts = p
 
 	def EnDialogoInicia(self, diag):

@@ -13,7 +13,7 @@ class EfectoGenerico(comun.Fx):
 		#Cuando la silaba sea cantada (activada)
 		global power #Tomamos el power del sonido (es una variable global)
 		#Copiamos el color secundario al color primario,
-		#usamos el power como modificador del avance del efecto
+		#usamos el power como modificador del avance del effect
 		diag.actual.color3.Interpolar(power, diag.actual.color1)
 		#y ponemos una sombra que dependa del power
 		#(esto es lo mismo que poner)
@@ -30,7 +30,7 @@ class FxsGroup(comun.FxsGroup):
 		self.sil_in_ms = 500 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
 		self.sil_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
 		self.saltar_cuadros = False
-		#Un efecto si o si tiene que definir lo siguiente, si o si con este nombre
+		#Un effect si o si tiene que definir lo siguiente, si o si con este nombre
 		#Funciones (grupo de efectos) que provee
 		self.fxs = (EfectoGenerico(), EfectoGenerico(), EfectoGenerico())
 		#hasta aca deberian saber que es

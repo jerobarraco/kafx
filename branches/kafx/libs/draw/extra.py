@@ -93,7 +93,7 @@ def CrearMatriz(pos_x=0, pos_y=0, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=
 
 	if inversa:
 		#esto no está testeado asique ojo, sobretodo con el ultimo translate. puede ir sumado (o restado) con org
-		#el punto de origen para la POSICION en los dialogos no es el mismo que el punto de origen, y esta siempre en el baseline,
+		#el punto de origen para la POSICION en los dialogues no es el mismo que el punto de origen, y esta siempre en el baseline,
 		#por eso mismo. hay que sumarle el origen, esto no es "deseable" en las particulas pej, donde quermos que estén centradas.
 		m.translate(org_x, org_y)
 		m.rotate(angle)
@@ -227,7 +227,7 @@ class cVector():
 		self._dur = 0
 		self._indice = 0
 		self._parent = parent
-		self.efecto = 0
+		self.effect = 0
 		self.texturas = [None, None, None, None] #border, fill, shadow, particulas
 		#Es la matriz de transformación del vector
 		self.matrix = cairo.Matrix()

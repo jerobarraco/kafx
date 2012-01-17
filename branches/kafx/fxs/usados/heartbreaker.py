@@ -54,7 +54,7 @@ class FX1(comun.Fx):
 		d.Pintar()
 
 	def EnDialogoEntra(self, d):
-		#obviamos de pintar ciertos dialogos que se repiten
+		#obviamos de pintar ciertos dialogues que se repiten
 		if d.original._capa>5: return
 		d.Desvanecer(0,1)
 		d.Pintar()
