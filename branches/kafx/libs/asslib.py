@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-import codecs
+"""Este módulo define las cosas necesarias para cargar un archivo ASS,
+y los objetos que permiten el pintado de texto con cairo"""
+import codecs, math
 from draw import extra
 import comun
-"""Este módulo define las cosas necesarias para cargar un archivo ASS, y los objetos que permiten el pintado de texto con cairo"""
 
 #Constantes, no cambien nada si no quieren que el programa se rompa
 #Del Estilo
@@ -69,7 +70,7 @@ class cProperties():
 		self.color3 = extra.cCairoColor(numero=0xFF101010) #border
 		self.color4 = extra.cCairoColor(numero=0xFF808080) #shadow
 		#colores: primario Secundario Outline Back
-		self._capa = 0
+		self._layer = 0
 
 		if other:
 			self.CopyAllFrom(other)
@@ -97,26 +98,24 @@ class cProperties():
 			self.mode_fill = 0
 			self.mode_border = 0
 			self.mode_shadow = 0
-			self.mode_particula = 0
+			self.mode_particle = 0
 			#no animables
 			#nombre del estilo
 			self._name ='EstiloManualmenteCreado'
 			#tamaÃ±o de la fuente
 			self._size = 12
 			#nombre de la fuente
-			self._fuente = "Verdana"
+			self._font = "Verdana"
 			#Negrita
-			self._negrita = False
+			self._bold = False
 			#Italica
-			self._italica = False
+			self._italic = False
 			#margenes en pixels, vertical, derecho e izquierdo respectivamente
 			self._marginv = 30
 			self._marginr = 30
 			self._marginl = 30
 			#alineaciÃ³n segun ass (an creo)
-			self._alin = 2
-			#capa, completamente sin usar
-			self._capa = 0
+			self._align = 2
 
 			#path info #cargando de una figura esto no tiene mucho efecto asi que ni siquiera se crean las variables
 			self._x_bearing = 0
@@ -135,30 +134,15 @@ class cProperties():
 		self.CopyFrom(other)
 		#No animables
 		self._name = other._name
-		self._fuente = other._fuente
+		self._font = other._fuente
 		self._size  = other._size
-		self._negrita = other._negrita
-		self._italica = other._italica
+		self._bold = other._negrita
+		self._italic = other._italica
 		self._marginv = other._marginv
 		self._marginr = other._marginr
 		self._marginl = other._marginl
-		self._alin = other._alin
-		#self._capa = other._capa # no es necesario
-
-		"""
-		calculados
-		self._ancho = other._ancho
-		self._alto = other._alto
-		self._alto_linea = other._alto_linea
-
-		self._x_bearing = other._x_bearing
-		self._y_bearing = other._y_bearing
-		self._x_advance = other._x_advance
-		self._y_advance = other._y_advance
-		self._ascent = other._ascent
-		self._descent = other._descent
-		self._max_x_advance = other._max_x_advance
-		self._max_y_advance = other._max_y_advance"""
+		self._align = other._align
+		#self._layer = other._layer # no es necesario
 
 	def CopyFrom(self,  other):
 		"""Copia los datos de other objeto del mismo tipo
@@ -184,69 +168,71 @@ class cProperties():
 		self.mode_fill = other.mode_fill
 		self.mode_border = other.mode_border
 		self.mode_shadow = other.mode_shadow
-		self.mode_particula = other.mode_particula
+		self.mode_particle = other.mode_particula
 
-	def FromDict(self, estilo):
+	def FromDict(self, style):
 		"""Crea los valores desde un diccionario, para uso interno"""
 		#animables
-		import math
-		self.angle = math.radians(comun.SafeGetFloat(estilo, S_ANGLE))
-		self.color1  = extra.cCairoColor(texto=estilo.get(S_PCOLOR, 0))
-		self.color3 = extra.cCairoColor(texto=estilo.get(S_OCOLOR, 0))
-		self.color4 = extra.cCairoColor(texto=estilo.get(S_BCOLOR, 0))
-		self.color2 = extra.cCairoColor(texto=estilo.get(S_SCOLOR, 0))
-		self.border = comun.SafeGetFloat(estilo, S_OUTLINE)
-		self.shadow = int(comun.SafeGetFloat(estilo, S_SHADOW)) #el zheo me dijo q podia ser flotante pero no tiene sentido aca
+		self.angle = math.radians(comun.SafeGetFloat(style, S_ANGLE))
+		self.color1  = extra.cCairoColor(texto=style.get(S_PCOLOR, 0))
+		self.color3 = extra.cCairoColor(texto=style.get(S_OCOLOR, 0))
+		self.color4 = extra.cCairoColor(texto=style.get(S_BCOLOR, 0))
+		self.color2 = extra.cCairoColor(texto=style.get(S_SCOLOR, 0))
+		self.border = comun.SafeGetFloat(style, S_OUTLINE)
+		self.shadow = int(comun.SafeGetFloat(style, S_SHADOW)) #el zheo me dijo q podia ser flotante pero no tiene sentido aca
 
-		self.scale_x = comun.SafeGetFloat(estilo, S_SCALE_X, 100)/100.0
-		self.scale_y = comun.SafeGetFloat(estilo, S_SCALE_Y, 100)/100.0
+		self.scale_x = comun.SafeGetFloat(style, S_SCALE_X, 100)/100.0
+		self.scale_y = comun.SafeGetFloat(style, S_SCALE_Y, 100)/100.0
 
 		#No animables
-		self._name = estilo.get(S_NAME, '')
-		self._fuente = estilo.get(S_FONT, '')
-		self._size = comun.SafeGetFloat(estilo, S_SIZE)
-		self._negrita = not (estilo.get(S_BOLD, '0') == '0')
-		self._italica = not (estilo.get(S_ITALIC, '0') == '0')
+		self._name = style.get(S_NAME, '')
+		self._font = style.get(S_FONT, '')
+		self._size = comun.SafeGetFloat(style, S_SIZE)
+		self._bold = not (style.get(S_BOLD, '0') == '0')
+		self._italic = not (style.get(S_ITALIC, '0') == '0')
 
-		self._marginv = int(comun.SafeGetFloat(estilo, S_MARGINV))
-		self._marginr = int(comun.SafeGetFloat(estilo, S_MARGINR))
-		self._marginl = int(comun.SafeGetFloat(estilo, S_MARGINL))
-		self._alin = int(comun.SafeGetFloat(estilo, S_ALIGN))
+		self._marginv = int(comun.SafeGetFloat(style, S_MARGINV))
+		self._marginr = int(comun.SafeGetFloat(style, S_MARGINR))
+		self._marginl = int(comun.SafeGetFloat(style, S_MARGINL))
+		self._align = int(comun.SafeGetFloat(style, S_ALIGN))
 
 class cSilaba(extra.cVector):
-	def __init__(self,  texto='', estilo=None, parent=None):
+	def __init__(self,  text='', style=None, parent=None):
 		"""
 		Una silaba, es mejor dejar que las cree el dialogo porque necesitan una inicializacion especial
-		@texto texto de la silaba
-		@estilo objeto del tipo cProperties
+		@text text de la silaba
+		@style objeto del tipo cProperties
 		@parent objeto padre
 
-		para que la silaba se pueda usar luego hay que llamar a CambiarTexto(texto, preposicion)
+		para que la silaba se pueda usar luego hay que llamar a CambiarTexto(text, preposicion)
 		"""
-		extra.cVector.__init__(self, estilo, parent=parent)
-		self._texto = texto
-		self._letras = None
+		extra.cVector.__init__(self, style, parent=parent)
+		self._text = text
+		#defaults to [] si its iterable, this is only created if the
+		#parameter FxsGroup.split_letters is True
+		#or if you call self.SplitLetters
+		self._letters = []
 
 	def SplitLetters(self):
 		"""Computa los caracteres de la sÃ­laba...
-		Usar si cambian el _texto
+		Usar si cambian el _text
 		es muy lento y consume mas ram
-		para acceder a las Syllables luego usen _letras
+		para acceder a las Syllables luego usen _letters
 		tambien activar la opcion en FxsGroup.
 		"""
 		#creamos el array y obtenemos valores comunes
-		self._letras = []
+		self._letters = []
 		time = self._start
 		last = (self.original.pos_x, self.original.pos_y)
 		#Si hay chars
-		if not self._texto:#atrapa '' y None
-			self._texto = ' '
+		if not self._text:#atrapa '' y None
+			self._text = ' '
 			#para evitar codigo duplicado, de igual manera no deberias llamar a esto sin texto Ã²_Ã³
 
 		#calculamos la duracion de cada caracter
-		cdur = float(self._dur) / len(self._texto)
+		cdur = float(self._dur) / len(self._text)
 		#agregamos los caracteres
-		for (i, tchar) in enumerate(self._texto):
+		for (i, tchar) in enumerate(self._text):
 			char = extra.cVector(estilo=self.original, parent=self)
 			char._indice = i
 			char._start = time
@@ -254,7 +240,7 @@ class cSilaba(extra.cVector):
 			char._end = time = (time + cdur)
 			char.efecto = self.efecto #no sirve de nada pero bueno
 			last = char.ChangeText(tchar, last)
-			self._letras.append(char)
+			self._letters.append(char)
 
 	def Chain(self, function, duration=None):
 		"""Permite Chain los caracteres a una animacion.
@@ -264,14 +250,16 @@ class cSilaba(extra.cVector):
 		@duration=None duracion de la animacion de cada caracter,
 		Si no se especifica, se usarÃ¡ una duraciÃ³n tal que
 		se anime solo un caracter por vez.
-		(Nota: no cambien el _texto si no quieren inconsistencias)
+		(Nota: no cambien el _text si no quieren inconsistencias)
 		"""
-		comun.Chain(self._dur, self.progress, self._letras, function, duration)
+		comun.Chain(self._dur, self.progress, self._letters, function, duration)
 
-	def FullWiggle(self, amplitud=4, frecuencia=2, dx=None, dy=None):
-		"""el wiggle que queria AbelKM, parte 2"""
+	def FullWiggle(self, amplitude=4, frequency=2, dx=None, dy=None):
+		"""el wiggle que queria AbelKM, parte 2
+		"""
+		#(btw) abelkm expand the doc explaingin this
 		if dx is None:
-			dx, dy = self.Wiggle(amplitud, frecuencia)
+			dx, dy = self.Wiggle(amplitude, frequency)
 
 		o = self.original
 		if not hasattr(o, 'old_x'):
@@ -280,7 +268,7 @@ class cSilaba(extra.cVector):
 		o.pos_x = o.old_x + dx
 		o.pos_y = o.old_y + dy
 
-		for let in self._letras:
+		for let in self._letters:
 			o = let.original
 			if not hasattr(o, 'old_x'):
 				o.old_x = o.pos_x
@@ -294,16 +282,16 @@ class cDialogue(extra.cVector):
 	Este objeto es el mas complejo, casi imposible que lo crees vos, mejor usar cSilaba o directamente extra.cVector
 	"""
 
-	def __init__(self, dialogue, estilos, max_effect = 0):
+	def __init__(self, dialogue, styles, max_effect = 0):
 		"""
 		@dialogue es la linea de dialogo en forma ass (interno)
-		@estilos es el array con estilos
-		opcionales
+		@styles es el array con styles
+		opcionales:
 		@max_effect numero mÃ¡ximo que puede tomar como efecto
 		"""
 		t_estilo = dialogue[E_STYLE]
-		est = estilos[0]
-		for i in estilos:
+		est = styles[0]
+		for i in styles:
 			if t_estilo == i._name:
 				est = i
 				break
@@ -311,7 +299,7 @@ class cDialogue(extra.cVector):
 		estilo = cProperties(est)
 		#odio lo asqueroso que se pone ass
 		#el or es porque el asqueroso de ass indica el margen por cada linea. PEEEEEEEEEERO si es 0 toma el del estilo ~_~
-		estilo._capa = comun.SafeGetFloat(dialogue, E_LAYER)	or estilo._capa
+		estilo._layer = comun.SafeGetFloat(dialogue, E_LAYER)	or estilo._layer
 		estilo._marginv = comun.SafeGetFloat(dialogue, S_MARGINV) or estilo._marginv
 		estilo._marginr = comun.SafeGetFloat(dialogue, S_MARGINR) or estilo._marginr
 		estilo._marginl = comun.SafeGetFloat(dialogue, S_MARGINL) or estilo._marginl
@@ -319,7 +307,7 @@ class cDialogue(extra.cVector):
 		extra.cVector.__init__(self, estilo)
 
 		#Seteamos los tiempos, traducimos todo a frames
-		#guardamos los tiempos como ms para tener mas precisiÃ³n
+		#guardamos los tiempos como ms para tener mas precisión
 		self._start = TimeToMS(dialogue[E_START])
 		self._end = TimeToMS(dialogue[E_END])
 		self._dur = self._end - self._start
@@ -327,7 +315,7 @@ class cDialogue(extra.cVector):
 		#Ponemos que efecto debe usar
 		self.efecto = min(max_effect, int(comun.SafeGetFloat(dialogue, E_EFFECT)))
 
-		#Cargamos las Syllables (esta funciÃ³n setea el _texto)
+		#Cargamos las Syllables (esta funciÃ³n setea el _text)
 		self.__SetSyllables( dialogue[E_TEXT] )
 		#El texto lo sabemos luego de parsear las Syllables
 		self.ChangeText(self._texto)

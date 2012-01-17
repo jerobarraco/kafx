@@ -34,7 +34,7 @@ class Kara(comun.Fx):
 		"""
 
 	def SilabasQueSalen(self, s, p):
-		"""Esta es la forma correcta!!! THIS IS CORRECT!
+		"""Esta esc la forma correcta!!! THIS IS CORRECT!
 		notar que le pusimos el "self" al principio,
 		porque esta funcion pertenece a la clase Tradu (por ende
 		recibe la instancia en self"""

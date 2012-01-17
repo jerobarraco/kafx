@@ -67,7 +67,7 @@ class FX1(comun.Fx):
 
 	def EnSilabaDorm(self, d):
 		#para el piguettae necesito que se pinten las muertas
-		#if d.original._capa>5: return
+		#if d.original._layer>5: return
 		d.PintarConCache()
 
 	def EnSilaba(self,d):
