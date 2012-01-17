@@ -24,7 +24,7 @@ class Efecto():
 
 	def OnSyllableSleep(self, sil):
 		sil.PaintWithCache()
-	def EnDialogoEntra(self, d):
+	def OnDDialogueEnters(self, d):
 		global t3
 		#d.MoverDe((0+(comun.Interpolate(d.progress, -40,0, comun.i_b_backstart))) ,(0))
 		mov = comun.Interpolate(d.progress,1380, 3480)#el fx parece dar toda la vuelta... o ya no?
@@ -59,7 +59,7 @@ class Evento1():
 					part.Paint()
 					world.Resize(part, comun.Interpolate(sil.progress, 0.1, 0.2))
 
-		def TiempoSilaba(self, sil):
+		def SyllableTime(self, sil):
                         return (sil._start, sil._end+500)
 
 
