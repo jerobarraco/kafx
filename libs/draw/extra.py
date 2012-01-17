@@ -234,7 +234,7 @@ class cVector():
 
 		self.original = asslib.cProperties(estilo)
 		self.actual = asslib.cProperties(estilo)
-		self._texto = ""
+		self._text = ""
 		self.pointsw = None
 
 		if figura :
@@ -252,7 +252,7 @@ class cVector():
 		es mejor llamar a _SetTextProps
 		"""
 		props = self.original
-		vert = ceil(props._alin/3.0) # 1=bottom, 2=mid, 3=top
+		vert = ceil(props._align/3.0) # 1=bottom, 2=mid, 3=top
 		if vert == 1 : #bottom
 			props.pos_y = video.vi.height - props._marginv #- props._descent
 		elif vert == 2: #middle
@@ -267,7 +267,7 @@ class cVector():
 		 1=bottom, 2=mid, 3=top
 		"""
 		props = self.original
-		horiz = props._alin % 3 #1 = left, 2 mid, 0 right
+		horiz = props._align % 3 #1 = left, 2 mid, 0 right
 
 		if horiz == 1:
 			props.pos_x = props._marginl
@@ -293,7 +293,7 @@ class cVector():
 		props = self.original
 		SetEstilo(props)
 
-		props._x_bearing, props._y_bearing, props._ancho, props._alto, props._x_advance, props._y_advance = ctx.text_extents(self._texto)
+		props._x_bearing, props._y_bearing, props._ancho, props._alto, props._x_advance, props._y_advance = ctx.text_extents(self._text)
 		props._ascent, props._descent, props._alto_linea, props._max_x_advance, props._max_y_advance = ctx.font_extents()
 
 		if lasts:
@@ -426,7 +426,7 @@ class cVector():
 		SetEstilo(self.original)
 		ctx = video.cf.ctx
 		ctx.new_path()
-		ctx.text_path(self._texto)
+		ctx.text_path(self._text)
 		self._old_path = self.path = ctx.copy_path()
 
 	def ChangeText(self, texto, last_pos=None):
@@ -436,7 +436,7 @@ class cVector():
 		para la recreacion del texto se usaran las propiedades almacenadas en ORIGINAL y se recalcularán todos los valores de posicion, etc
 		opcionales:
 		@last_pos=None tupla (x,y) con la posicion final de la silaba anterior (como lo devuelve esta misma funcion)"""
-		self._texto = texto
+		self._text = texto
 		last = self._SetTextProps(last_pos)
 		self._UpdateTextPath()
 		return last #por las dudas si a algun tarado se le ocurre cambiar silabas, proveemos esto tamb.
@@ -577,7 +577,7 @@ class cVector():
 		self.__to_path = self.__FlattenPathGroup( tgp)
 
 	def Morph(self, other):
-		if not self._texto : return
+		if not self._text : return
 		if not hasattr(self, "__from_path"):
 			self.__CreateDiffPath(other)
 
@@ -825,7 +825,7 @@ class cVector():
 		elif part == self.PART_SHADOW:
 			o.mode_shadow = a.mode_shadow = self.P_TEXTURA
 		elif part == self.PART_PARTICULA:
-			o.mode_particula = a.mode_particula = self.P_TEXTURA
+			o.mode_particle = a.mode_particle = self.P_TEXTURA
 
 	def MoverTextura(self, pos_x, pos_y, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=1, part=0):
 		self.texturas[part].set_matrix(CrearMatriz(pos_x, pos_y, org_x, org_y, angle, scale_x, scale_y, inversa=True))

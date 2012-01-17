@@ -30,9 +30,9 @@ s.Paint()
 ##creamos un estilo #no es indispensable
 #estilo = asslib.cPropiedades()
 #estilo._size = 80
-#estilo._fuente = "Verdana"
-#estilo._italica = True
-#estilo._alin = 5
+#estilo._font = "Verdana"
+#estilo._italic = True
+#estilo._align = 5
 ##creamos un vector
 #d = extra.cVector(texto="Hihi!", estilo=estilo)
 #d.Pintar()
