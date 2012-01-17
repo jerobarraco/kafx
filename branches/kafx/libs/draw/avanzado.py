@@ -152,7 +152,7 @@ OPERATORS = [
 #El tipo de operacion de pintado default es over
 paint_operator = cairo.OPERATOR_OVER
 
-def ModePainted(op=None):
+def PaintMode(op=None):
 	"""
 	Cambia el mode de pintado comun,
 	@op : opcional ha de ser un string con el nombre del mode de pintado tal cual esta en el array OPERATORS
@@ -648,7 +648,7 @@ class cParticleSystem():
 		#notar q hacemos referencia a AnimadorBase de la CLASE cParticula, no de una INSTANCIA, por lo q hay q poner explicitamente el primer parámetro
 		#con esto y la liena self.Animar(p) solucionamos problemas del "self" (q psicoloco q suena)
 
-	def Emitir(self):
+	def Emit(self):
 		"""Cuando se llama a esta función se le indica al sistema se emiten particulas
 		Cada vez que se llama, se crearán un máximo de "emitir_parts".
 		Se lo puede llamar varias veces en el mismo cuadro,
@@ -692,13 +692,13 @@ class cParticleSystem():
 					sc1=self.sc1, sc2=self.sc2, xg=e.xg, yg=e.yg, rotacion=self.anglei)
 				newparts+=1
 
-	def GivePosition(self, x, y):
+	def SetPosition(self, x, y):
 		"""Para cambiar la posicion del emisor
 		@x, y : Posición en pixels"""
 		self.emisor.x=x
 		self.emisor.y=y
 
-	def GiveAngle(self, angle, velocidad, apertura=0):
+	def SetAngle(self, angle, velocidad, apertura=0):
 		"""Para cambiar el angle de emision
 		@angle : el ángulo en radianes de la emisión
 		@velocidad : la velocidad de la emisión, en pixels por cuadro
@@ -708,7 +708,7 @@ class cParticleSystem():
 		e.vel = velocidad
 		e.mapertura = apertura/2.0
 
-	def GiveGravity(self, angle, velocidad ):
+	def SetGravity(self, angle, velocidad ):
 		"""para cambiar la gravedad del sistema de partículas
 		@angle : angulo en radianes de la gravedad
 		@velocidad : la velocidad de ACELEARCION de la gravedad en pixels por cuadro
@@ -720,7 +720,7 @@ class cParticleSystem():
 		#además como que la gravedad no cambia igual python es tan versatil ;)
 		#q si queres podes cambiarlo con part.emisor.xg=xxx
 
-	def DarVentana(self, ancho, alto):
+	def SetWindow(self, ancho, alto):
 		"""para cambiar la ventana de creacion de particulas
 		@ancho, alto : indican el tamaño de la ventana donde pueden aparecer
 		partículas
