@@ -16,6 +16,7 @@ colorb = extra.cCairoColor(0xFF0FBF2F)
 
 colorc = extra.cCairoColor(0xFFEEF7A7)
 
+#los colores son html con FF (alpha) adelante.
 class FX1():
 
         def OnDialogue(self, d):
