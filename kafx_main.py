@@ -367,7 +367,7 @@ def __PreLoadSyllables(diag):
 		if not evento: continue
 
 		ini = sil._end
-		end = sil._end + fx.sil_out_ms
+		end = sil._end + fx.syl_out_ms
 		dif = end - ini
 		__AddEvent(ini, end, dif, evento, sil)
 
@@ -376,7 +376,7 @@ def __PreLoadSyllables(diag):
 		evento = getattr(fs[sil.effect], "OnSyllableIn", None)
 		if not evento: continue
 
-		ini = sil._start - fx.sil_in_ms
+		ini = sil._start - fx.syl_in_ms
 		end = sil._start
 		dif = end-ini
 		__AddEvent(ini, end, dif, evento, sil)
