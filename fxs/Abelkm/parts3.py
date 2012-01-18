@@ -3,7 +3,7 @@ from libs import comun, physics, video
 from libs.draw import extra, avanzado
 
 from random import randint, random
-
+from math import pi, sin
 t = extra.CargarTextura("texturas/uq7.png")
 
 t3 = extra.CargarTextura('texturas/barra_gc.png') #entrada
@@ -56,7 +56,11 @@ class Evento1():
 			else:
 				for part in sil.parts[:]:
 					part.color.a = alpha
+					avanzado.StartGroup()
 					part.Paint()
+					avanzado.fGlow(2, 0.1+(sin(pi*sil.progress)/6.0))
+					avanzado.EndGroup()
+
 					world.Resize(part, comun.Interpolate(sil.progress, 0.1, 0.2))
 
 		def SyllableTime(self, sil):
