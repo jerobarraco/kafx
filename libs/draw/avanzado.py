@@ -689,35 +689,35 @@ class cParticleSystem():
 		self.emitter.x=x
 		self.emitter.y=y
 
-	def SetAngle(self, angle, velocidad, apertura=0):
+	def SetAngle(self, angle, speed, aperture=0):
 		"""Para cambiar el angle de emision
 		@angle : el ángulo en radianes de la emisión
-		@velocidad : la velocidad de la emisión, en pixels por cuadro
-		@apertura : angulo en radianes para el ángulo de apertura máxima de emisión"""
+		@speed : la speed de la emisión, en pixels por cuadro
+		@aperture : angulo en radianes para el ángulo de aperture máxima de emisión"""
 		e = self.emitter
 		e.angle = angle
-		e.vel = velocidad
-		e.mapertura = apertura/2.0
+		e.vel = speed
+		e.mapertura = aperture/2.0
 
-	def SetGravity(self, angle, velocidad ):
+	def SetGravity(self, angle, speed ):
 		"""para cambiar la gravedad del sistema de partículas
 		@angle : angulo en radianes de la gravedad
-		@velocidad : la velocidad de ACELEARCION de la gravedad en pixels por cuadro
+		@speed : la speed de ACELEARCION de la gravedad en pixels por cuadro
 		"""
-		self.emitter.xg = -cos(angle)*velocidad
-		self.emitter.yg = sin(angle)*velocidad
+		self.emitter.xg = -cos(angle)*speed
+		self.emitter.yg = sin(angle)*speed
 		#para la gravedad si lo guardamos como coordenada.
 		#porque no da para ir calculando el seno y eso cada cuadro,
 		#además como que la gravedad no cambia igual python es tan versatil ;)
 		#q si queres podes cambiarlo con part.emitter.xg=xxx
 
-	def SetWindow(self, ancho, alto):
+	def SetWindow(self, width, height):
 		"""para cambiar la ventana de creacion de particulas
-		@ancho, alto : indican el tamaño de la ventana donde pueden aparecer
+		@width, height : indican el tamaño de la ventana donde pueden aparecer
 		partículas
 		"""
-		self.emitter.mw = ancho/2.0
-		self.emitter.mh = alto/2.0
+		self.emitter.mw = width/2.0
+		self.emitter.mh = height/2.0
 
 	def Paint(self):
 		"""Cada vez que se llama a esta funcion se pintan todas las particulas vivas, se calcula su nueva posicion, y si estan vivas
@@ -751,11 +751,11 @@ class cParticleSystem():
 				#Este es el animador de la particula, puede ser uno personalizado
 				self.Animate(p)
 
-def CreateParticles(box, textura, scale=1.0, alpha_min=0.2, vertical=True, mode=0 ):
+def CreateParticles(box, texture, scale=1.0, alpha_min=0.2, vertical=True, mode=0 ):
 		"""Super Lento
 		parametros:
 		@box -> tupla con las coordenadas de donde buscar (x0, y0, ancho, alto) (todos los items DEBEN ser enteros (int)))
-		@textura -> pattern que se usará como textura
+		@texture -> pattern que se usará como texture
 		opcionales:
 		@scale=1.0 -> scale con la que se inicializarán todas las texturas
 		@alpha_min=0.2 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
@@ -831,7 +831,7 @@ def CreateParticles(box, textura, scale=1.0, alpha_min=0.2, vertical=True, mode=
 					c.g = g
 					c.b = b
 					#y creamos una "particula"
-					parts.append(cSprite(texture= textura, x=x+0.5, y=y+0.5, scale=scale, color=c, mode=mode))
+					parts.append(cSprite(texture= texture, x=x+0.5, y=y+0.5, scale=scale, color=c, mode=mode))
 				except:
 					import traceback
 					print "Error al crear las particulas", traceback.print_exc()
