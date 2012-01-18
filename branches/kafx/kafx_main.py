@@ -282,7 +282,7 @@ def __PreLoad():
 			enDialogo = getattr(evento, "OnDialogue", None)
 			if not enDialogo: continue
 
-			ini, end = evento.TiempoDialogo(diag)
+			ini, end = evento.DialogueTime(diag)
 			dif = end - ini
 			__AddEvent(ini, end, dif, enDialogo, diag)
 
@@ -401,7 +401,7 @@ def __PreLoadSyllables(diag):
 			if not enSilaba: continue
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios events extras en cada effect
-			ini, end = evento.TiempoSilaba(sil)
+			ini, end = evento.SyllableTime(sil)
 			dif = end - ini
 			__AddEvent(ini, end, dif, enSilaba, sil)
 
@@ -486,7 +486,7 @@ def __PreLoadLetters(sil):
 			if not enLetra: continue
 			#Calculamos la duracion de cada evento extra
 			#Notar que puede haber varios events extras en cada effect
-			ini, end = evento.TiempoLetra(letra)
+			ini, end = evento.LetterTime(letra)
 			dif = end - ini
 			__AddEvent(ini, end, dif, enLetra, letra)
 
