@@ -3,6 +3,7 @@ from PySide import QtGui
 import sys
 import subprocess as s
 import threading
+from PySide.QtCore import Qt
 
 class Encoder(threading.Thread):
     def __init__(self,*args,**kwargs):
@@ -11,26 +12,68 @@ class Encoder(threading.Thread):
     def run(self):
         print "Soy el thread"
 
+class videoOut(QtGui.QDialog):
+    def __init__(self):
+        super(videoOut,self).__init__()
+        self.initUI()
 
-class MainWindow(QtGui.QMainWindow):
+    def initUI(self):
+        hbox=QtGui.QHBoxLayout()
+        hbox1=QtGui.QHBoxLayout()
+        vbox=QtGui.QVBoxLayout()
+        title=QtGui.QLabel('Video Output Config')
+        widthLabel=QtGui.QLabel('Widht:',self)
+        heightLabel=QtGui.QLabel('Height: ',self)
+        widthEdit=QtGui.QLineEdit('',self)
+        close=QtGui.QPushButton('Close',self)
+        close.clicked.connect(self.close)
+        vbox.addWidget(title)
+        hbox1.addStretch(1)
+        hbox1.addWidget(widthLabel)
+        hbox1.addWidget(widthEdit)
+        vbox.addLayout(hbox1)
+        vbox.addWidget(widthLabel)
+        vbox.addWidget(heightLabel)
+        vbox.addWidget(close)
+        hbox.addLayout(vbox)
+        self.setLayout(hbox)
+        self.setWindowTitle("Out Video Settings")
+        self.setGeometry(100,150,100,150)
+        self.show()
+
+class MainWindow(QtGui.QWidget):
     def __init__(self):
         super(MainWindow,self).__init__()
         self.initUI()
 
     def initUI(self):
-        self.lb1=QtGui.QLabel()
-        self.lb2=QtGui.QLabel()
-        openVideoAction=QtGui.QAction(QtGui.QIcon('addVideo.png'),'Open Video',self,triggered=self.openVideo)
-        self.toolbar=self.addToolBar('Open Video')
-        self.toolbar.addAction(openVideoAction)
-        self.statusBar().showMessage('Ready')
-        self.setGeometry(300,300,300,300)
+        hbox=QtGui.QHBoxLayout()
+        vbox=QtGui.QVBoxLayout()
+        openViddeoButton=QtGui.QPushButton('Open Video',self)
+        openViddeoButton.clicked.connect(self.openVideo)
+        configVideoOutButton=QtGui.QPushButton('Config Video Output',self)
+        configVideoOutButton.clicked.connect(self.configVideoOut)
+        encodingButton=QtGui.QPushButton('Encode',self)
+        vbox.addWidget(encodingButton)
+        vbox.addWidget(openViddeoButton)
+        vbox.addWidget(configVideoOutButton)
+        hbox.addLayout(vbox)
+        self.setLayout(hbox)
+        vbox.addStretch(1)
+        hbox.addStretch(1)
         self.setWindowTitle("KickAssEffects 1.7")
+        self.setGeometry(300,300,300,300)
         self.show()
 
     def openVideo(self):
         a,b=QtGui.QFileDialog().getOpenFileName(self,self.tr('Open Video'),self.tr('~/'),self.tr('AVI files (*.*)'))
         self.getVideoInfo(a)
+
+    def configVideoOut(self):
+        #a,b=QtGui.QFileDialog().getOpenFileName(self,self.tr('Open Video'),self.tr('~/'),self.tr('AVI files (*.*)'))
+        #self.getVideoInfo(a)
+            vop=videoOut()
+            vop.exec_()
 
     def getVideoInfo(self,video):
         infop =s.Popen(['ffmpeg', '-i', video], stdout=s.PIPE, stderr=s.PIPE)
