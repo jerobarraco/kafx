@@ -89,8 +89,8 @@ class World():
 
 		x = a.pos_x+a.org_x
 		y = a.pos_y+a.org_y
-		w = vector.original._ancho /2.0
-		h = vector.original._alto /2.0
+		w = vector.original._width /2.0
+		h = vector.original._height /2.0
 		vector.shape = self.CreateBody( x, y, w, h, a.angle, dynamic, square)
 		self.vectors.append(vector)
 
@@ -98,8 +98,8 @@ class World():
 		sprite._type = 1
 		x= sprite.x+sprite.org_x
 		y= sprite.y+sprite.org_y
-		w= sprite._ancho*(1.0/sprite.scale_x) /2.0
-		h= sprite._alto*(1.0/sprite.scale_y) /2.0
+		w= sprite._width*(1.0/sprite.scale_x) /2.0
+		h= sprite._height*(1.0/sprite.scale_y) /2.0
 
 		sprite.shape = self.CreateBody(x, y, w, h, sprite.angle, dynamic, square)
 		sprite.shape.shape_type = 0
@@ -129,11 +129,11 @@ class World():
 		#recreate the shape
 		if obj._type == 0: #si es un vector
 			obj.actual.scale_x = obj.actual.scale_y = scale
-			w = obj.original._ancho * scale
-			h = obj.original._alto * scale
+			w = obj.original._width * scale
+			h = obj.original._height * scale
 		else:
 			obj.Scale(scale, scale)
-			w=h= (obj._ancho*scale)/2.0
+			w=h= (obj._width*scale)/2.0
 
 		obj.shape = self.__createShape(body, w, h, square)
 		obj.shape._dynamic = dynamic

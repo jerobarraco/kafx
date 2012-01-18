@@ -12,11 +12,11 @@ t3 = extra.CargarTextura('texturas/barra_gc.png') #entrada
 world = None
 class Efecto():
 	def __init__(self):
-		self.eventos = [Evento1()]
+		self.events = [Evento1()]
 	def OnSyllableStarts(self, sil):
 		global t
 		#sil.actual.color1.CopyFrom(sil.actual.color2)
-  		sil.parts = sil.CrearParticulas(t, escala=0.1,alpha_min=0.4)
+		sil.parts = sil.CrearParticulas(t, escala=0.1,alpha_min=0.4)
 		sil.crear = True
 		x = sil.actual.pos_x+ sil.actual.org_x
 		y = sil.actual.pos_y + sil.actual.org_y
@@ -24,7 +24,7 @@ class Efecto():
 
 	def OnSyllableSleep(self, sil):
 		sil.PaintWithCache()
-	def OnDialogueEnters(self, d):
+	def OnDialogueIn(self, d):
 		global t3
 		#d.MoverDe((0+(comun.Interpolate(d.progress, -40,0, comun.i_b_backstart))) ,(0))
 		mov = comun.Interpolate(d.progress,1380, 3480)#el fx parece dar toda la vuelta... o ya no?
@@ -60,7 +60,7 @@ class Evento1():
 					world.Resize(part, comun.Interpolate(sil.progress, 0.1, 0.2))
 
 		def SyllableTime(self, sil):
-                        return (sil._start, sil._end+500)
+			return (sil._start, sil._end+500)
 
 
 
