@@ -8,7 +8,7 @@ class ef1(comun.Fx):
 	def __init__(self):
 		#cuando inicie el effect
 		#creamos un sistema de particulas, con un color definido
-		p = avanzado.cParticleSystem(png="texturas/sakura.png", emit_parts=3,
+		p = avanzado.cParticleSystem(png="textures/sakura.png", emit_parts=3,
 			color=extra.cCairoColor(0xFFFF0000))
 		#Le ponemos un angulo para que salgan las particulas
 		p.DarAngulo(5, 2, 0)
@@ -29,23 +29,23 @@ class ef1(comun.Fx):
 		
 	def EnDialogo(self, diag):
 		#Al mostrar el dialogo, lo vamos haciendo un fadein
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		diag.Pintar()
 
 	def EnDialogoSale(self, d):
 		#Mientras el dialogo se va, Fade out y pintamos
-		d.Desvanecer(1, 0)
+		d.Fade(1, 0)
 		d.Pintar()
 
 	def EnSilabaSale(self, d):
 		#Cuando la silaba termina su accion
-		d.Desvanecer(1, 0)
+		d.Fade(1, 0)
 		d.Pintar()
 
 	def EnSilaba(self, d):
 		#Cuando la silaba esta active
 		#fadeout
-		d.Desvanecer(0, 1)
+		d.Fade(0, 1)
 
 		#creamos un grupo
 		avanzado.StartGroup()
@@ -79,18 +79,18 @@ class ef2(comun.Fx):
 		d.original.modo_relleno = d.P_DEG_VERT
 
 	def EnDialogo(self, d):
-		d.Desvanecer(0, 1)
+		d.Fade(0, 1)
 		d.Pintar()
 
 	def EnSilabaInicia(self, d):
 		d.original.modo_relleno = d.P_DEG_VERT
 
 	def EnSilabaSale(self, d):
-		d.Desvanecer(1, 0)
+		d.Fade(1, 0)
 		d.Pintar()
 
 	def EnSilaba(self, d):
-		d.Desvanecer(0, 1)
+		d.Fade(0, 1)
 		avanzado.StartGroup()
 		d.Pintar()
 
@@ -103,7 +103,7 @@ class ef2(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, d):
-		d.Desvanecer(1, 0)
+		d.Fade(1, 0)
 		d.Pintar()
 
 class FxsGroup(comun.FxsGroup):

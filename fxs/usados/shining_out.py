@@ -27,15 +27,15 @@ class FX1(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
-		diag.MoverA(-3, 0)
-		diag.Desvanecer(1, 0)
+		diag.MoveTo(-3, 0)
+		diag.Fade(1, 0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
@@ -45,7 +45,7 @@ class FX1(comun.Fx):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 1, 0.6)
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 1, 1)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
@@ -68,15 +68,15 @@ class FX2(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
-		diag.MoverA(-3,0)
-		diag.Desvanecer(1, 0)
+		diag.MoveTo(-3,0)
+		diag.Fade(1, 0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
@@ -86,7 +86,7 @@ class FX2(comun.Fx):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 1, 0.6)
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 1, 1)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
@@ -109,7 +109,7 @@ class FX3(comun.Fx):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 0.8, 1)
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 0.9, 1)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
-		diag.Sacudir(2)
+		diag.Shake(2)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(1, 0.08*diag.progreso)
@@ -117,15 +117,15 @@ class FX3(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
-		diag.MoverA(-3,0)
-		diag.Desvanecer(1, 0)
+		diag.MoveTo(-3,0)
+		diag.Fade(1, 0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
@@ -135,8 +135,8 @@ class FX3(comun.Fx):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 1, 0.6)
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 1, 1)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
-		diag.Desvanecer(1, 0)
-		diag.Sacudir(2)
+		diag.Fade(1, 0)
+		diag.Shake(2)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
@@ -152,7 +152,7 @@ class FX4(comun.Fx):
 
 	def __init__(self):
 		self.audio  = audio.BPM("test.bpm")
-		self.parts = avanzado.cParticleSystem(png="texturas/star3.png",
+		self.parts = avanzado.cParticleSystem(png="textures/star3.png",
 			color=extra.cCairoColor(0xFFBCD8EA))
 		self.parts.DarVentana(3, 3)
 		self.parts.DarAngulo(pi, 3, pi)
@@ -168,15 +168,15 @@ class FX4(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
-		diag.MoverA(-3, 0)
-		diag.Desvanecer(1, 0)
+		diag.MoveTo(-3, 0)
+		diag.Fade(1, 0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
@@ -188,7 +188,7 @@ class FX4(comun.Fx):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 1, 0.6)
 		diag.actual.color1.g = comun.Interpolar(diag.progreso, 1, 1)
 		diag.actual.color1.b = comun.Interpolar(diag.progreso, 1, 1)
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(1,self.audio.RevBPM()/5.0)
@@ -211,11 +211,11 @@ class FX5(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
-		diag.Desvanecer(1,0)
+		diag.Fade(1,0)
 		diag.Pintar()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0,1)
+		diag.Fade(0,1)
 		diag.Pintar()
 
 
@@ -237,15 +237,15 @@ class FX6(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
-		diag.MoverA(-3, 0)
-		diag.Desvanecer(1, 0)
+		diag.MoveTo(-3, 0)
+		diag.Fade(1, 0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
@@ -255,7 +255,7 @@ class FX6(comun.Fx):
 		diag.actual.color1.r = comun.Interpolar(diag.progreso, 1, 0.6)
 		diag.actual.color1.g = 1
 		diag.actual.color1.b = 1
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)

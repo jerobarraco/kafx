@@ -74,13 +74,13 @@ class Roman(comun.Fx):
 		a.modo_relleno =  s.P_TEXTURA
 		#y llamamos al EnDialogo que carga la textura y pinta
 		#Cargamos la textura global en la textura local
-		#s.texturas[s.PART_BORDE] = pat
+		#s.textures[s.PART_BORDE] = pat
 		s.texturas[s.PART_RELLENO] = pat
-		#s.texturas[s.PART_SOMBRA] = pat
+		#s.textures[s.PART_SOMBRA] = pat
 		#ver aclaracion en EnDialogo
-		#s.MoverTextura(-s.actual.pos_x, -s.actual.pos_y, parte = s.PART_BORDE)
-		s.MoverTextura(-s.actual.pos_x, -s.actual.pos_y+s.original._y_bearing, parte = s.PART_RELLENO)
-		#s.MoverTextura(-s.actual.pos_x, -s.actual.pos_y, parte = s.PART_SOMBRA)
+		#s.MoveTexture(-s.actual.pos_x, -s.actual.pos_y, parte = s.PART_BORDE)
+		s.MoveTexture(-s.actual.pos_x, -s.actual.pos_y+s.original._y_bearing, parte = s.PART_RELLENO)
+		#s.MoveTexture(-s.actual.pos_x, -s.actual.pos_y, parte = s.PART_SOMBRA)
 		#Y pintamos todo
 		s.Pintar()
 
@@ -90,7 +90,7 @@ class Roman(comun.Fx):
 		diag.texturas[diag.PART_RELLENO] = pat
 		#No hay que olvidarse que la textura depende del punto de origen del texto
 		#o sea el baseline (pos_x, pos_y) (la textura se mueve con el texto)
-		diag.MoverTextura(-diag.actual.pos_x, -diag.actual.pos_y+diag.original._y_bearing, parte = diag.PART_RELLENO)
+		diag.MoveTexture(-diag.actual.pos_x, -diag.actual.pos_y+diag.original._y_bearing, parte = diag.PART_RELLENO)
 		#Y pintamos todo
 		diag.Pintar()
 		#con la nueva forma de pintado usar una textura aleatoria para pintar una parte del texto
@@ -98,23 +98,23 @@ class Roman(comun.Fx):
 
 	def EnDialogoEntra(self, s):
 		global pat
-		s.Desvanecer(0, 1)
-		s.MoverDe(10, 0)
+		s.Fade(0, 1)
+		s.MoveFrom(10, 0)
 		#Cargamos la textura global en la textura local
 		s.texturas[s.PART_RELLENO] = pat
 		#ver aclaracion en EnDialogo
-		s.MoverTextura(-s.actual.pos_x, -s.actual.pos_y, parte = s.PART_RELLENO)
+		s.MoveTexture(-s.actual.pos_x, -s.actual.pos_y, parte = s.PART_RELLENO)
 		#Y pintamos todo
 		s.Pintar()
 
 	def EnDialogoSale(self, s):
 		global pat
-		s.Desvanecer(1, 0)
-		s.MoverA(-10, 0)
+		s.Fade(1, 0)
+		s.MoveTo(-10, 0)
 		#Cargamos la textura global en la textura local
 		s.texturas[s.PART_RELLENO] = pat
 		#ver aclaracion en EnDialogo
-		s.MoverTextura(-s.actual.pos_x, -s.actual.pos_y, parte = s.PART_RELLENO)
+		s.MoveTexture(-s.actual.pos_x, -s.actual.pos_y, parte = s.PART_RELLENO)
 		#Y pintamos todo
 		s.Pintar()
 
@@ -131,16 +131,16 @@ class tradu(comun.Fx):
 	#el glow lo hago por pintada, lo qu lo hace mas lento de lo normal, pero pasa q si uso un glow a nivel general
 	#haria glow sobre el romanji y el effect se cagaria.
 	def EnDialogoEntra(self, s):
-		s.Desvanecer(0,1)
-		s.MoverDe(10,0)
+		s.Fade(0,1)
+		s.MoveFrom(10,0)
 		avanzado.StartGroup()
 		s.Pintar()
 		avanzado.fGlow()
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, s):
-		s.Desvanecer(1,0)
-		s.MoverA(-10,0)
+		s.Fade(1,0)
+		s.MoveTo(-10,0)
 		avanzado.StartGroup()
 		s.Pintar()
 		avanzado.fGlow()

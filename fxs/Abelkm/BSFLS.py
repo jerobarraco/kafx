@@ -15,7 +15,7 @@ class FX1(comun.Fx):
 	def EnDialogo(self, d):
 		global pat
 		d.texturas[d.PART_RELLENO] = pat
-		d.MoverTextura(-d.actual.pos_x, -d.actual.pos_y+d.original._y_bearing, parte = d.PART_RELLENO)
+		d.MoveTexture(-d.actual.pos_x, -d.actual.pos_y+d.original._y_bearing, parte = d.PART_RELLENO)
 		avanzado.ModoPintado('color_burn')
 
 		avanzado.StartGroup()
@@ -26,18 +26,18 @@ class FX1(comun.Fx):
 
 	def EnDialogoEntra(self, d):
 		global pat
-		d.Desvanecer(0, 1)
-		d.MoverDe(-30, 0, comun.i_b_backstart)
+		d.Fade(0, 1)
+		d.MoveFrom(-30, 0, comun.i_b_backstart)
 		d.texturas[d.PART_RELLENO] = pat
-		d.MoverTextura(-d.actual.pos_x, -d.actual.pos_y, parte = d.PART_RELLENO)
+		d.MoveTexture(-d.actual.pos_x, -d.actual.pos_y, parte = d.PART_RELLENO)
 		d.Pintar()
 
 	def EnDialogoSale(self, d):
 		global pat
-		d.Desvanecer(1, 0)
-		d.MoverA(30, 0, comun.i_b_backstart)
+		d.Fade(1, 0)
+		d.MoveTo(30, 0, comun.i_b_backstart)
 		d.texturas[d.PART_RELLENO] = pat
-		d.MoverTextura(-d.actual.pos_x, -d.actual.pos_y, parte = d.PART_RELLENO)
+		d.MoveTexture(-d.actual.pos_x, -d.actual.pos_y, parte = d.PART_RELLENO)
 		d.Pintar()
 
 
@@ -58,12 +58,12 @@ class FX2(comun.Fx):
 
 	def EnDialogoEntra(self, d):
 		d.actual.color3.a = comun.Interpolar(d.progreso, 0, 1)
-		d.MoverDe(-30, 0, comun.i_b_backstart)
+		d.MoveFrom(-30, 0, comun.i_b_backstart)
 		d.Pintar()
 
 	def EnDialogoSale(self, d):
 		d.actual.color3.a = comun.Interpolar(d.progreso, 1, 0)
-		d.MoverA(30, 0, comun.i_b_backstart)
+		d.MoveTo(30, 0, comun.i_b_backstart)
 		d.Pintar()
 
 

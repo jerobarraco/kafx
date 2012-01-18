@@ -41,7 +41,7 @@ Agregado
 		Modos de pintura para borde, relleno y sombra
 		Funciones
 			PintarConCache, PintarReferencia, Deformar, Box, Scale,
-			CargarTextura, MoverTextura, Crear Particulas
+			LoadTexture, MoveTexture, Crear Particulas
 		Deformacion
 		Propiedad indice
 		Desplazamiento de sombra

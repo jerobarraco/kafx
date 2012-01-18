@@ -24,7 +24,7 @@ class FX1(comun.Fx):
 	def EnDialogoEntra(self, diag):
 		#Cuando el dialogo entre
 		#Hacemos un fade-in
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		#Creamos un grupo
 		avanzado.StartGroup()
 		#Pintamos el dialogo
@@ -37,9 +37,9 @@ class FX1(comun.Fx):
 	def EnDialogoSale(self, diag):
 		#Cuando el dialogo sale
 		#Lo movemos 3 pixels a la izq
-		diag.MoverA(-3, 0)
+		diag.MoveTo(-3, 0)
 		#Hacemos un fade-out
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		#Grupo-Pintamos-Blur-Cerramos
 		avanzado.StartGroup()
 		diag.Pintar()
@@ -49,7 +49,7 @@ class FX1(comun.Fx):
 	def EnSilaba(self, diag):
 		#Cuando se muestre la silaba
 		#Hacemos un fade out
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		#Grupo-Pintamos-Glow-Cerramos
 		avanzado.StartGroup()
 		diag.Pintar()
@@ -69,15 +69,15 @@ class FX2(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0,1)
+		diag.Fade(0,1)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
-		diag.MoverA(-3,0)
-		diag.Desvanecer(1,0)
+		diag.MoveTo(-3,0)
+		diag.Fade(1,0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
@@ -87,7 +87,7 @@ class FX2(comun.Fx):
 		diag.actual.color1.r = 0.8
 		diag.actual.color1.g = 0.6
 		diag.actual.color1.b = 0.5
-		diag.Desvanecer(1,0)
+		diag.Fade(1,0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
@@ -106,14 +106,14 @@ class FX3(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(1,0)
+		diag.Fade(1,0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
-		diag.MoverA(-3,0)
+		diag.MoveTo(-3,0)
 		diag.Devanecer(1,0)
 		avanzado.StartGroup()
 		diag.Pintar()
@@ -124,7 +124,7 @@ class FX3(comun.Fx):
 		diag.actual.color1.r = 0.9
 		diag.actual.color1.g = 0.7
 		diag.actual.color1.b = 0.5
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fGlow(5, 0.08*diag.progreso)
@@ -140,15 +140,15 @@ class FX4(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0.0, 1.0)
+		diag.Fade(0.0, 1.0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
-		diag.MoverA(-3, 0)
-		diag.Desvanecer(1.0, 0.0)
+		diag.MoveTo(-3, 0)
+		diag.Fade(1.0, 0.0)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBlur(5, 0.08*diag.progreso)

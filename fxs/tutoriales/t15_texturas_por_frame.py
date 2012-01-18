@@ -11,9 +11,9 @@ import random, cairo
 from math import pi, sin, cos
 
 
-textura1 = extra.CargarTextura('texturas/blanco3.png', extend=cairo.EXTEND_REFLECT)
-textura2 = extra.CargarTextura('texturas/violeta1.png', extend=cairo.EXTEND_REFLECT)
-textura3 = extra.CargarTextura('texturas/azul3.png', extend=cairo.EXTEND_REFLECT)
+textura1 = extra.LoadTexture('textures/blanco3.png', extend=cairo.EXTEND_REFLECT)
+textura2 = extra.LoadTexture('textures/violeta1.png', extend=cairo.EXTEND_REFLECT)
+textura3 = extra.LoadTexture('textures/azul3.png', extend=cairo.EXTEND_REFLECT)
 
 
 

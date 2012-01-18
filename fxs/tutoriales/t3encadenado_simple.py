@@ -14,7 +14,7 @@ class FX1(comun.Fx):
 
 	    #acá se ponen todos los efectos de la entrada del diálogo
 			s.progreso = p
-			s.Desvanecer(0, 1)
+			s.Fade(0, 1)
 			s.Pintar()
 
 	def EnDialogoEntra(self, d):
@@ -26,7 +26,7 @@ class FX1(comun.Fx):
 	def DialogoQueSale(self, s, p):
 			#lo mismo que antes, efectos
 			s.progreso = p
-			s.Desvanecer(1, 0)
+			s.Fade(1, 0)
 			s.Pintar()
 
 	def EnDialogoSale(self, d):

@@ -28,7 +28,7 @@ class FX1(comun.Fx):
 
 
 	def EnDialogoEntra(self, di):
-		di.Desvanecer(0, 1)
+		di.Fade(0, 1)
 		di.actual.modo_relleno = di.P_DEG_VERT
 		avanzado.StartGroup()
 		di.actual.scale_y = (1.5)+(sin(pi*di.progreso))
@@ -37,7 +37,7 @@ class FX1(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, di):
-		di.Desvanecer(1, 0)
+		di.Fade(1, 0)
 		di.actual.modo_relleno = di.P_DEG_VERT
 		di.actual.color1.CopiarDe(di.actual.color3)
 		di.actual.scale_y  = 1+di.progreso
@@ -69,7 +69,7 @@ class FX2(comun.Fx):
 
 
 	def EnDialogoEntra(self, di):
-		di.Desvanecer(0, 1)
+		di.Fade(0, 1)
 		di.actual.modo_relleno = di.P_DEG_VERT
 		avanzado.StartGroup()
 		di.actual.scale_y = (1.5)+(sin(pi*di.progreso))
@@ -78,7 +78,7 @@ class FX2(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, di):
-		di.Desvanecer(1, 0)
+		di.Fade(1, 0)
 		di.actual.modo_relleno = di.P_DEG_VERT
 		di.actual.color1.CopiarDe(di.actual.color3)
 		di.actual.scale_y  = 1+di.progreso

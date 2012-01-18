@@ -5,9 +5,9 @@ from OpenGL.GLUT import *
 from OpenGL.GL import *
 from random import randint, random
 
-t = extra.CargarTextura("texturas/uq7.png")
+t = extra.LoadTexture("textures/uq7.png")
 
-t3 = extra.CargarTextura('texturas/barra_gc.png') #entrada
+t3 = extra.LoadTexture('textures/barra_gc.png') #entrada
 
 #If you use physics in only one effect you can assign to "self" in that effect, that would make it slightly faster
 world = None
@@ -17,7 +17,7 @@ class Efecto():
 	def OnSyllableStarts(self, sil):
 		global t
 		#sil.actual.color1.CopyFrom(sil.actual.color2)
-		sil.parts = sil.CrearParticulas(t, escala=0.1,alpha_min=0.4)
+		sil.parts = sil.CreateParticles(t, scale=0.1,alpha_min=0.4)
 		sil.crear = True
 		x = sil.actual.pos_x+ sil.actual.org_x
 		y = sil.actual.pos_y + sil.actual.org_y
@@ -27,7 +27,7 @@ class Efecto():
 		sil.PaintWithCache()
 	def OnDialogueIn(self, d):
 		global t3
-		#d.MoverDe((0+(comun.Interpolate(d.progress, -40,0, comun.i_b_backstart))) ,(0))
+		#d.MoveFrom((0+(comun.Interpolate(d.progress, -40,0, comun.i_b_backstart))) ,(0))
 		mov = comun.Interpolate(d.progress,1380, 3480)#el fx parece dar toda la vuelta... o ya no?
 		extra.MoveTexture(t3, mov, 50)
 		avanzado.StartGroup()

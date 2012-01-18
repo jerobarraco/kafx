@@ -4,7 +4,7 @@ from libs import comun
 
 class EfectoGenerico(comun.Fx):
 	def EnDialogoInicia(self, diag):
-		diag.CargarTextura("texturas/cloud3.png", diag.PART_RELLENO)
+		diag.LoadTexture("textures/cloud3.png", diag.PART_RELLENO)
 		diag.original.modo_relleno = diag.P_PATRON_COLOREADO
 
 	def EnDialogo(self, diag):

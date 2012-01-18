@@ -15,7 +15,7 @@ class FxsGroup(comun.FxsGroup):
 		self.saltar_cuadros = False
 		self.syl_in_ms = 400
 		self.syl_out_ms = 400
-		self.psys =  avanzado.cParticleSystem(png="texturas/star2.png",
+		self.psys =  avanzado.cParticleSystem(png="textures/star2.png",
 		max_life=2, max_parts=2000, emit_parts=1, scale_from= 0.4, scale_to=1, modo=1, rotation=0)
 		self.psys.DarAngulo(2*pi, 0.5, 2*pi)
 		self.psys.DarVentana(2, 2)

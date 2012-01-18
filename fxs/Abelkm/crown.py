@@ -2,7 +2,7 @@
 from libs import comun, physics
 from libs.draw import extra
 
-t1 = extra.CargarTextura("texturas/spark3.png")
+t1 = extra.LoadTexture("textures/spark3.png")
 
 class Efecto():
 	def __init__(self):
@@ -10,7 +10,7 @@ class Efecto():
 		self.objs = []
 
 	def EnSilabaInicia(self, sil):
-		parts = sil.CrearParticulas(t1, escala=0.001 )
+		parts = sil.CreateParticles(t1, scale=0.001 )
 		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 3) ] #tomamos 1 cada 100 parts
 		sil.moving = False
 

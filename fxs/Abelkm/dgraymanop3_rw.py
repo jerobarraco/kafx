@@ -11,14 +11,14 @@ from libs.draw import avanzado, extra
 import random, cairo
 from math import pi, sin, cos
 
-fondo = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/metal3.png', extend=cairo.EXTEND_REFLECT)
-textura0 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/ror1.png', extend=cairo.EXTEND_REFLECT)
-textura1 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/celeste1.png', extend=cairo.EXTEND_REFLECT)
-textura2 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/rojo2.png', extend=cairo.EXTEND_REFLECT)
-textura3 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/blanco3.png', extend=cairo.EXTEND_REFLECT)
-textura4 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/violeta1.png', extend=cairo.EXTEND_REFLECT)
-textura5 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/amarillo1.png', extend=cairo.EXTEND_REFLECT)
-textura6 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/azul3.png', extend=cairo.EXTEND_REFLECT)
+fondo = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/metal3.png', extend=cairo.EXTEND_REFLECT)
+textura0 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/ror1.png', extend=cairo.EXTEND_REFLECT)
+textura1 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/celeste1.png', extend=cairo.EXTEND_REFLECT)
+textura2 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/rojo2.png', extend=cairo.EXTEND_REFLECT)
+textura3 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/blanco3.png', extend=cairo.EXTEND_REFLECT)
+textura4 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/violeta1.png', extend=cairo.EXTEND_REFLECT)
+textura5 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/amarillo1.png', extend=cairo.EXTEND_REFLECT)
+textura6 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/azul3.png', extend=cairo.EXTEND_REFLECT)
 
 
 
@@ -37,8 +37,8 @@ class FX1(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.MoverDe(0, -10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, -10, comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -62,8 +62,8 @@ class FX1(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura0
-		d.Desvanecer(1,0)
-		d.MoverA(0, -10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, -10, comun.i_accel)
 		mitextura = textura0
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -85,8 +85,8 @@ class FX2(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.MoverDe(0, -10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, -10, comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -110,8 +110,8 @@ class FX2(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura1
-		d.Desvanecer(1,0)
-		d.MoverA(0, -10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, -10, comun.i_accel)
 		mitextura = textura1
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -132,8 +132,8 @@ class FX3(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.MoverDe(0, -10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, -10, comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -157,8 +157,8 @@ class FX3(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura2
-		d.Desvanecer(1,0)
-		d.MoverA(0, -10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, -10, comun.i_accel)
 		mitextura = textura2
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -179,8 +179,8 @@ class FX4(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.MoverDe(0, -10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, -10, comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -204,8 +204,8 @@ class FX4(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura3
-		d.Desvanecer(1,0)
-		d.MoverA(0, -10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, -10, comun.i_accel)
 		mitextura = textura3
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -227,8 +227,8 @@ class FX5(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.MoverDe(0, -10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, -10, comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -252,8 +252,8 @@ class FX5(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura4
-		d.Desvanecer(1,0)
-		d.MoverA(0, -10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, -10, comun.i_accel)
 		mitextura = textura4
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -274,8 +274,8 @@ class FX6(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.MoverDe(0, -10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, -10, comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -299,8 +299,8 @@ class FX6(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura5
-		d.Desvanecer(1,0)
-		d.MoverA(0, -10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, -10, comun.i_accel)
 		mitextura = textura5
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -321,8 +321,8 @@ class FX7(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.MoverDe(0, -10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, -10, comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -348,8 +348,8 @@ class FX7(comun.Fx):
 		global textura6, textura5
 		mitextura = comun.ElegirPorCuadro(1202,1271,textura5, textura6)
 		d.texturas[d.PART_RELLENO] = mitextura
-		d.Desvanecer(1,0)
-		d.MoverA(0, -10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, -10, comun.i_accel)
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.Pintar()
@@ -369,8 +369,8 @@ class FX8(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.MoverDe(0, -10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, -10, comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -396,8 +396,8 @@ class FX8(comun.Fx):
 		global textura3, textura4
 		mitextura = comun.ElegirPorCuadro(1502,1561,textura3, textura4)
 		d.texturas[d.PART_RELLENO] = mitextura
-		d.Desvanecer(1,0)
-		d.MoverA(0, -10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, -10, comun.i_accel)
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.Pintar()
@@ -417,8 +417,8 @@ class FX9(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.MoverDe(0, -10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, -10, comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -444,8 +444,8 @@ class FX9(comun.Fx):
 		global textura3, textura4
 		mitextura = comun.ElegirPorCuadro(1630,1704,textura4, textura3)
 		d.texturas[d.PART_RELLENO] = mitextura
-		d.Desvanecer(1,0)
-		d.MoverA(0, -10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, -10, comun.i_accel)
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.Pintar()
@@ -468,9 +468,9 @@ class FX10(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
+		d.Fade(0,1)
 		d.actual.pos_x = -100
-		d.Mover((-110, 214), (-100, 214), comun.i_accel)
+		d.Move((-110, 214), (-100, 214), comun.i_accel)
 
 		d.Pintar()
 
@@ -497,8 +497,8 @@ class FX10(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura0
-		d.Desvanecer(1,0)
-		d.Mover((-100, 214), (-110, 214), comun.i_accel)
+		d.Fade(1,0)
+		d.Move((-100, 214), (-110, 214), comun.i_accel)
 		mitextura = textura0
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -521,8 +521,8 @@ class FX11(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover((-90, 214), (-80, 214), comun.i_accel)
+		d.Fade(0,1)
+		d.Move((-90, 214), (-80, 214), comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -548,8 +548,8 @@ class FX11(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura1
-		d.Desvanecer(1,0)
-		d.Mover((-80, 214), (-90, 214),  comun.i_accel)
+		d.Fade(1,0)
+		d.Move((-80, 214), (-90, 214),  comun.i_accel)
 		mitextura = textura1
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -572,8 +572,8 @@ class FX11b(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover((-140, 214), (-130, 214), comun.i_accel)
+		d.Fade(0,1)
+		d.Move((-140, 214), (-130, 214), comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -599,8 +599,8 @@ class FX11b(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura1
-		d.Desvanecer(1,0)
-		d.Mover((-130, 214), (-140, 214),  comun.i_accel)
+		d.Fade(1,0)
+		d.Move((-130, 214), (-140, 214),  comun.i_accel)
 		mitextura = textura1
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -623,8 +623,8 @@ class FX12(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover((-150, 214), (-139.5, 214), comun.i_accel)
+		d.Fade(0,1)
+		d.Move((-150, 214), (-139.5, 214), comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -650,8 +650,8 @@ class FX12(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura2
-		d.Desvanecer(1,0)
-		d.Mover((-139.5, 214), (-150, 214),  comun.i_accel)
+		d.Fade(1,0)
+		d.Move((-139.5, 214), (-150, 214),  comun.i_accel)
 		mitextura = textura2
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -673,8 +673,8 @@ class FX13(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover((-110, 214), (-100, 214), comun.i_accel)
+		d.Fade(0,1)
+		d.Move((-110, 214), (-100, 214), comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -700,8 +700,8 @@ class FX13(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura3
-		d.Desvanecer(1,0)
-		d.Mover((-100, 214), (-110, 214),  comun.i_accel)
+		d.Fade(1,0)
+		d.Move((-100, 214), (-110, 214),  comun.i_accel)
 		mitextura = textura3
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -723,8 +723,8 @@ class FX13b(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover((-114, 214), (-104, 214), comun.i_accel)
+		d.Fade(0,1)
+		d.Move((-114, 214), (-104, 214), comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -750,8 +750,8 @@ class FX13b(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura3
-		d.Desvanecer(1,0)
-		d.Mover((-104, 214),(-114, 214), comun.i_accel)
+		d.Fade(1,0)
+		d.Move((-104, 214),(-114, 214), comun.i_accel)
 		mitextura = textura3
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -773,8 +773,8 @@ class FX14(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover((-149, 214), (-139, 214), comun.i_accel)
+		d.Fade(0,1)
+		d.Move((-149, 214), (-139, 214), comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -800,8 +800,8 @@ class FX14(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura4
-		d.Desvanecer(1,0)
-		d.Mover( (-139, 214), (-149, 214), comun.i_accel)
+		d.Fade(1,0)
+		d.Move( (-139, 214), (-149, 214), comun.i_accel)
 		mitextura = textura4
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -823,8 +823,8 @@ class FX15(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover( (-74, 214), (-64, 214), comun.i_accel)
+		d.Fade(0,1)
+		d.Move( (-74, 214), (-64, 214), comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -850,8 +850,8 @@ class FX15(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura5
-		d.Desvanecer(1,0)
-		d.Mover((-64, 214),  (-74, 214), comun.i_accel)
+		d.Fade(1,0)
+		d.Move((-64, 214),  (-74, 214), comun.i_accel)
 		mitextura = textura5
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -872,8 +872,8 @@ class FX15b(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover((-44, 214),  (-34, 214), comun.i_accel)
+		d.Fade(0,1)
+		d.Move((-44, 214),  (-34, 214), comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -899,8 +899,8 @@ class FX15b(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura5
-		d.Desvanecer(1,0)
-		d.Mover( (-34, 214), (-44, 214), comun.i_accel)
+		d.Fade(1,0)
+		d.Move( (-34, 214), (-44, 214), comun.i_accel)
 		mitextura = textura5
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -922,8 +922,8 @@ class FX15c(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover( (-110, 214), (-100, 214), comun.i_accel)
+		d.Fade(0,1)
+		d.Move( (-110, 214), (-100, 214), comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -949,8 +949,8 @@ class FX15c(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura5
-		d.Desvanecer(1,0)
-		d.Mover((-100, 214), (-110, 214),  comun.i_accel)
+		d.Fade(1,0)
+		d.Move((-100, 214), (-110, 214),  comun.i_accel)
 		mitextura = textura5
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -972,8 +972,8 @@ class FX16(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover((-80, 214), (-70, 214),  comun.i_accel)
+		d.Fade(0,1)
+		d.Move((-80, 214), (-70, 214),  comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -1001,8 +1001,8 @@ class FX16(comun.Fx):
 		global textura6, textura5
 		mitextura = comun.ElegirPorCuadro(1202,1271,textura5, textura6)
 		d.texturas[d.PART_RELLENO] = mitextura
-		d.Desvanecer(1,0)
-		d.Mover( (-70, 214), (-80, 214), comun.i_accel)
+		d.Fade(1,0)
+		d.Move( (-70, 214), (-80, 214), comun.i_accel)
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.Pintar()
@@ -1023,8 +1023,8 @@ class FX17(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover( (-90, 214), (-80, 214), comun.i_accel)
+		d.Fade(0,1)
+		d.Move( (-90, 214), (-80, 214), comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -1052,8 +1052,8 @@ class FX17(comun.Fx):
 		global textura3, textura4
 		mitextura = comun.ElegirPorCuadro(1502,1561,textura3, textura4)
 		d.texturas[d.PART_RELLENO] = mitextura
-		d.Desvanecer(1,0)
-		d.Mover((-80, 214), (-90, 214),  comun.i_accel)
+		d.Fade(1,0)
+		d.Move((-80, 214), (-90, 214),  comun.i_accel)
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.Pintar()
@@ -1074,8 +1074,8 @@ class FX18(comun.Fx):
 		mitextura = fondo
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.Mover( (-145, 214), (-135, 214), comun.i_accel)
+		d.Fade(0,1)
+		d.Move( (-145, 214), (-135, 214), comun.i_accel)
 		d.Pintar()
 
 	def EnSilaba(self, d):
@@ -1103,8 +1103,8 @@ class FX18(comun.Fx):
 		global textura3, textura4
 		mitextura = comun.ElegirPorCuadro(1630,1704,textura4, textura3)
 		d.texturas[d.PART_RELLENO] = mitextura
-		d.Desvanecer(1,0)
-		d.Mover( (-135, 214), (-145, 214), comun.i_accel)
+		d.Fade(1,0)
+		d.Move( (-135, 214), (-145, 214), comun.i_accel)
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.Pintar()
@@ -1122,8 +1122,8 @@ class FX19(comun.Fx):
 
 
 	def EnDialogoEntra(self, d):
-		d.Desvanecer(0,1)
-		d.MoverDe(0, 10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, 10, comun.i_accel)
 		global textura0
 		mitextura = textura0
 		d.texturas[d.PART_RELLENO] = mitextura
@@ -1133,8 +1133,8 @@ class FX19(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura0
-		d.Desvanecer(1,0)
-		d.MoverA(0, 10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, 10, comun.i_accel)
 		mitextura = textura0
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -1152,8 +1152,8 @@ class FX20(comun.Fx):
 
 
 	def EnDialogoEntra(self, d):
-		d.Desvanecer(0,1)
-		d.MoverDe(0, 10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, 10, comun.i_accel)
 		global textura1
 		mitextura = textura1
 		d.texturas[d.PART_RELLENO] = mitextura
@@ -1163,8 +1163,8 @@ class FX20(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura1
-		d.Desvanecer(1,0)
-		d.MoverA(0, 10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, 10, comun.i_accel)
 		mitextura = textura1
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -1181,8 +1181,8 @@ class FX21(comun.Fx):
 
 
 	def EnDialogoEntra(self, d):
-		d.Desvanecer(0,1)
-		d.MoverDe(0, 10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, 10, comun.i_accel)
 		global textura2
 		mitextura = textura2
 		d.texturas[d.PART_RELLENO] = mitextura
@@ -1191,8 +1191,8 @@ class FX21(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura2
-		d.Desvanecer(1,0)
-		d.MoverA(0, 10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, 10, comun.i_accel)
 		mitextura = textura2
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -1209,8 +1209,8 @@ class FX22(comun.Fx):
 
 
 	def EnDialogoEntra(self, d):
-		d.Desvanecer(0,1)
-		d.MoverDe(0, 10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, 10, comun.i_accel)
 		global textura3
 		mitextura = textura3
 		d.texturas[d.PART_RELLENO] = mitextura
@@ -1220,8 +1220,8 @@ class FX22(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura3
-		d.Desvanecer(1,0)
-		d.MoverA(0, 10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, 10, comun.i_accel)
 		mitextura = textura3
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -1239,8 +1239,8 @@ class FX23(comun.Fx):
 
 
 	def EnDialogoEntra(self, d):
-		d.Desvanecer(0,1)
-		d.MoverDe(0, 10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, 10, comun.i_accel)
 		global textura4
 		mitextura = textura4
 		d.texturas[d.PART_RELLENO] = mitextura
@@ -1249,8 +1249,8 @@ class FX23(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura4
-		d.Desvanecer(1,0)
-		d.MoverA(0, 10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, 10, comun.i_accel)
 		mitextura = textura4
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -1267,8 +1267,8 @@ class FX24(comun.Fx):
 
 
 	def EnDialogoEntra(self, d):
-		d.Desvanecer(0,1)
-		d.MoverDe(0, 10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, 10, comun.i_accel)
 		global textura5
 		mitextura = textura5
 		d.texturas[d.PART_RELLENO] = mitextura
@@ -1278,8 +1278,8 @@ class FX24(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		global textura5
-		d.Desvanecer(1,0)
-		d.MoverA(0, 10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, 10, comun.i_accel)
 		mitextura = textura5
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
@@ -1296,8 +1296,8 @@ class FX25(comun.Fx):
 
 
 	def EnDialogoEntra(self, d):
-		d.Desvanecer(0,1)
-		d.MoverDe(0, 10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, 10, comun.i_accel)
 		global textura6, textura5
 		mitextura = comun.ElegirPorCuadro(1202,1271,textura5, textura6)
 		d.texturas[d.PART_RELLENO] = mitextura
@@ -1309,8 +1309,8 @@ class FX25(comun.Fx):
 		global textura6, textura5
 		mitextura = comun.ElegirPorCuadro(1202,1271,textura5, textura6)
 		d.texturas[d.PART_RELLENO] = mitextura
-		d.Desvanecer(1,0)
-		d.MoverA(0, 10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, 10, comun.i_accel)
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.Pintar()
@@ -1326,8 +1326,8 @@ class FX26(comun.Fx):
 
 
 	def EnDialogoEntra(self, d):
-		d.Desvanecer(0,1)
-		d.MoverDe(0, 10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, 10, comun.i_accel)
 		global textura3, textura4
 		mitextura = comun.ElegirPorCuadro(1502,1561,textura3, textura4)
 		d.texturas[d.PART_RELLENO] = mitextura
@@ -1339,8 +1339,8 @@ class FX26(comun.Fx):
 		global textura3, textura4
 		mitextura = comun.ElegirPorCuadro(1502,1561,textura3, textura4)
 		d.texturas[d.PART_RELLENO] = mitextura
-		d.Desvanecer(1,0)
-		d.MoverA(0, 10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, 10, comun.i_accel)
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.Pintar()
@@ -1356,8 +1356,8 @@ class FX27(comun.Fx):
 
 
 	def EnDialogoEntra(self, d):
-		d.Desvanecer(0,1)
-		d.MoverDe(0, 10, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, 10, comun.i_accel)
 		global textura3, textura4
 		mitextura = comun.ElegirPorCuadro(1630,1704,textura4, textura3)
 		d.texturas[d.PART_RELLENO] = mitextura
@@ -1368,8 +1368,8 @@ class FX27(comun.Fx):
 		global textura3, textura4
 		mitextura = comun.ElegirPorCuadro(1630,1704,textura4, textura3)
 		d.texturas[d.PART_RELLENO] = mitextura
-		d.Desvanecer(1,0)
-		d.MoverA(0, 10, comun.i_accel)
+		d.Fade(1,0)
+		d.MoveTo(0, 10, comun.i_accel)
 		d.texturas[d.PART_RELLENO] = mitextura
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.Pintar()

@@ -7,7 +7,7 @@ class FX1(comun.Fx):
 	def __init__(self):
 		#Cuando se cree el effect
 		#Creamos las particulas
-		self.parts = avanzado.cParticleSystem(png="texturas/star3.png", max_life=3, emit_parts=2, scale_from= 0.8, scale_to=0.3, modo=1)
+		self.parts = avanzado.cParticleSystem(png="textures/star3.png", max_life=3, emit_parts=2, scale_from= 0.8, scale_to=0.3, modo=1)
 		#Configuramos la ventana y el angulo
 		self.parts.DarVentana(6, 2)
 		self.parts.DarAngulo(pi, 3, pi/4.0)
@@ -20,7 +20,7 @@ class FX1(comun.Fx):
 		s.original.modo_relleno = s.P_DEG_VERT
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		diag.Pintar()
 
 	def EnSilaba(self, diag):
@@ -36,7 +36,7 @@ class FX1(comun.Fx):
 		)
 		self.parts.Emitir()
 		diag.actual.color4.r=diag.actual.color4.g=diag.actual.color4.b=0.8
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		diag.Pintar()
 
 	def EnSilabaDorm(self, diag):
@@ -69,7 +69,7 @@ class FX2(comun.Fx):
 	def EnDialogoSale(self, diag):
 		#Sale con una scale decreciente
 		diag.actual.scale_y  = 1.01-diag.progreso
-		diag.Desvanecer(1,0)
+		diag.Fade(1,0)
 		diag.Pintar()
 
 class FX3(comun.Fx):
@@ -81,7 +81,7 @@ class FX3(comun.Fx):
 		avanzado.StartGroup()
 		diag.Alpha(sin(angulo))
 		diag.actual.pos_x += (cos(angulo)*120)# Esto depende de reset_style
-		#diag.MoverA(diag.actual.pos_x+, 0)
+		#diag.MoveTo(diag.actual.pos_x+, 0)
 		diag.Pintar()
 		avanzado.fGlow(opacity=0.025)
 		avanzado.EndGroup()

@@ -8,12 +8,12 @@ from random import randint
 
 class FXPart (comun.Fx):
 	def __init__(self):
-		self.textura  = extra.CargarTextura("texturas/sakura.png")
+		self.textura  = extra.LoadTexture("textures/sakura.png")
 
 	def EnSilabaInicia(self, sil):
 		sil.actual.color1.CopiarDe(sil.original.color2)
 		sil.actual.modo_relleno = sil.P_DEG_VERT
-		sil.parts = sil.CrearParticulas(self.textura, 0.1)
+		sil.parts = sil.CreateParticles(self.textura, 0.1)
 		for p in sil.parts:
 			p.movx = randint(-10, 10)
 			p.movy = randint(-10, 10)

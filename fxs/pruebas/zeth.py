@@ -11,7 +11,7 @@ class FX1(comun.Fx):
 	def EnDialogoEntra(self, d):
 		avanzado.StartGroup()
 		d.original.modo_relleno = d.P_DEG_VERT
-		d.Desvanecer(0, 1)
+		d.Fade(0, 1)
 		d.Pintar()
 		avanzado.fWave(self.movimiento, 0.030, 2, True)
 		avanzado.fWave(self.movimiento, 0.040, 2, False)
@@ -26,7 +26,7 @@ class FX1(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnSilaba(self, d):
-		d.Desvanecer(1, 0)
+		d.Fade(1, 0)
 		avanzado.StartGroup()
 		d.Pintar()#el pintar va antes del wave, sino el wave no le afecta :D
 		avanzado.fWave(self.movimiento, 0.030, 2, True)
@@ -37,7 +37,7 @@ class FX1(comun.Fx):
 	def EnDialogoSale(self, d):
 		avanzado.StartGroup()
 		d.original.modo_relleno = d.P_DEG_VERT
-		d.Desvanecer(1, 0)
+		d.Fade(1, 0)
 		d.Pintar()
 		avanzado.fWave( self.movimiento, 0.030, 2,  True)
 		avanzado.fWave( self.movimiento, 0.040, 2,  False)
@@ -46,7 +46,7 @@ class FX1(comun.Fx):
 class FX2(comun.Fx):
 
 	def __init__(self):
-		self.parts = avanzado.cParticleSystem(png="texturas/spark.png", color = extra.cCairoColor(0xFFAFAFAF), max_life=3, emit_parts=2, scale_from= 0.4, scale_to=0.1, modo=1)
+		self.parts = avanzado.cParticleSystem(png="textures/spark.png", color = extra.cCairoColor(0xFFAFAFAF), max_life=3, emit_parts=2, scale_from= 0.4, scale_to=0.1, modo=1)
 		self.parts.DarVentana(6, 2)
 		self.parts.DarAngulo(pi, 5, pi/4.2)
 
@@ -59,20 +59,20 @@ class FX2(comun.Fx):
 	def Entrada(self, c, prog):
 		c.progreso = prog
 		otro_interpolado= comun.Interpolar(prog, 0, 1)
-		c.Desvanecer(0, otro_interpolado)
+		c.Fade(0, otro_interpolado)
 		#c.actual.scale_x = c.actual.scale_y= otro_interpolado
 		c.Pintar()
 
 	def Salida(self, c, prog):
 		c.progreso = prog
 		#otro_interpolado= comun.Interpolar(prog, 1, 0)
-		c.Desvanecer(1,0)
+		c.Fade(1,0)
 		#c.actual.scale_x = c.actual.scale_y= otro_interpolado
 		c.Pintar()
 
 	def EnDialogoEntra(self, d):
 		d.original.modo_relleno = d.P_DEG_VERT
-		d.Desvanecer(0, 1)
+		d.Fade(0, 1)
 		d.Pintar()
 		#d.original.modo_relleno = d.P_DEG_VERT
 		#comun.Encadenar(450, d.progreso, d.chars, self.Entrada, 200)
@@ -88,7 +88,7 @@ class FX2(comun.Fx):
 	def EnSilaba(self, s):
 		if not s._texto.strip():
 			return #nunca pongas un return adentro de un grupo (o sea antes de grupofin)
-		s.Desvanecer(1, 0)
+		s.Fade(1, 0)
 		avanzado.StartGroup()
 		s.Pintar()
 		avanzado.fGlow(5, 0.08*s.progreso)
@@ -104,7 +104,7 @@ class FX2(comun.Fx):
 
 	def EnDialogoSale(self, d):
 		d.original.modo_relleno = d.P_DEG_VERT
-		d.Desvanecer(1, 0)
+		d.Fade(1, 0)
 		d.Pintar()
 		#d.original.modo_relleno = d.P_DEG_VERT
 		#comun.Encadenar(450, d.progreso, d.chars, self.Salida, 200)
@@ -116,13 +116,13 @@ class tradu(comun.Fx):
 	def EnDialogoEntra(self, d):
 		desp = sin(pi*d.progreso)*15
 		d.actual.pos_x -= desp
-		d.Desvanecer(0, 1)
+		d.Fade(0, 1)
 		d.Pintar()
 
 	def EnDialogoSale(self, d):
 		desp = sin(pi*d.progreso)*15
 		d.actual.pos_x += desp
-		d.Desvanecer(1,0)
+		d.Fade(1,0)
 		d.Pintar()
 
 class FxsGroup(comun.FxsGroup):

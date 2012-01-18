@@ -22,16 +22,16 @@ class FX1(comun.Fx):
 
 
 	def EnDialogoEntra(self, d):
-		d.Desvanecer(0, 1)
+		d.Fade(0, 1)
 		d.actual.modo_relleno = d.P_DEG_VERT
-		d.MoverDe(-25, 0)
+		d.MoveFrom(-25, 0)
 		d.Pintar()
 
 	def EnDialogoSale(self, d):
-		d.Desvanecer(1, 0)
+		d.Fade(1, 0)
 		d.actual.modo_relleno = d.P_DEG_VERT
 		d.actual.color1.CopiarDe(d.actual.color3)
-		d.MoverA(25, 0)
+		d.MoveTo(25, 0)
 		d.Pintar()
 
 	def EnSilabaDorm(self, d):

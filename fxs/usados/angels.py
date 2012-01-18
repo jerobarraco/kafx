@@ -35,11 +35,11 @@ class Romanji(comun.Fx):
 		#Copiamos el color del borde al color primario
 		a.color1.CopiarDe(a.color3)
 		#Lo movemos hacia la posicion que calculamos en el EnSilabaInicia
-		diag.MoverA(diag.mov_x, diag.mov_y)
+		diag.MoveTo(diag.mov_x, diag.mov_y)
 		#y hacemos que se escale de 1 a 0.5
 		a.scale_x = a.scale_y = comun.Interpolar(diag.progreso, 1, 0.5)
 		#Lo desvanecemos y lo pintamos
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		diag.Pintar()
 		
 	def EnSilabaDorm(self, d):
@@ -55,13 +55,13 @@ class tradu(comun.Fx):
 		desp = sin(pi*d.progreso)*15 #aumentará hasta 20 px, en una acelearcion como una curva. q va d 0 a 1  y de nuevo a 0 (porque el angulo del seno es de 0 a 180º
 		#lo movemos en las Y (verticalmente)
 		d.actual.pos_y -= desp
-		d.Desvanecer(0, 1)
+		d.Fade(0, 1)
 		d.Pintar()
 		
 	def EnDialogoSale(self, d):
 		desp = sin(pi*d.progreso)*15
 		d.actual.pos_y += desp
-		d.Desvanecer(1,0)
+		d.Fade(1,0)
 		d.Pintar()
 
 class cred(comun.Fx):
@@ -69,7 +69,7 @@ class cred(comun.Fx):
 		#Usando alpha podemos elegir un valor de alpha manualmente,
 		#Entonces puedo usar la funcion seno que me dara valores de 0 a 1 en una forma mas suave
 		d.Alpha(sin(pi*d.progreso))
-		#Esto tambien es posible usando Desvanecer y especificando otro interpolador (comun.i_sin) pero eso es mas avanzado :B
+		#Esto tambien es posible usando Fade y especificando otro interpolador (comun.i_sin) pero eso es mas avanzado :B
 		d.Pintar()
 		
 class FxsGroup(comun.FxsGroup):

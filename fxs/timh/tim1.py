@@ -7,7 +7,7 @@ import random
 
 class fx1(comun.Fx):
     def EnDialogo(self,d):
-        d.CargarTextura('texturas/fuego/f0000.png',1)
+        d.LoadTexture('textures/fuego/f0000.png',1)
         d.Pintar()
 
     def EnSilaba(self,s):

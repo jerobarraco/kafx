@@ -13,7 +13,7 @@ class FX1(comun.Fx):
 			#y porque el movimiento de las particulas puede durar mas que el dialog en pantalla
 			self.parts = []
 			#y cargamos una textura comun para intentar reducir memoria
-			self.t = extra.CargarTextura('texturas/star3.png') #Notar la / , no es lo mismo que \
+			self.t = extra.LoadTexture('textures/star3.png') #Notar la / , no es lo mismo que \
 
 		def EnSilabaInicia(self, s):
 			#Cuando cada silaba inicie
@@ -29,7 +29,7 @@ class FX1(comun.Fx):
 			#Creamos las particulas con una funcion especial.
 			#scale sera la scale inicial
 			#0.2 es la opacidad mínima, el resto de particulas no seran mostradas.
-			s.parts = s.CrearParticulas(self.t,	escala, 0.1, False, modo=0)
+			s.parts = s.CreateParticles(self.t,	escala, 0.1, False, modo=0)
 			print len(s.parts)
 			"""
 			print len(s.parts)
@@ -111,8 +111,8 @@ class FX2(comun.Fx):
 	def EnDialogoInicia(self, d):
 		#cargamos una textura y le decimos que la usaremos con el relleno
 		#parte = 0:borde, 1:relleno, 2:sombra
-		d.CargarTextura('texturas/cloud2.png', parte=d.PART_RELLENO)
-		#Por cada dialogo elegimos un offset inicial para la textura (lo que hara parecer diferentes texturas)
+		d.LoadTexture('textures/cloud2.png', parte=d.PART_RELLENO)
+		#Por cada dialogo elegimos un offset inicial para la textura (lo que hara parecer diferentes textures)
 		d.start_x = random.random()*800
 		d.start_y = random.random()*600
 
@@ -132,7 +132,7 @@ class FX2(comun.Fx):
 		d.start_x += d.dx
 		d.start_y += d.dy
 		#Le asignamos una matriz a la textura (con los movimientos)
-		d.MoverTextura(pos_x = d.start_x, pos_y = d.start_y, parte = d.PART_RELLENO)
+		d.MoveTexture(pos_x = d.start_x, pos_y = d.start_y, parte = d.PART_RELLENO)
 
 		#Para poder dar una opacidad homogénea a un grupo de cosas usaremos el StartGroup
 		avanzado.StartGroup()

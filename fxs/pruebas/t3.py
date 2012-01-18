@@ -59,7 +59,7 @@ class FxsGroup(comun.FxsGroup):
 		self.paso = video.vi.width /float(audioFrameSize)
 
 		delta = 10.0 #altura máxima en píxeles
-		sfc = extra.CopiarTarget()
+		sfc = extra.CopyTarget()
 		c.set_operator(cairo.OPERATOR_CLEAR)
 		c.paint()
 		avanzado.ModoPintado()

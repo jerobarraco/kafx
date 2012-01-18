@@ -11,7 +11,7 @@ from math import pi, sin
 class FX1(comun.Fx):
 	def EnDialogoEntra(self, d):
 		d.actual.modo_relleno = d.P_DEG_VERT
-		d.Desvanecer(0, 1)
+		d.Fade(0, 1)
 		d.Pintar()
 
 	def EnSilabaDorm(self, d):
@@ -19,24 +19,24 @@ class FX1(comun.Fx):
 		d.PintarConCache()
 
 	def EnSilabaInicia(self, d):
-		d.CargarTextura('texturas/green2.png', parte=d.PART_RELLENO)
+		d.LoadTexture('textures/green2.png', parte=d.PART_RELLENO)
 
 
 	def EnSilabaMuerta(self, d):
 		d.actual.modo_relleno = d.P_DEG_VERT
-		d.Desvanecer(1,  0.6)
+		d.Fade(1,  0.6)
 		d.Pintar()
 
 	def EnDialogoSale(self,  d):
 		d.actual.modo_relleno = d.P_DEG_VERT
-		d.Desvanecer(0.6,  0)
+		d.Fade(0.6,  0)
 		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fRotoZoom(6, 0.7*d.progreso,  0.01, 0, d.actual.pos_x+d.actual.org_x, d.actual.pos_y+d.actual.org_y)
 		avanzado.EndGroup()
 
 	def EnSilaba(self, d):
-		d.MoverTextura( 120*d.progreso, 120*d.progreso, parte = d.PART_RELLENO)
+		d.MoveTexture( 120*d.progreso, 120*d.progreso, parte = d.PART_RELLENO)
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.PintarConCache()
 		avanzado.StartGroup()

@@ -5,9 +5,9 @@ import math, random, cairo
 from math import pi, sin, cos
 
 
-t1 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/T_Negro22.png', extend=cairo.EXTEND_REFLECT)
-t2 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/T_Blanco2.png', extend=cairo.EXTEND_REFLECT)
-t3 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/KAFX/branches/kafx_eng/texturas/sangre3.png', extend=cairo.EXTEND_REFLECT)
+t1 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/T_Negro22.png', extend=cairo.EXTEND_REFLECT)
+t2 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/T_Blanco2.png', extend=cairo.EXTEND_REFLECT)
+t3 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/KAFX/branches/kafx_eng/textures/sangre3.png', extend=cairo.EXTEND_REFLECT)
 
 
 
@@ -31,8 +31,8 @@ class FX2():
 		d.texturas[d.PART_BORDER] = t2
 		d.actual.mode_border = d.P_TEXTURA
 		d.Wiggle(10, 6)
-		d.MoverA(random.randint(-20, 10),random.randint(-20, 10))
-		d.Desvanecer(1, 0, comun.i_accel)
+		d.MoveTo(random.randint(-20, 10),random.randint(-20, 10))
+		d.Fade(1, 0, comun.i_accel)
 		d.Paint()
 
 
@@ -46,8 +46,8 @@ class FX2():
 		d.texturas[d.PART_BORDER] = t1
 		d.actual.mode_border = d.P_TEXTURA
 		d.Wiggle(10, 6)
-		d.MoverDe(random.randint(-20, 10),random.randint(-20, 10))
-		d.Desvanecer(0, 1, comun.i_accel)
+		d.MoveFrom(random.randint(-20, 10),random.randint(-20, 10))
+		d.Fade(0, 1, comun.i_accel)
 		d.Paint()
 
 class Evento11():
@@ -179,8 +179,8 @@ class FX3():
 		d.texturas[d.PART_BORDER] = t2
 		d.actual.mode_border = d.P_TEXTURA
 		d.Wiggle(10, 6)
-		d.MoverA(random.randint(-20, 10),random.randint(-20, 10))
-		d.Desvanecer(1, 0, comun.i_accel)
+		d.MoveTo(random.randint(-20, 10),random.randint(-20, 10))
+		d.Fade(1, 0, comun.i_accel)
 		d.Paint()
 
 
@@ -194,8 +194,8 @@ class FX3():
 		d.texturas[d.PART_BORDER] = t1
 		d.actual.mode_border = d.P_TEXTURA
 		d.Wiggle(10, 6)
-		d.MoverDe(random.randint(-20, 10),random.randint(-20, 10))
-		d.Desvanecer(0, 1, comun.i_accel)
+		d.MoveFrom(random.randint(-20, 10),random.randint(-20, 10))
+		d.Fade(0, 1, comun.i_accel)
 		d.Paint()
 
 class Evento13():
@@ -303,13 +303,13 @@ class Evento3():
 
 class FX1():
 	def __init__(self):
-		self.t = extra.CargarTextura("texturas/sangre2.png")
+		self.t = extra.LoadTexture("textures/sangre2.png")
 		self.eventos = [Evento4(), Evento5(), Evento6(), Evento10()]
 
 	def EnLetraInicia(self, letra):
 		letra.actual.shadow = 0
 		letra.actual.border = 0
-		letra.parts = letra.CrearParticulas(self.t, 0.1, mode = 1)
+		letra.parts = letra.CreateParticles(self.t, 0.1, mode = 1)
 		for p in letra.parts:
 			p.inix = p.x
 			p.iniy = p.y
@@ -343,8 +343,8 @@ class FX1():
 		d.texturas[d.PART_BORDER] = t2
 		d.actual.mode_border = d.P_TEXTURA
 		d.Wiggle(10, 6)
-		d.MoverA(random.randint(-20, 10),random.randint(-20, 10))
-		d.Desvanecer(1, 0, comun.i_accel)
+		d.MoveTo(random.randint(-20, 10),random.randint(-20, 10))
+		d.Fade(1, 0, comun.i_accel)
 		d.Paint()
 
 
@@ -358,8 +358,8 @@ class FX1():
 		d.texturas[d.PART_BORDER] = t1
 		d.actual.mode_border = d.P_TEXTURA
 		d.Wiggle(10, 6)
-		d.MoverDe(random.randint(-20, 10),random.randint(-20, 10))
-		d.Desvanecer(0, 1, comun.i_accel)
+		d.MoveFrom(random.randint(-20, 10),random.randint(-20, 10))
+		d.Fade(0, 1, comun.i_accel)
 		d.Paint()
 
 
