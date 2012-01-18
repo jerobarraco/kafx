@@ -76,7 +76,7 @@ def CapasActivar(capa=0, opacity=1.0, mode='over'):
 	@opacidad=1.0
 		opacidad de la capa. Valor entre 0.0 y 1.0
 	@mode='over'
-		mode de pintado de la capa. un texto. igual que en ModePainted.
+		mode de pintado de la capa. un texto. igual que en PaintMode.
 		(Ver valores posibles en avanzado.OPERATORS)
 	"""
 	global _capas
@@ -381,7 +381,7 @@ def fGlow(steps=3, opacity=0.05):
 	"""
 	video.cf.ctx.set_operator(cairo.OPERATOR_ADD)
 	fBlur(steps, opacity)
-	ModePainted()
+	PaintMode()
 
 def StartGroup(copy_background=False):
 	"""Comienza un grupo de pintado.
@@ -470,7 +470,7 @@ def fWave( offset,  delta=0.1,  amplitude = 10,  vertical=True,  delete=True):
 	if delete:
 		ctx.set_operator(cairo.OPERATOR_CLEAR)
 		ctx.paint()
-		ModePainted()
+		PaintMode()
 
 	x1,  x2,  y1,  y2 = 0,  vi.width,  0,  vi.height
 	if vertical :
