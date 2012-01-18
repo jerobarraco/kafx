@@ -34,10 +34,10 @@ class Fxpart (comun.Fx):
 
         def __init__(self):
 			self.events = [Evento1(), Evento2()]
-			self.t = extra.CargarTextura("texturas/star1.png")
+			self.t = extra.LoadTexture("textures/star1.png")
 
         def EnSilabaInicia(self, sil):
-			sil.parts1 = sil.CrearParticulas(self.t, 0.1 )
+			sil.parts1 = sil.CreateParticles(self.t, 0.1 )
 			for p in sil.parts1:
 				p.inix = p.x
 				p.iniy = p.y
@@ -46,7 +46,7 @@ class Fxpart (comun.Fx):
 				p.esc = 0.01
 				p.vida1 = 0
 
-			sil.parts2 = sil.CrearParticulas(self.t, 0.1 )
+			sil.parts2 = sil.CreateParticles(self.t, 0.1 )
 			for p in sil.parts2:
 				p.inix = p.x
 				p.iniy = p.y

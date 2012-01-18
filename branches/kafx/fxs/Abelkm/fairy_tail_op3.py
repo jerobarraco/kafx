@@ -12,8 +12,8 @@ from math import pi, sin, cos
 class FX1(comun.Fx):
 	def EnSilaba(self, d):
 
-		d.CargarTextura('texturas/fire2.png', parte=d.PART_RELLENO)
-		d.MoverTextura( 60*d.progreso, 60*d.progreso, parte = d.PART_RELLENO)
+		d.LoadTexture('textures/fire2.png', parte=d.PART_RELLENO)
+		d.MoveTexture( 60*d.progreso, 60*d.progreso, parte = d.PART_RELLENO)
 		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fGlow(2, 0+((cos(pi*d.progreso))/4))
@@ -21,15 +21,15 @@ class FX1(comun.Fx):
 
 	def EnSilabaMuerta(self, d):
 
-		d.CargarTextura('texturas/fire2.png', parte=d.PART_RELLENO)
-		d.MoverTextura( -50*d.progreso, -50*d.progreso, parte=d.PART_RELLENO)
+		d.LoadTexture('textures/fire2.png', parte=d.PART_RELLENO)
+		d.MoveTexture( -50*d.progreso, -50*d.progreso, parte=d.PART_RELLENO)
 		d.Pintar()
 
 	def EnDialogoSale(self, d):
 
-		d.CargarTextura('texturas/fire2.png', parte=d.PART_RELLENO)
-		d.MoverTextura( 70*d.progreso, 70*d.progreso, parte=d.PART_RELLENO)
-		d.Desvanecer(1, 0)
+		d.LoadTexture('textures/fire2.png', parte=d.PART_RELLENO)
+		d.MoveTexture( 70*d.progreso, 70*d.progreso, parte=d.PART_RELLENO)
+		d.Fade(1, 0)
 		d.actual.scale_y  = 1+((d.progreso)/4.0)
 		avanzado.StartGroup()
 		d.Pintar()
@@ -38,8 +38,8 @@ class FX1(comun.Fx):
 
 
 	def EnDialogoEntra(self, d):
-		d.CargarTextura('texturas/stone2.png', parte=d.PART_RELLENO)
-		d.Desvanecer(0, 1)
+		d.LoadTexture('textures/stone2.png', parte=d.PART_RELLENO)
+		d.Fade(0, 1)
 		avanzado.StartGroup()
 		d.actual.scale_y = (1)+(sin(pi*d.progreso))
 		d.Pintar()
@@ -47,7 +47,7 @@ class FX1(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnSilabaDorm(self, d):
-		d.CargarTextura('texturas/stone2.png', parte=d.PART_RELLENO)
+		d.LoadTexture('textures/stone2.png', parte=d.PART_RELLENO)
 		d.Pintar()
 
 

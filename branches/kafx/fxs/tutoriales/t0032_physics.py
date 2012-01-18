@@ -5,7 +5,7 @@ from libs.draw import extra
 def chunker(seq, size):
     return (seq[pos:pos + size] for pos in xrange(0, len(seq), size))
 
-t1 = extra.CargarTextura("texturas/uq7.png")
+t1 = extra.LoadTexture("textures/uq7.png")
 
 class Efecto():
 	def __init__(self):
@@ -13,7 +13,7 @@ class Efecto():
 		self.objs = []
 
 	def EnSilabaInicia(self, sil):
-		parts = sil.CrearParticulas(t1, escala=0.3 )
+		parts = sil.CreateParticles(t1, scale=0.3 )
 		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 2) ] #tomamos 1 cada 100 parts
 		sil.moving = False
 

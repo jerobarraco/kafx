@@ -13,7 +13,7 @@ class Efecto():
 		#por eso nos fijamos si ya la crearon
 		if not self.forma :
 			l.actual.color1.CopyFrom(l.actual.color2)
-			self.forma = extra.cVector(l.actual, figura= formas.APPLE)
+			self.forma = extra.cVector(l.actual, figure= formas.APPLE)
 
 	def OnSyllableSleep(self, l):
 		l.PaintWithCache()

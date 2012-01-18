@@ -67,7 +67,7 @@ class Fx1(comun.Fx):
 		c.actual.pos_y += sin(pi*prog)*30
 		#Notar que para que el desvanecer (y demás funciones del c.) funcione bien
 		#hay que copiar el progreso a c.progreso
-		c.Desvanecer(1, 0)
+		c.Fade(1, 0)
 		c.Paint()
 
 	def EnDialogoSale(self, d):

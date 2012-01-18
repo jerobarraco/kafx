@@ -6,7 +6,7 @@ from math import pi, sin
 class Kara2(comun.Fx):
 	def __init__(self):
 		#Creamos el sistema d particulas que usaremos en dos dialogues
-		self.parts = avanzado.cParticleSystem(png="texturas/snowflake1.png",
+		self.parts = avanzado.cParticleSystem(png="textures/snowflake1.png",
 			max_life=2, max_parts=30, emit_parts=2, scale_from=0.2, scale_to=0.03,
 			color=extra.cCairoColor(0x88FFFFFF), modo=1)
 		#Le damos una direccion de 90º, 2 pixels por cuadro y 0.5 radianes de diferencia posible
@@ -17,7 +17,7 @@ class Kara2(comun.Fx):
 
 	def EnDialogoEntra(self, diag):
 		diag.ModoRelleno(diag.P_DEG_VERT)
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		diag.Pintar()
 		#Lo restauramos para los demás EnDialogo*
 		diag.ModoRelleno(diag.P_SOLIDO)
@@ -63,11 +63,11 @@ class Kara1(comun.Fx):
 		diag.PintarConCache()
 
 	def EnDialogoSale(self, diag):
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		diag.Pintar()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		diag.Pintar()
 
 class Cred(comun.Fx):
@@ -75,13 +75,13 @@ class Cred(comun.Fx):
 		diag.PintarConCache()
 
 	def EnDialogoSale(self, diag):
-		diag.Desvanecer(1, 0)
-		diag.MoverA(0, 30)
+		diag.Fade(1, 0)
+		diag.MoveTo(0, 30)
 		diag.Pintar()
 		
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
-		diag.MoverDe(0, 30)
+		diag.Fade(0, 1)
+		diag.MoveFrom(0, 30)
 		diag.Pintar()
 
 class Trad(comun.Fx):
@@ -89,7 +89,7 @@ class Trad(comun.Fx):
 		diag.PintarConCache()
 
 	def EnDialogoSale(self, diag):
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		#una scale que va a ir de 1 a 2 (0<=progreso<=1)
 		diag.actual.scale_y  = 1+diag.progreso
 		avanzado.StartGroup()
@@ -98,7 +98,7 @@ class Trad(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		avanzado.StartGroup()
 		#una scale que va a ir de 2 a 1
 		diag.actual.scale_y = 2 -diag.progreso
@@ -111,11 +111,11 @@ class Kanji(comun.Fx):
 		diag.Pintar()
 
 	def EnDialogoSale(self, diag):
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		diag.Pintar()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		avanzado.StartGroup()
 		diag.Pintar()
 		avanzado.fBiDirBlur(pi/2.0, 5)

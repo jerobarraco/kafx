@@ -18,7 +18,7 @@ class Efecto():
 			sil.creada = True
 
 	def EnSilabaSale(self, s):
-		s.Desvanecer(1, 0)
+		s.Fade(1, 0)
 		escala = comun.Interpolate(s.progress, 1.0, 0.8)
 		if s.creada:
 			self.world.Resize(s, escala)

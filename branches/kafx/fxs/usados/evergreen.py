@@ -6,12 +6,12 @@ from random import random
 class Romanji(comun.Fx):
 	#Este effect se aplica al romanji o sea el karaoke
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		diag.Pintar()
 		#Entra con fade_in 
 		
 	def EnDialogoSale(self, diag):
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		diag.Pintar()
 		#se va con fade_out
 		
@@ -30,7 +30,7 @@ class Romanji(comun.Fx):
 		#le asignamos una sombra de 2pxs
 		a.color1.CopiarDe(a.color2)
 		#copiamos el color secundario al color primario
-		diag.Desvanecer(0, 1, comun.i_sin)
+		diag.Fade(0, 1, comun.i_sin)
 		#diag.Alpha(sin(pi*diag.progreso))
 		#le ponemos un alfa de el seno de pi por el progreso (la curva es la grafica de seno de 0 a 180, o sea, sube a 1, y baja a 0 de nuevo)
 		avanzado.StartGroup()
@@ -57,11 +57,11 @@ class Romanji(comun.Fx):
 class Kanji(comun.Fx):
 	#Para el kanji
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0,1)
+		diag.Fade(0,1)
 		diag.Pintar()
 		
 	def EnDialogoSale(self, diag):
-		diag.Desvanecer(1,0)
+		diag.Fade(1,0)
 		diag.Pintar()		
 		
 	def EnDialogo(self, diag):
@@ -74,7 +74,7 @@ class Creditos(comun.Fx):
 	def EnDialogo(self, diag):
 		#durante el dialogo
 		avanzado.StartGroup()
-		diag.Desvanecer(0, 1, comun.i_sin)
+		diag.Fade(0, 1, comun.i_sin)
 		#diag.Alpha(sin(pi*diag.progreso))
 		#un effect de alpha con la misma curva que antes, 0 a 1 a 0, con la forma de un seno...
 		diag.Pintar()

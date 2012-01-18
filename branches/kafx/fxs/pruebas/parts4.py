@@ -5,7 +5,7 @@ import random
 
 class Fxpart (comun.Fx):
 	def __init__(self):
-		self.t = extra.CargarTextura("texturas/star1.png")
+		self.t = extra.LoadTexture("textures/star1.png")
 
 	def EnSilabaEntra(self, sil):
 		for p in sil.parts:
@@ -22,7 +22,7 @@ class Fxpart (comun.Fx):
 			p.Pintar()
 
 	def EnSilabaInicia(self, sil):
-		sil.parts = sil.CrearParticulas(self.t, 0.1)
+		sil.parts = sil.CreateParticles(self.t, 0.1)
 		for p in sil.parts:
 			p.inix = p.x
 			p.iniy = p.y

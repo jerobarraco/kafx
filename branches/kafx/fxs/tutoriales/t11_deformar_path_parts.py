@@ -8,7 +8,7 @@ class EfectoGenerico(comun.Fx):
 	def __init__(self):
 		#Cuando se cree el effect
 		#Creamos las particulas
-		self.parts = avanzado.cParticleSystem(png="texturas/spark5.png",
+		self.parts = avanzado.cParticleSystem(png="textures/spark5.png",
 		max_life=3, max_parts=10000, emit_parts=10, scale_from= 0.05, scale_to=0.5, mode=1, rotation=0)
 		#Configuramos la ventana y el angulo
 		self.parts.SetWindow(0, 0)
@@ -54,7 +54,7 @@ class EfectoGenerico(comun.Fx):
 
 	def chainin(self, s, p):
 		s.progreso = p
-		s.Desvanecer(0,1)
+		s.Fade(0,1)
 		s.PaintReflection()
 		s.Paint()
 
@@ -64,7 +64,7 @@ class EfectoGenerico(comun.Fx):
 
 	def chainout(self, s, p):
 		s.progreso = p
-		s.Desvanecer(1, 0)
+		s.Fade(1, 0)
 		s.PaintReflection()
 		s.Paint()
 

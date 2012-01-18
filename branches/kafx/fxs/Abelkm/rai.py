@@ -5,9 +5,9 @@ import math, random, cairo
 from math import pi, sin, cos
 
 
-textura1 = extra.CargarTextura('C:\Users\Riis\Videos\kafx\ONK\metala.png', extend=cairo.EXTEND_REFLECT)
-textura2 = extra.CargarTextura('C:\Users\Riis\Videos\kafx\ONK\blanco3.png', extend=cairo.EXTEND_REFLECT)
-textura3 = extra.CargarTextura('C:\Users\Riis\Videos\kafx\ONK\orange1.png', extend=cairo.EXTEND_REFLECT)
+textura1 = extra.LoadTexture('C:\Users\Riis\Videos\kafx\ONK\metala.png', extend=cairo.EXTEND_REFLECT)
+textura2 = extra.LoadTexture('C:\Users\Riis\Videos\kafx\ONK\blanco3.png', extend=cairo.EXTEND_REFLECT)
+textura3 = extra.LoadTexture('C:\Users\Riis\Videos\kafx\ONK\orange1.png', extend=cairo.EXTEND_REFLECT)
 
 
 class FX1(comun.Fx):
@@ -47,8 +47,8 @@ class FX1(comun.Fx):
 
 	def EnDialogoSale(self, diag):
 		avanzado.StartGroup()
-		diag.Desvanecer(1,0)
-		diag.MoverA(0, 20, comun.i_accel)
+		diag.Fade(1,0)
+		diag.MoveTo(0, 20, comun.i_accel)
 		diag.Pintar()
 		avanzado.fGlow(1, 0.15)
 		avanzado.EndGroup()
@@ -57,15 +57,15 @@ class FX1(comun.Fx):
 		diag.actual.modo_relleno = diag.P_TEXTURA
 		diag.texturas[diag.PART_BORDE] = textura1
 		diag.actual.modo_borde = diag.P_TEXTURA
-		diag.Desvanecer(1,0)
-		diag.MoverA(0, 20, comun.i_accel)
+		diag.Fade(1,0)
+		diag.MoveTo(0, 20, comun.i_accel)
 		diag.Pintar()
 
 
 	def EnDialogoEntra(self, d):
 		avanzado.StartGroup()
-		d.Desvanecer(0,1)
-		d.MoverDe(0, 20, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, 20, comun.i_accel)
 		d.Pintar()
 		avanzado.fGlow(1, 0.15)
 		avanzado.EndGroup()
@@ -74,14 +74,14 @@ class FX1(comun.Fx):
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.texturas[d.PART_BORDE] = textura1
 		d.actual.modo_borde = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.MoverDe(0, 20, comun.i_accel)
+		d.Fade(0,1)
+		d.MoveFrom(0, 20, comun.i_accel)
 		d.Pintar()
 		d.actual.color3.a = 0
 		d.texturas[d.PART_RELLENO] = textura2
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.actual.color1.a = comun.Interpolar(d.progreso,0, 1)
-		d.MoverDe(0, 20, comun.i_accel)
+		d.MoveFrom(0, 20, comun.i_accel)
 		d.Pintar()
 
 

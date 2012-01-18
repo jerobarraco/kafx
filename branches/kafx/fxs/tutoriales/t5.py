@@ -6,7 +6,7 @@ class FX1(comun.Fx):
         d.x_inicial = random.random() * 20
 
     def EnDialogo(self, d):
-        d.MoverDe( d.x_inicial , 0)
+        d.MoveFrom( d.x_inicial , 0)
         d.Pintar()
 
     def EnSilaba(self, s):

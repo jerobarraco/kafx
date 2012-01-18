@@ -5,7 +5,7 @@ from math import pi, sin
 
 class Fx1(comun.Fx):
 	def __init__(self):
-		self.parts = avanzado.cParticleSystem( png="texturas/spark3.png", max_life=3,
+		self.parts = avanzado.cParticleSystem( png="textures/spark3.png", max_life=3,
 			emit_parts=2, scale_from= 0.8, scale_to=0.3, modo=1,
 			animator= self.mianimador
 		)
@@ -79,7 +79,7 @@ class Fx1(comun.Fx):
 		)
 		self.parts.Emitir()
 		diag.actual.color4.r=diag.actual.color4.g=diag.actual.color4.b=0.8
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		diag.Pintar()
 
 	def EnSilabaDorm(self, diag):

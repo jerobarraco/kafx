@@ -11,7 +11,7 @@ class Kara(comun.Fx):
 		self.cuadros = 42
 		self.gatos = [
 			avanzado.cSprite(text)
-			for text in extra.CargarSecuencia('texturas/fuego/f', self.cuadros, 4, cairo.EXTEND_NONE)
+			for text in extra.LoadSequence('textures/fuego/f', self.cuadros, 4, cairo.EXTEND_NONE)
 		]
 
 		"""Esta era la forma anterior, para que entiendan que hacia
@@ -37,7 +37,7 @@ class Kara(comun.Fx):
 		diag.original.modo_relleno = diag.P_DEG_VERT
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		diag.Pintar()
 
 	def EnSilabaDorm(self, diag):
@@ -92,13 +92,13 @@ class Kanji(comun.Fx):
 			diag.PintarConCache()
 
 		def EnDialogoSale(self, diag):
-			diag.Desvanecer(1, 0)
-			diag.MoverA(-10, 0)
+			diag.Fade(1, 0)
+			diag.MoveTo(-10, 0)
 			diag.Pintar()
 
 		def EnDialogoEntra(self, diag):
-			diag.Desvanecer(0, 1)
-			diag.MoverDe(10, 0)
+			diag.Fade(0, 1)
+			diag.MoveFrom(10, 0)
 			diag.Pintar()
 
 class Cred(comun.Fx):
@@ -106,13 +106,13 @@ class Cred(comun.Fx):
 			diag.PintarConCache()
 
 		def EnDialogoSale(self, diag):
-			diag.Desvanecer(1, 0)
-			diag.MoverA(0, 30)
+			diag.Fade(1, 0)
+			diag.MoveTo(0, 30)
 			diag.Pintar()
 
 		def EnDialogoEntra(self, diag):
-			diag.Desvanecer(0, 1)
-			diag.MoverDe(0, 30)
+			diag.Fade(0, 1)
+			diag.MoveFrom(0, 30)
 			diag.Pintar()
 
 class Trad(comun.Fx):
@@ -120,7 +120,7 @@ class Trad(comun.Fx):
 			diag.PintarConCache()
 
 		def EnSilabaDormIn(self, diag):
-			diag.MoverDe(20,10)
+			diag.MoveFrom(20,10)
 			diag.Pintar()
 
 class FxsGroup(comun.FxsGroup):

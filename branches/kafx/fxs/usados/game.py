@@ -16,11 +16,11 @@ class FX1(comun.Fx):
 
 	#Hacemos que aparezca y desaparezca con fade
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		diag.Pintar()
 
 	def EnDialogoSale(self, diag):
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		diag.Pintar()
 
 	def EnSilaba(self, diag):
@@ -41,13 +41,13 @@ class FX2(comun.Fx):
 
 	#Y que entre y se vaya con fade y un movimiento hacia la izq
 	def EnDialogoSale(self, diag):
-		diag.MoverA(-5, 0)
-		diag.Desvanecer(1, 0)
+		diag.MoveTo(-5, 0)
+		diag.Fade(1, 0)
 		diag.Pintar()
 
 	def EnDialogoEntra(self, diag):
-		diag.MoverDe(5, 0)
-		diag.Desvanecer(0, 1)
+		diag.MoveFrom(5, 0)
+		diag.Fade(0, 1)
 		diag.Pintar()
 
 class FxsGroup(comun.FxsGroup):

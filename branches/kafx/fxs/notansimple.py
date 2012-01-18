@@ -5,7 +5,7 @@ from math import pi, sin
 class FX1(comun.Fx):
 		#Entrada: sea por silabas y con fadein
 		def EnSilabaEntra(self, s):
-			s.Desvanecer(0, 1)#fadein
+			s.Fade(0, 1)#fadein
 			s.Pintar()
 
 		#Estatico: solo color
@@ -28,7 +28,7 @@ class FX1(comun.Fx):
 
 		#Salida: un fadeout x silaba
 		def EnSilabaSale(self, s):
-			s.Desvanecer(1, 0)#fadeout
+			s.Fade(1, 0)#fadeout
 			s.Pintar()
 
 

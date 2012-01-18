@@ -13,8 +13,8 @@ from math import pi, sin, cos
 class FX1(comun.Fx):
 
 	def EnSilaba(self, d):
-		d.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/glass3.png', parte = d.PART_RELLENO)
-		d.MoverTextura( 60*d.progreso, 60*d.progreso, parte = d.PART_RELLENO)
+		d.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/glass3.png', parte = d.PART_RELLENO)
+		d.MoveTexture( 60*d.progreso, 60*d.progreso, parte = d.PART_RELLENO)
 		d.actual.color1.a = 0.6
 		avanzado.StartGroup()
 		d.Pintar()
@@ -25,7 +25,7 @@ class FX1(comun.Fx):
 
 
 	def EnSilabaMuerta(self, d):
-		d.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/glass3.png', parte=d.PART_RELLENO)
+		d.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/glass3.png', parte=d.PART_RELLENO)
 		d.actual.color1.a = 0.6
 		avanzado.StartGroup()
 		d.Pintar()
@@ -34,7 +34,7 @@ class FX1(comun.Fx):
 
 
 	def EnDialogoSale(self, d):
-		d.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/glass3.png', parte=d.PART_RELLENO)
+		d.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/glass3.png', parte=d.PART_RELLENO)
 		d.actual.color1.a = comun.Interpolar(d.progreso, 0.6, 0)
 		d.actual.color3.a = comun.Interpolar(d.progreso, 1, 0)
 		d.actual.borde = comun.Interpolar(d.progreso, 1, 0)
@@ -45,7 +45,7 @@ class FX1(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoEntra(self, d):
-		d.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/glass1.png', parte=d.PART_RELLENO)
+		d.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/glass1.png', parte=d.PART_RELLENO)
 		d.actual.color1.a = comun.Interpolar(d.progreso, 0, 0.6)
 		d.actual.color3.a = comun.Interpolar(d.progreso, 0, 1)
 		d.actual.borde = comun.Interpolar(d.progreso, 0, 1)
@@ -57,7 +57,7 @@ class FX1(comun.Fx):
 
 
 	def EnSilabaDorm(self, d):
-		d.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/glass1.png', parte=d.PART_RELLENO)
+		d.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/glass1.png', parte=d.PART_RELLENO)
 		d.actual.color1.a = 0.6
 		avanzado.StartGroup()
 		d.Pintar()

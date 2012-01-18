@@ -19,15 +19,15 @@ def DebugCairo(carpeta="caps/"):
 	debugi+=1
 	video.cf.ctx.get_group_target().write_to_png(carpeta+str(debugi).zfill(5)+'.png')
 
-def CargarSecuencia(carpeta, cantidad, digitos=3, extend=cairo.EXTEND_REPEAT):
-	"""Carga una secuencia de texturas
-	@carpeta : indica la carpeta donde estan las imagenes, si todas las imagenes empiezan con un prefijo
+def LoadSequence(folder, count, digits=3, extend=cairo.EXTEND_NONE):
+	"""Carga una secuencia de textures
+	@folder : indica la folder donde estan las imagenes, si todas las imagenes empiezan con un prefijo
 	(pej: imgxxx.png) también incluyan ese prefijo (e incluyan la "/")
 
-	@cantidad : la cantidad de cuadros (imagenes)
-					(notar que la secuencia comienza desde 0 y termia en cantidad-1)
+	@count : la count de cuadros (imagenes)
+					(notar que la secuencia comienza desde 0 y termia en count-1)
 
-	@digitos : cantidad de digitos que tiene la secuencia
+	@digits : count de digits que tiene la secuencia
 
 	@extend: el extend default de la textura (default EXTEND_REPEAT)
 			Para usar con cSprite el extend debe ser cairo.EXTEND_NONE
@@ -35,63 +35,63 @@ def CargarSecuencia(carpeta, cantidad, digitos=3, extend=cairo.EXTEND_REPEAT):
 	#Esta es la forma corta
 	#para el que no conozca se llama list comprehension
 	return [
-		CargarTextura(carpeta + str(i).zfill(digitos) + '.png', extend)
-		for i in range(cantidad)
+		LoadTexture(folder + str(i).zfill(digits) + '.png', extend)
+		for i in range(count)
 		]
 
 	#Esta es la forma explicada
 	"""
-	#donde almacenaremos las texturas
-	texturas = []
-	for i in range (cantidad):
+	#donde almacenaremos las textures
+	textures = []
+	for i in range (count):
 		#creamos un nombre de archivo a partir del numero
-		#convertimos el numero en string y lo rellenamos con 0's hasta la cantidad de digitos
-		num = str(i).zfill(digitos)
-		imgname = carpeta + num + '.png'
-		text = CargarTextura(imgname, extend)
-		texturas.append(text)
-	return texturas"""
+		#convertimos el numero en string y lo rellenamos con 0's hasta la count de digits
+		num = str(i).zfill(digits)
+		imgname = folder + num + '.png'
+		text = LoadTexture(imgname, extend)
+		textures.append(text)
+	return textures"""
 
-def CargarTextura(archivo, extend=cairo.EXTEND_REPEAT):
-	"""Devuelve una textura (SurfacePattern) de cairo, a partir de un archivo png.
+def LoadTexture(filename, extend=cairo.EXTEND_REPEAT):
+	"""Devuelve una textura (SurfacePattern) de cairo, a partir de un filename png.
 	Para usar con set_source o lo que fuere
-	@archivo: el nombre del archivo. Debe ser un PNG.
+	@filename: el nombre del filename. Debe ser un PNG.
 
 	@extend: el extend default de la textura (default EXTEND_REPEAT)
 			Para usar con cSprite el extend debe ser cairo.EXTEND_NONE"""
-	t = cairo.SurfacePattern(cairo.ImageSurface.create_from_png(archivo))
+	t = cairo.SurfacePattern(cairo.ImageSurface.create_from_png(filename))
 	t.set_extend(extend)
 	return t
 
 def MoveTexture(pattern, x, y, org_x=0.0, org_y=0.0, angle=0.0, scale_x=1.0, scale_y=1.0):
-	"""Moves, rotates and scale a texture loaded with CargarTextura, or any other cairo patter"""
-	pattern.set_matrix(CrearMatriz(x, y, org_x, org_y, angle, scale_x, scale_y, True))
+	"""Moves, rotates and scale a texture loaded with LoadTexture, or any other cairo patter"""
+	pattern.set_matrix(CreateMatrix(x, y, org_x, org_y, angle, scale_x, scale_y, True))
 
-def SetEstilo(estilo):
+def SetStyle(style):
 	"""Prepara cairo con los estilos
 	Antes de dibujar un texto, se puede llamar a esta funcion para que ponga las cosas basicas
-	el estilo tiene que ser del tipo asslib.cProperties
+	el style tiene que ser del tipo asslib.cProperties
 	(y debe ser el original ya que requiere propiedades no animables)
 	"""
 	ctx = video.cf.ctx
-	ctx.select_font_face(estilo._font, int(estilo._italic),  int(estilo._bold))
-	ctx.set_font_size(estilo._size)
+	ctx.select_font_face(style._font, int(style._italic),  int(style._bold))
+	ctx.set_font_size(style._size)
 
-def CrearMatriz(pos_x=0, pos_y=0, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=1, inversa=False):
+def CreateMatrix(pos_x=0, pos_y=0, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=1, inverse=False):
 	"""Crea una matriz segun las transformaciones comunes
 	pos_x, pos_y posicion x/y final
 	org_x, org_y el punto de origen de la transformación
 	angle angulo en radianes
 	scale_x scale_y la scale
-	inversa = False indica si es una matriz inversa (para patrones (puede fallar)) o normal, para contexto
-	en caso de ser una matriz inversa, los scales deben estar invertidos o sea, 1.0/scale"""
+	inverse = False indica si es una matriz inverse (para patrones (puede fallar)) o normal, para contexto
+	en caso de ser una matriz inverse, los scales deben estar invertidos o sea, 1.0/scale"""
 	m = cairo.Matrix()
 
 	#Evitamos errores de matrices no invertibles a costo de velocidad
-	if scale_x == 0: scale_x = 0.00001
-	if scale_y == 0: scale_y = 0.00001
+	if not scale_x: scale_x = 0.00001
+	if not scale_y: scale_y = 0.00001
 
-	if inversa:
+	if inverse:
 		#esto no está testeado asique ojo, sobretodo con el ultimo translate. puede ir sumado (o restado) con org
 		#el punto de origen para la POSICION en los dialogues no es el mismo que el punto de origen, y esta siempre en el baseline,
 		#por eso mismo. hay que sumarle el origen, esto no es "deseable" en las particulas pej, donde quermos que estén centradas.
@@ -101,7 +101,7 @@ def CrearMatriz(pos_x=0, pos_y=0, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=
 		m.translate(-pos_x, -pos_y)
 	else:
 		#para arreglar el problema aca estuve como 1 semana, hasta q empecé a escribir un mail al cairo list
-		#al tipear "parece que la rotacion se aplica _despues_ de la posicion" me acordé que esto tiene el concepto de "inversa"
+		#al tipear "parece que la rotacion se aplica _despues_ de la posicion" me acordé que esto tiene el concepto de "inverse"
 		#y dije, el orden es importante, quizas eso tamb está invertido... y asi resulto esto...
 		#recuerden lean la doc y piensen las cosas
 		m.translate(pos_x, pos_y)
@@ -113,19 +113,21 @@ def CrearMatriz(pos_x=0, pos_y=0, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=
 #Clases
 class cCairoColor():
 	"""Clase para ayudar con los colores sólidos"""
-	def __init__(self, numero=None, texto='', ccolor=None):
+	def __init__(self, numero=None, texto='', ccolor=None, components=None):
 		"""
 		3 formas
-		@numero creado como con DesdeNumero, recibe un entero (0xAARRGGBB)
-		@texto creado como con DesdeTexto, recibe un string ('AARRGGBB')
+		@numero creado como con FromNumber, recibe un entero (0xAARRGGBB)
+		@texto creado como con FromText, recibe un string ('AARRGGBB')
 		@ccolor creado como con CopyFrom, recibe un objeto del tipo cCairoColor
 		"""
-		if texto:
-			self.DesdeTexto(texto)
+		if numero is not None: #checkeamos con None porque 0 es valido pero es falso
+			self.FromNumber(numero)
+		elif texto:
+			self.FromText(texto)
 		elif ccolor:
 			self.CopyFrom(ccolor)
-		elif (numero is not None):
-			self.DesdeNumero(numero)
+		elif components:
+			self.a , self.r, self.g, self.b = components
 		else:
 			self.r= self.g= self.b= self.a=1.0
 
@@ -135,20 +137,22 @@ class cCairoColor():
 		video.cf.ctx.set_source_rgba(a.r, a.g, a.b, a.a)"""
 		return cairo.SolidPattern(self.r, self.g, self.b, self.a)
 
-	def DesdeTexto(self, color):
+	def FromText(self, color):
 		"""Crea un color desde otro
 		color puede ser '&HAARRGGBB' o 'AARRGGBB'
 		"""
-		if (color[0]=='&'): 		color = color[1:]
-		if color[0].lower()=='h': 	color = color[1:]
+		if color[0]=='&':
+			color = color[1:]
+		if color[0].lower()=='h':
+			color = color[1:]
 
 		color.zfill(8)#rellenamos con 0 a la izq si por alguna razon faltan
 		self.a = (255-ord(color[:2].decode('hex')))/255.0 #alfa,
 		self.b = ord(color[2:4].decode('hex'))/255.0 #blue
-		self.g = ord(color[4:6].decode('hex'))/255.0#green y lo movemos a la izq
+		self.g = ord(color[4:6].decode('hex'))/255.0 #green y lo movemos a la izq
 		self.r = ord(color[6:8].decode('hex'))/255.0 #red
 
-	def DesdeNumero(self,  color):
+	def FromNumber(self,  color):
 		"""Crea un color desde otro
 		color debe ser un entero: 31238231 o 0xAARRGGBB"""
 		self.b = (color & 0xFF) /255.0 #hacemos un and de 255 = b11111111 ,(o sea, tomamos los ocho bits)
@@ -198,29 +202,29 @@ class cVector():
 	"""
 	#Tipos de pintado
 	#Esto ha de corresponderse con basico.sources, definido acá para comodidad del user.
-	P_SOLIDO = 0
-	P_TEXTURA = 1
+	P_SOLID = 0
+	P_TEXTURE = 1
 	P_DEG_VERT = 2
 	P_DEG_HOR = 3
 	P_DEG_DIAG = 4
 	P_DEG_RAD = 5
 	P_AN_DEG_LIN = 6
 	P_AN_DEG_RAD = 7
-	P_PATRON_COLOREADO = 8
+	P_COLORED_PATTERN = 8
 	PART_BORDER = 0
 	PART_FILL = 1
 	PART_SHADOW = 2
-	PART_PARTICULA = 3
+	PART_PARTICLE = 3
 
-	def __init__(self, estilo=None, texto='', figura=None, parent=None):
+	def __init__(self, style=None, text='', figure=None, parent=None):
 		"""Parametros
-		@estilo objeto del tipo cProperties del cual heredar
-		@texto crea un objeto desde un texto
-		@figura lo crea desde una figura ass
+		@style objeto del tipo cProperties del cual heredar
+		@text crea un objeto desde un text
+		@figure lo crea desde una figure ass
 		@parent el objeto padre
 		"""
 		from libs import asslib #si no lo pongo aca no puede cargarlo,
-		# todo mover estas cosas donde corresponda
+		# todo mover estas cosas donde corresponda hay que agrupar los vectores!
 		self.progress = 0.0
 		self._end = 0
 		self._start = 0
@@ -228,19 +232,19 @@ class cVector():
 		self._indice = 0
 		self._parent = parent
 		self.effect = 0
-		self.texturas = [None, None, None, None] #border, fill, shadow, particulas
+		self.textures = [None, None, None, None] #border, fill, shadow, particulas
 		#Es la matriz de transformación del vector
 		self.matrix = cairo.Matrix()
 
-		self.original = asslib.cProperties(estilo)
-		self.actual = asslib.cProperties(estilo)
+		self.original = asslib.cProperties(style)
+		self.actual = asslib.cProperties(style)
 		self._text = ""
 		self.pointsw = None
 
-		if figura :
-			self.CreateFromFigure(figura)
-		elif texto:
-			self.ChangeText(texto)
+		if figure :
+			self.CreateFromFigure(figure)
+		elif text:
+			self.ChangeText(text)
 		else:
 			self._old_path = self.path = None
 
@@ -256,7 +260,7 @@ class cVector():
 		if vert == 1 : #bottom
 			props.pos_y = video.vi.height - props._marginv #- props._descent
 		elif vert == 2: #middle
-			props.pos_y = (video.vi.height - props._alto_linea )/2 #- props._descent
+			props.pos_y = (video.vi.height - props._line_height )/2 #- props._descent
 		else: #top
 			props.pos_y = props._marginv -props._y_bearing #+ props._alto_linea #- props._y_bearing
 		return
@@ -272,9 +276,9 @@ class cVector():
 		if horiz == 1:
 			props.pos_x = props._marginl
 		elif horiz == 2:
-			props.pos_x = ((video.vi.width - props._ancho) / 2.0)
+			props.pos_x = ((video.vi.width - props._width) / 2.0)
 		else:
-			props.pos_x = video.vi.width - props._ancho - props._marginr
+			props.pos_x = video.vi.width - props._width - props._marginr
 
 		return
 		"""if props.angle and not self._parent:
@@ -291,10 +295,10 @@ class cVector():
 		"""
 		ctx = video.cf.ctx
 		props = self.original
-		SetEstilo(props)
+		SetStyle(props)
 
-		props._x_bearing, props._y_bearing, props._ancho, props._alto, props._x_advance, props._y_advance = ctx.text_extents(self._text)
-		props._ascent, props._descent, props._alto_linea, props._max_x_advance, props._max_y_advance = ctx.font_extents()
+		props._x_bearing, props._y_bearing, props._width, props._height, props._x_advance, props._y_advance = ctx.text_extents(self._text)
+		props._ascent, props._descent, props._line_height, props._max_x_advance, props._max_y_advance = ctx.font_extents()
 
 		if lasts:
 			props.pos_x = lasts[0]
@@ -315,8 +319,8 @@ class cVector():
 			#tambien se podria usar self._parent.matrix
 			props._x_advance, props._y_advance = self._parent.matrix.transform_distance(props._x_advance, props._y_advance)
 		else:
-			props.org_x = (props._ancho/2.0)
-			props.org_y = -(props._alto_linea/2.0) + props._descent
+			props.org_x = (props._width/2.0)
+			props.org_y = -(props._line_height/2.0) + props._descent
 
 		self.actual.CopyAllFrom(props)
 		return (props.pos_x + props._x_advance, props.pos_y + props._y_advance)
@@ -327,14 +331,14 @@ class cVector():
 		"""
 		o = self.original
 		e = video.cf.ctx.path_extents()#x1,y2,x2,y2
-		o._ancho = e[2]-e[0]
-		o._alto  = o._alto_linea = (e[3]-e[1])
+		o._width = e[2]-e[0]
+		o._height  = o._line_height = (e[3]-e[1])
 		#el descent es casi como el e[1]
 		o._x_bearing = e[0]
 		o._y_bearing = e[1]
 
-		o.org_x = o._x_bearing + (o._ancho/2.0)
-		o.org_y = -(o._alto/2.0)
+		o.org_x = o._x_bearing + (o._width/2.0)
+		o.org_y = -(o._height/2.0)
 		self.actual.CopyAllFrom(o)
 
 	def GetShape(self):
@@ -368,15 +372,7 @@ class cVector():
 				else:
 					lp = ''
 					mapa[0] = 'm '
-
-				"""#oldcode, incompatible con vsfilter :B pero compatible con el import de esto
-				figura += mapa[t] #agregamos el tipo de punto
-				for coord in p:
-					figura += str(int(round(coord))) + ' '
-				if t==0:#si el ultimo tipo fue un 'm' cambiamos el m a n
-					mapa[0] = 'n '
-				if t==3:#si el ultimo fue c, reseteamos a m
-					mapa[0] = 'm '"""
+			figura += " c"
 		return figura
 
 
@@ -419,24 +415,24 @@ class cVector():
 	def _UpdateMatrix(self):
 		#updates the transformation matrix for the vector with the current style
 		a = self.actual
-		self.matrix = CrearMatriz(a.pos_x+a.org_x, a.pos_y-a.org_y, a.org_x, a.org_y, a.angle, a.scale_x, a.scale_y, False)
+		self.matrix = CreateMatrix(a.pos_x+a.org_x, a.pos_y-a.org_y, a.org_x, a.org_y, a.angle, a.scale_x, a.scale_y, False)
 
 	def _UpdateTextPath(self):
 		#Creates the path from a text, the style must be already set, position is ignored
-		SetEstilo(self.original)
+		SetStyle(self.original)
 		ctx = video.cf.ctx
 		ctx.new_path()
 		ctx.text_path(self._text)
 		self._old_path = self.path = ctx.copy_path()
 
-	def ChangeText(self, texto, last_pos=None):
+	def ChangeText(self, text, last_pos=None):
 		"""LENTO
-		Cambia el texto de un vector
-		@texto es el texto a usar
-		para la recreacion del texto se usaran las propiedades almacenadas en ORIGINAL y se recalcularán todos los valores de posicion, etc
+		Cambia el text de un vector
+		@text es el text a usar
+		para la recreacion del text se usaran las propiedades almacenadas en ORIGINAL y se recalcularán todos los valores de posicion, etc
 		opcionales:
 		@last_pos=None tupla (x,y) con la posicion final de la silaba anterior (como lo devuelve esta misma funcion)"""
-		self._text = texto
+		self._text = text
 		last = self._SetTextProps(last_pos)
 		self._UpdateTextPath()
 		return last #por las dudas si a algun tarado se le ocurre cambiar silabas, proveemos esto tamb.
@@ -604,42 +600,42 @@ class cVector():
 		self.actual.CopyFrom(self.original)
 		self.path = self._old_path
 
-	def PaintWithCache(self, conFondo=False, matriz=None):
+	def PaintWithCache(self, background=False, matrix=None):
 		"""Pinta un vector utilizando cache... notar que solo se crea la pintura la primera vez que se llama, luego se pintara lo cacheado
 		opcionales:
-		@conFondo=False Booleano indica si se pasa el fondo al texto (StartGroup con fondo)
-		@matriz=None la matriz de transformacion para el EndGroup
+		@background=False Booleano indica si se pasa el fondo al texto (StartGroup con fondo)
+		@matrix=None la matrix de transformacion para el EndGroup
 		"""
 		if self._pat_cache :
 			ctx = video.cf.ctx
 			ctx.set_source(self._pat_cache)
 			ctx.paint()
 		else:
-			self._pat_cache = self.Paint(conFondo, matriz)
+			self._pat_cache = self.Paint(background, matrix)
 		return self._pat_cache
 
-	def BorrarCache(self):
+	def DeleteCache(self):
 		#Elimina el cache de pintura, trivial, para facilitarte la vida.
 		self._pat_cache = None
 
-	def Paint(self, conFondo=False, matriz=None, matriz2=None):
+	def Paint(self, background=False, matrix=None, matrix2=None):
 		"""Pinta un vector utilizando el estilo actual
 		opcionales:
-		@conFondo=False Booleano indica si se pasa el fondo al texto (StartGroup con fondo)
-		@matriz=None la matriz de transformacion del VECTOR
-		@matriz2=None la matriz de transformación del EndGroup
+		@background=False Booleano indica si se pasa el fondo al texto (StartGroup con fondo)
+		@matrix=None la matrix de transformacion del VECTOR
+		@matrix2=None la matrix de transformación del EndGroup
 		"""
 		a = self.actual
 		ctx = video.cf.ctx
 		#empezamos un grupo por la shadow
-		avanzado.StartGroup(conFondo)
+		avanzado.StartGroup(background)
 
-		if matriz:
+		if matrix:
 			#para permitir el uso de matrices personalizadas para hacer
 			#unas transforamciones bien cochinas (como shear pej)
-			self.matrix = matriz
+			self.matrix = matrix
 		else:
-			#y sino usamos una matriz creada a partir de las propiedades animables
+			#y sino usamos una matrix creada a partir de las propiedades animables
 			self._UpdateMatrix()
 
 		ctx.set_matrix(self.matrix)
@@ -659,12 +655,12 @@ class cVector():
 		basico.sources[a.mode_fill](self, a.color1, 1)
 		ctx.fill()
 
-		#finalizamos el grupo y aplicamos la 2º matriz
-		#notar que la 2º matriz se afecta ya sobre el pattern, o sea,
+		#finalizamos el grupo y aplicamos la 2º matrix
+		#notar que la 2º matrix se afecta ya sobre el pattern, o sea,
 		#sobre el raster y no sobre el vector, eso trae consecuencias
-		pat = avanzado.EndGroup(0.0, matriz2)
+		pat = avanzado.EndGroup(0.0, matrix2)
 
-		#shadow. notar que la cargamos antes de restaurar la matriz identidad,
+		#shadow. notar que la cargamos antes de restaurar la matrix identidad,
 		#para q sea concordante en caso de no ser solida, y que los points de control no sean un caso y sean iguales en todos los casos (border/fill)
 		basico.sources[a.mode_shadow](self, a.color4, 2)
 
@@ -673,11 +669,11 @@ class cVector():
 		ctx.identity_matrix()
 		return pat
 
-	def PaintReference(self, matriz=None):
+	def PaintReference(self, matrix=None):
 		"""Pinta los points de referencia del vector, note que puede no estar sujeta a ciertas transformaciones"""
 		ctx = video.cf.ctx
-		if matriz:
-			self.matrix = matriz
+		if matrix:
+			self.matrix = matrix
 		else:
 			self._UpdateMatrix()
 		ctx.set_matrix(self.matrix)
@@ -711,51 +707,51 @@ class cVector():
 		o= self.original
 		bord= self.actual.border
 		#compatible con rectangle de cairo.....
-		return (-o._x_bearing-bord, -o._alto-bord, o._x_bearing+o._ancho+(bord*2), o._alto+o._descent+(bord*2))
+		return (-o._x_bearing-bord, -o._height-bord, o._x_bearing+o._width+(bord*2), o._height+o._descent+(bord*2))
 		#NO OLVIDAR QUE ES X, Y, ANCHO, ALTO
 
-	def Centro(self):
+	def Center(self):
 		"""Devuelve el punto central de un vector relativo al punto de posicion"""
 		"""o = self.original
 		x = o._width/2.0
 		props.org_y = -(props._alto_linea/2.0) + props._descent"""
-		x = self.actual.pos_x +(self.original._ancho/2.0)
-		y = self.actual.pos_y -(self.original._alto/2.0)
+		x = self.actual.pos_x +(self.original._width/2.0)
+		y = self.actual.pos_y -(self.original._height/2.0)
 		return (x, y) #deberia cambiarlo para que use las cosas como en el box pero no se si da.
 
-	def Mover(self, de, a, inter=comun.i_lineal):
-		"""Anima el movimiento de posicion de un vector desde _de_ hasta _a_
-		@de tupla (x,y)
-		@a tupla (x,y)
+	def Move(self, from_, to, inter=comun.i_lineal):
+		"""Anima el movimiento from_ posicion from_ un vector desde _de_ hasta _a_
+		@from_ tupla (x,y)
+		@to tupla (x,y)
 		"""
-		self.actual.pos_x = comun.Interpolate(self.progress, de[0], a[0], inter)
-		self.actual.pos_y = comun.Interpolate(self.progress, de[1], a[1], inter)
+		self.actual.pos_x = comun.Interpolate(self.progress, from_[0], to[0], inter)
+		self.actual.pos_y = comun.Interpolate(self.progress, from_[1], to[1], inter)
 
-	def MoverA(self, x, y, inter=comun.i_lineal):
+	def MoveTo(self, dx, dy, inter=comun.i_lineal):
 		"""Anima el movimiento de un vector desde el punto indicado hasta su posicion original
-		@x, y coordenada de punto inical relative to the original position
+		@dx, dy coordenada de punto inical relative to the original position
 		"""
 		org = self.original
 		px = org.pos_x
 		py = org.pos_y
-		self.Mover( (px, py), (x+px, y+py), inter)
+		self.Move( (px, py), (dx+px, dy+py), inter)
 
-	def MoverDe(self, x, y, inter=comun.i_lineal):
+	def MoveFrom(self, dx, dy, inter=comun.i_lineal):
 		"""Anima el movimiento de un vector hasta el punto indicado desde su posicion original
-		@x, y coordenada de punto final
+		@dx, dy coordenada de punto final
 		"""
 		org = self.original
 		px = org.pos_x
 		py = org.pos_y
-		self.Mover((px+x, py+y), (px, py), inter)
+		self.Move((px+dx, py+dy), (px, py), inter)
 
-	def Desvanecer(self, desde, hasta, inter=comun.i_lineal):
+	def Fade(self, from_, to, inter=comun.i_lineal):
 		"""Anima el fade de un vector
-		@desde float indicando el valor inicial
-		@hasta float con el valor final
+		@from_ float indicando el valor inicial
+		@to float con el valor final
 		ambos valores tienen un rango de 0 a 1
 		"""
-		self.Alpha(comun.Interpolate(self.progress, desde, hasta, inter))
+		self.Alpha(comun.Interpolate(self.progress, from_, to, inter))
 
 	def Alpha(self, alpha):
 		"""Especifica el alfa para todos los colores
@@ -763,41 +759,41 @@ class cVector():
 		"""
 		self.actual.color1.a = self.actual.color2.a = self.actual.color3.a = self.actual.color4.a = alpha
 
-	def Girar(self, desde, hasta, inter=comun.i_lineal):
+	def Rotate(self, from_, to, inter=comun.i_lineal):
 		"""Anima la rotacion de un vector
-		@desde angle inical en radianes
-		@hasta angle final en radianes
+		@from_ angle inical en radianes
+		@to angle final en radianes
 		"""
-		self.actual.angle = comun.Interpolate(self.progress, desde, hasta, inter)
+		self.actual.angle = comun.Interpolate(self.progress, from_, to, inter)
 
-	def Escalar(self, desde, hasta, inter=comun.i_lineal):
+	def Scale(self, from_, to_, inter=comun.i_lineal):
 		"""Anima el escalado de un vector
-		@desde scale incial
+		@from_ scale incial
 		@hasa scale final
 		ambos son float donde 1 es el valor normal >1 es mas grande y <1 es mas pequeño
 		"""
-		self.actual.scale_x = self.actual.scale_y = comun.Interpolate(self.progress, desde, hasta, inter)
+		self.actual.scale_x = self.actual.scale_y = comun.Interpolate(self.progress, from_, to_, inter)
 
-	def Sacudir(self, amplitud=4):
+	def Shake(self, amplitude=4):
 		"""
 		Anima la posición como un shake
-		@amplitud = cantidad de pixels que se moverá
+		@amplitude = cantidad de pixels que se moverá
 		"""
-		self.actual.pos_x = self.original.pos_x + comun.Interpolate(self.progress, -amplitud, amplitud, comun.i_rand)
-		self.actual.pos_y = self.original.pos_y +comun.Interpolate(self.progress, -amplitud, amplitud, comun.i_rand)
+		self.actual.pos_x = self.original.pos_x + comun.Interpolate(self.progress, -amplitude, amplitude, comun.i_rand)
+		self.actual.pos_y = self.original.pos_y +comun.Interpolate(self.progress, -amplitude, amplitude, comun.i_rand)
 
-	def Wiggle(self, amplitud=4, frecuencia=2):
+	def Wiggle(self, amplitude=4, frequency=2):
 		"""
 		Anima la posición como un movimiento entre points aleatorios
-		@amplitud = cantidad de pixels que se moverá
-		@frecuencia = cantidad de points a los que irá
+		@amplitude = cantidad de pixels que se moverá
+		@frequency = cantidad de points a los que irá
 		"""
-		if self.pointsw == None:
+		if self.pointsw is None:
 			self.pointsw = []
 			self.pointsw.append( (0, 0) )
-			for i in range(frecuencia):
-				randomx = comun.LERP(random(), -amplitud, amplitud)
-				randomy = comun.LERP(random(), -amplitud, amplitud)
+			for i in range(frequency):
+				randomx = comun.LERP(random(), -amplitude, amplitude)
+				randomy = comun.LERP(random(), -amplitude, amplitude)
 				self.pointsw.append( (randomx, randomy) )
 				self.pointsw.append( (0, 0) )
 		x, y = comun.RanmaBezier(self.progress, self.pointsw)
@@ -805,44 +801,44 @@ class cVector():
 		self.actual.pos_y = self.original.pos_y +y
 		return x, y
 
-	def CargarTextura(self, archivo, part=PART_BORDER, extend=cairo.EXTEND_REPEAT):
-		"""Esto carga la textura para todos los pintados, desde un archivo png
-		@archivo path al archivo .png
+	def LoadTexture(self, filename, part=PART_BORDER, extend=cairo.EXTEND_REPEAT):
+		"""Esto carga la textura para todos los pintados, desde un filename png
+		@filename path al filename .png
 		@part para que parte del texto se usará (0=border, 1=fill, 2=shadow, 3=particulas)
 		(o usar .PART_BORDER .PART_FILL .PART_SHADOW o .PART_PARTICULAS)
 		@extend tipo de extend de cairo default: cairo.EXTEND_REPEAT
 		"""
-		t = CargarTextura(archivo, extend)
-		self.texturas[part] = t
-		#esto es un fix para las texturas con otro extend.
-		self.MoverTextura(pos_x = 0, pos_y=-self.original._ascent, part=part)
+		t = LoadTexture(filename, extend)
+		self.textures[part] = t
+		#esto es un fix para las textures con otro extend.
+		self.MoveTexture(pos_x = 0, pos_y=-self.original._ascent, part=part)
 		a = self.actual
 		o = self.original
 		if part == self.PART_BORDER:
-			o.mode_border = a.mode_border = self.P_TEXTURA
+			o.mode_border = a.mode_border = self.P_TEXTURE
 		elif part == self.PART_FILL:
-			o.mode_fill = a.mode_fill = self.P_TEXTURA
+			o.mode_fill = a.mode_fill = self.P_TEXTURE
 		elif part == self.PART_SHADOW:
-			o.mode_shadow = a.mode_shadow = self.P_TEXTURA
-		elif part == self.PART_PARTICULA:
-			o.mode_particle = a.mode_particle = self.P_TEXTURA
+			o.mode_shadow = a.mode_shadow = self.P_TEXTURE
+		elif part == self.PART_PARTICLE:
+			o.mode_particle = a.mode_particle = self.P_TEXTURE
 
-	def MoverTextura(self, pos_x, pos_y, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=1, part=0):
-		self.texturas[part].set_matrix(CrearMatriz(pos_x, pos_y, org_x, org_y, angle, scale_x, scale_y, inversa=True))
+	def MoveTexture(self, pos_x, pos_y, org_x=0, org_y=0, angle=0, scale_x=1, scale_y=1, part=0):
+		self.textures[part].set_matrix(CreateMatrix(pos_x, pos_y, org_x, org_y, angle, scale_x, scale_y, inverse=True))
 
-	def CrearParticulas(self, textura=None, escala=1.0, alpha_min=0.2, barrido_vertical=True, mode=0):
+	def CreateParticles(self, texture=None, scale=1.0, alpha_min=0.2, vertical=True, mode=0):
 		"""Super Lento
 		parametros:
-		@textura -> pattern con la textura a usar
+		@texture -> pattern con la texture a usar
 		opcionales:
-		@scale=1.0 -> scale con la que se inicializarán todas las texturas
+		@scale=1.0 -> scale con la que se inicializarán todas las textures
 		@alpha_min=0.2 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
-		@barrido_vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
+		@vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
 		las partículas en el array, por lo tanto la forma en que se recorre
 		@mode=0 -> el mode de las particulas
 		"""
-		if not textura:
-			textura = self.texturas[3]
+		if not texture:
+			texture = self.textures[3]
 
 		#obtenemos el bounding box, y lo convertimos a todos a enteros
 		x1, y1, x2, y2 = map(int, self.Box())
@@ -860,27 +856,27 @@ class cVector():
 		#pintamos el vector/dialogo/silaba
 		self.Paint()
 		#creamos las particulas
-		parts = avanzado.CreateParticles(box, textura, escala, alpha_min, barrido_vertical, mode)
+		parts = avanzado.CreateParticles(box, texture, scale, alpha_min, vertical, mode)
 		avanzado.EndGroup(opacity=0.0)
 		return parts
 
-	def PaintReflection(self, alto = None):
-		"""@alto : el alto en pixels para el degradado, o None para usar el default"""
+	def PaintReflection(self, height = None):
+		"""@height : el height en pixels para el degradado, o None para usar el default"""
 
 		#cache
 		posy = self.actual.pos_y
-		alto_linea = self.original._alto_linea
+		alto_linea = self.original._line_height
 		descent = self.original._descent
-		alto = alto or self.original._alto
+		height = height or self.original._height
 
 		avanzado.StartGroup()
 		self.Paint()
 		avanzado.fBlur()
-		mt = CrearMatriz(org_y=posy-self.actual.org_y, pos_y=posy+alto_linea+descent, scale_y = -1)
+		mt = CreateMatrix(org_y=posy-self.actual.org_y, pos_y=posy+alto_linea+descent, scale_y = -1)
 		pat = avanzado.EndGroup(0.0, matrix= mt)
 
 		video.cf.ctx.set_source(pat)
-		lineal = cairo.LinearGradient(0, posy+alto, 0, posy+(alto*2.0))
+		lineal = cairo.LinearGradient(0, posy+height, 0, posy+(height*2.0))
 		lineal.add_color_stop_rgba(1, 0, 0, 0, 0)
 		lineal.add_color_stop_rgba(0, 1, 1, 1, 1)
 		video.cf.ctx.mask(lineal)
@@ -891,10 +887,10 @@ def DemultiplicarAlpha(b,g,r,a):
 	"""
 	@b, g, r, a
 	Todos los valores de 0 a 255"""
-	r = Demult(r, a)
-	g = Demult(g, a)
-	b = Demult(b, a)
-	return b, g, r, a
+	#z = Demult(r, a)
+	#g = Demult(g, a)
+	#b = Demult(b, a)
+	return Demult(b, a), Demult(g, a), Demult(r, a), a
 
 def D1(x):
 	return x/255.0
@@ -903,10 +899,9 @@ def D2(x):
 	return (x+0.5)/256.0
 
 def Demult(x, a):
-	from libs.comun import ClampB
-	return ClampB( int( ((x*a)-1) /254 ) )
+	return comun.ClampB( int( ((x*a)-1) /254 ) )
 
-def DuplicarSurface(surface):
+def DuplicateSurface(surface):
 	vi = video.vi
 	sfc2 = surface.create_similar(cairo.CONTENT_COLOR_ALPHA,  vi.width,  vi.height)
 	ctx2 = cairo.Context(sfc2)
@@ -915,5 +910,5 @@ def DuplicarSurface(surface):
 	ctx2.paint()
 	return sfc2
 
-def CopiarTarget():
-	return DuplicarSurface(video.cf.ctx.get_group_target())
+def CopyTarget():
+	return DuplicateSurface(video.cf.ctx.get_group_target())

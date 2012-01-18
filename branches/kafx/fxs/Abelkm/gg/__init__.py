@@ -4,8 +4,8 @@ import math
 class FX1(comun.Fx):
     def Chain2(self, l, p):
         l.progreso = p
-        l.MoverDe(0, -30)
-        l.Desvanecer(0, 1)
+        l.MoveFrom(0, -30)
+        l.Fade(0, 1)
         l.actual.scale_x = -math.cos(math.pi*p)
         l.Pintar()
 
@@ -13,8 +13,8 @@ class FX1(comun.Fx):
         sil.progreso = p
         #sil.Encadenar(self.Chain2)
         sil.progreso = p
-        sil.MoverDe(0, -30)
-        sil.Desvanecer(0, 1)
+        sil.MoveFrom(0, -30)
+        sil.Fade(0, 1)
         sil.actual.scale_x = -math.cos(math.pi*p)
         sil.Pintar()
 
@@ -31,7 +31,7 @@ class FX1(comun.Fx):
 
     def Chain3(self, d, p):
         d.progreso = p
-        d.Desvanecer(1,0)
+        d.Fade(1,0)
         d.actual.color.CopyFrom(d.actual.scolor)
         d.Pintar()
 

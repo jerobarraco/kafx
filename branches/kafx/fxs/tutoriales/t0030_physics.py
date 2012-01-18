@@ -2,13 +2,13 @@
 from libs import comun, physics
 from libs.draw import extra
 
-t1 = extra.CargarTextura("texturas/T_Negro2.png")
+t1 = extra.LoadTexture("textures/T_Negro2.png")
 world = None #globales no son buena idea, alentan todo y es mas dificil saber que estas haciendo
 objs = []
 objs2 = []
 class Efecto():
 	def EnSilabaInicia(self, sil):
-		parts = sil.CrearParticulas(t1, escala=0.5 )
+		parts = sil.CreateParticles(t1, scale=0.5 )
 		sil.parts = [parts[pos] for pos in xrange(0, len(parts), 5) ] #tomamos 1 cada 5 parts
 		sil.moving = False
 

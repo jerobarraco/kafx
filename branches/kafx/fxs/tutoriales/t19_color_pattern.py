@@ -6,13 +6,13 @@ power = 0.0
 
 class EfectoGenerico(comun.Fx):
 	def EnDialogoInicia(self, diag):
-		diag.CargarTextura('texturas/T_Negro2.png', diag.PART_RELLENO)
+		diag.LoadTexture('textures/T_Negro2.png', diag.PART_RELLENO)
 		diag.original.modo_relleno = diag.P_PATRON_COLOREADO
 	def EnDialogo(self, diag):
 		#Cuando el dialogo sea mostrado
 		diag.Pintar()#Lo pintamos en la pantalla
 	def EnSilabaInicia(self, sil):
-		sil.CargarTextura('texturas/T_Negro2.png', sil.PART_RELLENO)
+		sil.LoadTexture('textures/T_Negro2.png', sil.PART_RELLENO)
 		sil.original.modo_relleno = sil.P_PATRON_COLOREADO
 		
 	def EnSilaba(self, diag):

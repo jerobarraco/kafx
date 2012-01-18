@@ -2,7 +2,7 @@
 from libs import comun, physics
 from libs.draw import extra
 
-t = extra.CargarTextura("texturas/snowflake2.png")
+t = extra.LoadTexture("textures/snowflake2.png")
 #If you use physics in only one effect you can assign to "self" in that effect, that would make it slightly faster
 class Efecto():
 	def __init__(self):
@@ -10,7 +10,7 @@ class Efecto():
 
 	def EnSilabaInicia(self, sil):
 		global t
-		sil.parts = sil.CrearParticulas(t, escala=0.2)
+		sil.parts = sil.CreateParticles(t, scale=0.2)
 		sil.crear = True
 
 	def EnSilaba(self, sil):

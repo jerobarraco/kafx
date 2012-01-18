@@ -8,9 +8,9 @@ class TiposDePintados(comun.Fx):
 		d.modo_borde = d.P_SOLIDO
 		d.modo_relleno = d.P_TEXTURA
 		d.modo_sombra = d.P_DEG_VERT
-		d.CargarTextura('texturas/star1.png', parte=d.PART_RELLENO)
+		d.LoadTexture('textures/star1.png', parte=d.PART_RELLENO)
 		#para pintar con textura hay que hacer:
-		#diag.actual.texturas[1] = y cualquier cosa que sea un source, podes definir tus propios degradados
+		#diag.actual.textures[1] = y cualquier cosa que sea un source, podes definir tus propios degradados
 		#un color en especial (random? (aunque para eso mejor cambia el actual.color1) )
 		#o una textura con ImageSource
 
@@ -21,10 +21,10 @@ class TiposDePintados(comun.Fx):
 #Ejemplo de particulas con un animador personalizado
 class ParticulasConAnimadorPersonalizado(comun.Fx):
 		def __init__(self):
-			self.p = avanzado.cParticleSystem(png='texturas/snowflake2.png',
+			self.p = avanzado.cParticleSystem(png='textures/snowflake2.png',
 				max_parts=100, emitir_parts=10, max_life=3, modo=0, escala_a=0.5,
 				animador=self.panimador)
-			#png="texturas/blast.png", particulas=100, maxparticulas=10, color=None, maxlife=2, modo = 0, escala_de=1.0, escala_a=2.0, animador=None
+			#png="textures/blast.png", particulas=100, maxparticulas=10, color=None, maxlife=2, modo = 0, escala_de=1.0, escala_a=2.0, animador=None
 			#Parametros son:x, y , w, h, angulo, vel, apertura, grav_angulo=None, grav_vel=None
 			self.p.DarPosicion(0, 0)
 			self.p.DarVentana(30, 5)
@@ -77,7 +77,7 @@ class FX1(comun.Fx):
 class FX1(comun.Fx):
 	def __init__(self):
 		#Creamos el sistema de partículas
-		self.parts = avanzado.cParticleSystem(png="texturas/snowflake1.png",
+		self.parts = avanzado.cParticleSystem(png="textures/snowflake1.png",
 			max_life=3, emitir_parts= 30, escala_de=0.2, escala_a=2,
 			color=extra.cCairoColor(0x88FFFFFF), max_parts=30, modo=1)
 			

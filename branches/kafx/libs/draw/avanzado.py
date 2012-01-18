@@ -193,7 +193,7 @@ def fBlur1(steps=4, opacity=0.15):
 def fBlur1b(steps=6,  opacity=0.25):
 	"""El viejo blur..."""
 	ctx = video.cf.ctx
-	sfc=extra.CopiarTarget()
+	sfc=extra.CopyTarget()
 	for a in xrange(1, int(steps+1)):
 		for x in (-a, a):
 			for y in (-a, a):
@@ -315,7 +315,7 @@ def Shadow(pattern, size=5, offx=0, offy=0, paint=True):
 	StartGroup()
 	if size > 0 :
 		#recordar de setear el source ANTES de llamar
-		ctx.set_matrix(extra.CrearMatriz(offx, offy))
+		ctx.set_matrix(extra.CreateMatrix(offx, offy))
 		ctx.mask(pattern)
 		ctx.identity_matrix()
 		fBlur(size)
@@ -394,7 +394,7 @@ def StartGroup(copy_background=False):
 		ctx = video.cf.ctx
 		#si esto da algun tipo de "error" (como cuando la textura se repite o si da error o algo raro)
 		#activar la siguiente linea y comentar la otra
-		sfc = extra.CopiarTarget() #esto es mas lento pero quizas de menos problemas
+		sfc = extra.CopyTarget() #esto es mas lento pero quizas de menos problemas
 		#sfc = ctx.get_group_target()#esto es mas rapido pero puede traer problemas ademas no esta admitido legalemente por cairo, asi que se puede romper en cualquier momento
 		ctx.push_group()
 		ctx.set_source_surface(sfc, 0, 0)
@@ -420,7 +420,7 @@ def EndGroup(opacity=1.0, matrix=None):
 	return pat
 
 """
-#todo probar esto pero usando  extra.CopiarTarget
+#todo probar esto pero usando  extra.CopyTarget
 _time_blur_pat = None
 def fTimeBlur(opacidad=0.15):
 	global _time_blur_pat
@@ -450,7 +450,7 @@ def fRotoZoom(steps=4, opacity=0.25, scale=1, angle=0, org_x=0, org_y=0):
 		fescala = 1.0/(1.0+(a*scale)) #1/a*2
 		fangle += angle
 		pat.set_matrix(
-			extra.CrearMatriz(org_x, org_y, org_x, org_y, fangle, fescala, fescala, inversa=True)
+			extra.CreateMatrix(org_x, org_y, org_x, org_y, fangle, fescala, fescala, inverse=True)
 		)
 		ctx.paint_with_alpha(opacity)
 
@@ -465,7 +465,7 @@ def fWave( offset,  delta=0.1,  amplitude = 10,  vertical=True,  delete=True):
 	ctx = video.cf.ctx
 	vi = video.vi
 
-	sfc = extra.CopiarTarget()
+	sfc = extra.CopyTarget()
 
 	if delete:
 		ctx.set_operator(cairo.OPERATOR_CLEAR)
@@ -505,7 +505,7 @@ class cSprite():
 	def __init__(self, texture, x = 0, y = 0, angle=0, color=None, mode=1, scale=1.0):
 		"""
 		@texture : pattern que se usará como textura
-			(se puede cargar con extra.CargarTextura("archivo.png") o simplemente pasar el nombre de archivo "archivo.png")
+			(se puede cargar con extra.LoadTexture("archivo.png") o simplemente pasar el nombre de archivo "archivo.png")
 		@mode =1: 1-> textura solida, 0-> un solo color y mascara
 		@center =False: If true, then the sprite will be moved to be centered at the x/y (works better with squared textures)
 		"""
@@ -534,7 +534,7 @@ class cSprite():
 	def Paint(self):
 		"""Pinta la imagen sobre el cuadro según las propiedades
 		"""
-		self._pat.set_matrix(extra.CrearMatriz(self.x, self.y, self.org_x, self.org_y, self.angle, self.scale_x, self.scale_y, True))
+		self._pat.set_matrix(extra.CreateMatrix(self.x, self.y, self.org_x, self.org_y, self.angle, self.scale_x, self.scale_y, True))
 		ctx = video.cf.ctx
 		if self.mode:
 			ctx.set_source(self._pat)
@@ -597,7 +597,7 @@ class cParticleSystem():
 			self.life += self.fade
 			self.active = (self.life<1) #mas rapido (??) acuerdense que aca adentro estamos si p.active == True
 
-	def __init__(self, png="texturas/blast.png", emit_parts=5, max_parts=500, max_life=2, mode=None, color=None, scale_from=1.0, scale_to=2.0, rotation= 0.1, animator=None):
+	def __init__(self, png="textures/blast.png", emit_parts=5, max_parts=500, max_life=2, mode=None, color=None, scale_from=1.0, scale_to=2.0, rotation= 0.1, animator=None):
 		"""
 		todos los valores son opcionales
 
@@ -740,7 +740,7 @@ class cParticleSystem():
 				#Además para velocidad, x,y , xi, yi están premultiplicados por -1 (o sea, cambiados de signos)
 				#eso se hace una sola vez al crear la particula
 				self.pat.set_matrix(
-					extra.CrearMatriz( p.x, p.y, self.centx, self.centy, p.angle, p.scale, p.scale, True)
+					extra.CreateMatrix( p.x, p.y, self.centx, self.centy, p.angle, p.scale, p.scale, True)
 				)"""
 				if self.mode:
 					ctx.set_source_rgba(p.color.r, p.color.g, p.color.b, p.color.a)
@@ -757,7 +757,7 @@ def CreateParticles(box, texture, scale=1.0, alpha_min=0.2, vertical=True, mode=
 		@box -> tupla con las coordenadas de donde buscar (x0, y0, ancho, alto) (todos los items DEBEN ser enteros (int)))
 		@texture -> pattern que se usará como texture
 		opcionales:
-		@scale=1.0 -> scale con la que se inicializarán todas las texturas
+		@scale=1.0 -> scale con la que se inicializarán todas las textures
 		@alpha_min=0.2 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
 		@vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
 				las partículas en el array, por lo tanto la forma en que se recorre

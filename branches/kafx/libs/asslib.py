@@ -126,8 +126,16 @@ class cProperties():
 			self._descent = 0
 			self._max_x_advance = 0
 			self._max_y_advance = 0
+			#no necesitados, no los pongo porque si da error es porque hay algo mal en el codiog
+			#self._line_height = 0
+			#self._width = 0
 			if dicc:
 				self.FromDict(dicc)#porque al dict le pueden faltar valores
+		#estos no son necesarios, se cargan cuando se crea el vector
+		#los pongo solo porque ai el ide los toma
+		self._height = None
+		self._width = None
+		self._line_height = None
 
 	def CopyAllFrom(self, other):
 		#Esto es importante porque el estilo original de los dialgos se inicia en realidad pasandole un estilo al momento de crearlo
@@ -233,7 +241,7 @@ class cSilaba(extra.cVector):
 		cdur = float(self._dur) / len(self._text)
 		#agregamos los caracteres
 		for (i, tchar) in enumerate(self._text):
-			char = extra.cVector(estilo=self.original, parent=self)
+			char = extra.cVector(style=self.original, parent=self)
 			char._indice = i
 			char._start = time
 			char._dur = cdur

@@ -8,12 +8,12 @@ from random import randint
 
 class Fxpart (comun.Fx):
 	def __init__(self):
-		self.t = extra.CargarTextura("texturas/snowflake2.png")
+		self.t = extra.LoadTexture("textures/snowflake2.png")
 		self.parts_a_pintar = []
 
 	def EnLetraInicia(self, le):
 		le.actual.modo_relleno = le.P_DEG_VERT
-		le.parts = le.CrearParticulas(self.t, 0.2)
+		le.parts = le.CreateParticles(self.t, 0.2)
 		for p in le.parts:
 			p.movx = randint(-10, 10)
 			p.movy = randint(-10, 10)

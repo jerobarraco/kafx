@@ -11,14 +11,14 @@ class EfectoGenerico(comun.Fx):
 
 	def EnSilaba(self, diag):
 		avanzado.CapasActivar(2)
-		diag.MoverA(0,0)
+		diag.MoveTo(0,0)
 		diag.Pintar()# Pintamos la silaba en la pantalla
 
 		#Podemos activar cualquier capa en cualquier momento, tantas veces como queramos
 		#(de hecho cambiar de capa no consume muchos recursos) (no digo que sea instantaneo pero es bastante rapido)
 		#Tengan en cuenta que al activar una capa QUEDA ACTIVADA HASTA EL PROXIMO CUADRO!!! (o hasta que activen otra)
 		avanzado.CapasActivar(1)
-		diag.MoverA(10, 10)
+		diag.MoveTo(10, 10)
 		diag.actual.color1.r = 1.0
 		diag.Pintar()
 

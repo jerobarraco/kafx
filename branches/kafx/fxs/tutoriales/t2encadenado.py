@@ -23,7 +23,7 @@ class Kara(comun.Fx):
 			#Basicamente es para evitar producir efectos raros, metemos esto
 			sil.progreso = prog#Esto es para que las funciones internas de la silaba tomen el progreso
 			sil.actual.scale_x = sil.actual.scale_y = 4 - (prog*3)  #que se vaya achicando
-			sil.Desvanecer(0.0, 1.0)#podemos acceder a las funciones normales (dado a la linea sil.progreso=..)
+			sil.Fade(0.0, 1.0)#podemos acceder a las funciones normales (dado a la linea sil.progreso=..)
 			sil.Pintar()#very important...
 
 		diag.Encadenar(PorCadaSilabaHagoEsto)
@@ -40,7 +40,7 @@ class Kara(comun.Fx):
 		recibe la instancia en self"""
 		s.Restore()
 		s.progreso = p
-		s.Desvanecer(1, 0)
+		s.Fade(1, 0)
 		s.actual.scale_x = 1-p #para q vaya disminuyendo
 		s.Pintar()
 		#El problema d meterlo asi es que confunde con los otros metodos,
@@ -82,11 +82,11 @@ class Tradu(comun.Fx):#AVANZADO! si no entendes no importa
 		diag.Pintar()
 
 	def EnDialogoEntra(self,diag):
-		diag.Desvanecer(0,1)
+		diag.Fade(0,1)
 		diag.Pintar()
 
 	def EnDialogoSale(self, diag):
-		diag.Desvanecer(1,0)
+		diag.Fade(1,0)
 		diag.Pintar()
 
 class FxsGroup(comun.FxsGroup):

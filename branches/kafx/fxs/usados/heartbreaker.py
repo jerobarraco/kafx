@@ -11,7 +11,7 @@ from math import sin
 class FX1(comun.Fx):
 	def __init__(self):
 		#Cargamos una textura, notar que la textura queda almacenada en el self (o sea en FX1)
-		self.textura = comun.CargarTextura('texturas/scan.png')
+		self.textura = comun.CargarTextura('textures/scan.png')
 
 	def EnSilabaInicia(self, d):
 		#Cuando la silaba inicializa
@@ -21,7 +21,7 @@ class FX1(comun.Fx):
 		p= d.original.pos_x
 		#creamos una matriz y la guardamos en d (nuestra silaba)
 		#esto es porque es mas rapido crear una sola vez la matriz y usarla muchas veces
-		d.mat = extra.CrearMatriz(pos_x = random()*-300, pos_y = int(random()*100)*4)
+		d.mat = extra.CreateMatrix(pos_x = random()*-300, pos_y = int(random()*100)*4)
 		#*4: para q las lineas horizontales concuerden
 		if l ==1:
 			#el heart original
@@ -50,13 +50,13 @@ class FX1(comun.Fx):
 	def EnDialogoSale(self, d):
 		if d.original._capa>1 : return
 		d.actual.color1.CopiarDe(d.actual.color2)
-		d.Desvanecer(1,0)
+		d.Fade(1,0)
 		d.Pintar()
 
 	def EnDialogoEntra(self, d):
 		#obviamos de pintar ciertos dialogues que se repiten
 		if d.original._capa>5: return
-		d.Desvanecer(0,1)
+		d.Fade(0,1)
 		d.Pintar()
 
 	def EnSilabaMuerta(self, d):
@@ -91,12 +91,12 @@ class FX1(comun.Fx):
 		pat = d.Pintar()
 		
 		#escalamos el source para que no quede deformado el noise, asi conservamos un ruido con calidad
-		pat.set_matrix(extra.CrearMatriz(pos_x = random()*-5))
+		pat.set_matrix(extra.CreateMatrix(pos_x = random()*-5))
 		self.textura.set_matrix(d.mat)
 
 		#Si quisieramos que la textura de la mascara se vaya moviendo podriamos hacer esto
 		#x = comun.Interpolar(random(), -20, 20)
-		#self.textura.set_matrix(extra.CrearMatriz( pos_x=x, pos_y=x))
+		#self.textura.set_matrix(extra.CreateMatrix( pos_x=x, pos_y=x))
 
 		avanzado.StartGroup()
 		#asignamos la textura en pat como source
@@ -114,7 +114,7 @@ class FX2(comun.Fx):
 		d.original.modo_borde = d.P_DEG_VERT
 
 	def EnDialogoEntra(self,d):
-		d.Desvanecer(0,1)
+		d.Fade(0,1)
 		#hacemos que se vaya moviendo hacia abajo con velocidad en seno
 		d.actual.pos_y += sin(d.progreso*3.14)*10
 		d.Pintar()
@@ -123,7 +123,7 @@ class FX2(comun.Fx):
 		d.PintarConCache()
 
 	def EnDialogoSale(self,d):
-		d.Desvanecer(1,0)
+		d.Fade(1,0)
 		#hacemos que se vaya moviendo hacia arriba con velocidad en seno
 		d.actual.pos_y -= sin(d.progreso*3.14)*10
 		d.Pintar()

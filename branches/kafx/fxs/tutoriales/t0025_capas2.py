@@ -13,12 +13,12 @@ class EfectoGenerico(comun.Fx):
 	def EnSilaba(self, diag):
 		#esto es al pedo pero es para mostrar que una capa se puede activar muchas veces.
 		avanzado.CapasActivar('2 puede ser un nombre tambien pero es mas largo y lento')
-		diag.MoverA(0, 0)
+		diag.MoveTo(0, 0)
 		diag.Pintar()# Pintamos la silaba en la pantalla
 
 		#Asi demostramos como pintar una silaba por debajo del dialogo.. aunque esto podria ser hecho de otra manera
 		avanzado.CapasActivar('1 moviendose')
-		diag.MoverA(10, 10)
+		diag.MoveTo(10, 10)
 		diag.actual.color1.r = 1.0
 		diag.Pintar()
 

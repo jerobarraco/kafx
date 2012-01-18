@@ -6,29 +6,29 @@ import math
 
 class FX1(comun.Fx):
     def EnDialogo(self, s):
-        s.MoverTextura( 120*s.progreso, 120*s.progreso, parte = s.PART_BORDE)
+        s.MoveTexture( 120*s.progreso, 120*s.progreso, parte = s.PART_BORDE)
         s.Pintar()
 
     def EnDialogoSale(self, s):
-        s.Desvanecer(1, 0)
+        s.Fade(1, 0)
         s.Pintar()
 
     def EnDialogoInicia(self, s):
-        #Cargamos las texturas al INICIAR el dialogo, y le especificamos en que parte se usaran
-        s.CargarTextura('texturas/scan.png', s.PART_BORDE)
-        s.CargarTextura('texturas/cloud2.png', s.PART_RELLENO)
+        #Cargamos las textures al INICIAR el dialogo, y le especificamos en que parte se usaran
+        s.LoadTexture('textures/scan.png', s.PART_BORDE)
+        s.LoadTexture('textures/cloud2.png', s.PART_RELLENO)
 
     def EnSilaba(self, s):
         s.actual.modo_relleno = s.P_DEG_VERT
-        s.Desvanecer(1, 0.5)
-        s.Girar(0, -math.pi)
+        s.Fade(1, 0.5)
+        s.Rotate(0, -math.pi)
         s.Scale(1, 2)
         s.Pintar()
 
         s.Restore()
         s.actual.modo_relleno = s.P_AN_DEG_RAD
         s.Alpha(0.50000000000)
-        s.Mover((30, 30), (123, 60))
+        s.Move((30, 30), (123, 60))
         s.Pintar()
 
 

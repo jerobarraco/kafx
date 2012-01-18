@@ -4,7 +4,7 @@ from libs.draw import avanzado, extra
 #Hecho por AbelKM con sugerencias de Nande!
 #http://my.opera.com/kafx/blog/2011/09/18/tutorial
 
-textura = extra.CargarTextura('texturas/metal_pattern.png')
+textura = extra.LoadTexture('textures/metal_pattern.png')
 class FX1(comun.Fx):
 	def EnDialogo(self, d):
 		patron = avanzado.cSprite(texture=textura )

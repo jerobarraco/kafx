@@ -3,7 +3,7 @@ from libs import comun, physics
 from libs.draw import extra
 from libs.draw import avanzado
 
-t = extra.CargarTextura("texturas/snowflake2.png")
+t = extra.LoadTexture("textures/snowflake2.png")
 parts = []
 world = None
 class Efecto():

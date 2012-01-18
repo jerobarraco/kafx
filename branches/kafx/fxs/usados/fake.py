@@ -17,9 +17,9 @@ class FX1(comun.Fx):
 
 	def EnSilabaEntra(self, diag):
 		#cuando la silaba esta a punto de animarse, hacemos fade in
-		diag.Desvanecer(0, 1)
+		diag.Fade(0, 1)
 		#La movemos desde unos 40 pixels a la der y 20 arriba
-		diag.MoverDe(40, -20)
+		diag.MoveFrom(40, -20)
 		#Cambiamos la scale, de 0.5 a 1.0 (50% a 100%)
 		diag.Scale(0.5, 1.0)
 		#y finalmente la pintamos
@@ -28,11 +28,11 @@ class FX1(comun.Fx):
 	def EnSilabaSale(self, diag):
 		#Luego que se anime la silaba
 		#Hacemos fadeout
-		diag.Desvanecer(1, 0)
+		diag.Fade(1, 0)
 		#Reducimos la scale
 		diag.Scale(1, 0.5)
 		#La movemos unos 20 pixels a la izq y 20 arriba
-		diag.MoverA(-20, -20)
+		diag.MoveTo(-20, -20)
 		#Y la pintamos
 		diag.Pintar()
 
@@ -42,7 +42,7 @@ class FX2(comun.Fx):
 		#Elegimos una posicion aleatoria en -5/5 pixels de diferencia (para hacer un shake)
 		a.pos_x = a.pos_x + comun.Interpolar(random(), -5, 5) #Lo mismo q poner a.pos_x += comun.....
 		a.pos_y = a.pos_y + comun.Interpolar(random(), -5, 5)
-		diag.Desvanecer(0.5, 0.5)
+		diag.Fade(0.5, 0.5)
 
 		avanzado.StartGroup()
 		#Lo pintamos y le hacemos blur de 2 pasos
@@ -60,14 +60,14 @@ class FX2(comun.Fx):
 		avanzado.EndGroup()
 
 	def EnDialogoSale(self, diag):
-		diag.Desvanecer(1,0)
-		diag.MoverA(0, 20)
+		diag.Fade(1,0)
+		diag.MoveTo(0, 20)
 		diag.Scale(1, 0.5)
 		diag.Pintar()
 
 	def EnDialogoEntra(self, diag):
-		diag.Desvanecer(0, 1)
-		diag.MoverDe(40, -20)
+		diag.Fade(0, 1)
+		diag.MoveFrom(40, -20)
 		diag.Scale(0.5, 1.0)
 		diag.Pintar()
 

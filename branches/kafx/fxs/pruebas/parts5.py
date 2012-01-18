@@ -6,7 +6,7 @@ from math import pi, cos, sin, hypot, atan2
 
 class Fxpart (comun.Fx):
 	def __init__(self):
-		self.t = extra.CargarTextura("texturas/star1.png")
+		self.t = extra.LoadTexture("textures/star1.png")
 
 	def EnSilabaEntra(self, sil):
 		for p in sil.parts:
@@ -25,7 +25,7 @@ class Fxpart (comun.Fx):
 			p.Pintar()
 
 	def EnSilabaInicia(self, sil):
-		sil.parts = sil.CrearParticulas(self.t, 0.1)
+		sil.parts = sil.CreateParticles(self.t, 0.1)
 		sil.centx = sil.actual.pos_x +sil.actual.org_x
 		sil.centy = sil.actual.pos_y -sil.actual.org_y
 		print sil.actual.pos_x, sil.centx, sil.actual.pos_y, sil.centy

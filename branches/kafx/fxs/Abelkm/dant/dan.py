@@ -5,9 +5,9 @@ import math, random, cairo
 from math import pi, sin, cos
 
 
-t2 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/plata1.png', extend=cairo.EXTEND_REFLECT)
-t1 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/silver2.png', extend=cairo.EXTEND_REFLECT)
-t3 = extra.CargarTextura('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/texturas/win3.png', extend=cairo.EXTEND_REFLECT)
+t2 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/plata1.png', extend=cairo.EXTEND_REFLECT)
+t1 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/silver2.png', extend=cairo.EXTEND_REFLECT)
+t3 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/win3.png', extend=cairo.EXTEND_REFLECT)
 
 class FX1(comun.Fx):
 
@@ -28,8 +28,8 @@ class FX1(comun.Fx):
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.texturas[d.PART_BORDE] = t2
 		d.actual.modo_borde = d.P_TEXTURA
-		d.Desvanecer(1,0)
-		d.MoverA(random.randint(0, 30), 0)
+		d.Fade(1,0)
+		d.MoveTo(random.randint(0, 30), 0)
 		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fBlur1(3, comun.Interpolar(d.progreso, 0, 0.15, comun.i_b_ease_in))
@@ -42,8 +42,8 @@ class FX1(comun.Fx):
 		d.actual.modo_relleno = d.P_TEXTURA
 		d.texturas[d.PART_BORDE] = t2
 		d.actual.modo_borde = d.P_TEXTURA
-		d.Desvanecer(0,1)
-		d.MoverDe(random.randint(-30, 0), 0)
+		d.Fade(0,1)
+		d.MoveFrom(random.randint(-30, 0), 0)
 		avanzado.StartGroup()
 		d.Pintar()
 		avanzado.fBlur1(3, comun.Interpolar(d.progreso, 0.15, 0, comun.i_b_ease_in))
@@ -53,7 +53,7 @@ class FX1(comun.Fx):
 
 class Evento1(comun.Evento):
 		def __init__(self):
-			p = avanzado.cParticleSystem(png="texturas/win3.png", emit_parts=40,
+			p = avanzado.cParticleSystem(png="textures/win3.png", emit_parts=40,
 				modo = 0, max_parts=80, rotation= 0.1, scale_from=0.05, scale_to= 0.05,max_life=1)
 			p.DarAngulo(10, 2, 10)
 			p.DarGravedad(0, 1)

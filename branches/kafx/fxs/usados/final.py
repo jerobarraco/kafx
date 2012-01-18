@@ -8,7 +8,7 @@ class FX1(comun.Fx):
 	def __init__(self):
 		#Cuando inicia el effect (cuando se crea)
 		#Creamos el sistema de partículas
-		self.parts = avanzado.cParticleSystem(png="texturas/star3.png",
+		self.parts = avanzado.cParticleSystem(png="textures/star3.png",
 			max_life=3, max_parts=300, emit_parts=4, scale_from=0.2, scale_to=1,
 			color=extra.cCairoColor(0xFF7F7920),  modo=1)
 
@@ -18,12 +18,12 @@ class FX1(comun.Fx):
 		
 	def EnDialogoEntra(self, d):
 		#Fade-In cuando el dialogo entra
-		d.Desvanecer(0, 1)
+		d.Fade(0, 1)
 		d.Pintar()
 
 	def EnDialogoSale(self, d):
 		#Fade-out Cuando sale
-		d.Desvanecer(1, 0)
+		d.Fade(1, 0)
 		d.Pintar()
 		
 	def EnDialogo(self, d):
@@ -161,26 +161,26 @@ class FX1(comun.Fx):
 		
 
 class Tradu(comun.Fx):
-	#Notar que los moverDe MoverA y Mover estan sincronizados para que se mueva constantemente
+	#Notar que los moverDe MoveTo y Move estan sincronizados para que se mueva constantemente
 	#Pero con mayor velocidad cuando entra y sale
 	def EnDialogoInicia(self,d):
 		d.original.modo_relleno = d.P_DEG_VERT
 		
 	def EnDialogoEntra(self, d):
-		d.Desvanecer(0, 1)
-		d.MoverDe(10, 0)
+		d.Fade(0, 1)
+		d.MoveFrom(10, 0)
 		d.Pintar()
 
 	def EnDialogo(self, d):
-		d.MoverA(-10, 0)
+		d.MoveTo(-10, 0)
 		d.Pintar()
 
 	def EnDialogoSale(self, d):
 		#Hacemos que el dialogo salga desvaneciendoce, con un movimiento hacia la izquierda, desde -10 hasta -20
 		y = d.original.pos_y
 		x = d.original.pos_x
-		d.Mover((x-10, y), (x-20, y))
-		d.Desvanecer(1, 0)
+		d.Move((x-10, y), (x-20, y))
+		d.Fade(1, 0)
 		d.Pintar()
 
 class FxsGroup(comun.FxsGroup):
