@@ -216,7 +216,7 @@ class cVector():
 	PART_SHADOW = 2
 	PART_PARTICLE = 3
 
-	def __init__(self, style=None, text='', figure=None, parent=None):
+	def __init__(self, text='', style=None, figure=None, parent=None):
 		"""Parametros
 		@style objeto del tipo cProperties del cual heredar
 		@text crea un objeto desde un text
@@ -240,16 +240,16 @@ class cVector():
 		self.actual = asslib.cProperties(style)
 		self._text = ""
 		self.pointsw = None
-
-		if figure :
-			self.CreateFromFigure(figure)
-		elif text:
-			self.ChangeText(text)
-		else:
-			self._old_path = self.path = None
-
+		self._old_path = self.path = None
 		#el pattern usado por PaintWithCache, si se quiere reestablecer se puede proceder a borrar esta variable (asignandole None, nunca con "del _pat")
 		self._pat_cache = None
+		if figure :
+			self.CreateFromFigure(figure)
+		elif text is not None:
+			self.ChangeText(text)
+
+
+
 
 	def _SetTextVertPos(self):
 		"""Actualiza la posicion vertical segun la alineación

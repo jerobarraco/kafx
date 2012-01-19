@@ -214,8 +214,8 @@ class cSilaba(extra.cVector):
 
 		para que la silaba se pueda usar luego hay que llamar a CambiarTexto(text, preposicion)
 		"""
-		extra.cVector.__init__(self, style, parent=parent)
-		self._text = text
+		extra.cVector.__init__(self, text=text, style=style, parent=parent)
+		#self._text = text
 		#defaults to [] si its iterable, this is only created if the
 		#parameter FxsGroup.split_letters is True
 		#or if you call self.SplitLetters
@@ -312,7 +312,8 @@ class cDialogue(extra.cVector):
 		estilo._marginr = comun.SafeGetFloat(dialogue, S_MARGINR) or estilo._marginr
 		estilo._marginl = comun.SafeGetFloat(dialogue, S_MARGINL) or estilo._marginl
 
-		extra.cVector.__init__(self, estilo)
+		#notar que no le pasamos el texto aun
+		extra.cVector.__init__(self, style=estilo)
 
 		#Seteamos los tiempos, traducimos todo a frames
 		#guardamos los tiempos como ms para tener mas precisión

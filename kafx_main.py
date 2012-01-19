@@ -33,6 +33,7 @@ import cairo
 print 'Cairo cargado. Version:', cairo.version_info
 print 'Cargando KAFX...'
 from libs import video, comun, asslib
+
 #Poner librerias recien a partir de acá :D
 
 #hasta aca
@@ -43,7 +44,6 @@ print "Yay! se han cargado todas las librerias."
 #cf y vi es una gran chanchada, son los mismos objetos que en video (y deben ser los mismos)
 cf = None
 vi = None
-error_obj = asslib.cSilaba(asslib.cProperties())
 fx = None
 frames = []
 no_frames = [] #cache the wantframes, wich seems to be a very slow and important for optimization.
@@ -57,11 +57,11 @@ def DBug(msg):
 
 def PintarEnPantalla(msg):
 	"pone un texto en pantalla, super slow, soporta multilinea"
-	global error_obj
-	lasty = 15
-	for n in msg.split('\n'):
-		lasty = error_obj.ChangeText(n, (15, lasty))[1] + error_obj.original._alto_linea
+	props = asslib.cProperties()
+	for line in msg.split('\n'):
+		error_obj = asslib.cSilaba(line, props)
 		error_obj.Paint()
+		props.pos_y += error_obj.original._line_height
 
 def Error(msg=""):
 	"""Escribe un mensaje de error al archivo y en la pantalla,
