@@ -3,12 +3,12 @@ from PySide import QtGui
 import sys
 import subprocess as s
 import threading
-from PySide.QtCore import Qt
-from PySide.QtGui.QtWidget import tr
 
 class Encoder(threading.Thread):
-	def __init__(self,*args,**kwargs):
+	def __init__(self,inargs,outargs):
 		threading.Thread.__init__(self)
+		self.inargs=inargs
+		self.outargs=outargs
 
 	def run(self):
 		print "Soy el thread"
@@ -19,16 +19,18 @@ class MainWindow(QtGui.QWidget):
 		self.initUI()
 
 	def initUI(self):
+		self.file=None
+		self.w=None
+		self.h=None
+		self.fps=None
 		hbox=QtGui.QHBoxLayout()
 		vbox=QtGui.QVBoxLayout()
 		openViddeoButton=QtGui.QPushButton('Open Video',self)
 		openViddeoButton.clicked.connect(self.openVideo)
-		configVideoOutButton=QtGui.QPushButton('Video Out Settings',self)
-		configVideoOutButton.clicked.connect(self.configVideoOut)
 		encodingButton=QtGui.QPushButton('Encode',self)
-		vbox.addWidget(encodingButton)
+		encodingButton.clicked.connect(self.encode)
 		vbox.addWidget(openViddeoButton)
-		vbox.addWidget(configVideoOutButton)
+		vbox.addWidget(encodingButton)
 		hbox.addLayout(vbox)
 		self.setLayout(hbox)
 		vbox.addStretch(1)
@@ -38,10 +40,16 @@ class MainWindow(QtGui.QWidget):
 		self.show()
 
 	def openVideo(self):
-		a,b=QtGui.QFileDialog().getOpenFileName(self,tr('Open Video'),tr('~/'),tr('AVI files (*.*)'))
-		self.getVideoInfo(a)
-
-	def
+		self.file,self.filter=QtGui.QFileDialog().getOpenFileName(self,self.tr('Open Video'),self.tr('~/'),self.tr('AVI files (*.*)'))
+		self.getVideoInfo(self.file)
+		
+	def encode(self):
+		if self.file:
+			self.encoder=Encoder(['a','b','c'],['d','e','f'])
+			print self.encoder.inargs
+			print self.encoder.outargs
+		elif not self.file:
+			print "No file selected"
 
 	def getVideoInfo(self,video):
 		infop =s.Popen(['ffmpeg', '-i', video], stdout=s.PIPE, stderr=s.PIPE)
@@ -71,9 +79,6 @@ class MainWindow(QtGui.QWidget):
 def main():
 	app=QtGui.QApplication(sys.argv)
 	ex=MainWindow()
-	t1=Encoder()
-	t1.start()
-	t1.join()
 	sys.exit(app.exec_())
 
 if __name__=='__main__':
