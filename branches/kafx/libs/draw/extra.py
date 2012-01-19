@@ -262,7 +262,7 @@ class cVector():
 		elif vert == 2: #middle
 			props.pos_y = (video.vi.height - props._line_height )/2 #- props._descent
 		else: #top
-			props.pos_y = props._marginv -props._y_bearing #+ props._alto_linea #- props._y_bearing
+			props.pos_y = props._marginv -props._y_bearing #+ props._line_height #- props._y_bearing
 		return
 
 	def _SetTextHorizPos(self):
@@ -714,7 +714,7 @@ class cVector():
 		"""Devuelve el punto central de un vector relativo al punto de posicion"""
 		"""o = self.original
 		x = o._width/2.0
-		props.org_y = -(props._alto_linea/2.0) + props._descent"""
+		props.org_y = -(props._line_height/2.0) + props._descent"""
 		x = self.actual.pos_x +(self.original._width/2.0)
 		y = self.actual.pos_y -(self.original._height/2.0)
 		return (x, y) #deberia cambiarlo para que use las cosas como en el box pero no se si da.
