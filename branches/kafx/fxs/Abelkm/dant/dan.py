@@ -51,7 +51,7 @@ class FX1(comun.Fx):
 
 
 
-class Evento1(comun.Evento):
+class Evento1(comun.Event):
 		def __init__(self):
 			p = avanzado.cParticleSystem(png="textures/win3.png", emit_parts=40,
 				modo = 0, max_parts=80, rotation= 0.1, scale_from=0.05, scale_to= 0.05,max_life=1)
@@ -81,7 +81,7 @@ class Evento1(comun.Evento):
 		def TiempoLetra(self, letra):
 			return (letra._start, letra._end)
 
-class Evento2(comun.Evento):
+class Evento2(comun.Event):
         def EnLetra(self, letra):
 			global t3
 			letra.actual.color3.a = 0
@@ -99,7 +99,7 @@ class Evento2(comun.Evento):
         def TiempoLetra(self, letra):
                 return (letra._start - 5, letra._start)
 
-class Evento3(comun.Evento):
+class Evento3(comun.Event):
         def EnLetra(self, letra):
 			global t3
 			letra.actual.color3.a = 0
