@@ -74,7 +74,7 @@ class FX1(comun.Fx):
 
 
 
-class Evento1(comun.Evento):
+class Evento1(comun.Event):
         def EnLetra(self, letra):
 			global textura1
 			letra.actual.color3.a = 0

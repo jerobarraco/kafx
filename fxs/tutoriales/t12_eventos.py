@@ -3,7 +3,7 @@
 from libs import comun
 from random import random
 
-class EventoExtra(comun.Evento):
+class EventoExtra(comun.Event):
 	def EnSilaba(self, sil):
 		#este seria el evento extra para cada silaba
 		sil.Pintar()

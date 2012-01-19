@@ -9,7 +9,7 @@ Nota, este metodo es bastante ineficiente, y la idea es que luego se incluya un 
 funcion onda OnBarridoSilabaIn/Out pero aun no c q nombre ponerle."""
 
 class Kara(comun.Fx):
-	def EnDialogoEntra(self, diag):
+	def OnDialogueIn(self, diag):
 		"""Para hacer un efecto de barrido, lo que hacemos es llamar a la funcion Encadenar del dialogo
 		al definir el "Encadenado" en la funcion EnDialogoEntra estamos diciendo que queremos que el barrido
 		se realize cuando la funcion está entrando."""
@@ -21,12 +21,12 @@ class Kara(comun.Fx):
 			deben ser al menos dos (despues le podes agregar *args y **kwargs si queres)"""
 			sil.Restore() #Esto lo ponemos por la naturaleza de kafx
 			#Basicamente es para evitar producir efectos raros, metemos esto
-			sil.progreso = prog#Esto es para que las funciones internas de la silaba tomen el progreso
+			sil.progress = prog#Esto es para que las funciones internas de la silaba tomen el progreso
 			sil.actual.scale_x = sil.actual.scale_y = 4 - (prog*3)  #que se vaya achicando
 			sil.Fade(0.0, 1.0)#podemos acceder a las funciones normales (dado a la linea sil.progreso=..)
-			sil.Pintar()#very important...
+			sil.Paint()#very important...
 
-		diag.Encadenar(PorCadaSilabaHagoEsto)
+		diag.Chain(PorCadaSilabaHagoEsto)
 		"""Le decimos a q funcion tiene q llamar por cada silaba
 		noten que le pasamos solo EL NOMBRE nada de (),
 		sino estariamos llamando a la susodicha funcion.
@@ -39,17 +39,17 @@ class Kara(comun.Fx):
 		porque esta funcion pertenece a la clase Tradu (por ende
 		recibe la instancia en self"""
 		s.Restore()
-		s.progreso = p
+		s.progress = p
 		s.Fade(1, 0)
 		s.actual.scale_x = 1-p #para q vaya disminuyendo
-		s.Pintar()
+		s.Paint()
 		#El problema d meterlo asi es que confunde con los otros metodos,
 		#pero python lo ejecuta mejor, en una de esas lo pueden poner en otro modulo,
 		#porque no importa la instancia (igual, recomiendo que para efectos complejos,
 		#un modulo aparte para cada clase
 
-	def EnDialogoSale(self, diag):
-		diag.Encadenar(self.SilabasQueSalen, duracion=50)
+	def OnDialogueOut(self, diag):
+		diag.Chain(self.SilabasQueSalen, duration=50)
 		"""Este segundo parametro, q es opcional, dice cuanto tiempo queres
 		que se anime cada silaba si no se pone, se anima cada silaba con el tiempo maximo, sin que
 		se animen 2 a la vez.
@@ -62,10 +62,10 @@ class Kara(comun.Fx):
 	def Montanitas(self, s, p):
 		s.Restore()
 		s.actual.scale_y = 1 + sin(pi*p)
-		s.Pintar()
+		s.Paint()
 
-	def EnDialogo(self, diag):
-		diag.Encadenar(self.Montanitas)
+	def OnDialogue(self, diag):
+		diag.Chain(self.Montanitas)
 		#noten que se pueden usar varios efectos al mismo tiempo, traten de ser organizados
 		#PAra evitar pisarnos, uso el s.Restore()
 
@@ -78,16 +78,16 @@ class Tradu(comun.Fx):#AVANZADO! si no entendes no importa
 	un objeto del tipo string que no continee metodos especiales de cairo que yo implemente que facilitan
 	pintarlo"""
 
-	def EnDialogo(self, diag):
-		diag.Pintar()
+	def OnDialogue(self, diag):
+		diag.PaintWithCache()
 
-	def EnDialogoEntra(self,diag):
+	def OnDialogueIn(self,diag):
 		diag.Fade(0,1)
-		diag.Pintar()
+		diag.Paint()
 
-	def EnDialogoSale(self, diag):
+	def OnDialogueOut(self, diag):
 		diag.Fade(1,0)
-		diag.Pintar()
+		diag.Paint()
 
 class FxsGroup(comun.FxsGroup):
 	"""Explicacion:

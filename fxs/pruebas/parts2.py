@@ -8,7 +8,7 @@ from random import randint
 
 parts_a_pintar = []
 parts_a_pintar2 = []
-class Evento1(comun.Evento):
+class Evento1(comun.Event):
         def EnSilaba(self, sil):
                 global parts_a_pintar
                 parts_a_pintar.extend(
@@ -19,7 +19,7 @@ class Evento1(comun.Evento):
         def TiempoSilaba(self, sil):
                 return (sil._start-400, sil._start)
 
-class Evento2(comun.Evento):
+class Evento2(comun.Event):
         def EnSilaba(self, sil):
                 global parts_a_pintar2
                 parts_a_pintar2.extend(

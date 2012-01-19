@@ -300,49 +300,49 @@ class FxsGroup():
 class Fx():
 	"""Clase de la que desciende un effect"""
 	events = []
-	#Un array con events personalizados, debe contener instancias de la clase Evento
+	#Un array con events personalizados, debe contener instancias de la clase Event
 
-	def OnDialogue(self, *args):
+	def OnDialogue(self, diag):
 		pass
-	def OnSyllable(self, *args):
+	def OnSyllable(self, sil):
 		pass
-	def OnLetter(self, *args):
+	def OnLetter(self, let):
 		pass
 
 
-	def OnSyllableDead(self, *args):
+	def OnSyllableDead(self, sil):
 		pass
-	def OnSyllableSleep(self, *args):
+	def OnSyllableSleep(self, sil):
 		#Sílaba dormida común (el progress es igual para todas las sílabas dormidas del mismo diálogo)
 		pass
-	def OnLetterDead(self, *args):
+	def OnLetterDead(self, let):
 		pass
-	def OnLetterSleep(self, *args):
+	def OnLetterSleep(self, let):
 		pass
 
 	#Hasta aca son las animaciones normales
-	def OnDialogueIn(self, *args):
+	def OnDialogueIn(self, diag):
 		pass
-	def OnSyllableIn(self, *args):
+	def OnSyllableIn(self, sil):
 		pass
-	def OnLetterIn(self, *args):
-		pass
-
-	def OnDialogueOut(self, *args):
-		pass
-	def OnSyllableOut(self, *args):
-		pass
-	def OnLetterOut(self, *args):
+	def OnLetterIn(self, let):
 		pass
 
-	def OnDialogueStarts(self, *args):
+	def OnDialogueOut(self, diag):
 		pass
-	def OnSyllableStarts(self, *args):
+	def OnSyllableOut(self, sil):
 		pass
-	def OnLetterStarts(self, *args):
+	def OnLetterOut(self, let):
 		pass
 
-class Evento():
+	def OnDialogueStarts(self, diag):
+		pass
+	def OnSyllableStarts(self, sil):
+		pass
+	def OnLetterStarts(self, let):
+		pass
+
+class Event():
 	def OnSyllable(self, sil):
 		pass
 	def OnDialogue(self, diag):
