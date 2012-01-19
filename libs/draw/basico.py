@@ -32,7 +32,7 @@ def Linear(x,y,x1,y1,c1,c2):
 def SDegradadoVertical(obj, color, part):
 	"""Setea el source como un dergadado lineal verticalmente, el alto del degradado es el alto de la linea,
 	para que sea el mismo aun pintando diferentes sílabas por separado"""
-	Linear(0, -obj.original._alto_linea, 0, 0, color, obj.actual.color2)
+	Linear(0, -obj.original._line_height, 0, 0, color, obj.actual.color2)
 
 def SDegradadoHorizontal(obj, color, part):
 	"""Setea el source como un degradado lineal horizontalmente"""
@@ -40,7 +40,7 @@ def SDegradadoHorizontal(obj, color, part):
 
 def SDegradadoDiagonal(obj, color, part):
 	"""Setea el source con un degradado lineal en diagonal desde arriba a la izquierda a abajo a la derecha"""
-	Linear(0, -obj.original._alto_linea, obj.original._ancho,0, color, obj.actual.color2)
+	Linear(0, -obj.original._line_height, obj.original._ancho,0, color, obj.actual.color2)
 
 def SDegradadoRadial(obj, color, part):
 	"""Setea el source como un degradado radial con centro en el punto de origen"""
@@ -60,7 +60,7 @@ def SDegradadoLinealAnimado(obj, color, part):
 	hasta = a.color2
 	lineal = cairo.LinearGradient(a.pos_x, a.pos_y,
 		a.pos_x+ (obj.original._ancho*obj.progress)
-		, a.pos_y + (obj.original._alto_linea*obj.progress))
+		, a.pos_y + (obj.original._line_height*obj.progress))
 	lineal.add_color_stop_rgba(obj.progress, color.r, color.g, color.b, color.a)
 	lineal.add_color_stop_rgba(1, hasta.r, hasta.g, hasta.b, hasta.a)
 	video.cf.ctx.set_source(lineal)
