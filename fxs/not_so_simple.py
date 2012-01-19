@@ -27,7 +27,7 @@ class FX1(comun.Fx):
 			s.Paint()
 
 		#Salida: un fadeout x silaba
-		def OnSyllableOut(self, s):
+		def OnDialogueOut(self, s):
 			s.Fade(1, 0)#fadeout
 			s.Paint()
 
