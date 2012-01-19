@@ -198,7 +198,7 @@ class cVector():
 	Incluye las cosas basicas de pintado de cairo
 	basicamente puede ser instanciada,
 	pasandole @texto o @figura al instanciarlo o llamando luego a
-	ChangeText o CreateFromFigure respectivamente
+	SetText o CreateFromFigure respectivamente
 	"""
 	#Tipos de pintado
 	#Esto ha de corresponderse con basico.sources, definido acá para comodidad del user.
@@ -216,7 +216,7 @@ class cVector():
 	PART_SHADOW = 2
 	PART_PARTICLE = 3
 
-	def __init__(self, text='', style=None, figure=None, parent=None):
+	def __init__(self, text='', style=None, figure=None, parent=None, last_pos = None):
 		"""Parametros
 		@style objeto del tipo cProperties del cual heredar
 		@text crea un objeto desde un text
@@ -231,13 +231,17 @@ class cVector():
 		self._dur = 0
 		self._indice = 0
 		self._parent = parent
+		self._next_x = 0
+		self._next_y = 0
 		self.effect = 0
 		self.textures = [None, None, None, None] #border, fill, shadow, particulas
 		#Es la matriz de transformación del vector
-		self.matrix = cairo.Matrix()
 
 		self.original = asslib.cProperties(style)
 		self.actual = asslib.cProperties(style)
+		self.matrix = None
+		self._UpdateMatrix()
+
 		self._text = ""
 		self.pointsw = None
 		self._old_path = self.path = None
@@ -246,10 +250,8 @@ class cVector():
 		if figure :
 			self.CreateFromFigure(figure)
 		elif text is not None:
-			self.ChangeText(text)
-
-
-
+			self.SetText(text, last_pos=last_pos)
+	#fin def
 
 	def _SetTextVertPos(self):
 		"""Actualiza la posicion vertical segun la alineación
@@ -279,11 +281,9 @@ class cVector():
 			props.pos_x = ((video.vi.width - props._width) / 2.0)
 		else:
 			props.pos_x = video.vi.width - props._width - props._marginr
-
 		return
 		"""if props.angle and not self._parent:
 				props.pos_x, props.pos_y = self.matrix.transform_distance(props.pos_x, props.pos_y)"""
-
 
 	def _SetTextProps(self, lasts=None):
 		"""Setea las propiedades de un objeto segun el texto,
@@ -323,7 +323,8 @@ class cVector():
 			props.org_y = -(props._line_height/2.0) + props._descent
 
 		self.actual.CopyAllFrom(props)
-		return (props.pos_x + props._x_advance, props.pos_y + props._y_advance)
+		self._next_x = props.pos_x + props._x_advance
+		self._next_y = props.pos_y + props._y_advance
 
 	def _SetPathProps(self):
 		"""Pone las propiedades de un path.
@@ -425,7 +426,7 @@ class cVector():
 		ctx.text_path(self._text)
 		self._old_path = self.path = ctx.copy_path()
 
-	def ChangeText(self, text, last_pos=None):
+	def SetText(self, text, last_pos=None):
 		"""LENTO
 		Cambia el text de un vector
 		@text es el text a usar
@@ -433,9 +434,8 @@ class cVector():
 		opcionales:
 		@last_pos=None tupla (x,y) con la posicion final de la silaba anterior (como lo devuelve esta misma funcion)"""
 		self._text = text
-		last = self._SetTextProps(last_pos)
+		self._SetTextProps(last_pos)
 		self._UpdateTextPath()
-		return last #por las dudas si a algun tarado se le ocurre cambiar silabas, proveemos esto tamb.
 
 	def Deform(self, func):
 		"""Deforma el vector del objeto,

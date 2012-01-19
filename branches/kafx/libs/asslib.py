@@ -205,7 +205,7 @@ class cProperties():
 		self._align = int(comun.SafeGetFloat(style, S_ALIGN))
 
 class cSilaba(extra.cVector):
-	def __init__(self,  text='', style=None, parent=None):
+	def __init__(self,  text='', style=None, parent=None, last_pos=None):
 		"""
 		Una silaba, es mejor dejar que las cree el dialogo porque necesitan una inicializacion especial
 		@text text de la silaba
@@ -214,7 +214,8 @@ class cSilaba(extra.cVector):
 
 		para que la silaba se pueda usar luego hay que llamar a CambiarTexto(text, preposicion)
 		"""
-		extra.cVector.__init__(self, text=text, style=style, parent=parent)
+		extra.cVector.__init__(
+			self, text=text, style=style, parent=parent, last_pos=last_pos)
 		#self._text = text
 		#defaults to [] si its iterable, this is only created if the
 		#parameter FxsGroup.split_letters is True
@@ -234,20 +235,21 @@ class cSilaba(extra.cVector):
 		last = (self.original.pos_x, self.original.pos_y)
 		#Si hay chars
 		if not self._text:#atrapa '' y None
-			self._text = ' '
+			self._text = ''
 			#para evitar codigo duplicado, de igual manera no deberias llamar a esto sin texto Ã²_Ã³
 
 		#calculamos la duracion de cada caracter
 		cdur = float(self._dur) / len(self._text)
 		#agregamos los caracteres
 		for (i, tchar) in enumerate(self._text):
-			char = extra.cVector(style=self.original, parent=self)
+			char = extra.cVector(
+				text = tchar, style=self.original, parent=self, last_pos=last)
 			char._indice = i
 			char._start = time
 			char._dur = cdur
 			char._end = time = (time + cdur)
-			char.effect = self.effect #no sirve de nada pero bueno
-			last = char.ChangeText(tchar, last)
+			char.effect = self.effect
+			last = (char._next_x, char._next_y)
 			self._letters.append(char)
 
 	def Chain(self, function, duration=None):
@@ -289,7 +291,6 @@ class cDialogue(extra.cVector):
 	Posee herramientas para tomar el texto, cada una de las Syllables del texto y sus tiempos de karaoke.
 	Este objeto es el mas complejo, casi imposible que lo crees vos, mejor usar cSilaba o directamente extra.cVector
 	"""
-
 	def __init__(self, dialogue, styles, max_effect = 0):
 		"""
 		@dialogue es la linea de dialogo en forma ass (interno)
@@ -313,7 +314,8 @@ class cDialogue(extra.cVector):
 		estilo._marginl = comun.SafeGetFloat(dialogue, S_MARGINL) or estilo._marginl
 
 		#notar que no le pasamos el texto aun
-		extra.cVector.__init__(self, style=estilo)
+		extra.cVector.__init__(self, text=None, style=estilo)
+		#text=None hace que no cree el path, cuidado! si no llamamos a changeText el path no se creará y dará error!
 
 		#Seteamos los tiempos, traducimos todo a frames
 		#guardamos los tiempos como ms para tener mas precisión
@@ -324,41 +326,12 @@ class cDialogue(extra.cVector):
 		#Ponemos que effect debe usar
 		self.effect = min(max_effect, int(comun.SafeGetFloat(dialogue, E_EFFECT)))
 
-		#Cargamos las Syllables (esta funciÃ³n setea el _text)
+		#Cargamos las Syllables (esta funcion setea el _text)
 		self.__SetSyllables( dialogue[E_TEXT] )
 		#El texto lo sabemos luego de parsear las Syllables
-		self.ChangeText(self._text)
+		#self.SetText(self._text)
 
-		#Como la pos depende de la alineacion y por ende del tamaÃ±o del texto, solo lo podemos
-		#hacer despues de parsear las Syllables
-		o = self.original
-		px= o.pos_x
-		py= o.pos_y
 
-		if o.angle :
-			"""#esto funciona bastante bien pero obliga a cambiarle el origen a 0,0
-			#se compportaria como si el dialogo tuviese \an1
-			o.org_x = 0
-			o.org_y = 0
-			pre = px, py
-			"""
-
-			"""
-			#basico y obsoleto (tendria problemas con scale y translates)
-			r = sqrt((px**2)+(py**2))
-			pre = cos(o.angle)*r , sin(o.angle)*r
-			"""
-
-			#esto tendria que usarse en caso del angle pero no funciona bien (aun)
-			#creamos la matriz de transformacion del dialogo
-			self._UpdateMatrix()
-			#y calculamos el punto 0,0 del dialogo, que es el punto de inicio del texto
-			pre = self.matrix.transform_point(0, 0)
-		else:
-			pre = px, py
-
-		for sil in self._syllables:
-			pre = sil.ChangeText(sil._text, pre)
 
 	def __SetSyllables(self, texto):
 		"""crea los objetos Syllables de un dialogo,
@@ -366,10 +339,6 @@ class cDialogue(extra.cVector):
 
 		Zheo y Alchemist, grax chicos, son grosos! :D"""
 		import re
-		self._text = ''
-		self._syllables = []
-		tiempo = self._start
-		i = 0
 		"""
 		{(?:\\.)* = toma cualkier cosa, esto se hizo por si alguien ponian algun effect y despeus el \k, pues toma el \k y bota el resto
 		\\(?:[kK]?[ko]?[kf])  = toma los \k, \kf, \ko y \K
@@ -394,19 +363,35 @@ class cDialogue(extra.cVector):
     (\s+)*                      # postspace
     ''',
     re.IGNORECASE | re.UNICODE | re.VERBOSE)"""
-
 		texto = re.sub(r'({[\s\w\d]+})*', '', texto) #quita los comentarios o  tags que no comienzen con \
 		pattern = r'(?:\\[k]?[K|ko|kf])(\d+)(?:\\[\w\d]+)*(\\-[\w\d]+)*(?:\\[\w\d]+)*}([^\{\}]+)*'
 		#pattern = r"{(?:\\.)*\\(?:[kK]?[ko]?[kf])(\d+)([\\\-a-zA-Z_0-9]*)}([^{]*)"#anterior
-		for ti, ifx, tx in re.findall(pattern, texto):
-			syl = cSilaba(tx, self.original, parent=self)
+		info = list(re.findall(pattern, texto))
+		plain_text = ''.join([tx for ti, ifx, tx in info])
+		if not plain_text:#no se porque hace esto, quizás si no hay {\k} el re no devuelve nada.
+			plain_text = re.sub(r'{.*}', '', texto) # lineas (quitando las tags)
+		self.SetText(plain_text)
+		#Como la pos depende de la alineacion y por ende del tamaÃ±o del texto, solo lo podemos
+		#hacer despues de parsear las Syllables
+		if self.original.angle:
+			#esto tendria que usarse en caso del angle pero no funciona bien (aun)
+			#y calculamos el punto 0,0 del dialogo, que es el punto de inicio del texto
+			pre = self.matrix.transform_point(0, 0)
+		else:
+			pre = self.original.pos_x, self.original.pos_y
+
+		self._syllables = []
+		tiempo = self._start
+		i = 0
+		for ti, ifx, tx in info:
+			syl = cSilaba(tx, self.original, parent=self, last_pos=pre)
 			syl._indice = i
 			syl._start = tiempo
 
 			dur = int(ti)*10.0
 
 			syl._dur = dur
-			syl._end = tiempo =  syl._start + syl._dur
+			syl._end = tiempo = syl._start + syl._dur
 
 			if len(ifx)>2 :
 				try:
@@ -418,11 +403,8 @@ class cDialogue(extra.cVector):
 			#Ponemos ifx a none para permitir efectos = 0
 			syl.effect = ifx or self.effect
 			self._syllables.append(syl)
-			self._text += tx
 			i += 1
-
-		if not self._text: #no se porque hace esto, quizás si no hay {\k} el re no devuelve nada.
-			self._text = re.sub(r'{.*}', '', texto) # lineas (quitando las tags)
+			pre = syl._next_x, syl._next_y
 
 	def Chain(self, function, duration=None):
 		"""Permite encadenar las syllables a una animacion
