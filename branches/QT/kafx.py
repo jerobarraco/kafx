@@ -5,10 +5,9 @@ import subprocess as s
 import threading
 
 class Encoder(threading.Thread):
-	def __init__(self,inargs,outargs):
+	def __init__(self,in_args,out_args):
 		threading.Thread.__init__(self)
-		self.inargs=inargs
-		self.outargs=outargs
+		
 
 	def run(self):
 		print "Soy el thread"
@@ -16,6 +15,22 @@ class Encoder(threading.Thread):
 class MainWindow(QtGui.QWidget):
 	def __init__(self):
 		super(MainWindow,self).__init__()
+		
+		self.in_args = [
+					#video to decode
+					'ffmpeg',  '-i', 'video_in.avi',
+					#pipe data
+					'-pix_fmt', 'rgb32', '-f', 'rawvideo', '-y', '-' #-y IS important
+					]
+		
+		self.out_args= [
+					'-i' , 'video_in.avi' , '-map','0:0', '-map', '1:1',#this is used to copy the audio from the original video
+					'-sameq',
+					'-acodec', 'libmp3lame', '-ab', '192k',
+					'-vcodec', 'mpeg4', '-vtag', 'xvid',
+					'-y', 'video_out.avi']
+		
+		
 		self.initUI()
 
 	def initUI(self):
@@ -45,9 +60,9 @@ class MainWindow(QtGui.QWidget):
 		
 	def encode(self):
 		if self.file:
-			self.encoder=Encoder(['a','b','c'],['d','e','f'])
-			print self.encoder.inargs
-			print self.encoder.outargs
+			self.encoder=Encoder(self.in_args,self.out_args)
+			print self.in_args
+			print self.out_args
 		elif not self.file:
 			print "No file selected"
 
