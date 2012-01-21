@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from PySide import QtGui
+from PySide.QtCore import QProcess
 import sys
 import subprocess as s
 import threading
@@ -50,6 +51,7 @@ class MainWindow(QtGui.QWidget):
 	def encode(self):
 		if self.file:
 			self.encoder=Encoder(self.in_args,self.out_args,self.framesize)
+			self.encoder.start()
 			print self.in_args
 			print self.out_args
 		elif not self.file:
@@ -90,8 +92,6 @@ class Encoder(threading.Thread):
 		self.outargs=outargs
 		self.dec=s.Popen(self.inargs, bufsize=self.framesize, stdout=s.PIPE, stderr=open('in_err.txt','w'))
 		self.enc=s.Popen(self.outargs, bufsize=self.framesize, stdin=s.PIPE)#, stdout=s.PIPE)
-		
-
 	def run(self):
 		print "Soy el thread"
 
