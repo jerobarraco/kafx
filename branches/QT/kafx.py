@@ -4,6 +4,7 @@ from PySide.QtCore import QProcess
 import sys
 import subprocess as s
 import threading
+import array
 
 class MainWindow(QtGui.QWidget):
 	def __init__(self):
@@ -93,7 +94,14 @@ class Encoder(threading.Thread):
 		self.dec=s.Popen(self.inargs, bufsize=self.framesize, stdout=s.PIPE, stderr=open('in_err.txt','w'))
 		self.enc=s.Popen(self.outargs, bufsize=self.framesize, stdin=s.PIPE)#, stdout=s.PIPE)
 	def run(self):
-		print "Soy el thread"
+		cuadro=0
+		while self.dec.poll() == None:
+			out = array.array('B')
+			try:
+				out.fromfile(self.dec.stdout, self.framesize)
+			finally:
+				out.tofile(self.enc.stdin)
+				cuadro+=1
 
 
 def main():
