@@ -212,60 +212,56 @@ class Evento1():
 					world.DestroySprite(b)
 				sil.bull = []
 			else:
+				factual = video.cf.framen
+				micolor = extra.cCairoColor()
+				if factual<=571:
+					micolor.CopyFrom(colora)
+				elif 572<=factual<=694:
+					micolor.CopyFrom(colorb)
+				elif 695<=factual<=700:
+					micolor.CopyFrom(colorc)
+					micolor.Interpolate((700-factual)/float(700-695), colorb)
+
+				elif 701<=factual<=825:
+					micolor.CopyFrom(colorc)
+
+				elif 826<=factual<=833:
+					micolor.CopyFrom(colord)
+					micolor.Interpolate((833-factual)/float(833-826), colorc)
+				elif 834<=factual<=904:
+					micolor.CopyFrom(colord)
+				elif 905<=factual<=970:
+					micolor.CopyFrom(colore)
+				elif 971<=factual<=1127:
+					micolor.CopyFrom(colorf)
+
+				elif 1128<=factual<=1255:
+					micolor.CopyFrom(colorg)
+				elif 1256<=factual<=1400:
+					micolor.CopyFrom(colorh)
+				elif 1401<=factual<=1520:
+					micolor.CopyFrom(colori)
+				elif 1521<=factual<=1667:
+					micolor.CopyFrom(colorj)
+				elif 1668<=factual<=1751:
+					micolor.CopyFrom(colorm)
+				elif 1752<=factual<=1824:
+					micolor.CopyFrom(colorn)
+				elif 1825<=factual<=1940:
+					micolor.CopyFrom(colorg)
+				elif 1941<=factual<=1958:
+					micolor.CopyFrom(colorm)
+				elif 1959<=factual<=1960:
+					micolor.CopyFrom(colorn)
+				elif 1961<=factual<=1971:
+					micolor.CopyFrom(colorf)
+				elif 1971<=factual<=2000:
+					micolor.CopyFrom(colorn)
 				for part in sil.parts[:]:
-					part.color.a = alpha
+					part.color.CopyFrom(micolor)
 					sil.actual.mode_fill = sil.P_DEG_VERT
-					factual = video.cf.framen
-					micolor = extra.cCairoColor()
-					if factual<=571:
-						micolor.CopyFrom(colora)
-					elif 572<=factual<=694:
-						micolor.CopyFrom(colorb)
-					elif 695<=factual<=700:
-						micolor.CopyFrom(colorc)
-						micolor.Interpolate((700-factual)/float(700-695), colorb)
-
-					elif 701<=factual<=825:
-						micolor.CopyFrom(colorc)
-
-					elif 826<=factual<=833:
-						micolor.CopyFrom(colord)
-						micolor.Interpolate((833-factual)/float(833-826), colorc)
-					elif 834<=factual<=904:
-						micolor.CopyFrom(colord)
-					elif 905<=factual<=970:
-						micolor.CopyFrom(colore)
-					elif 971<=factual<=1127:
-						micolor.CopyFrom(colorf)
-
-					elif 1128<=factual<=1255:
-						micolor.CopyFrom(colorg)
-					elif 1256<=factual<=1400:
-						micolor.CopyFrom(colorh)
-					elif 1401<=factual<=1520:
-						micolor.CopyFrom(colori)
-					elif 1521<=factual<=1667:
-						micolor.CopyFrom(colorj)
-					elif 1668<=factual<=1751:
-						micolor.CopyFrom(colorm)
-					elif 1752<=factual<=1824:
-						micolor.CopyFrom(colorn)
-					elif 1825<=factual<=1940:
-						micolor.CopyFrom(colorg)
-					elif 1941<=factual<=1958:
-						micolor.CopyFrom(colorm)
-					elif 1959<=factual<=1960:
-						micolor.CopyFrom(colorn)
-					elif 1961<=factual<=1971:
-						micolor.CopyFrom(colorf)
-					elif 1971<=factual<=2000:
-						micolor.CopyFrom(colorn)
-
 					sil.actual.color1.CopyFrom(micolor)
 					sil.actual.color3.CopyFrom(micolor)
-
-
-
 					#avanzado.StartGroup()
 					part.Paint()
 					#avanzado.fGlow(1, 0.1+(sin(pi*sil.progress)/6.0))
