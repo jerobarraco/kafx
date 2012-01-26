@@ -116,7 +116,7 @@ OPERATORS = [
 	'clear',#clear destination layer (bounded)
 
 	'source', #replace destination layer (bounded)
-	'over', #draw source layer on top of destination layer (bounded)
+	'over', #(default mode) draw source layer on top of destination layer (bounded)
 	'in', #draw source where there was destination content (unbounded)
 	'out', #draw source where there was no destination content (unbounded)
 	'atop', #draw source on top of destination content and only there

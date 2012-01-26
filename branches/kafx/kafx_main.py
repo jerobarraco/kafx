@@ -57,11 +57,11 @@ def DBug(msg):
 
 def PintarEnPantalla(msg):
 	"pone un texto en pantalla, super slow, soporta multilinea"
-	props = asslib.cProperties()
+	lasty = 10
 	for line in msg.split('\n'):
-		error_obj = asslib.cSilaba(line, props)
+		error_obj = asslib.cSilaba(line, last_pos=(20, lasty))
 		error_obj.Paint()
-		props.pos_y += error_obj.original._line_height
+		lasty += error_obj.original._line_height
 
 def Error(msg=""):
 	"""Escribe un mensaje de error al archivo y en la pantalla,
