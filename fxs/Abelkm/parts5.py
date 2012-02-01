@@ -76,13 +76,17 @@ class Evento1():
 			else:
 				for part in sil.parts[:]:
 					#avanzado.StartGroup()
-					part.color.a = alpha
+					part.color.a -= 0.1
 
 					part.Paint()
 					#avanzado.fGlow(1, 0.1+(sin(pi*sil.progress)/6.0))
 					#avanzado.EndGroup()
 
 					world.Resize(part, comun.Interpolate(sil.progress, 0.1, 0.2))
+					if part.color.a <0:
+						world.DestroySprite(part)
+						sil.parts.remove(part)
+
 
 		def SyllableTime(self, sil):
 			return (sil._start, sil._end+750)
