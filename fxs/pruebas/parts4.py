@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
-from libs import comun
+from libs import common
 from libs.draw import extra
 import random
 
-class Fxpart (comun.Fx):
+class Fxpart (common.Fx):
 	def __init__(self):
 		self.t = extra.LoadTexture("textures/star1.png")
 
 	def EnSilabaEntra(self, sil):
 		for p in sil.parts:
-			p.color.a = comun.Interpolar (sil.progreso, 0, 1)
-			p.x = comun.Interpolar(sil.progreso, p.movx, p.inix)
-			p.y = comun.Interpolar(sil.progreso, p.movy, p.iniy)
+			p.color.a = common.Interpolar (sil.progreso, 0, 1)
+			p.x = common.Interpolar(sil.progreso, p.movx, p.inix)
+			p.y = common.Interpolar(sil.progreso, p.movy, p.iniy)
 			p.Pintar()
 
 	def EnSilabaSale(self, sil):
 		for p in sil.parts:
-			p.color.a = comun.Interpolar (sil.progreso, 1,0)
-			p.x = comun.Interpolar(sil.progreso, p.inix, p.movx2)
-			p.y = comun.Interpolar(sil.progreso, p.iniy, p.movy)
+			p.color.a = common.Interpolar (sil.progreso, 1,0)
+			p.x = common.Interpolar(sil.progreso, p.inix, p.movx2)
+			p.y = common.Interpolar(sil.progreso, p.iniy, p.movy)
 			p.Pintar()
 
 	def EnSilabaInicia(self, sil):
@@ -34,7 +34,7 @@ class Fxpart (comun.Fx):
 	def EnSilaba(self, sil):
 		sil.PintarConCache()
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.fxs = [Fxpart()]
 		self.saltar_cuadros = False

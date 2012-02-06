@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from libs import comun, video
-from libs.draw import avanzado, extra
+from libs import common, video
+from libs.draw import advanced, extra
 import math, random, cairo
 from math import pi, sin, cos
 
@@ -9,7 +9,7 @@ t2 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva
 t1 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/silver2.png', extend=cairo.EXTEND_REFLECT)
 t3 = extra.LoadTexture('E:/Documents and Settings/Administrador/Escritorio/Nueva carpeta/textures/win3.png', extend=cairo.EXTEND_REFLECT)
 
-class FX1(comun.Fx):
+class FX1(common.Fx):
 
 	def __init__(self):
 		self.events = [Evento1(), Evento2(), Evento3()]
@@ -30,10 +30,10 @@ class FX1(comun.Fx):
 		d.actual.modo_borde = d.P_TEXTURA
 		d.Fade(1,0)
 		d.MoveTo(random.randint(0, 30), 0)
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		d.Pintar()
-		avanzado.fBlur1(3, comun.Interpolar(d.progreso, 0, 0.15, comun.i_b_ease_in))
-		avanzado.EndGroup()
+		advanced.fBlur1(3, common.Interpolar(d.progreso, 0, 0.15, common.i_b_ease_in))
+		advanced.EndGroup()
 
 
 	def EnDialogoEntra(self, d):
@@ -44,16 +44,16 @@ class FX1(comun.Fx):
 		d.actual.modo_borde = d.P_TEXTURA
 		d.Fade(0,1)
 		d.MoveFrom(random.randint(-30, 0), 0)
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		d.Pintar()
-		avanzado.fBlur1(3, comun.Interpolar(d.progreso, 0.15, 0, comun.i_b_ease_in))
-		avanzado.EndGroup()
+		advanced.fBlur1(3, common.Interpolar(d.progreso, 0.15, 0, common.i_b_ease_in))
+		advanced.EndGroup()
 
 
 
-class Evento1(comun.Event):
+class Evento1(common.Event):
 		def __init__(self):
-			p = avanzado.cParticleSystem(png="textures/win3.png", emit_parts=40,
+			p = advanced.cParticleSystem(png="textures/win3.png", emit_parts=40,
 				modo = 0, max_parts=80, rotation= 0.1, scale_from=0.05, scale_to= 0.05,max_life=1)
 			p.DarAngulo(10, 2, 10)
 			p.DarGravedad(0, 1)
@@ -65,10 +65,10 @@ class Evento1(comun.Event):
 			letra.actual.color1.a = 0.5
 			letra.texturas[letra.PART_RELLENO] = t3
 			letra.actual.modo_relleno = letra.P_TEXTURA
-			avanzado.StartGroup()
+			advanced.StartGroup()
 			letra.Pintar()
-			avanzado.fGlow(1, 0.1+(sin(pi*letra.progreso)/6.0))
-			avanzado.EndGroup()
+			advanced.fGlow(1, 0.1+(sin(pi*letra.progreso)/6.0))
+			advanced.EndGroup()
 			self.parts.DarVentana(letra.original._ancho+1, 1)
 			self.parts.DarPosicion(
 				letra.actual.pos_x+random.randint(-2,3)+(letra.original._ancho*(letra.progreso)/4),
@@ -81,37 +81,37 @@ class Evento1(comun.Event):
 		def TiempoLetra(self, letra):
 			return (letra._start, letra._end)
 
-class Evento2(comun.Event):
+class Evento2(common.Event):
         def EnLetra(self, letra):
 			global t3
 			letra.actual.color3.a = 0
-			letra.actual.color1.a = comun.Interpolar(letra.progreso, 0, 0.5,  comun.i_b_ease_in)
+			letra.actual.color1.a = common.Interpolar(letra.progreso, 0, 0.5,  common.i_b_ease_in)
 			letra.texturas[letra.PART_RELLENO] = t3
 			letra.actual.modo_relleno = letra.P_TEXTURA
-			avanzado.StartGroup()
+			advanced.StartGroup()
 			letra.Pintar()
-			avanzado.fGlow(2, 0.1)
-			avanzado.EndGroup()
+			advanced.fGlow(2, 0.1)
+			advanced.EndGroup()
 			letra.actual.color3.a = 0
-			letra.actual.color1.a = comun.Interpolar(letra.progreso, 0, 0.5,  comun.i_b_ease_in)
+			letra.actual.color1.a = common.Interpolar(letra.progreso, 0, 0.5,  common.i_b_ease_in)
 			letra.Pintar()
 
         def TiempoLetra(self, letra):
                 return (letra._start - 5, letra._start)
 
-class Evento3(comun.Event):
+class Evento3(common.Event):
         def EnLetra(self, letra):
 			global t3
 			letra.actual.color3.a = 0
-			letra.actual.color1.a = comun.Interpolar(letra.progreso, 0.5, 0,  comun.i_b_ease_out)
+			letra.actual.color1.a = common.Interpolar(letra.progreso, 0.5, 0,  common.i_b_ease_out)
 			letra.texturas[letra.PART_RELLENO] = t3
 			letra.actual.modo_relleno = letra.P_TEXTURA
-			avanzado.StartGroup()
+			advanced.StartGroup()
 			letra.Pintar()
-			avanzado.fGlow(2, 0.1)
-			avanzado.EndGroup()
+			advanced.fGlow(2, 0.1)
+			advanced.EndGroup()
 			letra.actual.color3.a = 0
-			letra.actual.color1.a = comun.Interpolar(letra.progreso, 0.5, 0,  comun.i_b_ease_out)
+			letra.actual.color1.a = common.Interpolar(letra.progreso, 0.5, 0,  common.i_b_ease_out)
 			letra.Pintar()
 
         def TiempoLetra(self, letra):
@@ -119,7 +119,7 @@ class Evento3(comun.Event):
 
 
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.in_ms = 250
 		self.out_ms = 250

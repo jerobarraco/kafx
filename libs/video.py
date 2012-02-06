@@ -3,7 +3,7 @@
 "Define all types necessary for interfacing with avisynth.dll
  Moved from internal.h *"
 
-   Copia burda del avisynth .h
+   Copia del avisynth .h
    mas que nada por compatibilidad con los parámetros que se le pasen a la inicialización
 	 y tiene algunas funciones extras para trabajar con video
    """

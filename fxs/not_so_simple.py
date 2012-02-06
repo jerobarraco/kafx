@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from libs import comun
+from libs import common
 from math import pi, sin
 
-class FX1(comun.Fx):
+class FX1(common.Fx):
 		#Entrada: sea por silabas y con fadein
 		def OnDialogueIn(self, s):
 			s.Fade(0, 1)#fadein
@@ -32,7 +32,7 @@ class FX1(comun.Fx):
 			s.Paint()
 
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.in_ms = 150 #Milisegundos para la animacion de entrada
 		self.out_ms = 250 #MS para animacion d salida

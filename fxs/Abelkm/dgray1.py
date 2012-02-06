@@ -3,17 +3,17 @@
 Hecho por Abelkm
 http://my.opera.com/Abelkm/blog/d-gray-man-ed-1
 """
-from libs import comun
-from libs.draw import avanzado
+from libs import common
+from libs.draw import advanced
 from math import pi, sin
 
-class FX1(comun.Fx):
+class FX1(common.Fx):
 	def EnSilaba(self, diag):
 		diag.actual.scale_x = diag.actual.scale_y = 1+((sin(pi*diag.progreso))/10)
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		diag.Pintar()
-		avanzado.fGlow(6, 0.06)
-		avanzado.EndGroup()
+		advanced.fGlow(6, 0.06)
+		advanced.EndGroup()
 
 	def EnSilabaMuerta(self, d):
 		d.actual.modo_relleno = d.P_DEG_VERT
@@ -38,7 +38,7 @@ class FX1(comun.Fx):
 		d.actual.modo_relleno = d.P_DEG_VERT
 		d.Pintar()
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.in_ms = 700
 		self.out_ms = 700

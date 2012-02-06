@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from libs import comun, physics
+from libs import common, physics
 from libs.draw import extra
 
 t1 = extra.LoadTexture("textures/spark3.png")
@@ -32,8 +32,8 @@ class Efecto():
 		for p in sil.parts [:]: #[:] para el remove
 			p.Paint()
 			#pintamos primero, porque hasta que no hagamos world.update no tomara los cambios
-			p.color.a = comun.Interpolate(sil.progress, 1, 0.00)
-			self.world.Resize(p, comun.Interpolate(sil.progress, 0.3, 0.001 ))
+			p.color.a = common.Interpolate(sil.progress, 1, 0.00)
+			self.world.Resize(p, common.Interpolate(sil.progress, 0.3, 0.001 ))
 			if p.color.a <= 0.1:
 				self.world.Destroy(p)
 				sil.parts.remove(p)
@@ -46,7 +46,7 @@ class Efecto2():
 		s.actual.color1.CopyFrom(s.actual.color2)
 		s.PaintWithCache()
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.fxs = (Efecto(), Efecto2(), Efecto2())
 		#no puedo crear dos effect() porque intentaria crear dos mundos

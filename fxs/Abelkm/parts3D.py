@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from libs import comun, physics, video
-from libs.draw import extra, avanzado
+from libs import common, physics, video
+from libs.draw import extra, advanced
 from OpenGL.GLUT import *
 from OpenGL.GL import *
 from random import randint, random
@@ -21,24 +21,24 @@ class Efecto():
 		sil.crear = True
 		x = sil.actual.pos_x+ sil.actual.org_x
 		y = sil.actual.pos_y + sil.actual.org_y
-		sil.bull = [avanzado.cSprite(t, x +randint(-50, 50), y+randint(-50, 50), scale=random()*0.5 +0.5) for i in range(50)]#para que desordenen, pero no las vamos a pintar
+		sil.bull = [advanced.cSprite(t, x +randint(-50, 50), y+randint(-50, 50), scale=random()*0.5 +0.5) for i in range(50)]#para que desordenen, pero no las vamos a pintar
 
 	def OnSyllableSleep(self, sil):
 		sil.PaintWithCache()
 	def OnDialogueIn(self, d):
 		global t3
 		#d.MoveFrom((0+(comun.Interpolate(d.progress, -40,0, comun.i_b_backstart))) ,(0))
-		mov = comun.Interpolate(d.progress,1380, 3480)#el fx parece dar toda la vuelta... o ya no?
+		mov = common.Interpolate(d.progress,1380, 3480)#el fx parece dar toda la vuelta... o ya no?
 		extra.MoveTexture(t3, mov, 50)
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		d.Paint()
-		texto = avanzado.EndGroup(0)
+		texto = advanced.EndGroup(0)
 		video.cf.ctx.set_source(texto)
 		video.cf.ctx.mask(t3)
 	def OnSyllable(self, sil):
-		xa = comun.LERP(sil.progress, sil.actual.pos_x, sil.actual.pos_x+sil.original._ancho)
+		xa = common.LERP(sil.progress, sil.actual.pos_x, sil.actual.pos_x+sil.original._ancho)
 		x = (xa/(video.vi.width/2.0))-1.0
-		ya = comun.Interpolate(sil.progress, sil.actual.pos_y, sil.actual.pos_y+sil.original._alto,comun.i_full_sin)
+		ya = common.Interpolate(sil.progress, sil.actual.pos_y, sil.actual.pos_y+sil.original._alto,common.i_full_sin)
 		y = 1 -(ya/(video.vi.height/2.0))
 		color = [1.0, 0., 0., 0.8]
 		glPushMatrix()
@@ -58,7 +58,7 @@ class Evento1():
 				for b in sil.bull:
 					world.CreateSprite(b, False)
 				sil.matar=True
-			alpha = comun.Interpolate(sil.progress, 1, -0.5)
+			alpha = common.Interpolate(sil.progress, 1, -0.5)
 			if alpha < 0.0:
 				for part in sil.parts:
 						world.DestroySprite(part)
@@ -70,7 +70,7 @@ class Evento1():
 				for part in sil.parts[:]:
 					part.color.a = alpha
 					part.Paint()
-					world.Resize(part, comun.Interpolate(sil.progress, 0.1, 0.2))
+					world.Resize(part, common.Interpolate(sil.progress, 0.1, 0.2))
 
 
 
@@ -79,7 +79,7 @@ class Evento1():
 
 
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		global world
 		self.fxs = (Efecto(),Efecto())

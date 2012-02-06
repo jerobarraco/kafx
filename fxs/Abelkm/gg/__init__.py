@@ -1,7 +1,7 @@
-from libs import comun
+from libs import common
 import math
 
-class FX1(comun.Fx):
+class FX1(common.Fx):
     def Chain2(self, l, p):
         l.progreso = p
         l.MoveFrom(0, -30)
@@ -39,7 +39,7 @@ class FX1(comun.Fx):
         d.Encadenar(self.Chain3)
 
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
     def __init__(self):
         self.fxs = [ FX1() ]
         self.syl_in_ms = 300

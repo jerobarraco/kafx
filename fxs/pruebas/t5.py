@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """Este efecto muestra lo mas simple, lo basico"""
-from libs import comun, video, audio
+from libs import common, video, audio
 
 power = 0.0
 
-class EfectoGenerico(comun.Fx):
+class EfectoGenerico(common.Fx):
 	def EnDialogo(self, diag):
 		#Cuando el dialogo sea mostrado
 		diag.PintarConCache()#Lo pintamos en la pantalla
@@ -17,7 +17,7 @@ class EfectoGenerico(comun.Fx):
 		diag.Pintar()# Pintamos la silaba en la pantalla
 
 #Esta es la clase principal de donde kafx tomara toda la info, tiene que tener este nombre
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		#Opciones principales
 		self.in_ms = 150 #Milisegundos para la animacion de entrada
@@ -27,7 +27,7 @@ class FxsGroup(comun.FxsGroup):
 		self.saltar_cuadros = False
 		#Un effect si o si tiene que definir lo siguiente, si o si con este nombre
 		#Funciones (grupo de efectos) que provee
-		self.fxs = (EfectoGenerico(), comun.Fx(), comun.Fx())
+		self.fxs = (EfectoGenerico(), common.Fx(), common.Fx())
 		self.audiodata = audio.Datos("fma.avi")
 		self.paso = video.vi.width / float(self.audiodata.frameSize)
 

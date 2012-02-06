@@ -1,51 +1,51 @@
 # -*- coding: utf-8 -*-
-from libs.draw import extra, avanzado, basico
-from libs import comun
+from libs.draw import extra, advanced, basic
+from libs import common
 from math import cos, pi, sin
 import math, random
 
-class FX1(comun.Fx):
+class FX1(common.Fx):
 	def __init__(self):
 		self.movimiento=0
 
 	def EnDialogoEntra(self, d):
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		d.original.modo_relleno = d.P_DEG_VERT
 		d.Fade(0, 1)
 		d.Pintar()
-		avanzado.fWave(self.movimiento, 0.030, 2, True)
-		avanzado.fWave(self.movimiento, 0.040, 2, False)
-		avanzado.EndGroup()
+		advanced.fWave(self.movimiento, 0.030, 2, True)
+		advanced.fWave(self.movimiento, 0.040, 2, False)
+		advanced.EndGroup()
 
 	def EnDialogo(self,  d):
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		d.original.modo_relleno = d.P_DEG_VERT
 		d.Pintar()
-		avanzado.fWave(self.movimiento, 0.030, 2, True)
-		avanzado.fWave(self.movimiento, 0.040, 2, False)
-		avanzado.EndGroup()
+		advanced.fWave(self.movimiento, 0.030, 2, True)
+		advanced.fWave(self.movimiento, 0.040, 2, False)
+		advanced.EndGroup()
 
 	def EnSilaba(self, d):
 		d.Fade(1, 0)
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		d.Pintar()
-		avanzado.fWave(self.movimiento, 0.030, 2, True)
-		avanzado.fWave(self.movimiento, 0.040, 2, False)
-		avanzado.fGlow(3, d.progreso*0.15)
-		avanzado.EndGroup()
+		advanced.fWave(self.movimiento, 0.030, 2, True)
+		advanced.fWave(self.movimiento, 0.040, 2, False)
+		advanced.fGlow(3, d.progreso*0.15)
+		advanced.EndGroup()
 
 	def EnDialogoSale(self, d):
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		d.original.modo_relleno = d.P_DEG_VERT
 		d.Fade(1, 0)
 		d.Pintar()
-		avanzado.fWave(self.movimiento, 0.030, 2,  True)
-		avanzado.fWave(self.movimiento, 0.040, 2,  False)
-		avanzado.EndGroup()
+		advanced.fWave(self.movimiento, 0.030, 2,  True)
+		advanced.fWave(self.movimiento, 0.040, 2,  False)
+		advanced.EndGroup()
 
-class FX2(comun.Fx):
+class FX2(common.Fx):
 	def __init__(self):
-		self.parts = avanzado.cParticleSystem(png="textures/spark.png", color = extra.cCairoColor(0xFFAFAFAF), max_life=3, emit_parts=2, scale_from= 0.4, scale_to=0.1, modo=1)
+		self.parts = advanced.cParticleSystem(png="textures/spark.png", color = extra.cCairoColor(0xFFAFAFAF), max_life=3, emit_parts=2, scale_from= 0.4, scale_to=0.1, modo=1)
 		self.parts.DarVentana(6, 2)
 		self.parts.DarAngulo(pi, 5, pi/4.2)
 		self.posx= 0
@@ -74,16 +74,16 @@ class FX2(comun.Fx):
 		s.Fade(1, 0)
 		s.actual.pos_x += self.posx
 		s.actual.pos_y += self.posy
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		s.Pintar()
-		avanzado.fGlow(5, 0.08*s.progreso)
-		avanzado.EndGroup()
+		advanced.fGlow(5, 0.08*s.progreso)
+		advanced.EndGroup()
 		
 		valor= random.randint(0,1)
 		if valor == "1":
-			ZethPRO= comun.Interpolar(random.random(), -15, 10)
+			ZethPRO= common.Interpolar(random.random(), -15, 10)
 		else:
-			ZethPRO= comun.Interpolar(random.random(), 10, 15)
+			ZethPRO= common.Interpolar(random.random(), 10, 15)
 		self.parts.DarPosicion( s.actual.pos_x + s.progreso*s.original._ancho, s.actual.pos_y + ZethPRO)
 		self.parts.Emitir()
 
@@ -92,7 +92,7 @@ class FX2(comun.Fx):
 		d.Fade(1, 0)
 		d.Pintar()
 		
-class traduANDkanji(comun.Fx):
+class traduANDkanji(common.Fx):
 	def EnDialogo(self, d):
 		d.PintarConCache()
 
@@ -117,7 +117,7 @@ class traduANDkanji(comun.Fx):
 		d.Pintar()
 		
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.saltar_cuadros = False
 		self.in_ms = 250
@@ -126,13 +126,13 @@ class FxsGroup(comun.FxsGroup):
 		self.syl_out_ms = 200
 		self.fxs = (FX1(), FX2(), traduANDkanji(),)
 	def EnCuadroInicia(self):
-		avanzado.StartGroup()
+		advanced.StartGroup()
 	def EnCuadroFin(self):
-		avanzado.fGlow(2, 0.06)
-		avanzado.EndGroup()
-		avanzado.ModoPintado('add')
+		advanced.fGlow(2, 0.06)
+		advanced.EndGroup()
+		advanced.ModoPintado('add')
 		self.fxs[1].parts.Pintar()
-		avanzado.ModoPintado('over')
+		advanced.ModoPintado('over')
 		self.fxs[0].movimiento +=1
 		self.fxs[1].posx= random.random()*6
 		self.fxs[1].posy= random.random()*6.5

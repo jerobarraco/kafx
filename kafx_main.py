@@ -32,7 +32,7 @@ import cairo
 #import cProfile
 print 'Cairo cargado. Version:', cairo.version_info
 print 'Cargando KAFX...'
-from libs import video, comun, asslib
+from libs import video, common, asslib
 
 #Poner librerias recien a partir de acá :D
 
@@ -109,7 +109,7 @@ def OnInit(filename, assfile, pixel_type, image_type, width, height, fpsn, fpsd,
 		cf.ctx = cairo.Context(cairo.ImageSurface(vi.modo, vi.width, vi.height))
 		#esto es porque para el ass, el tamaño d las fuentes es necesario un contexto y que tenga el tamaño correcto
 		DBug("Importando el efecto\n")
-		m = comun.MyImport(filename)
+		m = common.MyImport(filename)
 		DBug("Cargando los subtitulos\n")
 		fx = m.FxsGroup()
 		ass = asslib.Ass(assfile, len(fx.fxs) -1)
@@ -205,11 +205,11 @@ def __PreLoad():
 	"""
 
 	global frames, fx, ass, no_frames
-	from libs.draw import avanzado
+	from libs.draw import advanced
 
 	num_frames = vi.num_frames #la cantidad de frames totales
 	fs = fx.fxs #la lista de efectos
-	avanzado.fBlur = avanzado.fBlurs[fx.blur_type] #elegimos el tipo de blur segun la configuración
+	advanced.fBlur = advanced.fBlurs[fx.blur_type] #elegimos el tipo de blur segun la configuración
 
 	#no_frames = [True for i in xrange(num_frames+1)] #this way is slower
 	no_frames = [True, ]*(num_frames+1)#el objeto no_frames es una lista con los cuadros que no quieren ser procesados

@@ -5,9 +5,9 @@ http://my.opera.com/Abelkm/blog/
 """
 
 
-from libs import comun
+from libs import common
 
-class FX1(comun.Fx):
+class FX1(common.Fx):
     def EnDialogo(self, d):
         d.FullWiggle(4)
         d.Pintar()
@@ -28,7 +28,7 @@ class FX1(comun.Fx):
         d.actual.color1.CopiarDe(d.actual.color4)
         d.Pintar()
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.in_ms = 500
 		self.out_ms = 500
