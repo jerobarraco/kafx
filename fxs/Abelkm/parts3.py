@@ -4,9 +4,9 @@ from libs.draw import extra, advanced
 
 from random import randint, random
 from math import pi, sin
-t = extra.LoadTexture("texturas/uq7.png")
+t = extra.LoadTexture("textures/uq7.png")
 
-t3 = extra.LoadTexture('texturas/barra_gc.png') #entrada
+t3 = extra.LoadTexture('textures/barra_gc.png') #entrada
 
 #If you use physics in only one effect you can assign to "self" in that effect, that would make it slightly faster
 world = None
