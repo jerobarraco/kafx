@@ -4,9 +4,9 @@ from libs.draw import extra, advanced
 
 from random import randint, random
 from math import pi, sin
-t = extra.LoadTexture("texturas/uq7.png")
+t = extra.LoadTexture("textures/uq7.png")
 
-t3 = extra.LoadTexture('texturas/barra_gc.png') #entrada
+t3 = extra.LoadTexture('textures/barra_gc.png') #entrada
 colora = extra.cCairoColor(0xFF8B5BBD)#violeta
 colorb = extra.cCairoColor(0xFF7BBCC3)#verde
 colorc = extra.cCairoColor(0xFF804E3F)#marrón
