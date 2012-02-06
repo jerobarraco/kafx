@@ -55,7 +55,7 @@ def DBug(msg):
 	#Esta funcion es llamada desde la dll, imprime el error actual
 	traceback.sys.stdout.write(str(msg))
 
-def PintarEnPantalla(msg):
+def PainOnScreen(msg):
 	"pone un texto en pantalla, super slow, soporta multilinea"
 	lasty = 10
 	for line in msg.split('\n'):
@@ -69,7 +69,7 @@ def Error(msg=""):
 	traceback.sys.stderr.write (msg+"\n")
 	traceback.print_exc()
 	traceback.sys.stderr.write ("\n---------------\n")
-	PintarEnPantalla(traceback.format_exc())
+	PainOnScreen(traceback.format_exc())
 
 def OnDestroy():
 	"""Esta funcion es llamada desde la dll
