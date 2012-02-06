@@ -237,9 +237,10 @@ class cSilaba(extra.cVector):
 		if not self._text:#atrapa '' y None
 			self._text = ''
 			#para evitar codigo duplicado, de igual manera no deberias llamar a esto sin texto Ã²_Ã³
-
-		#calculamos la duracion de cada caracter
-		cdur = float(self._dur) / len(self._text)
+			cdur = 0.0
+		else:
+			#calculamos la duracion de cada caracter
+			cdur = float(self._dur) / len(self._text)
 		#agregamos los caracteres
 		for (i, tchar) in enumerate(self._text):
 			char = extra.cVector(
