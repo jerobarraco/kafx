@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from libs import comun, physics, video
-from libs.draw import extra, avanzado
+from libs import common, physics, video
+from libs.draw import extra, advanced
 
 from random import randint, random
 from math import pi, sin
@@ -83,7 +83,7 @@ class Efecto():
 		sil.crear = True
 		x = sil.actual.pos_x+ sil.actual.org_x
 		y = sil.actual.pos_y + sil.actual.org_y
-		sil.bull = [avanzado.cSprite(t, x +randint(-50, 50), y+randint(-50, 50), scale=random()*0.5 +0.5) for i in range(50)]#para que desordenen, pero no las vamos a pintar
+		sil.bull = [advanced.cSprite(t, x +randint(-50, 50), y+randint(-50, 50), scale=random()*0.5 +0.5) for i in range(50)]#para que desordenen, pero no las vamos a pintar
 
 	def OnSyllableSleep(self, sil):
 		global colora, colorb, colorc, colord, colore, colorf, colorg, colorh, colori, colorm, colorn, colork, coloro, colorl, t
@@ -185,11 +185,11 @@ class Efecto():
 		d.actual.color1.CopyFrom(micolor)
 		d.actual.color3.CopyFrom(micolor)
 		#d.MoveFrom((0+(comun.Interpolate(d.progress, -40,0, comun.i_b_backstart))) ,(0))
-		mov = comun.Interpolate(d.progress,1380, 3480)#el fx parece dar toda la vuelta... o ya no?
+		mov = common.Interpolate(d.progress,1380, 3480)#el fx parece dar toda la vuelta... o ya no?
 		extra.MoveTexture(t3, mov, 50)
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		d.Paint()
-		texto = avanzado.EndGroup(0)
+		texto = advanced.EndGroup(0)
 		video.cf.ctx.set_source(texto)
 		video.cf.ctx.mask(t3)
 
@@ -203,7 +203,7 @@ class Evento1():
 				for b in sil.bull:
 					world.CreateSprite(b, False)
 				sil.matar=True
-			alpha = comun.Interpolate(sil.progress, 1, -0.2)
+			alpha = common.Interpolate(sil.progress, 1, -0.2)
 			if alpha < 0.0:
 				for part in sil.parts:
 						world.DestroySprite(part)
@@ -267,14 +267,14 @@ class Evento1():
 					#avanzado.fGlow(1, 0.1+(sin(pi*sil.progress)/6.0))
 					#avanzado.EndGroup()
 
-					world.Resize(part, comun.Interpolate(sil.progress, 0.1, 0.2))
+					world.Resize(part, common.Interpolate(sil.progress, 0.1, 0.2))
 
 		def SyllableTime(self, sil):
 			return (sil._start, sil._end+750)
 
 
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		global world
 		self.fxs = (Efecto(),Efecto())

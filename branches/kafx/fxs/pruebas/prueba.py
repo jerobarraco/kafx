@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """Este efecto muestra lo mas simple, lo basico"""
-from libs import comun
-from libs.draw import avanzado
+from libs import common
+from libs.draw import advanced
 import kafx_ogl
 
-class EfectoGenerico(comun.Fx):
+class EfectoGenerico(common.Fx):
 	def EnDialogo(self, diag):
 		#Cuando el dialogo sea mostrado
 		diag.Pintar()#Lo pintamos en la pantalla
@@ -20,7 +20,7 @@ class EfectoGenerico(comun.Fx):
 		diag.Pintar()# Pintamos la silaba en la pantalla
 
 #Esta es la clase principal de donde kafx tomara toda la info, tiene que tener este nombre
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		#Opciones principales
 		self.in_ms = 150 #Milisegundos para la animacion de entrada
@@ -36,12 +36,12 @@ class FxsGroup(comun.FxsGroup):
 	def EnCuadroInicia1(self):
 		#Cuando inicia el cuadro (antes de cualquier dialogo o silaba)
 		#Comenzamos un grupo
-		avanzado.StartGroup()
+		advanced.StartGroup()
 
 	def EnCuadroFin1(self):
 		#Cuando termina el cuadro (luego de todas las sibalas y dialogues)
 		#Hacemos un glow con lo que habia
 		#avanzado.fGlow()
 		#Y cerramos el grupo
-		avanzado.fBlur()
-		avanzado.EndGroup()
+		advanced.fBlur()
+		advanced.EndGroup()

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Este efecto muestra lo mas simple, lo basico"""
-from libs import comun
+from libs import common
 
 class EfectoGenerico():
 	def OnDialogue(self, diag):
@@ -14,7 +14,7 @@ class EfectoGenerico():
 
 
 #Esta es la clase principal de donde kafx tomara toda la info, tiene que tener este nombre
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		#Opciones principales
 		self.in_ms = 150 #Milisegundos para la animacion de entrada

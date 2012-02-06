@@ -3,7 +3,7 @@
 y los objetos que permiten el pintado de texto con cairo"""
 import codecs, math
 from draw import extra
-import comun
+import common
 
 #Constantes, no cambien nada si no quieren que el programa se rompa
 #Del Estilo
@@ -181,28 +181,28 @@ class cProperties():
 	def FromDict(self, style):
 		"""Crea los valores desde un diccionario, para uso interno"""
 		#animables
-		self.angle = math.radians(comun.SafeGetFloat(style, S_ANGLE))
+		self.angle = math.radians(common.SafeGetFloat(style, S_ANGLE))
 		self.color1  = extra.cCairoColor(texto=style.get(S_PCOLOR, 0))
 		self.color3 = extra.cCairoColor(texto=style.get(S_OCOLOR, 0))
 		self.color4 = extra.cCairoColor(texto=style.get(S_BCOLOR, 0))
 		self.color2 = extra.cCairoColor(texto=style.get(S_SCOLOR, 0))
-		self.border = comun.SafeGetFloat(style, S_OUTLINE)
-		self.shadow = int(comun.SafeGetFloat(style, S_SHADOW)) #el zheo me dijo q podia ser flotante pero no tiene sentido aca
+		self.border = common.SafeGetFloat(style, S_OUTLINE)
+		self.shadow = int(common.SafeGetFloat(style, S_SHADOW)) #el zheo me dijo q podia ser flotante pero no tiene sentido aca
 
-		self.scale_x = comun.SafeGetFloat(style, S_SCALE_X, 100)/100.0
-		self.scale_y = comun.SafeGetFloat(style, S_SCALE_Y, 100)/100.0
+		self.scale_x = common.SafeGetFloat(style, S_SCALE_X, 100)/100.0
+		self.scale_y = common.SafeGetFloat(style, S_SCALE_Y, 100)/100.0
 
 		#No animables
 		self._name = style.get(S_NAME, '')
 		self._font = style.get(S_FONT, '')
-		self._size = comun.SafeGetFloat(style, S_SIZE)
+		self._size = common.SafeGetFloat(style, S_SIZE)
 		self._bold = not (style.get(S_BOLD, '0') == '0')
 		self._italic = not (style.get(S_ITALIC, '0') == '0')
 
-		self._marginv = int(comun.SafeGetFloat(style, S_MARGINV))
-		self._marginr = int(comun.SafeGetFloat(style, S_MARGINR))
-		self._marginl = int(comun.SafeGetFloat(style, S_MARGINL))
-		self._align = int(comun.SafeGetFloat(style, S_ALIGN))
+		self._marginv = int(common.SafeGetFloat(style, S_MARGINV))
+		self._marginr = int(common.SafeGetFloat(style, S_MARGINR))
+		self._marginl = int(common.SafeGetFloat(style, S_MARGINL))
+		self._align = int(common.SafeGetFloat(style, S_ALIGN))
 
 class cSilaba(extra.cVector):
 	def __init__(self,  text='', style=None, parent=None, last_pos=None):
@@ -262,7 +262,7 @@ class cSilaba(extra.cVector):
 		se anime solo un caracter por vez.
 		(Nota: no cambien el _text si no quieren inconsistencias)
 		"""
-		comun.Chain(self._dur, self.progress, self._letters, function, duration)
+		common.Chain(self._dur, self.progress, self._letters, function, duration)
 
 	def FullWiggle(self, amplitude=4, frequency=2, dx=None, dy=None):
 		"""el wiggle que queria AbelKM, parte 2
@@ -308,10 +308,10 @@ class cDialogue(extra.cVector):
 		estilo = cProperties(est)
 		#odio lo asqueroso que se pone ass
 		#el or es porque el asqueroso de ass indica el margen por cada linea. PEEEEEEEEEERO si es 0 toma el del estilo ~_~
-		estilo._layer = comun.SafeGetFloat(dialogue, E_LAYER)	or estilo._layer
-		estilo._marginv = comun.SafeGetFloat(dialogue, S_MARGINV) or estilo._marginv
-		estilo._marginr = comun.SafeGetFloat(dialogue, S_MARGINR) or estilo._marginr
-		estilo._marginl = comun.SafeGetFloat(dialogue, S_MARGINL) or estilo._marginl
+		estilo._layer = common.SafeGetFloat(dialogue, E_LAYER)	or estilo._layer
+		estilo._marginv = common.SafeGetFloat(dialogue, S_MARGINV) or estilo._marginv
+		estilo._marginr = common.SafeGetFloat(dialogue, S_MARGINR) or estilo._marginr
+		estilo._marginl = common.SafeGetFloat(dialogue, S_MARGINL) or estilo._marginl
 
 		#notar que no le pasamos el texto aun
 		extra.cVector.__init__(self, text=None, style=estilo)
@@ -324,7 +324,7 @@ class cDialogue(extra.cVector):
 		self._dur = self._end - self._start
 
 		#Ponemos que effect debe usar
-		self.effect = min(max_effect, int(comun.SafeGetFloat(dialogue, E_EFFECT)))
+		self.effect = min(max_effect, int(common.SafeGetFloat(dialogue, E_EFFECT)))
 
 		#Cargamos las Syllables (esta funcion setea el _text)
 		self.__SetSyllables( dialogue[E_TEXT] )
@@ -413,7 +413,7 @@ class cDialogue(extra.cVector):
 		Si no se especifica, se usara¡ una duracion tal que
 		se anime solo una silaba por vez.
 		"""
-		comun.Chain(self._dur, self.progress, self._syllables, function, duration)
+		common.Chain(self._dur, self.progress, self._syllables, function, duration)
 
 	def FullWiggle(self, amplitud=4, frecuencia=2):
 		"""el wiggle que queria AbelKM"""
@@ -463,7 +463,7 @@ class Ass():
 			valores.append(valores_raw[-1]) #Esto es para q no le pase el texto del dialogo en minusculas
 
 			nuevo_d = dict(zip(self.eformato,  valores))
-			nuevo_d[E_EFFECT] = int(comun.SafeGetFloat(nuevo_d, E_EFFECT))
+			nuevo_d[E_EFFECT] = int(common.SafeGetFloat(nuevo_d, E_EFFECT))
 			d = cDialogue(nuevo_d, self.styles, self.max_effect)
 			d._indice = self.index
 			self.dialogues.append(d)

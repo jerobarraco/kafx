@@ -2,10 +2,10 @@
 import random
 from math import pi, cos, sin, ceil
 
-from libs.draw import avanzado, extra
-from libs import comun, video
+from libs.draw import advanced, extra
+from libs import common, video
 
-class FX1(comun.Fx):
+class FX1(common.Fx):
 		def __init__(self):
 			#Cuando inicia el effect
 			#creamos un array para poner las particulas que iremos animando,
@@ -107,7 +107,7 @@ class FX1(comun.Fx):
 				#Pintamos las estáticas
 				p.Pintar()
 
-class FX2(comun.Fx):
+class FX2(common.Fx):
 	def EnDialogoInicia(self, d):
 		#cargamos una textura y le decimos que la usaremos con el relleno
 		#parte = 0:borde, 1:relleno, 2:sombra
@@ -135,7 +135,7 @@ class FX2(comun.Fx):
 		d.MoveTexture(pos_x = d.start_x, pos_y = d.start_y, parte = d.PART_RELLENO)
 
 		#Para poder dar una opacidad homogénea a un grupo de cosas usaremos el StartGroup
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		#Pintamos el texto
 		d.Pintar()
 		#Aca podriamos pintar muchas cosas, deformarlas y demás,
@@ -148,7 +148,7 @@ class FX2(comun.Fx):
 		#de esta manera todo se ve bien, la sombra el relleno y el borde y con la opacidad que le corresponde
 		#notar que de esta forma, al pintarse primero solido y luego aplicar opacidad, la sombra nunca se vera
 		#a traves del borde
-		avanzado.EndGroup(d.op)
+		advanced.EndGroup(d.op)
 		#Segun el ultimo cambio tambien podriamos haber puesto
 		"""
 		d.Alpha(d.op)
@@ -161,15 +161,15 @@ class FX2(comun.Fx):
 		self.HacerCosas(d)
 
 	def EnDialogoEntra(self, d):
-		d.op = comun.Interpolar(d.progreso, 0, 1)
+		d.op = common.Interpolar(d.progreso, 0, 1)
 		self.HacerCosas(d)
 
 	def EnDialogoSale(self, d):
-		d.op = comun.Interpolar(d.progreso, 1, 0)
+		d.op = common.Interpolar(d.progreso, 1, 0)
 		self.HacerCosas(d)
 
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		#Por las particulas ponemos esto a false, sino el kafx se saltará los cuadros
 		#en que no hay ningun dialogo

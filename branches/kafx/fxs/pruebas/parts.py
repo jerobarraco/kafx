@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from libs import comun
+from libs import common
 from libs.draw import extra
 import random
 
@@ -7,7 +7,7 @@ import random
 parts_a_pintar = []
 parts_a_pintar2 = []
 
-class Fxpart (comun.Fx):
+class Fxpart (common.Fx):
 	def __init__(self):
 		self.t = extra.LoadTexture("textures/star1.png")
 
@@ -43,7 +43,7 @@ class Fxpart (comun.Fx):
 	def EnSilaba(self, sil):
 		sil.PintarConCache()
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.fxs = [Fxpart()]
 		self.saltar_cuadros = False
@@ -53,9 +53,9 @@ class FxsGroup(comun.FxsGroup):
 	def EnCuadroFin(self):
 		global parts_a_pintar, parts_a_pintar2
 		for p in parts_a_pintar[:]:
-			p.color.a += comun.Interpolar(p.vida, 0, 1)
-			p.x = comun.Interpolar(p.vida, p.movx, p.inix)
-			p.y = comun.Interpolar(p.vida, p.movy, p.iniy)
+			p.color.a += common.Interpolar(p.vida, 0, 1)
+			p.x = common.Interpolar(p.vida, p.movx, p.inix)
+			p.y = common.Interpolar(p.vida, p.movy, p.iniy)
 			p.Pintar()
 
 			p.vida += 0.06
@@ -64,9 +64,9 @@ class FxsGroup(comun.FxsGroup):
 
 
 		for p in parts_a_pintar2[:]:
-			p.color.a = comun.Interpolar(p.vida, 1, 0)
-			p.x = comun.Interpolar(p.vida, p.inix, p.movx )
-			p.y = comun.Interpolar(p.vida, p.iniy, p.movy)
+			p.color.a = common.Interpolar(p.vida, 1, 0)
+			p.x = common.Interpolar(p.vida, p.inix, p.movx )
+			p.y = common.Interpolar(p.vida, p.iniy, p.movy)
 			p.Pintar()
 
 			p.vida += 0.06

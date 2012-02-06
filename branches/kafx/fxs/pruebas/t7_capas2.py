@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
 """Este efecto muestra lo mas simple, lo basico"""
-from libs import comun, video, audio
-from libs.draw import avanzado
+from libs import common, video, audio
+from libs.draw import advanced
 
 
-class EfectoGenerico(comun.Fx):
+class EfectoGenerico(common.Fx):
 	def EnDialogo(self, diag):
 		#Cuando el dialogo sea mostrado
-		avanzado.CapasActivar('2 puede ser un nombre tambien pero es mas largo y lento')
+		advanced.CapasActivar('2 puede ser un nombre tambien pero es mas largo y lento')
 		diag.PintarConCache()#Lo pintamos en la pantalla
 
 	def EnSilaba(self, diag):
 		#esto es al pedo pero es para mostrar que una capa se puede activar muchas veces.
-		avanzado.CapasActivar('2 puede ser un nombre tambien pero es mas largo y lento')
+		advanced.CapasActivar('2 puede ser un nombre tambien pero es mas largo y lento')
 		diag.MoveTo(0, 0)
 		diag.Pintar()# Pintamos la silaba en la pantalla
 
 		#Asi demostramos como pintar una silaba por debajo del dialogo.. aunque esto podria ser hecho de otra manera
-		avanzado.CapasActivar('1 moviendose')
+		advanced.CapasActivar('1 moviendose')
 		diag.MoveTo(10, 10)
 		diag.actual.color1.r = 1.0
 		diag.Pintar()
@@ -27,7 +27,7 @@ class EfectoGenerico(comun.Fx):
 		#eso es porque esta pintado luego de activar la capa 1, porque es la que está mas abajo (se ordenan por nombre)
 		
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		#Opciones principales
 		self.in_ms = 150 #Milisegundos para la animacion de entrada
@@ -37,12 +37,12 @@ class FxsGroup(comun.FxsGroup):
 		self.fxs = (EfectoGenerico(),)
 
 	def EnCuadroInicia(self):
-		avanzado.CapasInicia()
+		advanced.CapasInicia()
 		#Las capas se pintan segun el orden de su nombre
 		#1Moviendose se pinta antes que 2puedes.....
-		avanzado.CapasCrear('1 moviendose', 0.5)
-		avanzado.CapasCrear('2 puede ser un nombre tambien pero es mas largo y lento', 1.0 , 'add')
+		advanced.CapasCrear('1 moviendose', 0.5)
+		advanced.CapasCrear('2 puede ser un nombre tambien pero es mas largo y lento', 1.0 , 'add')
 		
 		
 	def EnCuadroFin(self):
-		avanzado.CapasFin()
+		advanced.CapasFin()

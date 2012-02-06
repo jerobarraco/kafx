@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from libs import comun
-from libs.draw import avanzado, extra
+from libs import common
+from libs.draw import advanced, extra
 import math, random, cairo
 from math import pi, sin, cos
 from random import randint
@@ -8,7 +8,7 @@ from random import randint
 
 parts_a_pintar = []
 parts_a_pintar2 = []
-class Evento1(comun.Event):
+class Evento1(common.Event):
         def EnSilaba(self, sil):
                 global parts_a_pintar
                 parts_a_pintar.extend(
@@ -19,7 +19,7 @@ class Evento1(comun.Event):
         def TiempoSilaba(self, sil):
                 return (sil._start-400, sil._start)
 
-class Evento2(comun.Event):
+class Evento2(common.Event):
         def EnSilaba(self, sil):
                 global parts_a_pintar2
                 parts_a_pintar2.extend(
@@ -30,7 +30,7 @@ class Evento2(comun.Event):
         def TiempoSilaba(self, sil):
                 return (sil._end, sil._end+400)
 
-class Fxpart (comun.Fx):
+class Fxpart (common.Fx):
 
         def __init__(self):
 			self.events = [Evento1(), Evento2()]
@@ -58,7 +58,7 @@ class Fxpart (comun.Fx):
         def EnSilaba(self, sil):
 			sil.Pintar()
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
         def __init__(self):
                 self.fxs = [Fxpart()]
                 self.saltar_cuadros = False
@@ -67,8 +67,8 @@ class FxsGroup(comun.FxsGroup):
 			global parts_a_pintar, parts_a_pintar2
 			for p in parts_a_pintar[:]:
 				p.color.a += 0.05
-				p.x = comun.Interpolar(p.vida1, p.movx, p.inix)
-				p.y = comun.Interpolar(p.vida1, p.movy, p.iniy)
+				p.x = common.Interpolar(p.vida1, p.movx, p.inix)
+				p.y = common.Interpolar(p.vida1, p.movy, p.iniy)
 				#p.esc -= 0.001
 				#p.Scale(p.esc, p.esc)
 				p.Pintar()
@@ -79,8 +79,8 @@ class FxsGroup(comun.FxsGroup):
 
 			for p in parts_a_pintar2[:]:
 				p.color.a -= 0.08
-				p.x = comun.Interpolar(p.vida2, p.inix, p.movx)
-				p.y = comun.Interpolar(p.vida2, p.iniy, p.movy)
+				p.x = common.Interpolar(p.vida2, p.inix, p.movx)
+				p.y = common.Interpolar(p.vida2, p.iniy, p.movy)
 				#p.esc += 0.0005
 				#p.Scale(p.esc, p.esc)
 				p.Pintar()

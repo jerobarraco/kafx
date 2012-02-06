@@ -1,19 +1,19 @@
-from libs.draw import avanzado, extra
-from libs import comun, video, audio
+from libs.draw import advanced, extra
+from libs import common, video, audio
 from math import pi, cos, sin
 
 import numpy
-class Fxpart (comun.Fx):
+class Fxpart (common.Fx):
 	def EnSilaba(self, sil): sil.PintarConCache()
 	EnDialogo = EnSilaba
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.fxs = [Fxpart(), ]
 		self.saltar_cuadros = False
 		self.syl_in_ms = 400
 		self.syl_out_ms = 400
-		self.psys =  avanzado.cParticleSystem( png="textures/T_Negro2.png",
+		self.psys =  advanced.cParticleSystem( png="textures/T_Negro2.png",
 			max_life=1, max_parts=2000, emit_parts=4, scale_from= 0.6, scale_to=1, modo=1, rotation=0,
 			color=extra.cCairoColor(numero=0xFFA060F0))
 		self.psys.DarAngulo(pi, 0.0, pi/2.0)

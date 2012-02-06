@@ -65,11 +65,11 @@ def EnSilaba(self, d):
 
 
 ###Cargar Forma ass
-from libs import formas
+from libs import figure
 #.........
 class FX1(comun.Fx):
 		def __init__(self):
-			self.coso = extra.cVector(figura=formas.CALAVERA1)
+			self.coso = extra.cVector(figura=figure.CALAVERA1)
 		#...
 			self.coso.Pintar()
 

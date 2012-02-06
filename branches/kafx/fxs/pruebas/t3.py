@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Este efecto muestra lo mas simple, lo basico"""
-from libs import comun, video
-from libs.draw import avanzado, extra
+from libs import common, video
+from libs.draw import advanced, extra
 import wave, audioop, cairo
 
 audio = wave.open('out.wav', 'r')
@@ -18,7 +18,7 @@ maxintb= float(2**29)
 frames = ""
 
 
-class EfectoGenerico(comun.Fx):
+class EfectoGenerico(common.Fx):
 	def EnDialogo(self, diag):
 		#Cuando el dialogo sea mostrado
 		diag.PintarConCache()#Lo pintamos en la pantalla
@@ -30,7 +30,7 @@ class EfectoGenerico(comun.Fx):
 		diag.Pintar()# Pintamos la silaba en la pantalla
 
 #Esta es la clase principal de donde kafx tomara toda la info, tiene que tener este nombre
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		#Opciones principales
 		self.in_ms = 150 #Milisegundos para la animacion de entrada
@@ -40,13 +40,13 @@ class FxsGroup(comun.FxsGroup):
 		self.saltar_cuadros = False
 		#Un effect si o si tiene que definir lo siguiente, si o si con este nombre
 		#Funciones (grupo de efectos) que provee
-		self.fxs = (EfectoGenerico(), comun.Fx(), comun.Fx())
+		self.fxs = (EfectoGenerico(), common.Fx(), common.Fx())
 		#self.paso = video.vi.width / float(audioFrameSize)
 		self.paso = 1.0
 
 
 	def EnCuadroInicia(self):
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		pass
 
 	def EnCuadroFin(self):
@@ -62,7 +62,7 @@ class FxsGroup(comun.FxsGroup):
 		sfc = extra.CopyTarget()
 		c.set_operator(cairo.OPERATOR_CLEAR)
 		c.paint()
-		avanzado.ModoPintado()
+		advanced.ModoPintado()
 		posx = 0
 		for f in range(audioFrameSize):
 			frame = audioop.getsample(frames, sampwidth, f)/maxint
@@ -70,4 +70,4 @@ class FxsGroup(comun.FxsGroup):
 			c.rectangle(posx, 0, 1,  video.vi.height)
 			c.fill()
 			posx += self.paso
-		avanzado.EndGroup()
+		advanced.EndGroup()

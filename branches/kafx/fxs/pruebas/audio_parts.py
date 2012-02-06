@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
-from libs import comun, audio, video
-from libs.draw import extra, avanzado
+from libs import common, audio, video
+from libs.draw import extra, advanced
 import random
 from math import pi, cos, sin, hypot, atan2
 
 power = 0.0
-class Fxpart (comun.Fx):
+class Fxpart (common.Fx):
 	def EnSilaba(self, sil): sil.PintarConCache()
 	EnDialogo = EnSilaba
 
-class FxsGroup(comun.FxsGroup):
+class FxsGroup(common.FxsGroup):
 	def __init__(self):
-		self.fxs = [Fxpart(), comun.Fx()]
+		self.fxs = [Fxpart(), common.Fx()]
 		self.saltar_cuadros = False
 		self.syl_in_ms = 400
 		self.syl_out_ms = 400
-		self.psys =  avanzado.cParticleSystem(png="textures/star2.png",
+		self.psys =  advanced.cParticleSystem(png="textures/star2.png",
 		max_life=2, max_parts=2000, emit_parts=1, scale_from= 0.4, scale_to=1, modo=1, rotation=0)
 		self.psys.DarAngulo(2*pi, 0.5, 2*pi)
 		self.psys.DarVentana(2, 2)
@@ -57,7 +57,7 @@ class FxsGroup(comun.FxsGroup):
 			posx += self.paso
 		#y pintamos la linea
 		c.stroke()
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		self.psys.Pintar()
-		avanzado.fGlow()
-		avanzado.EndGroup()
+		advanced.fGlow()
+		advanced.EndGroup()

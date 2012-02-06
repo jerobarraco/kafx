@@ -4,8 +4,8 @@ from random import random
 import itertools
 
 import cairo
-from libs import video, comun
-import basico, avanzado
+from libs import video, common
+import basic, advanced
 
 """
 Este modulo contiene todas las funciones que no hacen directamente a dibujar algo,
@@ -180,14 +180,14 @@ class cCairoColor():
 		self.b=other.b
 		self.a=other.a
 
-	def Interpolate(self, progress, other, inter=comun.i_lineal):
+	def Interpolate(self, progress, other, inter=common.i_lineal):
 		"""Interpola un color con otro, segun un progress
 		La interpolacion es lineal, asique no esperen algo de croma ni nada por el estilo.
 
 		@progress : indicador de progress de la interpolacion, es un valor entre 0 y 1
 		@other : el color al cual se interpolará
 		"""
-		i = comun.Interpolate
+		i = common.Interpolate
 		self.r = i(progress, self.r, other.r, inter)
 		self.g = i(progress, self.g, other.g, inter)
 		self.b = i(progress, self.b, other.b, inter)
@@ -589,7 +589,7 @@ class cVector():
 			fpoints = fcom[1]
 			tpoints = tcom[1]
 			if t<3:
-				p = [comun.LERP(self.progress, i, j) for i, j in zip(fpoints, tpoints)]
+				p = [common.LERP(self.progress, i, j) for i, j in zip(fpoints, tpoints)]
 				ctx_funcs[t](*p)
 			else:
 				ctx.close_path()
@@ -628,7 +628,7 @@ class cVector():
 		a = self.actual
 		ctx = video.cf.ctx
 		#empezamos un grupo por la shadow
-		avanzado.StartGroup(background)
+		advanced.StartGroup(background)
 
 		if matrix:
 			#para permitir el uso de matrices personalizadas para hacer
@@ -648,24 +648,24 @@ class cVector():
 			ctx.set_line_width(a.border)
 			#Ponemos el source usando la funcion para sources
 			#asignada al border y lo mismo haremos para el resto de las partes
-			basico.sources[a.mode_border](self, a.color3, 0)
+			basic.sources[a.mode_border](self, a.color3, 0)
 			ctx.stroke_preserve()
 
 		#fill
-		basico.sources[a.mode_fill](self, a.color1, 1)
+		basic.sources[a.mode_fill](self, a.color1, 1)
 		ctx.fill()
 
 		#finalizamos el grupo y aplicamos la 2º matrix
 		#notar que la 2º matrix se afecta ya sobre el pattern, o sea,
 		#sobre el raster y no sobre el vector, eso trae consecuencias
-		pat = avanzado.EndGroup(0.0, matrix2)
+		pat = advanced.EndGroup(0.0, matrix2)
 
 		#shadow. notar que la cargamos antes de restaurar la matrix identidad,
 		#para q sea concordante en caso de no ser solida, y que los points de control no sean un caso y sean iguales en todos los casos (border/fill)
-		basico.sources[a.mode_shadow](self, a.color4, 2)
+		basic.sources[a.mode_shadow](self, a.color4, 2)
 
 		#Devolvemos el patron con la shadow integrada
-		pat =  avanzado.Shadow(pat, a.shadow, a.shad_x, a.shad_y)
+		pat =  advanced.Shadow(pat, a.shadow, a.shad_x, a.shad_y)
 		ctx.identity_matrix()
 		return pat
 
@@ -719,15 +719,15 @@ class cVector():
 		y = self.actual.pos_y -(self.original._height/2.0)
 		return (x, y) #deberia cambiarlo para que use las cosas como en el box pero no se si da.
 
-	def Move(self, from_, to, inter=comun.i_lineal):
+	def Move(self, from_, to, inter=common.i_lineal):
 		"""Anima el movimiento from_ posicion from_ un vector desde _de_ hasta _a_
 		@from_ tupla (x,y)
 		@to tupla (x,y)
 		"""
-		self.actual.pos_x = comun.Interpolate(self.progress, from_[0], to[0], inter)
-		self.actual.pos_y = comun.Interpolate(self.progress, from_[1], to[1], inter)
+		self.actual.pos_x = common.Interpolate(self.progress, from_[0], to[0], inter)
+		self.actual.pos_y = common.Interpolate(self.progress, from_[1], to[1], inter)
 
-	def MoveTo(self, dx, dy, inter=comun.i_lineal):
+	def MoveTo(self, dx, dy, inter=common.i_lineal):
 		"""Anima el movimiento de un vector desde el punto indicado hasta su posicion original
 		@dx, dy coordenada de punto inical relative to the original position
 		"""
@@ -736,7 +736,7 @@ class cVector():
 		py = org.pos_y
 		self.Move( (px, py), (dx+px, dy+py), inter)
 
-	def MoveFrom(self, dx, dy, inter=comun.i_lineal):
+	def MoveFrom(self, dx, dy, inter=common.i_lineal):
 		"""Anima el movimiento de un vector hasta el punto indicado desde su posicion original
 		@dx, dy coordenada de punto final
 		"""
@@ -745,13 +745,13 @@ class cVector():
 		py = org.pos_y
 		self.Move((px+dx, py+dy), (px, py), inter)
 
-	def Fade(self, from_, to, inter=comun.i_lineal):
+	def Fade(self, from_, to, inter=common.i_lineal):
 		"""Anima el fade de un vector
 		@from_ float indicando el valor inicial
 		@to float con el valor final
 		ambos valores tienen un rango de 0 a 1
 		"""
-		self.Alpha(comun.Interpolate(self.progress, from_, to, inter))
+		self.Alpha(common.Interpolate(self.progress, from_, to, inter))
 
 	def Alpha(self, alpha):
 		"""Especifica el alfa para todos los colores
@@ -759,28 +759,28 @@ class cVector():
 		"""
 		self.actual.color1.a = self.actual.color2.a = self.actual.color3.a = self.actual.color4.a = alpha
 
-	def Rotate(self, from_, to, inter=comun.i_lineal):
+	def Rotate(self, from_, to, inter=common.i_lineal):
 		"""Anima la rotacion de un vector
 		@from_ angle inical en radianes
 		@to angle final en radianes
 		"""
-		self.actual.angle = comun.Interpolate(self.progress, from_, to, inter)
+		self.actual.angle = common.Interpolate(self.progress, from_, to, inter)
 
-	def Scale(self, from_, to_, inter=comun.i_lineal):
+	def Scale(self, from_, to_, inter=common.i_lineal):
 		"""Anima el escalado de un vector
 		@from_ scale incial
 		@hasa scale final
 		ambos son float donde 1 es el valor normal >1 es mas grande y <1 es mas pequeño
 		"""
-		self.actual.scale_x = self.actual.scale_y = comun.Interpolate(self.progress, from_, to_, inter)
+		self.actual.scale_x = self.actual.scale_y = common.Interpolate(self.progress, from_, to_, inter)
 
 	def Shake(self, amplitude=4):
 		"""
 		Anima la posición como un shake
 		@amplitude = cantidad de pixels que se moverá
 		"""
-		self.actual.pos_x = self.original.pos_x + comun.Interpolate(self.progress, -amplitude, amplitude, comun.i_rand)
-		self.actual.pos_y = self.original.pos_y +comun.Interpolate(self.progress, -amplitude, amplitude, comun.i_rand)
+		self.actual.pos_x = self.original.pos_x + common.Interpolate(self.progress, -amplitude, amplitude, common.i_rand)
+		self.actual.pos_y = self.original.pos_y +common.Interpolate(self.progress, -amplitude, amplitude, common.i_rand)
 
 	def Wiggle(self, amplitude=4, frequency=2):
 		"""
@@ -792,11 +792,11 @@ class cVector():
 			self.pointsw = []
 			self.pointsw.append( (0, 0) )
 			for i in range(frequency):
-				randomx = comun.LERP(random(), -amplitude, amplitude)
-				randomy = comun.LERP(random(), -amplitude, amplitude)
+				randomx = common.LERP(random(), -amplitude, amplitude)
+				randomy = common.LERP(random(), -amplitude, amplitude)
 				self.pointsw.append( (randomx, randomy) )
 				self.pointsw.append( (0, 0) )
-		x, y = comun.RanmaBezier(self.progress, self.pointsw)
+		x, y = common.RanmaBezier(self.progress, self.pointsw)
 		self.actual.pos_x = self.original.pos_x +x
 		self.actual.pos_y = self.original.pos_y +y
 		return x, y
@@ -852,12 +852,12 @@ class cVector():
 		box = (x1, y1, x2, y2)
 
 		#Creamos un nuevo grupo para que no hayan cochinadas en el medio
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		#pintamos el vector/dialogo/silaba
 		self.Paint()
 		#creamos las particulas
-		parts = avanzado.CreateParticles(box, texture, scale, alpha_min, vertical, mode)
-		avanzado.EndGroup(opacity=0.0)
+		parts = advanced.CreateParticles(box, texture, scale, alpha_min, vertical, mode)
+		advanced.EndGroup(opacity=0.0)
 		return parts
 
 	def PaintReflection(self, height = None):
@@ -869,11 +869,11 @@ class cVector():
 		descent = self.original._descent
 		height = height or self.original._height
 
-		avanzado.StartGroup()
+		advanced.StartGroup()
 		self.Paint()
-		avanzado.fBlur()
+		advanced.fBlur()
 		mt = CreateMatrix(org_y=posy-self.actual.org_y, pos_y=posy+alto_linea+descent, scale_y = -1)
-		pat = avanzado.EndGroup(0.0, matrix= mt)
+		pat = advanced.EndGroup(0.0, matrix= mt)
 
 		video.cf.ctx.set_source(pat)
 		lineal = cairo.LinearGradient(0, posy+height, 0, posy+(height*2.0))
@@ -883,7 +883,7 @@ class cVector():
 
 #los colores en cairo tiene alpha premultiplicado, en caso de necesitar demultiplicarlos pueden usar esto
 #http://lists.freedesktop.org/archives/cairo/attachments/20050826/b24b464d/alpha_test.obj
-def DemultiplicarAlpha(b,g,r,a):
+def DemultipyAlpha(b,g,r,a):
 	"""
 	@b, g, r, a
 	Todos los valores de 0 a 255"""
@@ -899,7 +899,7 @@ def D2(x):
 	return (x+0.5)/256.0
 
 def Demult(x, a):
-	return comun.ClampB( int( ((x*a)-1) /254 ) )
+	return common.ClampB( int( ((x*a)-1) /254 ) )
 
 def DuplicateSurface(surface):
 	vi = video.vi
