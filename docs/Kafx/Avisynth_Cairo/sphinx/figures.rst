@@ -1,6 +1,6 @@
-Formas
+Figures
 =======================================
 
-.. automodule:: libs.formas
+.. automodule:: libs.figures
 	:members:
 	

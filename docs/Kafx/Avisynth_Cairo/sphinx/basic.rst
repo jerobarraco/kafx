@@ -1,6 +1,6 @@
-Basico
+Basic
 =======================================
 
-.. automodule:: libs.draw.basico
+.. automodule:: libs.draw.basic
 	:members:
 	

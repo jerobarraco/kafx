@@ -11,14 +11,14 @@ Contents:
 .. toctree::
    :maxdepth: 2
 	
-   comun.rst
+   common.rst
    video.rst
    audio.rst
-   formas.rst
+   figures.rst
    asslib.rst
    extra.rst
-   basico.rst
-   avanzado.rst
+   basic.rst
+   avanced.rst
    
 Indices and tables
 ==================

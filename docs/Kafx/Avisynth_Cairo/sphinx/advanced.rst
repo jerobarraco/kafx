@@ -1,6 +1,6 @@
-Avanzado
+Advanced
 =======================================
 
-.. automodule:: libs.draw.avanzado
+.. automodule:: libs.draw.advanced
 	:members:
 	

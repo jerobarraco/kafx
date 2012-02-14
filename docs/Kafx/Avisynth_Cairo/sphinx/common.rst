@@ -1,6 +1,6 @@
-Comun
+Common
 =======================================
 
-.. automodule:: libs.comun
+.. automodule:: libs.common
 	:members:
 	
