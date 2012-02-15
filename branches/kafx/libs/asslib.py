@@ -44,9 +44,9 @@ F_STYLE4P = '[v4+ styles]' #La p es de PLUS (o sea +)
 F_STYLE4 = '[v4 styles]'
 
 #Estas funciones estan definidas afuera para que sean usables por cualquiera que llama al modulo
-def TimeToMS(tiempo):
+def TimeToMS(time):
 	"""Convierte un string del tipo '0:00:00.00' de ASS a milisegundos en entero"""
-	h, m, s = tiempo.split(':')
+	h, m, s = time.split(':')
 	s, ms = s.split('.')
 	result = int(h) *60 #Le asignamos horas y lo convertimos a minutos
 	result += int(m) #Le asignamos los minutos
@@ -204,7 +204,7 @@ class cProperties():
 		self._marginl = int(common.SafeGetFloat(style, S_MARGINL))
 		self._align = int(common.SafeGetFloat(style, S_ALIGN))
 
-class cSilaba(extra.cVector):
+class cSyllable(extra.cVector):
 	def __init__(self,  text='', style=None, parent=None, last_pos=None):
 		"""
 		Una silaba, es mejor dejar que las cree el dialogo porque necesitan una inicializacion especial
@@ -334,7 +334,7 @@ class cDialogue(extra.cVector):
 
 
 
-	def __SetSyllables(self, texto):
+	def __SetSyllables(self, text):
 		"""crea los objetos Syllables de un dialogo,
 		codigo tomado del proyecto hermano ZheoFX (C)
 
@@ -364,7 +364,7 @@ class cDialogue(extra.cVector):
     (\s+)*                      # postspace
     ''',
     re.IGNORECASE | re.UNICODE | re.VERBOSE)"""
-		texto = re.sub(r'({[\s\w\d]+})*', '', texto) #quita los comentarios o  tags que no comienzen con \
+		texto = re.sub(r'({[\s\w\d]+})*', '', text) #quita los comentarios o  tags que no comienzen con \
 		pattern = r'(?:\\[k]?[K|ko|kf])(\d+)(?:\\[\w\d]+)*(\\-[\w\d]+)*(?:\\[\w\d]+)*}([^\{\}]+)*'
 		#pattern = r"{(?:\\.)*\\(?:[kK]?[ko]?[kf])(\d+)([\\\-a-zA-Z_0-9]*)}([^{]*)"#anterior
 		info = list(re.findall(pattern, texto))
@@ -385,7 +385,7 @@ class cDialogue(extra.cVector):
 		tiempo = self._start
 		i = 0
 		for ti, ifx, tx in info:
-			syl = cSilaba(tx, self.original, parent=self, last_pos=pre)
+			syl = cSyllable(tx, self.original, parent=self, last_pos=pre)
 			syl._indice = i
 			syl._start = tiempo
 
@@ -416,12 +416,12 @@ class cDialogue(extra.cVector):
 		"""
 		common.Chain(self._dur, self.progress, self._syllables, function, duration)
 
-	def FullWiggle(self, amplitud=4, frecuencia=2):
+	def FullWiggle(self, amplitude=4, frequency=2):
 		"""el wiggle que queria AbelKM"""
 		#TODO doc
-		dx, dy = self.Wiggle(amplitud, frecuencia)
+		dx, dy = self.Wiggle(amplitude, frequency)
 		for sil in self._syllables:
-			sil.FullWiggle(amplitud, frecuencia , dx, dy)
+			sil.FullWiggle(amplitude, frequency , dx, dy)
 
 class Ass():
 	#Esta es la clase que parsea el archivo .ass con suerte no van a necesitar usarlo
@@ -442,9 +442,9 @@ class Ass():
 		#parseador null
 		pass#aguante el pass
 
-	def __v4PStyle(self,  texto):
+	def __v4PStyle(self,  text):
 		#parseador del estilo
-		titulo,  valor = texto.split(':', 1) #el 1 es por las dudas, uno nunca sabe
+		titulo,  valor = text.split(':', 1) #el 1 es por las dudas, uno nunca sabe
 		titulo = titulo.strip().lower()
 		if titulo == S_FORMAT:
 			self.formato = [v.strip().lower() for v in valor.split(',')] # si que me gusta hacer codigo complicado, no?
@@ -452,9 +452,9 @@ class Ass():
 			valores = [v.strip().lower() for v in valor.split(',')]
 			self.styles.append( cProperties(dicc=dict(zip(self.formato,  valores))))
 
-	def __Events(self,  texto):
+	def __Events(self,  text):
 		#parseador de events
-		titulo, valor = texto.split(':', 1)
+		titulo, valor = text.split(':', 1)
 		titulo = titulo.strip().lower()
 		if titulo == E_FORMAT :
 			self.eformato = [v.strip().lower() for v in valor.split(',')]
