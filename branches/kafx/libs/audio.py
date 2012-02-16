@@ -55,12 +55,12 @@ class BPM():
 		return (self.fpb -(time % float(self.fpb) ) ) / self.fpb
 
 
-class Datos():
+class Data():
 	proc = None
 	frames = ()
 	maxint = float(2**31)
 
-	def __init__(self, archivo = None):
+	def __init__(self, archive = None):
 		"""@archivo nombre del archivo de donde tomar el audio. por ejemplo : 'mivideo.avi'"""
 		self.frameRate = 44100 # --ar
 		self.sampWidth = 4 #4 bytes --ab 32
@@ -68,7 +68,7 @@ class Datos():
 		self.bufSize = self.frameSize*self.sampWidth
 		self.args = [
 			#video to decode
-			'ffmpeg', '-loglevel', '3', '-i', archivo,
+			'ffmpeg', '-loglevel', '3', '-i', archive,
 			#pipe data
 			'-vn',  '-acodec', 'pcm_s32le', '-ac', '1', '-ar' , str(self.frameRate), '-ab', '32', '-f', 'wav',
 			'-y', '-' #-y IS important
@@ -96,12 +96,12 @@ class Datos():
 		"""Devuelve el RMS para los datos actuales (Es como el poder del sonido)"""
 		return audioop.rms(self.frames, self.sampWidth)/self.maxint
 
-	def sample(self, cuadro):
+	def sample(self, frame):
 		"""Devuelve el valor de uno de los datos,
 		@cuadro : el numero de cuadro del cual se requiere el valor
 		(debe ser menor a frameSize)"""
 
-		if cuadro < len(self.frames):
+		if frame < len(self.frames):
 			return audioop.getsample(self.frames, self.sampWidth, cuadro)/self.maxint
 		else:
 			return 0.0
