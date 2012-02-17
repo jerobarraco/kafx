@@ -20,9 +20,9 @@ de hacerlo y que probablemente no buscaste como hacerlo.
 recuerden que pueden preguntar en el irc.
 """
 _capas = {}
-class Capa:
+class Layer:
 	"""Clase interna para cada capa, no tocar :D"""
-	def __init__(self,  opacidad=1.0, mode='over'):
+	def __init__(self,  opacity=1.0, mode='over'):
 		#todo copiar capa
 		#Esto me suena a que va a ser super costoso... pero bueno, me lo han pedido taaaaaaaaaaaaaaanto...
 		global OPERATORS
@@ -48,22 +48,22 @@ class Capa:
 			mode = 'over'
 
 		self.mode = OPERATORS.index(mode)
-		self.alpha = opacidad
+		self.alpha = opacity
 
-def CapasInicia():
+def LayerStarts():
 	"""Llamar en cada OnFrameStarts"""
 	global _capas
 	_capas = {}
 
 	if not ('base' in _capas):
-		base = Capa()
+		base = Layer()
 		base.ctx = video.cf.ctx
 		_capas['base'] = base
 
 #TODO antialias
 #TODO problema de stride
 #TODO Orden en events
-def CapasActivar(capa=0, opacity=1.0, mode='over'):
+def LayerActivate(layer=0, opacity=1.0, mode='over'):
 	"""Activa una capa.
 	todo lo que se pinte luego de esto se pintará sobre la capa activada.
 	@capa Nombre de la capa a activar, igual que se uso en CapasCrear
@@ -80,11 +80,11 @@ def CapasActivar(capa=0, opacity=1.0, mode='over'):
 		(Ver valores posibles en avanzado.OPERATORS)
 	"""
 	global _capas
-	if not capa in _capas:
-		_capas[capa] = Capa(opacity, mode)
-	video.cf.ctx = _capas[capa].ctx
+	if not layer in _capas:
+		_capas[layer] = Layer(opacity, mode)
+	video.cf.ctx = _capas[layer].ctx
 
-def CapasFin():
+def LayerEnd():
 	"""Llamar en cada OnFrameEnds"""
 	global _capas
 	video.cf.ctx = _capas['base'].ctx
