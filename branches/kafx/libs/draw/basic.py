@@ -4,12 +4,12 @@ from libs import video
 
 #Las funciones S setean un surce
 #NO OLIVDAR QUE LOS SOURCES SON RELATIVOS AL PUNTO DE POSICION DEL VECTOR!
-def SSolido(obj, color, part):
+def SSolid(obj, color, part):
 	"""usa el color definido en obj.actual como source"""
 	#Tambien podriamos usar cairo.SolidPattern(a.r, a.g, a.b, a.a) #tener en cuenta para crear un pattern de un ccairocolor
 	video.cf.ctx.set_source_rgba(color.r, color.g, color.b, color.a)
 
-def STextura(obj, mycolor, part):
+def SPattern(obj, mycolor, part):
 	"""Setea el source, usa la textura (pattern) almacenada en obj.actual.source como source"""
 	txt = obj.texturas[part]
 	ctx = video.cf.ctx
@@ -29,20 +29,20 @@ def Linear(x,y,x1,y1,c1,c2):
 	lineal.add_color_stop_rgba(1, c2.r, c2.g, c2.b, c2.a)
 	video.cf.ctx.set_source(lineal)
 
-def SDegradadoVertical(obj, color, part):
+def SVerticalGradient(obj, color, part):
 	"""Setea el source como un dergadado lineal verticalmente, el alto del degradado es el alto de la linea,
 	para que sea el mismo aun pintando diferentes sílabas por separado"""
 	Linear(0, -obj.original._line_height, 0, 0, color, obj.actual.color2)
 
-def SDegradadoHorizontal(obj, color, part):
+def SHorizontalGradient(obj, color, part):
 	"""Setea el source como un degradado lineal horizontalmente"""
 	Linear(0,0, obj.original._ancho,0, color, obj.actual.color2)
 
-def SDegradadoDiagonal(obj, color, part):
+def SDiagonalGradient(obj, color, part):
 	"""Setea el source con un degradado lineal en diagonal desde arriba a la izquierda a abajo a la derecha"""
 	Linear(0, -obj.original._line_height, obj.original._ancho,0, color, obj.actual.color2)
 
-def SDegradadoRadial(obj, color, part):
+def SRadialGradient(obj, color, part):
 	"""Setea el source como un degradado radial con centro en el punto de origen"""
 	a = obj.actual
 	cx = a.org_x
@@ -54,7 +54,7 @@ def SDegradadoRadial(obj, color, part):
 	radial.add_color_stop_rgba(1, hasta.r, hasta.g, hasta.b, hasta.a)
 	video.cf.ctx.set_source(radial)
 
-def SDegradadoLinealAnimado(obj, color, part):
+def SLinearAnimatedGradient(obj, color, part):
 	"""Crea un degradado lineal a lo ancho, usando el progress para el punto medio, creando un barrido"""
 	a = obj.actual
 	hasta = a.color2
@@ -65,7 +65,7 @@ def SDegradadoLinealAnimado(obj, color, part):
 	lineal.add_color_stop_rgba(1, hasta.r, hasta.g, hasta.b, hasta.a)
 	video.cf.ctx.set_source(lineal)
 
-def SDegradadoRadialAnimado(obj, color, part):
+def SRadialAnimatedGradient(obj, color, part):
 	"""Un degradado radial que va creciendo con el progress)"""
 	a = obj.actual
 	cx = a.org_x
@@ -118,6 +118,6 @@ desde tu script, nunca modifiques este archivo)
 y poner el index que corresponda al usar ModeRelleno/Border/Shadow
 ej: diag.ModeShadow(8)
 """
-sources = [SSolido, STextura, SDegradadoVertical, SDegradadoHorizontal, SDegradadoDiagonal,
-	SDegradadoRadial, SDegradadoLinealAnimado, SDegradadoRadialAnimado, SColorPattern, SBevel
+sources = [SSolid, SPattern, SVerticalGradient, SHorizontalGradient, SDiagonalGradient,
+	SRadialGradient, SLinearAnimatedGradient, SRadialAnimatedGradient, SColorPattern, SBevel
 	]
