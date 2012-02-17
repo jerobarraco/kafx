@@ -5,22 +5,22 @@
 import gtk, gtk.glade
 import gobject, weakref, gc
 
-class Ventana():
+class Window():
 	window = None
 	def __init__(self):
 		xml = gtk.glade.XML('gui.glade')
 		self.window = xml.get_widget('Window')
 
-	def Mostrar(self):
+	def Show(self):
 		if self.window:
 			self.window.show()
 		else:
 			print "No pude cargar la ventana, D:!"
 			
-	def Procesar_Click(self):
+	def Process_Click(self):
 		print "asldk"
 if __name__ == "__main__":
-	ventana = Ventana()
-	ventana.Mostrar()
+	ventana = Window()
+	ventana.Show()
 	gtk.main()
 
