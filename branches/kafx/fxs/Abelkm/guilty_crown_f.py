@@ -75,7 +75,7 @@ class Evento1():
 			#alpha = common.Interpolate(sil.progress, 1, -0.2)#not needed, esto es lo que produce elbug q todas las parts tengan la misma opacidad (lo q es mentira)
 
 			#nande: el capasactivar es como el modopintado, con llamarlo una vez basta, asi quel o pongo afuera del for
-			advanced.CapasActivar(1)
+			advanced.LayerActivate(1)
 			for part in sil.parts[:]:
 				#advanced.StartGroup()
 				part.color.a -= 0.05
@@ -108,7 +108,7 @@ class Evento2():
 			sil.actual.mode_fill = sil.P_DEG_VERT
 			sil.actual.color1.a = common.Interpolate(sil.progress, 0.5, 0.0)
 			sil.actual.color3.a = common.Interpolate(sil.progress, 0.5, 0.0)
-			advanced.CapasActivar(3)
+			advanced.LayerActivate(3)
 			advanced.StartGroup()
 			sil.Paint()
 			advanced.fBlur1(1, ((sin(pi*sil.progress))/6.0))
@@ -123,7 +123,7 @@ class Evento3():
 			global world, colort, colors, colorr, colorq, colora, colorb, colorc, colord, colore, colorf, colorg, colorh, colori, colorm, colorn, colork, coloro, colorl, t
 
 			sil.actual.mode_fill = sil.P_DEG_VERT
-			advanced.CapasActivar(2)
+			advanced.LayerActivate(2)
 			sil.Paint()
 
 		def SyllableTime(self, sil):
@@ -141,11 +141,11 @@ class FxsGroup(common.FxsGroup):
 		global world
 		world.Update(True)
 		advanced.StartGroup()
-		advanced.CapasInicia()
+		advanced.LayerStarts()
 
 
 	def OnFrameEnds(self):
-		advanced.CapasFin()
+		advanced.LayerEnd()
 		micolor = extra.cCairoColor()
 		factual = video.cf.framen
 		if factual<=375:
