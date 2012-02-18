@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
-#Importamos las funciones del KAFX~
+#Import libs to make work KAFX
 from libs import common
 from math import cos, pi, sin
 
-#Definimos un effect
+#First, define the FX
 class Fx1(common.Fx):
 	def Char(self, c, prog):
-		#Esta es la función que se llamará por cada silaba active
-		#ver EnSilaba
+		#This is the function that will be called at each active syllable
+		#>See OnSyllable
 
-		#Como esta funcion es llamada por Encadenar, el progreso es un parametro
-		#lo copiamos al progreso (no es necesario para este effect pero tenganlo en cuenta)
+		#Since this function is called by Chain, the progress is a parameter
+		#so we copy it (not alctualy necesary for this fx, but keep it in mind)
 		c.progress = prog
-		#interpolamos los colores
-		#Esto anima el color de relleno con el color secundario
+		#we do an interpolation of the colors
+		#this will animate the fill color with the secondary color (color1 with color2)
 		c.actual.color1.Interpolate(prog, c.original.color2)
 		c.Paint()
 
@@ -36,7 +36,7 @@ class Fx1(common.Fx):
 			#y los metemos en el array de chars
 			d.chars.extend(silaba._letters)
 
-	def AnimacionEntrada(self, c, prog):
+	def AnimationIn(self, c, prog):
 		#Esta animacion se llama cuando el DIALOGO entra
 		#como es llamada por el Encadenar, nos pasa el caracter y el progreso
 		#Al progreso lo copiamos aunque no es necesario
@@ -55,13 +55,13 @@ class Fx1(common.Fx):
 		el primer tiempo es la duracion total de la animacion (la puse en ms)
 		luego va el progreso maestro (q es el progreso del dialogo)
 		luego los objetos a encadenar (las letras q coleccionamos en el EnDialogoInicia)
-		luego la funcion encargada de animar (self.AnimacionEntrada)
+		luego la funcion encargada de animar (self.AnimationIn)
 		luego el tiempo de animacion de cada objeto (caracter)
 		como el tiempo total está en ms la duracion de cada caracter tamb la puse en ms
 		"""
-		common.Chain(500, d.progress, d.chars, self.AnimacionEntrada, 100)
+		common.Chain(500, d.progress, d.chars, self.AnimationIn, 100)
 
-	def AnimacionSalida(self, c, prog):
+	def AnimationOut(self, c, prog):
 		#Esta animacion se llama cuando el DIALOGO sale
 		c.progress = prog
 		c.actual.pos_y += sin(pi*prog)*30
@@ -72,7 +72,7 @@ class Fx1(common.Fx):
 
 	def OnDialogueOut(self, d):
 		#lo mismo q la otra
-		common.Chain(500, d.progress, d.chars, self.AnimacionSalida, 100)
+		common.Chain(500, d.progress, d.chars, self.AnimationOut, 100)
 
 	def OnDialogue(self, d):
 		d.Paint()
