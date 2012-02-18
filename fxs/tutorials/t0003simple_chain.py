@@ -11,30 +11,30 @@ from libs import common
 class FX1(common.Fx):
 
 	def DialogoQueEntra(self, s, p):
-		#acá se ponen todos los efectos de la entrada del diálogo
+		#here all the fxs for the dialoguein
 		s.progress = p
 		s.Fade(0, 1)
 		s.Paint()
 
 	def OnDialogueIn(self, d):
-		#acá se encadena y se le da una duración para cada sílaba entrante, así no se la de el kafx automáticamente
+		#and here we give it the time using a chain
 		d.Chain(self.DialogoQueEntra, duration=150)
 
 
 
 	def DialogoQueSale(self, s, p):
-		#lo mismo que antes, efectos
+		#same as before, effects
 		s.progress = p
 		s.Fade(1, 0)
 		s.Paint()
 
 	def OnDialogueOut(self, d):
-		#acá también es lo mismo, encadenar y poner tiempo, sólo que con la salida del diálogo
+		#and so here, chain
 		d.Chain(self.DialogoQueSale, duration=40)
 
 
 	def OnDialogue(self, d):
-		#diálogo for the lulz
+		#dialogue for the lulz
 		d.Paint()
 
 

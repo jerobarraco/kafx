@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Como pintar un dialogo y efectos basicos
-Ver tutorials para explicacion
-Read the tutorials for explanation
+How to paint an dialogue with the most basic effect.
+See tutoriales for further explication.
+Read the tutorials for explanation at:
 svn/docs/Kafx/Avisynth_Cairo
 """
 from libs import common
