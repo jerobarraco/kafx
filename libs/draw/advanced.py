@@ -60,9 +60,7 @@ def LayerStarts():
 		base.ctx = video.cf.ctx
 		_capas['base'] = base
 
-#TODO antialias
 #TODO problema de stride
-#TODO Orden en events
 def LayerActivate(layer=0, opacity=1.0, mode='over'):
 	"""Activa una capa.
 	todo lo que se pinte luego de esto se pintará sobre la capa activada.
