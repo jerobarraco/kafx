@@ -72,26 +72,32 @@ class Evento1():
 				for b in sil.bull:
 					world.CreateSprite(b, False)
 				sil.matar=True
-			alpha = common.Interpolate(sil.progress, 1, -0.2)
-			if alpha < 0.0:
+			#alpha = common.Interpolate(sil.progress, 1, -0.2)#not needed, esto es lo que produce elbug q todas las parts tengan la misma opacidad (lo q es mentira)
+
+			#nande: el capasactivar es como el modopintado, con llamarlo una vez basta, asi quel o pongo afuera del for
+			advanced.CapasActivar(1)
+			for part in sil.parts[:]:
+				#advanced.StartGroup()
+				part.color.a -= 0.05
+				#Este numero es raro, es importante que no sea muy chico o las particulas no se van a morir!  y la animacion luego va a verse rara por todas las particuals que existen pero no se ven
+				#el calculo es maso asi. tenemos 750 ms de animacion seguro (el _end+750)
+				#si lo pasamos a frames son unos 25 (750/30 (fps)) (ojo no usar fps mayor)
+				#si vemos cuanto podemos decrementar en 25 frames tenemos 1/25=0.05 (o algo menor, pero es mejor poner un numero mas grande
+				part.Paint()
+				#advanced.fBlur1(1, common.Interpolate(sil.progress, 0.2, 0))
+				#advanced.EndGroup()
+				world.Resize(part, common.Interpolate(sil.progress, 0.1, 0.2))
+				if part.color.a <= 0:
+					sil.parts.remove(part)
+
+			#verificamos si no hay mas parts y si se crearon, si es cierto significa que hay que matar los buls tamb
+			if (not sil.parts )and sil.matar:
 				for part in sil.parts:
-						world.DestroySprite(part)
+					world.DestroySprite(part)
 				sil.parts = [] #borramos las parts
 				for b in sil.bull:
 					world.DestroySprite(b)
 				sil.bull = []
-			else:
-				for part in sil.parts[:]:
-					#advanced.StartGroup()
-					part.color.a = alpha
-					advanced.CapasActivar(1)
-					part.Paint()
-					#advanced.fBlur1(1, common.Interpolate(sil.progress, 0.2, 0))
-					#advanced.EndGroup()
-
-					world.Resize(part, common.Interpolate(sil.progress, 0.1, 0.2))
-
-
 
 		def SyllableTime(self, sil):
 			return (sil._start+((sil._end-sil._start)/2.0) , sil._end+750)
