@@ -34,10 +34,10 @@ class Encoder():
 		kf.SetProfiling(bool(self.profile))
 		try:
 			self.conf = __import__(module)
-			print ("importado el modulo", module, self.conf)
+			print ("Module imported", module, self.conf)
 		except Exception, e:
 			print e
-			print "No pude importar el archivo "+module+"(.py) asegurate que exista, que este bien el nombre y que no tenga errores"
+			print "I couldn't import "+module+"(.py) check that it's an existing file, the name is correct and hasn't errors"
 			exit(-1)
 
 
@@ -122,7 +122,7 @@ class Encoder():
 		glutReshapeWindow(self.w, self.h)
 
 	def Stop(self):
-		print 'Saliendo'
+		print 'Leaving'
 		self.running = False
 		self.enc.terminate()
 		self.dec.terminate()
