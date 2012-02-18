@@ -65,10 +65,10 @@ class cProperties():
 		cProperties(dicc=diccionario) lo inicializa con los valores de un diccionario ass"""
 
 		#Estos necesitan estar afuera porque si no estan inicializados, en el caso q se cree directamente una  instancia cProperties dara error!!
-		self.color1 = extra.cCairoColor(numero=0xFFFF2020) #Notar q el 0x hace q sea un numero de verdad, y no un string. color primario
-		self.color2 = extra.cCairoColor(numero=0xFF808080) #color secundario
-		self.color3 = extra.cCairoColor(numero=0xFF101010) #border
-		self.color4 = extra.cCairoColor(numero=0xFF808080) #shadow
+		self.color1 = extra.cCairoColor(number=0xFFFF2020) #Notar q el 0x hace q sea un numero de verdad, y no un string. color primario
+		self.color2 = extra.cCairoColor(number=0xFF808080) #color secundario
+		self.color3 = extra.cCairoColor(number=0xFF101010) #border
+		self.color4 = extra.cCairoColor(number=0xFF808080) #shadow
 		#colores: primario Secundario Outline Back
 		self._layer = 0
 
@@ -182,10 +182,10 @@ class cProperties():
 		"""Crea los valores desde un diccionario, para uso interno"""
 		#animables
 		self.angle = math.radians(common.SafeGetFloat(style, S_ANGLE))
-		self.color1  = extra.cCairoColor(texto=style.get(S_PCOLOR, 0))
-		self.color3 = extra.cCairoColor(texto=style.get(S_OCOLOR, 0))
-		self.color4 = extra.cCairoColor(texto=style.get(S_BCOLOR, 0))
-		self.color2 = extra.cCairoColor(texto=style.get(S_SCOLOR, 0))
+		self.color1  = extra.cCairoColor(text=style.get(S_PCOLOR, 0))
+		self.color3 = extra.cCairoColor(text=style.get(S_OCOLOR, 0))
+		self.color4 = extra.cCairoColor(text=style.get(S_BCOLOR, 0))
+		self.color2 = extra.cCairoColor(text=style.get(S_SCOLOR, 0))
 		self.border = common.SafeGetFloat(style, S_OUTLINE)
 		self.shadow = int(common.SafeGetFloat(style, S_SHADOW)) #el zheo me dijo q podia ser flotante pero no tiene sentido aca
 
