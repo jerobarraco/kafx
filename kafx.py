@@ -51,7 +51,7 @@ class Encoder():
 			'-pix_fmt', 'rgb32', '-f', 'rawvideo', '-y', '-' #-y IS important
 		]
 
-		if self.d3:#solucion rapida al flip vertical
+		if self.d3:#fast solution for flip vertical
 			self.conf.out_parameters.insert(-2, "-vf")
 			self.conf.out_parameters.insert(-2, "vflip")
 
@@ -99,14 +99,14 @@ class Encoder():
 
 		glMatrixMode(GL_PROJECTION)
 		gluPerspective(1., 1.,1.,1.)
-		#gluOrtho2D(-1, 1, 1, -1)#con esto lo puedo dar vuelta, pero me sirve de nada, porque el glreadpixels lo da vuelta de nuevo
+		#gluOrtho2D(-1, 1, 1, -1)#this can flip it, it's unnecessary because glreadpixels flips it back again
 		#gluOrtho2D(-1, 1, -1, 1)
 		glMatrixMode(GL_MODELVIEW)
 		glPushMatrix()
 
 		self.texture = glGenTextures(1)
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 4)
-		glBindTexture(GL_TEXTURE_2D, self.texture)#esta linea pareciera opcional
+		glBindTexture(GL_TEXTURE_2D, self.texture)#this line seems optional esta linea pareciera opcional
 		glTexImage2D(GL_TEXTURE_2D, 0,  GL_RGBA8, self.w, self.h, 0, GL_RGBA , GL_UNSIGNED_BYTE, [])
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
@@ -149,9 +149,9 @@ class Encoder():
 				self.durations = l[a:b]
 				print self.durations
 			elif ("stream #" in low) and ("video: " in low):
-				parts = low.split(",") #esperemos que no haya ningun codec con una "," en el medio...
+				parts = low.split(",") #lets hope there's no codec with a "," in it...
 				self.w, self.h = map(int, parts[2].strip().split(" ")[0].split("x"))
-				#4 porque en algunos el 3º es el kbps, en otros ni siquiera pone el fps
+				#4th because in some the 3rd is kbps, in others it doesn't even have fps
 				self.fps = float(parts[4].strip().split(" ")[0])
 
 		self.stride = self.w*4
@@ -165,7 +165,7 @@ class Encoder():
 		print("frames %s, fps %s, %sx%s"%(self.duration, self.fps, self.w, self.h))
 
 	def Display(self, *args):
-		#Dibujar
+		#Draw
 		#pixels = array.array('B', p.stdout.read(framesize))
 		if not self.running: return
 		if self.dec.poll()!=None: exit(-2)
@@ -175,25 +175,25 @@ class Encoder():
 
 		pixels = ctypes.create_string_buffer(self.dec.stdout.read(self.framesize), self.framesize)
 		"""
-		el ",framesize" es ultraimportante, si no se coloca, python crea un array de caracteres que termina con el caracter NULL
-		lo que hace que el array tenga un byte de mas, lo que hace que al intentar escribirlo la imagen se corrompa.
-		al ponerle el tamaño del array (framesize) el array funciona correctamente
+		the ",framesize" is VERY important, if we don't put it, python creats a character array that ends with a NULL character,
+		the array has a extra byte, that way in the writing process the image becomes corrupt.
+		When we give the array length (framesize), the array works correctly
 		"""
 
 
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 		#pixels2 = ctypes.create_string_buffer(pixels.tostring())
 		#http://www.opengl.org/wiki/Common_Mistakes#OOP_and_performance
-		#podemos usar unpack 4 proque usamos 4bytes por pixel
+		#we can use unpack 4 because we use 4bytes per pixel
 		#glPixelStorei(GL_UNPACK_ALIGNMENT, 4)
 		glBindTexture(GL_TEXTURE_2D, self.texture)
 		kf.OnFrame(self.cuadro, self.stride, pixels)
-		#teoricamente se recomienda usar texsubimage, pero se ve horrible! y la performance parece la misma
+		#theoretically it's better to use textsubimage, but it looks awful! and performance seem to be the same
 		#if self.d3:
 		#	glTexImage2D(GL_TEXTURE_2D, 0,  GL_RGBA8, self.w, self.h, 0, GL_BGRA , GL_UNSIGNED_BYTE, pixels)
 		#else:
 		#	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, self.w, self.h, GL_BGRA, GL_UNSIGNED_BYTE, pixels)
-		#ni hablemos de performance con mipmaps
+		#don't even talk about performance with mipmaps
 		#gluBuild2DMipmaps( GL_TEXTURE_2D, 4, self.w, self.h,
 		#                   GL_BGRA, GL_UNSIGNED_BYTE, pixels );
 		glTexImage2D(GL_TEXTURE_2D, 0,  GL_RGBA8, self.w, self.h, 0, GL_BGRA , GL_UNSIGNED_BYTE, pixels)
@@ -229,12 +229,12 @@ class Encoder():
 		glutSwapBuffers()
 		glutPostRedisplay()#http://www.opengl.org/resources/faq/technical/glut.htm 3.050
 
-		"""ni ahi que funca esto
+		"""I think this won't work..
 		gluOrtho2D(-1, 1, 1, -1)
 		glReadPixels(0, 0, self.w, self.h, GL_BGRA, GL_UNSIGNED_BYTE, pixels);
 		gluOrtho2D(-1, 1, 1, -1)
 		"""
-		"""this works... BUT la imagen se pone mas opaca, dios sabe porque
+		"""this works... BUT the image becomes more opaque, god knows why
 		glRasterPos2f(-1,1);
 		# flip the y direction
 		glPixelZoom(1,-1);
