@@ -20,28 +20,28 @@ version_info = (1, 8, 0, 'newfinalrc4')
 print 'Python version', traceback.sys.version_info
 if traceback.sys.version_info[:3] < (2, 6, 6):
 	print """
-	La versión de python que esta usando es menor a 2.6.6, esto puede traer problema con cairo.
-	Por favor intente usar la versión 2.6.6 de python, o la última versión de python 2.6 (pero no 2.7 ni 3.2)
+	The python version used is 2.7 or less, this can bring problems with cairo.
+	Please try to use version  2.7 of python (do not use 3.2)
 	"""
 #TODO agregar verificacion de frame >=0 en carga de tiempos... porque me odias abel???
 #TODO agregar verificacion de que se haya cargado el effect correctamente
 #TODO cambiar el preload para que organice las cosas como debe
 
-print "Cargando Cairo..." #si, el sistema de loggin rulea
+print "Loading Cairo..." #si, el sistema de loggin rulea
 import cairo
 #import cProfile
-print 'Cairo cargado. Version:', cairo.version_info
-print 'Cargando KAFX...'
+print 'Cairo loaded. Version:', cairo.version_info
+print 'Loading KAFX...'
 from libs import video, common, asslib
 
-#Poner librerias recien a partir de acá :D
+#Insert libraries from here :D
 
-#hasta aca
-print 'KAFX cargado. Librerias version:', version_info
-print "Yay! se han cargado todas las librerias."
+#to here
+print 'KAFX loaded. Libreries version:', version_info
+print "Yay! The libraries were successfully loaded."
 
-#Estos son los objetos globales, no muy buena práctica pero ayudan.
-#cf y vi es una gran chanchada, son los mismos objetos que en video (y deben ser los mismos)
+#This are the global objects, not a good thing to do but they help
+#cf y vi are gross, same objects as in video (and they must be the same)
 cf = None
 vi = None
 fx = None
@@ -52,49 +52,49 @@ m = None
 ass = None
 
 def DBug(msg):
-	#Esta funcion es llamada desde la dll, imprime el error actual
+	#This function is called from the dll, prints the actual error
 	traceback.sys.stdout.write(str(msg))
 
 def PainOnScreen(msg):
-	"pone un texto en pantalla, super slow, soporta multilinea"
+	"Prints text on screen, super slow, multiline supported"
 	lasty = 10
 	for line in msg.split('\n'):
-		error_obj = asslib.cSilaba(line, last_pos=(20, lasty))
+		error_obj = asslib.cSyllable(line, last_pos=(20, lasty))
 		error_obj.Paint()
 		lasty += error_obj.original._line_height
 
 def Error(msg=""):
-	"""Escribe un mensaje de error al archivo y en la pantalla,
-	no siempre escribe en la pantalla, depende del error"""
+	"""Prints the error message in archive and on screen,
+	not always on screen, depends on the error"""
 	traceback.sys.stderr.write (msg+"\n")
 	traceback.print_exc()
 	traceback.sys.stderr.write ("\n---------------\n")
 	PainOnScreen(traceback.format_exc())
 
 def OnDestroy():
-	"""Esta funcion es llamada desde la dll
-	se llama antes de destruir todo, en python es completamente innecesario usar esto.. pero por si acaso lo dejo...
-	mejor si intentan usar los metodos especiales de las clases como __del__
+	"""This function is called from the dll
+	it's called before destroying everything, it's completely unnecessary to use this in python... but just in case...
+	It's better to use special methods from __del__ class
 	"""
-	print ('Me voy, me dijeron que termine')
+	print "I'm leaving, they told me to finish"
 
 def OnInit(filename, assfile, pixel_type, image_type, width, height, fpsn, fpsd, numframes):
-	"""Esta funcion es llamada desde la dll
-	inicializa todas las cosas.
+	"""This function is called from dll
+	initialize everything
 	"""
 	try:
 		global fop, cf, vi, m, fx, ass
-		DBug("ME INICIALIZAN\n")
+		DBug("I'M BEING INTITIALIZED\n")
 
-		#Ponemos las opciones de fuentes
+		#We put the Font Options
 		fop = cairo.FontOptions()
 		fop.set_antialias(cairo.ANTIALIAS_SUBPIXEL)#hay que ver si esto no lo hace mas lento
 
-		#Cargamos la información del video
+		#We load the information of the video Cargamos la información del video
 		cf = video.cf
 		vi = video.vi
-		vi.pixel_type = pixel_type #como se guarda los datos de un pixel, segun video
-		vi.modo = video.GetMode(vi.pixel_type) #El modo de cairo
+		vi.pixel_type = pixel_type #the way the data of a pixel is saved, according to video
+		vi.modo = video.GetMode(vi.pixel_type) #cairos mode
 		vi.image_type = image_type
 		vi.width = width
 		vi.height = height
@@ -104,29 +104,29 @@ def OnInit(filename, assfile, pixel_type, image_type, width, height, fpsn, fpsd,
 		vi.fps = float(fpsn) /fpsd
 		vi.fpscof1 = vi.fps / 1000.0
 		vi.fpscof2 = 1000.0 / vi.fps
-		vi.fake_stride = width*4 #para rgba
+		vi.fake_stride = width*4 #for rgba
 		#cf.tiempo = -1
 		cf.ctx = cairo.Context(cairo.ImageSurface(vi.modo, vi.width, vi.height))
-		#esto es porque para el ass, el tamaño d las fuentes es necesario un contexto y que tenga el tamaño correcto
-		DBug("Importando el efecto\n")
+		#this is because the ass needs a contexts for the font size with the correct size
+		DBug("Importing Effect\n")
 		m = common.MyImport(filename)
-		DBug("Cargando los subtitulos\n")
+		DBug("Loading Subtitles\n")
 		fx = m.FxsGroup()
 		ass = asslib.Ass(assfile, len(fx.fxs) -1)
-		DBug("Precalculando los events\n")
+		DBug("Making calculations for events\n")
 		__PreLoad()
-		DBug("Todo se cargo aparentemente bien\n")
+		DBug("All was apparently successfully loaded\n")
 	except:
 		print "Something bad happened and we don't know what it is. It is really bad. Seriously, it is really bad. Really."
 		Error()
 
 def OnFrame(pframe, stride, cuadro):
-	"""Esta funcion se llama desde la dll
-	Llamada por cada cuadro
+	"""This function is called from dll
+	It's called for each frame
 	"""
 	try:
 		global fx, no_frames
-		if fx.skip_frames: #Verificamos si se desea procesar el cuadro o si lo devolvemos tal cual
+		if fx.skip_frames: #We verify if the frame wants to be processed or just return it
 			if pframe > len(no_frames): return
 			if no_frames[pframe]: return
 
@@ -146,7 +146,7 @@ def OnFrame(pframe, stride, cuadro):
 		#definitivamente nadie lo usa. lo deshabilite porque usa mucho CPU
 		#cf.tiempo = video.CuadroAMS(cf.framen)
 
-		#Llamamos a los events
+		#Calling the events
 		__CallFuncs()
 		cf.sfc.flush()
 	except:
@@ -157,14 +157,14 @@ def __CallFuncsProfile():
 	cProfile.runctx('__CallFuncsNormal()', globals(), locals(), filename='profile')
 
 def __CallFuncsNormal():
-	"""Esta funcion llama a todos los events del efecto
-	Si agregan un evento no olvidar ponerlo en __PreLoad"""
+	"""This function calls all the events of the effect
+	If an event is added, don't forget to add it in __PreLoad"""
 	global fx, frames, cf
 
 	frame = frames[cf.framen]
 	fx.OnFrameStarts()
 
-	#Nueva forma de llamar, por events
+	#New way for calling per events
 	for (evento, o, prog) in frame:
 		o.progress = prog
 		if fx.reset_style:
@@ -173,14 +173,14 @@ def __CallFuncsNormal():
 
 	fx.OnFrameEnds()
 
-#Esto es para profiling, como es algo lento, intentamos hacerlo mas rapido con este hack
-#En cualquier caso iniciamos la funcion __CallFuncs que se llama en OnFrame con el CallFuncsNormal
+#This is for profiling, as it is kind of slow, we try to make it faster with this hack
+#Either way, we initialize __CalFuncs function that it's called in OnFrame with CallFuncsNormal
 __CallFuncs = __CallFuncsNormal
 def SetProfiling(do=False):
 	global __CallFuncs, __CallFuncsNormal, __CallFuncsProfile
 	#Si do es True (Y lo pongo en otra variable para que el dia de mañana pueda venir como parametro)
 	if do:
-		#CallFuncs ahora apunta al CallFuncs del Profile
+		#CallFuncs now points to CallFuncs from Profile
 		print "Profiling active"
 		__CallFuncs = __CallFuncsProfile
 	else:
@@ -200,50 +200,50 @@ def __AddEvent(ini, end, dif, evento, element):
 		no_frames[f] = False
 
 def __PreLoad():
-	"""Esta función crea los arrays de no_frames y frames,
-		y también inicializa las cosas del efecto
+	"""This function creates arrays of no_frames and frames,
+	and initializes things of the effect, too
 	"""
 
 	global frames, fx, ass, no_frames
 	from libs.draw import advanced
 
-	num_frames = vi.num_frames #la cantidad de frames totales
-	fs = fx.fxs #la lista de efectos
-	advanced.fBlur = advanced.fBlurs[fx.blur_type] #elegimos el tipo de blur segun la configuración
+	num_frames = vi.num_frames #total number of frames
+	fs = fx.fxs #list of effects
+	advanced.fBlur = advanced.fBlurs[fx.blur_type] #we select the type of blur according to the configuration
 
 	#no_frames = [True for i in xrange(num_frames+1)] #this way is slower
-	no_frames = [True, ]*(num_frames+1)#el objeto no_frames es una lista con los cuadros que no quieren ser procesados
+	no_frames = [True, ]*(num_frames+1)#the object no_frames is a list with the frames that don't want to be processed
 	#frames = [[]]*(num_frames+1) #no hagan esto, porque [] es la misma instancia, o sea, todos los frames referencian al mismo = desastre
-	frames = [ [] for i in range(num_frames+1) ] #creamos el objeto frames q contiene todos los objetos de dialogues
+	frames = [ [] for i in range(num_frames+1) ] #we create the object 'frames' that has all the objects of dialogues
 
 	"""
-	Nota: si bien el array frame es una referencia directa a cada frame,
-	los tiempos en las syllables/dialogues están guardados en milisegundos,
-	con la esperanza de darle mayor presición.
+	Nota: Even though array frame is a direct reference to each frame,
+	the times of syllables/dialogues are saved in miliseconds,
+	with the hope of having more precision
 	"""
 
-	#cacheo las funciones porque soy raton #this actually speed things up
+	#functions cached #this actually speed things up
 	dialogos = ass.dialogues
 
-	#Para poder hacer que las cosas se pinten en un orden predeterminado es necesario
-	#iterar varias veces cada objeto, una por cada evento. caso contrario, se pisan.
+	#We need to iterate several times each object, one per event, this way
+	#things will be draw in a predetermined order. Otherwise, they step over each other
 
-	#los tiempos van siempre en ms para tener presición
+	#Times are always in ms for better precision
 	for diag in dialogos:
 		diag.progress = 0.0
-		#effect se usa más abajo en events extras y las syllables lo cambian
-		#notar que cada dialogo y silaba puede tener un effect individual (sobre todo con el inline fx >.>;)
+		#effect will be used later in events extras and the syllables will change it
+		#please note that each dialogue and syllable can have an individual effect (especially with inline fx >.>;)
 		efecto = fs[diag.effect]
 
-		#Llamamos a la función de cuando se inicia el dialogo
-		#No es necsaria una iteracion especial para esto, ya que no deberia pintarse nada aca
+		#We call the function when the dialogue is inicialized
+		#There's no need for a special iteration for this, since there shouldn't be anything to draw here
 		inicio = getattr(efecto, "OnDialogueStarts", None)
 		if inicio: inicio(diag)
 
-		#Dialogo Sale
-		#nos fijamos si definio la funcion EnDialogoSale
+		#Dialogue leaves
+		#we check if the OnDialogueOut is defined
 		evento = getattr(efecto, "OnDialogueOut", None)
-		#Si no la definio entonces no la quiere, y no la cargamos y con continue vamos al siguiente dialogo
+		#If it wasn't, it isn't wanted and we don't load it. We go to the next dialogye with 'continue'
 		if not evento: continue
 
 		ini = diag._end
@@ -251,7 +251,7 @@ def __PreLoad():
 		dif = end - ini
 		__AddEvent(ini, end, dif, evento, diag)
 
-	#Dialogo Entra
+	#Dialogue enters
 	for diag in dialogos:
 		evento = getattr(fs[diag.effect], "OnDialogueIn", None)
 		if not evento: continue
@@ -261,7 +261,7 @@ def __PreLoad():
 		dif = end - ini
 		__AddEvent(ini, end, dif, evento, diag)
 
-	#Dialogo Animado o Activo
+	#Animated or Active Dialogue
 	for diag in dialogos:
 		evento = getattr(fs[diag.effect], "OnDialogue", None)
 		if not evento: continue
@@ -271,14 +271,14 @@ def __PreLoad():
 		dif = end - ini
 		__AddEvent(ini, end, dif, evento, diag)
 
-	#Eventos personalizados
+	#Custom Events
 	for diag in dialogos:
 		eventos = getattr(fs[diag.effect], "events", None)
 		if not eventos: continue
 
 		for evento in eventos:
-			#Calculamos la duracion de cada evento extra
-			#Notar que puede haber varios events extras en cada effect
+			#We calculate the duration of each extra event
+			#Note that there can be several extra events in each effect
 			enDialogo = getattr(evento, "OnDialogue", None)
 			if not enDialogo: continue
 
@@ -286,27 +286,27 @@ def __PreLoad():
 			dif = end - ini
 			__AddEvent(ini, end, dif, enDialogo, diag)
 
-	#Prelodeamos las syllables :D
+	#Preload of syllables :D
 	for diag in dialogos:
 		__PreLoadSyllables(diag)
 
-	#Necesario poner esto aca para que las maldetas syllables no pisen las letras
-	#sep, una vez mas, no queda otra
+	#This is necessary so that the syllables don't step over the letters
+	#again, there's no other way
 	if fx.split_letters:
 		for diag in dialogos:
 			syllables = diag._syllables
 			for sil in syllables:
 				__PreLoadLetters(sil)
 
-	#primero ordenamos los dialogues/syllables/letras en cada frame segun sus layers
-	#(aun asi quedan dialogues bajo syllables bajo letras (en el mismo layer en el mismo frame))
+	#First we order the dialogues/syllables/letters in each frame according to their layers
+	#(still there are dialogues under syllables under letters (in the same layer in the same frame))
 	def keyfunc(item):
-		"""una funcion que por cada item en cada frame, devuelve el valor con que comparar
-		explicado es:
-		cada frame contiene muchos items, al ordenarlo, se llama a esta funcion por cada item
-		cada item posee 3 elementos, el evento, el dialogo y el progress
-		tomamos el elemento 1 (el 2º) el dialogo.
-		del dialogo tomamos el estilo original, y de ahi el layer
+		"""A function that for each item in each frame, returns the value which to compare with
+		explanation:
+		each frame contains several items, in the ordering process, this function is called for each item
+		each item has 3 elements (event, dialogue and progress)
+		we take the element 1 (the 2nd) the dialogue.
+		from the dialogue we take the original style, and from there the layer
 		"""
 		return item[1].original._layer
 		#pd: podría usar lambda, pero lo odio :D
@@ -323,24 +323,24 @@ def __PreLoad():
 
 def __PreLoadSyllables(diag):
 	"""
-		Carga las syllables
+		Loads syllables
 	"""
-	#notar que esto se ejecuta por cada dialogo
+	#note that this is executed for each dialogue
 	global fx
-	#cacheos varios
+	#several caching
 	fs = fx.fxs
 
-	#Ahora las syllables!!! (T^T)
+	#Now the syllables!!! (T^T)
 	syllables = diag._syllables
 
-	#Inicio
+	#Beginning
 	for sil in syllables:
 		sil.progress = 0.0
-		#1º la inicializamos
+		#1st inicialization
 		inicio = getattr(fs[sil.effect], "OnSyllableStarts", None)
 		if inicio: inicio(sil)
 
-	#Zilaba Muerta
+	#Dead Syllable
 	for sil in syllables:
 		evento = getattr(fs[sil.effect], "OnSyllableDead", None)
 		if not evento: continue
@@ -350,7 +350,7 @@ def __PreLoadSyllables(diag):
 		dif = end - ini
 		__AddEvent(ini, end, dif, evento, sil)
 
-	#Silaba Dormida
+	#Sleep Syllable
 	for sil in syllables:
 		evento = getattr(fs[sil.effect], "OnSyllableSleep", None)
 		if not evento: continue
@@ -361,7 +361,7 @@ def __PreLoadSyllables(diag):
 		__AddEvent(ini, end, dif, evento, sil)
 
 
-	#Silaba sale
+	#Syllable leaves
 	for sil in syllables:
 		evento = getattr(fs[sil.effect], "OnSyllableOut", None)
 		if not evento: continue
@@ -371,7 +371,7 @@ def __PreLoadSyllables(diag):
 		dif = end - ini
 		__AddEvent(ini, end, dif, evento, sil)
 
-	#Silaba entra
+	#Syllable enters
 	for sil in syllables:
 		evento = getattr(fs[sil.effect], "OnSyllableIn", None)
 		if not evento: continue
@@ -381,7 +381,7 @@ def __PreLoadSyllables(diag):
 		dif = end-ini
 		__AddEvent(ini, end, dif, evento, sil)
 
-	#Silaba Animada
+	#Animated Syllable
 	for sil in syllables:
 		evento = getattr(fs[sil.effect], "OnSyllable", None)
 		if not evento: continue
@@ -391,7 +391,7 @@ def __PreLoadSyllables(diag):
 		dif = end-ini
 		__AddEvent(ini, end, dif, evento, sil)
 
-	#Eventos personalizados
+	#Custom Events
 	for sil in syllables:
 		eventos = getattr(fs[sil.effect], "events", None)
 		if not eventos: continue
@@ -399,26 +399,26 @@ def __PreLoadSyllables(diag):
 		for evento in eventos:
 			enSilaba = getattr(evento, "OnSyllable", None)
 			if not enSilaba: continue
-			#Calculamos la duracion de cada evento extra
-			#Notar que puede haber varios events extras en cada effect
+			#Calculating the duration of each extra event
+			#Note that there can be several extra events in each effect
 			ini, end = evento.SyllableTime(sil)
 			dif = end - ini
 			__AddEvent(ini, end, dif, enSilaba, sil)
 
 
 def __PreLoadLetters(sil):
-	#ahora las letras T_T
-	#esto ya me parece una locura.
-	#si quieren dividir un effect por letras, por favor usen el aegisub
+	#now the letters T_T
+	#this is insane.
+	#If you want to split an effect per letter, use aegisub
 	global  fx
-	#cacheos varios
+	#several caches
 	fs = fx.fxs
 
-	#Creamos las letras (ya que sino no se crean en memoria)
+	#We create the letters (otherwise they will not be created in memory)
 	sil.SplitLetters()
 	letras = sil._letters
 
-	#inicio y letra entra
+	#Beginning and letter enters
 	for letra in letras:
 		letra.progress = 0.0
 
@@ -456,7 +456,7 @@ def __PreLoadLetters(sil):
 		dif = end-ini
 		__AddEvent(ini, end, dif, evento, letra)
 
-	#letra sale
+	#letter leaves
 	for letra in letras:
 		evento = getattr(fs[letra.effect], "OnLetterOut", None)
 		if not evento: continue
@@ -466,7 +466,7 @@ def __PreLoadLetters(sil):
 		dif = end - ini
 		__AddEvent(ini, end, dif, evento, letra)
 
-	#letra Animada
+	#Animated letter
 	for letra in letras:
 		evento = getattr(fs[letra.effect], "OnLetter", None)
 		if not evento: continue
@@ -476,7 +476,7 @@ def __PreLoadLetters(sil):
 		dif = end-ini
 		__AddEvent(ini, end, dif, evento, letra)
 
-	#Eventos personalizados
+	#Custom Events
 	for letra in letras:
 		eventos = getattr(fs[letra.effect], "events", None)
 		if not eventos: continue
@@ -484,8 +484,8 @@ def __PreLoadLetters(sil):
 		for evento in eventos:
 			enLetra = getattr(evento, "OnLetter", None)
 			if not enLetra: continue
-			#Calculamos la duracion de cada evento extra
-			#Notar que puede haber varios events extras en cada effect
+			#Calculating the duration of each extra event
+			#Note that there can be several extra events in each effect
 			ini, end = evento.LetterTime(letra)
 			dif = end - ini
 			__AddEvent(ini, end, dif, enLetra, letra)
