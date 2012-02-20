@@ -11,7 +11,7 @@ def SSolid(obj, color, part):
 
 def SPattern(obj, mycolor, part):
 	"""Uses the pattern in obj.actual.source"""
-	txt = obj.texturas[part]
+	txt = obj.textures[part]
 	ctx = video.cf.ctx
 	ctx.set_source(txt)
 	if mycolor.a < 1:
