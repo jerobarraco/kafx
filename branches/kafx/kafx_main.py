@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Kick Ass FX
-copyright Barraco Mármol Jerónimo, David Pineda Melendez, Martín (Abelkm) y Colaboradores 2007
+copyright Barraco Mármol Jerónimo, David Pineda Melendez, Martín Dunn y Colaboradores 2007
 GNU/GPL
 """
 
@@ -18,14 +18,14 @@ traceback.sys.stderr = open('stderr.txt', 'w', 0)
 
 version_info = (1, 8, 0, 'newfinalrc4')
 print 'Python version', traceback.sys.version_info
-if traceback.sys.version_info[:3] < (2, 6, 6):
+if traceback.sys.version_info[:3] < (2, 7, 0):
 	print """
-	The python version used is 2.7 or less, this can bring problems with cairo.
-	Please try to use version  2.7 of python (do not use 3.2)
+	The python version used isn't 2.7, this can bring problems with cairo.
+	Please try to use version  2.7 of python (do not use 3.2).
 	"""
-#TODO agregar verificacion de frame >=0 en carga de tiempos... porque me odias abel???
-#TODO agregar verificacion de que se haya cargado el effect correctamente
-#TODO cambiar el preload para que organice las cosas como debe
+#TO-DO agregar verificacion de frame >=0 en carga de tiempos... porque me odias abel??? --Abelkm: esto no esta hecho ya?
+#TO-DO agregar verificacion de que se haya cargado el effect correctamente -- Abelkm: idem
+#TO-DO cambiar el preload para que organice las cosas como debe
 
 print "Loading Cairo..." #si, el sistema de loggin rulea
 import cairo
@@ -489,4 +489,4 @@ def __PreLoadLetters(sil):
 			ini, end = evento.LetterTime(letra)
 			dif = end - ini
 			__AddEvent(ini, end, dif, enLetra, letra)
-
+#creo que falta traducir, al menos eso creo al ver "letra" y "enletra" escrito por ahi..., ademas, "evento/s".
