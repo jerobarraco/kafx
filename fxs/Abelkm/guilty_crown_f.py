@@ -6,7 +6,8 @@ from random import randint, random
 from math import pi, sin, cos
 t = extra.LoadTexture("textures/uq7.png")
 
-t3 = extra.LoadTexture('textures/barra_gc.png') #entrada
+t3 = extra.LoadTexture('textures/barra_gc2.png') #entrada
+t4 = extra.LoadTexture('textures/barra_gc3.png') #salida
 
 colora = extra.cCairoColor(0xFF8B5BBD)#violeta
 colorb = extra.cCairoColor(0xFF7BBCC3)#verde
@@ -51,8 +52,7 @@ class Efecto():
 	def OnDialogueIn(self, d):
 		global colort, colors, colorr, colorq, colora, colorb, colorc, colord, colore, colorf, colorg, colorh, colori, colorm, colorn, colork, coloro, colorl, t3
 		d.actual.mode_fill = d.P_DEG_VERT
-		#d.MoveFrom((0+(comun.Interpolate(d.progress, -40,0, comun.i_b_backstart))) ,(0))
-		mov = common.Interpolate(d.progress,1380, 3480)#el fx parece dar toda la vuelta... o ya no?
+		mov = common.Interpolate(d.progress,1380, 3480)
 		extra.MoveTexture(t3, mov, 50)
 		advanced.StartGroup()
 		d.Paint()
@@ -129,13 +129,42 @@ class Evento3():
 		def SyllableTime(self, sil):
 			return (sil._start, sil._start+((sil._end-sil._start)/2.0))
 
+class Efecto1():
+
+	def OnDialogue(self, d):
+		global colort, colors, colorr, colorq, colora, colorb, colorc, colord, colore, colorf, colorg, colorh, colori, colorm, colorn, colork, coloro, colorl, t
+		d.actual.mode_fill = d.P_DEG_VERT
+		d.Paint()
+	def OnDialogueIn(self, d):
+		global colort, colors, colorr, colorq, colora, colorb, colorc, colord, colore, colorf, colorg, colorh, colori, colorm, colorn, colork, coloro, colorl, t3
+		d.actual.mode_fill = d.P_DEG_VERT
+		mov = common.Interpolate(d.progress,1380, 3480)
+		extra.MoveTexture(t3, mov, 50)
+		advanced.StartGroup()
+		d.Paint()
+		texto = advanced.EndGroup(0)
+		video.cf.ctx.set_source(texto)
+		video.cf.ctx.mask(t3)
+
+	def OnDialogueOut(self, d):
+		global colort, colors, colorr, colorq, colora, colorb, colorc, colord, colore, colorf, colorg, colorh, colori, colorm, colorn, colork, coloro, colorl, t3,t4
+		d.actual.mode_fill = d.P_DEG_VERT
+		mov = common.Interpolate(d.progress, 1380, 3480)
+		extra.MoveTexture(t4, mov, 50)
+		advanced.StartGroup()
+		d.Paint()
+		texto = advanced.EndGroup(0)
+		video.cf.ctx.set_source(texto)
+		video.cf.ctx.mask(t4)
+
 
 class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		global world
-		self.fxs = (Efecto(),Efecto())
+		self.fxs = (Efecto(),Efecto1())
 		world = physics.World(grav_y = 0)
 		self.in_ms = 500
+		self.out_ms = 500
 
 	def OnFrameStarts(self):
 		global world
