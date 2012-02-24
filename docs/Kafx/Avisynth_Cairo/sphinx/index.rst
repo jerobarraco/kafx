@@ -18,7 +18,7 @@ Contents:
    asslib.rst
    extra.rst
    basic.rst
-   avanced.rst
+   advanced.rst
    
 Indices and tables
 ==================
