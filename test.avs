@@ -1,18 +1,43 @@
-#Este es un archivo de prueba, abrelo con el media player para verlo funcionando
+#This is a test avs script, open it with the media player or any program
+# like virtualdub or avsp to make it work or encode it.
 
-#para crear el tuyo copia este archivo
-loadplugin("KAFX.dll")
-#En vez de la siguiente linea, pon algo como 
-#AviSource("C:\mivideito.avi")
-#o
-#DirectShowSource("c:\mivideo.mkv")
-KillAudio(ColorBars())
+#----------||||||||||||||||----------#
+#          Start avs script
+#----------||||||||||||||||----------#
+
+loadplugin("KAFX.dll") #With this you load the dll of kafx
+KillAudio(ColorBars()) #And with this you use a fake video, at the bottom are other options.
+ 
 converttorgb32()
-FlipVertical()
-#coloca donde dice fxs.simple el nombre del archivo .py en la carpeta fxs (sin el py)
-#y donde dice test.ass el nombre de archivo con el karaoke
-#(y colocalo en esta misma carpeta)
-KAFX("fxs.simple", "test.ass")
+
 FlipVertical()
 
-#y abre tu archivo con el virtualdub, y guardalo con el formato que desees
+KAFX("fxs.simple", "test.ass")
+
+FlipVertical()
+
+#-----------|||||||||||||------------#
+#           End of script
+#-----------|||||||||||||------------#
+
+#Other options for video source (there are more!):
+
+#DirectShowSource("C:\folder_name\my_video.mkv")
+#AviSource("C:\folder_name\my_video.mkv")
+
+#Way of use: replace the "KillAudio(ColorBars())" with the source you want.
+
+#As a side note, the "#" comments everything that is after it, so keep that in mind.
+
+
+#--------------|||||-----------------#
+#              Notes
+#--------------|||||-----------------#
+
+#Don't remove either converttorgb32 nor FlipVertical!
+
+#Remember to load the KAFX.dll; the video, using avisource, directshowsource or even with the 
+#colorbars (and don't load two or more videos at the same time!); your python script 
+#(without the *.py extention) and the subtitle file (with the extention *.ass).
+
+#Make a copy of this file and have fun.
