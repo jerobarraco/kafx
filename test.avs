@@ -8,13 +8,13 @@
 loadplugin("KAFX.dll") #With this you load the dll of kafx
 KillAudio(ColorBars()) #And with this you use a fake video, at the bottom are other options.
  
-converttorgb32()
+converttorgb32() #Don't remove, KAFX needs to work with alpha channel!
 
-FlipVertical()
+FlipVertical() #This makes the process a little bit faster, don't remove. 
 
 KAFX("fxs.simple", "test.ass")
 
-FlipVertical()
+FlipVertical() #This makes the process a little bit faster, don't remove. 
 
 #-----------|||||||||||||------------#
 #           End of script
@@ -27,9 +27,6 @@ FlipVertical()
 
 #Way of use: replace the "KillAudio(ColorBars())" with the source you want.
 
-#As a side note, the "#" comments everything that is after it, so keep that in mind.
-
-
 #--------------|||||-----------------#
 #              Notes
 #--------------|||||-----------------#
@@ -41,3 +38,5 @@ FlipVertical()
 #(without the *.py extention) and the subtitle file (with the extention *.ass).
 
 #Make a copy of this file and have fun.
+
+#As a side note, the "#" comments everything that is after it, so keep that in mind.
