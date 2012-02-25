@@ -10,7 +10,7 @@ Kafx::Kafx(PClip _child, IScriptEnvironment *env, const char *file, const char *
             mmodule = PyImport_AddModule("__main__");
             main_dict = PyModule_GetDict(mmodule);
             if (!main_dict)
-                env->ThrowError("Dll-> No pude crear el diccionario principal de python");
+                env->ThrowError("Dll-> Could not create main dictionary for python");
 
             PyRun_SimpleString("import traceback");
             /*PyRun_SimpleString("traceback.sys.stdout = open('stdout.txt', 'w')");
@@ -23,19 +23,19 @@ Kafx::Kafx(PClip _child, IScriptEnvironment *env, const char *file, const char *
 
             main_dict = PyModule_GetDict(mmodule);
             if (!main_dict)
-                env->ThrowError ("Dll-> Error al cargar kafx_main.py, mirá el archivo stderr.txt\n o stdout.txt y si tenés suerte capaz que ahi dice que pasó\n y sinó ejecutalo desde una consola, aunque eso casi no funciona en windows, pero en linux si");
+                env->ThrowError ("Dll-> Error loading kafx_main\nLOOK INSIDE stderr.txt AND stdout.txt FILES TO SEE WHATS THE REAL ERROR");
 
             f_frame = PyObject_GetAttrString(mmodule, "OnFrame");
             if (!f_frame)
-                env->ThrowError("Dll-> Inicialice python, pero no pude cargar la funcion onFrame\n Existe? Hubo error?\n Revisa los archivos stdout.txt y stderr.txt");
+                env->ThrowError("Dll-> Python initialized, but the function \"onFrame\" could not be found.\nPLEASE check stderr.txt and stdout.txt to see the erro.");
 
-            debug ("Dll-> Parece que todo esta cargado, intentemos inicializar\n");
+            debug ("Dll-> Looks like everything is ok. Initializing....\n");
             PyObject_CallMethod (mmodule, "OnInit", "ssiiiiiii",
                 file, datastring, vi.pixel_type, vi.image_type, vi.width, vi.height, vi.fps_numerator,
                 vi.fps_denominator,	vi.num_frames
                 );
 
-            debug("Dll-> Ya cargamos todo\n");
+            debug("Dll-> Everything is loaded\n");
 }
 
 PVideoFrame __stdcall Kafx::GetFrame(int n, IScriptEnvironment* env)
