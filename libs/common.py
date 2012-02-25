@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Módulo con funciones varias
-teóricamente no dependen de nada raro como cairo o ass
+Module with different kind of functions
+theoretically it doesn't depend on things like cairo or ass
 """
 import math
 import random
@@ -17,50 +17,50 @@ def grouper(n, iterable, fillvalue=None):
 	return itertools.izip_longest(fillvalue=fillvalue, *args)
 
 def ClampB(x):
-	"Recorta un número (entero) al rango entre 0 y 255"
+	"Cuts a number (integer) to range 0 to 255"
 	if x > 255: x = 255
 	if x < 0: x = 0
 	return x
 
 def Clamp(num):
-	"Recorta un número flotante al rango entre 0.0 y 1.0"
+	"Cuts a float number to range 0.0 to 1.0"
 	if num < 0.0 : return 0.0
 	if num > 1.0 : return 1.0
 	return num
 
 def ChooseByFrame(start_frame, end_frame, active, inactive=None ):
-	"""frame_ini tiene el cuadro en que inicia
-	frame_Fin el cuadro donde termina
-	active es lo que te devuelve si estas dentro del rango
-	inactive es lo que devuelve cuando el cuadro actual no esta entre frame_ini ni frame_fin
-	ejemplo
+	"""start_frame has the starting frame
+	end_frame the ending frame
+	active is what is returned if the actual frame is in range
+	inactive is what is returned if the actual frame is not between start_frame and end_frame
+	example:
 	d.actual.pos_x = ChooseByFrame(100, 200, 0, 20)
-	esto hara que la posicion_x del dialogo sea 20 SOLAMENTE entre el frame 100 y el 200, y luego vuelva a 0
-	tambien pueden usarse otros objetos como:
+	this makes the position_x from dialogue to ONLY be 20 between frames 100 and 200, then it goes back to 0
+	other objects can be used like:
 	d.actual.color1.CopyFrom(ChooseByFrame(100, 400, d.actual.color2, d.actual.color3)
 	"""
 
 	if start_frame <= video.cf.framen  <= end_frame:
 		return active
 	else:
-		return inactive #el else no es necesario pero es para que entiendas
-	#tambien podria usar esto perque quedaria muy criptico, lo dejo para el lulz
+		return inactive #the else is not necessary, it's to understand
+	#this can also be used, just for the lulz
 	#return ( (start_frame <= video.cf.framen) and active) or inactive
 
 def Choose(progress, vector):
-	#Segun un progress (de 0.0 a 1.0) devuelve un item de un vector (array o lista) de elementos
-	progress = Clamp(progress)#el clamp es importante sino dara access error
+	#According to progress (form 0.0 to 1.0), returns an item from a vector (array or list) of elements
+	progress = Clamp(progress)#clamp is important, if not it gives access error
 	l = len(vector)
 	i = int(l*progress)
 	if i == l: i = l-1
 	return vector[i]
 
-#funciones para interpolar
-#dado un valor de 0-1 devuelven otro valor de 0-1, (algunas permiten otro rango de numeros
+#functions for interpolate
+#given a value between 0-1, reutnrs another value between 0-1
 def i_lineal(p): return float(p)
 def i_sin(p): return math.sin(math.pi*p)
 def i_cos(p): return math.cos(math.pi*p)
-#en caso de querer hacer cosas "circulares"
+#in case if somthing "circular" wants to be done
 def i_full_sin(p): return math.sin(2*math.pi*p)
 def i_full_cos(p): return math.cos(2*math.pi*p)
 
@@ -68,12 +68,12 @@ def i_accel(p): return math.sin(math.pi*p*0.5)**2 #pi/2 = 90º
 def i_deccel(p): return 1-i_accel(p)
 def i_rand(p): return random.random()
 def i_log(p):
-	#usar con cuidado, numeros menores a 1 da error
+	#be careful when using, numbers less than 1 gives error
 	return math.log((p*2)+1)
 
 #http://www.the-art-of-web.com/css/timing-function/ <<
-#esto es lo que yo queria hacer con beziers hace raaaaaaaaaaaaaaaaato pero no me daba
-#los mismos resultados, igual la idea es hacerlo con splines, aunque creo que no vale la pena
+#this is what I wanted to do with beizers a looooong time ago, but I couldn't
+#same results, the idea is to do it with splines, it's not worth it though
 def i_b_default(p):
 	return PointBezier(p, 0, 0, 0.25, 0.1, 0.25, 1, 1, 1)[1]
 
@@ -104,14 +104,14 @@ def i_b_boing(p):
 
 def Interpolate(progress, fom_val, to_val, function=i_lineal):
 	"""
-	devuelve un número flotante entre 2 valores, el número devuelto corresponde a una cantidad indicada por el primer valor
-	@progress indicador de que tan cerca del inico o fin debe estar el valor devuelto, debe ser un número entre 0 y 1 (aunque otros valores funcionan)
-	@de valor inicial, o comienzo del rango
-	@to_val valor final, o final del rango
-	@funcion funcion personal que devuelva un valor entre 0 y 1 (siempre float) dado un valor de progress entre 0 y 1
+	returns a floating number between 2 values, the returned number corresponds to the amount given in the first value
+	@progress indicates how close to the start or end should the returned value be, must be a number between 0 and 1 (other values are valid, though)
+	@from_val starting value or beginning of range
+	@to_val last value, or end of range
+	@function personal function that returns a value between 0 and 1 (always float) of a given value of progress between 0 and 1
 	(puede usar las funciones que comienzan por i_)
 	"""
-	#http://es.wikipedia.org/wiki/Interpolación
+	#http://es.wikipedia.org/wiki/Interpolación - http://en.wikipedia.org/wiki/Interpolation
 	return (function(progress) * (to_val-fom_val))+fom_val
 
 def LERP(progress, from_val, to_val):
