@@ -76,7 +76,7 @@ def OnDestroy():
 	it's called before destroying everything, it's completely unnecessary to use this in python... but just in case...
 	It's better to use special methods from __del__ class
 	"""
-	print "I'm leaving, they told me to finish"
+	print "I'm leaving, I've been told to finish."
 
 def OnInit(filename, assfile, pixel_type, image_type, width, height, fpsn, fpsd, numframes):
 	"""This function is called from dll
@@ -84,7 +84,7 @@ def OnInit(filename, assfile, pixel_type, image_type, width, height, fpsn, fpsd,
 	"""
 	try:
 		global fop, cf, vi, m, fx, ass
-		DBug("I'M BEING INTITIALIZED\n")
+		DBug("I'm being initialized...\n")
 
 		#We put the Font Options
 		fop = cairo.FontOptions()
@@ -108,14 +108,14 @@ def OnInit(filename, assfile, pixel_type, image_type, width, height, fpsn, fpsd,
 		#cf.tiempo = -1
 		cf.ctx = cairo.Context(cairo.ImageSurface(vi.modo, vi.width, vi.height))
 		#this is because the ass needs a contexts for the font size with the correct size
-		DBug("Importing Effect\n")
+		DBug("Importing Effect.\n")
 		m = common.MyImport(filename)
-		DBug("Loading Subtitles\n")
+		DBug("Loading Subtitles.\n")
 		fx = m.FxsGroup()
 		ass = asslib.Ass(assfile, len(fx.fxs) -1)
-		DBug("Making calculations for events\n")
+		DBug("Making calculations for events.\n")
 		__PreLoad()
-		DBug("All was apparently successfully loaded\n")
+		DBug("All was apparently successfully loaded.\n")
 	except:
 		print "Something bad happened and we don't know what it is. It is really bad. Seriously, it is really bad. Really."
 		Error()
