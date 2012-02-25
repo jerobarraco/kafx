@@ -21,21 +21,25 @@ Kafx::Kafx(PClip _child, IScriptEnvironment *env, const char *file, const char *
             /* Safamos cualquier error que pueda haber */
             PyRun_SimpleString("from kafx_main import *");
 
-            main_dict = PyModule_GetDict(mmodule);
+            /*main_dict = PyModule_GetDict(mmodule);
             if (!main_dict)
-                env->ThrowError ("Dll-> Error loading kafx_main\nLOOK INSIDE stderr.txt AND stdout.txt FILES TO SEE WHATS THE REAL ERROR");
+                env->ThrowError ("Dll-> Error loading kafx_main\nLOOK INSIDE stderr.txt AND stdout.txt FILES TO SEE WHAT IS THE REAL ERROR.");
+            */
 
             f_frame = PyObject_GetAttrString(mmodule, "OnFrame");
             if (!f_frame)
-                env->ThrowError("Dll-> Python initialized, but the function \"onFrame\" could not be found.\nPLEASE check stderr.txt and stdout.txt to see the erro.");
+                env->ThrowError("Dll-> Python initialized, but the function \"OnFrame\" could not be found.\nPLEASE check kafx_log.txt AND error_log.txt to see the REAL error.");
 
             debug ("Dll-> Looks like everything is ok. Initializing....\n");
-            PyObject_CallMethod (mmodule, "OnInit", "ssiiiiiii",
+            if ( NULL == PyObject_CallMethod (mmodule, "OnInit", "ssiiiiiii",
                 file, datastring, vi.pixel_type, vi.image_type, vi.width, vi.height, vi.fps_numerator,
                 vi.fps_denominator,	vi.num_frames
-                );
-
-            debug("Dll-> Everything is loaded\n");
+                )){
+                    debug("Dll-> Initialization failed\n");
+                    env->ThrowError("Dll-> Initialization failed.\nPLEASE check kafx_log.txt AND error_log.txt to see the REAL error.");
+            }else{
+                debug("Dll-> Everything is loaded\n");
+            };
 }
 
 PVideoFrame __stdcall Kafx::GetFrame(int n, IScriptEnvironment* env)
