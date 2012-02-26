@@ -12,7 +12,7 @@ converttorgb32() #Don't remove, KAFX needs to work with alpha channel!
 
 FlipVertical() #This makes the process a little bit faster, don't remove. 
 
-KAFX("fxs.simple", "test.ass")
+KAFX("fxs.simple", "test.ass") #Here you can chose your fx script and your 
 
 FlipVertical() #This makes the process a little bit faster, don't remove. 
 
@@ -22,8 +22,9 @@ FlipVertical() #This makes the process a little bit faster, don't remove.
 
 #Other options for video source (there are more!):
 
-#DirectShowSource("C:\folder_name\my_video.mkv")
-#AviSource("C:\folder_name\my_video.mkv")
+#FFVideoSource("C:\folder_name\my_video.mkv")#Recommended.
+#DirectShowSource("C:\folder_name\my_video.mkv")#Good.
+#AviSource("C:\folder_name\my_video.mkv")#Pretty old and not recommended.
 
 #Way of use: replace the "KillAudio(ColorBars())" with the source you want.
 
@@ -33,7 +34,7 @@ FlipVertical() #This makes the process a little bit faster, don't remove.
 
 #Don't remove either converttorgb32 nor FlipVertical!
 
-#Remember to load the KAFX.dll; the video, using avisource, directshowsource or even with the 
+#Remember to load the KAFX.dll; the video, using directshowsource, ffvideosource, or even with the 
 #colorbars (and don't load two or more videos at the same time!); your python script 
 #(without the *.py extention) and the subtitle file (with the extention *.ass).
 
