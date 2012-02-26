@@ -22,9 +22,14 @@ FlipVertical() #This makes the process a little bit faster, don't remove.
 
 #Other options for video source (there are more!):
 
-#FFVideoSource("C:\folder_name\my_video.mkv")#Recommended.
-#DirectShowSource("C:\folder_name\my_video.mkv")#Good.
-#AviSource("C:\folder_name\my_video.mkv")#Pretty old and not recommended.
+#FFVideoSource("C:\folder_name\my_video.mkv",fpsnum=24000, fpsden=1001)#Highly Recommended.
+#ffms2.dll is necessary to use this function, http://code.google.com/p/ffmpegsource/downloads/list
+
+#AvcSource("C:\folder_name\my_video.mkv")#Needs to be indexed previously through dgavcindex,
+# also recommended.
+
+#DirectShowSource("C:\folder_name\my_video.mkv")#Good and easy to use, but can cause nullframes.
+#AviSource("C:\folder_name\my_video.mkv")#Pretty old and not recommended at all!
 
 #Way of use: replace the "KillAudio(ColorBars())" with the source you want.
 
