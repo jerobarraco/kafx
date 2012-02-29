@@ -11,7 +11,7 @@ t = extra.LoadTexture("textures/sakura3.png")
 
 ca = extra.cCairoColor(0xFFE88CE0)#rosita
 cb = extra.cCairoColor(0xFF7390AB)#gris
-p = advanced.cParticleSystem(png="textures/sakura3.png", emit_parts=40, mode = 0, max_parts=80, rotation= 0.1, scale_from=0.40, scale_to= 0.7,max_life=1.6)
+p = advanced.cParticleSystem(png="textures/sakura3.png", emit_parts=20, mode = 0, max_parts=40, rotation= 0.1, scale_from=0.40, scale_to= 0.7,max_life=1)
 p.SetAngle(10, 2, 10)
 p.SetGravity(0, -1)
 #If you use physics in only one effect you can assign to "self" in that effect, that would make it slightly faster
@@ -37,7 +37,7 @@ class Efecto():
 
 class Evento1():
 		def OnSyllable(self, sil):
-			global ca, cb, t
+			global ca, cb, t, p
 			sil.actual.mode_fill = sil.P_DEG_VERT
 
 			if sil.crear:
@@ -59,6 +59,7 @@ class Evento1():
 				#si lo pasamos a frames son unos 25 (750/30 (fps)) (ojo no usar fps mayor)
 				#si vemos cuanto podemos decrementar en 25 frames tenemos 1/25=0.05 (o algo menor, pero es mejor poner un numero mas grande
 				part.Paint()
+
 				#advanced.fBlur1(1, common.Interpolate(sil.progress, 0.2, 0))
 				#advanced.EndGroup()
 				#world.Resize(part, common.Interpolate(sil.progress, 0.1, 0.3))
@@ -73,13 +74,20 @@ class Evento1():
 				for b in sil.bull:
 					world.DestroySprite(b)
 				sil.bull = []
-
+			p.SetWindow(sil.original._width+1, 1)
+			p.SetPosition(
+				sil.actual.pos_x+random.randint(8,12)-(random.randint(-2,3)+(sil.original._width*(sil.progress)/4)),
+            	(random.randint(1,20)+sil.actual.pos_y))
+			advanced.LayerActivate(4)
+			if sil._text.strip()<>"":
+				p.Emit()
+				p.Paint()
 		def SyllableTime(self, sil):
 			return (sil._start+((sil._end-sil._start)/2.0) , sil._end+200)
 class Evento2():
 		def OnSyllable(self, sil):
 
-			global ca, cb, t, p
+			global ca, cb, t
 			sil.actual.mode_fill = sil.P_DEG_VERT
 			sil.actual.color1.a = common.Interpolate(sil.progress, 0.5, 0.0)
 			sil.actual.color3.a = common.Interpolate(sil.progress, 0.5, 0.0)
@@ -89,13 +97,7 @@ class Evento2():
 			advanced.fBlur1(1, ((sin(pi*sil.progress))/4.0))
 			advanced.fGlow(1, ((sin(pi*sil.progress))/4.0))
 			advanced.EndGroup(common.Interpolate(sil.progress, 1, 0.0))
-			p.SetWindow(sil.original._width+1, 1)
-			p.SetPosition(
-				sil.actual.pos_x+random.randint(8,12)-(random.randint(-2,3)+(sil.original._width*(sil.progress)/4)),
-            	(random.randint(1,20)+sil.actual.pos_y))
 
-			if sil._text.strip()<>"":
-				p.Emit()
 		def SyllableTime(self, sil):
 			return (sil._start, sil._end)
 class Evento3():
@@ -129,7 +131,6 @@ class FxsGroup(common.FxsGroup):
 
 
 	def OnFrameEnds(self):
-		global p
 
 		advanced.LayerEnd()
 		micolor = extra.cCairoColor()
@@ -153,7 +154,6 @@ class FxsGroup(common.FxsGroup):
 		ctx.rectangle(0,0, video.vi.width, video.vi.height)
 		advanced.PaintMode("screen")
 		ctx.mask(pat)
-		p.Paint()
 		advanced.PaintMode("over")#no es realmente necesario
 
 
