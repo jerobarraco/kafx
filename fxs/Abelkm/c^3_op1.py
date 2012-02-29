@@ -11,7 +11,7 @@ t = extra.LoadTexture("textures/sakura3.png")
 
 ca = extra.cCairoColor(0xFFE88CE0)#rosita
 cb = extra.cCairoColor(0xFF7390AB)#gris
-p = advanced.cParticleSystem(png="textures/sakura3.png", emit_parts=40, mode = 0, max_parts=80, rotation= 0.1, scale_from=0.60, scale_to= 0.9,max_life=1.6)
+p = advanced.cParticleSystem(png="textures/sakura3.png", emit_parts=40, mode = 0, max_parts=80, rotation= 0.1, scale_from=0.40, scale_to= 0.7,max_life=1.6)
 p.SetAngle(10, 2, 10)
 p.SetGravity(0, -1)
 #If you use physics in only one effect you can assign to "self" in that effect, that would make it slightly faster
@@ -28,7 +28,7 @@ class Efecto():
 		sil.crear = True
 		x = sil.actual.pos_x+ sil.actual.org_x
 		y = sil.actual.pos_y + sil.actual.org_y
-		sil.bull = [advanced.cSprite(t, x +randint(-25, 25), y+randint(-25, 25), scale=random()*0.5 +0.5) for i in range(25)]#para que desordenen, pero no las vamos a pintar
+		sil.bull = [advanced.cSprite(t, x +random.randint(-25, 25), y+random.randint(-25, 25), scale=random.random()*0.5 +0.5) for i in range(25)]#para que desordenen, pero no las vamos a pintar
 
 	def OnSyllableSleep(self, sil):
 		global ca, cb, t
@@ -130,7 +130,7 @@ class FxsGroup(common.FxsGroup):
 
 	def OnFrameEnds(self):
 		global p
-		p.Paint()
+
 		advanced.LayerEnd()
 		micolor = extra.cCairoColor()
 		factual = video.cf.framen
@@ -154,4 +154,5 @@ class FxsGroup(common.FxsGroup):
 		advanced.PaintMode("screen")
 		ctx.mask(pat)
 		advanced.PaintMode("over")#no es realmente necesario
+		p.Paint()
 
