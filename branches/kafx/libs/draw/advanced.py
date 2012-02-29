@@ -647,7 +647,7 @@ class cParticleSystem():
 		e=self.emitter
 		for p in self.parts:
 			if newparts > self.ppc: return
-			if not p.activa:
+			if not p.active:
 				x = -(e.x + ((random()*e.mw*2)- e.mw))
 				y = -(e.y + ((random()*e.mh*2)- e.mh))
 				if self.color:
@@ -724,11 +724,11 @@ class cParticleSystem():
 		"""
 		ctx = video.cf.ctx
 		for p in self.parts: #Por cada particula
-			if p.activa:#Si está viva
+			if p.active:#Si está viva
 				mat = cairo.Matrix()
 				mat.translate(self.centx, self.centy)
 				mat.rotate(p.angle)
-				mat.scale(p.escala, p.escala)
+				mat.scale(p.scale, p.scale)
 				mat.translate(p.x, p.y)
 				self.pat.set_matrix(mat)
 
