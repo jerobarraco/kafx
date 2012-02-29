@@ -153,6 +153,7 @@ class FxsGroup(common.FxsGroup):
 		ctx.rectangle(0,0, video.vi.width, video.vi.height)
 		advanced.PaintMode("screen")
 		ctx.mask(pat)
-		advanced.PaintMode("over")#no es realmente necesario
 		p.Paint()
+		advanced.PaintMode("over")#no es realmente necesario
+
 
