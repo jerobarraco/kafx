@@ -55,6 +55,6 @@ class FxsGroup(common.FxsGroup):
 		advanced.StartGroup()
 		p.Paint()
 		advanced.fGlow(1, 0.05)
-		advanced.fBlur1(1, 0.05)
+		advanced.fBlur1(1, 0.10)
 
 		advanced.EndGroup()
