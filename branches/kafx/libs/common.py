@@ -107,7 +107,7 @@ def Interpolate(progress, fom_val, to_val, function=i_lineal):
 	returns a floating number between 2 values, the returned number corresponds to the amount given in the first value
 	@progress indicates how close to the start or end should the returned value be, must be a number between 0 and 1 (other values are valid, though)
 	@from_val starting value or beginning of range
-	@to_val last value, or end of range
+	@to_val ending value, or end of range
 	@function personal function that returns a value between 0 and 1 (always float) of a given value of progress between 0 and 1
 	(puede usar las funciones que comienzan por i_)
 	"""
@@ -116,24 +116,23 @@ def Interpolate(progress, fom_val, to_val, function=i_lineal):
 
 def LERP(progress, from_val, to_val):
 	"""
-	devuelve un número flotante entre 2 valores, el número devuelto corresponde a una cantidad indicada por el primer valor
-	@progress indicador de que tan cerca del inico o fin debe estar el valor devuelto, debe ser un número entre 0 y 1 (aunque otros valores funcionan)
-	@from_val valor inicial, o comienzo del rango
-	@to_val valor final, o final del rango
-	Esta funcion es lo mismo que interpolar lineal, pero un poco mas rapida,
-	solo para funciones que requieran unicamente interpolacion lineal
+	returns a float number between 2 values, this number corresponds to the amount given in the first value
+	@progress indicates how close to the start or end of the range should be the returned value, must be a number between 0 and 1 (other values work, too)
+	@from_val starting value, or beginning of range
+	@to_val ending value, or end of range
+	This function is the same as linear interpolate, but it's faster,
+	only for functions that only require linear interpolation
 	"""
 	return from_val+(float(progress)*(to_val-from_val))
 
 def RanmaBezier(progress, points):
 	"""
-	Devuelve un punto (x, y) sobre una curva bezier dado el avance en la misma
-	Admite curvas biezer de cualquier orden
-	@progress como en interpolar, normalmente un numero entre 0 y 1 indicando el avance de sobre la curva
-	@points : array de points -> [ [0, 0], [1, 1], [2, 2] ]
-	es como PointBezier pero permite curvas de cualquier cantidad de points de control (de 1 a (teoricamente) infinito))
-	es algo mas lento que PointBezier para curvas de la misma cantidad de points
-	escrito por Ranma42 @ irc.freenode.net/#cairo
+	Returns a point (x, y) over a bezier curve, given the progress over it
+	Allows biezer curves of any order
+	@progress as in interpolate, normally a number between 0 and 1 giving the progress over the curve
+	@points : array of points -> [ [0, 0], [1, 1], [2, 2] ]
+	It's like PointBezier, but allows vurces of any amount of control points (from 1 to (theoretically) infinit)
+	written by Ranma42 @ irc.freenode.net/#cairo
 	"""
 
 	while len(points)>1:
@@ -148,18 +147,18 @@ def RanmaBezier(progress, points):
 
 def PointBezier(progress, x_start, y_start,  x1, y1, x2, y2, x_end, y_end):
 	"""
-	Devuelve un punto (x, y) sobre una curva bezier dado el avance en la misma
-	@x_start, y_start : punto inicial de la curva
-	@x1, y1 : 1º punto de control de la curva
-	@x2, y2 : 2º punto de control de la curva
-	@x_end, y_end : punto final de la curva
-	@progress : avance sobre la curva (0 a 1)
-	Esta funcion es igual que Bezier pero es algo más rápida, además,
-	Está limitada a:
-	1 Punto de inicio
-	2 points de control
-	1 Punto final
-	y todos los points son pasados por parámetro secuencialmente.
+	Returns a point (x, y) over a bezier curve given the progress over it
+	@x_start, y_start : starting point of the curve
+	@x1, y1 : 1st control point of the curve
+	@x2, y2 : 2nd control point of the curve
+	@x_end, y_end : ending point of the curve
+	@progress : progress over the curve (0 to 1)
+	This function is like Bezier, but a little faster, also,
+	It's limited to:
+	1 Starting point
+	2 control points
+	1 Ending Point
+	and all the points are given sequentially by parameter.
 	#with help of ranma42!
 	"""
 
@@ -183,51 +182,51 @@ def PointBezier(progress, x_start, y_start,  x1, y1, x2, y2, x_end, y_end):
 	return curvx6, curvy6
 
 def Chain(duration, progress, objects, function, time=None):
-	"""Realiza una animación en cadena.
-	dado una duración maestra y un progress maestro aplicados a
-	un array de objetos y un tiempo de animacion por objeto
-	se calcula el progress para cada objeto y se llama a la funcion pasada por parametro para cada uno.
+	"""Makes a chain animation.
+	Given a master duration, a master progress applied to
+	an array of objects and an animation time per object,
+	progress gets calculated for each object and calls the function given by parameter for each one.
 
-	La idea es poder animar sílabas según el diálogo, o letras según la sílaba,
-	pero aun así lo pongo acá para que pueda ser usado de otras formas
+	The idea is to be able to animate syllables according to the dialogue, or letters according to the syllable,
+	however I put it here so it can be used in other ways.
 
-	@duración Duración del tiempo maestro
-	@progress float de rango 0 a 1 que dice el progress maestro
-	@objects array de objetos a ser animados en cadena.
-		serán pasados a la función func. (sólo debe implementar len y ser iterables (string y array funcionan))
+	@duration Duration fo master time
+	@progress float in range from 0 to 1, indicates the master progress
+	@objects array of objects to be animated in chain.
+		they will be given to the function func. (it only needs implement len and be iterable (string and array work))
 
-	@función debe ser una funcion
-	será llamada progresivamente vez por cada objeto en orden de aparición con los siguientes parámetros:
-		objeto, progress
+	@function must be a function
+	it will be called forth for eac object in appearance order with the following parameters:
+		object, progress
 
-	@time define el tiempo que dura la animación de cada objeto
-		si el time es mayor a la duración/len(objects)
-		entonces las aniamciones se superpondran.
-		si el time es None (o no se especifica) las animaciones se dan
-		una atrás de la otra, o sea el time es = duración/len(objects)
-		si es menor no sé.
+	@time defines how long the animation is for each object
+		if time is greater than duration/len(objects)
+		then the animations will overlap.
+		if time is None (or not specified) the animations go
+		one after another, so time = duration/len(objects)
+		if it's less, I don't know.
 	"""
 	duration = float(duration)
 	slen = len(objects)
 	if slen == 0 : return
-	tsil = duration/slen#Tiempo por sílaba en progress constante
+	tsil = duration/slen#Time per syllable in constant progress
 
 	if not time:
 		time = tsil
-	#El progress va a ser calculado de atrás para adelante. o sea, que terminen cuando les corresponda.
-	#Pero van a empezar cuando convenga para ajustarse al tiempo de animación.
+	#Progress will be calculated back and forth. In few words, they end when they must.
+	#But they will begin when it's better to adjust animation time
 
-	#Cuanto del progress del diálogo le corresponde
-	#a cada sílaba
-	#Para eso el calculo de las sílabas debe ser secuencial y en orden
-	finacum = tsil#Acumula los tiempos d fin (en que finaliza cada sílaba(respecto del diálogo))
+	#How much of dialogues progress belongs to
+	#each syllable
+	#Therefore, calculation of syllables must be sequential and in order
+	finacum = tsil#Accumulates the times of fin (in what each syllable ends (accoding to the dialogue))
 	tactualdiag=(progress*duration)
 	for obj in objects:
 		tini = finacum - time
 		tactualsilaba = (tactualdiag - tini)
-		if tactualsilaba <= 0:# No se anima aún (si es menor a 0 entonces tini es mayor que tactual)
+		if tactualsilaba <= 0:# Still not animated (if it's less than 0, then tini es greater than tactual)
 			prog = 0.0
-		elif tactualsilaba >= time:#Si el tiempo en la sílaba es mayor al tiempo que tiene que estar
+		elif tactualsilaba >= time:#If syllables time is greater than the time that it must be
 			prog = 1.0
 		else:
 			prog = tactualsilaba/time
@@ -237,10 +236,10 @@ def Chain(duration, progress, objects, function, time=None):
 
 def SafeGetFloat(dicc, prop, default=0.0):
 	"""
-	Devuelve una propiedad un diccionario convertido a float, o un valor default
-	@dict diccionario
-	@prop propiedad del diccionario a devolver
-	@default opcional, valor por default 0.0, es el valor que se devolverá en caso de haber algun error al convertir la propiedad del diccionario
+	Returns a property, a dictionary converted to float, or a default value
+	@dict dictionary
+	@prop property of the dictionary to return
+	@default, optional, default value 0.0, it's the returned value if there's an error in the convertion of the dictionarys property
 	"""
 	try:
 		return float(dicc[prop]) #porque en algunos lados se puede pasar algo que devuelve un string no valido como float, lo tenemos que poner dentro del try, así evitamos cosas
@@ -258,49 +257,48 @@ class FxsGroup():
 	With immutable objects, the sharing isn't interesting. With mutable objects (lists and dicts) the sharing is significant.
 	– S.Lott Oct 8 '09 at 11:58 @stackoverflow.com"
 
-
-	el único problema sería con el array de fxs pero mientras no usen append o cosa así todo estará bien
-	además que no van a crear dos instancias de un descendiente de FxsGroup al mismo tiempo
+	the only problem would be with the fxs array, but while appends or that kind of things aren't used, it will be alright
+	also they won't create two instances descendant of FxsGroup at the same time
 	"""
 	in_ms = 0
-	#Milisegundos para la animación de entrada
+	#Miliseconds for the entering animation
 	out_ms = 0
-	#MS para animación d salida
+	#ms for output animation
 	syl_in_ms = 0
-	#ms para la animación de entrada de cada sílaba sin animar (en el diálogo actual)
+	#ms for the entering animation of each not animated syllable (in actual dialogue)
 	syl_out_ms = 0
-	#ms para la animación de cada sílaba muerta (en el diálogo actual)
+	#ms for animation of each dead syllable (in actual dialogue)
 	letter_in_ms = 0
-	#ms para la animación de cada letra dormida (en la silaba actual)
+	#ms for animation of each sleeping letter (in actual syllable)
 	letter_out_ms = 0
-	#ms para la animación de cada letra muerta (en la silaba actual)
+	#ms for animation of each dead letter (in actual syllable)
 	skip_frames = True
-	#Indica si vas a usar todos los cuadros del video, incluso aquellos en que no aparecen diálogos o sílabas.
+	#Indicates if all the frames of the video will be used, including the ones without dialogues or syllables.
 	reset_style = True
-	#esto indica si se resetea el estilo (se vuelve al original) tras cada cuadro para cada sílaba.
+	#Indicates if style will be reseted (goes back to original) after each frame for each syllable.
 	split_letters = False
-	#Esto indica si se van a dividir las letras de las silabas al cargar
+	#Indicates if letters will be divided from syllables when loading
 
 	fxs = []
-	#A diferencia de los anteriores ésta es la única propiedad que hay que definir sí o sí.
-	#Esta propiedad contiene los diferentes efectos que harás. Por ejemplo, para un video si tenes una línea de kanjis,
-	#una con la traducción y una con la letra; podés crear un effect para cada tipo.
+	#Unlike the previous ones this is the only property that must be defined.
+	#This property has the different effects that will be done. For example for a video with a line of kanjis,
+	#other of translation, and other with the lyrics; there can be an effect for each type.
 
 	blur_type = 0
-	#Esto es para elegir el tipo de blur, es experimental y avanzado (y poco útil)
+	#This is for choosing the blur type, it's experimental and advanced (and not much useful)
 
 	def OnFrameStarts(self):
-		#Esto se ejecuta justo cuando empieza el cuadro. Antes que cualquier diálogo.
+		#This runs at the beginning of the frame. Before any dialogue.
 		pass
 
 	def OnFrameEnds(self):
-		#Esto se ejecuta al terminar el cuadro. Luego de todos los diálogos.
+		#This runs at the end of the frame. After all the dialogues.
 		pass
 
 class Fx():
-	"""Clase de la que desciende un effect"""
+	"""Class that an effect inherits from"""
 	events = []
-	#Un array con events personalizados, debe contener instancias de la clase Event
+	#Array with customized events, must contain instances from Event class
 
 	def OnDialogue(self, diag):
 		pass
@@ -313,14 +311,14 @@ class Fx():
 	def OnSyllableDead(self, sil):
 		pass
 	def OnSyllableSleep(self, sil):
-		#Sílaba dormida común (el progress es igual para todas las sílabas dormidas del mismo diálogo)
+		#Common sleeping syllable (progress is the same for all the sleeping syllables from the same dialogue)
 		pass
 	def OnLetterDead(self, let):
 		pass
 	def OnLetterSleep(self, let):
 		pass
 
-	#Hasta aca son las animaciones normales
+	#Till here are all normal animations
 	def OnDialogueIn(self, diag):
 		pass
 	def OnSyllableIn(self, sil):
@@ -358,10 +356,10 @@ class Event():
 		return (0, 0)
 
 
-####Cosas mas bien internas
+####Inner things
 
 def MyImport(name):
-	#función interna que uso para cargar un modulo a partir de un string separado por points, no recomiendo que lo usen
+	#Inner function to load a module from a string divided by points, I don't recommend its use
 	mod = __import__(name)
 	components = name.split('.')
 	for comp in components[1:]:
