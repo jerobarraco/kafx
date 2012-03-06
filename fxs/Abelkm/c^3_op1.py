@@ -11,7 +11,7 @@ t = extra.LoadTexture("textures/sakura3.png")
 
 ca = extra.cCairoColor(0xFFE88CE0)#rosita
 cb = extra.cCairoColor(0xFF7390AB)#gris
-p = advanced.cParticleSystem(png="textures/sakura3.png", emit_parts=20, mode = 0, max_parts=40, rotation= 0.1, scale_from=0.40, scale_to= 0.7,max_life=1)
+p = advanced.cParticleSystem(png="textures/sakura.png", emit_parts=30, mode = 0, max_parts=40, rotation= 0.1, scale_from=0.20, scale_to= 0.4,max_life=1)
 p.SetAngle(10, 2, 10)
 p.SetGravity(0, -1)
 #p.color.CopyFrom(micolor)
@@ -46,7 +46,7 @@ class Evento1():
 			advanced.LayerActivate(4)
 			if sil._text.strip()<>"":
 				p.Emit()
-				p.Paint()
+
 			sil.actual.mode_fill = sil.P_DEG_VERT
 
 			if sil.crear:
@@ -133,7 +133,7 @@ class FxsGroup(common.FxsGroup):
 
 
 	def OnFrameEnds(self):
-
+		global p
 		advanced.LayerEnd()
 		micolor = extra.cCairoColor()
 		factual = video.cf.framen
@@ -150,6 +150,7 @@ class FxsGroup(common.FxsGroup):
 		elif 1331<=factual<= 2159:
 			micolor.CopyFrom(ca)
 
+		p.Paint()
 		pat = advanced.EndGroup()
 		ctx = video.cf.ctx
 		ctx.set_source_rgba(micolor.r, micolor.g, micolor.b ,micolor.a)
