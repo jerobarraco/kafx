@@ -17,7 +17,8 @@ class FX1(common.Fx):
 		#Las que se estan animando
 		def OnSyllable(self, s):
 			#La scale está dada por scale_x y scale_y, 1 = 100% , 0.5 = 50% , 1.5 = 150% , 2 = 200% se entiende? (-1 es como dado vuelta)
-			#para que crezca y decrezca usaré la funcion sin, q vos le das un angulo entre 0 y 2*pi y va de 0 a 1 y de nuevo a 0 de forma bastante suave. (es un circulo)s.actual.scale_x = s.actual.scale_y = 0.5 * sin(pi*s.progress) + 1 # tambien se puede hacer asi: common.Interpolate(s.progress, 1, 1.5, common.i_sin)
+			#para que crezca y decrezca usaré la funcion sin, q vos le das un angulo entre 0 y 2*pi y va de 0 a 1 y de nuevo a 0 de forma bastante suave. (es un circulo)
+			s.actual.scale_x = s.actual.scale_y = 0.5 * sin(pi*s.progress) + 1 # tambien se puede hacer asi: common.Interpolate(s.progress, 1, 1.5, common.i_sin)
 			s.actual.color1.CopyFrom(s.original.color2)#Copiamos el color del color secundario
 			s.Paint()
 		#Las que ya fueron animadas las pintamos con el otro color
