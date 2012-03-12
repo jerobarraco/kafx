@@ -6,19 +6,18 @@ from math import cos, sin, pi
 import extra
 from libs import video
 
-"""Estos son los efectos "Avanzados"
-Mas que nada son efectos que trabajan a nivel imagen.
-O sea, mas que nada filtros y cosas similares.
+""" These are the "Advanced" effects
+Basically these are effects that working at image level.
+In other words, filters and similar things.
 """
 
 """
-Esto es para AbelKM dada su alta participacion con KAFX.
-pero no recomiendo (yo, nande) para nada su utilizacion.
-Usarlos es aceptar que estas haciendo algo que no esta
-del todo bien, y que probablemente hay otra forma correcta
-de hacerlo y que probablemente no buscaste como hacerlo.
-recuerden que pueden preguntar en el irc.
+This is for Abelkm because his high participation in KAFX.
+But I don't recommend (me, nande ) its use.
+To use it, you are agree that the things you make are bad, and probably
+you don't search how to make it better, remember that exist an IRC channel. 
 """
+
 _capas = {}
 class Layer:
 	"""Clase interna para cada capa, no tocar :D"""
