@@ -15,7 +15,7 @@ In other words, filters and similar things.
 This is for Abelkm because his high participation in KAFX.
 But I don't recommend (me, nande ) its use.
 To use it, you are agree that the things you make are bad, and probably
-you don't search how to make it better, remember that exist an IRC channel. 
+you don't search how to make it better, remember that exist an IRC channel.
 """
 
 _capas = {}
@@ -416,7 +416,7 @@ def EndGroup(opacity=1.0, matrix=None):
 	ctx.paint_with_alpha(opacity)
 	return pat
 
-"""
+
 #todo probar esto pero usando  extra.CopyTarget
 _time_blur_pat = None
 def fTimeBlur(opacidad=0.15):
@@ -426,7 +426,7 @@ def fTimeBlur(opacidad=0.15):
 		ctx.set_source_surface(_time_blur_pat)
 		ctx.paint_with_alpha(opacidad)
 	_time_blur_pat = ctx.get_group_target()
-"""
+
 
 def fRotoZoom(steps=4, opacity=0.25, scale=1, angle=0, org_x=0, org_y=0):
 	"""Realiza un effect de rotacion y zoom progresivos sobre todo el contenido del cuadro
