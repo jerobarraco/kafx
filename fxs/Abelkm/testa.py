@@ -21,10 +21,11 @@ class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.in_ms = 500
 		self.out_ms = 500
+		self.skip_frames = False
 		self.fxs = (FX1(), FX1())
 	def OnFrameStarts(self):
 		advanced.StartGroup()
-		advanced.fTimeBlur(opacidad=0.60)
+		advanced.fTimeBlur(opacidad=0.75)
 		#si pongo el timeblur en onframestarts, las "sombras" se pintan antes(debajo) de las silabas
 	def OnFrameEnds(self):
 
