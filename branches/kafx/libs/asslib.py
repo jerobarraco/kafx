@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Este módulo define las cosas necesarias para cargar un archivo ASS,
-y los objetos que permiten el pintado de texto con cairo"""
+"""This module defines the necessary things to load an ASS file,
+and the objects that allow to draw text with cairo"""
 import codecs, math
 from draw import extra
 import common
 
-#Constantes, no cambien nada si no quieren que el programa se rompa
-#Del Estilo
+#Constants, don't change anything if you don't want the program to crash
+#From Style
 S_NAME = 'name'
 S_FONT = 'fontname'
 S_SIZE = 'fontsize'
@@ -27,7 +27,7 @@ S_ANGLE = 'angle'
 S_SCALE_X = 'scalex'
 S_SCALE_Y = 'scaley'
 
-#De los events (Dialogos)
+#From events (Dialogues)
 E_FORMAT ='format'
 E_DIALOG = 'dialogue'
 E_START = 'start'
@@ -37,87 +37,87 @@ E_STYLE = 'style'
 E_TEXT = 'text'
 E_EFFECT = 'effect'
 
-#Del script ([F]ile)
+#From script ([F]ile)
 F_EVENTS = '[events]'
 F_SINFO = '[script info]'
-F_STYLE4P = '[v4+ styles]' #La p es de PLUS (o sea +)
+F_STYLE4P = '[v4+ styles]' #p for PLUS (like "+")
 F_STYLE4 = '[v4 styles]'
 
-#Estas funciones estan definidas afuera para que sean usables por cualquiera que llama al modulo
+#This functions are defined out so they can be used for everyone who uses the module
 def TimeToMS(time):
-	"""Convierte un string del tipo '0:00:00.00' de ASS a milisegundos en entero"""
+	"""Converts a string from type '0:00:00.00' from ASS to miliseconds in integer"""
 	h, m, s = time.split(':')
 	s, ms = s.split('.')
-	result = int(h) *60 #Le asignamos horas y lo convertimos a minutos
-	result += int(m) #Le asignamos los minutos
-	result *= 60 # Lo pasamos a segundos
-	result += int(s) #Le sumamos los segundos
-	result *= 1000 #lo pasamos a ms
+	result = int(h) *60 #We assign hours and convert it to minutes
+	result += int(m) #Add the minutes
+	result *= 60 #Convert it to seconds
+	result += int(s) #Add the seconds
+	result *= 1000 #Converting to ms
 	result += int(ms)*10
-	return result #y si no hay ningun caracter raro por ahi todo OK
+	return result #and if there's no strange character around it's all OK
 
 
 class cProperties():
 	def __init__(self, other=None, dicc=None):
-		"""Hay 3 formas de crear un estilo:
-		sin nada, se crea con valores default.
-		cProperties(other=otroacopiar) o cProperties(otroacopiar) copia los valores de otro
-		cProperties(dicc=diccionario) lo inicializa con los valores de un diccionario ass"""
+		"""There are 3 ways to create a style:
+		with nothing, it's done with default values.
+		cProperties(other=othercopy) or cProperties(othercopy) copies the values of other
+		cProperties(dicc=dictionary) initialize with the values of a ass dictionary"""
 
-		#Estos necesitan estar afuera porque si no estan inicializados, en el caso q se cree directamente una  instancia cProperties dara error!!
-		self.color1 = extra.cCairoColor(number=0xFFFF2020) #Notar q el 0x hace q sea un numero de verdad, y no un string. color primario
-		self.color2 = extra.cCairoColor(number=0xFF808080) #color secundario
+		#This ones need to be outside, because if they aren't initialized, in case an instance cProperties is created directly, it will raise an error!!
+		self.color1 = extra.cCairoColor(number=0xFFFF2020) #Note that the 0x makes them a real number and not a string. primary color
+		self.color2 = extra.cCairoColor(number=0xFF808080) #secondary color
 		self.color3 = extra.cCairoColor(number=0xFF101010) #border
 		self.color4 = extra.cCairoColor(number=0xFF808080) #shadow
-		#colores: primario Secundario Outline Back
+		#colors: primary Secondary Outline Back
 		self._layer = 0
 
 		if other:
 			self.CopyAllFrom(other)
 		else:
-			#valores por default
-			#animables
-			#escalado, x e y respectivamente
+			#default values
+			#animatable
+			#scaling, x and y respectively
 			self.scale_x = 1.0
 			self.scale_y = 1.0
-			#tamaÃ±o del border en pixels
+			#size of border in pixels
 			self.border = 3
-			#tamaÃ±o de la shadow en pixels
+			#size of shadow in pixels
 			self.shadow = 0
 			self.angle = 0
-			#posición del vector (del punto de inicio del vector)
+			#position of vector (beginning point of vector)
 			self.pos_x = 30
 			self.pos_y = 30
-			#origen de las transformaciones (y de algunos pintados)
+			#transformation's origin (and some draws)
 			self.org_x = 0
 			self.org_y = 0
-			#desplazamiento de la shadow en pixels, en x e y respectivamente
+			#displacement of shadow in pixels, in x and y repsectively
 			self.shad_x = 0
 			self.shad_y = 0
-			#modes de pintado
+			#drawing modes
 			self.mode_fill = 0
 			self.mode_border = 0
 			self.mode_shadow = 0
 			self.mode_particle = 0
-			#no animables
-			#nombre del estilo
+			#not animatable
+			#style's name
 			self._name ='EstiloManualmenteCreado'
-			#tamaÃ±o de la fuente
+			#font size
 			self._size = 12
-			#nombre de la fuente
+			#font name
 			self._font = "Verdana"
-			#Negrita
+			#Bold
 			self._bold = False
-			#Italica
+			#Italic
 			self._italic = False
-			#margenes en pixels, vertical, derecho e izquierdo respectivamente
+			#margins in pixels, vertical, right and left respectively
 			self._marginv = 30
 			self._marginr = 30
 			self._marginl = 30
-			#alineaciÃ³n segun ass (an creo)
+			#alignment according to ass (an creo)
 			self._align = 2
 
-			#path info #cargando de una figura esto no tiene mucho effect asi que ni siquiera se crean las variables
+			#path info #loading a figure, this doesn't have much effect so variables aren't needed
 			self._x_bearing = 0
 			self._y_bearing = 0
 			self._x_advance = 0
@@ -126,21 +126,21 @@ class cProperties():
 			self._descent = 0
 			self._max_x_advance = 0
 			self._max_y_advance = 0
-			#no necesitados, no los pongo porque si da error es porque hay algo mal en el codiog
+			#unneeded, I don't put them because if there's an error something should be wrong in coding
 			#self._line_height = 0
 			#self._width = 0
 			if dicc:
-				self.FromDict(dicc)#porque al dict le pueden faltar valores
-		#estos no son necesarios, se cargan cuando se crea el vector
-		#los pongo solo porque ai el ide los toma
+				self.FromDict(dicc)#bacause the dict could lack values
+		#this aren't needed, loaded when the vector is created
+		#there are just there because the ide catch them
 		self._height = None
 		self._width = None
 		self._line_height = None
 
 	def CopyAllFrom(self, other):
-		#Esto es importante porque el estilo original de los dialgos se inicia en realidad pasandole un estilo al momento de crearlo
+		#This is important because the original style from the dialogues intializes giving a style the moment it's created
 		self.CopyFrom(other)
-		#No animables
+		#Not animatable
 		self._name = other._name
 		self._font = other._font
 		self._size  = other._size
@@ -150,13 +150,13 @@ class cProperties():
 		self._marginr = other._marginr
 		self._marginl = other._marginl
 		self._align = other._align
-		#self._layer = other._layer # no es necesario
+		#self._layer = other._layer # not necessary
 
 	def CopyFrom(self,  other):
-		"""Copia los datos de other objeto del mismo tipo
-		@other es un objeto del tipo cProperties
+		"""Copies the data of another object from the same type
+		@other it's an object of cProperties type
 
-		copia solo los datos animables para hacerlo mÃ¡s rapido.
+		only the animatable data is copied, it makes them faster that way.
 		"""
 		self.pos_x = other.pos_x
 		self.pos_y = other.pos_y
@@ -179,20 +179,20 @@ class cProperties():
 		self.mode_particle = other.mode_particle
 
 	def FromDict(self, style):
-		"""Crea los valores desde un diccionario, para uso interno"""
-		#animables
+		"""Creates the values from a dictionary for internal use"""
+		#animatable
 		self.angle = math.radians(common.SafeGetFloat(style, S_ANGLE))
 		self.color1  = extra.cCairoColor(text=style.get(S_PCOLOR, 0))
 		self.color3 = extra.cCairoColor(text=style.get(S_OCOLOR, 0))
 		self.color4 = extra.cCairoColor(text=style.get(S_BCOLOR, 0))
 		self.color2 = extra.cCairoColor(text=style.get(S_SCOLOR, 0))
 		self.border = common.SafeGetFloat(style, S_OUTLINE)
-		self.shadow = int(common.SafeGetFloat(style, S_SHADOW)) #el zheo me dijo q podia ser flotante pero no tiene sentido aca
+		self.shadow = int(common.SafeGetFloat(style, S_SHADOW)) #zheo told me that it could be float but it doesn't make sense here
 
 		self.scale_x = common.SafeGetFloat(style, S_SCALE_X, 100)/100.0
 		self.scale_y = common.SafeGetFloat(style, S_SCALE_Y, 100)/100.0
 
-		#No animables
+		#Not animatable
 		self._name = style.get(S_NAME, '')
 		self._font = style.get(S_FONT, '')
 		self._size = common.SafeGetFloat(style, S_SIZE)
@@ -207,41 +207,41 @@ class cProperties():
 class cSyllable(extra.cVector):
 	def __init__(self,  text='', style=None, parent=None, last_pos=None):
 		"""
-		Una silaba, es mejor dejar que las cree el dialogo porque necesitan una inicializacion especial
-		@text text de la silaba
-		@style objeto del tipo cProperties
-		@parent objeto padre
-
-		para que la silaba se pueda usar luego hay que llamar a CambiarTexto(text, preposicion)
+		A syllable, it's better that the dialogue creates them because they need a special initialization
+		@text syllable's text
+		@style object of cProperties type
+		@parent father object
+		
+		to use the syllable later we must call changeText(text, preposition)
 		"""
 		extra.cVector.__init__(
 			self, text=text, style=style, parent=parent, last_pos=last_pos)
 		#self._text = text
-		#defaults to [] si its iterable, this is only created if the
+		#defaults to [] if its iterable, this is only created if the
 		#parameter FxsGroup.split_letters is True
 		#or if you call self.SplitLetters
 		self._letters = []
 
 	def SplitLetters(self):
-		"""Computa los caracteres de la sÃ­laba...
-		Usar si cambian el _text
-		es muy lento y consume mas ram
-		para acceder a las Syllables luego usen _letters
-		tambien activar la opcion en FxsGroup.
+		"""Computes the characters of the syllable...
+		Use if you change __text
+		it's slow and eats more ram
+		to access the Syllables use _letters later
+		and activate the option in FxsGroup, too.
 		"""
-		#creamos el array y obtenemos valores comunes
+		#we create the array and get common values
 		self._letters = []
 		time = self._start
 		last = (self.original.pos_x, self.original.pos_y)
-		#Si hay chars
-		if not self._text:#atrapa '' y None
+		#If there are chars
+		if not self._text:#catchs '' and None
 			self._text = ''
-			#para evitar codigo duplicado, de igual manera no deberias llamar a esto sin texto Ã²_Ã³
+			#to avoide duplicated code, even though you shouldn't call this function without text Ã²_Ã³
 			cdur = 0.0
 		else:
-			#calculamos la duracion de cada caracter
+			#calculation of each character's duration
 			cdur = float(self._dur) / len(self._text)
-		#agregamos los caracteres
+		#adding the characters
 		for (i, tchar) in enumerate(self._text):
 			char = extra.cVector(
 				text = tchar, style=self.original, parent=self, last_pos=last)
