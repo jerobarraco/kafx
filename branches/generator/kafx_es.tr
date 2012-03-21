@@ -39,7 +39,7 @@
     <message>
         <location filename="dachangecolor.ui" line="48"/>
         <source>Interpolate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Interpolar</translation>
     </message>
     <message>
         <location filename="dachangecolor.ui" line="57"/>

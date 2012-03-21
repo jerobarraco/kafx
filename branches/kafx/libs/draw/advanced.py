@@ -749,18 +749,21 @@ class cParticleSystem():
 				self.Animate(p)
 
 def CreateParticles(box, texture, scale=1.0, alpha_min=0.2, vertical=True, mode=0 ):
-		"""Super Lento
-		parametros:
-		@box -> tupla con las coordenadas de donde buscar (x0, y0, ancho, alto) (todos los items DEBEN ser enteros (int)))
-		@texture -> pattern que se usará como texture
-		opcionales:
-		@scale=1.0 -> scale con la que se inicializarán todas las textures
-		@alpha_min=0.2 -> cualquier pixel que contenga un alpha menor a ese valor será ignorado (por lo tanto no generará partícula) (es de 0 a 255)
-		@vertical=True -> True o False, indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas
-				las partículas en el array, por lo tanto la forma en que se recorre
-		@mode=0 -> el mode de las particulas
-		"""
+		"""This is really slow, use with care.
 
+		:param box: A tuple with the bounding box, like (x, y, w, h)(todos los items DEBEN ser enteros (int))
+		:type box: tuple
+		:param texture: pattern to be used as texture
+		:type texture: cairo pattern `cairo.pattern`
+		:param scale: starting scale for every particle
+		:type scale: `float`
+		:param alpha_min: any pixel with an alpha value less than this value will be ignored (por lo tanto no generará partícula) (0.0 to 1.0)
+		:type alpha_min: `float`
+		:param vertical: indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas las partículas en el array, por lo tanto la forma en que se recorre
+		:type vertical: `bool`
+		:param mode: particle mode xxxx TODO EXPAND
+		:type mode: int
+		"""
 		#creamos un array de particulas
 		parts = []
 
