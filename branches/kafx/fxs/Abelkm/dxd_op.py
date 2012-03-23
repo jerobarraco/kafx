@@ -110,8 +110,8 @@ class FX1(common.Fx):
 		advanced.StartGroup()
 		d.Paint()
 		advanced.fGlow(steps=3, opacity=0.10)
-		advanced.fDirBlur(pi*1/2 , 3+common.Interpolate(d.progress, 3,0, common.i_accel), 0.45)
-		advanced.fDirBlur(pi*-1/2 , 3+common.Interpolate(d.progress, 3,0, common.i_accel), 0.45)
+		advanced.fDirBlur(pi*1/2 , 3+common.Interpolate(d.progress, 3,0), 0.45)
+		advanced.fDirBlur(pi*-1/2 , 3+common.Interpolate(d.progress, 3,0,), 0.45)
 		advanced.EndGroup()
 
 class FxsGroup(common.FxsGroup):
