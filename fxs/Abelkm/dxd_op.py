@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#FX made by Abelkm. Use for learning only!
 from libs import common
 from libs.draw import advanced, extra
 import math, random, cairo
@@ -13,7 +14,7 @@ class FX1(common.Fx):
 	def OnDialogueOut(self, d):
 		global t1
 		d.actual.border = 0
-		d.actual.color1.a = common.Interpolate(d.progress, 1,0, common.i_accel)
+		d.Fade(1,0, common.i_accel)
 		d.actual.mode_fill = d.P_DEG_VERT
 		d.Paint()
 		d.Restore()
@@ -45,6 +46,7 @@ class FX1(common.Fx):
 		advanced.fDirBlur(pi*1/2 , 3, 0.45)
 		advanced.fDirBlur(pi*-1/2 , 3, 0.45)
 		advanced.EndGroup()
+
 
 	def OnSyllable(self, d):
 		global t2, t1
@@ -98,7 +100,7 @@ class FX1(common.Fx):
 	def OnDialogueIn(self, d):
 		global t2
 		d.actual.border = 0
-		d.actual.color1.a = common.Interpolate(d.progress, 0,1)
+		d.Fade(0, 1, common.i_accel)
 		d.actual.mode_fill = d.P_DEG_VERT
 		d.Paint()
 		d.Restore()
@@ -110,8 +112,8 @@ class FX1(common.Fx):
 		advanced.StartGroup()
 		d.Paint()
 		advanced.fGlow(steps=3, opacity=0.10)
-		advanced.fDirBlur(pi*1/2 , 3+common.Interpolate(d.progress, 3,0), 0.45)
-		advanced.fDirBlur(pi*-1/2 , 3+common.Interpolate(d.progress, 3,0,), 0.45)
+		advanced.fDirBlur(pi*1/2 , 3+common.Interpolate(d.progress, 3,0,common.i_accel), 0.45)
+		advanced.fDirBlur(pi*-1/2 , 3+common.Interpolate(d.progress, 3,0,common.i_accel), 0.45)
 		advanced.EndGroup()
 
 class FxsGroup(common.FxsGroup):
