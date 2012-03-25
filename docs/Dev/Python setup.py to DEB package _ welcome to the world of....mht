@@ -1,0 +1,762 @@
+Content-Type: multipart/related; start=<op.mhtml.1326483095170.8aee671f0d245f87@192.168.1.98>; boundary=----------X9oAAUR6FzVgPM1fWfKmi5
+Content-Location: http://www.smallbulb.net/2011/194-python-setup-py-to-deb-package
+Subject: =?utf-8?Q?Python=20setup.py=20to=20DEB=20package=20|=20welcome=20to=20the=20world=20of...?=
+MIME-Version: 1.0
+
+------------X9oAAUR6FzVgPM1fWfKmi5
+Content-Disposition: inline; filename=194-python-setup-py-to-deb-package.htm
+Content-Type: text/html; charset=UTF-8; name=194-python-setup-py-to-deb-package.htm
+Content-ID: <op.mhtml.1326483095170.8aee671f0d245f87@192.168.1.98>
+Content-Location: http://www.smallbulb.net/2011/194-python-setup-py-to-deb-package
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="google-site-verification" content="qRrRIFKtAmhHZ3c6FwX5tdcPcZ96ox4lzz_OMI9FMKA" />
+
+	<title>Python setup.py to DEB package | welcome to the world of...</title>
+
+	<style type="text/css" media="screen">
+		@import url( http://www.smallbulb.net/wp-content/themes/majstajl/style.css );
+	</style>
+
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.smallbulb.net/feed" />
+	<link rel="alternate" type="text/xml" title="RSS .92" href="http://www.smallbulb.net/feed/rss" />
+	<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="http://www.smallbulb.net/feed/atom" />
+
+	<link rel="pingback" href="http://www.smallbulb.net/xmlrpc.php" />
+		<link rel='archives' title='May 2011' href='http://www.smallbulb.net/date/2011/05' />
+	<link rel='archives' title='March 2011' href='http://www.smallbulb.net/date/2011/03' />
+	<link rel='archives' title='May 2010' href='http://www.smallbulb.net/date/2010/05' />
+	<link rel='archives' title='April 2010' href='http://www.smallbulb.net/date/2010/04' />
+	<link rel='archives' title='September 2009' href='http://www.smallbulb.net/date/2009/09' />
+	<link rel='archives' title='May 2009' href='http://www.smallbulb.net/date/2009/05' />
+	<link rel='archives' title='April 2009' href='http://www.smallbulb.net/date/2009/04' />
+	<link rel='archives' title='March 2009' href='http://www.smallbulb.net/date/2009/03' />
+	<link rel='archives' title='February 2009' href='http://www.smallbulb.net/date/2009/02' />
+	<link rel='archives' title='January 2009' href='http://www.smallbulb.net/date/2009/01' />
+		<link rel="alternate" type="application/rss+xml" title="welcome to the world of... &raquo; Python setup.py to DEB package Comments Feed" href="http://www.smallbulb.net/2011/194-python-setup-py-to-deb-package/feed" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.smallbulb.net/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.smallbulb.net/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='welcome to the world of&#8230;' href='http://www.smallbulb.net' />
+<link rel='start' title='Compression programs comparison' href='http://www.smallbulb.net/2009/7-compression-programs-comparison' />
+<link rel='prev' title='Ubuntu encrypted home' href='http://www.smallbulb.net/2011/182-ubuntu-encrypted-home' />
+<meta name="generator" content="WordPress 3.0.5" />
+<link rel='canonical' href='http://www.smallbulb.net/2011/194-python-setup-py-to-deb-package' />
+<link rel='shortlink' href='http://www.smallbulb.net/?p=194' />
+
+<!-- All in One SEO Pack 1.6.13.2 by Michael Torbert of Semper Fi Web Design[400,477] -->
+<meta name="description" content="From time to time I hit an interesting Python package which is not available in a DEB package. Setup.py/distutils/setuptools are de facto standard but the base" />
+<!-- /all in one seo pack -->
+
+<link rel="stylesheet" href="http://www.smallbulb.net/wp-content/plugins/wp-syntax/wp-syntax.css" type="text/css" media="screen" />
+</head>
+
+<body>
+<div id="rap">
+
+<div id="topheader"><div id="topheader_">
+  <h1><a href="http://www.smallbulb.net/">welcome to the world of&#8230;</a></h1>
+  <h2>Looks like a small bulb used to indicate something unusual, like a malfunction.</h2>
+</div></div>
+
+<!-- begin sidebar -->
+<div id="menu"><div id="menu_">
+
+<ul>
+	<li class="pagenav">Pages:<ul><li class="page_item page-item-2"><a href="http://www.smallbulb.net/about" title="About">About</a></li>
+<li class="page_item page-item-166"><a href="http://www.smallbulb.net/netflowvizu" title="NetFlowVizu">NetFlowVizu</a></li>
+<li class="page_item page-item-119"><a href="http://www.smallbulb.net/pyjampiler" title="Pyjampiler">Pyjampiler</a></li>
+<li class="page_item page-item-175"><a href="http://www.smallbulb.net/socket-retarder" title="Socket retarder">Socket retarder</a></li>
+</ul></li>	<li id="linkcat-72" class="linkcat">misc
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.snakemq.net/" rel="me" title="message queuing for Python" target="_blank">snakeMQ</a></li>
+
+	</ul>
+</li>
+	<li class="categories">Categories:<ul>	<li class="cat-item cat-item-1"><a href="http://www.smallbulb.net/category/uncategorized" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+</ul></li> <li id="search">
+   <label for="s">Search:</label>
+   <form id="searchform" method="get" action="http://www.smallbulb.net">
+	<div>
+		<input type="text" name="s" id="s" size="15" /><br />
+		<input type="submit" value="Search" />
+	</div>
+	</form>
+ </li>
+ <li id="archives">Archives:	<ul>
+	 	<li><a href='http://www.smallbulb.net/date/2011/05' title='May 2011'>May 2011</a></li>
+	<li><a href='http://www.smallbulb.net/date/2011/03' title='March 2011'>March 2011</a></li>
+	<li><a href='http://www.smallbulb.net/date/2010/05' title='May 2010'>May 2010</a></li>
+	<li><a href='http://www.smallbulb.net/date/2010/04' title='April 2010'>April 2010</a></li>
+	<li><a href='http://www.smallbulb.net/date/2009/09' title='September 2009'>September 2009</a></li>
+	<li><a href='http://www.smallbulb.net/date/2009/05' title='May 2009'>May 2009</a></li>
+	<li><a href='http://www.smallbulb.net/date/2009/04' title='April 2009'>April 2009</a></li>
+	<li><a href='http://www.smallbulb.net/date/2009/03' title='March 2009'>March 2009</a></li>
+	<li><a href='http://www.smallbulb.net/date/2009/02' title='February 2009'>February 2009</a></li>
+	<li><a href='http://www.smallbulb.net/date/2009/01' title='January 2009'>January 2009</a></li>
+	</ul>
+ </li>
+ <li id="meta">Meta:	<ul>
+				<li><a href="http://www.smallbulb.net/wp-login.php">Log in</a></li>
+		<li><a href="http://www.smallbulb.net/feed" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			</ul>
+ </li>
+
+</ul>
+
+<br/>
+Tags:
+<a href='http://www.smallbulb.net/tag/analysis' class='tag-link-27' title='1 topic' style='font-size: 9px;'>analysis</a>
+<a href='http://www.smallbulb.net/tag/apache' class='tag-link-33' title='1 topic' style='font-size: 9px;'>apache</a>
+<a href='http://www.smallbulb.net/tag/benchmark' class='tag-link-9' title='2 topics' style='font-size: 9.98181818182px;'>benchmark</a>
+<a href='http://www.smallbulb.net/tag/blacklist' class='tag-link-15' title='1 topic' style='font-size: 9px;'>blacklist</a>
+<a href='http://www.smallbulb.net/tag/box-model' class='tag-link-48' title='1 topic' style='font-size: 9px;'>box model</a>
+<a href='http://www.smallbulb.net/tag/bugs' class='tag-link-41' title='1 topic' style='font-size: 9px;'>bugs</a>
+<a href='http://www.smallbulb.net/tag/cache' class='tag-link-23' title='2 topics' style='font-size: 9.98181818182px;'>cache</a>
+<a href='http://www.smallbulb.net/tag/class' class='tag-link-16' title='1 topic' style='font-size: 9px;'>class</a>
+<a href='http://www.smallbulb.net/tag/compression' class='tag-link-11' title='1 topic' style='font-size: 9px;'>compression</a>
+<a href='http://www.smallbulb.net/tag/css' class='tag-link-43' title='1 topic' style='font-size: 9px;'>CSS</a>
+<a href='http://www.smallbulb.net/tag/decorator' class='tag-link-20' title='2 topics' style='font-size: 9.98181818182px;'>decorator</a>
+<a href='http://www.smallbulb.net/tag/denial-of-service' class='tag-link-14' title='1 topic' style='font-size: 9px;'>denial of service</a>
+<a href='http://www.smallbulb.net/tag/design-pattern' class='tag-link-24' title='1 topic' style='font-size: 9px;'>design pattern</a>
+<a href='http://www.smallbulb.net/tag/diagram' class='tag-link-28' title='1 topic' style='font-size: 9px;'>diagram</a>
+<a href='http://www.smallbulb.net/tag/duplicites' class='tag-link-32' title='1 topic' style='font-size: 9px;'>duplicites</a>
+<a href='http://www.smallbulb.net/tag/factory' class='tag-link-21' title='1 topic' style='font-size: 9px;'>factory</a>
+<a href='http://www.smallbulb.net/tag/fastcgi' class='tag-link-10' title='2 topics' style='font-size: 9.98181818182px;'>fastcgi</a>
+<a href='http://www.smallbulb.net/tag/filtering' class='tag-link-31' title='1 topic' style='font-size: 9px;'>filtering</a>
+<a href='http://www.smallbulb.net/tag/function' class='tag-link-18' title='2 topics' style='font-size: 9.98181818182px;'>function</a>
+<a href='http://www.smallbulb.net/tag/gcc' class='tag-link-50' title='2 topics' style='font-size: 9.98181818182px;'>gcc</a>
+<a href='http://www.smallbulb.net/tag/horde' class='tag-link-36' title='1 topic' style='font-size: 9px;'>horde</a>
+<a href='http://www.smallbulb.net/tag/html' class='tag-link-42' title='1 topic' style='font-size: 9px;'>HTML</a>
+<a href='http://www.smallbulb.net/tag/ie' class='tag-link-40' title='1 topic' style='font-size: 9px;'>IE</a>
+<a href='http://www.smallbulb.net/tag/javascript' class='tag-link-45' title='1 topic' style='font-size: 9px;'>Javascript</a>
+<a href='http://www.smallbulb.net/tag/magicdraw' class='tag-link-25' title='1 topic' style='font-size: 9px;'>magicdraw</a>
+<a href='http://www.smallbulb.net/tag/memoization' class='tag-link-22' title='1 topic' style='font-size: 9px;'>memoization</a>
+<a href='http://www.smallbulb.net/tag/method' class='tag-link-17' title='1 topic' style='font-size: 9px;'>method</a>
+<a href='http://www.smallbulb.net/tag/mpm' class='tag-link-37' title='1 topic' style='font-size: 9px;'>mpm</a>
+<a href='http://www.smallbulb.net/tag/msp430' class='tag-link-49' title='2 topics' style='font-size: 9.98181818182px;'>msp430</a>
+<a href='http://www.smallbulb.net/tag/mspdebug' class='tag-link-51' title='2 topics' style='font-size: 9.98181818182px;'>mspdebug</a>
+<a href='http://www.smallbulb.net/tag/php' class='tag-link-34' title='1 topic' style='font-size: 9px;'>php</a>
+<a href='http://www.smallbulb.net/tag/phpmyadmin' class='tag-link-35' title='1 topic' style='font-size: 9px;'>phpmyadmin</a>
+<a href='http://www.smallbulb.net/tag/png' class='tag-link-46' title='1 topic' style='font-size: 9px;'>PNG</a>
+<a href='http://www.smallbulb.net/tag/postfix' class='tag-link-12' title='1 topic' style='font-size: 9px;'>postfix</a>
+<a href='http://www.smallbulb.net/tag/prefork' class='tag-link-38' title='1 topic' style='font-size: 9px;'>prefork</a>
+<a href='http://www.smallbulb.net/tag/python' class='tag-link-5' title='6 topics' style='font-size: 12px;'>python</a>
+<a href='http://www.smallbulb.net/tag/scope' class='tag-link-19' title='1 topic' style='font-size: 9px;'>scope</a>
+<a href='http://www.smallbulb.net/tag/selectors' class='tag-link-44' title='1 topic' style='font-size: 9px;'>selectors</a>
+<a href='http://www.smallbulb.net/tag/smtp' class='tag-link-13' title='1 topic' style='font-size: 9px;'>smtp</a>
+<a href='http://www.smallbulb.net/tag/transparency' class='tag-link-47' title='1 topic' style='font-size: 9px;'>transparency</a>
+<a href='http://www.smallbulb.net/tag/ubuntu' class='tag-link-56' title='2 topics' style='font-size: 9.98181818182px;'>ubuntu</a>
+<a href='http://www.smallbulb.net/tag/uml' class='tag-link-26' title='1 topic' style='font-size: 9px;'>uml</a>
+<a href='http://www.smallbulb.net/tag/worker' class='tag-link-39' title='1 topic' style='font-size: 9px;'>worker</a>
+<a href='http://www.smallbulb.net/tag/xpath' class='tag-link-30' title='1 topic' style='font-size: 9px;'>xpath</a>
+<a href='http://www.smallbulb.net/tag/xslt' class='tag-link-29' title='1 topic' style='font-size: 9px;'>xslt</a>
+</div></div>
+<!-- end sidebar -->
+<div id="content"><div id="content_">
+
+<!-- end header -->
+
+
+<div class="post-194 post type-post hentry category-uncategorized tag-deb tag-distribution tag-distutils tag-package tag-python tag-rpm tag-setup-py tag-setuptools" id="post-194">
+	 <h1 class="storytitle"><a href="http://www.smallbulb.net/2011/194-python-setup-py-to-deb-package" rel="bookmark">Python setup.py to DEB package</a></h1>
+	<div class="meta">Filed under: <a href="http://www.smallbulb.net/category/uncategorized" title="View all posts in Uncategorized" rel="category tag">Uncategorized</a> &#8212; Tags: <a href="http://www.smallbulb.net/tag/deb" rel="tag">deb</a>, <a href="http://www.smallbulb.net/tag/distribution" rel="tag">distribution</a>, <a href="http://www.smallbulb.net/tag/distutils" rel="tag">distutils</a>, <a href="http://www.smallbulb.net/tag/package" rel="tag">package</a>, <a href="http://www.smallbulb.net/tag/python" rel="tag">python</a>, <a href="http://www.smallbulb.net/tag/rpm" rel="tag">rpm</a>, <a href="http://www.smallbulb.net/tag/setup-py" rel="tag">setup.py</a>, <a href="http://www.smallbulb.net/tag/setuptools" rel="tag">setuptools</a> &#8212;  admin @ 2011/05/13 10:29 </div>
+
+	<div class="storycontent">
+		<p>From time to time I hit an interesting Python package which is not available in a DEB package. Setup.py/distutils/setuptools are de facto standard but the base binary distribution command set includes only RPM support. I don&#8217;t like <em>python setup.py install</em>. I prefer full installation/purging control via Ubuntu package system. Solution is easy.</p>
+<p>Install package <strong>python-stdeb</strong> and then execute</p>
+<pre>python setup.py --command-packages=stdeb.command bdist_deb</pre>
+<p>And your DEB is ready!</p>
+	</div>
+
+	<div class="feedback">
+				<a href="http://www.smallbulb.net/2011/194-python-setup-py-to-deb-package#respond" title="Comment on Python setup.py to DEB package">Comments (0)</a>	</div>
+
+</div>
+
+<div id="commentsblock">
+
+<h2 id="comments">No Comments	<a href="#postcomment" title="Leave a comment">&raquo;</a>
+</h2>
+
+	<p>No comments yet.</p>
+
+<p><a href='http://www.smallbulb.net/2011/194-python-setup-py-to-deb-package/feed'><abbr title="Really Simple Syndication">RSS</abbr> feed for comments on this post.</a>	<a href="http://www.smallbulb.net/2011/194-python-setup-py-to-deb-package/trackback" rel="trackback">TrackBack <abbr title="Universal Resource Locator">URL</abbr></a>
+</p>
+
+<h2 id="postcomment">Leave a comment</h2>
+
+
+<form action="http://www.smallbulb.net/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; &lt;pre lang=&quot;&quot; line=&quot;&quot; escaped=&quot;&quot;&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="194" />
+</p>
+
+</form>
+
+
+</div>
+
+
+
+<!-- begin footer -->
+</div></div>
+
+</div>
+<div id="sponsor">
+  sponsored by <a href="http://www.dasir.cz/" title="Custom software development, web pages">dasir</a>;
+  partners:
+    <a href="http://www.mff-kv.cz/" title="Mezinárodní filmový festival Karlovy Vary">MFF KV</a>,
+    <a href="http://www.rsporcelan.cz/index_en.html" title="porcelain, decoration, handpainting">r&amp;š porcelán</a>
+</div>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9460989-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>
+
+------------X9oAAUR6FzVgPM1fWfKmi5
+Content-Disposition: inline
+Content-Type: text/css; charset=UTF-8
+Content-Location: http://www.smallbulb.net/wp-content/themes/majstajl/style.css
+Content-Transfer-Encoding: 8bit
+
+/*
+Theme Name: MájStájl
+Theme URI: http://siroky.cz/
+*/
+
+a {
+}
+
+a img {
+	border: none;
+}
+
+a:visited {
+}
+
+a:hover {
+}
+
+acronym, abbr {
+	border-bottom: 1px dashed #333;
+}
+
+acronym, abbr, span.caps {
+}
+
+acronym, abbr {
+	cursor: help;
+}
+
+pre {
+  font-size: 12px;
+}
+
+blockquote {
+	border-left: 5px solid #ccc;
+	margin-left: 1.5em;
+	padding-left: 5px;
+}
+
+body {
+	background: #efefcd;
+	color: #000;
+	font-family: 'Trebuchet MS', sans-serif;
+  font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+cite {
+	font-style: normal;
+}
+
+#content h2 {
+	border-bottom: 1px dotted #ccc;
+	margin: 15px 0 2px 0;
+	padding-bottom: 2px;
+}
+
+#content h3 {
+	border-bottom: 1px dotted #eee;
+	margin: 7px 0 2px 0;
+}
+
+#content p {
+  margin: 6px 0 6px 0;
+}
+
+ol#comments li p {
+}
+
+p, li, .feedback {
+}
+
+/* classes used by the_meta() */
+ul.post-meta {
+	list-style: none;
+}
+
+ul.post-meta span.post-meta-key {
+	font-weight: bold;
+}
+
+.credit {
+	background: #90a090;
+	border-top: 3px double #aba;
+	color: #fff;
+	margin: 10px 0 0 0;
+	padding: 3px;
+	text-align: center;
+}
+
+.credit a:link, .credit a:hover {
+	color: #fff;
+}
+
+.feedback {
+	color: #ccc;
+	text-align: right;
+	clear: both;
+}
+
+.meta {
+  color: #c0c0c0;
+}
+
+.meta a {
+  color: #7878ff;
+}
+
+.meta li, ul.post-meta li {
+	display: inline;
+}
+
+.meta ul {
+	display: inline;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.storytitle {
+	margin: 10px 0 10px 0;
+  padding-bottom: 2px;
+	border-bottom: 1px dotted #444;
+}
+
+.storytitle a {
+	text-decoration: none;
+}
+
+#commentsblock {
+  background-color: #f0f0f0;
+  border-top: 2px solid #d0d0d0;
+  padding: 5px;
+}
+
+#commentform #author, #commentform #email, #commentform #url, #commentform textarea {
+	background: #fff;
+	border: 1px solid #333;
+	padding: .2em;
+}
+
+#commentform textarea {
+	width: 90%;
+}
+
+#commentlist li ul {
+	border-left: 1px solid #ddd;
+	list-style-type: none;
+}
+
+#commentlist li .avatar {
+	float: right;
+	margin-right: 25px;
+	border: 1px dotted #ccc;
+	padding: 2px;
+}
+
+#content {
+  width: 650px;
+}
+#content_ {
+	padding: 20px;
+}
+
+#rap {
+  width: 800px;
+  background-color: #ffffff;
+  border: 1px #ffc078;
+  border-style: none solid solid solid;
+  margin: 0 auto 0 auto;
+}
+
+#sponsor {
+  margin: 0 auto 0 auto;
+  width: 800px;
+  font-size: 9px;
+  color: #b0b0b0;
+  text-align: right;
+}
+#sponsor A { color: #b0b0b0; }
+
+#topheader {
+	background: #7f380e url('header.jpg') no-repeat;
+	margin: 0;
+	padding: 0;
+  height: 70px;
+}
+#topheader_ {
+	padding-top: 15px;
+  padding-left: 45px;
+}
+
+#topheader H1 {
+  font-size: 20px;
+  margin: 0px;
+}
+
+#topheader H2 {
+  font-size: 12px;
+  font-weight: normal;
+  margin: 0px;
+	color: #fff;
+}
+
+#topheader a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#topheader a:hover {
+	text-decoration: underline;
+}
+
+#menu {
+	background: #fff;
+	border-left: 1px dotted #ccc;
+  position: absolute;
+  margin-left:645px;
+	width: 150px;
+}
+#menu_ {
+	padding: 10px;
+}
+
+#menu form {
+	margin: 0 0 0 13px;
+}
+
+#menu input#s {
+	width: 80%;
+	background: #eee;
+	border: 1px solid #999;
+	color: #000;
+}
+
+#menu ul {
+	color: #ccc;
+	font-weight: bold;
+	list-style-type: none;
+	margin: 0;
+	padding-left: 3px;
+	text-transform: lowercase;
+}
+
+#menu ul li {
+	font: italic normal 110%;
+	margin-top: 10px;
+	padding-bottom: 2px; /*border-bottom: dotted 1px #ccc;*/
+}
+
+#menu ul ul {
+	font-variant: normal;
+	font-weight: normal;
+	line-height: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+
+#menu ul ul li {
+	border: 0;
+	font: normal normal 12px/115%;
+	margin-top: 0;
+	padding: 0;
+	padding-left: 12px;
+}
+
+#menu ul ul li a {
+	text-decoration: none;
+}
+
+#menu ul ul li a:hover {
+	border-bottom: 1px solid #809080;
+}
+
+#menu ul ul ul.children {
+	font-size: 142%;
+	padding-left: 4px;
+}
+
+#wp-calendar {
+	border: 1px solid #ddd;
+	empty-cells: show;
+	font-size: 14px;
+	margin: 0;
+	width: 90%;
+}
+
+#wp-calendar #next a {
+	padding-right: 10px;
+	text-align: right;
+}
+
+#wp-calendar #prev a {
+	padding-left: 10px;
+	text-align: left;
+}
+
+#wp-calendar a {
+	display: block;
+	text-decoration: none;
+}
+
+#wp-calendar a:hover {
+	background: #e0e6e0;
+	color: #333;
+}
+
+#wp-calendar caption {
+	color: #999;
+	font-size: 16px;
+	text-align: left;
+}
+
+#wp-calendar td {
+	color: #ccc;
+	font: normal 12px;
+	padding: 2px 0;
+	text-align: center;
+}
+
+#wp-calendar td.pad:hover {
+	background: #fff;
+}
+
+#wp-calendar td:hover, #wp-calendar #today {
+	background: #eee;
+	color: #bbb;
+}
+
+#wp-calendar th {
+	font-style: normal;
+	text-transform: capitalize;
+}
+
+/* Captions & aligment */
+.aligncenter,
+div.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignleft {
+	float: left;
+}
+
+.alignright {
+	float: right;
+}
+
+.wp-caption {
+	border: 1px solid #ddd;
+	text-align: center;
+	background-color: #f3f3f3;
+	padding-top: 4px;
+	margin: 10px;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.wp-caption img {
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+}
+
+.wp-caption p.wp-caption-text {
+	font-size: 11px;
+	line-height: 17px;
+	padding: 0 4px 5px;
+	margin: 0;
+}
+/* End captions & aligment */
+
+------------X9oAAUR6FzVgPM1fWfKmi5
+Content-Disposition: inline
+Content-Type: image/jpeg
+Content-Location: http://www.smallbulb.net/wp-content/themes/majstajl/header.jpg
+Content-Transfer-Encoding: Base64
+
+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
+F/AAMvqFr//Z
+
+------------X9oAAUR6FzVgPM1fWfKmi5
+Content-Disposition: inline; filename=wp-syntax.css
+Content-Type: text/css; charset=UTF-8; name=wp-syntax.css
+Content-Location: http://www.smallbulb.net/wp-content/plugins/wp-syntax/wp-syntax.css
+Content-Transfer-Encoding: 8bit
+
+.wp_syntax {
+  color: #100;
+  background-color: #f9f9f9;
+  border: 1px solid silver;
+  margin: 0 0 1.5em 0;
+  overflow: auto;
+}
+
+/* IE FIX */
+.wp_syntax {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: expression(this.scrollWidth > this.offsetWidth ? 15 : 0);
+  width: 100%;
+}
+
+.wp_syntax table {
+  border-collapse: collapse;
+}
+
+.wp_syntax div, .wp_syntax td {
+  vertical-align: top;
+  padding: 2px 4px;
+}
+
+.wp_syntax .line_numbers {
+  text-align: right;
+  background-color: #def;
+  color: gray;
+  overflow: visible;
+}
+
+/* potential overrides for other styles */
+.wp_syntax pre {
+  margin: 0;
+  width: auto;
+  float: none;
+  clear: none;
+  overflow: visible;
+  font-size: 12px;
+  line-height: 1.333;
+  white-space: pre;
+}
+
+------------X9oAAUR6FzVgPM1fWfKmi5--
