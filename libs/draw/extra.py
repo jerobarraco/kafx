@@ -187,11 +187,17 @@ class cCairoColor():
 		self.a=other.a
 
 	def Interpolate(self, progress, other, inter=common.i_lineal):
-		"""Linear interpolation of two colors
+		"""
+		Linear interpolation of two colors
 
-		@progress : [0,1] interpolation factor/ratio
-		    - 0 means the first color, 1 the second color
-		@other : second color
+		:param progress:
+			[0,1] interpolation factor/ratio
+			0 means the first color, 1 the second color
+			values in between are interpolated
+		:param other: color to interpolate to
+		:type progress: double
+		:type other: :class:`libs.draw.extra.cCairoColor`
+
 		"""
 		i = common.Interpolate
 		self.r = i(progress, self.r, other.r, inter)
@@ -702,7 +708,9 @@ class cVector():
 		#do -NOT- forget it's x, y, width, height
 
 	def Center(self):
-		"""Returns a vector's center"""
+		"""
+		Returns a vector's center
+		Relative to the screen"""
 		"""o = self.original
 		x = o._width/2.0
 		props.org_y = -(props._line_height/2.0) + props._descent"""
@@ -711,9 +719,11 @@ class cVector():
 		return (x, y) #I may change this to the way it is for Box
 
 	def Move(self, from_, to, inter=common.i_lineal):
-		"""Animates a movement from the from_ position till to position
-		@from_ (x,y)
-		@to (x,y)
+		"""
+		Animates the movement from the `from` position to the `to` position
+
+		:param from: (x,y)
+		:param to: (x,y)
 		"""
 		self.actual.pos_x = common.Interpolate(self.progress, from_[0], to[0], inter)
 		self.actual.pos_y = common.Interpolate(self.progress, from_[1], to[1], inter)
