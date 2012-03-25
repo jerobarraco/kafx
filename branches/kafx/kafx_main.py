@@ -12,8 +12,8 @@ siempre y cuando no sea una cosa rebuscada que no sea extensible.
 """
 import traceback, cProfile
 
-traceback.sys.stdout = open('kafx_log.txt', 'w', 0)
-traceback.sys.stderr = open('error_log.txt', 'w', 0)
+#traceback.sys.stdout = open('kafx_log.txt', 'w', 0)
+#traceback.sys.stderr = open('error_log.txt', 'w', 0)
 
 
 version_info = (1, 8, 0, 'newfinalrc4')

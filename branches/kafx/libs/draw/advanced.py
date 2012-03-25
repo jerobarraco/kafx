@@ -1,22 +1,20 @@
 # -*- coding: utf-8 -*-
+"""
+.. module:: advanced
+   :platform: Unix, Windows
+   :synopsis:
+				These are the "Advanced" effects
+				Basically these are effects that working at image level.
+				In other words, filters and similar things.
+
+.. moduleauthor:: Kafx team http://kafx.com.ar
+"""
 import cairo
 from random import random
 from math import cos, sin, pi
 
 import extra
 from libs import video
-
-""" These are the "Advanced" effects
-Basically these are effects that working at image level.
-In other words, filters and similar things.
-"""
-
-"""
-This is for Abelkm because his high participation in KAFX.
-But I don't recommend (me, nande ) its use.
-To use it, you are agree that the things you make are bad, and probably
-you don't search how to make it better, remember that exist an IRC channel.
-"""
 
 _capas = {}
 class Layer:
@@ -61,10 +59,19 @@ def LayerStarts():
 
 #TODO problema de stride
 def LayerActivate(layer=0, opacity=1.0, mode='over'):
-	"""Activa una capa.
-	todo lo que se pinte luego de esto se pintará sobre la capa activada.
-	@capa Nombre de la capa a activar, igual que se uso en CapasCrear
-		la capa de nombre "base" es una capa especial, la capa del video, sobre la que se pinta todo.
+	"""
+	Activates a layer.
+		todo lo que se pinte luego de esto se pintará sobre la capa activada.
+
+	.. note::
+		Layers are for Abelkm because his high participation in KAFX.
+		But I (`Nande!`) don't recommend its use.
+		To use it, you are agree that the things you make are bad, and probably
+		you didn't search how to make it better, remember there is a forum, doc, and IRC channel.
+
+
+	:param capa: Nombre de la capa a activar, igual que se uso en CapasCrear
+	la capa de nombre "base" es una capa especial, la capa del video, sobre la que se pinta todo.
 
 	Si no existe la crea, y ahi se usan los parametros adicionales
 	@capa
@@ -325,7 +332,8 @@ def Shadow(pattern, size=5, offx=0, offy=0, paint=True):
 
 def fDirBlur(angle=0, steps=1,  opacity=0.25):
 	"""
-		Blur Direccional
+	Blur Direccional
+
 	opcionales:
 	@angle=0 angulo en radianes de la dirección
 	@steps=1 cantidad de pixels y steps que tendrá el blur
@@ -360,7 +368,7 @@ def fDirBlurB(angle=0, steps=1, opacity=0.25):
 
 def fBiDirBlur(angle=0, steps=1, opacity=0.25):
 	"""Blur bidireccional
-	opcionales:
+
 	opcionales:
 	@angle=0 angulo en radianes de la dirección
 	@steps=1 cantidad de pixels y steps que tendrá el blur
@@ -401,11 +409,16 @@ def StartGroup(copy_background=False):
 
 def EndGroup(opacity=1.0, matrix=None):
 	"""
-	Finaliza un grupo,
-	opcionales:
-	@paint Indica si al finalizar el grupo se pinta el contenido
-	@matrix Matriz del tipo cairo.matrix con la transformacion sobre el grupo anterior
-	@return devuelve un pattern con el resultado del grupo
+	Closes a Group. Every Opened group MUST be closed. Group are like parenthesis.
+	The last opened group is the first to get closed.
+
+	:param opacity: The opacity used for painting the resultant group. It can be 0.0 or False.
+	:type opacity: double
+	:param matrix: Matrix for distortion of the whole group
+	:type matrix: :class:`cairo.Matrix`
+
+	:Returns: a newly created :class:`cairo.SurfacePattern` containing the results
+        of all drawing operations performed to the group.
 	"""
 	ctx= video.cf.ctx
 	pat= ctx.pop_group()
