@@ -207,12 +207,15 @@ class cProperties():
 class cSyllable(extra.cVector):
 	def __init__(self,  text='', style=None, parent=None, last_pos=None):
 		"""
-		A syllable, it's better that the dialogue creates them because they need a special initialization
-		@text syllable's text
-		@style object of cProperties type
-		@parent father object
-		
-		to use the syllable later we must call changeText(text, preposition)
+		A syllable. It's better that the dialogue creates them because they need a special initialization.
+		To use the syllable later we must call changeText(text, preposition)
+
+		:param text: syllable's text
+		:param style: Style of the syllable
+		:param parent: Parent object
+		:type text: string
+		:type style: :class:`cProperties`
+		:type parent: :class:`cDialogue`
 		"""
 		extra.cVector.__init__(
 			self, text=text, style=style, parent=parent, last_pos=last_pos)
@@ -297,7 +300,7 @@ class cDialogue(extra.cVector):
 		@dialogue es la linea de dialogo en forma ass (interno)
 		@styles es el array con styles
 		opcionales:
-		@max_effect numero mÃ¡ximo que puede tomar como effect
+		@max_effect numero máximo que puede tomar como effect
 		"""
 		t_estilo = dialogue[E_STYLE]
 		est = styles[0]
@@ -408,11 +411,17 @@ class cDialogue(extra.cVector):
 			pre = syl._next_x, syl._next_y
 
 	def Chain(self, function, duration=None):
-		"""Permite encadenar las syllables a una animacion
-		@function funcion a llamar con cada silaba y el progress
-		@duration=None duracion de la animacion de cada silaba
-		Si no se especifica, se usara¡ una duracion tal que
-		se anime solo una silaba por vez.
+		"""
+		Permite encadenar las syllables a una animacion
+
+		:param function: funcion a llamar con cada silaba y el progress
+		:param duraton:
+			duracion de la animacion de cada silaba
+			Si no se especifica, se usará una duracion tal que
+			se anime solo una silaba por vez.
+		:type function: `method`
+		:type duration: int milliseconds
+
 		"""
 		common.Chain(self._dur, self.progress, self._syllables, function, duration)
 

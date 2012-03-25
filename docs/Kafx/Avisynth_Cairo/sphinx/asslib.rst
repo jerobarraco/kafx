@@ -1,4 +1,4 @@
-Asslib
+:mod:`libs.asslib`
 =======================================
 
 .. automodule:: libs.asslib
