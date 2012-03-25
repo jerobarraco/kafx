@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: advanced
+.. module:: libs.draw.advanced
    :platform: Unix, Windows
    :synopsis:
 				These are the "Advanced" effects
@@ -70,18 +70,18 @@ def LayerActivate(layer=0, opacity=1.0, mode='over'):
 		you didn't search how to make it better, remember there is a forum, doc, and IRC channel.
 
 
-	:param capa: Nombre de la capa a activar, igual que se uso en CapasCrear
-	la capa de nombre "base" es una capa especial, la capa del video, sobre la que se pinta todo.
-
-	Si no existe la crea, y ahi se usan los parametros adicionales
-	@capa
-		nombre de la capa. Puede ser un numero o un texto, Esto define el orden en que se pintan
+	:param layer:
+		Nombre de la capa a activar, igual que se uso en CapasCrear
+		la capa de nombre "base" es una capa especial, la capa del video, sobre la que se pinta todo.
+		Si no existe la crea, y ahi se usan los parametros adicionales
+	:type layer:
+		Puede ser un numero o un texto, Esto define el orden en que se pintan
 		las capas. Siempre se pintaran segun el orden de su nombre (1,2,3) ('a','b','c') etc
-	@opacidad=1.0
-		opacidad de la capa. Valor entre 0.0 y 1.0
-	@mode='over'
-		mode de pintado de la capa. un texto. igual que en PaintMode.
-		(Ver valores posibles en avanzado.OPERATORS)
+	:param opacity: Layer opacity
+	:type opacity: double. Between 0.0 and 1.0
+	:param mode: 	mode de pintado de la capa. un texto. igual que en PaintMode.
+	:type mode: string. (Ver valores posibles en `OPERATORS`)
+
 	"""
 	global _capas
 	if not layer in _capas:
@@ -413,12 +413,14 @@ def EndGroup(opacity=1.0, matrix=None):
 	The last opened group is the first to get closed.
 
 	:param opacity: The opacity used for painting the resultant group. It can be 0.0 or False.
-	:type opacity: double
 	:param matrix: Matrix for distortion of the whole group
+	:type opacity: double
 	:type matrix: :class:`cairo.Matrix`
 
-	:Returns: a newly created :class:`cairo.SurfacePattern` containing the results
-        of all drawing operations performed to the group.
+	:Returns:
+		a newly created :class:`cairo.SurfacePattern` containing the results
+		of all drawing operations performed to the group.
+
 	"""
 	ctx= video.cf.ctx
 	pat= ctx.pop_group()

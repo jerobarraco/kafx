@@ -3,7 +3,6 @@
 
 #TODO usar sys.path y current_directory
 #TODO importar la configuracion con el argv
-#TODO hacer ejecutable
 #TODO buscar una forma de hacer como el cairodraw pero con GL (tip : leer, evaluar, redraw)
 #TODO buscar como exportar a RGB32 Lossless (http://en.wikipedia.org/wiki/List_of_codecs#Lossless_compression ) (creo q ffmpeg usa FFV1)
 #TODO eliminar dll >:D
