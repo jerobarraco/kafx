@@ -1,9 +1,17 @@
 # -*- coding: utf-8 -*-
+"""
+.. module:: libs.draw.basic
+   :platform: Unix, Windows
+   :synopsis:
+				.. note::
+						S* functions sets a `cairo.Source`
+						DO -NOT- FORGET THE ORIGIN IS RELATIVE TO THE POSITION OF THE VECTOR! (cDialogue, cSyllable, etc )
+.. moduleauthor:: Kafx team http://kafx.com.ar
+"""
 import cairo
 from libs import video
 
-#SFunctions set an origin
-#DO -NOT- FORGET THE ORIGIN IS RELATIVE TO THE POSITION OF THE VECTOR!
+
 def SSolid(obj, color, part):
 	"""Uses the color from obj.actual"""#ACTUAL <- change that pretty much everywhere [[TO-DO]]
 	#cairo.SolidPattern(a.r, a.g, a.b, a.a) is an alternative
@@ -23,7 +31,7 @@ def SPattern(obj, mycolor, part):
 		ctx.pop_group_to_source()
 
 def Linear(x,y,x1,y1,c1,c2):
-	"""Code from the gradient funcs"""
+	"""Code for the gradient funcs"""
 	lineal = cairo.LinearGradient(x,y, x1,y1)
 	lineal.add_color_stop_rgba(0, c1.r, c1.g, c1.b, c1.a)
 	lineal.add_color_stop_rgba(1, c2.r, c2.g, c2.b, c2.a)

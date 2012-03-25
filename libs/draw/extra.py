@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+"""
+.. module:: libs.draw.extra
+	:platform: Unix, Windows
+	:synopsis:
+		This module contains useful functions on which other drawing functions depend.
+.. moduleauthor:: Kafx team http://kafx.com.ar
+"""
+
 from math import ceil
 from random import random
 import itertools
@@ -7,13 +15,12 @@ import cairo
 from libs import video, common
 import basic, advanced
 
-"""
-This module contains useful functions on which other drawing functions depend.
-"""
+
 global debugi
 debugi=-1
 
 def DebugCairo(folder="caps/"):
+	#Todo docstring (explain)
 	global debugi
 	debugi+=1
 	video.cf.ctx.get_group_target().write_to_png(folder+str(debugi).zfill(5)+'.png')
@@ -52,12 +59,13 @@ def LoadSequence(folder, count, digits=3, extend=cairo.EXTEND_NONE):
 	return textures"""
 
 def LoadTexture(filename, extend=cairo.EXTEND_REPEAT):
-	"""Returns a cairo texture (SurfacePattern) using a png filename
+	"""Returns a cairo texture (`cairo.SurfacePattern`) using a png filename
 	Used in set_source or whatever
 	@filename: png filename
 
-	@extend: texture's extend (default EXTEND_REPEAT)
-			if used with cSprite extend must be set to cairo.EXTEND_NONE"""
+	@extend: texture's extend (default `cairo.EXTEND_REPEAT`)
+			if used with cSprite extend MUST be set to `cairo.EXTEND_NONE`
+	"""
 	t = cairo.SurfacePattern(cairo.ImageSurface.create_from_png(filename))
 	t.set_extend(extend)
 	return t
@@ -69,7 +77,7 @@ def MoveTexture(pattern, x, y, org_x=0.0, org_y=0.0, angle=0.0, scale_x=1.0, sca
 def SetStyle(style):
 	"""Prepares cairo with the styles
 	Before drawing any text you can call this function to set up the basic stuff
-	the style type has to be asslib.cProperties
+	the style type has to be :class:`libs.asslib.cProperties`
 	"""
 	ctx = video.cf.ctx
 	ctx.select_font_face(style._font, int(style._italic),  int(style._bold))
@@ -113,7 +121,8 @@ class cCairoColor():
 	"""Class for solid colors"""
 	def __init__(self, number=None, text='', ccolor=None, components=None):
 		"""
-		3 ways
+		4 independent ways to initialize
+		If no argument is given the resultant is White
 		@number through FromNumber, receives an integer (0xAARRGGBB)
 		@texto through FromText, receives a string ('AARRGGBB')
 		@ccolor through CopyFrom, receives a cCairoColor object
@@ -537,7 +546,6 @@ class cVector():
 			topg.append(lastt)
 		return frompg, topg
 
-
 	def __FlattenPathGroup(self, path): #check ok
 		for g in path:
 			g.append((3, ()))#a close in each group
@@ -585,7 +593,8 @@ class cVector():
 		self.path = self._old_path
 
 	def PaintWithCache(self, background=False, matrix=None):
-		"""Uses cache to draw a vector... it's only created the first time you call it, it uses the cache afterwards
+		"""Uses cache to draw a vector.
+		It's only created the first time you call it, it uses the cache afterwards
 		optional
 		@background=False Boolean, decides if the text receives the background
 		@matrix=None transform matrix for EndGroup
