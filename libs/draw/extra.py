@@ -28,7 +28,7 @@ def LoadSequence(folder, count, digits=3, extend=cairo.EXTEND_NONE):
 
 	@digits: number of digits used
 
-	@extend: texture's extend (default EXTEND_REPEAT)
+	@extend: texture's extend (default EXTEND_NONE)
 			if used with cSprite extend must be set to cairo.EXTEND_NONE
 	"""
 	#this is the short way
