@@ -19,6 +19,13 @@ class Efecto():
 	def OnSyllableStarts(self, sil):
 		global ca, cb
 		sil.actual.mode_fill = sil.P_DEG_VERT
+		letters = []
+		for sil in diag._syllables:
+			for let in sil._letters:
+				letters.append(let)
+
+
+
 
 class Evento3():
 		def OnSyllable(self, sil):
@@ -47,7 +54,7 @@ class Evento1():
 			s.Paint()
 
 		def OnSyllable(self, sil):
-			sil.Chain(self.OnSy1)#duration = 100
+			common.Chain(100,pro, letters,self.OnSy1, 100)
 
 		def SyllableTime(self, sil):
 			return (sil._parent._start-1000, sil._parent._start-200)
