@@ -14,7 +14,9 @@ import ctypes
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
-
+import traceback
+traceback.sys.stdout = open('kafx_log.txt', 'w', 0)
+traceback.sys.stderr = open('error_log.txt', 'w', 0)
 import kafx_main as kf
 from libs import video
 
