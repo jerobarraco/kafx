@@ -47,10 +47,10 @@ class Evento1():
 			s.Paint()
 
 		def OnSyllable(self, sil):
-			sil.Chain(self.OnSy1, duration = 150)
+			sil.Chain(self.OnSy1)#duration = 100
 
 		def SyllableTime(self, sil):
-			return (sil._parent._start-600, sil._parent._start-200)
+			return (sil._parent._start-1000, sil._parent._start-200)
 
 
 
@@ -92,6 +92,7 @@ class Evento2b():
 class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.fxs = (Efecto(),Efecto())
+		self.split_letters = True
 
 	def OnFrameStarts(self):
 		advanced.StartGroup()
