@@ -257,19 +257,18 @@ class cSyllable(extra.cVector):
 			self._letters.append(char)
 
 	def Chain(self, function, duration=None):
-		"""Permite Chain los caracteres a una animacion.
-		Antes de llamar a esta funciÃ³n llamen a DivideLetters
-		o activen la opcion en FxsGroup
-		@function funcion a llamar con cada silaba y el progress
-		@duration=None duracion de la animacion de cada caracter,
-		Si no se especifica, se usarÃ¡ una duraciÃ³n tal que
-		se anime solo un caracter por vez.
-		(Nota: no cambien el _text si no quieren inconsistencias)
+		"""Allows to Chain the characters to a animation.
+		Before calling this function call DivideLetters
+		or enable the option in FxsGroup
+		@function function that will be called for each syllable and the progress
+		@duration=None duration of the animatio of each character
+		If not specified, a duration that animates one character per time will be used.
+		(Note: do not change _text if you don't want inconsistencies)
 		"""
 		common.Chain(self._dur, self.progress, self._letters, function, duration)
 
 	def FullWiggle(self, amplitude=4, frequency=2, dx=None, dy=None):
-		"""el wiggle que queria AbelKM, parte 2
+		"""the wiggle that AbelKM wanted, part 2
 		"""
 		#(btw) abelkm expand the doc explaingin this
 		if dx is None:
@@ -291,16 +290,16 @@ class cSyllable(extra.cVector):
 			o.pos_y = o.old_y + dy
 
 class cDialogue(extra.cVector):
-	"""Un Dialogo representa una linea de texto,
-	Posee herramientas para tomar el texto, cada una de las Syllables del texto y sus tiempos de karaoke.
-	Este objeto es el mas complejo, casi imposible que lo crees vos, mejor usar cSilaba o directamente extra.cVector
+	"""A Dialogue represents a text line,
+	This takes the text, each Syllable of the text and it's karaoke times.
+	This object is the most complex one, almost imposible for you to create, better use cSyllable or directly extra.cVector
 	"""
 	def __init__(self, dialogue, styles, max_effect = 0):
 		"""
-		@dialogue es la linea de dialogo en forma ass (interno)
-		@styles es el array con styles
-		opcionales:
-		@max_effect numero máximo que puede tomar como effect
+		@dialogue the dialogue line in ASS form (inner)
+		@styles array with styles
+		optionals:
+		@max_effect maximum number that can take as effect
 		"""
 		t_estilo = dialogue[E_STYLE]
 		est = styles[0]
@@ -310,45 +309,45 @@ class cDialogue(extra.cVector):
 				break
 
 		estilo = cProperties(est)
-		#odio lo asqueroso que se pone ass
-		#el or es porque el asqueroso de ass indica el margen por cada linea. PEEEEEEEEEERO si es 0 toma el del estilo ~_~
+		#I hate how aweful can become ass 
+		#the "or" is because the scumbag ass indicates the margin for each line. BUUUUUT if it's 0 it takes the style ~_~
 		estilo._layer = common.SafeGetFloat(dialogue, E_LAYER)	or estilo._layer
 		estilo._marginv = common.SafeGetFloat(dialogue, S_MARGINV) or estilo._marginv
 		estilo._marginr = common.SafeGetFloat(dialogue, S_MARGINR) or estilo._marginr
 		estilo._marginl = common.SafeGetFloat(dialogue, S_MARGINL) or estilo._marginl
 
-		#notar que no le pasamos el texto aun
+		#note that we haven't given the text yet
 		extra.cVector.__init__(self, text=None, style=estilo)
-		#text=None hace que no cree el path, cuidado! si no llamamos a changeText el path no se creará y dará error!
+		#text=None this way the path won't be created, attention! if we don't call changeText the path won't be created and it will raise an error!
 
-		#Seteamos los tiempos, traducimos todo a frames
-		#guardamos los tiempos como ms para tener mas precisión
+		#Setting times, translating all to frames
+		#we sabe the times as ms for better accuracy
 		self._start = TimeToMS(dialogue[E_START])
 		self._end = TimeToMS(dialogue[E_END])
 		self._dur = self._end - self._start
 
-		#Ponemos que effect debe usar
+		#Setting the effect to use
 		self.effect = min(max_effect, int(common.SafeGetFloat(dialogue, E_EFFECT)))
 
-		#Cargamos las Syllables (esta funcion setea el _text)
+		#Loading Syllables (this function sets the _text)
 		self.__SetSyllables( dialogue[E_TEXT] )
-		#El texto lo sabemos luego de parsear las Syllables
+		#We know the text after parsing the Syllables
 		#self.SetText(self._text)
 
 
 
 	def __SetSyllables(self, text):
-		"""crea los objetos Syllables de un dialogo,
-		codigo tomado del proyecto hermano ZheoFX (C)
+		"""Creats the objects Syllables from a dialogue,
+		code was taken from ZheoFX (C) brother project
 
-		Zheo y Alchemist, grax chicos, son grosos! :D"""
+		Zheo y Alchemist, thanks guys, you're awesome! :D"""
 		import re
 		"""
-		{(?:\\.)* = toma cualkier cosa, esto se hizo por si alguien ponian algun effect y despeus el \k, pues toma el \k y bota el resto
-		\\(?:[kK]?[ko]?[kf])  = toma los \k, \kf, \ko y \K
-		(\d+) = cualkier digito, en este caso, el tiempo de las \k
-		([\\\-a-zA-Z_0-9]*)} = para el inline_fx ({\k20\-0} karaoke)
-		(\s*)([^{]*)(\s*) = espacio - cualkier caracter alfanumerico y signos-espacio"""
+		{(?:\\.)* = takes anything, this was made so if someone put some effect and \k after it, it takes the \k and drops the rest
+		\\(?:[kK]?[ko]?[kf])  = takes \k, \kf, \ko and \K
+		(\d+) = any digit, in this case, \k timming
+		([\\\-a-zA-Z_0-9]*)} = for inline_fx ({\k20\-0} karaoke)
+		(\s*)([^{]*)(\s*) = space - any alphanumeric character and signs-space"""
 		#TODO probar con el nuevo regex de alch
 		#TODO pensar si conviene que cree un cVector en vez de una silaba (si no trae problemas en los events)
 		#si el anterior es cierto : TODO cuando encuentre la sintaxis de una forma en el dialogo que en vez de crear un dialogo lo cree usando la forma
@@ -367,19 +366,19 @@ class cDialogue(extra.cVector):
     (\s+)*                      # postspace
     ''',
     re.IGNORECASE | re.UNICODE | re.VERBOSE)"""
-		texto = re.sub(r'({[\s\w\d]+})*', '', text) #quita los comentarios o  tags que no comienzen con \
+		texto = re.sub(r'({[\s\w\d]+})*', '', text) #removes comments and tags that don't begin with \
 		pattern = r'(?:\\[k]?[K|ko|kf])(\d+)(?:\\[\w\d]+)*(\\-[\w\d]+)*(?:\\[\w\d]+)*}([^\{\}]+)*'
-		#pattern = r"{(?:\\.)*\\(?:[kK]?[ko]?[kf])(\d+)([\\\-a-zA-Z_0-9]*)}([^{]*)"#anterior
+		#pattern = r"{(?:\\.)*\\(?:[kK]?[ko]?[kf])(\d+)([\\\-a-zA-Z_0-9]*)}([^{]*)"#previous
 		info = list(re.findall(pattern, texto))
 		plain_text = ''.join([tx for ti, ifx, tx in info])
-		if not plain_text:#no se porque hace esto, quizás si no hay {\k} el re no devuelve nada.
-			plain_text = re.sub(r'{.*}', '', texto) # lineas (quitando las tags)
+		if not plain_text:#I don't know why it does this, maybe if there isn't {\k}, re doesn't return anything.
+			plain_text = re.sub(r'{.*}', '', texto) # lines (removing tags)
 		self.SetText(plain_text)
-		#Como la pos depende de la alineacion y por ende del tamaÃ±o del texto, solo lo podemos
-		#hacer despues de parsear las Syllables
+		#Since pos depends of the alignment and hence of the text's size, we can only
+		#do it after parsing the Syllables
 		if self.original.angle:
-			#esto tendria que usarse en caso del angle pero no funciona bien (aun)
-			#y calculamos el punto 0,0 del dialogo, que es el punto de inicio del texto
+			#this should be used in case of the angle, but it doesn't work good (yet)
+			#calculating point 0,0 of dialogue, the text's beginning point
 			pre = self.matrix.transform_point(0, 0)
 		else:
 			pre = self.original.pos_x, self.original.pos_y
@@ -404,7 +403,7 @@ class cDialogue(extra.cVector):
 					ifx = None
 			else:
 				ifx = None
-			#Ponemos ifx a none para permitir efectos = 0
+			#ifx=None to allow effects = 0
 			syl.effect = ifx or self.effect
 			self._syllables.append(syl)
 			i += 1
@@ -412,13 +411,13 @@ class cDialogue(extra.cVector):
 
 	def Chain(self, function, duration=None):
 		"""
-		Permite encadenar las syllables a una animacion
+		Allows to chain the Syllables to a animationn
 
-		:param function: funcion a llamar con cada silaba y el progress
+		:param function: function to call for each syllable and the progress
 		:param duraton:
-			duracion de la animacion de cada silaba
-			Si no se especifica, se usará una duracion tal que
-			se anime solo una silaba por vez.
+			duration of the animation of each syllable
+			If not specified, a duration that animates
+			one syllable per time will be used.
 		:type function: `method`
 		:type duration: int milliseconds
 
@@ -433,36 +432,36 @@ class cDialogue(extra.cVector):
 			sil.FullWiggle(amplitude, frequency , dx, dy)
 
 class Ass():
-	#Esta es la clase que parsea el archivo .ass con suerte no van a necesitar usarlo
+	"""This class parses the .ass file, luckily you won't need to use it"""
 	def __init__(self,  file,  max):
-		"""Al crear la clase se le puede indicar de que archivo cargar
-		@file archivo .ass a cargar
-		@max el numero mÃ¡ximo de efectos"""
+		"""When initialized, the file to load can be specified
+		@file .ass file to load
+		@max maximum number of effects"""
 
 		if file:
 			self.LoadFromFile(file,  max)
 
 	def __pHeader(self,  text):
-		#Funcion para parsear un header
+		"""Function to parse a header"""
 		titulo, valor = text.split(':', 1)
-		self.info[titulo.strip().lower()] = valor.strip() #el titulo en minuscula lo hace mas compatible
+		self.info[titulo.strip().lower()] = valor.strip() #the title in lower case makes it more compatible
 
 	def __none(self,  text):
-		#parseador null
-		pass#aguante el pass
+		"""null parseator"""
+		pass#pass rules
 
 	def __v4PStyle(self,  text):
-		#parseador del estilo
-		titulo,  valor = text.split(':', 1) #el 1 es por las dudas, uno nunca sabe
+		"""style parseator"""
+		titulo,  valor = text.split(':', 1) #the 1 is just in case, one never knows
 		titulo = titulo.strip().lower()
 		if titulo == S_FORMAT:
 			self.formato = [v.strip().lower() for v in valor.split(',')] # si que me gusta hacer codigo complicado, no?
-		else: # esto no c hace, asumimos q si no es format es style, pero uno nunca sabe
+		else: # this shouldn't be done, we asume that it's not format and it's style, but one never knows
 			valores = [v.strip().lower() for v in valor.split(',')]
 			self.styles.append( cProperties(dicc=dict(zip(self.formato,  valores))))
 
 	def __Events(self,  text):
-		#parseador de events
+		"""event parseator"""
 		titulo, valor = text.split(':', 1)
 		titulo = titulo.strip().lower()
 		if titulo == E_FORMAT :
@@ -470,7 +469,7 @@ class Ass():
 		elif titulo == E_DIALOG:
 			valores_raw = [v.strip() for v in valor.split(',',  len(self.eformato)-1)]
 			valores = [v.lower() for v in valores_raw[:-1]]
-			valores.append(valores_raw[-1]) #Esto es para q no le pase el texto del dialogo en minusculas
+			valores.append(valores_raw[-1]) #The text won't be given in lower case this way
 
 			nuevo_d = dict(zip(self.eformato,  valores))
 			nuevo_d[E_EFFECT] = int(common.SafeGetFloat(nuevo_d, E_EFFECT))
@@ -480,7 +479,7 @@ class Ass():
 			self.index += 1
 
 	def LoadFromFile(self, file, max):
-		#carga un archivo ass
+		"""Loading a ass file"""
 		self.info = {}
 		self.styles = []
 		self.dialogues = []
@@ -490,9 +489,9 @@ class Ass():
 		parser = self.__none
 		for line in f:
 			s = line.strip().lower()
-			if (s=="") or (s[0] ==";"): #poniendo el s="" al principio nos evitamos error por q sea una linea vacia
+			if (s=="") or (s[0] ==";"): #with s="" we avoid errors if it's an empty line
 				pass # me la soban los comentarios y las lineas en blanco ^_^
-			elif s==F_EVENTS: #Pongo los events aca por cuestion d eficiencia, porque gralmente es lo q mas va a haber
+			elif s==F_EVENTS: #The events go here because it's more efficient, generally there will be lot of them
 				parser = self.__Events
 			elif s == F_SINFO:
 				parser = self.__pHeader
