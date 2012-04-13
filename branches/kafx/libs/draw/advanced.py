@@ -442,6 +442,7 @@ def fTimeBlur(opacidad=0.15):
 		ctx.paint_with_alpha(opacidad)
 	_time_blur_pat = ctx.get_group_target()
 
+#corte###################################################
 
 def fRotoZoom(steps=4, opacity=0.25, scale=1, angle=0, org_x=0, org_y=0):
 	"""Realiza un effect de rotacion y zoom progresivos sobre todo el contenido del cuadro
