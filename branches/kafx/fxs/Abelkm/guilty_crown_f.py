@@ -89,12 +89,9 @@ class Evento1():
 				world.Resize(part, common.Interpolate(sil.progress, 0.1, 0.2))
 				if part.color.a <= 0:
 					sil.parts.remove(part)
-
-			#verificamos si no hay mas parts y si se crearon, si es cierto significa que hay que matar los buls tamb
-			if (not sil.parts )and sil.matar:
-				for part in sil.parts:
 					world.DestroySprite(part)
-				sil.parts = [] #borramos las parts
+			#verificamos si no hay mas parts y si se crearon, si es cierto significa que hay que matar los buls tamb
+			if (not sil.parts ) and sil.matar:
 				for b in sil.bull:
 					world.DestroySprite(b)
 				sil.bull = []
