@@ -48,6 +48,9 @@ class cVideoInfo:
 		if frame > self.num_frames : return self.num_frames
 		return frame
 
+	def HasVideo(self):
+		return self.width!=0
+
 class cCurrentFrame:
 	"""
 	Contiene información del cuadro actual
@@ -121,8 +124,7 @@ IT_TFF = 2 #1<<1
 IT_FIELDBASED = 4 #1<<2
 
 # useful functions of the above
-def HasVideo():
-	return width!=0
+
 
 def Check(var,  type):
 	return (var & type) == type

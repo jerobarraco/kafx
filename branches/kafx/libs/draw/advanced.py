@@ -522,6 +522,8 @@ class cSprite():
 		@mode =1: 1-> textura solida, 0-> un solo color y mascara
 		@center =False: If true, then the sprite will be moved to be centered at the x/y (works better with squared textures)
 		"""
+		if isinstance(texture, str) or isinstance(texture, unicode):
+			texture = extra.LoadTexture(texture, cairo.EXTEND_NONE)
 		texture.set_extend(cairo.EXTEND_NONE)
 		self._pat = texture
 		self._s = texture.get_surface()

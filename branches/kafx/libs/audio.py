@@ -106,6 +106,6 @@ class Data():
 		(must be lower than frameSize)"""
 
 		if frame < len(self.frames):
-			return audioop.getsample(self.frames, self.sampWidth, cuadro)/self.maxint
+			return audioop.getsample(self.frames, self.sampWidth, frame)/self.maxint
 		else:
 			return 0.0
