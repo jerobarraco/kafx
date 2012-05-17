@@ -70,7 +70,7 @@ def i_full_sin(p): return math.sin(2*math.pi*p)
 def i_full_cos(p): return math.cos(2*math.pi*p)
 
 def i_accel(p): return math.sin(math.pi*p*0.5)**2 #pi/2 = 90º
-def i_deccel(p): return 1-i_accel(p)
+def i_deccel(p): return 1-i_accel(1-p)
 def i_rand(p): return random.random()
 def i_log(p):
 	#be careful when using, numbers less than 1 gives error
@@ -118,7 +118,7 @@ def Interpolate(progress, from_val, to_val, function=i_lineal):
 	"""
 	#http://es.wikipedia.org/wiki/Interpolación - http://en.wikipedia.org/wiki/Interpolation
 	return (function(progress) * (to_val-from_val))+from_val
-	
+
 
 def LERP(progress, from_val, to_val):
 	"""

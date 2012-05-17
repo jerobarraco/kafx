@@ -1,0 +1,13 @@
+#loadplugin("KAFX.dll")
+blank = Blankclip(2100, 800, 600, color = $202020, fps=30)
+#image = tweak(ImageSource("cover2.jpg").ConvertToYV12(), bright=-125)
+image = ImageSource("cover2.jpg")
+video = Overlay(blank, image, opacity=0.3, x = 150, y = 50).ConvertToYV12()
+audio = DirectShowSource("mp3.mp3")
+
+return AudioDub(video, audio)
+#converttorgb32()
+#FlipVertical()
+#KAFX("fxs.tests.pics", "out.ass")
+#FlipVertical()
+#ConvertToYV12()

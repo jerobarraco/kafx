@@ -44,6 +44,7 @@ F_STYLE4P = '[v4+ styles]' #p for PLUS (like "+")
 F_STYLE4 = '[v4 styles]'
 
 #This functions are defined out so they can be used for everyone who uses the module
+#TODO check if this can be moved to common
 def TimeToMS(time):
 	"""Converts a string from type '0:00:00.00' from ASS to miliseconds in integer"""
 	h, m, s = time.split(':')
@@ -309,7 +310,7 @@ class cDialogue(extra.cVector):
 				break
 
 		estilo = cProperties(est)
-		#I hate how aweful can become ass 
+		#I hate how aweful can become ass
 		#the "or" is because the scumbag ass indicates the margin for each line. BUUUUUT if it's 0 it takes the style ~_~
 		estilo._layer = common.SafeGetFloat(dialogue, E_LAYER)	or estilo._layer
 		estilo._marginv = common.SafeGetFloat(dialogue, S_MARGINV) or estilo._marginv
