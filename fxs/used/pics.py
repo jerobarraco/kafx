@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from libs.draw import advanced
+from libs.draw import advanced, extra
 from libs import common, video, audio
+#import gtk
 power = 0.0
 class Efecto():
 	def __init__(self):
@@ -11,13 +12,22 @@ class Efecto():
 		self.starty = video.vi.height
 
 	def OnDialogueStarts(self, diag):
-		#texture =extra.LoadTexture(diag._text)
-		diag.pic = advanced.cSprite(diag._text)
-		msize = max(diag.pic._width,diag.pic._height )
+		"""pixbuf = gtk.gdk.pixbuf_new_from_file(diag._text)
+		imgw=pixbuf.get_width()
+		imgh=pixbuf.get_height()
+
+		sfc = cairo.SurfacePattern(cairo.ImageSurface.create_from_data(pixbuf.get_pixels(), imgw, imgh, imgw*3)"""
+		"""video.cf.ctx.set_source_pixbuf(pixbuf)
+		sfc = video.cf.ctx.get_source()
+		print sfc"""
+		diag.pic = advanced.cSprite(extra.LoadTexture(diag._text))
+
+		msize = max(diag.pic._width, diag.pic._height )
 		diag.pic.max_scale = (self.mwindow/msize)
 		diag.pic.min_scale = diag.pic.max_scale /4.0
 		diag.pic.Scale(diag.pic.max_scale,diag.pic.max_scale)
 		diag.pic.y = self.centy
+		diag.off = 0.0
 
 	def OnDialogueIn(self, diag):
 		diag.pic.x = common.Interpolate(diag.progress, self.startx, self.centx, common.i_deccel )
@@ -35,11 +45,16 @@ class Efecto():
 		diag.pic.Paint()
 
 	def OnDialogueOut(self, diag):
-		diag.pic.x = common.Interpolate(diag.progress, self.centx, 0, common.i_accel )
-		scale = common.Interpolate(diag.progress, diag.pic.max_scale, diag.pic.min_scale, common.i_accel)
-		diag.pic.Scale(scale, scale)
+		advanced.StartGroup()
+		#diag.pic.x = common.Interpolate(diag.progress, self.centx, 0, common.i_accel )
+		#scale = common.Interpolate(diag.progress, diag.pic.max_scale, diag.pic.min_scale, common.i_accel)
+		#diag.pic.Scale(scale, scale)
 		diag.pic.color.a = common.Interpolate(diag.progress, 1.0, 0.0, common.i_accel)
 		diag.pic.Paint()
+		tam = common.Interpolate(diag.progress, 0, 5, common.i_accel)
+		advanced.fWave(diag.off, amplitude=tam )
+		diag.off += 2
+		advanced.EndGroup()
 
 class Subtitulo():
 	def OnDialogueIn(self, diag):
@@ -58,10 +73,10 @@ class FxsGroup(common.FxsGroup):
 		self.out_ms = 500
 		self.skip_frames = False
 		self.fxs = (Efecto(), Subtitulo())
-		self.audiodata = audio.Data("in.avi")
-		self.paso = video.vi.width / float(self.audiodata.frameSize)
+		#self.audiodata = audio.Data("in.avi")
+		#self.paso = video.vi.width / float(self.audiodata.frameSize)
 
-	def OnFrameStarts(self):
+	def OnFrameStarts1(self):
 		#En cada cuadro
 		global power
 		#leemos una "linea" de audio (un grupo de muestras para un cuadro de video)
