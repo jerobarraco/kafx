@@ -58,7 +58,7 @@ def doFolder(directory):
 	dur = 3000
 	space = 500
 	for entry in os.listdir(directory):
-		if os.path.splitext(entry)[-1].lower() in('.png', '.jpg'):
+		if os.path.splitext(entry)[-1].lower() in('.png'):
 			ini = MSToTime(last)
 			last += dur
 			end = MSToTime(last)
