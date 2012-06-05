@@ -36,9 +36,9 @@ class Efecto():
 		#diag.pic.x = common.Interpolate(diag.progress, self.centx, 0, common.i_accel )
 		#scale = common.Interpolate(diag.progress, diag.pic.max_scale, diag.pic.min_scale, common.i_accel)
 		#diag.pic.Scale(scale, scale)
-		diag.pic.color.a = common.Interpolate(diag.progress, 1.0, 0.0, common.i_accel)
+		diag.pic.color.a = common.Interpolate(diag.progress,0.0, 1.0, common.i_accel)
 		diag.pic.Paint()
-		tam = common.Interpolate(diag.progress, 0, 5, common.i_accel)
+		tam = common.Interpolate(diag.progress, 20, 0, common.i_accel)
 		advanced.fWave(diag.off, amplitude=tam,vertical=False )
 		diag.off += 2
 		advanced.EndGroup()
@@ -59,7 +59,7 @@ class Efecto():
 		#diag.pic.Scale(scale, scale)
 		diag.pic.color.a = common.Interpolate(diag.progress, 1.0, 0.0, common.i_accel)
 		diag.pic.Paint()
-		tam = common.Interpolate(diag.progress, 0, 5, common.i_accel)
+		tam = common.Interpolate(diag.progress, 0, 20, common.i_accel)
 		advanced.fWave(diag.off, amplitude=tam )
 		diag.off += 2
 		advanced.EndGroup()
@@ -116,8 +116,8 @@ class Sub2():
 
 class FxsGroup(common.FxsGroup):
 	def __init__(self):
-		self.in_ms = 500
-		self.out_ms = 500
+		self.in_ms = 750
+		self.out_ms = 750
 		self.skip_frames = False
 		self.fxs = (Efecto(), Subtitulo(), Sub2())
 

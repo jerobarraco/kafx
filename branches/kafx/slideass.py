@@ -50,13 +50,12 @@ def MSToTime(ms):
 	return string %(h,m,s,d)
 
 def doFolder(directory):
-	from libs import video
 	out = codecs.open("out.ass", "w", "utf-8")
 	out.write(header)
 	begin = 1500
 	last = begin
 	dur = 3000
-	space = 500
+	space = 1000
 	for entry in os.listdir(directory):
 		if os.path.splitext(entry)[-1].lower() in('.png'):
 			ini = MSToTime(last)
