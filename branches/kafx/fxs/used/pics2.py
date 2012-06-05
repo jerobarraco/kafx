@@ -11,11 +11,11 @@ class Efecto():
 		self.startx = video.vi.width
 		self.starty = video.vi.height
 
-	def max_scale(self, picw, pih):
-		wr = picw/video.vi.width
-		hr = pich/video.vi.height
+	def max_scale(self, picw, pich):
+		wr = float(picw)/video.vi.width
+		hr = float(pich)/video.vi.height
 		rm = max(wr, hr)
-		return 1.0/rm
+		return 1.0/(rm or 1.0)
 
 	def OnDialogueStarts(self, diag):
 		"""pixbuf = gtk.gdk.pixbuf_new_from_file(diag._text)
