@@ -67,7 +67,7 @@ def SLinearAnimatedGradient(obj, color, part):
 	a = obj.actual
 	hasta = a.color2
 	lineal = cairo.LinearGradient(a.pos_x, a.pos_y,
-		a.pos_x+ (obj.original._ancho*obj.progress)
+		a.pos_x+ (obj.original._width*obj.progress)
 		, a.pos_y + (obj.original._line_height*obj.progress))
 	lineal.add_color_stop_rgba(obj.progress, color.r, color.g, color.b, color.a)
 	lineal.add_color_stop_rgba(1, hasta.r, hasta.g, hasta.b, hasta.a)

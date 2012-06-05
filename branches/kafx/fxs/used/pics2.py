@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from libs.draw import advanced, extra
 from libs import common, video, audio
+import cairo, random
+from math import pi
 #import gtk
-power = 0.0
+
 class Efecto():
 	def __init__(self):
 		self.mwindow = float( min(video.vi.width, video.vi.height )	)
@@ -18,14 +20,6 @@ class Efecto():
 		return 1.0/(rm or 1.0)
 
 	def OnDialogueStarts(self, diag):
-		"""pixbuf = gtk.gdk.pixbuf_new_from_file(diag._text)
-		imgw=pixbuf.get_width()
-		imgh=pixbuf.get_height()
-
-		sfc = cairo.SurfacePattern(cairo.ImageSurface.create_from_data(pixbuf.get_pixels(), imgw, imgh, imgw*3)"""
-		"""video.cf.ctx.set_source_pixbuf(pixbuf)
-		sfc = video.cf.ctx.get_source()
-		print sfc"""
 		text = extra.LoadTexture(diag._text)
 		diag.pic = advanced.cSprite(text)
 		#msize = max(diag.pic._width, diag.pic._height )
@@ -36,12 +30,18 @@ class Efecto():
 		diag.off = 0.0
 
 	def OnDialogueIn(self, diag):
-		diag.pic.x = common.Interpolate(diag.progress, self.startx, self.centx, common.i_deccel )
-		diag.pic.color.a = common.Interpolate(diag.progress, 0.0, 1.0, common.i_deccel)
-		scale = common.Interpolate(diag.progress, diag.pic.min_scale, diag.pic.max_scale, common.i_deccel)
-		diag.pic.Scale(scale, scale)
-		diag.pic.angle = common.Interpolate(diag.progress, 3.14*2, 0.0, common.i_deccel)
+		diag.pic.x = self.centx
+		diag.pic.y = self.centy
+		advanced.StartGroup()
+		#diag.pic.x = common.Interpolate(diag.progress, self.centx, 0, common.i_accel )
+		#scale = common.Interpolate(diag.progress, diag.pic.max_scale, diag.pic.min_scale, common.i_accel)
+		#diag.pic.Scale(scale, scale)
+		diag.pic.color.a = common.Interpolate(diag.progress, 1.0, 0.0, common.i_accel)
 		diag.pic.Paint()
+		tam = common.Interpolate(diag.progress, 0, 5, common.i_accel)
+		advanced.fWave(diag.off, amplitude=tam,vertical=False )
+		diag.off += 2
+		advanced.EndGroup()
 
 	def OnDialogue(self, diag):
 		diag.pic.x = self.centx
@@ -51,6 +51,8 @@ class Efecto():
 		diag.pic.Paint()
 
 	def OnDialogueOut(self, diag):
+		diag.pic.x = self.centx
+		diag.pic.y = self.centy
 		advanced.StartGroup()
 		#diag.pic.x = common.Interpolate(diag.progress, self.centx, 0, common.i_accel )
 		#scale = common.Interpolate(diag.progress, diag.pic.max_scale, diag.pic.min_scale, common.i_accel)
@@ -64,52 +66,63 @@ class Efecto():
 
 class Subtitulo():
 	def OnDialogueIn(self, diag):
-		diag.Fade(0,1)
+		diag.Fade(0, 1)
 		diag.Paint()
+		diag.PaintReflection()
+
 	def OnDialogue(self, diag):
-		global power
-		advanced.StartGroup()
 		diag.PaintWithCache()
-		advanced.fGlow(opacity=0.3*power)
-		advanced.EndGroup()
+		diag.PaintReflection()
+
+t3 = extra.LoadTexture('textures/barra3.png', extend=cairo.EXTEND_REFLECT) #entrada
+t4 = extra.LoadTexture('textures/barra4.png', extend=cairo.EXTEND_REFLECT)
+class Sub2():
+	def __init__(self):
+		self.butter = advanced.cSprite("textures/butterfly.png")
+		self.parts = advanced.cParticleSystem(png="textures/star3.png", max_life=4, emit_parts=12, scale_from= 0.8, scale_to=0.3, mode=1)
+		#Configuramos la ventana y el angulo
+		self.parts.SetWindow(30, 4)
+		self.parts.SetAngle(pi, 3, pi/4.0)
+
+	def OnDialogueIn(self, d):
+		d.actual.mode_fill = d.P_DEG_VERT
+		mov = common.Interpolate(d.progress, 1380, 3480)
+		extra.MoveTexture(t3, mov, 0)
+		advanced.StartGroup()
+		d.Paint()
+		texto = advanced.EndGroup(0)
+		video.cf.ctx.set_source(texto)
+		video.cf.ctx.mask(t3)
+
+		x = common.Interpolate(d.progress,-50, video.vi.width+50 )
+		y = d.actual.pos_y - d.actual.org_y
+
+
+		#butterfly
+		self.butter.x = x
+		self.butter.y = y
+		self.butter.Paint()
+		self.parts.SetPosition(x-20, y)
+		self.parts.Emit()
+
+	def OnDialogue(self, diag):
+		diag.actual.mode_fill = diag.P_DEG_VERT
+		diag.PaintWithCache()
+
+	def OnDialogueOut(self, d):
+		d.actual.mode_fill = d.P_DEG_VERT
+		d.Fade(1,0)
+		d.Paint()
 
 class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.in_ms = 500
 		self.out_ms = 500
 		self.skip_frames = False
-		self.fxs = (Efecto(), Subtitulo(),Subtitulo())
-		#self.audiodata = audio.Data("in.avi")
-		#self.paso = video.vi.width / float(self.audiodata.frameSize)
+		self.fxs = (Efecto(), Subtitulo(), Sub2())
 
-	def OnFrameStarts1(self):
-		#En cada cuadro
-		global power
-		#leemos una "linea" de audio (un grupo de muestras para un cuadro de video)
-		#very important , mantiene la sincronia del audio con el video
-		self.audiodata.read()
-
+	def OnFrameEnds(self):
 		advanced.StartGroup()
-		c = video.cf.ctx
-		c.set_line_width(2)
-		c.set_source_rgb(75/255.0, 0, 130/255.0)
-		posx = 0
-		posy_base = 40
-		posy = posy_base
-		altura = 40.0 #altura máxima en píxeles
-
-		c.move_to(posx, posy)
-		power = self.audiodata.rms()
-		#iteramos cada una de las muestras para este cuadro de video
-		for n in range(self.audiodata.frameSize):
-			#obtenemos el valor de la muestra numero n
-			muestra = self.audiodata.sample(n)
-			posy = posy_base + (altura*muestra)
-			#y dibujamos una linea, cuya altura depende del valor de la muestra
-			c.line_to(posx, posy)
-			#y vamos avanzando horizontalmente
-			posx += self.paso
-		#y pintamos la linea
-		c.stroke()
+		self.fxs[2].parts.Paint()
 		advanced.fGlow()
 		advanced.EndGroup()
