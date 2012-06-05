@@ -63,12 +63,12 @@ class Efecto():
 	def OnDialogueOut(self, d):
 		d.pic.x = self.centx
 		d.pic.y = self.centy
-		steps = round(common.Interpolate(d.progress, 0, 10), 0)
+		steps = round(common.Interpolate(d.progress, 2, 5), 0)
 		advanced.StartGroup()
 		d.pic.color.a = common.Interpolate(d.progress, 1.0, 0.0, common.i_b_ease_in)
 		d.pic.Paint()
-		d.pic.Scale(xscale, d.pic.max_scale)
-		advanced.fBiDirBlur(steps=steps)
+		#d.pic.Scale(xscale, d.pic.max_scale)
+		advanced.fGlow(steps, 0.1)
 		advanced.EndGroup()
 
 class Subtitulo():
