@@ -38,7 +38,7 @@ enddiag = """Dialogue: 0,%s,%s,Default,,0000,0000,0000,1,Made Automagically with
 Dialogue: 0,%s,%s,Default,,0000,0000,0030,1,KickASS FX! ( kafx.com.ar )
 """
 DOWNLOAD_FOLDER = "downloads/"
-FLICKR_BASE = "http://api.flickr.com/services/rest/?format=json&api_key=681a3c8a1972aad5e00be458f3464367"
+FLICKR_BASE = "http://api.flickr.com/services/rest/?format=json&api_key="
 
 def MSToTime(ms):
 	"""Converts miliseconds in integer to a string from type '0:00:00.00' for ASS """
@@ -92,7 +92,7 @@ def Url2FileName(url):
 	return fname.rsplit('.', 1)[0] + '.png'
 
 def FromFlickr():
-	#url ="http://api.flickr.com/services/rest/?format=json&method=flickr.people.getPublicPhotos&api_key=681a3c8a1972aad5e00be458f3464367&per_page=500&extras=url_l&user_id=%s"
+	#url ="http://api.flickr.com/services/rest/?format=json&method=flickr.people.getPublicPhotos&api_key=&per_page=500&extras=url_l&user_id=%s"
 	uid = FlickrID(raw_input("Username: "))
 	url = FLICKR_BASE + ("&method=flickr.people.getPublicPhotos&per_page=10&extras=url_l&user_id=%s" %uid)
 	#57176197@N02
