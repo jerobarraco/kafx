@@ -489,15 +489,15 @@ def fWave( offset,  delta=0.1,  amplitude = 10,  vertical=True,  delete=True):
 	if vertical :
 		alto = y2
 		ancho = 1
-		min = x1
-		max = x2
+		min_f = x1
+		max_f = x2
 	else:
 		alto = 1
 		ancho = x2
-		min = y1
-		max = y2
+		min_f = y1
+		max_f = y2
 
-	for i in xrange(min,  max):
+	for i in xrange(min_f,  max_f):
 		dif = delta*(i+offset)
 		if vertical:
 			x1 = i
@@ -507,6 +507,47 @@ def fWave( offset,  delta=0.1,  amplitude = 10,  vertical=True,  delete=True):
 			y1 = i
 			mx = sin(pi*dif)*amplitude
 			my = 0
+
+		ctx.set_source_surface(sfc,  mx,  my)
+		ctx.rectangle(x1, y1, ancho,  alto)
+		ctx.fill()
+
+def fDOF( offset,  delta=0.1,  amplitude = 10,  vertical=True,  delete=True):
+	"""Realiza un effect de ondulacion sobre la imagen active.
+	@offset : un offset del angle de offset (si se quiere animar esto se debe modificar)
+	@delta = 0.1 : el delta que indica cuanto cambiará la onda de pixel a pixel (es como el ancho de la onda (en vertical)) (mientras mas pequeño, la onda es mas ancha) (esto es lo mismo que frecuencia)
+	@amplitude = 10 : cuan fuerte es la deformacion (el alto de la onda (en vertical))
+	@vertical = True : True si se quiere hacer una onda vertical, False si se la quiere horizontal
+	@delete = True : True si se desea eliminar lo dibujado anteriormente, o False si se desea redibujar lo deformado encima de lo anterior
+	"""
+	ctx = video.cf.ctx
+	vi = video.vi
+
+	sfc = extra.CopyTarget()
+
+	if delete:
+		ctx.set_operator(cairo.OPERATOR_CLEAR)
+		ctx.paint()
+		PaintMode()
+
+	x1,  x2,  y1,  y2 = 0,  vi.width,  0,  vi.height
+	if vertical :
+		alto = y2
+		ancho = 1
+		min_f = x1
+		max_f = x2
+	else:
+		alto = 1
+		ancho = x2
+		min_f = y1
+		max_f = y2
+
+	for i in xrange(min_f,  max_f):
+		if vertical:
+			x1 = i
+
+		else:
+			y1 = i
 
 		ctx.set_source_surface(sfc,  mx,  my)
 		ctx.rectangle(x1, y1, ancho,  alto)
