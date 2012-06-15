@@ -545,13 +545,16 @@ def fDOF( offset,  delta=0.1,  amplitude = 10,  vertical=True,  delete=True):
 	for i in xrange(min_f,  max_f):
 		if vertical:
 			x1 = i
-
 		else:
 			y1 = i
+		p = (float(i)/max_f) or 0.0000001
+		ctx.translate(-1.0/x1/p, (alto-(alto*p))/2.0 )
+		ctx.scale(p, p)
 
-		ctx.set_source_surface(sfc,  mx,  my)
+		ctx.set_source_surface(sfc,  0,  0)
 		ctx.rectangle(x1, y1, ancho,  alto)
 		ctx.fill()
+		ctx.identity_matrix()
 
 class cSprite():
 	#Implementación basica de una imagen estática
