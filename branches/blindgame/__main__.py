@@ -6,37 +6,37 @@ print " ...... "
 raw_input("")
 print " ... Te despiertas en medio de la madrugada,"
 raw_input("")
-print " no sabes por qué, pero hay algo que te molesta."
+print " no sabes por quÃ©, pero hay algo que te molesta."
 raw_input("")
-print " Te levantas para acercarte a la ventana de tu habitación."
+print " Te levantas para acercarte a la ventana de tu habitaciÃ³n."
 raw_input("")
 raw_input(" Abres la ventana.")
 raw_input("")
-raw_input(" En ese momento sientes una fría brisa que te recuerda que todavía es invierno.")
+raw_input(" En ese momento sientes una frÃ­a brisa que te recuerda que todavÃ­a es invierno.")
 raw_input("")
-raw_input(" Miras hacia arriba, pero lo único que se ve es la luna, brillando solitaria.")
+raw_input(" Miras hacia arriba, pero lo Ãºnico que se ve es la luna, brillando solitaria.")
 raw_input("")
 raw_input(" \"...\" ")
 raw_input("")
 raw_input(" Bajas la vista, ves la calle y las casas vecinas; nada fuera de lugar.")
 raw_input("")
-raw_input(" O eso creías, hasta que ves \"algo\" cerca de la case de los vecinos de enfrente.")
+raw_input(" O eso creÃ­as, hasta que ves \"algo\" cerca de la case de los vecinos de enfrente.")
 raw_input("")
-raw_input(" Fue fugaz, pero estás casi seguro que has visto algo.")
+raw_input(" Fue fugaz, pero estÃ¡s casi seguro que has visto algo.")
 raw_input("")
-print "¿Vas a ver qué fue eso?: Y / N"
+print "Â¿Vas a ver quÃ© fue eso?: Y / N"
 choise1 =raw_input("")
-if choise1 == "Y" or "y" or "Yes" or "yes":
+if choice1.lower()[1] == 'y':
 	print "..."
-	raw_input(" No. Algo no está bien.")
+	raw_input(" No. Algo no estÃ¡ bien.")
 	raw_input("")
 	raw_input("")
 
-elif choise1 == "N" or "n" or "No" or "no":
+else:
 	print "......"
 	raw_input(" ... \"Haa...\" -- Se te escapa un suspiro.")
 	raw_input("")
-	raw_input(" \"No sé qué estaba esperando que sucediese...\" -- Te preguntas en voz alta.")
+	raw_input(" \"No sÃ© quÃ© estaba esperando que sucediese...\" -- Te preguntas en voz alta.")
 	raw_input("")
 	raw_input(" \"...\" ")
 	raw_input("")
