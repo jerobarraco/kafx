@@ -4,16 +4,8 @@
 def MostrarDialogos(nombre_archivo):
 	archivo = open(nombre_archivo, 'r')
 	for linea in archivo:
-		print linea
-		print "╚╗\n╔╝"
-		raw_input("")
-
-
-
-
-
-
-
+		raw_input(linea + "\234")
+		
 print "========BLIND GAME========="
 MostrarDialogos("start.txt")
 print "¿Vas a ver qué fue eso?: Y / N"
