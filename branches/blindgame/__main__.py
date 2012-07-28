@@ -1,5 +1,19 @@
 # -*- coding: utf-8 -*-
 #Soy malo escribiendo historias/cuentos, esto es sólo para practicar.
+
+def MostrarDialogos(nombre_archivo):
+	archivo = open(nombre_archivo, 'r')
+	for linea in archivo:
+		print linea
+		print "╚╗\n╔╝"
+		raw_input("")
+
+
+
+
+
+
+
 print "========BLIND GAME========="
 print" ... "
 raw_input("")
