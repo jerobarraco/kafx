@@ -44,11 +44,11 @@ def SVerticalGradient(obj, color, part):
 
 def SHorizontalGradient(obj, color, part):
 	"""Uses a horizontal gradient"""
-	Linear(0,0, obj.original._ancho,0, color, obj.actual.color2)
+	Linear(0,0, obj.original._width,0, color, obj.actual.color2)
 
 def SDiagonalGradient(obj, color, part):
 	"""Uses a linear gradient, top-left to bottom-right"""
-	Linear(0, -obj.original._line_height, obj.original._ancho,0, color, obj.actual.color2)
+	Linear(0, -obj.original._line_height, obj.original._width,0, color, obj.actual.color2)
 
 def SRadialGradient(obj, color, part):
 	"""Uses a radial gradient, its center is the origin"""
@@ -57,7 +57,7 @@ def SRadialGradient(obj, color, part):
 	cy = a.org_y
 
 	hasta = a.color2
-	radial = cairo.RadialGradient(cx, cy, 0, cx, cy, obj.original._ancho/2.0)
+	radial = cairo.RadialGradient(cx, cy, 0, cx, cy, obj.original._width/2.0)
 	radial.add_color_stop_rgba(0, color.r, color.g, color.b, color.a)
 	radial.add_color_stop_rgba(1, hasta.r, hasta.g, hasta.b, hasta.a)
 	video.cf.ctx.set_source(radial)
@@ -78,7 +78,7 @@ def SRadialAnimatedGradient(obj, color, part):
 	a = obj.actual
 	cx = a.org_x
 	cy = a.org_y
-	rad = obj.original._ancho*2*obj.progress or 0.001
+	rad = obj.original._width*2*obj.progress or 0.001
 
 	r = cairo.RadialGradient(cx, cy, 0, cx, cy, rad)
 	r.add_color_stop_rgba(0, color.r, color.g, color.b, color.a)
