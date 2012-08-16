@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-assfile = "test.ass"
+assfile = "fma.ass"
 fx = 'fxs.simple'
 
 """
