@@ -252,6 +252,7 @@ class Encoder():
 		return
 
 if __name__ == '__main__':
+	
 	module = "myconfig"
 	profile = False
 	d3 = False
