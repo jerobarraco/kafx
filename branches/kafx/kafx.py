@@ -14,6 +14,8 @@ import ctypes
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
+#for pyinstaller
+import OpenGL.platform.win32
 import traceback
 traceback.sys.stdout = open('kafx_log.txt', 'w', 0)
 traceback.sys.stderr = open('error_log.txt', 'w', 0)
