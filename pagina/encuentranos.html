@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+		
+		<script type="text/javascript" src="js/lavalamp-0.2.0/jquery-1.2.3.min.js"></script>
+		<script type="text/javascript" src="js/lavalamp-0.2.0/jquery.easing.min.js"></script>
+		<script type="text/javascript" src="js/lavalamp-0.2.0/jquery.lavalamp.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("#1, #2, #3, #4").lavaLamp({
+					fx: "backout",
+					speed: 500,
+					click: function(event, menuItem) {
+						return false;
+					}
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			var mapa;
+			function inicializar() { 
+				var opciones = { 
+					zoom: 16, 
+					mapTypeId: google.maps.MapTypeId.ROADMAP 
+				}; 
+				mapa = new google.maps.Map(document.getElementById('mapa_content'), opciones); 
+				if (navigator.geolocation) 
+				{ 
+					//Hago el CallBack a mostrarLocalizacion 
+					navigator.geolocation.getCurrentPosition(mostrarLocalizacion,manejadorDeError); 
+				} 
+				else{ 
+					//Caso contraio muestro error 
+					alert("Su navegador no soporta Geolocalizacion"); 
+					} 
+			} 
+			
+			function mostrarLocalizacion(posicion) 
+			 { 
+				var pos = new google.maps.LatLng(posicion.coords.latitude,posicion.coords.longitude); 
+				//Muestro un tooltip con un mensaje sobre el mapa 
+				var infowindow = new google.maps.InfoWindow({ 
+				  map: mapa, 
+				  position: pos, 
+				  content: 'Hola mundo! :D!!' 
+				}); 
+	  
+				mapa.setCenter(pos); 
+			  } 
+	  
+			function manejadorDeError(error) { 
+	  
+			   switch(error.code) 
+				{ 
+					case error.PERMISSION_DENIED: alert("El usuario no permite compartir datos de geolocalizacion"); 
+					break; 
+	  
+					case error.POSITION_UNAVAILABLE: alert("Imposible detectar la posicio actual"); 
+					break; 
+	  
+					case error.TIMEOUT: alert("La posicion debe recuperar el tiempo de espera"); 
+					break; 
+	  
+					default: alert("Error desconocido"); 
+					break; 
+				} 
+				var opciones = { 
+				  map: mapa, 
+				  position: new google.maps.LatLng(60, 105), 
+				  content: content 
+				}; 
+				var infowindow = new google.maps.InfoWindow(opciones); 
+				mapa.setCenter(opciones.position); 
+		  } 
+		  google.maps.event.addDomListener(window, 'load', inicializar); 
+		</script> 		
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+		<div id = "big_wrapper">
+			<header id = "top_header">
+				<h1>¡Bienvenido a nuestra página!</h1>
+			</header>
+			<nav id = "top_menu">
+				<ul class="lavaLampNoImage" id="2">
+					<li><a href="index.html">Inicio</a></li>
+					<li><a href="galeria.html">Galería</a></li>
+					<li class="current"><a href="encuentranos.html">¡Encuéntranos!</a></li>
+					<li><a href="contactanos.html">¡Contáctanos!</a></li>
+				</ul>
+			</nav>
+			<section id = "main_section">
+			<div id="mapa_content"></div>
+	
+			</section>		
+		
+
+
+			<footer id = "the_footer">
+				Hecho por Sonia Martinez y Martín Dunn.
+			</footer>
+		</div>
+
+		
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
