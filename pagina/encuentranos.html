@@ -20,18 +20,55 @@
 		<script type="text/javascript" src="js/lavalamp-0.2.0/jquery.easing.min.js"></script>
 		<script type="text/javascript" src="js/lavalamp-0.2.0/jquery.lavalamp.min.js"></script>
 		<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js?ver=3.1.2'></script> 
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?&sensor=true"></script> 		
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?&sensor=true"></script>
 		<script type="text/javascript">
 			$(function() {
 				$("#1, #2, #3, #4").lavaLamp({
 					fx: "backout",
 					speed: 500,
-					click: function(event, menuItem) {
+					/*click: function(event, menuItem) {
 						return false;
-					}
+					}*/
 				});
 			});
 		</script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+		<div id = "big_wrapper">
+			<header id = "top_header">
+				<h1>¡Bienvenido a nuestra página!</h1>
+			</header>
+			<nav id = "top_menu">
+				<ul class="lavaLampNoImage" id="2">
+					<li class="current"><a href="index.html">Inicio</a></li>
+					<li><a href="galeria.html">Galería</a></li>
+					<li><a href="encuentranos.html">¡Encuéntranos!</a></li>
+					<li><a href="contacto.html">¡Contáctanos!</a></li>
+				</ul>
+			</nav>
+			<section id = "main_section">
+			<div id="mapa_content"></div>
+	
+			</section>		
+		
+
+
+			<footer id = "the_footer">
+				Hecho por Sonia Martinez y Martín Dunn.
+			</footer>
+		</div>
+
+		
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
 		<script type="text/javascript">
 			var mapa;
 			function inicializar() { 
@@ -58,7 +95,7 @@
 				var infowindow = new google.maps.InfoWindow({ 
 				  map: mapa, 
 				  position: pos, 
-				  content: 'Hola mundo! :D!!' 
+				  content: 'Nuestro local se encuentra aquí' 
 				}); 
 	  
 				mapa.setCenter(pos); 
@@ -82,52 +119,14 @@
 				} 
 				var opciones = { 
 				  map: mapa, 
-				  position: new google.maps.LatLng(60, 105), 
+				  position: new google.maps.LatLng(24, 55), 
 				  content: content 
 				}; 
 				var infowindow = new google.maps.InfoWindow(opciones); 
 				mapa.setCenter(opciones.position); 
 		  } 
 		  google.maps.event.addDomListener(window, 'load', inicializar); 
-		</script> 		
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Add your site or application content here -->
-		<div id = "big_wrapper">
-			<header id = "top_header">
-				<h1>¡Bienvenido a nuestra página!</h1>
-			</header>
-			<nav id = "top_menu">
-				<ul class="lavaLampNoImage" id="2">
-					<li><a href="index.html">Inicio</a></li>
-					<li><a href="galeria.html">Galería</a></li>
-					<li class="current"><a href="encuentranos.html">¡Encuéntranos!</a></li>
-					<li><a href="contactanos.html">¡Contáctanos!</a></li>
-				</ul>
-			</nav>
-			<section id = "main_section">
-			<div id="mapa_content"></div>
-	
-			</section>		
-		
-
-
-			<footer id = "the_footer">
-				Hecho por Sonia Martinez y Martín Dunn.
-			</footer>
-		</div>
-
-		
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-
+		</script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

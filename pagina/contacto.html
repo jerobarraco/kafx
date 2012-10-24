@@ -24,9 +24,9 @@
 				$("#1, #2, #3, #4").lavaLamp({
 					fx: "backout",
 					speed: 500,
-					click: function(event, menuItem) {
+					/*click: function(event, menuItem) {
 						return false;
-					}
+					}*/
 				});
 			});
 		</script>
@@ -51,16 +51,32 @@
 			</nav>
 			<section id = "main_section">
 				<article id ="article">
-					<header>
-						<hgroup>
-							<h1>Titulo del articulo</h1>
-							<h2>Segundo titulo</h2>
-						</hgroup>
-					</header>
-					<p>This is the besst article eva!</p>
-					<footer>
-						<p>Escrito por... usuario.</p>
-					</footer>
+					<form id="registro" method="post">
+					<hgroup>
+						<h1>Yo quiero recibir el newletter</h1>
+						<h2>Agrégueme</h2>
+					</hgroup>
+					<ul>
+						<li>
+							<label for="url">Mi web es:</label>
+							<input type="url" id="url" name="url" placeholder="http//miweb.com">
+						</li>
+						<li>
+						
+							<label for="quantity">Me gustaría recibir
+							<input type="number" id="quantity" name="quantity" min="1" max="10" value="1"> copias de <cite> su pedido</cite></label>
+						</li>
+						<li>
+							<label for="rating">En una escala de 1 al 10 mi conocimiento es de:</label>
+							<input min="1" max="10" id="rating" type="rating">
+						</li>
+						<li>
+							<label for="startdate">Día de la fecha:</label>
+							<input type="date" id="startdate" name="startdate" min="1904-03/07" max="1904-05/07" required>
+						</li>
+					</ul>
+						<input type="submit" id="register-submit" value="enviar">
+					</form>
 				</article>
 	
 			</section>		
