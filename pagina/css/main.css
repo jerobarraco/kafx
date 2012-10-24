@@ -107,6 +107,7 @@ h2{
 }
 
 
+
 header, section, footer, aside, nav, article, hgroup{
 	display: block;
 }
@@ -127,7 +128,7 @@ body{
 	border: 0px;
 
 }
-#top_header, #top_menu, #main_section, #the_footer{
+#top_header, #top_menu, #main_section, #the_footer {
 	background-color: rgb(240,240,240);
 	opacity: 0.3;
 	-webkit-border-radius: 4px;
@@ -204,6 +205,10 @@ body{
 article footer{
 	text-align: right;
 }
+article li{
+	font: bold 14px Tahoma;
+	margin: 20px auto;
+}
 
 
 
@@ -250,9 +255,10 @@ article footer{
 }
 
 #mapa_content{ 
-	height: 400px; 
-	width: 300px;
+	width: 980px;
+	height: 400px;
 	position: absolute;
+
 } 
 
 @media print{ 
@@ -260,9 +266,7 @@ article footer{
 	height: auto; 
 } 
 
-#mapa_content{ 
-	height: 50px; 
-} 
+
 
 .lavaLampNoImage li a:hover, .lavaLampNoImage li a:active, .lavaLampNoImage li a:visited {
 	border: none;
