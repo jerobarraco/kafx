@@ -432,8 +432,21 @@ def EndGroup(opacity=1.0, matrix=None):
 	return pat
 
 
+
 #todo probar esto pero usando  extra.CopyTarget
 _time_blur_sfc = None
+#note, this is experimental, note that it shares _time_blur_sfc, is not meant to be used toghether! (fTimeBlurStart/end + fTimeBlur is bad!)
+def fTimeBlurStart(opacity= 0.90):
+	if _time_blur_sfc:
+		ctx = video.cf.ctx
+		ctx.set_source_surface(_time_blur_sfc)
+		ctx.paint_with_alpha(opacity)
+		
+def fTimeBlurEnd():
+	global _time_blur_sfc
+	ctx = video.cf.ctx
+	_time_blur_sfc = ctx.get_group_target()
+	
 def fTimeBlur(opacidad=0.15):
 	global _time_blur_sfc
 	ctx = video.cf.ctx
