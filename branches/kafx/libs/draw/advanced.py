@@ -433,14 +433,18 @@ def EndGroup(opacity=1.0, matrix=None):
 
 
 #todo probar esto pero usando  extra.CopyTarget
-_time_blur_pat = None
+_time_blur_sfc = None
 def fTimeBlur(opacidad=0.15):
-	global _time_blur_pat
+	global _time_blur_sfc
 	ctx = video.cf.ctx
-	if _time_blur_pat:
-		ctx.set_source_surface(_time_blur_pat)
+	
+	if _time_blur_sfc:
+		ctx.set_source_surface(_time_blur_sfc)
 		ctx.paint_with_alpha(opacidad)
-	_time_blur_pat = ctx.get_group_target()
+	
+	#_time_blur_sfc = ctx.get_group_target()
+	#_time_blur_sfc = cairo.SurfacePattern(extra.CopyTarget())
+	_time_blur_sfc = extra.CopyTarget()
 
 #corte###################################################
 
