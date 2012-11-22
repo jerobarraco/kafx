@@ -33,7 +33,7 @@ class MainWindow(QtGui.QWidget):
 		self.getVideoInfo(self.file)
 		self.in_args = [
 					#video to decode
-					'ffmpeg',  '-i', 'fma.avi',
+					'ffmpeg',  '-i', self.file,
 					#pipe data
 					'-pix_fmt', 'rgb32', '-f', 'rawvideo', '-y', '-' #-y IS important
 					]
@@ -43,7 +43,7 @@ class MainWindow(QtGui.QWidget):
 					'ffmpeg', '-r', str(self.fps), '-pix_fmt', 'rgb32',
 					'-s', str(self.w)+'x'+str(self.h), '-f', 'rawvideo', '-i', '-',
 			#output parameters
-					'-i' , 'fma.avi' , '-map','0:0', '-map', '1:1',#this is used to copy the audio from the original video
+					'-i' , self.file, '-map','0:0', '-map', '1:1',#this is used to copy the audio from the original video
 					'-sameq',
 					'-acodec', 'libmp3lame', '-ab', '192k',
 					'-vcodec', 'mpeg4', '-vtag', 'xvid',
