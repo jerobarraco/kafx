@@ -44,7 +44,7 @@ class MainWindow(QtGui.QWidget):
 					'-s', str(self.w)+'x'+str(self.h), '-f', 'rawvideo', '-i', '-',
 			#output parameters
 					'-i' , self.file, '-map','0:0', '-map', '1:1',#this is used to copy the audio from the original video
-					'-sameq',
+					'-qscale', '0', 
 					'-acodec', 'libmp3lame', '-ab', '192k',
 					'-vcodec', 'mpeg4', '-vtag', 'xvid',
 					'-y', 'video_out.avi']
