@@ -115,8 +115,9 @@ class FX2():
 		sil.actual.color1.r = 1
 		sil.actual.color1.b = 1
 		sil.actual.color1.g = 1
-
-		sil.Scale(1, common.Interpolate(sil.progress, 1.5, 1), common.i_accel)
+		sil.actual.scale_y = common.Interpolate(sil.progress, 1, 1.55, common.i_b_boing)
+		sil.actual.scale_x = common.Interpolate(sil.progress, 1, 1.55, common.i_b_boing)
+		
 		sil.actual.pos_x = sil.actual.pos_x + random.randint(-2,2)
 		sil.actual.pos_y = sil.actual.pos_y + random.randint(-2,2)
 		sil.actual.border = 0
@@ -137,7 +138,8 @@ class FX2():
 		sil.actual.color2.r = 1
 		sil.actual.color2.b = 1
 		sil.actual.color2.g = 1
-		sil.Scale(1, common.Interpolate(sil.progress, 1.5, 1), common.i_accel)
+		sil.actual.scale_y = common.Interpolate(sil.progress, 1, 1.55, common.i_b_boing)
+		sil.actual.scale_x = common.Interpolate(sil.progress, 1, 1.55, common.i_b_boing)
 		sil.actual.pos_x = sil.actual.pos_x + random.randint(-2,2)
 		sil.actual.pos_y = sil.actual.pos_y + random.randint(-2,2)
 
@@ -154,12 +156,13 @@ class Event2():
 	def AnimationIn(self, d, prog):
 		d.progress = prog
 		d.actual.mode_fill = d.P_DEG_VERT
-		d.Scale(1.5, 1 )
+		d.actual.scale_y = common.Interpolate(d.progress, 1.5, 1, common.i_b_ease_in)
+		d.actual.scale_x = common.Interpolate(d.progress, 1.5, 1, common.i_b_ease_in)
 		d.Fade(0,0.85)
 		d.Paint()
 
 	def OnDialogue(self, d):
-		common.Chain(500, d.progress, d.chars, self.AnimationIn, 50)
+		common.Chain(500, d.progress, d.chars, self.AnimationIn, 150)
 
 	def DialogueTime(self, d):
 		return (d._start-100, d._start+400)
@@ -175,7 +178,7 @@ class Event1():
 
 
 	def OnDialogue(self, d):
-		common.Chain(500, d.progress, d.chars, self.AnimationD, 50)
+		common.Chain(500, d.progress, d.chars, self.AnimationD, 150)
 
 	def DialogueTime(self, d):
 		return (d._start+400, d._end-400)
@@ -183,14 +186,15 @@ class Event3():
 	def AnimationOut(self, d, prog):
 		d.progress = prog
 		d.actual.mode_fill = d.P_DEG_VERT
-		d.Scale(1, 1.5 )
+		d.actual.scale_y = common.Interpolate(d.progress, 1, 1.5, common.i_b_ease_out)
+		d.actual.scale_x = common.Interpolate(d.progress, 1, 1.5, common.i_b_ease_out)
 		d.Fade(0.85,0)
 		d.Paint()
 
 
 
 	def OnDialogue(self, d):
-		common.Chain(500, d.progress, d.chars, self.AnimationOut, 50)
+		common.Chain(500, d.progress, d.chars, self.AnimationOut, 150)
 
 	def DialogueTime(self, d):
 		return (d._end-400, d._end+300)
@@ -201,11 +205,12 @@ class Event3():
 class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.split_letters = True
+		skip_frames = False
 		self.fxs = (FX1(), FX2())
 
 	def OnFrameStarts(self):
 		advanced.StartGroup()
-		advanced.fTimeBlurStart(0.6)
+		advanced.fTimeBlurStart(0.5)
 
 	def OnFrameEnds(self):
 		advanced.fTimeBlurEnd()

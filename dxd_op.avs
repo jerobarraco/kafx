@@ -8,5 +8,5 @@ converttorgb32()
 FlipVertical()
 
 
-KAFX("fxs.Abelkm.dxd_op", "dxd_op.ass")
+KAFX("fxs.Abelkm.move_ease", "dxd_op.ass")
 FlipVertical()

@@ -7,17 +7,17 @@ class EfectoGenerico():
 	def OnDialogue(self, diag):
 		#Cuando el dialogo sea mostrado
 		diag.PaintWithCache()#Lo pintamos en la pantalla
-		
+
 	def OnDialogueIn(self, diag):
 		diag.MoveFrom(-30,0, common.i_deccel)
 		diag.Fade(0, 1)
 		diag.Paint()
-		
+
 	def OnDialogueOut(self, diag):
 		diag.MoveTo(30, 0, common.i_deccel)
 		diag.Fade(1, 0)
 		diag.Paint()
-		
+
 	def OnSyllable(self, diag):
 		#Cuando la silaba sea cantada (activada)
 		diag.actual.color1.CopyFrom(diag.actual.color2) #Copiamos el color secundario al color primario,
@@ -44,11 +44,11 @@ class FxsGroup(common.FxsGroup):
 			que se define en cada linea de dialogo... (Columna Effect)
 			(generalmente ass lo usa para poner cosas como "karaoke" "scroll" acá usaremos un numero,
 			0 para el primer effect, 1 para el siguiente y asi)"""
-			
+
 	def OnFrameStarts(self):
 		advanced.StartGroup()
-		advanced.fTimeBlurStart()
-		
+		advanced.fTimeBlurStart(0.5)
+
 	def OnFrameEnds(self):
 		advanced.fTimeBlurEnd()
 		advanced.EndGroup()
