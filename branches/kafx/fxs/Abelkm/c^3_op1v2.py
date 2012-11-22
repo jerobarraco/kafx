@@ -7,11 +7,12 @@ from math import pi, sin, cos
 import random
 import cairo
 
-
+t1 = extra.LoadTexture('textures/barra_c31.png') #entrada
+t2 = extra.LoadTexture('textures/barra_c32.png') #salida
 
 ca = extra.cCairoColor(0xFFE88CE0)#rosita
 cb = extra.cCairoColor(0xFF7390AB)#gris
-
+#lo empeore...
 class Efecto():
 	def __init__(self):
 		self.events = [Evento1(),Evento1b(),Evento2(),Evento2b(),Evento3()]
@@ -19,12 +20,6 @@ class Efecto():
 	def OnSyllableStarts(self, sil):
 		global ca, cb
 		sil.actual.mode_fill = sil.P_DEG_VERT
-		letters = []
-		for sil in diag._syllables:
-			for let in sil._letters:
-				letters.append(let)
-
-
 
 
 class Evento3():
@@ -43,21 +38,22 @@ class Evento3():
 			return (sil._start, sil._end)#sil._start+((sil._end-sil._start)/2.0)
 
 class Evento1():
-		def OnSy1(self, s, pro):
 
-			global ca, cb
-			s.progress = pro
-			s.actual.color1.CopyFrom(s.actual.color4)
-			s.actual.color2.CopyFrom(s.actual.color3)
-			s.actual.mode_fill = s.P_DEG_VERT
-			s.Fade(0, 1)
-			s.Paint()
+		def OnDialogue(self, diag):
+			global ca, cb, t1
+			diag.actual.color1.CopyFrom(diag.actual.color4)
+			diag.actual.color2.CopyFrom(diag.actual.color3)
+			diag.actual.mode_fill = diag.P_DEG_VERT
+			mov = common.Interpolate(diag.progress,1380, 3480)
+			extra.MoveTexture(t1, mov, 50)
+			advanced.StartGroup()
+			diag.Paint()
+			texto = advanced.EndGroup(0)
+			video.cf.ctx.set_source(texto)
+			video.cf.ctx.mask(t1) #empieza 556 y se ve 560
 
-		def OnSyllable(self, sil):
-			common.Chain(100,pro, letters,self.OnSy1, 100)
-
-		def SyllableTime(self, sil):
-			return (sil._parent._start-1000, sil._parent._start-200)
+		def DialogueTime(self, diag):
+			return (diag._start-100, diag._start+600)
 
 
 
@@ -73,33 +69,35 @@ class Evento1b():
 			sil.Paint()
 
 		def SyllableTime(self, sil):
-			return (sil._parent._start-200, sil._start)
+			return (sil._parent._start+600, sil._start)
 
 class Evento2():
 		def OnSyllable(self, sil):
-
 			global ca, cb
 			sil.actual.mode_fill = sil.P_DEG_VERT
 			sil.Paint()
 
 		def SyllableTime(self, sil):
-			return (sil._end, sil._parent._end-200)
+			return (sil._end, sil._parent._end-700)
 
 class Evento2b():
-		def OnSyllable(self, sil):
+		def OnDialogue(self, diag):
+			global ca, cb, t2
+			diag.actual.mode_fill = diag.P_DEG_VERT
+			mov = common.Interpolate(diag.progress,1380, 3480)#(diag.progress,1380, 3480)
+			extra.MoveTexture(t2, mov, 50)
+			advanced.StartGroup()
+			diag.Paint()
+			texto = advanced.EndGroup(0)
+			video.cf.ctx.set_source(texto)
+			video.cf.ctx.mask(t2)
 
-			global ca, cb
-			sil.actual.mode_fill = sil.P_DEG_VERT
-			sil.Fade(1, 0)
-			sil.Paint()
-
-		def SyllableTime(self, sil):
-			return (sil._parent._end-200, sil._parent._end+200)
+		def DialogueTime(self, diag):
+			return (diag._end-700, diag._end+100)
 
 class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		self.fxs = (Efecto(),Efecto())
-		self.split_letters = True
 
 	def OnFrameStarts(self):
 		advanced.StartGroup()

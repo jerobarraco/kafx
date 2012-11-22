@@ -11,9 +11,9 @@ t = extra.LoadTexture("textures/sakura3.png")
 
 ca = extra.cCairoColor(0xFFE88CE0)#rosita
 cb = extra.cCairoColor(0xFF7390AB)#gris
-p = advanced.cParticleSystem(png="textures/sakura.png", emit_parts=30, mode = 0, max_parts=40, rotation= 0.1, scale_from=0.20, scale_to= 0.4,max_life=1)
+p = advanced.cParticleSystem(png="textures/sakura.png", emit_parts=360, mode = 0, max_parts=100, rotation= 0.1, scale_from=0.3, scale_to= 0.4,max_life=1)
 p.SetAngle(10, 2, 10)
-p.SetGravity(0, -1)
+p.SetGravity(0, 0)
 #p.color.CopyFrom(micolor)
 #If you use physics in only one effect you can assign to "self" in that effect, that would make it slightly faster
 world = None

@@ -10,13 +10,12 @@ ScaledBorderAndShadow: yes
 Collisions: Normal
 Last Style Storage: Cube TV
 Video Aspect Ratio: 0
-Video Zoom: 5
-Video Position: 580
-Video File: [Shin]C3_-_OP[TV-720p][BA8D388F].mkv
+Video Zoom: 6
+Video Position: 0
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Cube OP Romaji,Narkisim,35,&H19000000,&H00FFFFFF,&H00000000,&H00FFFFFF,0,0,0,0,100,100,0,0,1,2,0,8,10,10,10,1
+Style: Cube OP Romaji,Narkisim,35,&H19000000,&H00FFFFFF,&H00000000,&H00FFFFFF,0,0,0,0,100,100,0,0,1,2,0,8,10,10,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -26,7 +25,7 @@ Dialogue: 0,0:00:24.17,0:00:27.42,Cube OP Romaji,,0000,0000,0000,0,{\k34}Da{\k22
 Dialogue: 0,0:00:27.42,0:00:32.76,Cube OP Romaji,,0000,0000,0000,0,{\k22}A{\k18}fu{\k17}re{\k13}ru {\k20}ka{\k30}ge {\k29}no {\k33}mu{\k33}ko{\k49}u {\k30}ni{\k64} {\k32}a{\k32}na{\k27}ta {\k37}ga {\k23}i{\k25}ru
 Dialogue: 0,0:00:34.38,0:00:37.01,Cube OP Romaji,,0000,0000,0000,0,{\k31}O{\k31}na{\k16}ji {\k17}ba{\k19}me{\k16}n {\k15}no {\k17}ri{\k33}pu{\k33}re{\k35}i
 Dialogue: 0,0:00:37.18,0:00:43.77,Cube OP Romaji,,0000,0000,0000,0,{\k27}A{\k15}ri{\k15}fu{\k16}re{\k16}ta {\k15}hi{\k17}bi {\k15}wo {\k33}ka{\k30}e{\k37}te {\k62}shi{\k17}ma{\k48}u{\k48} {\k29}ho{\k33}ho{\k31}e{\k31}mi {\k34}no {\k31}ma{\k24}ho{\k35}u
-Dialogue: 0,0:00:44.73,0:00:47.19,Cube OP Romaji,,0000,0000,0000,1,{\k27}Do{\k16}u {\k11}ni {\k14}mo {\k36}na{\k17}ra{\k19}na{\k23}i {\k28}no {\k55}ni
-Dialogue: 0,0:00:47.48,0:00:56.49,Cube OP Romaji,,0000,0000,0000,1,{\k21}Ki{\k17}no{\k17}u {\k32}ni {\k32}ma{\k28}yo{\k25}u {\k28}to{\k46}ki {\k35}a{\k16}na{\k18}ta {\k29}no {\k13}ya{\k19}sa{\k20}shi{\k32}sa {\k34}wa{\k41} {\k48}hi{\k45}ka{\k46}ri {\k50}wo {\k26}ku{\k42}re{\k141}ru
+Dialogue: 0,0:00:44.73,0:00:47.19,Cube OP Romaji,,0000,0000,0000,0,{\k27}Do{\k16}u {\k11}ni {\k14}mo {\k36}na{\k17}ra{\k19}na{\k23}i {\k28}no {\k55}ni
+Dialogue: 0,0:00:47.48,0:00:56.49,Cube OP Romaji,,0000,0000,0000,0,{\k21}Ki{\k17}no{\k17}u {\k32}ni {\k32}ma{\k28}yo{\k25}u {\k28}to{\k46}ki {\k35}a{\k16}na{\k18}ta {\k29}no {\k13}ya{\k19}sa{\k20}shi{\k32}sa {\k34}wa{\k41} {\k48}hi{\k45}ka{\k46}ri {\k50}wo {\k26}ku{\k42}re{\k141}ru
 Dialogue: 0,0:00:56.95,0:01:07.00,Cube OP Romaji,,0000,0000,0000,0,{\k32}I{\k37}tsu{\k62}mo {\k30}i{\k41}tsu{\k62}mo {\k29}a{\k32}na{\k30}ta {\k33}no {\k33}so{\k36}ba {\k41}de{\k20} {\k25}a{\k43}i {\k57}wo {\k31}tsu{\k33}yo{\k37}ku {\k28}da{\k30}ki{\k38}shi{\k62}me{\k30}ta{\k22}i {\k51}yo
 Dialogue: 0,0:01:07.21,0:01:17.39,Cube OP Romaji,,0000,0000,0000,0,{\k39}Me{\k31}gu{\k63}ri{\k29}a{\k39}i {\k58}wa {\k33}ta{\k32}t{\k34}ta {\k33}hi{\k31}to{\k36}tsu {\k62}no {\k33}o{\k35}wa{\k57}ri {\k32}no {\k33}na{\k28}i {\k33}su{\k19}to{\k31}o{\k32}ri{\k165}i
