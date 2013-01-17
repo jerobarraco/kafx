@@ -79,9 +79,9 @@ t4 = extra.LoadTexture('textures/barra4.png', extend=cairo.EXTEND_REFLECT)
 class Sub2():
 	def __init__(self):
 		self.butter = advanced.cSprite("textures/butterfly.png")
-		self.parts = advanced.cParticleSystem(png="textures/star3.png", max_life=4, emit_parts=12, scale_from= 0.8, scale_to=0.3, mode=1)
+		self.parts = advanced.cParticleSystem(png="textures/star3.png", max_life=3, emit_parts=7, scale_from=1.0, scale_to=0.3, mode=1, max_parts=5000)
 		#Configuramos la ventana y el angulo
-		self.parts.SetWindow(30, 4)
+		self.parts.SetWindow(60, 4)
 		self.parts.SetAngle(pi, 3, pi/4.0)
 
 	def OnDialogueIn(self, d):
@@ -101,9 +101,10 @@ class Sub2():
 		#butterfly
 		self.butter.x = x
 		self.butter.y = y
-		self.butter.Paint()
-		self.parts.SetPosition(x-20, y)
+		
+		self.parts.SetPosition(x-60, y)
 		self.parts.Emit()
+		self.butter.Paint()
 
 	def OnDialogue(self, diag):
 		diag.actual.mode_fill = diag.P_DEG_VERT

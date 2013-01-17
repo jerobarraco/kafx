@@ -78,7 +78,7 @@ class Subtitulo():
 
 class Sub2():
 	def __init__(self):
-		self.parts = advanced.cParticleSystem(png="textures/sakura3.png", max_life=4, emit_parts=1, scale_from=1.0, scale_to=0.3, mode=0)
+		self.parts = advanced.cParticleSystem(png="textures/sakura3.png", max_life=3, max_parts =5000, emit_parts=1, scale_from=1.0, scale_to=0.3, mode=0)
 		#Configuramos la ventana y el angulo
 		self.parts.SetWindow(30, 4)
 		#self.parts.SetGravity(3.0/4*pi,5 )
