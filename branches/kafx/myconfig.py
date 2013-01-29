@@ -30,7 +30,7 @@ start_frame = 0
 #this is the config nande uses , it copies the audio from source automatically
 out_parameters = [
 '-i' , video_in, '-map','0:0', '-map', '1:1',#this is used to copy the audio from the original video
-'-sameq',
+'-qmax',
 '-acodec', 'libmp3lame', '-ab', '192k',
 '-vcodec', 'mpeg4', '-vtag', 'xvid',
 '-y', video_out]
