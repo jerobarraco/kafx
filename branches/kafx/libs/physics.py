@@ -27,7 +27,7 @@ class World():
 			#l2 = pm.Segment(body, (0.0, 0.0), (0.0, -self.maxy),5.0)#left
 			#l3 = pm.Segment(body, (self.maxx, 0.0), (self.maxx, -self.maxy), 5.0)#right
 			#self.space.add_static(l1,l2,l3) # 3
-			self.space.add_static(l1)
+			self.space.add(l1)
 
 	def Update(self, updateObjs=True):
 		self.space.step(self.__dt)
