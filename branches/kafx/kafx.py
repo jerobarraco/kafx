@@ -14,13 +14,16 @@ import ctypes
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
+import os
 #for pyinstaller
-import OpenGL.platform.win32
+if os.name=='nt':
+	import OpenGL.platform.win32
 import traceback
 traceback.sys.stdout = open('kafx_log.txt', 'w', 0)
 traceback.sys.stderr = open('error_log.txt', 'w', 0)
 import kafx_main as kf
 from libs import video
+conf_module = None
 
 class Encoder():
 	running = False
@@ -36,7 +39,8 @@ class Encoder():
 
 		kf.SetProfiling(bool(self.profile))
 		try:
-			self.conf = __import__(module)
+			global conf_module
+			conf_module = self.conf = __import__(module)
 			print ("Module imported", module, self.conf)
 		except Exception, e:
 			print e
@@ -254,7 +258,6 @@ class Encoder():
 		return
 
 if __name__ == '__main__':
-	
 	module = "myconfig"
 	profile = False
 	d3 = False
