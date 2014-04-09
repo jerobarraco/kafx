@@ -109,7 +109,6 @@ class Processor(StopThread):
 		self.framen = 0
 		self.stride = stride
 		self.inq = inqueue#to be processed
-		#outqueue is only to show encoded frames
 		self.outq = outqueue#processed, to be encoded
 		
 	#So the initialization is done in the same thread as it runs (just in case)
