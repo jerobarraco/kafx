@@ -77,6 +77,7 @@ class cred(common.Fx):
 class FxsGroup(common.FxsGroup):
 	def __init__(self):
 		#Opciones principales
+		self.skip_frames = False
 		#Un effect si o si tiene q definir lo siguiente, si o si con esos nombres
 		self.in_ms = 500 #Milisegundos para la animacion de entrada
 		self.out_ms = 500 #MS para animacion d salida

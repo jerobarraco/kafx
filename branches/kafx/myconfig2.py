@@ -19,6 +19,8 @@ start_frame = 0
 
 #this is the config nande uses , it copies the audio from source automatically
 _with_audio = ['-i' , video_in, '-map','0:0', '-map', '1:1'] #this is used to copy the audio from the original video
+_with_ext_audio = ['-i', audio_in, '-map','0:0', '-map', '1:0'] #this is used to copy the audio from another audio
+
 _a_mp3 = ['-acodec', 'libmp3lame', '-ab', '192k']
 _a_aac = ["-acodec", "libvo_aacenc", '-ab', '96k']
 _a_copy = ["-acodec", "copy"]

@@ -71,6 +71,7 @@ class Decoder(StopThread):
 			if self.stopped():
 				break
 		#cleanup
+		self.stop()#sets the flag for other ppl
 		self.dec.terminate()
 		self.dec.kill()
 
@@ -98,6 +99,7 @@ class Encoder(StopThread):
 				print ("encoder stopped")
 				break
 		#cleanup
+		self.stop()#sets the flag for other ppl
 		self.enc.terminate()
 		self.dec.kill()
 		
@@ -127,8 +129,12 @@ class Processor(StopThread):
 		kf.OnInit(self.fx, self.assfile, self.pfmt, 0, self.w, self.h, self.fps, 1, self.duration)
 		while True:
 			try:
+				#this is repeated until it passes
 				frame = self.inq.get(True, 3)
+				#this happens only if it can get a frame
+				self.framen +=1
 				kf.OnFrame(self.framen, self.stride, frame)
+				
 				while True:
 					try:
 						self.outq.put(frame, True, 3)#to be displayed
@@ -144,6 +150,7 @@ class Processor(StopThread):
 			if self.stopped():
 				print ("processor stopped")
 				break
+		self.stop()#sets the flag for other ppl
 		#cleanup
 		kf.OnDestroy()
 		
@@ -260,12 +267,12 @@ class Kafx():
 		glutReshapeWindow(self.w, self.h)
 
 	def Stop(self):
-		print 'Leaving'
+		print ('Leaving')
 		self.running = False
 		self.dec.stop()
 		self.proc.stop()
 		self.enc.stop()
-		print("waiting fod other threads")
+		print("waiting for other threads")
 		self.dec.join()
 		self.proc.join()
 		self.enc.join()
@@ -314,6 +321,8 @@ class Kafx():
 		#Draw
 		#pixels = array.array('B', p.stdout.read(framesize))
 		if not self.running: return
+		if self.enc.stopped() or self.proc.stopped() or self.dec.stopped():
+			self.Stop()
 		#original >>> if self.dec.poll()!=None: exit(-2)
 		"""p.poll()
 		pixels = array.array('B')
@@ -420,5 +429,5 @@ if __name__ == '__main__':
 		d3 = bool (argv[3])
 	enc = Kafx(module, profile, d3)
 	enc.Go()
-	print("stopping all shit")
+	print("stopping all stuff")
 	enc.Stop()

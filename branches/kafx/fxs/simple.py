@@ -21,7 +21,7 @@ class FxsGroup(common.FxsGroup):
 		self.out_ms = 250 #MS para animacion d salida
 		self.syl_in_ms = 500 #ms para la animacion de entrada de cada silaba sin animar (en el dialogo actual)
 		self.syl_out_ms = 200 #ms para la animacion de cada silaba muerta (en el dialogo actual)
-
+		self.skip_frames = True
 		#Un effect si o si tiene que definir lo siguiente, si o si con este nombre
 		#Funciones (grupo de efectos) que provee
 		self.fxs = (EfectoGenerico(), EfectoGenerico())

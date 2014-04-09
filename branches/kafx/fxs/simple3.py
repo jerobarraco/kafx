@@ -42,4 +42,4 @@ class FxsGroup(common.FxsGroup):
 			(generalmente ass lo usa para poner cosas como "karaoke" "scroll" acá usaremos un numero,
 			0 para el primer effect, 1 para el siguiente y asi)"""
 	def OnFrameEnds(self):
-		advanced.fDOF(0)
+		advanced.fDOF(0.9)
