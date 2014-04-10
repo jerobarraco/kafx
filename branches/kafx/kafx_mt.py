@@ -322,6 +322,7 @@ class Kafx():
 		if not self.running: return
 		if self.enc.stopped() or self.proc.stopped() or self.dec.stopped():
 			self.Stop()
+			return
 		#original >>> if self.dec.poll()!=None: exit(-2)
 		"""p.poll()
 		pixels = array.array('B')
