@@ -2,16 +2,19 @@
 #fx = 'fxs.tutorials.t0037_deformar'
 #fx = 'fxs.AbelKM.parts3D'
 #fx = 'fxs.Abelkm.parts3'
-fx = 'fxs.Abelkm.guilty_crown_f'
+#fx = 'fxs.Abelkm.guilty_crown_f'
 #fx = 'fxs.used.badapple'
-assfile = "fma.ass"
+fx = 'fxs.simple2'
+assfile = "test.ass"
 #assfile = "guilty/guilty.ass"
 #video_in ="guilty/vid.avi"
-video_in ="fma.avi"
-#video_in = "tos open2.avi"
+#video_in ="fma.avi"
+video_in = "tos open2.avi"
+audio_in = video_in
 #video_in ="guile.mp4"
 video_out ="out.avi"
 start_frame = 0
+
 
 #Parameters for output video. "As seen in" ffmpeg
 #this is the simpliest case
@@ -28,5 +31,6 @@ _v_mp4 = ['-vcodec', 'mpeg4', "-f", 'mp4']
 _v_xvid = ['-vcodec', 'mpeg4', '-vtag', 'xvid', ]
 _v_ffv1 = ['-vcodec', 'ffv1']
 _webpm = ['-vcodec', 'libvpx', '-vpre', 'libvpx-720p', '-b:v', '3900k', '-acodec', 'libvorbis', '-b:a', '100k']
-#out_parameters = [ '-sameq' ] + _with_audio + _a_mp3 + _v_xvid +['-y', video_out]
-out_parameters = [ '-sameq' ] +  _v_xvid +['-y', video_out]
+_same_q = ['-q:a', '9', '-q:v', '9']
+out_parameters = _same_q + _with_audio + _a_mp3 + _v_xvid +['-y', video_out]
+#out_parameters =  _v_xvid +['-y', video_out]

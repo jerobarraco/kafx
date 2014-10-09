@@ -184,7 +184,7 @@ class Kafx():
 		#input args
 		self.in_args = [
 			#video to decode
-			'ffmpeg',  '-i', self.conf.video_in,
+			'avconv',  '-i', self.conf.video_in,
 			#pipe data
 			'-pix_fmt', 'rgb32', '-f', 'rawvideo', '-y', '-' #-y IS important
 		]
@@ -195,7 +195,7 @@ class Kafx():
 
 		self.out_args =  [
 			#input parameters (pipe)
-			'ffmpeg', '-r', str(self.fps), '-pix_fmt', 'rgb32',
+			'avconv', '-r', str(self.fps), '-pix_fmt', 'rgb32',
 			'-s', str(self.w)+'x'+str(self.h), '-f', 'rawvideo', '-i', '-'
 			#output parameters
 			] + self.conf.out_parameters
@@ -286,7 +286,7 @@ class Kafx():
 
 	def getVideoInfo(self):
 		from libs import asslib
-		infop =s.Popen(['ffmpeg', '-i', self.conf.video_in], stdout=s.PIPE, stderr=s.PIPE)
+		infop =s.Popen(['avconv', '-i', self.conf.video_in], stdout=s.PIPE, stderr=s.PIPE)
 		out, err = infop.communicate()
 		self.durations = "01:00:00.00"
 		self.fps = 29.97
