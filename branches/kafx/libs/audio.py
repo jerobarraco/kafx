@@ -32,13 +32,14 @@ class BPM():
 		"""Opens a file specifying the BPM.
 		The file mus contain 2 numbers separeted by a comma:
 			the start in ms(milliseconds) of the beat and the BPM(beat per minute.)"""
+		vi = video.vi
 		f = open(arch,"r")
 		for l in f :
 			args = l.split(',')
 			if len(args)>1:
-				self.start = video.MSACuadro(int(args[0].strip()))
+				self.start = vi.MSToFrame(int(args[0].strip()))
 				self.bpm = float(args[1].strip())
-		vi = video.vi
+		
 		self.fpb = 60.0*vi.fps_numerator /vi.fps_denominator / self.bpm
 
 	def BPM(self):
