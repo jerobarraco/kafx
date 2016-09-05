@@ -13,6 +13,7 @@ import threading
 #import multiprocessing
 import subprocess as s
 import ctypes
+import sys, re
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
@@ -301,10 +302,12 @@ class Kafx():
 				self.durations = l[a:b]
 				print self.durations
 			elif ("stream #" in low) and ("video: " in low):
-				parts = low.split(",") #lets hope there's no codec with a "," in it...
-				self.w, self.h = map(int, parts[2].strip().split(" ")[0].split("x"))
+				self.w, self.h = map(int, ''.join(re.findall(r'(\d{2,}x\d+)', low)).split("x"))
+				self.fps = float(''.join(re.findall(r'(\d+\.*\d+)\sfps,', low)))
+				#parts = low.split(",") #lets hope there's no codec with a "," in it...
+				#self.w, self.h = map(int, parts[2].strip().split(" ")[0].split("x"))
 				#4th because in some the 3rd is kbps, in others it doesn't even have fps
-				self.fps = float(parts[4].strip().split(" ")[0])
+				#self.fps = float(parts[4].strip().split(" ")[0])
 
 		self.stride = self.w*4
 		self.framesize = self.stride*self.h
