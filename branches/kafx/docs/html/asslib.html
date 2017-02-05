@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>libs.asslib &mdash; KickAss FX! 1.7.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.7.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="KickAss FX! 1.7.8 documentation" href="index.html" />
+    <link rel="next" title="Extra" href="extra.html" />
+    <link rel="prev" title="Figures" href="figures.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="extra.html" title="Extra"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="figures.html" title="Figures"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-libs.asslib">
+<span id="libs-asslib"></span><h1><a class="reference internal" href="#module-libs.asslib" title="libs.asslib"><code class="xref py py-mod docutils literal"><span class="pre">libs.asslib</span></code></a><a class="headerlink" href="#module-libs.asslib" title="Permalink to this headline">¶</a></h1>
+<p>This module defines the necessary things to load an ASS file,
+and the objects that allow to draw text with cairo</p>
+<dl class="class">
+<dt id="libs.asslib.Ass">
+<em class="property">class </em><code class="descclassname">libs.asslib.</code><code class="descname">Ass</code><span class="sig-paren">(</span><em>file</em>, <em>max</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.asslib.Ass" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class parses the .ass file, luckily you won&#8217;t need to use it</p>
+<dl class="method">
+<dt id="libs.asslib.Ass.LoadFromFile">
+<code class="descname">LoadFromFile</code><span class="sig-paren">(</span><em>file</em>, <em>max</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.asslib.Ass.LoadFromFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loading a ass file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.asslib.TimeToMS">
+<code class="descclassname">libs.asslib.</code><code class="descname">TimeToMS</code><span class="sig-paren">(</span><em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.asslib.TimeToMS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a string from type &#8216;0:00:00.00&#8217; from ASS to miliseconds in integer</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.asslib.cDialogue">
+<em class="property">class </em><code class="descclassname">libs.asslib.</code><code class="descname">cDialogue</code><span class="sig-paren">(</span><em>dialogue</em>, <em>styles</em>, <em>max_effect=0</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.asslib.cDialogue" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Dialogue represents a text line,
+This takes the text, each Syllable of the text and it&#8217;s karaoke times.
+This object is the most complex one, almost imposible for you to create, better use cSyllable or directly extra.cVector</p>
+<dl class="method">
+<dt id="libs.asslib.cDialogue.Chain">
+<code class="descname">Chain</code><span class="sig-paren">(</span><em>function</em>, <em>duration=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.asslib.cDialogue.Chain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows to chain the Syllables to a animationn</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>function</strong> (<cite>method</cite>) &#8211; function to call for each syllable and the progress</li>
+<li><strong>duraton</strong> &#8211; duration of the animation of each syllable
+If not specified, a duration that animates
+one syllable per time will be used.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.asslib.cDialogue.FullWiggle">
+<code class="descname">FullWiggle</code><span class="sig-paren">(</span><em>amplitude=4</em>, <em>frequency=2</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.asslib.cDialogue.FullWiggle" title="Permalink to this definition">¶</a></dt>
+<dd><p>el wiggle que queria AbelKM</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="figures.html"
+                        title="previous chapter">Figures</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="extra.html"
+                        title="next chapter">Extra</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/asslib.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="extra.html" title="Extra"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="figures.html" title="Figures"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Nande!.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>libs.draw.advanced &mdash; KickAss FX! 1.7.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.7.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="KickAss FX! 1.7.8 documentation" href="index.html" />
+    <link rel="prev" title="Basic" href="basic.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="basic.html" title="Basic"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-libs.draw.advanced">
+<span id="libs-draw-advanced"></span><h1><a class="reference internal" href="#module-libs.draw.advanced" title="libs.draw.advanced: These are the &quot;Advanced&quot; effects Basically these are effects that working at image level. In other words, filters and similar things. (Unix, Windows)"><code class="xref py py-mod docutils literal"><span class="pre">libs.draw.advanced</span></code></a><a class="headerlink" href="#module-libs.draw.advanced" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-libs.draw.advanced"></span><dl class="function">
+<dt id="libs.draw.advanced.CreateParticles">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">CreateParticles</code><span class="sig-paren">(</span><em>box</em>, <em>texture</em>, <em>scale=1.0</em>, <em>alpha_min=0.2</em>, <em>vertical=True</em>, <em>mode=0</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.CreateParticles" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is really slow, use with care.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>box</strong> (<em>tuple</em>) &#8211; A tuple with the bounding box, like (x, y, w, h)(todos los items DEBEN ser enteros (int))</li>
+<li><strong>texture</strong> (cairo pattern <cite>cairo.pattern</cite>) &#8211; pattern to be used as texture</li>
+<li><strong>scale</strong> (<cite>float</cite>) &#8211; starting scale for every particle</li>
+<li><strong>alpha_min</strong> (<cite>float</cite>) &#8211; any pixel with an alpha value less than this value will be ignored (por lo tanto no generará partícula) (0.0 to 1.0)</li>
+<li><strong>vertical</strong> (<cite>bool</cite>) &#8211; indica si el barrido de pixels será vertical (True) u horizontal (False) esto influye en el orden en que serán creadas las partículas en el array, por lo tanto la forma en que se recorre</li>
+<li><strong>mode</strong> (<em>int</em>) &#8211; particle mode xxxx TODO EXPAND</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.EndGroup">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">EndGroup</code><span class="sig-paren">(</span><em>opacity=1.0</em>, <em>matrix=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.EndGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes a Group. Every Opened group MUST be closed. Group are like parenthesis.
+The last opened group is the first to get closed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>opacity</strong> (<em>double</em>) &#8211; The opacity used for painting the resultant group. It can be 0.0 or False.</li>
+<li><strong>matrix</strong> (<code class="xref py py-class docutils literal"><span class="pre">cairo.Matrix</span></code>) &#8211; Matrix for distortion of the whole group</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a newly created <code class="xref py py-class docutils literal"><span class="pre">cairo.SurfacePattern</span></code> containing the results
+of all drawing operations performed to the group.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.draw.advanced.Layer">
+<em class="property">class </em><code class="descclassname">libs.draw.advanced.</code><code class="descname">Layer</code><span class="sig-paren">(</span><em>opacity=1.0</em>, <em>mode='over'</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.Layer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clase interna para cada capa, no tocar :D</p>
+<dl class="attribute">
+<dt id="libs.draw.advanced.Layer.vi">
+<code class="descname">vi</code><em class="property"> = None</em><a class="headerlink" href="#libs.draw.advanced.Layer.vi" title="Permalink to this definition">¶</a></dt>
+<dd><p>sfc = video.cf.ctx.get_target().create_similar(cairo.CONTENT_COLOR_ALPHA,  vi.width,  vi.height)
+self.ctx = cairo.Context(sfc)
+self.ctx.set_operator(cairo.OPERATOR_CLEAR)
+self.ctx.paint()
+self.ctx.set_operator(cairo.OPERATOR_OVER)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.LayerActivate">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">LayerActivate</code><span class="sig-paren">(</span><em>layer=0</em>, <em>opacity=1.0</em>, <em>mode='over'</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.LayerActivate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Activates a layer.</dt>
+<dd>todo lo que se pinte luego de esto se pintará sobre la capa activada.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Layers are for Abelkm because his high participation in KAFX.
+But I (<cite>Nande!</cite>) don&#8217;t recommend its use.
+To use it, you are agree that the things you make are bad, and probably
+you didn&#8217;t search how to make it better, remember there is a forum, doc, and IRC channel.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>layer</strong> (<em>Puede ser un numero o un texto, Esto define el orden en que se pintan
+las capas. Siempre se pintaran segun el orden de su nombre (1,2,3) ('a','b','c') etc</em>) &#8211; Nombre de la capa a activar, igual que se uso en CapasCrear
+la capa de nombre &#8220;base&#8221; es una capa especial, la capa del video, sobre la que se pinta todo.
+Si no existe la crea, y ahi se usan los parametros adicionales</li>
+<li><strong>opacity</strong> (<em>double. Between 0.0 and 1.0</em>) &#8211; Layer opacity</li>
+<li><strong>mode</strong> (string. (Ver valores posibles en <cite>OPERATORS</cite>)) &#8211; mode de pintado de la capa. un texto. igual que en PaintMode.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.LayerEnd">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">LayerEnd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.LayerEnd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Llamar en cada OnFrameEnds</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.LayerStarts">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">LayerStarts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.LayerStarts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Llamar en cada OnFrameStarts</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.PaintMode">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">PaintMode</code><span class="sig-paren">(</span><em>op=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.PaintMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cambia el mode de pintado comun,
+&#64;op : opcional ha de ser un string con el nombre del mode de pintado tal cual esta en el array OPERATORS
+Si no se especifica la operacion, se restaura al ultimo mode que se usó, util porque algunas funciones cambiarán el mode de pintado de manera temporal,
+de esta manera se puede hacer poner un mode global e intercambiarlo para funciones especificas, como glow</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.Shadow">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">Shadow</code><span class="sig-paren">(</span><em>pattern</em>, <em>size=5</em>, <em>offx=0</em>, <em>offy=0</em>, <em>paint=True</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.Shadow" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;pattern es el patron usado como máscara. (o sea, el relleno de la sombra)
+opcionales:
+&#64;size el tamaño del blur (cantidad de pasos y pixels)
+&#64;offx, offy desplazamiento de la sombra sobre x e y respectivamente.
+&#64;paint booleano indicando si se debe pintar o solo devolver el patron
+&#64;return devuelve lo que se pinto como patron</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.StartGroup">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">StartGroup</code><span class="sig-paren">(</span><em>copy_background=False</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.StartGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comienza un grupo de pintado.
+es como un encapsulamiento
+todo lo que pintes dentro de un grupo no sera afectado por lo que tiene el de afuera.
+opcional
+&#64;copy_background=False indica si el nuevo grupo contiene la informacion del grupo anterior</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fBiDirBlur">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fBiDirBlur</code><span class="sig-paren">(</span><em>angle=0</em>, <em>steps=1</em>, <em>opacity=0.25</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fBiDirBlur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blur bidireccional</p>
+<p>opcionales:
+&#64;angle=0 angulo en radianes de la dirección
+&#64;steps=1 cantidad de pixels y steps que tendrá el blur
+&#64;opacity=0.25 opacity de cada paso</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fBlur">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fBlur</code><span class="sig-paren">(</span><em>steps=4</em>, <em>opacity=0.15</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fBlur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Si se desea cambiar el tipo de blur pueden hacerlo seteando la variable blur_type en tu clase FxsGroup
+o de la misma manera que acá arriba desde el script de effect obvio, no modifiquen este archivo por un effect.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fBlur1">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fBlur1</code><span class="sig-paren">(</span><em>steps=4</em>, <em>opacity=0.15</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fBlur1" title="Permalink to this definition">¶</a></dt>
+<dd><p>El blur por excelencia, el mas rápido, mas visible, sin errores (casi)
+opcionales:
+&#64;steps=4 cantidad de steps del blur
+&#64;opacity=0.15 opacity de cada paso</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fBlur1b">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fBlur1b</code><span class="sig-paren">(</span><em>steps=6</em>, <em>opacity=0.25</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fBlur1b" title="Permalink to this definition">¶</a></dt>
+<dd><p>El viejo blur...</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fBlur3">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fBlur3</code><span class="sig-paren">(</span><em>steps=3</em>, <em>opacity=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fBlur3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blur usando pil, verdadero blur gausiano.. el parametro de opacity no hace effect
+asquerosamente lento,</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fBlur4">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fBlur4</code><span class="sig-paren">(</span><em>steps=0</em>, <em>opacity=0</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fBlur4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ejemplo de como implementar un filter kernel
+es tambien un ejemplo de como pasar un surface de cairo a otras cosas como pil o ogl</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fDOF">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fDOF</code><span class="sig-paren">(</span><em>offset</em>, <em>delta=0.1</em>, <em>amplitude=10</em>, <em>vertical=True</em>, <em>delete=True</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fDOF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realiza un effect de ondulacion sobre la imagen active.
+&#64;offset : un offset del angle de offset (si se quiere animar esto se debe modificar)
+&#64;delta = 0.1 : el delta que indica cuanto cambiará la onda de pixel a pixel (es como el ancho de la onda (en vertical)) (mientras mas pequeño, la onda es mas ancha) (esto es lo mismo que frecuencia)
+&#64;amplitude = 10 : cuan fuerte es la deformacion (el alto de la onda (en vertical))
+&#64;vertical = True : True si se quiere hacer una onda vertical, False si se la quiere horizontal
+&#64;delete = True : True si se desea eliminar lo dibujado anteriormente, o False si se desea redibujar lo deformado encima de lo anterior</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fDirBlur">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fDirBlur</code><span class="sig-paren">(</span><em>angle=0</em>, <em>steps=1</em>, <em>opacity=0.25</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fDirBlur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blur Direccional</p>
+<p>opcionales:
+&#64;angle=0 angulo en radianes de la dirección
+&#64;steps=1 cantidad de pixels y steps que tendrá el blur
+&#64;opacity=0.25 opacity de cada paso</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fDirBlurB">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fDirBlurB</code><span class="sig-paren">(</span><em>angle=0</em>, <em>steps=1</em>, <em>opacity=0.25</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fDirBlurB" title="Permalink to this definition">¶</a></dt>
+<dd><p>blur direccional usando surface</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fGlow">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fGlow</code><span class="sig-paren">(</span><em>steps=3</em>, <em>opacity=0.05</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fGlow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hace un effect de brillo
+opcionales:
+&#64;steps cantidad de steps
+&#64;opacity opacity de cada paso</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fRotoZoom">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fRotoZoom</code><span class="sig-paren">(</span><em>steps=4</em>, <em>opacity=0.25</em>, <em>scale=1</em>, <em>angle=0</em>, <em>org_x=0</em>, <em>org_y=0</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fRotoZoom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realiza un effect de rotacion y zoom progresivos sobre todo el contenido del cuadro
+&#64;steps : cantidad de steps
+&#64;opacity : opacity de cada paso
+&#64;scale : incremento de scale por paso
+&#64;angle : incremento del ángulo por paso, en radianes
+&#64;org_x, org_y : el origen sobre el que se realizan las transformaciones</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.fWave">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">fWave</code><span class="sig-paren">(</span><em>offset</em>, <em>delta=0.1</em>, <em>amplitude=10</em>, <em>vertical=True</em>, <em>delete=True</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.advanced.fWave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realiza un effect de ondulacion sobre la imagen active.
+&#64;offset : un offset del angle de offset (si se quiere animar esto se debe modificar)
+&#64;delta = 0.1 : el delta que indica cuanto cambiará la onda de pixel a pixel (es como el ancho de la onda (en vertical)) (mientras mas pequeño, la onda es mas ancha) (esto es lo mismo que frecuencia)
+&#64;amplitude = 10 : cuan fuerte es la deformacion (el alto de la onda (en vertical))
+&#64;vertical = True : True si se quiere hacer una onda vertical, False si se la quiere horizontal
+&#64;delete = True : True si se desea eliminar lo dibujado anteriormente, o False si se desea redibujar lo deformado encima de lo anterior</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.advanced.random">
+<code class="descclassname">libs.draw.advanced.</code><code class="descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; x in the interval [0, 1).<a class="headerlink" href="#libs.draw.advanced.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="basic.html"
+                        title="previous chapter">Basic</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/advanced.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="basic.html" title="Basic"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Nande!.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

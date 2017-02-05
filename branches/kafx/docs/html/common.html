@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Common &mdash; KickAss FX! 1.7.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.7.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="KickAss FX! 1.7.8 documentation" href="index.html" />
+    <link rel="next" title="Video" href="video.html" />
+    <link rel="prev" title="Welcome to KickAss FX!’s documentation!" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="video.html" title="Video"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to KickAss FX!’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-libs.common">
+<span id="common"></span><h1>Common<a class="headerlink" href="#module-libs.common" title="Permalink to this headline">¶</a></h1>
+<p>Module with different kind of functions
+theoretically it doesn&#8217;t depend on things like cairo or ass</p>
+<dl class="function">
+<dt id="libs.common.Chain">
+<code class="descclassname">libs.common.</code><code class="descname">Chain</code><span class="sig-paren">(</span><em>duration</em>, <em>progress</em>, <em>objects</em>, <em>function</em>, <em>time=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.common.Chain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realiza una animación en cadena.
+dado una duración maestra y un progress maestro aplicados a
+un array de objetos y un tiempo de animacion por objeto
+se calcula el progress para cada objeto y se llama a la funcion pasada por parametro para cada uno.</p>
+<p>La idea es poder animar sílabas según el diálogo, o letras según la sílaba,
+pero aun así lo pongo acá para que pueda ser usado de otras formas</p>
+<p>&#64;duración Duración del tiempo maestro
+&#64;progress float de rango 0 a 1 que dice el progress maestro
+&#64;objects array de objetos a ser animados en cadena.</p>
+<blockquote>
+<div>serán pasados a la función func. (sólo debe implementar len y ser iterables (string y array funcionan))</div></blockquote>
+<p>&#64;función debe ser una funcion
+será llamada progresivamente vez por cada objeto en orden de aparición con los siguientes parámetros:</p>
+<blockquote>
+<div>objeto, progress</div></blockquote>
+<dl class="docutils">
+<dt>&#64;time define el tiempo que dura la animación de cada objeto</dt>
+<dd>si el time es mayor a la duración/len(objects)
+entonces las aniamciones se superpondran.
+si el time es None (o no se especifica) las animaciones se dan
+una atrás de la otra, o sea el time es = duración/len(objects)
+si es menor no sé.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.common.ChooseByFrame">
+<code class="descclassname">libs.common.</code><code class="descname">ChooseByFrame</code><span class="sig-paren">(</span><em>start_frame</em>, <em>end_frame</em>, <em>active</em>, <em>inactive=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.common.ChooseByFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>start_frame has the starting frame
+end_frame the ending frame
+active is what is returned if the actual frame is in range
+inactive is what is returned if the actual frame is not between start_frame and end_frame
+example:
+d.actual.pos_x = ChooseByFrame(100, 200, 0, 20)
+this makes the position_x from dialogue to ONLY be 20 between frames 100 and 200, then it goes back to 0
+other objects can be used like:
+d.actual.color1.CopyFrom(ChooseByFrame(100, 400, d.actual.color2, d.actual.color3)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.common.Clamp">
+<code class="descclassname">libs.common.</code><code class="descname">Clamp</code><span class="sig-paren">(</span><em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.common.Clamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cuts a float number to range 0.0 to 1.0</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.common.ClampB">
+<code class="descclassname">libs.common.</code><code class="descname">ClampB</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.common.ClampB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cuts a number (integer) to range 0 to 255</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.common.Fx">
+<em class="property">class </em><code class="descclassname">libs.common.</code><code class="descname">Fx</code><a class="headerlink" href="#libs.common.Fx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clase de la que desciende un effect</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.common.FxsGroup">
+<em class="property">class </em><code class="descclassname">libs.common.</code><code class="descname">FxsGroup</code><a class="headerlink" href="#libs.common.FxsGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clase de la que desciende un grupo de efectos</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.common.Interpolate">
+<code class="descclassname">libs.common.</code><code class="descname">Interpolate</code><span class="sig-paren">(</span><em>progress</em>, <em>from_val</em>, <em>to_val</em>, <em>function=&lt;function i_lineal&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.common.Interpolate" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a floating number between 2 values, the returned number corresponds to the amount given in the first value
+&#64;progress indicates how close to the start or end should the returned value be, must be a number between 0 and 1 (other values are valid, though)
+&#64;from_val starting value or beginning of range
+&#64;to_val last value, or end of range
+&#64;function personal function that returns a value between 0 and 1 (always float) of a given value of progress between 0 and 1
+(puede usar las funciones que comienzan por <a href="#id1"><span class="problematic" id="id2">i_</span></a>)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.common.LERP">
+<code class="descclassname">libs.common.</code><code class="descname">LERP</code><span class="sig-paren">(</span><em>progress</em>, <em>from_val</em>, <em>to_val</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.common.LERP" title="Permalink to this definition">¶</a></dt>
+<dd><p>devuelve un número flotante entre 2 valores, el número devuelto corresponde a una cantidad indicada por el primer valor
+&#64;progress indicador de que tan cerca del inico o fin debe estar el valor devuelto, debe ser un número entre 0 y 1 (aunque otros valores funcionan)
+&#64;from_val valor inicial, o comienzo del rango
+&#64;to_val valor final, o final del rango
+Esta funcion es lo mismo que interpolar lineal, pero un poco mas rapida,
+solo para funciones que requieran unicamente interpolacion lineal</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.common.PointBezier">
+<code class="descclassname">libs.common.</code><code class="descname">PointBezier</code><span class="sig-paren">(</span><em>progress</em>, <em>x_start</em>, <em>y_start</em>, <em>x1</em>, <em>y1</em>, <em>x2</em>, <em>y2</em>, <em>x_end</em>, <em>y_end</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.common.PointBezier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Devuelve un punto (x, y) sobre una curva bezier dado el avance en la misma
+&#64;x_start, y_start : punto inicial de la curva
+&#64;x1, y1 : 1º punto de control de la curva
+&#64;x2, y2 : 2º punto de control de la curva
+&#64;x_end, y_end : punto final de la curva
+&#64;progress : avance sobre la curva (0 a 1)
+Esta funcion es igual que Bezier pero es algo más rápida, además,
+Está limitada a:
+1 Punto de inicio
+2 points de control
+1 Punto final
+y todos los points son pasados por parámetro secuencialmente.
+#with help of ranma42!</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.common.RanmaBezier">
+<code class="descclassname">libs.common.</code><code class="descname">RanmaBezier</code><span class="sig-paren">(</span><em>progress</em>, <em>points</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.common.RanmaBezier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Devuelve un punto (x, y) sobre una curva bezier dado el avance en la misma
+Admite curvas biezer de cualquier orden
+&#64;progress como en interpolar, normalmente un numero entre 0 y 1 indicando el avance de sobre la curva
+&#64;points : array de points -&gt; [ [0, 0], [1, 1], [2, 2] ]
+es como PointBezier pero permite curvas de cualquier cantidad de points de control (de 1 a (teoricamente) infinito))
+es algo mas lento que PointBezier para curvas de la misma cantidad de points
+escrito por Ranma42 &#64; irc.freenode.net/#cairo</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.common.SafeGetFloat">
+<code class="descclassname">libs.common.</code><code class="descname">SafeGetFloat</code><span class="sig-paren">(</span><em>dicc</em>, <em>prop</em>, <em>default=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.common.SafeGetFloat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Devuelve una propiedad un diccionario convertido a float, o un valor default
+&#64;dict diccionario
+&#64;prop propiedad del diccionario a devolver
+&#64;default opcional, valor por default 0.0, es el valor que se devolverá en caso de haber algun error al convertir la propiedad del diccionario</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.common.grouper">
+<code class="descclassname">libs.common.</code><code class="descname">grouper</code><span class="sig-paren">(</span><em>n</em>, <em>iterable</em>, <em>fillvalue=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.common.grouper" title="Permalink to this definition">¶</a></dt>
+<dd><p>grouper(3, &#8216;ABCDEFG&#8217;, &#8216;x&#8217;) &#8211;&gt; ABC DEF Gxx</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to KickAss FX!&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="video.html"
+                        title="next chapter">Video</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/common.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="video.html" title="Video"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to KickAss FX!’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Nande!.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

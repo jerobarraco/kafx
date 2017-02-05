@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Figures &mdash; KickAss FX! 1.7.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.7.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="KickAss FX! 1.7.8 documentation" href="index.html" />
+    <link rel="next" title="libs.asslib" href="asslib.html" />
+    <link rel="prev" title="Audio" href="audio.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="asslib.html" title="libs.asslib"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="audio.html" title="Audio"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-libs.figures">
+<span id="figures"></span><h1>Figures<a class="headerlink" href="#module-libs.figures" title="Permalink to this headline">¶</a></h1>
+<dl class="data">
+<dt id="libs.figures.SKULL4">
+<code class="descclassname">libs.figures.</code><code class="descname">SKULL4</code><em class="property"> = 'm 0 -40 m 1 -42 l 1 -42 b 2 -46 11 -52 16 -51 b 23 -52 30 -47 31 -42 l 32 -38 b 33 -29 28 -23 27 -23 l 24 -20 b 20 -17 12 -17 9 -20 b 8 -18 7 -16 6 -13 b 12 -6 20 -6 26 -13 b 25 -15 24 -18 23 -20 b 23 -20 24 -20 24 -20 l 24 -20 b 25 -18 26 -15 27 -13 b 30 -2 20 0 16 0 b 11 0 2 -2 5 -13 b 6 -16 7 -18 8 -20 l 5 -23 b 4 -23 -1 -29 0 -35 m 16 -27 b 15 -27 14 -26 14 -24 b 15 -22 17 -22 18 -24 b 18 -26 17 -27 16 -27 m 13 -32 b 13 -37 6 -38 4 -33 b 3 -30 5 -28 7 -27 b 10 -26 13 -29 13 -32 m 28 -33 b 26 -38 19 -37 19 -32 b 19 -29 22 -26 25 -27 b 27 -28 29 -30 28 -33 '</em><a class="headerlink" href="#libs.figures.SKULL4" title="Permalink to this definition">¶</a></dt>
+<dd><p>#Ejemplo cargando un svg
+import mXMLDao
+dao = mXMLDao.cDao(&#8216;svg&#8217;, &#8216;archivo.svg&#8217;)
+svg = dao.Root()
+x, y, w, h = svg.viewBox.split(&#8216; &#8216;, 4)
+paths = svg.path
+mypath= paths[0].d.replace(&#8216;,&#8217;, &#8216; &#8216;).replace(&#8216;z&#8217;, &#8216;&#8217;).replace(&#8216;c&#8217;, &#8216;b&#8217;).replace(&#8216;  &#8216;, &#8216; &#8216;)
+#y despues un par de translates para</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="libs.figures.version_info">
+<code class="descclassname">libs.figures.</code><code class="descname">version_info</code><em class="property"> = (1, 0, 3)</em><a class="headerlink" href="#libs.figures.version_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Este modulo define constantes con formas en ass, ver texto siguiente para mas detalles.
+algunas formas hay que modificarlas para que anden bien con el kafx, dada la alineacion</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="audio.html"
+                        title="previous chapter">Audio</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="asslib.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">libs.asslib</span></code></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/figures.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="asslib.html" title="libs.asslib"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="audio.html" title="Audio"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Nande!.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

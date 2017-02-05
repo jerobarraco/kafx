@@ -1,0 +1,446 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Extra &mdash; KickAss FX! 1.7.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.7.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="KickAss FX! 1.7.8 documentation" href="index.html" />
+    <link rel="next" title="Basic" href="basic.html" />
+    <link rel="prev" title="libs.asslib" href="asslib.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="basic.html" title="Basic"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="asslib.html" title="libs.asslib"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-libs.draw.extra">
+<span id="extra"></span><h1>Extra<a class="headerlink" href="#module-libs.draw.extra" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-libs.draw.extra"></span><dl class="function">
+<dt id="libs.draw.extra.CreateMatrix">
+<code class="descclassname">libs.draw.extra.</code><code class="descname">CreateMatrix</code><span class="sig-paren">(</span><em>pos_x=0</em>, <em>pos_y=0</em>, <em>org_x=0</em>, <em>org_y=0</em>, <em>angle=0</em>, <em>scale_x=1</em>, <em>scale_y=1</em>, <em>inverse=False</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.CreateMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a matrix with standard transforms
+pos_x, pos_y: x/y final position
+org_x, org_y: origin for the transform
+angle: (radians)
+scale_x scale_y: obvious, ain&#8217;t it?
+inverse = False inverse matrices or not
+scales must be inverted if matrix is inverse: scale=1.0/scale</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.extra.DemultipyAlpha">
+<code class="descclassname">libs.draw.extra.</code><code class="descname">DemultipyAlpha</code><span class="sig-paren">(</span><em>b</em>, <em>g</em>, <em>r</em>, <em>a</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.DemultipyAlpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;b, g, r, a
+Todos los valores de 0 a 255</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.extra.LoadSequence">
+<code class="descclassname">libs.draw.extra.</code><code class="descname">LoadSequence</code><span class="sig-paren">(</span><em>folder</em>, <em>count</em>, <em>digits=3</em>, <em>extend=0</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.LoadSequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a set of textures
+&#64;folder : folder containing the images
+if there&#8217;s a common prefix you can include it,
+use &#8216;/&#8217;</p>
+<p>&#64;count : image count [0 -&gt; count-1]</p>
+<p>&#64;digits: number of digits used</p>
+<dl class="docutils">
+<dt>&#64;extend: texture&#8217;s extend (default EXTEND_NONE)</dt>
+<dd>if used with cSprite extend must be set to cairo.EXTEND_NONE</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.extra.LoadTexture">
+<code class="descclassname">libs.draw.extra.</code><code class="descname">LoadTexture</code><span class="sig-paren">(</span><em>filename</em>, <em>extend=1</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.LoadTexture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a cairo texture (<cite>cairo.SurfacePattern</cite>) using a png filename
+Used in set_source or whatever
+&#64;filename: png filename</p>
+<dl class="docutils">
+<dt>&#64;extend: texture&#8217;s extend (default <cite>cairo.EXTEND_REPEAT</cite>)</dt>
+<dd>if used with cSprite extend MUST be set to <cite>cairo.EXTEND_NONE</cite></dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.extra.MoveTexture">
+<code class="descclassname">libs.draw.extra.</code><code class="descname">MoveTexture</code><span class="sig-paren">(</span><em>pattern</em>, <em>x</em>, <em>y</em>, <em>org_x=0.0</em>, <em>org_y=0.0</em>, <em>angle=0.0</em>, <em>scale_x=1.0</em>, <em>scale_y=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.MoveTexture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves, rotates and scales a texture loaded with LoadTexture, or any other cairo pattern</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.extra.SetStyle">
+<code class="descclassname">libs.draw.extra.</code><code class="descname">SetStyle</code><span class="sig-paren">(</span><em>style</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.SetStyle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepares cairo with the styles
+Before drawing any text you can call this function to set up the basic stuff
+the style type has to be <code class="xref py py-class docutils literal"><span class="pre">libs.asslib.cProperties</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.draw.extra.cCairoColor">
+<em class="property">class </em><code class="descclassname">libs.draw.extra.</code><code class="descname">cCairoColor</code><span class="sig-paren">(</span><em>number=None</em>, <em>text=''</em>, <em>ccolor=None</em>, <em>components=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cCairoColor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for solid colors</p>
+<dl class="method">
+<dt id="libs.draw.extra.cCairoColor.CopyFrom">
+<code class="descname">CopyFrom</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cCairoColor.CopyFrom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies a color
+&#64;other is a cCairoColor object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cCairoColor.FromNumber">
+<code class="descname">FromNumber</code><span class="sig-paren">(</span><em>color</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cCairoColor.FromNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a color from another
+color is an integer: 31238231 or 0xAARRGGBB</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cCairoColor.FromText">
+<code class="descname">FromText</code><span class="sig-paren">(</span><em>color</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cCairoColor.FromText" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a color from another
+color may be either &#8216;&amp;HAARRGGBB&#8217; or &#8216;AARRGGBB&#8217;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cCairoColor.Interpolate">
+<code class="descname">Interpolate</code><span class="sig-paren">(</span><em>progress</em>, <em>other</em>, <em>inter=&lt;function i_lineal&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cCairoColor.Interpolate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linear interpolation of two colors</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>progress</strong> (<em>double</em>) &#8211; [0,1] interpolation factor/ratio
+0 means the first color, 1 the second color
+values in between are interpolated</li>
+<li><strong>other</strong> (<a class="reference internal" href="#libs.draw.extra.cCairoColor" title="libs.draw.extra.cCairoColor"><code class="xref py py-class docutils literal"><span class="pre">libs.draw.extra.cCairoColor</span></code></a>) &#8211; color to interpolate to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cCairoColor.Pattern">
+<code class="descname">Pattern</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cCairoColor.Pattern" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns a cairo patter for usage in functions  receiving one</dt>
+<dd>you can also use video.cf.ctx.set_source_rgba(a.r, a.g, a.b, a.a) directly</dd>
+</dl>
+<p>but this syntax is way better, right?</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.draw.extra.cVector">
+<em class="property">class </em><code class="descclassname">libs.draw.extra.</code><code class="descname">cVector</code><span class="sig-paren">(</span><em>text=''</em>, <em>style=None</em>, <em>figure=None</em>, <em>parent=None</em>, <em>last_pos=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base cairo object class includes drawing utils for cairo
+it may be instanced &#64;text or &#64;figure or using the setters afterwards</p>
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Alpha">
+<code class="descname">Alpha</code><span class="sig-paren">(</span><em>alpha</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies alpha, for all colors
+&#64;alpha float value for alpha channel, [0-1]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Box">
+<code class="descname">Box</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the bounding box with 4 components (x,y, width, height), values
+relative to vector&#8217;s 0,0 point (baseline). Not valid for deformed paths,
+in that case you should use ctx.path_extents</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Center">
+<code class="descname">Center</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a vector&#8217;s center
+Relative to the screen</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.CompleteDeform">
+<code class="descname">CompleteDeform</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.CompleteDeform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like Deform but it only receives an object, it&#8217;s expected to return just a coordinates array
+This leads to better control of the points</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.CreateFromFigure">
+<code class="descname">CreateFromFigure</code><span class="sig-paren">(</span><em>ass</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.CreateFromFigure" title="Permalink to this definition">¶</a></dt>
+<dd><p>SLOW - vector from ass shape</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.CreateParticles">
+<code class="descname">CreateParticles</code><span class="sig-paren">(</span><em>texture=None</em>, <em>scale=1.0</em>, <em>alpha_min=0.2</em>, <em>vertical=True</em>, <em>mode=0</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.CreateParticles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extremely SLOW
+parameters
+&#64;texture -&gt; pattern with the texture
+optional
+&#64;scale=1.0 -&gt; scale wanted
+&#64;alpha_min=0.2 -&gt; minimum alpha threshold [0-255] &lt;- TODO- CHECK THIS
+&#64;vertical=True -&gt; boolean, sets order for particle creation, True = Vertical, False = Horizontal
+&#64;mode=0 -&gt; particle mode</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Deform">
+<code class="descname">Deform</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Deform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deforms vector object
+&#64;func is a function called once for each point group in the vector, receives the following params:
+self : Dialog you want to Deform
+tipo : Integer indicating the point type (0=move, 1=line, 2=curve, 3=close (from some cairo stuff))
+points : coordinates array
+returns a modified points array</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Fade">
+<code class="descname">Fade</code><span class="sig-paren">(</span><em>from_</em>, <em>to</em>, <em>inter=&lt;function i_lineal&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Fade" title="Permalink to this definition">¶</a></dt>
+<dd><p>Animated fade of a vector
+&#64;from_ float for initial value
+&#64;to float for final value
+both of them [0-1]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.GetShape">
+<code class="descname">GetShape</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.GetShape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a string like &#8216;m 13 13 13 31 b 31 31 13 31&#8217; used in ass subs
+this is for zheo, ass sucks, don&#8217;t use it, seriously, do NEVER use it,
+just for you to know a little bit more about ass and useless stuff</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.LoadTexture">
+<code class="descname">LoadTexture</code><span class="sig-paren">(</span><em>filename</em>, <em>part=0</em>, <em>extend=1</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.LoadTexture" title="Permalink to this definition">¶</a></dt>
+<dd><p>This loads texture for every drawing function
+&#64;filename .png filename
+&#64;part what is it for? (0=outline, 1=fill, 2=shadow, 3=particles)
+(or .PART_BORDER .PART_FILL .PART_SHADOW, .PART_PARTICULAS) &lt;- TODO-CHECK THIS
+&#64;extend type of extend for cairo</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Move">
+<code class="descname">Move</code><span class="sig-paren">(</span><em>from_</em>, <em>to</em>, <em>inter=&lt;function i_lineal&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Animates the movement from the <cite>from</cite> position to the <cite>to</cite> position</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>from</strong> &#8211; (x,y)</li>
+<li><strong>to</strong> &#8211; (x,y)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.MoveFrom">
+<code class="descname">MoveFrom</code><span class="sig-paren">(</span><em>dx</em>, <em>dy</em>, <em>inter=&lt;function i_lineal&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.MoveFrom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Animates the movement of a vector to the given point from its original position
+&#64;dx, dy final position</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.MoveTo">
+<code class="descname">MoveTo</code><span class="sig-paren">(</span><em>dx</em>, <em>dy</em>, <em>inter=&lt;function i_lineal&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.MoveTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Animates movement back to the original position -CHECK THIS-
+&#64;dx, dy position relative to origin</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Paint">
+<code class="descname">Paint</code><span class="sig-paren">(</span><em>background=False</em>, <em>matrix=None</em>, <em>matrix2=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Paint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws a vector using current style.
+optional:
+&#64;background=False Boolean, decides if the text receives the background
+&#64;matrix=None -vector&#8217;s- transform matrix
+&#64;matrix2=None transform matrix for EndGroup</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.PaintReference">
+<code class="descname">PaintReference</code><span class="sig-paren">(</span><em>matrix=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.PaintReference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws the vector reference points, note that some transforms may not be possible</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.PaintReflection">
+<code class="descname">PaintReflection</code><span class="sig-paren">(</span><em>height=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.PaintReflection" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;height : pixel height for gradient, etc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.PaintWithCache">
+<code class="descname">PaintWithCache</code><span class="sig-paren">(</span><em>background=False</em>, <em>matrix=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.PaintWithCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses cache to draw a vector.
+It&#8217;s only created the first time you call it, it uses the cache afterwards
+optional
+&#64;background=False Boolean, decides if the text receives the background
+&#64;matrix=None transform matrix for EndGroup</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Restore">
+<code class="descname">Restore</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Restore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restores a vector&#8217;s style</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Rotate">
+<code class="descname">Rotate</code><span class="sig-paren">(</span><em>from_</em>, <em>to</em>, <em>inter=&lt;function i_lineal&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Animates vector rotation
+&#64;from_ initial angle, radians
+&#64;to final angle, radians</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Scale">
+<code class="descname">Scale</code><span class="sig-paren">(</span><em>from_</em>, <em>to_</em>, <em>inter=&lt;function i_lineal&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Animates vector scaling
+&#64;from_ initial scale
+&#64;to_ final scale
+both of them are float, 1 is default, natural scale; &gt;1 is bigger; &lt;1 is smaller</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.SetText">
+<code class="descname">SetText</code><span class="sig-paren">(</span><em>text</em>, <em>last_pos=None</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.SetText" title="Permalink to this definition">¶</a></dt>
+<dd><p>SLOW:
+Changes the text asociated to a vector
+&#64;text used text
+It&#8217;ll use the original properties but re-calculating position and stuff
+optional:
+&#64;last_pos=None (x,y) coordinates of the last syllable</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Shake">
+<code class="descname">Shake</code><span class="sig-paren">(</span><em>amplitude=4</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Shake" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a shake from the position
+&#64;amplitude of the movement in pixels</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.draw.extra.cVector.Wiggle">
+<code class="descname">Wiggle</code><span class="sig-paren">(</span><em>amplitude=4</em>, <em>frequency=2</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.extra.cVector.Wiggle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Movement between random points
+&#64;amplitude of the movement in pixels
+&#64;frequency number of points</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.extra.random">
+<code class="descclassname">libs.draw.extra.</code><code class="descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; x in the interval [0, 1).<a class="headerlink" href="#libs.draw.extra.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="asslib.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">libs.asslib</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="basic.html"
+                        title="next chapter">Basic</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/extra.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="basic.html" title="Basic"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="asslib.html" title="libs.asslib"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Nande!.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

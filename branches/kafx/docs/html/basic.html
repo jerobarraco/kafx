@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic &mdash; KickAss FX! 1.7.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.7.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="KickAss FX! 1.7.8 documentation" href="index.html" />
+    <link rel="next" title="libs.draw.advanced" href="advanced.html" />
+    <link rel="prev" title="Extra" href="extra.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="advanced.html" title="libs.draw.advanced"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="extra.html" title="Extra"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-libs.draw.basic">
+<span id="basic"></span><h1>Basic<a class="headerlink" href="#module-libs.draw.basic" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-libs.draw.basic"></span><dl class="function">
+<dt id="libs.draw.basic.Linear">
+<code class="descclassname">libs.draw.basic.</code><code class="descname">Linear</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>x1</em>, <em>y1</em>, <em>c1</em>, <em>c2</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.basic.Linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code for the gradient funcs</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.basic.SDiagonalGradient">
+<code class="descclassname">libs.draw.basic.</code><code class="descname">SDiagonalGradient</code><span class="sig-paren">(</span><em>obj</em>, <em>color</em>, <em>part</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.basic.SDiagonalGradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses a linear gradient, top-left to bottom-right</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.basic.SHorizontalGradient">
+<code class="descclassname">libs.draw.basic.</code><code class="descname">SHorizontalGradient</code><span class="sig-paren">(</span><em>obj</em>, <em>color</em>, <em>part</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.basic.SHorizontalGradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses a horizontal gradient</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.basic.SLinearAnimatedGradient">
+<code class="descclassname">libs.draw.basic.</code><code class="descname">SLinearAnimatedGradient</code><span class="sig-paren">(</span><em>obj</em>, <em>color</em>, <em>part</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.basic.SLinearAnimatedGradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses a linear horizontal gradient, animated through obj.progress</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.basic.SPattern">
+<code class="descclassname">libs.draw.basic.</code><code class="descname">SPattern</code><span class="sig-paren">(</span><em>obj</em>, <em>mycolor</em>, <em>part</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.basic.SPattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses the pattern in obj.actual.source</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.basic.SRadialAnimatedGradient">
+<code class="descclassname">libs.draw.basic.</code><code class="descname">SRadialAnimatedGradient</code><span class="sig-paren">(</span><em>obj</em>, <em>color</em>, <em>part</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.basic.SRadialAnimatedGradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses a radial gradient, animated through obj.progress</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.basic.SRadialGradient">
+<code class="descclassname">libs.draw.basic.</code><code class="descname">SRadialGradient</code><span class="sig-paren">(</span><em>obj</em>, <em>color</em>, <em>part</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.basic.SRadialGradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses a radial gradient, its center is the origin</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.basic.SSolid">
+<code class="descclassname">libs.draw.basic.</code><code class="descname">SSolid</code><span class="sig-paren">(</span><em>obj</em>, <em>color</em>, <em>part</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.basic.SSolid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses the color from obj.actual</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="libs.draw.basic.SVerticalGradient">
+<code class="descclassname">libs.draw.basic.</code><code class="descname">SVerticalGradient</code><span class="sig-paren">(</span><em>obj</em>, <em>color</em>, <em>part</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.draw.basic.SVerticalGradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses a vertical gradient, its height is the line&#8217;s,
+for it to be the same for every syllable painted at the same time</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="extra.html"
+                        title="previous chapter">Extra</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="advanced.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">libs.draw.advanced</span></code></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/basic.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="advanced.html" title="libs.draw.advanced"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="extra.html" title="Extra"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Nande!.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Video &mdash; KickAss FX! 1.7.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.7.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="KickAss FX! 1.7.8 documentation" href="index.html" />
+    <link rel="next" title="Audio" href="audio.html" />
+    <link rel="prev" title="Common" href="common.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="audio.html" title="Audio"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="common.html" title="Common"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-libs.video">
+<span id="video"></span><h1>Video<a class="headerlink" href="#module-libs.video" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt>&#8220;Define all types necessary for interfacing with avisynth.dll</dt>
+<dd><p class="first">Moved from internal.h <a href="#id1"><span class="problematic" id="id2">*</span></a>&#8220;</p>
+<blockquote class="last">
+<div><p>Copia del avisynth .h
+mas que nada por compatibilidad con los parámetros que se le pasen a la inicialización</p>
+<blockquote>
+<div>y tiene algunas funciones extras para trabajar con video</div></blockquote>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="function">
+<dt id="libs.video.GetMode">
+<code class="descclassname">libs.video.</code><code class="descname">GetMode</code><span class="sig-paren">(</span><em>ptype</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.video.GetMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dado un modo de avisynth, devuelve el modo para cairo.
+actualmente implementado RGB24 y ARGB32</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.video.cCurrentFrame">
+<em class="property">class </em><code class="descclassname">libs.video.</code><code class="descname">cCurrentFrame</code><a class="headerlink" href="#libs.video.cCurrentFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contiene información del cuadro actual
+ctx = contexto de cairo global
+sfc = surface de cairo global
+framen = numero de cuadro actual</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.video.cVideoInfo">
+<em class="property">class </em><code class="descclassname">libs.video.</code><code class="descname">cVideoInfo</code><a class="headerlink" href="#libs.video.cVideoInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>#Contiene la información del video propiamente dicho
+width=640 # width=0 means no video; ancho
+height=480 #alto
+num_frames=0 #cantidad total de cuadros (corresponde a avisynth)
+fps_numerator=1 #numerador del FPS
+fps_denominator=1 #denominador del FPS
+fps=1 #Fps en float
+fpscof1 = 1 #fpscof1 = fps /1000.0 #coeficientes precalculados para el calculo de milisegundos y frames
+fpscof2 = 1 #fpscof2 = 1000.0 / fps
+fake_stride = 0 #un stride precalculado para cuando se necesite hacer width*4</p>
+<dl class="method">
+<dt id="libs.video.cVideoInfo.ClampFrameNum">
+<code class="descname">ClampFrameNum</code><span class="sig-paren">(</span><em>frame</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.video.cVideoInfo.ClampFrameNum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recorta un número (entero) al rango entre 0 y el máximo numero de frames (+ o - 1)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.video.cVideoInfo.FrameToMS">
+<code class="descname">FrameToMS</code><span class="sig-paren">(</span><em>frame</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.video.cVideoInfo.FrameToMS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convierte de numero de cuadro a milisegundos</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.video.cVideoInfo.MSToFrame">
+<code class="descname">MSToFrame</code><span class="sig-paren">(</span><em>ms</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.video.cVideoInfo.MSToFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convierte de milisegundos a pnumero de cuadro</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="data">
+<dt id="libs.video.vi">
+<code class="descclassname">libs.video.</code><code class="descname">vi</code><em class="property"> = &lt;libs.video.cVideoInfo instance&gt;</em><a class="headerlink" href="#libs.video.vi" title="Permalink to this definition">¶</a></dt>
+<dd><p>typedef unsigned long   Pixel;    # this will break on 64-bit machines!
+typedef unsigned long   Pixel32;
+typedef unsigned char   Pixel8;
+typedef long                    PixCoord;
+typedef long                    PixDim;
+typedef long                    PixOffset;
+Ni idea como definir numeros de tamaños particulares, ni que importase en python</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="common.html"
+                        title="previous chapter">Common</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="audio.html"
+                        title="next chapter">Audio</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/video.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="audio.html" title="Audio"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="common.html" title="Common"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KickAss FX! 1.7.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2011, Nande!.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>
