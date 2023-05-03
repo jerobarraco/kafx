@@ -1,4 +1,7 @@
-		Kick Ass FX (Effects) (antes llamado "Real Karaoke")
+copyright Jeronimo Barraco-Marmol, unless it belongs to someone else.
+licensce for code is AGPLv2 and CC-By-Sa 4 for other assets.
+
+			Kick Ass FX
 
 
 
